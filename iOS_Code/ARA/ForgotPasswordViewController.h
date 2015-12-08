@@ -16,9 +16,11 @@
 
     IBOutlet UITextField *txtEmail;
     IBOutlet UIButton *btnSingUp;
+    IBOutlet UIButton *btnResetPassword;
     IBOutlet UIButton *btnLogIn;
     NSMutableData *webData;
     NSString *recieved_status;
+    IBOutlet UILabel *lblOr;
 }
 - (IBAction)btnResetPassword:(id)sender;
 @property (nonatomic,strong) NSString *email;

@@ -11,6 +11,7 @@
 @interface myBadgesViewController : UIViewController
 {
     IBOutlet UIImageView *headerImage;
+    IBOutlet UIButton *btnBack;
 
     IBOutlet UITableView *tableView;
     NSArray *arrImagesUrl;

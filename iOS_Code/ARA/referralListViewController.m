@@ -304,12 +304,20 @@ UIButton *tag_btn,*tag_cancel_btn;
 #pragma mark - tableview delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        return 80;
+    }
+    
+    
     return 60;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if([pop_out isEqualToString:@"yes"])
     {
         pop_out = @"no";
+        
         return 0;
     }
     
@@ -398,6 +406,8 @@ UIButton *tag_btn,*tag_cancel_btn;
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //cell.imageView.image = [UIImage imageNamed:@"chained_ref.png"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

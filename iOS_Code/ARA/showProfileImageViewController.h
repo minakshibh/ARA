@@ -12,6 +12,8 @@
 {
     
     IBOutlet UIImageView *imageViewProfile;
+    IBOutlet UIButton *btnProfile;
+    IBOutlet UILabel *lblheading;
     NSData *imagedata;
 }
 - (IBAction)btnEdit:(id)sender;

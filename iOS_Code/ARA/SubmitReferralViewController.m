@@ -1121,7 +1121,8 @@
     }
     cell.textLabel.text = [name_mea_array objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:13.0];
-    
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     return  cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

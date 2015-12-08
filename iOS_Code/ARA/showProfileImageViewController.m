@@ -59,6 +59,15 @@
 //                    placeholderImage:nil];
    
     // Do any additional setup after loading the view from its nib.
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        lblheading.font=[lblheading.font fontWithSize:24];
+        
+        btnProfile.titleLabel.font = [btnProfile.titleLabel.font fontWithSize:24];
+
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

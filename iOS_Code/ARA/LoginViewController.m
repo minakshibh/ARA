@@ -61,6 +61,26 @@
     [lblPass setClipsToBounds:YES];
     btnCheckbox.layer.cornerRadius = 2.0;
     [btnCheckbox setClipsToBounds:YES];
+    
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:20];
+        btnForgotPassword.titleLabel.font = [btnForgotPassword.titleLabel.font fontWithSize:20];
+        lblAlreadyHaveAnAccount.font = [lblAlreadyHaveAnAccount.font fontWithSize:20]
+        ;
+        btnSignUp.titleLabel.font = [btnSignUp.titleLabel.font fontWithSize:20];
+        
+        btnLogin.titleLabel.font = [btnLogin.titleLabel.font fontWithSize:24];
+        btnFacebookLogin.titleLabel.font = [btnFacebookLogin.titleLabel.font fontWithSize:24];
+        txtEmail.font = [lblAlreadyHaveAnAccount.font fontWithSize:24]
+        ;
+        txtPassword.font = [lblAlreadyHaveAnAccount.font fontWithSize:24]
+        ;
+
+        
+        
+    }
 }
 -(void)viewWillAppear:(BOOL)animated
 {

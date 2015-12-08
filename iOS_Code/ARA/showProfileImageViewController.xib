@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="showProfileImageViewController">
             <connections>
+                <outlet property="btnProfile" destination="UGi-PP-uqB" id="muI-0y-Cj0"/>
                 <outlet property="imageViewProfile" destination="ugG-HQ-EnF" id="T8q-Iq-xCL"/>
+                <outlet property="lblheading" destination="OUd-aa-wKF" id="PaK-YF-MeG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -94,6 +94,10 @@
         lblHighestEarningPrice.font = [lblHighestEarningPrice.font fontWithSize:50];
         lblReferralCount.font = [lblReferralCount.font fontWithSize:50];
         lblSoldReferralCount.font = [lblSoldReferralCount.font fontWithSize:50];
+        
+        lblBackgroundEarning.layer.borderWidth = 1;
+        lblbackgroundReferral.layer.borderWidth = 1;
+        lblbackgroundSoldReferrals.layer.borderWidth = 1;
     }
 }
 

@@ -17,6 +17,7 @@
     CGPoint svos;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UILabel *lblPass;
+    IBOutlet UILabel *lblAlreadyHaveAnAccount;
     IBOutlet UILabel *lblEmail;
     IBOutlet UIButton *btnForgotPassword;
     IBOutlet UIButton *btnSignUp;

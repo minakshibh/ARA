@@ -80,6 +80,13 @@
          badagesName.font=[badagesName.font fontWithSize:24];
          badagesDate.font=[badagesDate.font fontWithSize:20];
          badagesNo.font=[badagesNo.font fontWithSize:20];
+         badagesImage.contentMode = UIViewContentModeScaleAspectFit;
+
+        badagesImage.frame = CGRectMake(badagesImage.frame.origin.x-10, badagesImage.frame.origin.y, badagesImage.frame.size.width, badagesImage.frame.size.height);
+        
+        badagesName.frame = CGRectMake(badagesName.frame.origin.x-20, badagesName.frame.origin.y, badagesName.frame.size.width, badagesName.frame.size.height);
+        badagesDate.frame = CGRectMake(badagesDate.frame.origin.x-20, badagesDate.frame.origin.y, badagesDate.frame.size.width, badagesDate.frame.size.height);
+        badagesNo.frame = CGRectMake(badagesNo.frame.origin.x-20, badagesNo.frame.origin.y, badagesNo.frame.size.width, badagesNo.frame.size.height);
         
         //badagesImage.frame = CGRectMake(badagesImage.frame.origin.x, badagesImage.frame.origin.y, badagesImage.frame.size.width, badagesImage.frame.size.height+5);
     }

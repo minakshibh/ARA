@@ -90,7 +90,7 @@
         BUILDVERSION.font = [BUILDVERSION.font fontWithSize:24];
         buildVersion.font = [buildVersion.font fontWithSize:24];
         buildSize.font = [buildSize.font fontWithSize:24];
-       
+       btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
          BUILDSIZE.font = [BUILDSIZE.font fontWithSize:24];
         btnheading.font = [btnheading.font fontWithSize:24];
     }

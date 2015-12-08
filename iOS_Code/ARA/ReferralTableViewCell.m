@@ -96,11 +96,11 @@
     {
         imageViewimage.frame = CGRectMake(imageViewimage.frame.origin.x+2, imageViewimage.frame.origin.y-3, imageViewimage.frame.size.width-4, imageViewimage.frame.size.height+10);
         
-        lblName.font = [lblName.font fontWithSize:19];
-        lblDate.font = [lblDate.font fontWithSize:17];
-        lbltag.font = [lbltag.font fontWithSize:20];
+        lblName.font = [lblName.font fontWithSize:24];
+        lblDate.font = [lblDate.font fontWithSize:20];
+        lbltag.font = [lbltag.font fontWithSize:24];
         
-        lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y+5, lblDate.frame.size.width, lblDate.frame.size.height);
+        lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y, lblDate.frame.size.width, lblDate.frame.size.height);
     }
 }
 -(void)setLabelTextforReward:(NSString*)Name :(NSString*)referralId : (NSString*)price :(NSString*)date
@@ -113,6 +113,18 @@
     lbltag.hidden = YES;
     lblpriceReferral.text = [NSString stringWithFormat:@"$%@",price];
     lblDateReward.text = [NSString stringWithFormat:@"Sold Date: %@",date];
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        lblAmontEarnedScoreboard.font=[lblAmontEarnedScoreboard.font fontWithSize:20];
+        lblPricetxtScoreboard.font=[lblPricetxtScoreboard.font fontWithSize:20];
+        lblPriceScoreboard.font=[lblPriceScoreboard.font fontWithSize:20];
+        lblName.font=[lblName.font fontWithSize:20];
+        lblDate.font=[lblDate.font fontWithSize:20];
+        lblpriceReferral.font=[lblpriceReferral.font fontWithSize:20];
+        lblDateReward.font=[lblDateReward.font fontWithSize:20];
+        
+    }
     
 }
 -(void)setLabelTextforScoreboard:(NSString*)Name : (NSString*)price :(NSString*)trigger
@@ -138,10 +150,13 @@
         lblAmontEarnedScoreboard.text = @"Sold Referrals :";
         lblAmontEarnedScoreboard.frame = CGRectMake(lblAmontEarnedScoreboard.frame.origin.x +15, lblAmontEarnedScoreboard.frame.origin.y, lblAmontEarnedScoreboard.frame.size.width, lblAmontEarnedScoreboard.frame.size.height);
 
-        
+        lblNameScoreboard.font=[lblNameScoreboard.font fontWithSize:20];
+        lblDateReward.font=[lblDateReward.font fontWithSize:20];
+        lblDate.font=[lblDate.font fontWithSize:20];
+        lblName.font=[lblName.font fontWithSize:20];
+        lbltag.font=[lbltag.font fontWithSize:20];
         
         lblPriceScoreboard.textAlignment = NSTextAlignmentCenter;
-
         lblPriceScoreboard.text = price;
 
     }else if([trigger isEqualToString:@"HighestEarner"])
@@ -157,7 +172,8 @@
         lblNameScoreboard.font = [lblNameScoreboard.font fontWithSize:19];
         lblPriceScoreboard.font = [lblPriceScoreboard.font fontWithSize:17];
         lblAmontEarnedScoreboard.font = [lblAmontEarnedScoreboard.font fontWithSize:17];
-
+         lblPriceScoreboard.frame = CGRectMake(lblPriceScoreboard.frame.origin.x+10,lblPriceScoreboard.frame.origin.y, lblPriceScoreboard.frame.size.width, lblPriceScoreboard.frame.size.height);
+         lblAmontEarnedScoreboard.frame = CGRectMake(lblAmontEarnedScoreboard.frame.origin.x+10, lblAmontEarnedScoreboard.frame.origin.y, lblAmontEarnedScoreboard.frame.size.width, lblAmontEarnedScoreboard.frame.size.height);
     }
     
     

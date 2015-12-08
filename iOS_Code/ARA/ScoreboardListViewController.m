@@ -86,7 +86,7 @@
     {
     
     
-    lblHeader.font = [lblHeader.font fontWithSize:24];
+    self.lblHeader.font = [self.lblHeader.font fontWithSize:24];
         
         btnQuater.titleLabel.font = [btnQuater.titleLabel.font fontWithSize:24];
         btnYear.titleLabel.font = [btnYear.titleLabel.font fontWithSize:24];
@@ -111,10 +111,15 @@
 #pragma mark - tableview Delegates
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+         return 70;
+    }
     return 50;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     return UserName.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)atableView
@@ -138,6 +143,8 @@
     
     }
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   
     return  cell;
 }
 - (void)tableView:(UITableView *)atableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

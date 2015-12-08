@@ -44,6 +44,16 @@
     if (d==3) {
         imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
     }
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        txtEmail.font=[txtEmail.font fontWithSize:24];
+        
+        btnLogIn.titleLabel.font = [btnLogIn.titleLabel.font fontWithSize:20];
+        btnSingUp.titleLabel.font = [btnSingUp.titleLabel.font fontWithSize:20];
+        btnResetPassword.titleLabel.font = [btnSingUp.titleLabel.font fontWithSize:24];
+        lblOr.font = [lblOr.font fontWithSize:20];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

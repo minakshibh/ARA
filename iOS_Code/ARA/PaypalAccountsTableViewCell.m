@@ -36,8 +36,9 @@ int i=0;
 
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-         lblEmail.font=[lblEmail.font fontWithSize:24];
-        
+        lblEmail.font=[lblEmail.font fontWithSize:24];
+        iamgeViewTick.frame = CGRectMake(iamgeViewTick.frame.origin.x+10, iamgeViewTick.frame.origin.y, iamgeViewTick.frame.size.width, iamgeViewTick.frame.size.height);
+
     }
 }
 @end

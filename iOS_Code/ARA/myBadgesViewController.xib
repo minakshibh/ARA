@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="myBadgesViewController">
             <connections>
+                <outlet property="btnBack" destination="HZF-ax-l3x" id="Rx3-Oy-5VZ"/>
                 <outlet property="btnallBadges" destination="KO8-by-jtg" id="D6D-Qd-hkW"/>
                 <outlet property="btnback" destination="HZF-ax-l3x" id="nva-np-cdv"/>
                 <outlet property="headerImage" destination="Xyr-V0-rPY" id="EFg-kV-cUr"/>

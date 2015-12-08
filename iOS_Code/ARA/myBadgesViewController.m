@@ -59,7 +59,11 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     
-    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        lblheading.font=[lblheading.font fontWithSize:24];
+        btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:24];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,6 +82,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
     {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return badgesArray.count;
     }
 - (UITableViewCell *)tableView:(UITableView *)atableView
@@ -127,7 +132,7 @@
         [cell setLabelText:[NSString stringWithFormat:@"%@",obj.BadgeName] :joinedStr :[NSString stringWithFormat:@"%@",obj.EarnedDate] :badgeUrl_str :random];
     }
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     return cell;
 }
 - (void)tableView:(UITableView *)atableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

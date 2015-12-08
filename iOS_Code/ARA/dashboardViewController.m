@@ -164,8 +164,47 @@
 //   NSLog(@"%@",[phoneNumbers objectAtIndex:1]);
 //   NSLog(@"%@",[phoneNumbers objectAtIndex:2]);
 
+    [NSTimer scheduledTimerWithTimeInterval:0.1
+                                     target:self
+                                   selector:@selector(targetMethod:)
+                                   userInfo:nil
+                                    repeats:NO];
 }
-
+-(void)targetMethod:(NSTimer *)timer
+{
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        
+        CGRect frame = imageViewMenuProfile.frame;
+        frame.size.width = 210;
+        frame.size.height = 210;
+        frame.origin.x = frame.origin.x +14;
+        frame.origin.y = frame.origin.y -10;
+        imageViewMenuProfile.frame = frame;
+        
+        imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;
+        imageViewMenuProfile.layer.masksToBounds = YES;
+        imageViewMenuProfile.layer.borderWidth = 2;
+        imageViewMenuProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        imageViewMenuProfile.hidden = NO;
+    }else{
+        //---making image round
+        if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
+        {
+            CGRect frame = imageViewMenuProfile.frame;
+            frame.size.width = 100;
+            frame.size.height = 100;
+            imageViewMenuProfile.frame = frame;
+        }
+        imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;
+        imageViewMenuProfile.layer.borderWidth = 2.0f;
+        imageViewMenuProfile.layer.borderWidth = 2;
+        imageViewMenuProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        
+    }
+    //---image
+    
+}
 -(void)setRoundedAvatar:(UIImageView *)avatarView toDiameter:(float)newSize atView:(UIView *)containedView;
 {
     avatarView.layer.cornerRadius = newSize/2;
@@ -189,26 +228,7 @@
     NSString* namestr = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"],[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
     lblNameMenu.text = namestr;
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-    {
-        
-        [self setRoundedAvatar:imageViewMenuProfile toDiameter:imageViewMenuProfile.frame.size.width atView:self.view];
-    }else{
-    //---making image round
-    if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
-    {
-        CGRect frame = imageViewMenuProfile.frame;
-        frame.size.width = 100;
-        frame.size.height = 100;
-        imageViewMenuProfile.frame = frame;
-    }
-    imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;
-    imageViewMenuProfile.layer.borderWidth = 2.0f;
-    imageViewMenuProfile.layer.borderWidth = 2;
-    imageViewMenuProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
     
-    }
-    //---image
     NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{

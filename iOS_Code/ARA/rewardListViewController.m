@@ -110,14 +110,20 @@
 //---tableview delegates
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+          return 80;
+    }
     return 60;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if(rewardListArray.count==0)
     {
         return 0;
     }
+
     return rewardListArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)atableView
@@ -142,6 +148,7 @@
         [cell setLabelTextforReward:name :obj.UniqueReferralNumber :obj.RewardAmount :obj.SoldDate];
     
         tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     return  cell;
 }
 

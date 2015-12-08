@@ -87,6 +87,31 @@
     
     [numberToolbar sizeToFit];
     txtPhoneNo.inputAccessoryView = numberToolbar;
+    
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        btnCheckBox.titleLabel.font = [btnCheckBox.titleLabel.font fontWithSize:20];
+        btnSignup.titleLabel.font = [btnSignup.titleLabel.font fontWithSize:20];
+        
+        lblAlready.font = [lblAlready.font fontWithSize:20];
+        btnLogIn.titleLabel.font = [btnLogIn.titleLabel.font fontWithSize:20];
+        
+        
+        btnMEA.titleLabel.font = [btnMEA.titleLabel.font fontWithSize:20];
+        btnPreviewCustomer.titleLabel.font = [btnPreviewCustomer.titleLabel.font fontWithSize:20];
+        
+        
+        txtFirstName.font = [txtFirstName.font fontWithSize:20];
+        txtLastName.font = [txtLastName.font fontWithSize:20];
+        txtUserId.font = [txtUserId.font fontWithSize:20];
+        txtPhoneNo.font = [txtPhoneNo.font fontWithSize:20];
+        txtEmail.font = [txtEmail.font fontWithSize:20];
+        txtPassword.font = [txtPassword.font fontWithSize:20];
+        txtPreviousCoustomer.font = [txtPreviousCoustomer.font fontWithSize:20];
+        txtMEA.font = [txtMEA.font fontWithSize:20];
+        
+    }
 }
 
 -(void)cancelNumberPad{
@@ -1297,6 +1322,9 @@ if(tableView == tableViewPreviousCustomer)
     [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
     scrollView.scrollEnabled = YES;
 
+  
+    
+    
     return 35;
     
 }
@@ -1321,6 +1349,15 @@ if(tableView == tableViewPreviousCustomer)
     
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [tableView flashScrollIndicators];
+    
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        cell.textLabel.font = [UIFont systemFontOfSize:17.0];
+    }
+    tableViewPreviousCustomer.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableViewMEA.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1417,6 +1454,7 @@ if(tableView == tableViewPreviousCustomer)
         [btnMEA setTitle:@" " forState:UIControlStateNormal];
         tableViewMEA.hidden = YES;
          status=false;
+        
     }
 }
 @end
