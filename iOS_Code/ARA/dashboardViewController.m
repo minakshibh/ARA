@@ -51,7 +51,7 @@
     
     lblEmailSideMenu.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]];
     
-    
+    NSLog(@"%@",lblEmailSideMenu.text);
     
     
 //    if([_from_login isEqualToString:@"yes"])
