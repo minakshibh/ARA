@@ -314,6 +314,13 @@
     NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
     if([response_status isEqualToString:@"passed"])
     {
+        if (userDetailDict.count==0) {
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"There is no data to display" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
+        
+        
         Earning = [[NSMutableArray alloc]init];
         ReferralCount = [[NSMutableArray alloc]init];
         UserName = [[NSMutableArray alloc]init];
