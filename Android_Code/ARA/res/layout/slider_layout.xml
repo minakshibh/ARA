@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="@color/menu_blue"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/layout_imagename"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="2dp" >
+<!-- 
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_launcher" /> -->
+ <com.ara.util.RoundedImageView
+                android:id="@+id/userImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+           		android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                 android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:padding="10dp"
+                android:text="User Name"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_text_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <include layout="@layout/slider_separator" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/menu_option_padding" 
+                android:id="@+id/profile">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/my_profile"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                      android:id="@+id/txt_profile"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="My Profile"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <include layout="@layout/slider_separator" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:id="@+id/referrals"
+                android:padding="@dimen/menu_option_padding" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                     android:src="@drawable/referrals_icon"
+                    />
+
+                <TextView
+                      android:id="@+id/txt_referral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Referrals"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+  <!--           <include layout="@layout/slider_separator" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/menu_option_padding"
+                android:id="@+id/submitReferral" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:src="@drawable/submit_referral"
+                     />
+
+                <TextView
+                    android:id="@+id/txt_submitReferral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Submit Referral"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout> -->
+
+            <include layout="@layout/slider_separator" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/menu_option_padding" 
+                android:id="@+id/paymentAccounts">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:src="@drawable/paypal"
+                     />
+
+                <TextView
+                     android:id="@+id/txt_paymentAccounts"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Payment Accounts"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <include layout="@layout/slider_separator" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/menu_option_padding" 
+                android:id="@+id/myBadges">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                     android:src="@drawable/badges"
+                    />
+
+                <TextView
+                     android:id="@+id/txt_myBadges"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="My Badges"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <include layout="@layout/slider_separator" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/menu_option_padding" 
+                android:id="@+id/myRewards">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                     android:src="@drawable/rewards"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_myRewards"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="My Rewards"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <include layout="@layout/slider_separator" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/menu_option_padding" 
+                android:id="@+id/scoreboard">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                     android:src="@drawable/scoreboard"
+                    />
+
+                <TextView
+                      android:id="@+id/txt_scoreboard"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Scoreboard"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <include layout="@layout/slider_separator" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:gravity="bottom"
+            android:padding="@dimen/menu_option_padding" 
+            android:id="@+id/logout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                 android:src="@drawable/logout"
+                />
+
+            <TextView
+                android:id="@+id/txt_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Logout"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_text_size"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_useremail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="user@name"
+                android:gravity="right"
+                android:singleLine="true"
+                android:textColor="@color/app_blue"
+                android:textSize="@dimen/default_text_size"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/Slidermenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:layout_margin="5dp"
+        android:src="@drawable/menu_icon" />
+
+</LinearLayout>

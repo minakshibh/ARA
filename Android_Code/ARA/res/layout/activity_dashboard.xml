@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+   <TextView
+        android:id="@+id/referralDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:background="@color/app_yellow"
+        android:gravity="start|center_vertical"
+        android:paddingLeft="10dp"
+        android:text="REFERRAL DASHBOARD"
+        android:textColor="@color/app_blue" />
+
+  <LinearLayout
+        android:id="@+id/LinearLayout_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_up"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/activeReferralLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/app_green"
+                android:orientation="vertical"
+                android:paddingRight="5dp"
+                android:paddingLeft="10dp"
+                android:layout_margin="10dp" >
+
+	       <TextView
+	           android:id="@+id/textView_activeReferral"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="start|center_vertical"
+	           android:text="ACTIVE REFERRALS"
+	           android:textColor="@color/white"
+	           android:textSize="11sp" />
+
+	       <TextView
+	           android:id="@+id/activeReferralCount"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="5"
+	           android:gravity="start"
+	           android:textColor="@color/white"
+	           android:textSize="35sp" />
+
+	       <TextView
+	           android:id="@+id/activeReferralAmount"
+	           android:layout_width="match_parent"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="end|center_vertical"
+	           android:textColor="@color/white"
+	           android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/soldReferralLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/light_blue"
+                android:orientation="vertical"
+                 android:paddingRight="5dp"
+                android:paddingLeft="10dp"
+                android:layout_margin="10dp" >
+	        <TextView
+	           android:id="@+id/textView_soldReferral"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="start|center_vertical"
+	           android:text="SOLD REFERRALS"
+	           android:textColor="@color/white"
+	           android:textSize="11sp" />
+
+	       <TextView
+	           android:id="@+id/soldReferralCount"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="5"
+	           android:gravity="start"
+	           android:textColor="@color/white"
+	           android:textSize="35sp" />
+
+	       <TextView
+	           android:id="@+id/soldReferralAmount"
+	           android:layout_width="match_parent"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="end|center_vertical"
+	           android:textColor="@color/white"
+	           android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_down"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/inActiveReferralLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/app_orange"
+                android:orientation="vertical"
+                 android:paddingRight="5dp"
+                android:paddingLeft="10dp"
+                android:layout_margin="10dp" >
+	        <TextView
+	           android:id="@+id/textView_inactiveRederral"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="start|center_vertical"
+	           android:text="INACTIVE REFERRALS"
+	           android:textColor="@color/white"
+	           android:textSize="11sp" />
+
+	       <TextView
+	           android:id="@+id/inActiveReferralCount"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="5"
+	           android:gravity="start"
+	           android:textColor="@color/white"
+	           android:textSize="35sp" />
+
+	       <TextView
+	           android:id="@+id/textView_inactiveempty"
+	           android:layout_width="match_parent"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="end|center_vertical"
+	           android:textColor="@color/white"
+	           android:visibility="invisible"
+	           android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/totalReferralLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/light_yellow"
+                android:orientation="vertical"
+                 android:paddingRight="5dp"
+                android:paddingLeft="10dp"
+                android:layout_margin="10dp">
+	       
+                 <TextView
+	           android:id="@+id/textView_total_Referral"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="start|center_vertical"
+	           android:text="TOTAL REFERRALS"
+	           android:textColor="@color/white"
+	           android:textSize="11sp" />
+
+	       <TextView
+	           android:id="@+id/totalReferralCount"
+	           android:layout_width="wrap_content"
+	           android:layout_height="0dp"
+	           android:layout_weight="5"
+	           android:gravity="start"
+	           android:textColor="@color/white"
+	           android:textSize="35sp" />
+
+	       <TextView
+	           android:id="@+id/textView_totalt"
+	           android:layout_width="match_parent"
+	           android:layout_height="0dp"
+	           android:layout_weight="3"
+	           android:gravity="end|center_vertical"
+	           android:textColor="@color/white"
+	           android:visibility="invisible"
+	           android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+  </LinearLayout>
+ <LinearLayout
+        android:id="@+id/LinearLayout_fotter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="20dp" >
+</LinearLayout>
+</LinearLayout>

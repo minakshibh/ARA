@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/swipe"
+    android:layout_width="fill_parent" android:layout_height="wrap_content">
+    <!-- Bottom View Start-->
+     <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <!--What you want to show-->
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Edit"
+            android:background="@color/bright_green"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:id="@+id/editAccount"
+            />
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Delete"
+            android:background="@color/bright_orange"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:id="@+id/deleteAccount"
+            />
+
+    </LinearLayout>
+    <!-- Bottom View End-->
+
+    <!-- Surface View Start -->
+     <LinearLayout
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:id="@+id/swipeLayout"
+        android:layout_height="match_parent">
+        <!--What you want to show in SurfaceView-->
+        
+        <RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+   android:orientation="horizontal"
+    android:padding="10dp">
+    
+   
+    
+    <ImageView
+        android:id="@+id/paypalIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/paypal_icon" />
+    
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="abc@paypal.com"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/default_text_size"
+            android:layout_toRightOf="@+id/paypalIcon"
+            android:layout_toLeftOf="@+id/defaultIcon"
+            android:singleLine="true"
+            android:id="@+id/paypalEmail"/>
+    <ImageView
+        android:id="@+id/defaultIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/tick" />
+    
+</RelativeLayout>
+    </LinearLayout>
+    <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>
+
+

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/listview_bg" >
+
+<RelativeLayout
+    
+        android:id="@+id/LinearLayout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black">
+
+       <ImageView
+          android:id="@+id/back_arrow"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="10dp"
+          android:padding="5dp"
+          android:layout_alignParentLeft="true"
+          android:src="@drawable/back_icon" />
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          	android:layout_centerInParent="true"
+            android:gravity="start|center_vertical"
+            android:text="Back"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white" 
+            android:layout_toRightOf="@+id/back_arrow"/>
+
+        <ImageView
+             android:src="@drawable/header_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+         	android:layout_margin="5dp"
+             />
+
+        <TextView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:text="Add"
+            android:padding="8dp"
+            android:textColor="@color/white" />
+
+</RelativeLayout>
+   <TextView
+         android:layout_below="@+id/LinearLayout_header"
+        android:id="@+id/txtHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_yellow"
+        android:gravity="start|center_vertical"
+        android:padding="5dp"
+      android:text="PAYMENT ACCOUNTS"
+        android:textColor="@color/app_blue" />
+
+<TextView
+         android:layout_below="@+id/txtHeader"
+        android:id="@+id/swipeInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:gravity="start|center_vertical"
+        android:paddingLeft="5dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+      android:text="Swipe left to Edit or Delete"
+      android:textSize="10sp"
+      android:textStyle="bold"
+        android:textColor="@color/dark_gray" />
+
+    <ListView
+        android:id="@+id/paymentListView"
+        android:layout_width="fill_parent"
+        android:background="@color/listview_bg"
+        android:layout_height="fill_parent" 
+        android:layout_below="@+id/swipeInfo">
+    </ListView>
+
+   
+</RelativeLayout>
