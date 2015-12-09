@@ -1440,13 +1440,17 @@ if(tableView == tableViewPreviousCustomer)
         }
     }else if(tableView==tableViewMEA)
     {
-        if([[NSString stringWithFormat:@"%@",[name_array_Mea objectAtIndex:indexPath.row]] isEqualToString:@"Any Member Experience Advisor(sales)"])
+        txtMEA.text = [name_array_Mea objectAtIndex:indexPath.row];
+        if([ txtMEA.text isEqualToString:@"Any Member Experience Advisor (Sales)"])
+            
         {
-            txtMEA.font=[txtMEA.font fontWithSize:13];
+            txtMEA.font=[txtMEA.font fontWithSize:12];
   
+        }else{
+            txtMEA.font=[txtMEA.font fontWithSize:13];
         }
         
-        txtMEA.text = [name_array_Mea objectAtIndex:indexPath.row];
+        
         if(indexPath.row>0)
         {
         selected_meaid= [NSString stringWithFormat:@"%@",[id_array_Mea objectAtIndex:indexPath.row-1]];

@@ -315,7 +315,8 @@
     if([response_status isEqualToString:@"passed"])
     {
         if (userDetailDict.count==0) {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"There is no data to display" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"There is no data to display" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag=2;
             [alert show];
             return;
         }
@@ -333,6 +334,14 @@
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
 
+    }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag==2){
+        if(buttonIndex == 0)//OK button pressed
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 @end

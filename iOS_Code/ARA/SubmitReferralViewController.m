@@ -1110,6 +1110,10 @@
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        return 50;
+    }
     return 35;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -1122,14 +1126,28 @@
     cell.textLabel.text = [name_mea_array objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:13.0];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        cell.textLabel.font = [UIFont systemFontOfSize:17.0];
+    }
     return  cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     txtmea.text = [name_mea_array objectAtIndex:indexPath.row];
+    
+    if([txtmea.text isEqualToString:@"Any Member Experience Advisor (Sales)"])
+    {
+         txtmea.font=[txtmea.font fontWithSize:12];
+    }else{
+    
     txtmea.font=[txtmea.font fontWithSize:13];
     
+    }
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        txtmea.font=[txtmea.font fontWithSize:24];
+    }
     selected_text_id = [NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexPath.row]];
     [btnMEA setTitle:@"" forState:UIControlStateNormal];
     tableView.hidden =YES;

@@ -93,6 +93,33 @@
 - (IBAction)btnProfile:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;  // after animation
+{
+    if (buttonIndex == 1)
+    {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker
+                           animated:YES completion:nil];
+    }
+    if (buttonIndex==0)
+    {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        //        [self presentViewController:picker animated:YES completion:nil];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:picker];
+            [popover presentPopoverFromRect:btnProfile.bounds inView:imageViewProfile permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+           // self.popoverImageViewController = popover;
+        } else {
+            [self presentModalViewController:picker animated:YES];
+        }
+    }
+
+}
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1)
@@ -108,7 +135,14 @@
         UIImagePickerController * picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        [self presentViewController:picker animated:YES completion:nil];
+//        [self presentViewController:picker animated:YES completion:nil];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:picker];
+            [popover presentPopoverFromRect:imageViewProfile.bounds inView:imageViewProfile permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            self.popoverImageViewController = popover;
+        } else {
+            [self presentModalViewController:picker animated:YES];
+        }
     }
     
 }

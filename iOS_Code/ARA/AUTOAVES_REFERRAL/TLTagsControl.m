@@ -176,7 +176,7 @@
             UIView *lastTag = tagSubviews_.lastObject;
             offset.x = lastTag.frame.origin.x + lastTag.frame.size.width - self.frame.size.width;
         }
-    } else {
+    }else {
         offset.x = 0;
     }
     

@@ -18,5 +18,5 @@
 }
 - (IBAction)btnEdit:(id)sender;
 - (IBAction)btnProfile:(id)sender;
-
+@property (nonatomic, strong) UIPopoverController *popoverImageViewController;
 @end

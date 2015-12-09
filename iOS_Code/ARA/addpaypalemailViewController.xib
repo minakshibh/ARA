@@ -88,11 +88,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner-logo.png" id="NI6-Fy-SIi">
-                            <rect key="frame" x="117" y="128" width="180" height="65"/>
+                            <rect key="frame" x="117" y="111" width="180" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNg-GE-l42">
-                            <rect key="frame" x="39" y="209" width="337" height="46"/>
+                            <rect key="frame" x="39" y="192" width="337" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -100,11 +100,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role-icon.png" id="gMb-Ax-7dy">
-                            <rect key="frame" x="51" y="224" width="15" height="15"/>
+                            <rect key="frame" x="51" y="207" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="n6w-Vy-MU7">
-                            <rect key="frame" x="92" y="209" width="284" height="45"/>
+                            <rect key="frame" x="92" y="192" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -113,7 +113,7 @@
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GKN-ez-YJi">
-                            <rect key="frame" x="91" y="210" width="280" height="45"/>
+                            <rect key="frame" x="91" y="193" width="280" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                             <state key="normal" title="Select Payment Mode">
@@ -125,11 +125,11 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown-arrow.png" id="uaN-xb-ipt">
-                            <rect key="frame" x="349" y="224" width="15" height="15"/>
+                            <rect key="frame" x="349" y="207" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FuQ-LL-Xp9">
-                            <rect key="frame" x="80" y="216" width="1" height="32"/>
+                            <rect key="frame" x="80" y="199" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -137,7 +137,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view hidden="YES" contentMode="scaleToFill" id="e4R-io-LCy">
-                            <rect key="frame" x="39" y="271" width="337" height="161"/>
+                            <rect key="frame" x="39" y="254" width="337" height="161"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L9d-Tf-WQt">
@@ -196,7 +196,7 @@
                             <color key="backgroundColor" red="0.062745098040000002" green="0.42352941179999998" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RwQ-sc-h5O">
-                            <rect key="frame" x="82" y="255" width="294" height="128"/>
+                            <rect key="frame" x="82" y="238" width="294" height="128"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>

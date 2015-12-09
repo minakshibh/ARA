@@ -510,10 +510,10 @@
         return;
         }
     }
-    namelbl.textColor = [UIColor darkGrayColor];
-    phonelbl.textColor = [UIColor darkGrayColor];
-    purchasedlbl.textColor = [UIColor darkGrayColor];
-    lastnamelbl.textColor= [UIColor darkGrayColor];
+    namelbl.textColor = [UIColor lightGrayColor];
+    phonelbl.textColor = [UIColor lightGrayColor];
+    purchasedlbl.textColor = [UIColor lightGrayColor];
+    lastnamelbl.textColor= [UIColor lightGrayColor];
     
     [txtPhoneNo resignFirstResponder];
     [txtName resignFirstResponder];

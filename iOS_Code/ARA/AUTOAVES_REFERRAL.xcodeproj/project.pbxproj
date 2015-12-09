@@ -791,8 +791,8 @@
 				D93569931B819F5500777DD3 /* ScoreboardListViewController.m */,
 				D93569941B819F5500777DD3 /* ScoreboardListViewController.xib */,
 				D93569981B81B15800777DD3 /* ScoreboardViewController.h */,
-				D93569991B81B15800777DD3 /* ScoreboardViewController.m */,
 				D935699A1B81B15800777DD3 /* ScoreboardViewController.xib */,
+				D93569991B81B15800777DD3 /* ScoreboardViewController.m */,
 			);
 			name = Scoreboard;
 			sourceTree = "<group>";
@@ -1822,7 +1822,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "12753f6f-7ede-4e63-8347-9938d8341736";
+				PROVISIONING_PROFILE = "f4ce5f38-711e-4603-8259-e167d84a4daf";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1858,7 +1858,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "81526813-1dd5-4cc1-9333-3386615d6a0f";
+				PROVISIONING_PROFILE = "20335dd6-566b-4885-8a60-653fc4a867b4";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1868,8 +1868,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1886,7 +1886,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f4ce5f38-711e-4603-8259-e167d84a4daf";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1895,8 +1895,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1913,7 +1913,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20335dd6-566b-4885-8a60-653fc4a867b4";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

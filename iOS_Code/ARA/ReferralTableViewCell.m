@@ -56,7 +56,7 @@
         CGRect frame = lbltag.frame;
         frame.origin.x = frame.origin.x-10;
         lbltag.frame = frame;
-        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:13];
+        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:14];
 
     }else if([tag isEqualToString:@"sold"]){
         lbltag.textColor = [UIColor colorWithRed:118.0f/255.0f green:178.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
@@ -66,7 +66,7 @@
         CGRect frame = lbltag.frame;
         frame.origin.x = frame.origin.x-10;
         lbltag.frame = frame;
-        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:13];
+        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:14];
 
     }else{
         lbltag.textColor = [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
@@ -139,31 +139,75 @@
     if([trigger isEqualToString:@"HighestReferral"])
     {
         lblAmontEarnedScoreboard.text = @"Referrals :";
-        lblAmontEarnedScoreboard.frame = CGRectMake(lblAmontEarnedScoreboard.frame.origin.x +15, lblAmontEarnedScoreboard.frame.origin.y, lblAmontEarnedScoreboard.frame.size.width, lblAmontEarnedScoreboard.frame.size.height);
+        lblAmontEarnedScoreboard.hidden=YES;
+       // lblPriceScoreboard.textAlignment = NSTextAlignmentCenter;
         
         
-        lblPriceScoreboard.textAlignment = NSTextAlignmentCenter;
-        lblPriceScoreboard.text = price;
+        
+        
+        NSString *yourString = [NSString stringWithFormat:@"Referrals : %@",price];
+        NSMutableAttributedString *yourAttributedString = [[NSMutableAttributedString alloc] initWithString:yourString];
+        NSString *boldString = [NSString stringWithFormat:@"%@",price];
+        NSRange boldRange = [yourString rangeOfString:boldString];
+        [yourAttributedString addAttribute: NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:boldRange];
+        
+        [yourAttributedString addAttribute:NSFontAttributeName
+                      value:[UIFont systemFontOfSize:12]
+                      range:NSMakeRange(0, 10)];
+        
+        [yourAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 10)];
+        
+        [lblPriceScoreboard setAttributedText: yourAttributedString];
+        
+        
+      // lblPriceScoreboard.text = [NSString stringWithFormat:@"Referrals : %@",price];
         
     }else if([trigger isEqualToString:@"HighestSoldReferral"])
     {
         lblAmontEarnedScoreboard.text = @"Sold Referrals :";
-        lblAmontEarnedScoreboard.frame = CGRectMake(lblAmontEarnedScoreboard.frame.origin.x +15, lblAmontEarnedScoreboard.frame.origin.y, lblAmontEarnedScoreboard.frame.size.width, lblAmontEarnedScoreboard.frame.size.height);
+         lblAmontEarnedScoreboard.hidden=YES;
 
-        lblNameScoreboard.font=[lblNameScoreboard.font fontWithSize:20];
-        lblDateReward.font=[lblDateReward.font fontWithSize:20];
-        lblDate.font=[lblDate.font fontWithSize:20];
-        lblName.font=[lblName.font fontWithSize:20];
-        lbltag.font=[lbltag.font fontWithSize:20];
         
-        lblPriceScoreboard.textAlignment = NSTextAlignmentCenter;
-        lblPriceScoreboard.text = price;
+        
+        NSString *yourString = [NSString stringWithFormat:@"Sold Referrals : %@",price];
+        NSMutableAttributedString *yourAttributedString = [[NSMutableAttributedString alloc] initWithString:yourString];
+        NSString *boldString = [NSString stringWithFormat:@"%@",price];
+        NSRange boldRange = [yourString rangeOfString:boldString];
+        [yourAttributedString addAttribute: NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:boldRange];
+        
+        [yourAttributedString addAttribute:NSFontAttributeName
+                                     value:[UIFont systemFontOfSize:12]
+                                     range:NSMakeRange(0, 15)];
+        
+        [yourAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 15)];
+        
+        [lblPriceScoreboard setAttributedText: yourAttributedString];
+ 
+        
+//     lblPriceScoreboard.text = [NSString stringWithFormat:@"Sold Referrals : %@",price];
 
     }else if([trigger isEqualToString:@"HighestEarner"])
     {
-        lblPriceScoreboard.text = price;
-
+        
+        NSString *yourString = [NSString stringWithFormat:@"Amount Earned : %@",price];
+        NSMutableAttributedString *yourAttributedString = [[NSMutableAttributedString alloc] initWithString:yourString];
+        NSString *boldString = [NSString stringWithFormat:@"%@",price];
+        NSRange boldRange = [yourString rangeOfString:boldString];
+        [yourAttributedString addAttribute: NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:boldRange];
+        
+        [yourAttributedString addAttribute:NSFontAttributeName
+                                     value:[UIFont systemFontOfSize:12]
+                                     range:NSMakeRange(0, 15)];
+        
+        [yourAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 15)];
+        
+        [lblPriceScoreboard setAttributedText: yourAttributedString];
+        
+      //  lblPriceScoreboard.text = [NSString stringWithFormat:@"Amount Earned : %@",price];
+        lblAmontEarnedScoreboard.hidden=YES;
     }
+    
+    
     
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
@@ -172,8 +216,8 @@
         lblNameScoreboard.font = [lblNameScoreboard.font fontWithSize:19];
         lblPriceScoreboard.font = [lblPriceScoreboard.font fontWithSize:17];
         lblAmontEarnedScoreboard.font = [lblAmontEarnedScoreboard.font fontWithSize:17];
-         lblPriceScoreboard.frame = CGRectMake(lblPriceScoreboard.frame.origin.x+10,lblPriceScoreboard.frame.origin.y, lblPriceScoreboard.frame.size.width, lblPriceScoreboard.frame.size.height);
-         lblAmontEarnedScoreboard.frame = CGRectMake(lblAmontEarnedScoreboard.frame.origin.x+10, lblAmontEarnedScoreboard.frame.origin.y, lblAmontEarnedScoreboard.frame.size.width, lblAmontEarnedScoreboard.frame.size.height);
+         lblPriceScoreboard.frame = CGRectMake(lblPriceScoreboard.frame.origin.x,lblPriceScoreboard.frame.origin.y, lblPriceScoreboard.frame.size.width,
+        lblPriceScoreboard.frame.size.height);
     }
     
     
