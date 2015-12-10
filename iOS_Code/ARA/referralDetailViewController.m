@@ -222,7 +222,7 @@
     }
     
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         lblheading.font = [lblheading.font fontWithSize:24];
         

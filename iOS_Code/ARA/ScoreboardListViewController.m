@@ -82,7 +82,7 @@
     
     
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
     
     
@@ -151,6 +151,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+#pragma  mark - Buttons
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -195,6 +196,7 @@
     [self displayData];
 
 }
+#pragma  mark - Other Methods
 -(void)displayData
 {
     [kappDelegate ShowIndicator];
@@ -231,6 +233,14 @@
         NSLog(@"connection is NULL");
     }
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag==2){
+        if(buttonIndex == 0)//OK button pressed
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
 #pragma mark - Connection Delegates
 
 -(NSInteger)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -251,10 +261,9 @@
         
     }else if ((long)[httpResponse statusCode] == 404)
     {
-        response_status = @"failed";
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"No data to display." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"No data to display." okBtn:OkButtonTitle];
 
+        response_status = @"failed";
         return [httpResponse statusCode];
     }
     return  YES;
@@ -266,30 +275,26 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
@@ -315,7 +320,11 @@
     if([response_status isEqualToString:@"passed"])
     {
         if (userDetailDict.count==0) {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"There is no data to display" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            
+       
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:@"There is no data to display" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            
             alert.tag=2;
             [alert show];
             return;
@@ -331,17 +340,10 @@
         UserName = [userDetailDict valueForKey:@"UserName"];
         [tableView reloadData];
     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
 
+        
     }
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(alertView.tag==2){
-        if(buttonIndex == 0)//OK button pressed
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }
-}
+
 @end

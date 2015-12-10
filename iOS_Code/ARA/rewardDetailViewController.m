@@ -61,7 +61,7 @@
     }
     
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         lblHeading.font=[lblHeading.font fontWithSize:24];
         
@@ -107,7 +107,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+#pragma mark - Buttons
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated: YES];
 }

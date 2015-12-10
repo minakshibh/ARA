@@ -110,7 +110,7 @@
     if (d==3) {
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         lblheading.font = [lblheading.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
@@ -125,17 +125,7 @@
         
     }
 }
--(void)cancelNumberPad{
-    [txtPhoneno resignFirstResponder];
-    txtPhoneno.text = @"";
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    scrollView.scrollEnabled = YES;
-}
 
--(void)doneWithNumberPad{
-    [txtEmail becomeFirstResponder];
-    
-}
 -(void)viewWillAppear:(BOOL)animated
 
 {
@@ -166,47 +156,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)getMEA
-{
-    
-    // [kappDelegate ShowIndicator];
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    webservice=1;
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/mea",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"GET"];
-    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    
-    
-}
-#pragma mark - text Delegate Methods
+
+#pragma mark - Text Delegate Methods
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField==txtFirstname) {
@@ -241,7 +192,7 @@
         {
             imagecheckforemailView.hidden = YES;
             if(txtEmail.text.length>0){
-                if (![self validateEmailWithString:txtEmail.text]==YES) {
+                if (![txtEmail emailValidation]==YES) {
                     lblemailerror.text = @"Enter a valid email";
                 }else{
                     //activityIndicatorObject.center = CGPointMake(0, 0);
@@ -424,7 +375,10 @@
     }
     return YES;
 }
-
+#pragma mark Buttons
+- (IBAction)btnBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (IBAction)btnSubmitReferral:(id)sender {
     NSString* firstNameStr = [txtFirstname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* lastNameStr = [txtLastname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -440,7 +394,7 @@
     
        
     
-    UIAlertView *alert;
+    
     NSString *msgstr;
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [txtFirstname resignFirstResponder];
@@ -453,14 +407,16 @@
     if(firstNameStr.length == 0)
     {
         msgstr = @"Please enter first name";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
+
+        
         return;
     }else if(lastNameStr.length == 0)
     {
         msgstr = @"Please enter last name";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
+
+       
         return;
     }
     //    else if (phoneStr.length==0 ) {
@@ -473,8 +429,9 @@
         
     
         if (phoneStr.length<10 ) {
-            alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"Please enter a valid phone number." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+
+            
         return;
         }
     }
@@ -483,23 +440,24 @@
         {
             
         }else{
+            
             msgstr = @"Please enter phone no. of atmost 10 digits";
-            alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
+
             return;
         }
     }
-    if (![self validateEmailWithString:emailStr]==YES) {
-        msgstr = @"Please enter email address";
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+    if (![txtEmail emailValidation]==YES) {
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
+
+       
         [txtEmail becomeFirstResponder];
         return;
     }
     if([email_checked isEqualToString:@"no"])
     {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Just wait a movement we are checking your email." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Just wait a movement we are checking your email." okBtn:OkButtonTitle];
+        
         
     //    [self.view makeToast:@"Just wait a movement we are verifying your email address."];
         
@@ -522,15 +480,14 @@
     if(meaStr.length == 0)
     {
         msgstr = @"Please select mea";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
+
         return;
     }
     if([lblemailerror.text isEqualToString:@"Email already exist"])
     {
         msgstr = @"Email already exist";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
         return;
     }
     NSString *mea_id;
@@ -557,62 +514,6 @@
    // btnSubmitReferral.userInteractionEnabled = NO;
     [self submitReferral:firstNameStr lastname:lastNameStr phoneno:phoneStr email:emailStr mea:mea_id comment:commentsStr];
     
-}
-- (BOOL)validateEmailWithString:(NSString*)email
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:email];
-}
-
--(void)submitReferral:(NSString*)firstname1 lastname:(NSString*)lastname1 phoneno:(NSString*)phoneno1 email:(NSString*)email mea:(NSString*)mea comment:(NSString*)comment
-{
-    
-    [kappDelegate ShowIndicator];
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    webservice=2;
-    
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
-    
-    _postData = [NSString stringWithFormat:@"ReferrerID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&Comments=%@&MeaId=%@",[NSString stringWithFormat:@"%@",[user valueForKey:@"l_userid"]],firstname1,lastname1,phoneno1,email,comment,mea];
-    
-    if([found_client isEqualToString:@"yes"])
-    {   found_client = @"no";
-        _postData = [NSString stringWithFormat:@"ReferrerID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&Comments=%@&MeaId=%@&UserDetailId=%@",[NSString stringWithFormat:@"%@",[user valueForKey:@"l_userid"]],firstname1,lastname1,phoneno1,email,comment,mea,UserDetailId];
-    }
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/referrals",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
-    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    NSString *objStr = @"self";
-    [[NSUserDefaults standardUserDefaults]setObject:objStr forKey:@"self"];
 }
 
 - (IBAction)btnMEA:(id)sender {
@@ -666,44 +567,6 @@
         // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
     }
 }
--(void)checkforavailability
-{
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    email_checked = @"no";
-    webservice=5;
-    _postData = [NSString stringWithFormat:@"Email=%@",txtEmail.text];
-    
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/confirm",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"data post >>> %@",_postData);
-    [request setHTTPMethod:@"POST"];
-    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    
-    
-    
-}
 
 #pragma mark - AddressBook Delegate Methods
 
@@ -721,14 +584,15 @@
 {
     if([[NSString stringWithFormat:@"%d",property] isEqualToString:@"999"])
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"Kindly select phone number" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly select phone number" okBtn:OkButtonTitle];
+        
         return YES;
     }
     if([[NSString stringWithFormat:@"%d",property] isEqualToString:@"14"])
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"Kindly select a phone number" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly select phone number" okBtn:OkButtonTitle];
+
+        
         return YES;
     }
     ABMutableMultiValueRef multi = ABRecordCopyValue(person, property);
@@ -915,30 +779,26 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
@@ -975,9 +835,11 @@
             {
                // NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted. You can track the same by referral id %@",responseString];
                   NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted successfully."];
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thanks!!" message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thanks!!"  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                
+                alert.tag=3;
                 [alert show];
-                alert.tag =3;
                 return;
             }
         }else if (webservice==5)
@@ -1004,9 +866,13 @@
             NSString *usertype = [userDetailDict valueForKey:@"UserType"];
             if([usertype isEqualToString:@"Client"])
             {
+                
+               
+                
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"One of our client already referred this person. Do you want to refer this person again." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
                 [alert show];
                 alert.tag =8;
+                
                 [txtEmail resignFirstResponder];
                 [txtComment resignFirstResponder];
                 [txtPhoneno resignFirstResponder];
@@ -1054,47 +920,15 @@
             }
             
         }
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+        
         
     }
     [kappDelegate HideIndicator];
     
 }
 
-- (IBAction)btnBack:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(alertView.tag==3){
-        if(buttonIndex == 0)//OK button pressed
-        {
-            dashboardViewController *obj  =[[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
-            [self.navigationController pushViewController:obj animated:YES];
-        }
-    }else if(alertView.tag==8){
-        
-        if(buttonIndex == 0)//OK button pressed
-        {
-            lblemailerror.text = @"Email already registered.";
-            txtFirstname.text = @"";
-            txtLastname.text = @"";
-            txtPhoneno.text = @"";
-        }
-        else if(buttonIndex == 1)//Annul button pressed.
-        {
-            txtFirstname.text = firstname;
-            txtLastname.text = lastname;
-            if ([phoneno isEqualToString:@"<null>"]) {
-                txtPhoneno.text = @"";
-            }else{
-                txtPhoneno.text = phoneno;
-            }
-            found_client = @"yes";
-            imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
-        }
-    }
-}
+
 #pragma mark - TableView Delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -1152,4 +986,173 @@
     [btnMEA setTitle:@"" forState:UIControlStateNormal];
     tableView.hidden =YES;
 }
+#pragma  mark Other methods
+-(void)submitReferral:(NSString*)firstname1 lastname:(NSString*)lastname1 phoneno:(NSString*)phoneno1 email:(NSString*)email mea:(NSString*)mea comment:(NSString*)comment
+{
+    
+    [kappDelegate ShowIndicator];
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    webservice=2;
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+    
+    _postData = [NSString stringWithFormat:@"ReferrerID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&Comments=%@&MeaId=%@",[NSString stringWithFormat:@"%@",[user valueForKey:@"l_userid"]],firstname1,lastname1,phoneno1,email,comment,mea];
+    
+    if([found_client isEqualToString:@"yes"])
+    {   found_client = @"no";
+        _postData = [NSString stringWithFormat:@"ReferrerID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&Comments=%@&MeaId=%@&UserDetailId=%@",[NSString stringWithFormat:@"%@",[user valueForKey:@"l_userid"]],firstname1,lastname1,phoneno1,email,comment,mea,UserDetailId];
+    }
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/referrals",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"POST"];
+    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    NSString *objStr = @"self";
+    [[NSUserDefaults standardUserDefaults]setObject:objStr forKey:@"self"];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag==3){
+        if(buttonIndex == 0)//OK button pressed
+        {
+            dashboardViewController *obj  =[[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
+            [self.navigationController pushViewController:obj animated:YES];
+        }
+    }else if(alertView.tag==8){
+        
+        if(buttonIndex == 0)//OK button pressed
+        {
+            lblemailerror.text = @"Email already registered.";
+            txtFirstname.text = @"";
+            txtLastname.text = @"";
+            txtPhoneno.text = @"";
+        }
+        else if(buttonIndex == 1)//Annul button pressed.
+        {
+            txtFirstname.text = firstname;
+            txtLastname.text = lastname;
+            if ([phoneno isEqualToString:@"<null>"]) {
+                txtPhoneno.text = @"";
+            }else{
+                txtPhoneno.text = phoneno;
+            }
+            found_client = @"yes";
+            imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
+        }
+    }
+}
+-(void)cancelNumberPad{
+    [txtPhoneno resignFirstResponder];
+    txtPhoneno.text = @"";
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    scrollView.scrollEnabled = YES;
+}
+
+-(void)doneWithNumberPad{
+    [txtEmail becomeFirstResponder];
+    
+}
+-(void)getMEA
+{
+    
+    // [kappDelegate ShowIndicator];
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    webservice=1;
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/mea",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
+-(void)checkforavailability
+{
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    email_checked = @"no";
+    webservice=5;
+    _postData = [NSString stringWithFormat:@"Email=%@",txtEmail.text];
+    
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/confirm",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    [request setHTTPMethod:@"POST"];
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+    
+    
+}
+
 @end

@@ -89,7 +89,7 @@
     txtPhoneNo.inputAccessoryView = numberToolbar;
     
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         btnCheckBox.titleLabel.font = [btnCheckBox.titleLabel.font fontWithSize:20];
         btnSignup.titleLabel.font = [btnSignup.titleLabel.font fontWithSize:20];
@@ -114,35 +114,7 @@
     }
 }
 
--(void)cancelNumberPad{
-    [txtPhoneNo resignFirstResponder];
-    txtPhoneNo.text = @"";
-    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
-    scrollView.scrollEnabled = YES;
-}
 
--(void)doneWithNumberPad{
-    [txtEmail becomeFirstResponder];
-}
--(void)gestureHandlerMethod2:(UITapGestureRecognizer*)sender {
-    
-        tableViewMEA.hidden = YES;
-        tableViewPreviousCustomer.hidden = YES;
-    status=false;status1 = false;
-    
-    [txtEmail resignFirstResponder];
-    [txtFirstName resignFirstResponder];
-    [txtLastName resignFirstResponder];
-    //[txtMEA resignFirstResponder];
-    [txtPassword resignFirstResponder];
-    [txtPhoneNo resignFirstResponder];
-    [txtPreviousCoustomer resignFirstResponder];
-    [txtUserId resignFirstResponder];
-    
-    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
-    scrollView.scrollEnabled = YES;
-    
-}
 -(void)viewWillAppear:(BOOL)animated
 {
     //--assigning values to label
@@ -238,6 +210,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma  mark - Buttons
 - (IBAction)btnMEA:(id)sender {
     
     if (status == true)
@@ -318,37 +291,32 @@
     NSString* emailAddressStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* passwordStr = [txtPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    UIAlertView *alert;
+   
     NSString *message;
     if (firstNameStr.length==0 ) {
         message = @"Please Enter First Name";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
+        
         return;
     } if (firstNameStr.length>25 ) {
         message = @"First name limit exceeds. Kindly enter a valid First name";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }else if (lastNameStr.length==0 ) {
         message = @"Please Enter Last Name";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }if (firstNameStr.length>25 ) {
         message = @"Last name limit exceeds. Kindly enter a valid Last name";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        return;
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];        return;
     }else if (userIdstr.length==0 ) {
         message = @"Please Enter User ID";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }else if (phoneNostr.length==0 ) {
         message = @"Please Enter a valid phone no";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }
     if (phoneNostr.length>10 ) {
@@ -357,15 +325,15 @@
             
         }else{
         message = @"Please Enter a phone no with atmost 10 digits";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        
             return;
         }
     }
-    if (![self validateEmailWithString:emailAddressStr]==YES) {
-        message = @"Please enter email address";
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+    if (![txtEmail emailValidation]) {
+        message = @"Please check your email address";
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        
         [txtEmail becomeFirstResponder];
         return;
     }else if (passwordStr.length==0 ) {
@@ -376,55 +344,54 @@
         }
         if(i==0){
         message = @"Please Enter Password";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
         }
     }else if([txtPreviousCoustomer.text isEqualToString:@"Select Role"])
     {
         message = @"Please Select Any Role";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
         
     }else if (txtPreviousCoustomer.text.length==0 ) {
         message = @"Please Select Any Role";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
     }else if([txtMEA.text isEqual:@"Select MEA"])
     {
         message = @"Please Select a MEA";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
     }else if (txtMEA.text.length==0 ) {
         message = @"Please Select MEA";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
     }
     
     if([lbluseriderror.text isEqualToString:@"This userId already exists"])
     {
         message = @"Please select a different userid";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
     }
 
     if([lblemailerror.text isEqualToString:@"Email already exist"])
     {
         message = @"Please select a different email address.";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
     }
     if([lblemailerror.text isEqualToString:@"Email not register with AAI - MEA account"])
     {
         message = @"Please select a different email address.";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
     }
     
@@ -487,13 +454,6 @@
         [self userRegestration:firstNameStr LastName:lastNameStr RoleID:role_id PhoneNumber:phoneNostr Emailid:emailAddressStr Password:passwordStr PurchasedBefore:value IsFacebookUser:fb_status MEAID:mea_id UserName:userIdstr userid:userID];
     
 }
-- (BOOL)validateEmailWithString:(NSString*)email
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:email];
-}
-
 - (IBAction)btnCheckBox:(id)sender {
     if(checkbox_Value == true)
     {
@@ -511,84 +471,6 @@
     [btnCheckBox setImage:btnImage forState:UIControlStateNormal];
 }
 
--(void)getPreviousCustomer
-{
-    webservice=1;
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/roles",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
-    
-    NSLog(@"data post >>> %@",_postData);
-    NSLog(@"%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]]);
-    
-    [request setHTTPMethod:@"GET"];
-    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-}
--(void)getMeaInformation
-{
-    webservice=2;
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/mea",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"GET"];
- //    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    
-
-}
 #pragma mark - Textfield Delegates
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -697,7 +579,7 @@
         {
             return;
         }
-        if (![self validateEmailWithString:txtEmail.text]==YES) {
+        if (![txtEmail emailValidation]==YES) {
             lblemailerror.text = @"Enter a valid email";
             //[txtEmail becomeFirstResponder];
             return;
@@ -752,10 +634,11 @@
                     }
                 }
                 if (check_for_meaEmail !=true) {
-                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"This email is not registered with AAI - MEA account." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [HelperAlert  alertWithOneBtn:AlertTitle description:@"This email is not registered with AAI - MEA account." okBtn:OkButtonTitle];
+
+                    
                     lblemailerror.text = @"Email not register with AAI - MEA account";
                     imagecheckforemailView.image=nil;
-                    [alert show];
                     return;
                     
                 }
@@ -840,106 +723,6 @@
     return YES;
 }
 
--(void)checkforAvailability
-{
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    if (internal==1) {
-        webservice=5;
-         _postData = [NSString stringWithFormat:@"UserName=%@",txtUserId.text];
-    }
-    if(internal==2){
-        webservice=6;
-        _postData = [NSString stringWithFormat:@"Email=%@",txtEmail.text];
-
-    }
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/confirm",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"data post >>> %@",_postData);
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    
-    
-
-}
-
--(void)userRegestration:(NSString*)firstName LastName:(NSString*)lastName RoleID:(NSString *)roleId PhoneNumber:(NSString*)phoneNo Emailid:(NSString*)emailid Password:(NSString *)password PurchasedBefore:(NSString*)purchasedBefore  IsFacebookUser:(NSString*)isFacebookUser  MEAID:(NSString*)meaID UserName:(NSString*)userName userid:(NSString*)userid
-{
-    [kappDelegate ShowIndicator];
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    
-    if([userid intValue]>=1){
-        internal1= 11;
-    }
-    
-    
-        webservice=4;
-        _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid];
-    
-    if([found_client isEqualToString:@"yes"])
-    {
-        _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@&UserDetailId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid,UserDetailId];
-        
-    }
-        request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
-    NSLog(@"data post >>> %@",_postData);
-    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[_postData length]];
-    [request setHTTPMethod:@"POST"];
-    [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    
-    if([userid intValue]>=1)
-    {
-    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    }
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    
-
-}
 #pragma mark - Connection Delegates
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -966,14 +749,15 @@
         if(webservice==2)
         {
             
-        
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"MEA Data not found" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"MEA Data not found" okBtn:OkButtonTitle];
+
+       
         }
         if (webservice==1)
         {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Role Data not found" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Role Data not found" okBtn:OkButtonTitle];
+
+            
         }
     }
     
@@ -1003,31 +787,27 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:[NSString stringWithFormat:@"ERROR with the Connection  >>>>>%@ ",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    NSLog(@"ERROR with the Connection  >>>>>%@ ",error);
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
+    NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
 
@@ -1051,15 +831,16 @@ if ([response_status isEqualToString:@"passed"])
     
     if ([responseString rangeOfString:@"User name already exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+        
         [kappDelegate HideIndicator];
         return;
     }
     if ([responseString rangeOfString:@"Validation failed for one or more entities" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+
+        
         [kappDelegate HideIndicator];
         return;
     }
@@ -1148,17 +929,19 @@ if ([response_status isEqualToString:@"passed"])
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             if(internal1==11){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"Profile updated successfully" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                [alert show];
+                [HelperAlert alertWithOneBtn:AlertTitle description:@"Profile updated successfully" okBtn:OkButtonTitle];
+
+               
             }else{
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thank You" message:@"You are sucessfully registered with us." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alert show];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thank You" message:@"You are sucessfully registered with us." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                
                 alert.tag=3;
+                [alert show];
                 return;
             }
             }else{
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Not able to communate to the server. kindly try again." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-                [alert show];
+                [HelperAlert alertWithOneBtn:AlertTitle description:@"Not able to communate to the server. kindly try again." okBtn:OkButtonTitle];
+
 
             }
         }else if(webservice==5)
@@ -1206,6 +989,8 @@ if ([response_status isEqualToString:@"passed"])
             NSString *usertype = [userDetailDict valueForKey:@"UserType"];
             if([usertype isEqualToString:@"Client"])
                {
+                   
+
                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"We already have your details. Are you a previous client of ARA ?" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Yes i am",nil];
                    [alert show];
                    alert.tag =2;
@@ -1263,8 +1048,9 @@ if ([response_status isEqualToString:@"passed"])
             return;
         }
     }
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alert show];
+    [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+
+   
 
 }
     [kappDelegate HideIndicator];
@@ -1272,32 +1058,7 @@ if ([response_status isEqualToString:@"passed"])
     [activityIndicatorObject stopAnimating];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex              {
-    if(alertView.tag==2){
-        
-        if(buttonIndex == 0)//OK button pressed
-        {
-            lblemailerror.text = @"Email already registered.";
-        }
-        else if(buttonIndex == 1)//Annul button pressed.
-        {
-            txtFirstName.text = firstname;
-            txtLastName.text = lastname;
-            if([phoneno isEqualToString:@"<null>"])
-            {
-             txtPhoneNo.text = @"";
-            }else{
-            txtPhoneNo.text = phoneno;
-            }
-            found_client = @"yes";
-            imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
-        }
-    }
-    if(alertView.tag==3) {
-        dashboardViewController *obj = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
-        [self.navigationController pushViewController:obj animated:YES];
-    }
-}
+
 #pragma mark - TableView Delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -1397,11 +1158,16 @@ if(tableView == tableViewPreviousCustomer)
                   }
              }
             if (check_for_meaEmail !=true) {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"This email is not registered with AAI - MEA account." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                
+                [HelperAlert alertWithOneBtn:AlertTitle description:@"This email is not registered with AAI - MEA account." okBtn:OkButtonTitle];
+                
+               
+                
+                
                 lblemailerror.text = @"Email not register with AAI - MEA account";
                 imagecheckforemailView.image=nil;
 
-                [alert show];
+                
                 return;
 
                 }
@@ -1460,5 +1226,240 @@ if(tableView == tableViewPreviousCustomer)
          status=false;
         
     }
+}
+
+#pragma mark - Other Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex              {
+    if(alertView.tag==2){
+        
+        if(buttonIndex == 0)//OK button pressed
+        {
+            lblemailerror.text = @"Email already registered.";
+        }
+        else if(buttonIndex == 1)//Annul button pressed.
+        {
+            txtFirstName.text = firstname;
+            txtLastName.text = lastname;
+            if([phoneno isEqualToString:@"<null>"])
+            {
+                txtPhoneNo.text = @"";
+            }else{
+                txtPhoneNo.text = phoneno;
+            }
+            found_client = @"yes";
+            imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
+        }
+    }
+    if(alertView.tag==3) {
+        dashboardViewController *obj = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
+        [self.navigationController pushViewController:obj animated:YES];
+    }
+}
+-(void)checkforAvailability
+{
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    if (internal==1) {
+        webservice=5;
+        _postData = [NSString stringWithFormat:@"UserName=%@",txtUserId.text];
+    }
+    if(internal==2){
+        webservice=6;
+        _postData = [NSString stringWithFormat:@"Email=%@",txtEmail.text];
+        
+    }
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/confirm",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+    
+    
+}
+
+-(void)userRegestration:(NSString*)firstName LastName:(NSString*)lastName RoleID:(NSString *)roleId PhoneNumber:(NSString*)phoneNo Emailid:(NSString*)emailid Password:(NSString *)password PurchasedBefore:(NSString*)purchasedBefore  IsFacebookUser:(NSString*)isFacebookUser  MEAID:(NSString*)meaID UserName:(NSString*)userName userid:(NSString*)userid
+{
+    [kappDelegate ShowIndicator];
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    
+    if([userid intValue]>=1){
+        internal1= 11;
+    }
+    
+    
+    webservice=4;
+    _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid];
+    
+    if([found_client isEqualToString:@"yes"])
+    {
+        _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@&UserDetailId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid,UserDetailId];
+        
+    }
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    
+    NSLog(@"data post >>> %@",_postData);
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[_postData length]];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    if([userid intValue]>=1)
+    {
+        [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    }
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+    
+}
+-(void)getPreviousCustomer
+{
+    webservice=1;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/roles",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    
+    
+    NSLog(@"data post >>> %@",_postData);
+    NSLog(@"%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]]);
+    
+    [request setHTTPMethod:@"GET"];
+    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
+-(void)getMeaInformation
+{
+    webservice=2;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/mea",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    //    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+    
+}
+-(void)cancelNumberPad{
+    [txtPhoneNo resignFirstResponder];
+    txtPhoneNo.text = @"";
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+    scrollView.scrollEnabled = YES;
+}
+
+-(void)doneWithNumberPad{
+    [txtEmail becomeFirstResponder];
+}
+-(void)gestureHandlerMethod2:(UITapGestureRecognizer*)sender {
+    
+    tableViewMEA.hidden = YES;
+    tableViewPreviousCustomer.hidden = YES;
+    status=false;status1 = false;
+    
+    [txtEmail resignFirstResponder];
+    [txtFirstName resignFirstResponder];
+    [txtLastName resignFirstResponder];
+    //[txtMEA resignFirstResponder];
+    [txtPassword resignFirstResponder];
+    [txtPhoneNo resignFirstResponder];
+    [txtPreviousCoustomer resignFirstResponder];
+    [txtUserId resignFirstResponder];
+    
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+    scrollView.scrollEnabled = YES;
+    
 }
 @end

@@ -15,7 +15,32 @@
 #import "SBJson.h"
 #import "ASIHTTPRequest.h"
 
-@interface LoginViewController ()
+@interface LoginViewController (){
+    IBOutlet UIImageView *imagelogo;
+    CGPoint svos;
+    IBOutlet UIScrollView *scrollView;
+    IBOutlet UILabel *lblPass;
+    IBOutlet UILabel *lblAlreadyHaveAnAccount;
+    IBOutlet UILabel *lblEmail;
+    IBOutlet UIButton *btnForgotPassword;
+    IBOutlet UIButton *btnSignUp;
+    IBOutlet UIButton *btnFacebookLogin;
+    SignUpViewController *SUvc;
+    IBOutlet UIButton *btnLogin;
+    IBOutlet UIButton *btnCheckbox;
+    BOOL checkbox_Value;
+    UIImage *btnImage;
+    IBOutlet UITextField *txtEmail;
+    IBOutlet UITextField *txtPassword;
+    NSMutableData *webData;
+    NSString *status;
+}
+//- (IBAction)btnCheckbox:(id)sender;
+//- (IBAction)btnForgotPassword:(id)sender;
+//- (IBAction)btnSignUp:(id)sender;
+//- (IBAction)btnFacebookLogin:(id)sender;
+//- (IBAction)btnLogin:(id)sender;
+
 
 @end
 
@@ -27,14 +52,14 @@
     //---initialize checkbox value first tiem with false
     checkbox_Value = false;
     
-    
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
+    [HelperUDLib removeObject:@"self"];
 
+    NSLog(@"%@",[HelperUDLib valueForKey:@"remember_me_status"]);
     
-    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
+    if([HelperUDLib valueForKey:@"remember_me_status"])
     {
-        txtEmail.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status_email"];
-        txtPassword.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status_pass"];
+        txtEmail.text = [HelperUDLib valueForKey:@"remember_me_status_email"];
+        txtPassword.text = [HelperUDLib valueForKey:@"remember_me_status_pass"];
         [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
         checkbox_Value = true;
     }
@@ -52,6 +77,8 @@
     
     //--initialize singup view object
     SUvc = [[SignUpViewController alloc]initWithNibName:@"SignUpViewController" bundle:nil];
+    
+    
     //---Make cornor round of button and text fields
     btnLogin.layer.cornerRadius = 3.0;
     [btnLogin setClipsToBounds:YES];
@@ -63,7 +90,7 @@
     [btnCheckbox setClipsToBounds:YES];
     
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:20];
         btnForgotPassword.titleLabel.font = [btnForgotPassword.titleLabel.font fontWithSize:20];
@@ -77,17 +104,15 @@
         ;
         txtPassword.font = [lblAlreadyHaveAnAccount.font fontWithSize:24]
         ;
-
-        
-        
     }
+    [self.view endEditing:YES];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
+    if([[HelperUDLib valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
     {
-        txtEmail.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status_email"];
-        txtPassword.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status_pass"];
+        txtEmail.text = [HelperUDLib valueForKey:@"remember_me_status_email"];
+        txtPassword.text = [HelperUDLib valueForKey:@"remember_me_status_pass"];
         [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
     }
     
@@ -124,6 +149,11 @@
     txtEmail.text =@"";
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+#pragma mark UITextField Delegate Methods
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField ==txtEmail){
@@ -159,9 +189,7 @@
     }
     }
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
+#pragma mark Button Actions
 - (IBAction)btnCheckbox:(id)sender {
     
     
@@ -192,122 +220,16 @@
   
     [self facebookLogin];
 }
--(void)facebookLogin
-{
-    
-    if (FBSession.activeSession.state == FBSessionStateOpen
-        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
-        
-        // Close the session and remove the access token from the cache
-        // The session state handler (in the app delegate) will be called automatically
-        [FBSession.activeSession closeAndClearTokenInformation];
-        
-        // If the session state is not any of the two "open" states when the button is clicked
-    } else {
-        // Open a session showing the user the login UI
-        // You must ALWAYS ask for public_profile permissions when opening a session
-        NSArray *permissions = [[NSArray alloc] initWithObjects:@"public_profile, email", nil];
-        
-        [FBSession openActiveSessionWithReadPermissions:permissions
-                                           allowLoginUI:YES
-                                      completionHandler:
-         ^(FBSession *session, FBSessionState state, NSError *error) {
-             
-             // Retrieve the app delegate
-             // AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
-             [self sessionStateChanged:session state:state error:error];
-         }];
-    }
-}
 - (IBAction)btnLogin:(id)sender {
     
     [self checkLogin];
 }
--(void) checkLogin
-{
-    NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSString* passwordNameStr = [txtPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    UIAlertView *alert;
-    NSString *message;
-    if (emailStr.length==0 ) {
-        message = @"Please enter email address";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        return;
-    }else if (passwordNameStr.length==0 ) {
-        message = @"Please enter password";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    if ([emailStr rangeOfString:@"@" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        if (![self validateEmailWithString:emailStr]==YES) {
-            message = @"Please enter email address";
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            [txtEmail becomeFirstResponder];
-            return;
-        }
-    }
-    
-    
-    
-    [txtPassword resignFirstResponder];
-    [txtEmail resignFirstResponder];
-    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
-    
-    [self login:emailStr password:passwordNameStr];
-}
--(void)login:(NSString*)email password:(NSString*)password
-{
-    [kappDelegate ShowIndicator];
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/accounts/login",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"GET"];
-    [request addValue:email forHTTPHeaderField:@"username"];
-    [request addValue:password forHTTPHeaderField:@"userpassword"];
-    
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-}
-- (BOOL)validateEmailWithString:(NSString*)email
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:email];
-}
+//- (BOOL)validateEmailWithString:(NSString*)email
+//{
+//    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+//    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+//    return [emailTest evaluateWithObject:email];
+//}
 
 #pragma mark - Connection Delegates
 
@@ -337,32 +259,27 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
+       return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    NSLog(@"ERROR with the Connection ");
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
+        NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
 
@@ -384,8 +301,8 @@
     NSError *error;
     if([status isEqualToString:@"failed"])
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+       
         return;
     }
     SBJsonParser *json = [[SBJsonParser alloc] init];
@@ -408,40 +325,39 @@
     NSString *purchased_before = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PurchasedBefore"]];
     NSString *profile_picture = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"ProfilePicName"]];
         
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
         
-    [user setObject:email forKey:@"l_email"];
-    [user setObject:first_name forKey:@"l_firstName"];
-    [user setObject:last_name forKey:@"l_lastName"];
-    [user setObject:facebook_user forKey:@"l_facebookUser"];
-    [user setObject:mea_id forKey:@"l_meaId"];
-    [user setObject:mea_name forKey:@"l_meaName"];
-    [user setObject:phone_no forKey:@"l_phoneNo"];
-    [user setObject:user_name forKey:@"l_userName"];
-    [user setObject:user_id forKey:@"l_userid"];
-    [user setObject:role_name forKey:@"l_roleName"];
-    [user setObject:role_id forKey:@"l_roleId"];
-    [user setObject:purchased_before forKey:@"l_purchasedBefore"];
-    [user setObject:password forKey:@"l_password"];
-    [user setObject:@"yes" forKey:@"l_loggedin"];
-    [user setObject:profile_picture forKey:@"l_image"];
         
-        NSString *tokenStr = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]];
-        NSLog(@"%@",tokenStr);
-        NSLog(@"%@",[userDetailDict valueForKey:@"UserToken"]);
-    [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]] forKey:@"UserToken"];
+    [HelperUDLib setObject:email forKey:@""];
+    [HelperUDLib setObject:email forKey:@"l_email"];
+    [HelperUDLib setObject:first_name forKey:@"l_firstName"];
+    [HelperUDLib setObject:last_name forKey:@"l_lastName"];
+    [HelperUDLib setObject:facebook_user forKey:@"l_facebookUser"];
+    [HelperUDLib setObject:mea_id forKey:@"l_meaId"];
+    [HelperUDLib setObject:mea_name forKey:@"l_meaName"];
+    [HelperUDLib setObject:phone_no forKey:@"l_phoneNo"];
+    [HelperUDLib setObject:user_name forKey:@"l_userName"];
+    [HelperUDLib setObject:user_id forKey:@"l_userid"];
+    [HelperUDLib setObject:role_name forKey:@"l_roleName"];
+    [HelperUDLib setObject:role_id forKey:@"l_roleId"];
+    [HelperUDLib setObject:purchased_before forKey:@"l_purchasedBefore"];
+    [HelperUDLib setObject:password forKey:@"l_password"];
+    [HelperUDLib setObject:@"yes" forKey:@"l_loggedin"];
+    [HelperUDLib setObject:profile_picture forKey:@"l_image"];
+        
+        
+       
+    [HelperUDLib setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]] forKey:@"UserToken"];
     NSLog(@"%@",[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]]);
-    [[NSUserDefaults standardUserDefaults] synchronize];
         
     if(checkbox_Value == true)
     {
-        [[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"remember_me_status"];
-        [[NSUserDefaults standardUserDefaults]setObject:email forKey:@"remember_me_status_email"];
-        [[NSUserDefaults standardUserDefaults]setObject:password forKey:@"remember_me_status_pass"];
+        [HelperUDLib setObject:@"yes" forKey:@"remember_me_status"];
+        [HelperUDLib setObject:email forKey:@"remember_me_status_email"];
+        [HelperUDLib setObject:password forKey:@"remember_me_status_pass"];
     }else{
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status_email"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status_pass"];
+        [HelperUDLib removeObject:@"remember_me_status"];
+        [HelperUDLib removeObject:@"remember_me_status_email"];
+        [HelperUDLib removeObject:@"remember_me_status_pass"];
     }
     
     
@@ -451,13 +367,13 @@
     
     [self.navigationController pushViewController:obj animated:YES];
     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-
+        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
     }
     [kappDelegate HideIndicator];
 
 }
+
+#pragma mark Methods
 -(void)getFacebookProfile:(NSString *)token
 {
     NSString *urlString1 = [NSString stringWithFormat:@"https://graph.facebook.com/me?access_token=%@&fields=email,first_name,last_name",token];
@@ -469,8 +385,8 @@
         NSString *emailstr = [dict1 valueForKey:@"email"];
         NSString *firstnamestr = [dict1 valueForKey:@"first_name"];
         NSString *lastnamestr = [dict1 valueForKey:@"last_name"];
-        [[NSUserDefaults standardUserDefaults]setObject:emailstr forKey:@"user_email"];
-        [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@ %@",firstnamestr,lastnamestr]   forKey:@"user_name"];
+        [HelperUDLib setObject:emailstr forKey:@"user_email"];
+        [HelperUDLib setObject:[NSString stringWithFormat:@"%@ %@",firstnamestr,lastnamestr]   forKey:@"user_name"];
 
     }
     
@@ -482,13 +398,13 @@
         NSDictionary* dict=[NSJSONSerialization JSONObjectWithData:dataURL options:NSJSONReadingMutableContainers error:Nil];
         
         NSString *facebookID= [dict valueForKey:@"id"];
-        [[NSUserDefaults standardUserDefaults]setObject:facebookID forKey:@"user_fb_id"];
+        [HelperUDLib setObject:facebookID forKey:@"user_fb_id"];
 
         NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",pictureURL] forKey:@"l_image"];
+        [HelperUDLib setObject:[NSString stringWithFormat:@"%@",pictureURL] forKey:@"l_image"];
 
         NSData *imageData = [NSData dataWithContentsOfURL:pictureURL];
-        [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:@"user_image"];
+        [HelperUDLib setObject:imageData forKey:@"user_image"];
     }
 }
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
@@ -499,11 +415,10 @@
         
         NSString * fbToken = [[FBSession activeSession] accessToken];
         [self getFacebookProfile:fbToken];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setValue:fbToken forKey:@"TokenData"];
+        [HelperUDLib setValue:fbToken forKey:@"TokenData"];
         // Show the user the logged-in UI
         SUvc.from_fb_button = @"yes";
-        [[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"from_fb"];
+        [HelperUDLib setObject:@"yes" forKey:@"from_fb"];
         [self.navigationController pushViewController:SUvc animated:YES];
 
         return;
@@ -512,22 +427,21 @@
         // If the session is closed
         NSLog(@"Session closed");
         // Show the user the logged-out UI
-        user_detail = [NSUserDefaults standardUserDefaults];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_email"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_firstName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_lastName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_facebookUser"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaId"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_phoneNo"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userid"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleId"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_purchasedBefore"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_image"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
+        [HelperUDLib removeObject:@"l_email"];
+        [HelperUDLib removeObject:@"l_firstName"];
+        [HelperUDLib removeObject:@"l_lastName"];
+        [HelperUDLib removeObject:@"l_facebookUser"];
+        [HelperUDLib removeObject:@"l_meaId"];
+        [HelperUDLib removeObject:@"l_meaName"];
+        [HelperUDLib removeObject:@"l_phoneNo"];
+        [HelperUDLib removeObject:@"l_userName"];
+        [HelperUDLib removeObject:@"l_userid"];
+        [HelperUDLib removeObject:@"l_roleName"];
+        [HelperUDLib removeObject:@"l_roleId"];
+        [HelperUDLib removeObject:@"l_purchasedBefore"];
+        [HelperUDLib removeObject:@"l_image"];
+        [HelperUDLib removeObject:@"l_loggedin"];
+        [HelperUDLib removeObject:@"from_fb"];
 
         LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
         [self.navigationController pushViewController:LIvc animated:YES];
@@ -587,5 +501,116 @@
 }
 
 
+-(void)facebookLogin
+{
+    
+    if (FBSession.activeSession.state == FBSessionStateOpen
+        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+        
+        // Close the session and remove the access token from the cache
+        // The session state handler (in the app delegate) will be called automatically
+        [FBSession.activeSession closeAndClearTokenInformation];
+        
+        // If the session state is not any of the two "open" states when the button is clicked
+    } else {
+        // Open a session showing the user the login UI
+        // You must ALWAYS ask for public_profile permissions when opening a session
+        NSArray *permissions = [[NSArray alloc] initWithObjects:@"public_profile, email", nil];
+        
+        [FBSession openActiveSessionWithReadPermissions:permissions
+                                           allowLoginUI:YES
+                                      completionHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             
+             // Retrieve the app delegate
+             // AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
+             [self sessionStateChanged:session state:state error:error];
+         }];
+    }
+}
+
+-(void) checkLogin
+{
+    NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* passwordNameStr = [txtPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    UIAlertView *alert;
+    NSString *message;
+    if ([txtEmail isEmpty] ) {
+        message = @"Please enter email address";
+        //        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        //        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }else if (passwordNameStr.length==0 ) {
+        message = @"Please enter password";
+        
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
+        return;
+    }
+    
+    //    if ([emailStr rangeOfString:@"@" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    //    {
+    //        if (![txtEmail emailValidation]) {
+    //
+    //            message = @"Please enter email address";
+    //            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    //            [alert show];
+    //            [txtEmail becomeFirstResponder];
+    //            return;
+    //        }
+    //
+    //    }
+    
+    [self.view endEditing:YES];
+    
+    //    [txtPassword resignFirstResponder];
+    //    [txtEmail resignFirstResponder];
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+    
+    [self login:emailStr password:passwordNameStr];
+}
+-(void)login:(NSString*)email password:(NSString*)password
+{
+    [kappDelegate ShowIndicator];
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/accounts/login",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    [request addValue:email forHTTPHeaderField:@"username"];
+    [request addValue:password forHTTPHeaderField:@"userpassword"];
+    
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
 
 @end

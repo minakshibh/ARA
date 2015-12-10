@@ -86,7 +86,7 @@ UIButton *tag_btn,*tag_cancel_btn;
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
      //   btnSubmitReferral.titleLabel.font = [UIFont systemFontOfSize:24];
         lblheadingView.font=[lblheadingView.font fontWithSize:24];
@@ -108,54 +108,7 @@ UIButton *tag_btn,*tag_cancel_btn;
     
     
 }
--(void)getList:(NSString*)status
-{
-    if(count==0)
-    {
-        [kappDelegate ShowIndicator];
-        count++;
-    }
-    
-    
-    
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    
-    _postData = [NSString stringWithFormat:@""];
-    
-    NSString *user_id = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
-    NSLog(@"%@",user_id);
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/referrals/%@/statusType/%@",Kwebservices,user_id,status]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"%@",request);
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"GET"];
-    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
 
-}
 -(void)viewWillAppear:(BOOL)animated{
     
     AppDelegate*appdelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -435,7 +388,7 @@ UIButton *tag_btn,*tag_cancel_btn;
     detail_view = @"yes";
     [self.navigationController pushViewController:RDvc animated:YES];
 }
-    
+#pragma  mark - Buttons
 - (IBAction)btnFilternone:(id)sender {
     
     if([filter_status isEqualToString:@"sold_filter"])
@@ -986,7 +939,15 @@ UIButton *tag_btn,*tag_cancel_btn;
     sort_back_view.hidden = YES;
     filterView.hidden = YES;
 }
-
+#pragma  mark - Other Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag==2){
+        if(buttonIndex == 0)//OK button pressed
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
 -(void)sortByName:(NSMutableArray*)arr
 {
     referralListSortName = [[NSMutableArray alloc]init];
@@ -1276,6 +1237,54 @@ UIButton *tag_btn,*tag_cancel_btn;
     [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
     [btnOpenOnly setImage:btnImage1 forState:UIControlStateNormal];
 }
+-(void)getList:(NSString*)status
+{
+    if(count==0)
+    {
+        [kappDelegate ShowIndicator];
+        count++;
+    }
+    
+    
+    
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    
+    _postData = [NSString stringWithFormat:@""];
+    
+    NSString *user_id = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
+    NSLog(@"%@",user_id);
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/referrals/%@/statusType/%@",Kwebservices,user_id,status]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"%@",request);
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+}
 #pragma mark - Connection Delegates
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -1313,38 +1322,27 @@ UIButton *tag_btn,*tag_cancel_btn;
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Could not connect to the server, time out" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    NSLog(@"ERROR with the Connection  >>>>>%@ ",error);
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
+    NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
 
@@ -1367,14 +1365,15 @@ if([response_status isEqualToString:@"passed"])
     
     if ([responseString rangeOfString:@"An error has occurred" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Not able to get data" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Not able to get data" okBtn:OkButtonTitle];
+       
 
     }
     if ([responseString rangeOfString:@"Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"There is no data to display" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"There is no data to display"okBtn:OkButtonTitle];
+
+        
        pop_out = @"yes";
         [tableView reloadData];
         return;
@@ -1386,10 +1385,14 @@ if([response_status isEqualToString:@"passed"])
     {
         
         if (userDetailDict.count<1) {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"No referrals to display yet. Start submitting some referrals." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            
+
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:@"No referrals to display yet. Start submitting some referrals." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             
             alert.tag=2;
             [alert show];
+            
+            
              [kappDelegate HideIndicator];
             return;
         }
@@ -1460,20 +1463,16 @@ if([response_status isEqualToString:@"passed"])
     }
 }else{
     NSString *msg = @"No referrals to display yet. Start submitting some referrals.";
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    alert.tag = 2;
+    
+
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    
+    alert.tag=2;
     [alert show];
  [kappDelegate HideIndicator];
 }
    
 
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(alertView.tag==2){
-        if(buttonIndex == 0)//OK button pressed
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }
-}
+
 @end

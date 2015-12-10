@@ -59,7 +59,7 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         lblheading.font=[lblheading.font fontWithSize:24];
         btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:24];
@@ -74,7 +74,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         return 130;
     }
@@ -149,13 +149,13 @@
         NSString *msg;
         if ([random isEqualToString:@"1"]) {
              msg = [NSString stringWithFormat:@"You already earned a %@ badge.",obj.BadgeName];
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+            [HelperAlert alertWithOneBtn:AlertTitle description:msg okBtn:OkButtonTitle];
+
 
         }else{
             msg = [NSString stringWithFormat:@"You haven't earned any %@ badges yet.",obj.BadgeName];
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+            [HelperAlert alertWithOneBtn:AlertTitle description:msg okBtn:OkButtonTitle];
+
 
         }
         
@@ -163,6 +163,7 @@
     
 [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+#pragma  mark - Buttons
 - (IBAction)btnallBadges:(id)sender {
     btnallBadges.hidden = YES;
     [self getData:@"all"];
@@ -251,8 +252,8 @@
         return [httpResponse statusCode];
         
     }else if ((long)[httpResponse statusCode] == 404){
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Hello" message:@"" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Error" okBtn:OkButtonTitle];
+
 
     }
     return  YES;
@@ -264,30 +265,26 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
@@ -358,8 +355,9 @@
                 
                 if(userDetailDict.count<1)
                 {
-                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"No badges to display yet." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                    [alert show];
+                    [HelperAlert  alertWithOneBtn:AlertTitle description:@"No badges to display yet." okBtn:OkButtonTitle];
+
+                    
                     return;
 
                 }

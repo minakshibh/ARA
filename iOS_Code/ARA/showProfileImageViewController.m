@@ -59,7 +59,7 @@
 //                    placeholderImage:nil];
    
     // Do any additional setup after loading the view from its nib.
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD )
     {
         lblheading.font=[lblheading.font fontWithSize:24];
         
@@ -76,7 +76,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma  mark - buttons
 - (IBAction)btnEdit:(id)sender {
     [self.view endEditing:YES];
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
@@ -94,6 +94,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma  mark - ActionSheet Delegates
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;  // after animation
 {
     if (buttonIndex == 1)
@@ -266,8 +267,9 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@ ***** %@", operation.responseString, error);
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Failed to upload selected profile picture" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Failed to upload selected profile picture" okBtn:OkButtonTitle];
+       
         [kappDelegate HideIndicator];
 
         return ;

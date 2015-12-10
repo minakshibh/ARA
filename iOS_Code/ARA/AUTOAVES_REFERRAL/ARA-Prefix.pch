@@ -16,6 +16,21 @@
 //#define Kwebservices @"http://10.10.10.219:801/api"    //--Live
 #define Kwebservices @"http://63.255.19.72:801/api"
 
+
+
+#ifdef __OBJC__
+#import "UITextfieldValidations.h"
+#import "UITextField+HelperTextField.h"
+#import "HelperAlert.h"
+#import "SignUpViewController.h"
+#import "JSON.h"
+#import "SBJson.h"
+#import "HelperUDLib.h"
+#endif
+
+#define AlertTitle @"ARA"
+#define OkButtonTitle @"OK"
+
 #define ResultOk 200
 #define ResultFailed 500
 
