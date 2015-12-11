@@ -17,8 +17,6 @@
 #import "ScoreboardViewController.h"
 #import "PaypalAccountsViewController.h"
 #import "AboutAppViewController.h"
-
-
 #import "AFURLConnectionOperation.h"
 #import "AFHTTPRequestOperation.h"
 // #import "UIView+Toast.h"

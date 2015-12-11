@@ -8,8 +8,6 @@
 
 #import "SubmitReferralViewController.h"
 #import <AddressBook/AddressBook.h>
-#import "JSON.h"
-#import "SBJson.h"
 #import "ASIHTTPRequest.h"
 #import "dashboardViewController.h"
 //#import "UIView+Toast.h"
@@ -38,31 +36,16 @@
     //--hide navigation bar
    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
+    [cornerRadius setRadiusofLabel:lblComments :2.0];
+    [cornerRadius setRadiusofLabel:lblEmail :2.0];
+    [cornerRadius setRadiusofLabel:lblFirstname :2.0];
+    [cornerRadius setRadiusofLabel:lblLastname :2.0];
+    [cornerRadius setRadiusofLabel:lblMEA :2.0];
+    [cornerRadius setRadiusofLabel:lblPhoneno :2.0];
+    [cornerRadius setRadiusofButton:btnSubmitReferral :2.0];
+    [cornerRadius setRadiusofButton:btnImportContacts :2.0];
     
-    
-    lblComments.layer.cornerRadius = 2.0;
-    [lblComments setClipsToBounds:YES];
-    
-    lblEmail.layer.cornerRadius = 2.0;
-    [lblEmail setClipsToBounds:YES];
-    
-    lblFirstname.layer.cornerRadius = 2.0;
-    [lblFirstname setClipsToBounds:YES];
-    
-    lblLastname.layer.cornerRadius = 2.0;
-    [lblLastname setClipsToBounds:YES];
-    
-    lblMEA.layer.cornerRadius = 2.0;
-    [lblMEA setClipsToBounds:YES];
-    
-    lblPhoneno.layer.cornerRadius = 2.0;
-    [lblPhoneno setClipsToBounds:YES];
-    
-    btnSubmitReferral.layer.cornerRadius = 2.0;
-    [btnSubmitReferral setClipsToBounds:YES];
-    
-    btnImportContacts.layer.cornerRadius = 2.0;
-    [btnImportContacts setClipsToBounds:YES];
+
     NSString *role_name = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleName"]];
     
     if([role_name isEqualToString:@"AAI - MEA"])
@@ -127,7 +110,8 @@
         txtComment.font = [txtComment.font fontWithSize:24];
         //btnImportContacts.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 90);
         
-    }}
+    }
+}
 
 -(void)viewWillAppear:(BOOL)animated
 
@@ -546,30 +530,48 @@
 
 - (IBAction)btnImportContacts:(id)sender {
     
-    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
-    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
-        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
-            if (granted) {
-                picker.peoplePickerDelegate = self;
-                
-                [self presentModalViewController:picker animated:YES];
-                [picker setPeoplePickerDelegate:self];
-                [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
-            } else {
-                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
-            }
-        });
-    }else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-        // If the user user has earlier provided the access, then add the contact
-        picker.peoplePickerDelegate = self;
-        
-        [self presentModalViewController:picker animated:YES];
-        [picker setPeoplePickerDelegate:self];
-        [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
-    }
-    else {
-        // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
-    }
+//    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
+//    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+//        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+//            if (granted) {
+//                picker.peoplePickerDelegate = self;
+//                
+//                [self presentModalViewController:picker animated:YES];
+//                [picker setPeoplePickerDelegate:self];
+//                [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
+//            } else {
+//                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
+//            }
+//        });
+//    }else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+//        // If the user user has earlier provided the access, then add the contact
+//        picker.peoplePickerDelegate = self;
+//        
+//        [self presentModalViewController:picker animated:YES];
+//        [picker setPeoplePickerDelegate:self];
+//        [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
+//    }
+//    else {
+//        // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
+//    }
+    NSArray *sampleArray = @[@"545454545454",@"455454544454"];
+    
+    float height = viewHeaderPOPUP.frame.size.height + viewDetailPOPUP.frame.size.height*[sampleArray count];
+    
+    [viewHeaderPOPUP setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUP.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUP.frame.size.height-viewDetailPOPUP.frame.size.height*[sampleArray count]/2, viewHeaderPOPUP.frame.size.width, height)];
+    
+    [self.view addSubview:viewHeaderPOPUP];
+//    scrollViewPOPUP = [[UIScrollView alloc]initWithFrame:
+//                    CGRectMake(0, 0, 280, 420)];
+    
+    
+    
+    
+    
+    //                [self.footerWithoutEventsDetail setFrame:CGRectMake(0, 704, self.footerWithoutEventsDetail.frame.size.width, self.footerWithoutEventsDetail.frame.size.height)];
+    //                [self.sideScroller addSubview:self.footerWithoutEventsDetail];
+    
+    
 }
 
 #pragma mark - AddressBook Delegate Methods
@@ -581,21 +583,35 @@
     
     　[picker dismissModalViewControllerAnimated:YES];
 }
-//- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person;
-//{
-//    ABMultiValueRef emails = (ABMultiValueRef) ABRecordCopyValue(person, kABPersonEmailProperty);
-//    CFStringRef emailID = ABMultiValueCopyValueAtIndex(emails, 0);
-//    NSLog(@"%@",[NSString stringWithFormat:@"%@", emailID]);
-//    
-//    
-//    ABMultiValueRef phone = (ABMultiValueRef) ABRecordCopyValue(person, kABPersonPhoneProperty);
-//    CFStringRef phoneID = ABMultiValueCopyValueAtIndex(phone, 0);
-//    NSLog(@"%@",[NSString stringWithFormat:@"%@", phoneID]);
-//    NSArray *phoneArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(phone);
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person;
+{
+    ABMultiValueRef fnameProperty = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+    ABMultiValueRef lnameProperty = ABRecordCopyValue(person, kABPersonLastNameProperty);
+    
+    ABMultiValueRef phoneProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    ABMultiValueRef emailProperty = ABRecordCopyValue(person, kABPersonEmailProperty);
+    
+    NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
+    NSArray *phoneArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(phoneProperty);
+    
+    NSString *name,*phone,*email;
+    phone = [[NSString alloc]init];
+    email = [[NSString alloc]init];
+    name = [[NSString alloc]init];
+    
+    
+    if (fnameProperty != nil) {
+        name = [NSString stringWithFormat:@"%@", fnameProperty];
+    }
+    if (lnameProperty != nil) {
+        name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
+    }
+    
+    
 
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//    
-//}
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 
 - (BOOL)peoplePickerNavigationController: (ABPeoplePickerNavigationController *)peoplePicker

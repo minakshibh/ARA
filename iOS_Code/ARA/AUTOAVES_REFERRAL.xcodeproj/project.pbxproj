@@ -287,6 +287,7 @@
 		D9DDB9B51B7CC788006F5A37 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A21B7CC788006F5A37 /* RobotoCondensed-Light.ttf */; };
 		D9DDB9B61B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A31B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf */; };
 		D9DDB9B71B7CC788006F5A37 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A41B7CC788006F5A37 /* RobotoCondensed-Regular.ttf */; };
+		D9F8F07C1C1AD77D007745FA /* cornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F8F07B1C1AD77D007745FA /* cornerRadius.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -674,6 +675,8 @@
 		D9DDB9A21B7CC788006F5A37 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		D9DDB9A31B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
 		D9DDB9A41B7CC788006F5A37 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		D9F8F07A1C1AD77D007745FA /* cornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cornerRadius.h; sourceTree = "<group>"; };
+		D9F8F07B1C1AD77D007745FA /* cornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cornerRadius.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1281,6 +1284,8 @@
 				D96650AC1C19516E00C1399C /* UITextfieldValidations.m */,
 				D96650AD1C19516E00C1399C /* UITextField+HelperTextField.h */,
 				D96650AE1C19516E00C1399C /* UITextField+HelperTextField.m */,
+				D9F8F07A1C1AD77D007745FA /* cornerRadius.h */,
+				D9F8F07B1C1AD77D007745FA /* cornerRadius.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -1791,6 +1796,7 @@
 				D9527D361B9E9DAC00630F9F /* splashViewController.m in Sources */,
 				D956670D1B8EC65B00E01477 /* SBJSONScanner.m in Sources */,
 				D9AF3CC01B8EE5BD00F98881 /* AFURLRequestSerialization.m in Sources */,
+				D9F8F07C1C1AD77D007745FA /* cornerRadius.m in Sources */,
 				D95667371B8EC74500E01477 /* ASIInputStream.m in Sources */,
 				D9AF3CBD1B8EE5BD00F98881 /* AFNetworkReachabilityManager.m in Sources */,
 				D94BEAE61B78820E008BCF5F /* LoginViewController.m in Sources */,

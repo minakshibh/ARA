@@ -9,8 +9,6 @@
 #import "ProfileViewController.h"
 #import "changePasswordViewController.h"
 #import "SignUpViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "showProfileImageViewController.h"

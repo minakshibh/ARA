@@ -8,8 +8,6 @@
 
 #import "SignUpViewController.h"
 #import "dashboardViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "LoginViewController.h"
@@ -39,26 +37,17 @@
     scrollView.backgroundColor=[UIColor clearColor];
     
     //---doing corner radious of all objects
-    lblMEA.layer.cornerRadius = 2.0;
-    [lblMEA setClipsToBounds:YES];
-    lblPassword.layer.cornerRadius = 2.0;
-    [lblPassword setClipsToBounds:YES];
-    lblpreview.layer.cornerRadius = 2.0;
-    [lblpreview setClipsToBounds:YES];
-    lblFirstname.layer.cornerRadius = 2.0;
-    [lblFirstname setClipsToBounds:YES];
-    lbllastname.layer.cornerRadius = 2.0;
-    [lblFirstname setClipsToBounds:YES];
-    lblUserId.layer.cornerRadius = 2.0;
-    [lblUserId setClipsToBounds:YES];
-    lblPhoneNo.layer.cornerRadius = 2.0;
-    [lblPhoneNo setClipsToBounds:YES];
-    lblEmail.layer.cornerRadius = 2.0;
-    [lblEmail setClipsToBounds:YES];
-    btnCheckBox.layer.cornerRadius = 2.0;
-    [btnCheckBox setClipsToBounds:YES];
-    btnSignup.layer.cornerRadius = 2.0;
-    [btnSignup setClipsToBounds:YES];
+    
+    [cornerRadius setRadiusofButton:btnSignup :2.0];
+    [cornerRadius setRadiusofButton:btnCheckBox :2.0];
+    [cornerRadius setRadiusofLabel:lblMEA :2.0];
+    [cornerRadius setRadiusofLabel:lblPassword :2.0];
+    [cornerRadius setRadiusofLabel:lblpreview :2.0];
+    [cornerRadius setRadiusofLabel:lblFirstname :2.0];
+    [cornerRadius setRadiusofLabel:lbllastname :2.0];
+    [cornerRadius setRadiusofLabel:lblUserId :2.0];
+    [cornerRadius setRadiusofLabel:lblPhoneNo :2.0];
+    [cornerRadius setRadiusofLabel:lblEmail :2.0];
     
     //checking if coming to this view throudh facebook
     if([_from_fb_button isEqualToString:@"yes"])

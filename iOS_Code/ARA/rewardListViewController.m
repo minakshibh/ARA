@@ -8,8 +8,6 @@
 
 #import "rewardListViewController.h"
 #import "ReferralTableViewCell.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 

@@ -11,8 +11,6 @@
 #import "ForgotPasswordViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "dashboardViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "ASIHTTPRequest.h"
 
 @interface LoginViewController (){
@@ -80,14 +78,15 @@
     
     
     //---Make cornor round of button and text fields
-    btnLogin.layer.cornerRadius = 3.0;
-    [btnLogin setClipsToBounds:YES];
-     lblEmail.layer.cornerRadius = 2.0;
-    [lblEmail setClipsToBounds:YES];
-    lblPass.layer.cornerRadius = 2.0;
-    [lblPass setClipsToBounds:YES];
-    btnCheckbox.layer.cornerRadius = 2.0;
-    [btnCheckbox setClipsToBounds:YES];
+    
+    [cornerRadius setRadiusofButton:btnLogin :3.0];
+    [cornerRadius setRadiusofButton:btnCheckbox :3.0];
+    [cornerRadius setRadiusofLabel:lblEmail :2.0];
+    [cornerRadius setRadiusofLabel:lblPass :2.0];
+
+    
+    
+    
     
     
     if (IS_IPAD)

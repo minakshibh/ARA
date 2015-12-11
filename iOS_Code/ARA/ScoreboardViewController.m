@@ -8,8 +8,6 @@
 
 #import "ScoreboardViewController.h"
 #import "ScoreboardListViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 

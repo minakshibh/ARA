@@ -8,8 +8,6 @@
 
 #import "myBadgesViewController.h"
 #import "myBadgesTableViewCell.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "badges.h"
