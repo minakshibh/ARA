@@ -307,7 +307,7 @@
 //    }
 //    
     
-    if(namestr.length == 0)
+    if([txtName isEmpty])
     {
         msg = @"please enter name";
         lblerrorName.hidden = NO;
@@ -323,7 +323,7 @@
         lblerrorName.text = msg;
         [txtName becomeFirstResponder];
         return;
-    }else if(lastname.length == 0)
+    }else if([txtLastname isEmpty])
     {
         msg = @"please enter last name";
         lblerrorName.hidden = NO;
@@ -339,7 +339,7 @@
         lblerrorName.text = msg;
         [txtLastname becomeFirstResponder];
         return;
-    }else if(phoneno.length == 0)
+    }else if([txtPhoneNo isEmpty])
     {
         
         msg = @"please enter phone no";

@@ -125,7 +125,7 @@
         d = 1; // is retina display
     }
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    if (IS_IPAD) {
         d += 2;
     }
     
@@ -200,10 +200,12 @@
         btnImage = [UIImage imageNamed:@"checkbox-unchecked.png"];
         [btnCheckbox setImage:btnImage forState:UIControlStateNormal];
         return;
-    }
+    }else{
         checkbox_Value = true;
-    btnImage = [UIImage imageNamed:@"checkbox-checked.png"];
-    [btnCheckbox setImage:btnImage forState:UIControlStateNormal];
+        btnImage = [UIImage imageNamed:@"checkbox-checked.png"];
+        [btnCheckbox setImage:btnImage forState:UIControlStateNormal];
+    }
+    
 }
 
 - (IBAction)btnForgotPassword:(id)sender {
@@ -543,7 +545,7 @@
         //        [alert show];
         [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
-    }else if (passwordNameStr.length==0 ) {
+    }else if ([txtPassword isEmpty]) {
         message = @"Please enter password";
         
         [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];

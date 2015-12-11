@@ -17,8 +17,8 @@
     return alert;
 }
 
-+ (UIAlertView *) alertWithOneBtn:(NSString*)title description:(NSString*)description okBtn:(NSString *)okBtn withTag:(int)tag{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:description delegate:self cancelButtonTitle:okBtn otherButtonTitles:nil, nil];
++ (UIAlertView *) alertWithOneBtn:(NSString*)title description:(NSString*)description okBtn:(NSString *)okBtn withTag:(int)tag forController:(UIViewController*)controller{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:description delegate:controller cancelButtonTitle:okBtn otherButtonTitles:nil, nil];
     alert.tag = tag;
     [alert show];
     return alert;
@@ -30,6 +30,14 @@
     [alert show];
     return alert;
     
+}
+
++(UIAlertView*) alertWithTwoBtns:(NSString *)title description:(NSString *)description okBtn:(NSString *)okBtn cancelBtn:(NSString *)cancelBtn withTag:(int)tag forController:(UIViewController*)controller{
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:description delegate:controller cancelButtonTitle:okBtn otherButtonTitles:cancelBtn, nil];
+     alert.tag = tag;
+    [alert show];
+    return alert;
 }
 
 @end

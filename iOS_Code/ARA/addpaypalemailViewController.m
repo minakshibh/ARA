@@ -158,7 +158,7 @@
             }
         }
     }
-    if(emailstr.length == 0)
+    if([txtEmail isEmpty])
     {
         [HelperAlert alertWithOneBtn:AlertTitle description:@"Please enter an email address" okBtn:OkButtonTitle];
         return;

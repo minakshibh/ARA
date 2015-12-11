@@ -120,30 +120,33 @@
         
         if([obj.IsDefault integerValue] ==1)
         {
+            [HelperAlert alertWithOneBtn:@"This account cannot be deleted" description:@"This payment account has been set as 'Default' so it cannot be deleted. Set some other account as 'Default' in order to continue." okBtn:OkButtonTitle withTag:11 forController:self];
+//            
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"This account cannot be deleted"  message:@"This payment account has been set as 'Default' so it cannot be deleted. Set some other account as 'Default' in order to continue." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//           
+//            alert.tag=11;
+//            [alert show];
             
-            
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"This account cannot be deleted"  message:@"This payment account has been set as 'Default' so it cannot be deleted. Set some other account as 'Default' in order to continue." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-           
-            alert.tag=11;
-            [alert show];
         }else{
         
         
             if(paypalListArray.count==1)
             {
+                [HelperAlert alertWithOneBtn:@"Delete this account." description:@"You wont be able to recieve any payment. Are you sure you want to continue.." okBtn:OkButtonTitle withTag:10 forController:self];
                 
                 
-                
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Delete this account."  message:@"You wont be able to recieve any payment. Are you sure you want to continue.." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                
-                alert.tag=10;
-                [alert show];
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Delete this account."  message:@"You wont be able to recieve any payment. Are you sure you want to continue.." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//                
+//                alert.tag=10;
+//                [alert show];
                 
             }else{
-        
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Delete this account." message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
-            alert.tag = 10;
-            [alert show];
+                
+        [HelperAlert alertWithTwoBtns:@"Delete this account." description:@"Are you sure?" okBtn:@"Cancel" cancelBtn:@"Yes" withTag:10 forController:self];
+
+//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Delete this account." message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+//            alert.tag = 10;
+//            [alert show];
 
             }
         
@@ -189,9 +192,11 @@
     }
     if([obj.IsDefault isEqualToString:@"0"])
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Set As Default" message:@"Are you sure?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        alert.tag=8;
-        [alert show];
+        [HelperAlert alertWithTwoBtns:@"Set As Default" description:@"Are you sure?" okBtn:@"No" cancelBtn:@"Yes" withTag:8 forController:self];
+        
+//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Set As Default" message:@"Are you sure?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+//        alert.tag=8;
+//        [alert show];
 
     }
     

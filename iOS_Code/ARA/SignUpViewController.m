@@ -39,16 +39,26 @@
     scrollView.backgroundColor=[UIColor clearColor];
     
     //---doing corner radious of all objects
-    lblMEA.layer.cornerRadius = 2.0;  [lblMEA setClipsToBounds:YES];
-    lblPassword.layer.cornerRadius = 2.0;  [lblPassword setClipsToBounds:YES];
-    lblpreview.layer.cornerRadius = 2.0;  [lblpreview setClipsToBounds:YES];
-    lblFirstname.layer.cornerRadius = 2.0;  [lblFirstname setClipsToBounds:YES];
-    lbllastname.layer.cornerRadius = 2.0;  [lblFirstname setClipsToBounds:YES];
-    lblUserId.layer.cornerRadius = 2.0;  [lblUserId setClipsToBounds:YES];
-    lblPhoneNo.layer.cornerRadius = 2.0;  [lblPhoneNo setClipsToBounds:YES];
-    lblEmail.layer.cornerRadius = 2.0;  [lblEmail setClipsToBounds:YES];
-    btnCheckBox.layer.cornerRadius = 2.0;  [btnCheckBox setClipsToBounds:YES];
-    btnSignup.layer.cornerRadius = 2.0;  [btnSignup setClipsToBounds:YES];
+    lblMEA.layer.cornerRadius = 2.0;
+    [lblMEA setClipsToBounds:YES];
+    lblPassword.layer.cornerRadius = 2.0;
+    [lblPassword setClipsToBounds:YES];
+    lblpreview.layer.cornerRadius = 2.0;
+    [lblpreview setClipsToBounds:YES];
+    lblFirstname.layer.cornerRadius = 2.0;
+    [lblFirstname setClipsToBounds:YES];
+    lbllastname.layer.cornerRadius = 2.0;
+    [lblFirstname setClipsToBounds:YES];
+    lblUserId.layer.cornerRadius = 2.0;
+    [lblUserId setClipsToBounds:YES];
+    lblPhoneNo.layer.cornerRadius = 2.0;
+    [lblPhoneNo setClipsToBounds:YES];
+    lblEmail.layer.cornerRadius = 2.0;
+    [lblEmail setClipsToBounds:YES];
+    btnCheckBox.layer.cornerRadius = 2.0;
+    [btnCheckBox setClipsToBounds:YES];
+    btnSignup.layer.cornerRadius = 2.0;
+    [btnSignup setClipsToBounds:YES];
     
     //checking if coming to this view throudh facebook
     if([_from_fb_button isEqualToString:@"yes"])
@@ -293,7 +303,7 @@
     
    
     NSString *message;
-    if (firstNameStr.length==0 ) {
+    if ([txtFirstName isEmpty] ) {
         message = @"Please Enter First Name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
 
@@ -303,18 +313,18 @@
         message = @"First name limit exceeds. Kindly enter a valid First name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
-    }else if (lastNameStr.length==0 ) {
+    }else if ([txtLastName isEmpty]) {
         message = @"Please Enter Last Name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }if (firstNameStr.length>25 ) {
         message = @"Last name limit exceeds. Kindly enter a valid Last name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];        return;
-    }else if (userIdstr.length==0 ) {
+    }else if ([txtUserId isEmpty]) {
         message = @"Please Enter User ID";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
-    }else if (phoneNostr.length==0 ) {
+    }else if ([txtPhoneNo isEmpty] ) {
         message = @"Please Enter a valid phone no";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
@@ -336,7 +346,7 @@
         
         [txtEmail becomeFirstResponder];
         return;
-    }else if (passwordStr.length==0 ) {
+    }else if ([txtPassword isEmpty] ) {
         int i=0;
         if([_from_fb_button isEqualToString:@"yes"])
         {
@@ -354,7 +364,7 @@
 
         return;
         
-    }else if (txtPreviousCoustomer.text.length==0 ) {
+    }else if ([txtPreviousCoustomer isEmpty] ) {
         message = @"Please Select Any Role";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
 
@@ -365,7 +375,7 @@
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
 
         return;
-    }else if (txtMEA.text.length==0 ) {
+    }else if ([txtMEA isEmpty] ) {
         message = @"Please Select MEA";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
 
@@ -933,10 +943,14 @@ if ([response_status isEqualToString:@"passed"])
 
                
             }else{
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thank You" message:@"You are sucessfully registered with us." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 
-                alert.tag=3;
-                [alert show];
+                [HelperAlert alertWithOneBtn:@"Thank You" description:@"You are sucessfully registered with us." okBtn:@"Ok" withTag:3 forController:self];
+
+                
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thank You" message:@"You are sucessfully registered with us." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//                
+//                alert.tag=3;
+//                [alert show];
                 return;
             }
             }else{
@@ -989,11 +1003,12 @@ if ([response_status isEqualToString:@"passed"])
             NSString *usertype = [userDetailDict valueForKey:@"UserType"];
             if([usertype isEqualToString:@"Client"])
                {
-                   
+                   [HelperAlert alertWithTwoBtns:AlertTitle description:@"We already have your details. Are you a previous client of ARA ?" okBtn:OkButtonTitle cancelBtn:@"Yes i am" withTag:2 forController:self];
 
-                   UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"We already have your details. Are you a previous client of ARA ?" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Yes i am",nil];
-                   [alert show];
-                   alert.tag =2;
+                   
+//                   UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"We already have your details. Are you a previous client of ARA ?" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Yes i am",nil];
+//                   [alert show];
+//                   alert.tag =2;
                    [txtEmail resignFirstResponder];
                    [txtPassword resignFirstResponder];
                      [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];

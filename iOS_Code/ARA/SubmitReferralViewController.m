@@ -110,6 +110,9 @@
     if (d==3) {
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
+    [self iPadDesignInitialization];
+}
+-(void) iPadDesignInitialization{
     if (IS_IPAD)
     {
         lblheading.font = [lblheading.font fontWithSize:24];
@@ -122,13 +125,14 @@
         txtEmail.font = [txtEmail.font fontWithSize:24];
         txtmea.font = [txtmea.font fontWithSize:24];
         txtComment.font = [txtComment.font fontWithSize:24];
+        //btnImportContacts.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 90);
         
-    }
-}
+    }}
 
 -(void)viewWillAppear:(BOOL)animated
 
 {
+    [self iPadDesignInitialization];
     [[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
     if(txtEmail.text.length >0)
 {
@@ -404,14 +408,14 @@
     [txtmea resignFirstResponder];
     [txtPhoneno resignFirstResponder];
     
-    if(firstNameStr.length == 0)
+    if([txtFirstname isEmpty])
     {
         msgstr = @"Please enter first name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
 
         
         return;
-    }else if(lastNameStr.length == 0)
+    }else if([txtLastname isEmpty])
     {
         msgstr = @"Please enter last name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
@@ -425,7 +429,7 @@
     //        [alert show];
     //        return;
     //    }
-    if (phoneStr.length>0) {
+    if ([txtPhoneno isEmpty]) {
         
     
         if (phoneStr.length<10 ) {
@@ -477,7 +481,7 @@
 //        [alert show];
 //        return;
 //    }
-    if(meaStr.length == 0)
+    if([txtmea isEmpty])
     {
         msgstr = @"Please select mea";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
@@ -577,6 +581,22 @@
     
     　[picker dismissModalViewControllerAnimated:YES];
 }
+//- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person;
+//{
+//    ABMultiValueRef emails = (ABMultiValueRef) ABRecordCopyValue(person, kABPersonEmailProperty);
+//    CFStringRef emailID = ABMultiValueCopyValueAtIndex(emails, 0);
+//    NSLog(@"%@",[NSString stringWithFormat:@"%@", emailID]);
+//    
+//    
+//    ABMultiValueRef phone = (ABMultiValueRef) ABRecordCopyValue(person, kABPersonPhoneProperty);
+//    CFStringRef phoneID = ABMultiValueCopyValueAtIndex(phone, 0);
+//    NSLog(@"%@",[NSString stringWithFormat:@"%@", phoneID]);
+//    NSArray *phoneArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(phone);
+
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    
+//}
+
 
 - (BOOL)peoplePickerNavigationController: (ABPeoplePickerNavigationController *)peoplePicker
       shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property
@@ -836,10 +856,11 @@
                // NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted. You can track the same by referral id %@",responseString];
                   NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted successfully."];
                 
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thanks!!"  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                
-                alert.tag=3;
-                [alert show];
+                [HelperAlert alertWithOneBtn:@"Thanks!!" description:msg okBtn:OkButtonTitle withTag:3 forController:self];
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thanks!!"  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//                
+//                alert.tag=3;
+//                [alert show];
                 return;
             }
         }else if (webservice==5)
@@ -866,12 +887,12 @@
             NSString *usertype = [userDetailDict valueForKey:@"UserType"];
             if([usertype isEqualToString:@"Client"])
             {
-                
                
+                [HelperAlert alertWithTwoBtns:AlertTitle description:@"One of our client already referred this person. Do you want to refer this person again." okBtn:@"No" cancelBtn:@"Yes" withTag:8 forController:self];
                 
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"One of our client already referred this person. Do you want to refer this person again." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
-                [alert show];
-                alert.tag =8;
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"One of our client already referred this person. Do you want to refer this person again." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
+//                [alert show];
+//                alert.tag =8;
                 
                 [txtEmail resignFirstResponder];
                 [txtComment resignFirstResponder];

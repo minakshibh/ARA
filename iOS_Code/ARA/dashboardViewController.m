@@ -581,7 +581,7 @@ if([recieved_status isEqualToString:@"passed"])
 }
 -(void)targetMethod:(NSTimer *)timer
 {
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
         
         CGRect frame = imageViewMenuProfile.frame;

@@ -321,12 +321,13 @@
     {
         if (userDetailDict.count==0) {
             
-       
+            [HelperAlert alertWithOneBtn:AlertTitle description:@"There is no data to display"  okBtn:OkButtonTitle withTag:2 forController:self];
+
             
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:@"There is no data to display" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            
-            alert.tag=2;
-            [alert show];
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:@"There is no data to display" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//            
+//            alert.tag=2;
+//            [alert show];
             return;
         }
         

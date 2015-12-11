@@ -72,7 +72,7 @@
 - (IBAction)btnResetPassword:(id)sender {
     
     NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if(emailStr.length==0)
+    if([txtEmail isEmpty])
     {
         [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter an email address" okBtn:OkButtonTitle];
         return;

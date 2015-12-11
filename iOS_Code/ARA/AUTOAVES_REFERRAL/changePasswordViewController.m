@@ -131,13 +131,13 @@
         
         return;
     }
-    else if(newPWDstr.length==0)
+    else if([txtNewpwd isEmpty])
     {
         message = @"Please enter your new password";
         [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         
         return;
-    }else if(confirmNewPWDstr.length==0)
+    }else if([txtConfirmnewpwd isEmpty])
     {
         message = @"Please confirm your new password";
         [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];

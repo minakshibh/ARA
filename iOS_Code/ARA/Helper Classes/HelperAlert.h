@@ -31,6 +31,8 @@
 
 +(UIAlertView*) alertWithTwoBtns:(NSString*)title description:(NSString*)description okBtn:(NSString *)okBtn cancelBtn:(NSString*)cancelBtn;
 
-+(UIAlertView *) alertWithOneBtn:(NSString*)title description:(NSString*)description okBtn:(NSString *)okBtn withTag:(int)tag;
++ (UIAlertView *) alertWithOneBtn:(NSString*)title description:(NSString*)description okBtn:(NSString *)okBtn withTag:(int)tag forController:(UIViewController*)controller;
+
++(UIAlertView*) alertWithTwoBtns:(NSString *)title description:(NSString *)description okBtn:(NSString *)okBtn cancelBtn:(NSString *)cancelBtn withTag:(int)tag forController:(UIViewController*)controller;
 @end
 

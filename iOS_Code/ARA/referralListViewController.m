@@ -1385,12 +1385,12 @@ if([response_status isEqualToString:@"passed"])
     {
         
         if (userDetailDict.count<1) {
-            
+             [HelperAlert alertWithOneBtn:AlertTitle description:@"No referrals to display yet. Start submitting some referrals."  okBtn:OkButtonTitle withTag:2 forController:self];
 
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:@"No referrals to display yet. Start submitting some referrals." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            
-            alert.tag=2;
-            [alert show];
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:@"No referrals to display yet. Start submitting some referrals." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//            
+//            alert.tag=2;
+//            [alert show];
             
             
              [kappDelegate HideIndicator];
@@ -1464,11 +1464,11 @@ if([response_status isEqualToString:@"passed"])
 }else{
     NSString *msg = @"No referrals to display yet. Start submitting some referrals.";
     
-
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    
-    alert.tag=2;
-    [alert show];
+[HelperAlert alertWithOneBtn:AlertTitle description:msg  okBtn:OkButtonTitle withTag:2 forController:self];
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//    
+//    alert.tag=2;
+//    [alert show];
  [kappDelegate HideIndicator];
 }
    
