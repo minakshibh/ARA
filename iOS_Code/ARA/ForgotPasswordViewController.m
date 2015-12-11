@@ -8,8 +8,6 @@
 
 #import "ForgotPasswordViewController.h"
 #import "SignUpViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "ASIHTTPRequest.h"
 
 @interface ForgotPasswordViewController ()
@@ -59,6 +57,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma  mark Buttons
 - (IBAction)btnSingUp:(id)sender {
     SignUpViewController *SUvc = [[SignUpViewController alloc]initWithNibName:@"SignUpViewController" bundle:nil];
     [self.navigationController pushViewController:SUvc animated:YES];
@@ -67,6 +67,26 @@
 - (IBAction)btnLogIn:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)btnResetPassword:(id)sender {
+    
+    NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if([txtEmail isEmpty])
+    {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter an email address" okBtn:OkButtonTitle];
+        return;
+    }
+    if (![txtEmail emailValidation]==YES) {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
+
+        [txtEmail becomeFirstResponder];
+        return;
+    }
+    
+    [self forgotPassword:emailStr];
+}
+
+
+#pragma  mark TextField Delegate methods
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
@@ -95,6 +115,103 @@
         }
     }
 }
+
+#pragma mark - Connection Delegates
+
+-(NSInteger)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+    
+    if((long)[httpResponse statusCode] == ResultOk)
+    {
+        NSLog(@"Received Response");
+        [webData setLength: 0];
+        recieved_status = @"passed";
+        
+    }else if ((long)[httpResponse statusCode] == ResultFailed)
+    {
+        recieved_status = @"failed";
+        return [httpResponse statusCode];
+        
+    }
+    return  YES;
+}
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [kappDelegate HideIndicator];
+    
+    
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
+        return;
+    }
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
+        return;
+    }
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
+        return;
+    }
+    
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
+        return;
+    }
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
+    NSLog(@"ERROR with the Connection ");
+    webData =nil;
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
+{
+    [webData appendData:data1];
+}
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [kappDelegate HideIndicator];
+    
+    NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
+    
+    if ([webData length]==0)
+        return;
+    
+    NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
+    NSLog(@"responseString:%@",responseString);
+    NSError *error;
+    
+    SBJsonParser *json = [[SBJsonParser alloc] init];
+    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
+    NSLog(@"%@",userDetailDict);
+     if ([responseString rangeOfString:@"Email address not found" options:NSCaseInsensitiveSearch].location != NSNotFound)
+     {
+         [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
+
+         return;
+     }
+    if ([responseString rangeOfString:@"Please check your email for further instructions." options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
+
+        return;
+    }
+    if ([responseString rangeOfString:@"Failure sending mail" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
+
+        return;
+    }
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
+
+    return;
+}
+
+#pragma  mark Other Methods
 -(void)forgotPassword:(NSString*)email
 {
     [kappDelegate ShowIndicator];
@@ -134,129 +251,5 @@
     {
         NSLog(@"connection is NULL");
     }
-}
-#pragma mark - Connection Delegates
-
--(NSInteger)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-    NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
-    
-    if((long)[httpResponse statusCode] == ResultOk)
-    {
-        NSLog(@"Received Response");
-        [webData setLength: 0];
-        recieved_status = @"passed";
-        
-    }else if ((long)[httpResponse statusCode] == ResultFailed)
-    {
-        recieved_status = @"failed";
-        return [httpResponse statusCode];
-        
-    }
-    return  YES;
-}
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [kappDelegate HideIndicator];
-    
-    
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    NSLog(@"ERROR with the Connection ");
-    webData =nil;
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
-{
-    [webData appendData:data1];
-}
--(void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [kappDelegate HideIndicator];
-    
-    NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
-    
-    if ([webData length]==0)
-        return;
-    
-    NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
-    NSLog(@"responseString:%@",responseString);
-    NSError *error;
-    
-    SBJsonParser *json = [[SBJsonParser alloc] init];
-    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
-    NSLog(@"%@",userDetailDict);
-     if ([responseString rangeOfString:@"Email address not found" options:NSCaseInsensitiveSearch].location != NSNotFound)
-     {
-         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-         [alert show];
-         return;
-     }
-    if ([responseString rangeOfString:@"Please check your email for further instructions." options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([responseString rangeOfString:@"Failure sending mail" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alert show];
-    return;
-}
-
-- (IBAction)btnResetPassword:(id)sender {
-    
-    NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if(emailStr.length==0)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Kindly enter an email address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if (![self validateEmailWithString:emailStr]==YES) {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        [txtEmail becomeFirstResponder];
-        return;
-    }
-    
-    [self forgotPassword:emailStr];
-}
-- (BOOL)validateEmailWithString:(NSString*)email
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:email];
 }
 @end

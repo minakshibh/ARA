@@ -7,8 +7,6 @@
 //
 
 #import "addpaypalemailViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "PaypalAccountsViewController.h"
@@ -85,7 +83,7 @@
     }
     
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         lblheading.font=[lblheading .font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
@@ -94,7 +92,6 @@
         btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:24];
         selectPaymentMode.titleLabel.font = [selectPaymentMode.titleLabel.font fontWithSize:24];
         txtDropDown.font=[txtEmail .font fontWithSize:24];
-
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -123,6 +120,98 @@
         }
     }
 }
+#pragma  mark - Buttons
+- (IBAction)btnBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)btnSavechanges:(id)sender {
+    NSString* emailstr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if([_trigger isEqualToString:@"edit"])
+    {
+        for (int l=0; l<_email_array.count; l++) {
+            
+            if([_obj.PaypalEmail isEqualToString:[_email_array objectAtIndex:l]])
+            {
+                continue;
+            }
+            if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
+                [HelperAlert alertWithOneBtn:AlertTitle description:@"Email already exists in the list" okBtn:OkButtonTitle];
+              
+                return;
+            }
+        }
+        
+    }else{
+        
+        if(_email_array.count>0)
+        {
+            for (int l=0; l<_email_array.count; l++) {
+                if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
+                     [HelperAlert alertWithOneBtn:AlertTitle description:@"Email already exists in the list" okBtn:OkButtonTitle];
+                   
+                    return;
+                }
+            }
+        }
+    }
+    if([txtEmail isEmpty])
+    {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Please enter an email address" okBtn:OkButtonTitle];
+        return;
+    }else if (![self validateEmailWithString:emailstr]==YES) {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
+
+        [txtEmail becomeFirstResponder];
+        return;
+    }
+    
+    if([_trigger isEqualToString:@"edit"])
+    {
+    }else{
+        
+        if ([_obj.PaypalEmail isEqualToString:emailstr])
+        {
+            [HelperAlert alertWithOneBtn:AlertTitle description:@"Entered email is already in the list" okBtn:OkButtonTitle];
+
+            
+            [txtEmail becomeFirstResponder];
+            return;
+        }
+    }
+    
+    [txtEmail resignFirstResponder];
+    if(status==true)
+    {
+        value=@"true";
+    }else{
+        value=@"false";
+    }
+    
+    [self verifyEmail:emailstr];
+    
+    
+    
+}
+- (IBAction)btnCheckbox:(id)sender {
+    
+    //---toggle functionality of checkbox
+    if (self.paypalListCount != 0) {
+        
+        if(status == true)
+        {
+            status = false;
+            UIImage *btnImage = [UIImage imageNamed:@"checkbox-unchecked.png"];
+            [btnCheckbox setImage:btnImage forState:UIControlStateNormal];
+            return;
+        }
+        status = true;
+        UIImage* btnImage = [UIImage imageNamed:@"checkbox-checked.png"];
+        [btnCheckbox setImage:btnImage forState:UIControlStateNormal];
+    }
+}
+#pragma  mark - Other Methods
 -(void)viewWillDisappear:(BOOL)animated
 {
     [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-unchecked.png"] forState:UIControlStateNormal];
@@ -211,79 +300,6 @@
     }
 }
 
-- (IBAction)btnBack:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)btnSavechanges:(id)sender {
-    NSString* emailstr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    if([_trigger isEqualToString:@"edit"])
-    {
-        for (int l=0; l<_email_array.count; l++) {
-            
-            if([_obj.PaypalEmail isEqualToString:[_email_array objectAtIndex:l]])
-            {
-                continue;
-            }
-            if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Email already exists in the list" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-                return;
-            }
-        }
-       
-    }else{
-    
-        if(_email_array.count>0)
-        {
-            for (int l=0; l<_email_array.count; l++) {
-                if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
-                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Email already exists in the list" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                    [alert show];
-                    return;
-                    }
-            }
-        }
-    }
-    if(emailstr.length == 0)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please enter an email address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }else if (![self validateEmailWithString:emailstr]==YES) {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        [txtEmail becomeFirstResponder];
-        return;
-    }
-    
-    if([_trigger isEqualToString:@"edit"])
-    {
-    }else{
-        
-        if ([_obj.PaypalEmail isEqualToString:emailstr])
-        {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Entered email is already in the list" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            [txtEmail becomeFirstResponder];
-            return;
-        }
-    }
-    
-    [txtEmail resignFirstResponder];
-    if(status==true)
-    {
-        value=@"true";
-    }else{
-        value=@"false";
-    }
-    
-    [self verifyEmail:emailstr];
-    
-    
-    
-}
 - (BOOL)validateEmailWithString:(NSString*)email
 {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
@@ -389,23 +405,7 @@
 
 }
 
-- (IBAction)btnCheckbox:(id)sender {
-    
-    //---toggle functionality of checkbox
-    if (self.paypalListCount != 0) {
-        
-        if(status == true)
-        {
-            status = false;
-            UIImage *btnImage = [UIImage imageNamed:@"checkbox-unchecked.png"];
-            [btnCheckbox setImage:btnImage forState:UIControlStateNormal];
-            return;
-        }
-        status = true;
-        UIImage* btnImage = [UIImage imageNamed:@"checkbox-checked.png"];
-        [btnCheckbox setImage:btnImage forState:UIControlStateNormal];
-    }
-}
+
 #pragma mark - textView Delegates
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -494,30 +494,26 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
@@ -560,21 +556,24 @@
             }
             if([acount_status isEqualToString:@"UNVERIFIED"])
             {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"This email is not a valid paypal email" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
+                [HelperAlert  alertWithOneBtn:AlertTitle description:@"This email is not a valid paypal email" okBtn:OkButtonTitle];
+
+                
                 return;
             }
             NSArray *data = [userDetailDict valueForKey:@"responseEnvelope"];
             NSString *response = [data valueForKey:@"ack"];
     
             if ([response isEqualToString:@"Failure"]) {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"This email is not a valid paypal email" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+                [HelperAlert  alertWithOneBtn:AlertTitle description:@"This email is not a valid paypal email" okBtn:OkButtonTitle];
+
+               
             return;
             }
         }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+
+            
 
         }
     }else if(webservice==2)
@@ -584,9 +583,8 @@
             [self.navigationController popViewControllerAnimated:YES];
             return;
         }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            
-            [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+
             return;
             }
     }else if(webservice==3)
@@ -613,8 +611,9 @@
             }
           //  [tableView reloadData];
         }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
+            [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+
+           
         }
     }
     [kappDelegate HideIndicator];

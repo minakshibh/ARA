@@ -21,8 +21,7 @@
 //   [self.delegate cellWithButtonDidPressed:self];    
   
     NSString* msg = [NSString stringWithFormat:@"You haven't earned this badge yet."];
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alert show];
+    [HelperAlert alertWithOneBtn:AlertTitle description:msg okBtn:OkButtonTitle];
 }
 
 -(void)setLabelText:(NSString*)name :(NSString*)no : (NSString*)date :(NSString*)image :(NSString*)earned

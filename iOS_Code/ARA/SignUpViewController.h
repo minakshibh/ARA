@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SignUpViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate>
+@interface SignUpViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
     IBOutlet UIImageView *imagelogo;
     IBOutlet UILabel *lblEmail;

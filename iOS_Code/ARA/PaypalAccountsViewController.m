@@ -8,8 +8,6 @@
 
 #import "PaypalAccountsViewController.h"
 #import "PaypalAccountsTableViewCell.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "paypalObj.h"
@@ -55,7 +53,7 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         btnheading.font=[btnheading.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
@@ -63,107 +61,16 @@
         
     }
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
--(void)viewWillAppear:(BOOL)animated    
+-(void)viewWillAppear:(BOOL)animated
 {
     [self getlist];
 }
-
-
--(void)getlist
-{
-    // [self.view makeToast:@"Fetching data..."];
-    if (count==0) {
-        [kappDelegate ShowIndicator];
-        count++;
-    }
-
-    
-    webservice=1;
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    NSString * userid =  [[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"];
-    
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/paymentaccountinfo/%@",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"GET"];
-//    [request addValue:email forHTTPHeaderField:@"username"];
-//    [request addValue:password forHTTPHeaderField:@"userpassword"];
-     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
--(void)deleateData:(NSString*)accountInfo
-{
-    
-    [kappDelegate ShowIndicator];
-    webservice=2;
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    NSString * userid =  [[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"];
-    
-    _postData = [NSString stringWithFormat:@"PaymentAccountInfoId=%@&UserId=%@",accountInfo,userid];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/paymentaccountinfo/delete",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"POST"];
-    //    [request addValue:email forHTTPHeaderField:@"username"];
-    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
-    
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-}
+
+
+
 #pragma mark - tableview Delegates
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -211,26 +118,33 @@
         
         if([obj.IsDefault integerValue] ==1)
         {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"This account cannot be deleted" message:@"This payment account has been set as 'Default' so it cannot be deleted. Set some other account as 'Default' in order to continue." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            alert.tag = 11;
-            [alert show];
-
+            [HelperAlert alertWithOneBtn:@"This account cannot be deleted" description:@"This payment account has been set as 'Default' so it cannot be deleted. Set some other account as 'Default' in order to continue." okBtn:OkButtonTitle withTag:11 forController:self];
+//            
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"This account cannot be deleted"  message:@"This payment account has been set as 'Default' so it cannot be deleted. Set some other account as 'Default' in order to continue." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//           
+//            alert.tag=11;
+//            [alert show];
+            
         }else{
         
         
             if(paypalListArray.count==1)
             {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Delete this account." message:@"You wont be able to recieve any payment. Are you sure you want to continue.." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-                alert.tag = 10;
-                [alert show];
+                [HelperAlert alertWithOneBtn:@"Delete this account." description:@"You wont be able to recieve any payment. Are you sure you want to continue.." okBtn:OkButtonTitle withTag:10 forController:self];
+                
+                
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Delete this account."  message:@"You wont be able to recieve any payment. Are you sure you want to continue.." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//                
+//                alert.tag=10;
+//                [alert show];
                 
             }else{
-        
-        
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Delete this account." message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
-            alert.tag = 10;
-            [alert show];
+                
+        [HelperAlert alertWithTwoBtns:@"Delete this account." description:@"Are you sure?" okBtn:@"Cancel" cancelBtn:@"Yes" withTag:10 forController:self];
+
+//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Delete this account." message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+//            alert.tag = 10;
+//            [alert show];
 
             }
         
@@ -276,13 +190,16 @@
     }
     if([obj.IsDefault isEqualToString:@"0"])
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Set As Default" message:@"Are you sure?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        alert.tag=8;
-        [alert show];
+        [HelperAlert alertWithTwoBtns:@"Set As Default" description:@"Are you sure?" okBtn:@"No" cancelBtn:@"Yes" withTag:8 forController:self];
+        
+//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Set As Default" message:@"Are you sure?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+//        alert.tag=8;
+//        [alert show];
 
     }
     
 }
+#pragma  mark - Other Methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex              {
     if(alertView.tag==8){
         
@@ -357,6 +274,99 @@
     
 
 }
+-(void)getlist
+{
+    // [self.view makeToast:@"Fetching data..."];
+    if (count==0) {
+        [kappDelegate ShowIndicator];
+        count++;
+    }
+    
+    
+    webservice=1;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSString * userid =  [[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"];
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/paymentaccountinfo/%@",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    //    [request addValue:email forHTTPHeaderField:@"username"];
+    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+}
+-(void)deleateData:(NSString*)accountInfo
+{
+    
+    [kappDelegate ShowIndicator];
+    webservice=2;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSString * userid =  [[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"];
+    
+    _postData = [NSString stringWithFormat:@"PaymentAccountInfoId=%@&UserId=%@",accountInfo,userid];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/paymentaccountinfo/delete",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"POST"];
+    //    [request addValue:email forHTTPHeaderField:@"username"];
+    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
+    
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
+
+#pragma  mark - Buttons
 - (IBAction)btnAdd:(id)sender {
     addpaypalemailViewController *apVC = [[addpaypalemailViewController alloc]initWithNibName:@"addpaypalemailViewController" bundle:nil];
     apVC.trigger = @"add";
@@ -400,33 +410,29 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
+
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
+
         return;
     }
 
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
     
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    NSLog(@"ERROR with the Connection ");
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];    NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
 
@@ -490,10 +496,8 @@
             email_array = [userDetailDict valueForKey:@"PaypalEmail"];
             [tableView reloadData];
         }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            
-        }
+            [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+            }
 
     }else if (webservice==2)
     {
@@ -525,9 +529,7 @@
             
             [tableView reloadData];
         }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            
+            [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
         }
 
     }else if (webservice==3)
@@ -556,9 +558,7 @@
             }
             [tableView reloadData];
         }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-
+            [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
         }
     }
 }

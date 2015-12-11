@@ -9,8 +9,6 @@
 #import "ProfileViewController.h"
 #import "changePasswordViewController.h"
 #import "SignUpViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "showProfileImageViewController.h"
@@ -83,7 +81,7 @@
                                    userInfo:nil
                                     repeats:NO];
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
         
         namelbl.font=[namelbl.font fontWithSize:24];
@@ -118,66 +116,6 @@
     }
 }
 
--(void)cancelNumberPad{
-    [txtPhoneNo resignFirstResponder];
-    NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-    // lblPhoneno.text=@"5454564564564564564";
-    NSMutableString *random = [[NSMutableString alloc]init];
-    for (int i = 0; i<phone.length; i++)
-    {
-        NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:i]];
-        if(i==0){
-            random =[NSMutableString stringWithFormat:@"%@",character];
-        }else{
-            random = [NSMutableString stringWithFormat:@"%@%@",random,character];
-        }
-        [self showmaskonnumber:random];
-    }
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    scrollView.scrollEnabled = YES;
-}
-
--(void)doneWithNumberPad{
-    [txtPhoneNo resignFirstResponder];
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    scrollView.scrollEnabled = YES;
-}
-
--(void)gestureHandlerMethod:(UITapGestureRecognizer*)sender {
-
-    [txtName resignFirstResponder];
-    [txtPhoneNo resignFirstResponder];
-    
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    scrollView.scrollEnabled = YES;
-}
--(void)setRoundedAvatar:(UIImageView *)avatarView toDiameter:(float)newSize atView:(UIView *)containedView;
-{
-    
-    
-    
-    avatarView.layer.cornerRadius = newSize/2;
-    avatarView.clipsToBounds = YES;
-    
- 
-    
-        CGRect frame = avatarView.frame;
-        frame.size.width = newSize;
-        frame.size.height = newSize;
-        frame.origin.y = frame.origin.y -8;
-        avatarView.frame = frame;
-       
-    
-
-    
-//    
-//    CGRect frame = avatarView.frame;
-//    frame.size.width = newSize;
-//    frame.size.height = newSize;
-//     frame.origin.x = frame.origin.x+45;
-//    avatarView.frame = frame;
-    
-}
 -(void)viewWillAppear:(BOOL)animated
 {
     NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
@@ -263,90 +201,11 @@
     
     
 }
--(void)targetMethod:(NSTimer *)timer
-{
-    
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-    {
-        
-        CGRect frame = imageProfile.frame;
-        frame.size.width = 190;
-        frame.size.height = 190;
-        frame.origin.x = frame.origin.x +18;
-         frame.origin.y = frame.origin.y -5;
-        imageProfile.frame = frame;
-
-    imageProfile.layer.cornerRadius = imageProfile.frame.size.width /2;
-    imageProfile.layer.masksToBounds = YES;
-    imageProfile.layer.borderWidth = 2;
-    imageProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
-    imageProfile.hidden = NO;
-    }else {
-        if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
-        {
-            CGRect frame = imageProfile.frame;
-            frame.size.width = 100;
-            frame.size.height = 100;
-            imageProfile.frame = frame;
-        }
-        imageProfile.layer.cornerRadius = imageProfile.frame.size.width /2;
-        imageProfile.layer.masksToBounds = YES;
-        imageProfile.layer.borderWidth = 2;
-        imageProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
-        imageProfile.hidden = NO;
-    }
-    
-}
--(void)showmaskonnumber:(NSString*)number
-{
-    
-    NSString *newString = number;
-    if(newString.length==0)
-    {   txtPhoneNo.text=@"";
-        return ;
-    }
-    NSArray *components = [newString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
-    NSString *decimalString = [components componentsJoinedByString:@""];
-    
-    NSUInteger length = decimalString.length;
-    BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
-    
-    if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 11)) {
-        [txtPhoneNo becomeFirstResponder];
-        
-        return;
-    }
-    
-    NSUInteger index = 0;
-    NSMutableString *formattedString = [NSMutableString string];
-    
-    if (hasLeadingOne) {
-        [formattedString appendString:@"1 "];
-        index += 1;
-    }
-    
-    if (length - index > 3) {
-        NSString *areaCode = [decimalString substringWithRange:NSMakeRange(index, 3)];
-        [formattedString appendFormat:@"(%@) ",areaCode];
-        index += 3;
-    }
-    
-    if (length - index > 3) {
-        NSString *prefix = [decimalString substringWithRange:NSMakeRange(index, 3)];
-        [formattedString appendFormat:@"%@-",prefix];
-        index += 3;
-    }
-    
-    NSString *remainder = [decimalString substringFromIndex:index];
-    [formattedString appendString:remainder];
-    
-    NSString *frmtStr = formattedString;
-    lblPhoneno.text = frmtStr;
-    txtPhoneNo.text = frmtStr;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma  mark - Buttons
 - (IBAction)btnCheckBox:(id)sender {
     if(checkbox_Value == true)
     {
@@ -446,7 +305,7 @@
 //    }
 //    
     
-    if(namestr.length == 0)
+    if([txtName isEmpty])
     {
         msg = @"please enter name";
         lblerrorName.hidden = NO;
@@ -462,7 +321,7 @@
         lblerrorName.text = msg;
         [txtName becomeFirstResponder];
         return;
-    }else if(lastname.length == 0)
+    }else if([txtLastname isEmpty])
     {
         msg = @"please enter last name";
         lblerrorName.hidden = NO;
@@ -478,7 +337,7 @@
         lblerrorName.text = msg;
         [txtLastname becomeFirstResponder];
         return;
-    }else if(phoneno.length == 0)
+    }else if([txtPhoneNo isEmpty])
     {
         
         msg = @"please enter phone no";
@@ -690,27 +549,158 @@
     return YES;
 }
 
-
+#pragma  mark - Other Methods
 -(void)responseimageWebservice:(NSString*)imageurl
 {
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-  
-        
     
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
+}
+-(void)cancelNumberPad{
+    [txtPhoneNo resignFirstResponder];
+    NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+    // lblPhoneno.text=@"5454564564564564564";
+    NSMutableString *random = [[NSMutableString alloc]init];
+    for (int i = 0; i<phone.length; i++)
+    {
+        NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:i]];
+        if(i==0){
+            random =[NSMutableString stringWithFormat:@"%@",character];
+        }else{
+            random = [NSMutableString stringWithFormat:@"%@%@",random,character];
+        }
+        [self showmaskonnumber:random];
+    }
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    scrollView.scrollEnabled = YES;
+}
+
+-(void)doneWithNumberPad{
+    [txtPhoneNo resignFirstResponder];
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    scrollView.scrollEnabled = YES;
+}
+
+-(void)gestureHandlerMethod:(UITapGestureRecognizer*)sender {
+    
+    [txtName resignFirstResponder];
+    [txtPhoneNo resignFirstResponder];
+    
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    scrollView.scrollEnabled = YES;
+}
+-(void)setRoundedAvatar:(UIImageView *)avatarView toDiameter:(float)newSize atView:(UIView *)containedView;
+{
+    
+    
+    
+    avatarView.layer.cornerRadius = newSize/2;
+    avatarView.clipsToBounds = YES;
+    
+    
+    
+    CGRect frame = avatarView.frame;
+    frame.size.width = newSize;
+    frame.size.height = newSize;
+    frame.origin.y = frame.origin.y -8;
+    avatarView.frame = frame;
+    
+    
+    
+    
+    //
+    //    CGRect frame = avatarView.frame;
+    //    frame.size.width = newSize;
+    //    frame.size.height = newSize;
+    //     frame.origin.x = frame.origin.x+45;
+    //    avatarView.frame = frame;
+    
+}
+-(void)targetMethod:(NSTimer *)timer
+{
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        
+        CGRect frame = imageProfile.frame;
+        frame.size.width = 190;
+        frame.size.height = 190;
+        frame.origin.x = frame.origin.x +18;
+        frame.origin.y = frame.origin.y -5;
+        imageProfile.frame = frame;
+        
+        imageProfile.layer.cornerRadius = imageProfile.frame.size.width /2;
+        imageProfile.layer.masksToBounds = YES;
+        imageProfile.layer.borderWidth = 2;
+        imageProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        imageProfile.hidden = NO;
+    }else {
+        if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
+        {
+            CGRect frame = imageProfile.frame;
+            frame.size.width = 100;
+            frame.size.height = 100;
+            imageProfile.frame = frame;
+        }
+        imageProfile.layer.cornerRadius = imageProfile.frame.size.width /2;
+        imageProfile.layer.masksToBounds = YES;
+        imageProfile.layer.borderWidth = 2;
+        imageProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        imageProfile.hidden = NO;
+    }
+    
+}
+-(void)showmaskonnumber:(NSString*)number
+{
+    
+    NSString *newString = number;
+    if(newString.length==0)
+    {   txtPhoneNo.text=@"";
+        return ;
+    }
+    NSArray *components = [newString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
+    NSString *decimalString = [components componentsJoinedByString:@""];
+    
+    NSUInteger length = decimalString.length;
+    BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
+    
+    if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 11)) {
+        [txtPhoneNo becomeFirstResponder];
+        
+        return;
+    }
+    
+    NSUInteger index = 0;
+    NSMutableString *formattedString = [NSMutableString string];
+    
+    if (hasLeadingOne) {
+        [formattedString appendString:@"1 "];
+        index += 1;
+    }
+    
+    if (length - index > 3) {
+        NSString *areaCode = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"(%@) ",areaCode];
+        index += 3;
+    }
+    
+    if (length - index > 3) {
+        NSString *prefix = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"%@-",prefix];
+        index += 3;
+    }
+    
+    NSString *remainder = [decimalString substringFromIndex:index];
+    [formattedString appendString:remainder];
+    
+    NSString *frmtStr = formattedString;
+    lblPhoneno.text = frmtStr;
+    txtPhoneNo.text = frmtStr;
 }
 
 @end

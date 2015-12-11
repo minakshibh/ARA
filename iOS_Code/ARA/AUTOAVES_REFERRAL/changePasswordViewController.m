@@ -7,8 +7,7 @@
 //
 
 #import "changePasswordViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
+
 
 @interface changePasswordViewController ()
 
@@ -64,7 +63,7 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         btncahngpassword.titleLabel.font = [btncahngpassword.titleLabel.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
@@ -94,7 +93,7 @@
 }
 
 
-
+#pragma mark Buttons
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -121,40 +120,38 @@
         if(!([[[NSUserDefaults standardUserDefaults]valueForKey:@"l_password"]isEqualToString:oldPWDstr]))
            {
                message = @"The old passwords didn't match";
-               alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-               [alert show];
+               
+               [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+               
                return;
            }
         message = @"Please enter your old password";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        
         return;
     }
-    else if(newPWDstr.length==0)
+    else if([txtNewpwd isEmpty])
     {
         message = @"Please enter your new password";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        
         return;
-    }else if(confirmNewPWDstr.length==0)
+    }else if([txtConfirmnewpwd isEmpty])
     {
         message = @"Please confirm your new password";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }else if([oldPWDstr isEqualToString:newPWDstr])
     {
         message = @"Old and new password cannot be same.";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+       [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }else if(![newPWDstr isEqualToString:confirmNewPWDstr])
     {
         
         NSLog(@"%@ %@",txtConfirmnewpwd.text, txtNewpwd.text);
         message = @"New password and confirm password should be same.";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+       [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }
     
@@ -163,6 +160,143 @@
 
     
 }
+#pragma mark - Connection Delegates
+
+-(NSInteger)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+    
+    
+        NSLog(@"Received Response");
+        [webData setLength: 0];
+    
+    if((long)[httpResponse statusCode] == ResultOk)
+    {
+        NSLog(@"Received Response");
+        [webData setLength: 0];
+        recieved_status = @"passed";
+        
+    }else if ((long)[httpResponse statusCode] == ResultFailed)
+    {
+        recieved_status = @"failed";
+        return [httpResponse statusCode];
+        
+    }
+   
+    return  YES;
+}
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [kappDelegate HideIndicator];
+    
+    
+    
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
+        return;
+    }
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
+        return;
+    }
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
+        return;
+    }
+    
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
+        return;
+    }
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
+    NSLog(@"ERROR with the Connection ");
+    webData =nil;
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
+{
+    [webData appendData:data1];
+}
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [kappDelegate HideIndicator];
+    
+    NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
+    
+    if ([webData length]==0)
+        return;
+    
+    NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
+    NSLog(@"responseString:%@",responseString);
+    NSError *error;
+    
+    if([recieved_status isEqualToString:@"passed"])
+    {
+   if([responseString rangeOfString:@"true" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Password successfully changed" okBtn:OkButtonTitle];
+
+        
+        [[NSUserDefaults standardUserDefaults]setObject:txtNewpwd.text forKey:@"l_password"];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+   else  if([responseString rangeOfString:@"Password not match" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+       
+        txtConfirmnewpwd.text = @"";
+        txtNewpwd.text = @"";
+        return;
+    }
+    }else{
+        [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+    }
+    SBJsonParser *json = [[SBJsonParser alloc] init];
+    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
+    [kappDelegate HideIndicator];
+
+}
+#pragma mark - textfield Delegates
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    if(textField == txtOldpwd){
+        [txtNewpwd becomeFirstResponder];
+        return YES;
+    }else if(textField == txtNewpwd){
+        [txtConfirmnewpwd becomeFirstResponder];
+        return  YES;
+    }
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    
+    [textField resignFirstResponder];
+    scrollView.scrollEnabled = YES;
+    
+    return YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    svos = scrollView.contentOffset;
+    scrollView.scrollEnabled = YES;
+    if(textField == txtConfirmnewpwd  || textField == txtNewpwd ) {
+        
+        CGPoint pt;
+        CGRect rc = [textField bounds];
+        rc = [textField convertRect:rc toView:scrollView];
+        pt = rc.origin;
+        pt.x = 0;
+        pt.y -=180;
+        [scrollView setContentOffset:pt animated:YES];
+        }
+}
+
+#pragma  mark OtherMethods
 -(void)ConfirmPWD:(NSString*)oldPwd newPwd:(NSString*)newPwd confirmPwd:(NSString*)confirmPwd
 {
     [kappDelegate ShowIndicator];
@@ -202,146 +336,7 @@
     {
         NSLog(@"connection is NULL");
     }
-
-}
-#pragma mark - Connection Delegates
-
--(NSInteger)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-    NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
     
-    
-        NSLog(@"Received Response");
-        [webData setLength: 0];
-    
-    if((long)[httpResponse statusCode] == ResultOk)
-    {
-        NSLog(@"Received Response");
-        [webData setLength: 0];
-        recieved_status = @"passed";
-        
-    }else if ((long)[httpResponse statusCode] == ResultFailed)
-    {
-        recieved_status = @"failed";
-        return [httpResponse statusCode];
-        
-    }
-   
-    return  YES;
-}
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [kappDelegate HideIndicator];
-    
-    
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    NSLog(@"ERROR with the Connection ");
-    webData =nil;
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
-{
-    [webData appendData:data1];
-}
--(void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [kappDelegate HideIndicator];
-    
-    NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
-    
-    if ([webData length]==0)
-        return;
-    
-    NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
-    NSLog(@"responseString:%@",responseString);
-    NSError *error;
-    
-    if([recieved_status isEqualToString:@"passed"])
-    {
-   if([responseString rangeOfString:@"true" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"Password successfully changed" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        [[NSUserDefaults standardUserDefaults]setObject:txtNewpwd.text forKey:@"l_password"];
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
-    }
-   else  if([responseString rangeOfString:@"Password not match" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        txtConfirmnewpwd.text = @"";
-        txtNewpwd.text = @"";
-        return;
-    }
-    }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-
-    }
-    SBJsonParser *json = [[SBJsonParser alloc] init];
-    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
-    [kappDelegate HideIndicator];
-
-}
-#pragma mark - textfield Delegates
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    
-    if(textField == txtOldpwd){
-        [txtNewpwd becomeFirstResponder];
-        return YES;
-    }else if(textField == txtNewpwd){
-        [txtConfirmnewpwd becomeFirstResponder];
-        return  YES;
-    }
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    
-    [textField resignFirstResponder];
-    scrollView.scrollEnabled = YES;
-    
-    return YES;
-}
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    svos = scrollView.contentOffset;
-    scrollView.scrollEnabled = YES;
-    if(textField == txtConfirmnewpwd  || textField == txtNewpwd ) {
-        
-        CGPoint pt;
-        CGRect rc = [textField bounds];
-        rc = [textField convertRect:rc toView:scrollView];
-        pt = rc.origin;
-        pt.x = 0;
-        pt.y -=180;
-        [scrollView setContentOffset:pt animated:YES];
-        }
 }
 
 @end

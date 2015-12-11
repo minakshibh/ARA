@@ -19,6 +19,8 @@
 
     // Configure the view for the selected state
 }
+
+#pragma mark - Referral View
 -(void)setLabelText:(NSString*)Name :(NSString*)date : (NSString*)tag :(NSString*)ReferralType
 {
     //imageView.hidden = NO;
@@ -103,6 +105,8 @@
         lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y, lblDate.frame.size.width, lblDate.frame.size.height);
     }
 }
+
+#pragma  mark - Reward View
 -(void)setLabelTextforReward:(NSString*)Name :(NSString*)referralId : (NSString*)price :(NSString*)date
 {
     lblAmontEarnedScoreboard.hidden = YES;
@@ -127,6 +131,7 @@
     }
     
 }
+#pragma  mark - Scoreboard View
 -(void)setLabelTextforScoreboard:(NSString*)Name : (NSString*)price :(NSString*)trigger
 {
     lblNameScoreboard.text = Name;

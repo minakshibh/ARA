@@ -17,8 +17,6 @@
 #import "ScoreboardViewController.h"
 #import "PaypalAccountsViewController.h"
 #import "AboutAppViewController.h"
-
-
 #import "AFURLConnectionOperation.h"
 #import "AFHTTPRequestOperation.h"
 // #import "UIView+Toast.h"
@@ -94,7 +92,7 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
 
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
        btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
        lblheader.font=[lblheader.font fontWithSize:24];
@@ -170,57 +168,6 @@
                                    userInfo:nil
                                     repeats:NO];
 }
--(void)targetMethod:(NSTimer *)timer
-{
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-    {
-        
-        CGRect frame = imageViewMenuProfile.frame;
-        frame.size.width = 210;
-        frame.size.height = 210;
-        frame.origin.x = frame.origin.x +14;
-        frame.origin.y = frame.origin.y -10;
-        imageViewMenuProfile.frame = frame;
-        
-        imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;
-        imageViewMenuProfile.layer.masksToBounds = YES;
-        imageViewMenuProfile.layer.borderWidth = 2;
-        imageViewMenuProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
-        imageViewMenuProfile.hidden = NO;
-    }else{
-        //---making image round
-        if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
-        {
-            CGRect frame = imageViewMenuProfile.frame;
-            frame.size.width = 100;
-            frame.size.height = 100;
-            imageViewMenuProfile.frame = frame;
-        }
-        imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;
-        imageViewMenuProfile.layer.borderWidth = 2.0f;
-        imageViewMenuProfile.layer.borderWidth = 2;
-        imageViewMenuProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
-        
-    }
-    //---image
-    
-}
--(void)setRoundedAvatar:(UIImageView *)avatarView toDiameter:(float)newSize atView:(UIView *)containedView;
-{
-    avatarView.layer.cornerRadius = newSize/2;
-    avatarView.clipsToBounds = YES;
-    
-    if(i==0)
-    {
-    CGRect frame = avatarView.frame;
-    frame.size.width = newSize;
-    frame.size.height = newSize;
-    frame.origin.y = frame.origin.y -8;
-    avatarView.frame = frame;
-        i++;
-    }
-    
-}
 -(void)viewWillAppear:(BOOL)animated
 {
     [self getData];
@@ -244,105 +191,11 @@
     });
 
 }
-
--(void)getData
-{
-    webservice=1;
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    NSURLConnection *connection;
-    
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
-    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
-    
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard/%@",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"GET"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
-    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]);
-    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-}
-
--(void)registerDevice
-{
-    webservice=2;
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    NSURLConnection *connection;
-    
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
-    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
-    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    NSString *currSys = @"ios";
-    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
-   
-    
-    _postData = [NSString stringWithFormat:@"UserID=%@&DeviceUDID=%@&DeviceOS=%@&TokenID=%@",userid,udid,currSys,devToken];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/userdevice",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
-    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    
-    
-
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-
+#pragma  mark - Buttons
 - (IBAction)btnAboutApp:(id)sender {
     AboutAppViewController *AAVC = [[AboutAppViewController alloc]initWithNibName:@"AboutAppViewController" bundle:nil];
     [self.navigationController pushViewController:AAVC animated:YES];
@@ -400,32 +253,7 @@
     }
 
 }
--(void)menuSlideBack
-{
-    btnSubmitReferral.hidden = NO;
-    [UIView animateWithDuration:0.3
-                          delay:0.1
-                        options: UIViewAnimationCurveEaseIn
-                     animations:^
-     {
-         //   sideView.hidden=YES;
-         
-         CGRect frame = sideView.frame;
-         frame.origin.y = sideView.frame.origin.y;
-         frame.origin.x = self.view.frame.origin.x - sideView.frame.size.width;
-         sideView.frame = frame;
-         
-         CGRect btnmenu_frame = btnMenu.frame;
-         btnmenu_frame.origin.x = btnMenu.frame.origin.x - sideView.frame.size.width;
-         btnMenu.frame = btnmenu_frame;
-     }
-                     completion:^(BOOL finished)
-     {
-         NSLog(@"Completed");
-         
-     }];
 
-}
 - (IBAction)btnMyprofile:(id)sender
 {
     ProfileViewController *Pvc = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
@@ -528,54 +356,6 @@
 
     [self.navigationController pushViewController:RLvc animated:YES];
 }
--(void)logout
-{
-    [kappDelegate ShowIndicator];
-    webservice=3;
-    NSMutableURLRequest *request ;
-    NSString*_postData ;
-    NSURLConnection *connection;
-    
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
-    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
-//    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-//    NSString *currSys = @"ios";
-//    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
-    
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    NSLog(@"data post >>> %@",_postData);
-    
-    [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
-    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
-    
-    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if(connection)
-    {
-        if(webData==nil)
-        {
-            webData = [NSMutableData data] ;
-            NSLog(@"data");
-        }
-        else
-        {
-            webData=nil;
-            webData = [NSMutableData data] ;
-        }
-        NSLog(@"server connection made");
-    }
-    else
-    {
-        NSLog(@"connection is NULL");
-    }
-    
-
-}
 
 #pragma mark - connection delegate
 
@@ -608,36 +388,26 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Could not connect to the server, time out" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:error delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
@@ -722,11 +492,235 @@ if([recieved_status isEqualToString:@"passed"])
             return;
         }
     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+
+        
 
 }
     [kappDelegate HideIndicator];
 
 }
+
+#pragma  mark - Other Methods
+
+-(void)logout
+{
+    [kappDelegate ShowIndicator];
+    webservice=3;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSURLConnection *connection;
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
+    //    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //    NSString *currSys = @"ios";
+    //    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"POST"];
+    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+    
+}
+-(void)menuSlideBack
+{
+    btnSubmitReferral.hidden = NO;
+    [UIView animateWithDuration:0.3
+                          delay:0.1
+                        options: UIViewAnimationCurveEaseIn
+                     animations:^
+     {
+         //   sideView.hidden=YES;
+         
+         CGRect frame = sideView.frame;
+         frame.origin.y = sideView.frame.origin.y;
+         frame.origin.x = self.view.frame.origin.x - sideView.frame.size.width;
+         sideView.frame = frame;
+         
+         CGRect btnmenu_frame = btnMenu.frame;
+         btnmenu_frame.origin.x = btnMenu.frame.origin.x - sideView.frame.size.width;
+         btnMenu.frame = btnmenu_frame;
+     }
+                     completion:^(BOOL finished)
+     {
+         NSLog(@"Completed");
+         
+     }];
+    
+}
+-(void)targetMethod:(NSTimer *)timer
+{
+    if ( IS_IPAD )
+    {
+        
+        CGRect frame = imageViewMenuProfile.frame;
+        frame.size.width = 210;
+        frame.size.height = 210;
+        frame.origin.x = frame.origin.x +14;
+        frame.origin.y = frame.origin.y -10;
+        imageViewMenuProfile.frame = frame;
+        
+        imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;
+        imageViewMenuProfile.layer.masksToBounds = YES;
+        imageViewMenuProfile.layer.borderWidth = 2;
+        imageViewMenuProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        imageViewMenuProfile.hidden = NO;
+    }else{
+        //---making image round
+        if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
+        {
+            CGRect frame = imageViewMenuProfile.frame;
+            frame.size.width = 100;
+            frame.size.height = 100;
+            imageViewMenuProfile.frame = frame;
+        }
+        imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;
+        imageViewMenuProfile.layer.borderWidth = 2.0f;
+        imageViewMenuProfile.layer.borderWidth = 2;
+        imageViewMenuProfile.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        
+    }
+    //---image
+    
+}
+-(void)setRoundedAvatar:(UIImageView *)avatarView toDiameter:(float)newSize atView:(UIView *)containedView;
+{
+    avatarView.layer.cornerRadius = newSize/2;
+    avatarView.clipsToBounds = YES;
+    
+    if(i==0)
+    {
+        CGRect frame = avatarView.frame;
+        frame.size.width = newSize;
+        frame.size.height = newSize;
+        frame.origin.y = frame.origin.y -8;
+        avatarView.frame = frame;
+        i++;
+    }
+    
+}
+
+-(void)getData
+{
+    webservice=1;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSURLConnection *connection;
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard/%@",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]);
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
+
+-(void)registerDevice
+{
+    webservice=2;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSURLConnection *connection;
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
+    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString *currSys = @"ios";
+    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
+    
+    
+    _postData = [NSString stringWithFormat:@"UserID=%@&DeviceUDID=%@&DeviceOS=%@&TokenID=%@",userid,udid,currSys,devToken];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/userdevice",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"POST"];
+    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+    [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+    
+    
+}
+
 @end

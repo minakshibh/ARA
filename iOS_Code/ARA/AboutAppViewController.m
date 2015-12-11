@@ -85,7 +85,7 @@
     
     buildSize.text = [NSString stringWithFormat:@"%4.2f %@",convertedValue, [tokens objectAtIndex:multiplyFactor]];
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
         BUILDVERSION.font = [BUILDVERSION.font fontWithSize:24];
         buildVersion.font = [buildVersion.font fontWithSize:24];

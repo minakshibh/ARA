@@ -8,8 +8,6 @@
 
 #import "ScoreboardViewController.h"
 #import "ScoreboardListViewController.h"
-#import "JSON.h"
-#import "SBJson.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 
@@ -73,7 +71,7 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if (IS_IPAD)
     {
         btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:24];
         lblHeading.font = [lblHeading.font fontWithSize:24];
@@ -105,7 +103,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma  mark - Buttons
 - (IBAction)btnAllTime:(id)sender {
     [btnQuater setBackgroundColor:[UIColor blackColor]];
     [btnQuater setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -181,6 +179,7 @@
     SLvc.timestamp = timestamp;
     [self.navigationController pushViewController:SLvc animated:YES];
 }
+#pragma  mark - Other Buttons
 -(void)getDataToDisplay:(NSString*)period
 {
     
@@ -251,30 +250,26 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
+    
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:[NSString stringWithFormat:@"%@",error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
@@ -310,8 +305,9 @@
         lblSoldReferralCount.text = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"HighestSoldReferrals"]];
         
     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+
+        
 
     }
 

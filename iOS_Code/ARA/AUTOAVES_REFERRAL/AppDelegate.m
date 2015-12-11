@@ -112,8 +112,9 @@
     }else{
         NSArray *array = [userInfo valueForKey:@"aps"];
         NSString *noti_msg = [array valueForKey:@"alert"];
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:noti_msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        
+        [HelperAlert alertWithOneBtn:AlertTitle description:noti_msg okBtn:OkButtonTitle];
+        
         dashboardViewController *Dvc = [[dashboardViewController alloc]init];
         referralListViewController *RLvc = [[referralListViewController alloc]init];
         [Dvc getData];
