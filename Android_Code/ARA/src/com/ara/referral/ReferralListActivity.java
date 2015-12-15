@@ -479,11 +479,11 @@ private View.OnClickListener listener = new View.OnClickListener() {
 
 			if(referral.getReferralType().equalsIgnoreCase("direct"))
 			{
-				imageview.setImageResource(R.drawable.direct_ref);
+				imageview.setImageResource(R.drawable.direct);
 			}
 			else
 			{
-				imageview.setImageResource(R.drawable.chained_ref);
+				imageview.setImageResource(R.drawable.indirect);
 			}
 			
 			if (referral.getReferralStatus().equalsIgnoreCase(

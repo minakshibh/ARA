@@ -40,7 +40,8 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 
 	public AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.2F);
 	public RelativeLayout contentFrame;
-	public ImageView slider, Slidermenu,userImage,submitReferral;
+	public ImageView slider, Slidermenu,userImage;
+	public TextView submitReferral;
 	public LinearLayout profile, referrals, paymentAccounts,
 			myBadges, myRewards, scoreboard, logout,layout_imagename;
 	private TextView txt_username, txt_useremail,headerText;
@@ -93,7 +94,7 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 		userImage=(ImageView)findViewById(R.id.userImage);
 		profile = (LinearLayout) findViewById(R.id.profile);
 		referrals = (LinearLayout) findViewById(R.id.referrals);
-		submitReferral = (ImageView) findViewById(R.id.submit_Referral);
+		submitReferral = (TextView) findViewById(R.id.submit_Referral);
 		paymentAccounts = (LinearLayout) findViewById(R.id.paymentAccounts);
 		myBadges = (LinearLayout) findViewById(R.id.myBadges);
 		myRewards = (LinearLayout) findViewById(R.id.myRewards);
