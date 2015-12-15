@@ -209,6 +209,12 @@
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
+              <activity 
+             android:name="com.ara.login.AboutActivity" 
+             android:windowSoftInputMode="stateHidden"
+             android:theme="@android:style/Theme.Holo.Light"
+             android:screenOrientation="portrait"
+           />  
     </application>
 <supports-screens android:normalScreens="true"
     android:smallScreens="true"

@@ -24,6 +24,7 @@ import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.badge.BadgeListActivity;
 import com.ara.board.ScoreBoardActivity;
 import com.ara.imageloader.ImageLoader;
+import com.ara.login.AboutActivity;
 import com.ara.login.LoginActivity;
 import com.ara.payment.PaymentListActivity;
 import com.ara.profile.MyProfile;
@@ -43,10 +44,10 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 	public ImageView slider, Slidermenu,userImage;
 	public TextView submitReferral;
 	public LinearLayout profile, referrals, paymentAccounts,
-			myBadges, myRewards, scoreboard, logout,layout_imagename;
+			myBadges, myRewards, scoreboard, logout,layout_imagename,about;
 	private TextView txt_username, txt_useremail,headerText;
 	private TextView txt_profile,txt_referral,
-	txt_paymentAccounts,txt_myBadges,txt_myRewards,txt_scoreboard,txt_logout;
+	txt_paymentAccounts,txt_myBadges,txt_myRewards,txt_scoreboard,txt_logout,txtAbout;
 	private SharedPreferences spref;
 	public static Typeface typeface_roboto,typeface_timeburner;
 
@@ -100,6 +101,7 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 		myRewards = (LinearLayout) findViewById(R.id.myRewards);
 		scoreboard = (LinearLayout) findViewById(R.id.scoreboard);
 		logout = (LinearLayout) findViewById(R.id.logout);
+		about = (LinearLayout) findViewById(R.id.about);
 		//headerText=(TextView)findViewById(R.id.headerText);
 		//headerText.setTypeface(typeface_timeburner);
 		txt_username = (TextView) findViewById(R.id.username);
@@ -135,7 +137,8 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 		txt_logout = (TextView) findViewById(R.id.txt_logout);
 		txt_logout.setTypeface(typeface_roboto);
 		
-		
+		txtAbout = (TextView) findViewById(R.id.txtAbout);
+		txt_logout.setTypeface(typeface_roboto);
 		
 	}
 
@@ -256,6 +259,11 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 				startActivity(intent);
 				DrawerLayoutClose();
 			} 
+			else if (v == about) {
+				Intent intent = new Intent(BaseActivity.this, AboutActivity.class);
+				startActivity(intent);
+				DrawerLayoutClose();
+			} 
 			else if (v == logout) {
 				
 				logoutApi();
@@ -275,6 +283,7 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 		myRewards.setOnClickListener(listener);
 		layout_imagename.setOnClickListener(listener);
 		scoreboard.setOnClickListener(listener);
+		about.setOnClickListener(listener);
 		logout.setOnClickListener(listener);
 
 	}

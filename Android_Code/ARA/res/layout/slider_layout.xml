@@ -241,6 +241,32 @@
             </LinearLayout>
 
             <include layout="@layout/slider_separator" />
+      
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/menu_option_padding" 
+                android:id="@+id/about">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                     android:src="@drawable/about"
+                    />
+
+                <TextView
+                      android:id="@+id/txtAbout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="About"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+             <include layout="@layout/slider_separator" />
         </LinearLayout>
 
         <LinearLayout
