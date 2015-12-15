@@ -10,13 +10,18 @@
 #import <AddressBook/AddressBook.h>
 #import "ASIHTTPRequest.h"
 #import "dashboardViewController.h"
+#import "PopupTableViewCell.h"
+#import "UIView+Toast.h"
+
 //#import "UIView+Toast.h"
 
 @interface SubmitReferralViewController ()
 {
+    
     ABPeoplePickerNavigationController *picker;
     UIActivityIndicatorView *activityIndicatorObject1;
 }
+
 @end
 
 @implementation SubmitReferralViewController
@@ -24,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    selectedContactDict = [[NSMutableDictionary alloc]init];
     email_checked = @"no";
     
     activityIndicatorObject1 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -94,6 +99,10 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     [self iPadDesignInitialization];
+    
+    
+    viewPopUp_h = viewHeaderPOPUP.frame.size.height;
+    tableviewPopup_h = tableViewPopup.frame.size.height;
 }
 -(void) iPadDesignInitialization{
     if (IS_IPAD)
@@ -114,14 +123,16 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated
-
 {
+   
+    
+    
     [self iPadDesignInitialization];
     [[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
     if(txtEmail.text.length >0)
-{
-    [txtEmail becomeFirstResponder];
-}
+    {
+        [txtEmail becomeFirstResponder];
+    }
     
     [txtComment resignFirstResponder];
     [txtEmail resignFirstResponder];
@@ -367,6 +378,56 @@
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)btnShowEmailPopup:(id)sender {
+    if ([selectedContactDict objectForKey:@"phone_no"]){
+        //KGModal *obj = [KGModal sharedInstance];
+        [[KGModal sharedInstance] hideAnimated:YES];
+        
+        
+    aTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(aTime) userInfo:nil repeats:NO];
+
+      //  [self.view bringSubviewToFront:self.view];
+    
+    }else{
+        [self.view makeToast:@"Kindly select a phone number first..."];
+    }
+    
+}
+
+- (IBAction)btnDonePOPUPemail:(id)sender {
+    [[KGModal sharedInstance] hideAnimated:YES];
+    
+    NSArray *name = [lblNamePOPUPEmail.text componentsSeparatedByString:@" "];
+    
+    txtFirstname.text = [name objectAtIndex:0];
+    if([name count]>1)
+    {
+        txtLastname.text = [name objectAtIndex:1];
+    }
+    
+    txtPhoneno.text = [selectedContactDict valueForKey:@"phone_no"];
+    txtEmail.text = [selectedContactDict valueForKey:@"email"];
+}
+-(void)aTime
+{
+    txtPhoneno.text = [selectedContactDict valueForKey:@"phone_no"];
+    
+    
+    NSArray *emailArray = [contactDict valueForKey:@"contact_email"];
+    if([emailArray count]){
+        if ([emailArray count] ==0 ) {
+            NSString* select = @"email";
+            [selectedContactDict setObject:@"" forKey:select];
+            txtEmail.text = @"";
+        }else if ([emailArray count] ==1 ){
+            NSString* select = @"email";
+            [selectedContactDict setObject:[[contactDict valueForKey:@"contact_email"]objectAtIndex:0] forKey:select];
+            txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
+        }else if([emailArray count] >1){
+            [self showEmailPopup];
+        }
+    }
+}
 - (IBAction)btnSubmitReferral:(id)sender {
     NSString* firstNameStr = [txtFirstname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* lastNameStr = [txtLastname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -413,7 +474,7 @@
     //        [alert show];
     //        return;
     //    }
-    if ([txtPhoneno isEmpty]) {
+    if (![txtPhoneno isEmpty]) {
         
     
         if (phoneStr.length<10 ) {
@@ -444,7 +505,7 @@
     }
     if([email_checked isEqualToString:@"no"])
     {
-        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Just wait a movement we are checking your email." okBtn:OkButtonTitle];
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please wait a moment while we check your email." okBtn:OkButtonTitle];
         
         
     //    [self.view makeToast:@"Just wait a movement we are verifying your email address."];
@@ -474,7 +535,8 @@
     }
     if([lblemailerror.text isEqualToString:@"Email already exist"])
     {
-        msgstr = @"Email already exist";
+       // msgstr = @"Email already exist";
+       msgstr =  @"Unable to add user--email address already exists.";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
         return;
     }
@@ -530,47 +592,41 @@
 
 - (IBAction)btnImportContacts:(id)sender {
     
-//    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
-//    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
-//        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
-//            if (granted) {
-//                picker.peoplePickerDelegate = self;
-//                
-//                [self presentModalViewController:picker animated:YES];
-//                [picker setPeoplePickerDelegate:self];
-//                [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
-//            } else {
-//                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
-//            }
-//        });
-//    }else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-//        // If the user user has earlier provided the access, then add the contact
-//        picker.peoplePickerDelegate = self;
-//        
-//        [self presentModalViewController:picker animated:YES];
-//        [picker setPeoplePickerDelegate:self];
-//        [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
-//    }
-//    else {
-//        // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
-//    }
-    NSArray *sampleArray = @[@"545454545454",@"455454544454"];
-    
-    float height = viewHeaderPOPUP.frame.size.height + viewDetailPOPUP.frame.size.height*[sampleArray count];
-    
-    [viewHeaderPOPUP setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUP.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUP.frame.size.height-viewDetailPOPUP.frame.size.height*[sampleArray count]/2, viewHeaderPOPUP.frame.size.width, height)];
-    
-    [self.view addSubview:viewHeaderPOPUP];
-//    scrollViewPOPUP = [[UIScrollView alloc]initWithFrame:
-//                    CGRectMake(0, 0, 280, 420)];
-    
-    
-    
-    
-    
-    //                [self.footerWithoutEventsDetail setFrame:CGRectMake(0, 704, self.footerWithoutEventsDetail.frame.size.width, self.footerWithoutEventsDetail.frame.size.height)];
-    //                [self.sideScroller addSubview:self.footerWithoutEventsDetail];
-    
+    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+            if (granted) {
+                picker.peoplePickerDelegate = self;
+                
+                [self presentModalViewController:picker animated:YES];
+                [picker setPeoplePickerDelegate:self];
+                [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
+            } else {
+                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
+            }
+        });
+    }else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        // If the user user has earlier provided the access, then add the contact
+        picker.peoplePickerDelegate = self;
+        
+        [self presentModalViewController:picker animated:YES];
+        [picker setPeoplePickerDelegate:self];
+        [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
+    }
+    else {
+        // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
+        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+            if (granted) {
+                picker.peoplePickerDelegate = self;
+                
+                [self presentModalViewController:picker animated:YES];
+                [picker setPeoplePickerDelegate:self];
+                [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
+            } else {
+                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
+            }
+        });
+    }
     
 }
 
@@ -588,32 +644,168 @@
     ABMultiValueRef fnameProperty = ABRecordCopyValue(person, kABPersonFirstNameProperty);
     ABMultiValueRef lnameProperty = ABRecordCopyValue(person, kABPersonLastNameProperty);
     
+    lblNamePOPUPView.text= [NSString stringWithFormat:@"%@ %@",fnameProperty,lnameProperty];
+    lblNamePOPUPEmail.text = [NSString stringWithFormat:@"%@ %@",fnameProperty,lnameProperty];
+    
     ABMultiValueRef phoneProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
     ABMultiValueRef emailProperty = ABRecordCopyValue(person, kABPersonEmailProperty);
+    
     
     NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
     NSArray *phoneArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(phoneProperty);
     
-    NSString *name,*phone,*email;
-    phone = [[NSString alloc]init];
-    email = [[NSString alloc]init];
-    name = [[NSString alloc]init];
     
+    ABMultiValueRef phones = phoneProperty;
+    ABMultiValueRef email = emailProperty;
+    selectedIndex = nil;
+    [selectedContactDict removeAllObjects];
     
-    if (fnameProperty != nil) {
-        name = [NSString stringWithFormat:@"%@", fnameProperty];
+    NSMutableArray *phonelbl = [[NSMutableArray alloc]init];
+     NSMutableArray *emaillbl = [[NSMutableArray alloc]init];
+    for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
+    {
+        CFStringRef locLabel = ABMultiValueCopyLabelAtIndex(phones, j);
+        NSString *phoneLabel =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel);
+        [phonelbl addObject:phoneLabel];
     }
-    if (lnameProperty != nil) {
-        name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
+    for(CFIndex j = 0; j < ABMultiValueGetCount(email); j++)
+    {
+    CFStringRef emailLabel = ABMultiValueCopyLabelAtIndex(phones, j);
+    NSString *emailLabel1 =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(emailLabel);
+        NSLog(@"%@",emailLabel1);
+        [emaillbl addObject:emailLabel1];
     }
     
+    contactDict =  [[NSMutableDictionary alloc] init];
     
+    if([emailArray count]==0)
+    {
+        emailArray = @[];
+    }
+    if([phoneArray count]==0)
+    {
+        phoneArray = @[];
+    }
+    [contactDict setObject:phoneArray forKey:@"contact_phone"];
+    [contactDict setObject:emailArray forKey:@"contact_email"];
+    [contactDict setObject:phonelbl forKey:@"contact_lbl"];
+    [contactDict setObject:emaillbl forKey:@"contact_emaillbl"];
+    
+//    NSString *name,*phone,*email;
+//    phone = [[NSString alloc]init];
+//    email = [[NSString alloc]init];
+//    name = [[NSString alloc]init];
+//    
+//    
+//    if (fnameProperty != nil) {
+//        name = [NSString stringWithFormat:@"%@", fnameProperty];
+//    }
+//    if (lnameProperty != nil) {
+//        name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
+//    }
+//    
+//    
 
     [self dismissViewControllerAnimated:YES completion:nil];
+    txtFirstname.text = [NSString stringWithFormat:@"%@",fnameProperty];
+    txtLastname.text = [NSString stringWithFormat:@"%@",lnameProperty];
+    
+    
+    if([phoneArray count]){
+        
+        if ([phoneArray count] ==0 ) {
+            NSString* select = @"phone_no";
+            [selectedContactDict setObject:@"" forKey:select];
+            txtPhoneno.text = @"";
+
+        }else if ([phoneArray count] ==1 ){
+            NSString* select = @"phone_no";
+            [selectedContactDict setObject:[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0] forKey:select];
+            txtPhoneno.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0]];
+        }else if([phoneArray count]>1){
+        [self showPhoneNoPOPUP];
+        }
+    }else if([emailArray count]){
+        if ([emailArray count] ==0 ) {
+            NSString* select = @"email";
+            [selectedContactDict setObject:@"" forKey:select];
+            txtEmail.text = @"";
+        }else if ([emailArray count] ==1 ){
+            NSString* select = @"email";
+            [selectedContactDict setObject:[[contactDict valueForKey:@"contact_email"]objectAtIndex:0] forKey:select];
+            txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
+        }else if([emailArray count] >1){
+        [self showEmailPopup];
+        }
+    }
+    
     
 }
+-(void)showPhoneNoPOPUP
+{
+    isPhoneNo = true;
+    unSelected = true;
+    
+    NSArray *value = [contactDict valueForKey:@"contact_phone"];
+    
+    [self popupTableViewreloadHeight];
 
+    lblTypeheaderpopup.text = @"Select Phone Number";
+    
+    
+    if([value count]<=3)
+    {
+        float height_table =  tableViewPopup.frame.size.height+79*[value count];
+        tableViewPopup.frame=CGRectMake(0, tableViewPopup.frame.origin.y, tableViewPopup.frame.size.width, height_table);
+        
+        [viewHeaderPOPUP setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUP.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUP.frame.size.height/2-tableViewPopup.frame.size.height/2, viewHeaderPOPUP.frame.size.width, viewHeaderPOPUP.frame.size.height + tableViewPopup.frame.size.height)];
+    }else{
+        float height_table =  tableViewPopup.frame.size.height+79*3;
+        tableViewPopup.frame=CGRectMake(0, tableViewPopup.frame.origin.y, tableViewPopup.frame.size.width, height_table);
+        
+        [viewHeaderPOPUP setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUP.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUP.frame.size.height/2-tableViewPopup.frame.size.height/2, viewHeaderPOPUP.frame.size.width, viewHeaderPOPUP.frame.size.height + tableViewPopup.frame.size.height)];
+    }
+    
+    [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUP andAnimated:YES];
+   // [self.view addSubview:viewHeaderPOPUP];
+    [tableViewPopup reloadData];
 
+}
+-(void)showEmailPopup
+{
+    viewHeaderPOPUPemail.frame = CGRectMake(viewHeaderPOPUPemail.frame.origin.x, viewHeaderPOPUPemail.frame.origin.y, viewHeaderPOPUPemail.frame.size.width, viewPopUp_h);
+    tableViewPopupEmail.frame = CGRectMake(tableViewPopupEmail.frame.origin.x, tableViewPopupEmail.frame.origin.y, tableViewPopupEmail.frame.size.width, tableviewPopup_h);
+    
+    isPhoneNo = false;
+    unSelected = true;
+    selectedIndex = nil;
+    
+    NSArray *value = [contactDict valueForKey:@"contact_email"];
+    lblTypePOPUPEmail.text = @"Select Email";
+    
+    if([value count]<=3)
+    {
+        float height_table =  tableViewPopupEmail.frame.size.height+79*[value count];
+        tableViewPopupEmail.frame=CGRectMake(0, tableViewPopupEmail.frame.origin.y, tableViewPopupEmail.frame.size.width, height_table);
+        
+        [viewHeaderPOPUPemail setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUPemail.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUPemail.frame.size.height/2-tableViewPopupEmail.frame.size.height/2, viewHeaderPOPUPemail.frame.size.width, viewHeaderPOPUPemail.frame.size.height + tableViewPopupEmail.frame.size.height)];
+    }else{
+        float height_table =  tableViewPopup.frame.size.height+79*3;
+        tableViewPopupEmail.frame=CGRectMake(0, tableViewPopupEmail.frame.origin.y, tableViewPopupEmail.frame.size.width, height_table);
+        
+        [viewHeaderPOPUPemail setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUPemail.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUPemail.frame.size.height/2-tableViewPopupEmail.frame.size.height/2, viewHeaderPOPUPemail.frame.size.width, viewHeaderPOPUPemail.frame.size.height + tableViewPopupEmail.frame.size.height)];
+    }
+    
+    [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUPemail andAnimated:YES];
+
+//    [self.view addSubview:viewHeaderPOPUP];
+    [tableViewPopupEmail reloadData];
+}
+-(void)popupTableViewreloadHeight
+{
+    viewHeaderPOPUP.frame = CGRectMake(viewHeaderPOPUP.frame.origin.x, viewHeaderPOPUP.frame.origin.y, viewHeaderPOPUP.frame.size.width, viewPopUp_h);
+    tableViewPopup.frame = CGRectMake(tableViewPopup.frame.origin.x, tableViewPopup.frame.origin.y, tableViewPopup.frame.size.width, tableviewPopup_h);
+}
 - (BOOL)peoplePickerNavigationController: (ABPeoplePickerNavigationController *)peoplePicker
       shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property
 　　　　　　　　　　  identifier:(ABMultiValueIdentifier)identifier
@@ -977,17 +1169,83 @@
     [txtComment resignFirstResponder];
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     
+    
+    [self.view endEditing:YES];
+    
+    if (tableView == tableViewPopup || tableView==tableViewPopupEmail) {
+        NSArray *value;
+        if(isPhoneNo)
+        {
+            value = [contactDict valueForKey:@"contact_phone"];
+        }else{
+            value = [contactDict valueForKey:@"contact_email"];
+        }
+        return [value count];
+    }
+    
     return id_mea_array.count;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (tableView == tableViewPopup || tableView==tableViewPopupEmail) {
+        return 79;
+    }
+    
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
         return 50;
     }
     return 35;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)atableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    if (atableView == tableViewPopup ||  atableView==tableViewPopupEmail) {
+        
+        static NSString *simpleTableIdentifier = @"ArticleCellID";
+        
+        PopupTableViewCell *cell = (PopupTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+        
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PopupTableViewCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+            
+        }
+        NSArray *valueToSet,*valueLbl;
+        if (isPhoneNo) {
+            valueToSet = [contactDict valueForKey:@"contact_phone"];
+           valueLbl = [contactDict valueForKey:@"contact_lbl"];
+        }else{
+            valueToSet = [contactDict valueForKey:@"contact_email"];
+            valueLbl = [contactDict valueForKey:@"contact_emaillbl"];
+        }
+        
+        NSString *imageName;
+        if (selectedIndex ==indexPath) {
+            imageName = @"radio-checked.png";
+        }else{
+         imageName = @"radio-unchecked.png";
+        }
+        
+        if (indexPath==selectedIndex) {
+            imageName =@"radio-checked.png";
+        }
+        
+        
+        
+        [cell setLabelText:imageName :[valueLbl objectAtIndex:indexPath.row] :[valueToSet objectAtIndex:indexPath.row] :&(isPhoneNo)];
+        
+        
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return  cell;
+    }
+    
+    
+    
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -1003,8 +1261,36 @@
     }
     return  cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (void)tableView:(UITableView *)atableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (atableView == tableViewPopup || atableView==tableViewPopupEmail) {
+        NSArray *selectedValue;
+        NSString *select;
+        if (isPhoneNo) {
+        selectedValue = [contactDict valueForKey:@"contact_phone"];
+            select = @"phone_no";
+        }else{
+            selectedValue = [contactDict valueForKey:@"contact_email"];
+            select = @"email";
+        }
+        
+        
+        
+        
+        [selectedContactDict setObject:[selectedValue objectAtIndex:indexPath.row] forKey:select];
+        selectedIndex = indexPath;
+        if (isPhoneNo) {
+        [tableViewPopup reloadData];
+        }else{
+//        [[KGModal sharedInstance] hideAnimated:YES];
+        [tableViewPopupEmail reloadData];
+            
+//            txtPhoneno.text = [selectedContactDict valueForKey:@"phone_no"];
+//            txtEmail.text = [selectedContactDict valueForKey:@"email"];
+        }
+        return;
+    }
     txtmea.text = [name_mea_array objectAtIndex:indexPath.row];
     
     if([txtmea.text isEqualToString:@"Any Member Experience Advisor (Sales)"])

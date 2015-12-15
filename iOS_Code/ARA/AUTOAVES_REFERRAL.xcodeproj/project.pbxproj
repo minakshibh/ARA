@@ -51,8 +51,6 @@
 		D92EC41D1B8305CE00E8EB8D /* PaypalAccountsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D92EC41B1B8305CE00E8EB8D /* PaypalAccountsTableViewCell.m */; };
 		D92EC41E1B8305CE00E8EB8D /* PaypalAccountsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92EC41C1B8305CE00E8EB8D /* PaypalAccountsTableViewCell.xib */; };
 		D92EC4201B835ABD00E8EB8D /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = D92EC41F1B835ABD00E8EB8D /* refresh.png */; };
-		D92FA1011BB3E2760007F6C1 /* ContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92FA0FF1BB3E2760007F6C1 /* ContactListViewController.m */; };
-		D92FA1021BB3E2760007F6C1 /* ContactListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92FA1001BB3E2760007F6C1 /* ContactListViewController.xib */; };
 		D93569951B819F5500777DD3 /* ScoreboardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93569931B819F5500777DD3 /* ScoreboardListViewController.m */; };
 		D93569961B819F5500777DD3 /* ScoreboardListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93569941B819F5500777DD3 /* ScoreboardListViewController.xib */; };
 		D935699B1B81B15800777DD3 /* ScoreboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93569991B81B15800777DD3 /* ScoreboardViewController.m */; };
@@ -287,6 +285,9 @@
 		D9DDB9B51B7CC788006F5A37 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A21B7CC788006F5A37 /* RobotoCondensed-Light.ttf */; };
 		D9DDB9B61B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A31B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf */; };
 		D9DDB9B71B7CC788006F5A37 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A41B7CC788006F5A37 /* RobotoCondensed-Regular.ttf */; };
+		D9F3B0301C1E79C800828219 /* PopupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */; };
+		D9F3B0311C1E79C800828219 /* PopupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */; };
+		D9F3B0351C1EC42900828219 /* KGModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B0341C1EC42900828219 /* KGModal.m */; };
 		D9F8F07C1C1AD77D007745FA /* cornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F8F07B1C1AD77D007745FA /* cornerRadius.m */; };
 /* End PBXBuildFile section */
 
@@ -369,9 +370,6 @@
 		D92EC41B1B8305CE00E8EB8D /* PaypalAccountsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaypalAccountsTableViewCell.m; sourceTree = "<group>"; };
 		D92EC41C1B8305CE00E8EB8D /* PaypalAccountsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaypalAccountsTableViewCell.xib; sourceTree = "<group>"; };
 		D92EC41F1B835ABD00E8EB8D /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		D92FA0FE1BB3E2760007F6C1 /* ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListViewController.h; sourceTree = "<group>"; };
-		D92FA0FF1BB3E2760007F6C1 /* ContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListViewController.m; sourceTree = "<group>"; };
-		D92FA1001BB3E2760007F6C1 /* ContactListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactListViewController.xib; sourceTree = "<group>"; };
 		D93569921B819F5500777DD3 /* ScoreboardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreboardListViewController.h; sourceTree = "<group>"; };
 		D93569931B819F5500777DD3 /* ScoreboardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreboardListViewController.m; sourceTree = "<group>"; };
 		D93569941B819F5500777DD3 /* ScoreboardListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreboardListViewController.xib; sourceTree = "<group>"; };
@@ -675,6 +673,11 @@
 		D9DDB9A21B7CC788006F5A37 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		D9DDB9A31B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
 		D9DDB9A41B7CC788006F5A37 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		D9F3B02D1C1E79C800828219 /* PopupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupTableViewCell.h; sourceTree = "<group>"; };
+		D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupTableViewCell.m; sourceTree = "<group>"; };
+		D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupTableViewCell.xib; sourceTree = "<group>"; };
+		D9F3B0331C1EC42800828219 /* KGModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGModal.h; sourceTree = "<group>"; };
+		D9F3B0341C1EC42900828219 /* KGModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGModal.m; sourceTree = "<group>"; };
 		D9F8F07A1C1AD77D007745FA /* cornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cornerRadius.h; sourceTree = "<group>"; };
 		D9F8F07B1C1AD77D007745FA /* cornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cornerRadius.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -760,9 +763,9 @@
 		D92D412B1B7B1F6200AB588F /* Referrals Process */ = {
 			isa = PBXGroup;
 			children = (
-				D92FA0FE1BB3E2760007F6C1 /* ContactListViewController.h */,
-				D92FA0FF1BB3E2760007F6C1 /* ContactListViewController.m */,
-				D92FA1001BB3E2760007F6C1 /* ContactListViewController.xib */,
+				D9F3B02D1C1E79C800828219 /* PopupTableViewCell.h */,
+				D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */,
+				D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */,
 				D92D41491B7B5D5E00AB588F /* Referral_List.jpg */,
 				D92D41361B7B34F200AB588F /* ReferralObj.h */,
 				D92D41371B7B34F200AB588F /* ReferralObj.m */,
@@ -1262,6 +1265,7 @@
 		D96650A91C19505F00C1399C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D9F3B0321C1EC41900828219 /* KGModal */,
 				D96650AA1C19515000C1399C /* Helper Classes */,
 				D92164281B84408000B92589 /* SDWebImage */,
 				D9AF3CA61B8EE59600F98881 /* AFNETWORK */,
@@ -1439,6 +1443,15 @@
 			name = Timeburner;
 			sourceTree = "<group>";
 		};
+		D9F3B0321C1EC41900828219 /* KGModal */ = {
+			isa = PBXGroup;
+			children = (
+				D9F3B0331C1EC42800828219 /* KGModal.h */,
+				D9F3B0341C1EC42900828219 /* KGModal.m */,
+			);
+			name = KGModal;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1547,7 +1560,6 @@
 				D9DDB9AF1B7CC788006F5A37 /* Roboto-Regular.ttf in Resources */,
 				D92D414A1B7B5D5E00AB588F /* Referral_List.jpg in Resources */,
 				D93569DD1B81E74300777DD3 /* submit-referral.png in Resources */,
-				D92FA1021BB3E2760007F6C1 /* ContactListViewController.xib in Resources */,
 				D9356A001B81E82000777DD3 /* badges@2x.png in Resources */,
 				D9DDB9B41B7CC788006F5A37 /* RobotoCondensed-Italic.ttf in Resources */,
 				D91B9E001B874082008B0FEB /* checkbox2_checked.png in Resources */,
@@ -1591,6 +1603,7 @@
 				D93569FF1B81E82000777DD3 /* back-icon@2x.png in Resources */,
 				D93569C81B81E74300777DD3 /* email-icon.png in Resources */,
 				D9356A1B1B81E82000777DD3 /* submit-referral@2x.png in Resources */,
+				D9F3B0311C1E79C800828219 /* PopupTableViewCell.xib in Resources */,
 				D92D41301B7B1F9800AB588F /* SubmitReferralViewController.xib in Resources */,
 				D97FAB171BE9D49500540E38 /* 480X800.png in Resources */,
 				D94BEAED1B788630008BCF5F /* ForgotPasswordViewController.xib in Resources */,
@@ -1729,6 +1742,7 @@
 				D921644E1B84409A00B92589 /* SDWebImageDecoder.m in Sources */,
 				D94BEAEC1B788630008BCF5F /* ForgotPasswordViewController.m in Sources */,
 				D921644A1B84409A00B92589 /* MKAnnotationView+WebCache.m in Sources */,
+				D9F3B0351C1EC42900828219 /* KGModal.m in Sources */,
 				D959D1921B7DB68C0073C2D9 /* myBadgesTableViewCell.m in Sources */,
 				D968C25C1B9EF5AC0083198B /* addpaypalemailViewController.m in Sources */,
 				D92D413C1B7B41EC00AB588F /* referralListViewController.m in Sources */,
@@ -1744,6 +1758,7 @@
 				D95667151B8EC65B00E01477 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				D921644C1B84409A00B92589 /* SDImageCache.m in Sources */,
 				D92164551B84409A00B92589 /* UIImage+MultiFormat.m in Sources */,
+				D9F3B0301C1E79C800828219 /* PopupTableViewCell.m in Sources */,
 				D92164541B84409A00B92589 /* UIImage+GIF.m in Sources */,
 				D921644F1B84409A00B92589 /* SDWebImageDownloader.m in Sources */,
 				D96650B61C195A3F00C1399C /* HelperUDLib.m in Sources */,
@@ -1758,7 +1773,6 @@
 				D92164531B84409A00B92589 /* UIButton+WebCache.m in Sources */,
 				D95667321B8EC74500E01477 /* ASIDataCompressor.m in Sources */,
 				D93569951B819F5500777DD3 /* ScoreboardListViewController.m in Sources */,
-				D92FA1011BB3E2760007F6C1 /* ContactListViewController.m in Sources */,
 				D95667141B8EC65B00E01477 /* SBJsonStreamWriter.m in Sources */,
 				D9DA1B631B7CA7A600554220 /* TLTagsControl.m in Sources */,
 				D93D09BD1B79C9E50011E46B /* ProfileViewController.m in Sources */,

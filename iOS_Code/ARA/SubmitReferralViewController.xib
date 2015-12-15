@@ -8,9 +8,10 @@
         <mutableArray key="Roboto-Bold.ttf">
             <string>Roboto-Bold</string>
             <string>Roboto-Bold</string>
+            <string>Roboto-Bold</string>
+            <string>Roboto-Bold</string>
         </mutableArray>
         <mutableArray key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
@@ -27,8 +28,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubmitReferralViewController">
             <connections>
+                <outlet property="btnDonePOPUPemail" destination="uD0-YR-q5e" id="aOy-st-Zwj"/>
                 <outlet property="btnImportContacts" destination="Jnk-5A-CtC" id="MJS-q0-VjR"/>
                 <outlet property="btnMEA" destination="pOz-cE-wJ0" id="cN0-oA-nIx"/>
+                <outlet property="btnShowEmailPopup" destination="nMu-Ub-tFJ" id="JH9-Ml-qbR"/>
                 <outlet property="btnSubmitReferral" destination="A9u-TD-TJD" id="C3h-v8-QXu"/>
                 <outlet property="btnback" destination="haR-2t-T8p" id="rMV-xs-AfS"/>
                 <outlet property="headerImage" destination="CL9-Fo-5QN" id="rSz-vb-pv0"/>
@@ -39,12 +42,18 @@
                 <outlet property="lblFirstname" destination="yQj-1G-65s" id="ahE-KJ-u8Q"/>
                 <outlet property="lblLastname" destination="Aml-bD-SjN" id="531-r5-A7e"/>
                 <outlet property="lblMEA" destination="IKC-PH-ZKk" id="hHt-Up-kom"/>
+                <outlet property="lblNamePOPUPEmail" destination="cjq-ur-8KK" id="wil-Tt-QSg"/>
+                <outlet property="lblNamePOPUPView" destination="CSC-Np-6QH" id="Vrp-0I-Dvv"/>
                 <outlet property="lblPhoneno" destination="qAv-xm-NVk" id="piv-z9-orR"/>
+                <outlet property="lblTypePOPUPEmail" destination="whJ-Nk-HWX" id="TwK-SV-njt"/>
+                <outlet property="lblTypeheaderpopup" destination="6JL-VZ-KTJ" id="Zu1-n9-JvR"/>
                 <outlet property="lblemailerror" destination="BGH-Xt-gJL" id="IGc-mj-QAv"/>
                 <outlet property="lblheading" destination="FFW-g6-Ocw" id="2DO-9K-7n8"/>
                 <outlet property="lblphonenoerror" destination="dnn-N6-DB8" id="xCC-Wv-XFE"/>
                 <outlet property="scrollView" destination="qHv-zc-XYL" id="XLr-S5-eWs"/>
                 <outlet property="tableView" destination="U4e-3N-zb9" id="sNR-y0-GMY"/>
+                <outlet property="tableViewPopup" destination="H9A-nO-4DS" id="TeA-FQ-Lce"/>
+                <outlet property="tableViewPopupEmail" destination="K00-ob-2ir" id="VWz-1R-924"/>
                 <outlet property="txtComment" destination="rJJ-CQ-htc" id="FvH-gR-4yv"/>
                 <outlet property="txtEmail" destination="yD7-lp-p1e" id="0V5-sb-3ig"/>
                 <outlet property="txtFirstname" destination="9gc-gS-3o8" id="ZtR-xk-n1r"/>
@@ -52,9 +61,9 @@
                 <outlet property="txtPhoneno" destination="rBI-mg-2LG" id="gsK-Dl-6tj"/>
                 <outlet property="txtmea" destination="QBj-Vp-HJG" id="Chk-uy-TIq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="viewDetailPOPUP" destination="ZfG-c4-4El" id="rPu-Sr-eMU"/>
                 <outlet property="viewEmailindicator" destination="10m-gw-vYD" id="UyO-48-Urm"/>
                 <outlet property="viewHeaderPOPUP" destination="gXG-Db-sjs" id="FhV-Qb-Li2"/>
+                <outlet property="viewHeaderPOPUPemail" destination="vlX-VI-FmW" id="y91-Fm-C2x"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -106,7 +115,7 @@
                             <rect key="frame" x="92" y="90" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="fQr-Ek-RPt"/>
                             </connections>
@@ -115,7 +124,7 @@
                             <rect key="frame" x="92" y="146" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="1y4-d7-e7j"/>
                             </connections>
@@ -164,7 +173,7 @@
                             <rect key="frame" x="92" y="201" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="Kqc-oe-vZz"/>
                             </connections>
@@ -180,7 +189,7 @@
                             <rect key="frame" x="92" y="256" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="dh9-ab-rfD"/>
                             </connections>
@@ -229,7 +238,7 @@
                             <rect key="frame" x="92" y="309" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="9sr-YI-dvQ"/>
                             </connections>
@@ -281,7 +290,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="Oo0-qz-Lpg"/>
                             </connections>
@@ -408,41 +417,82 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right-arrow.png" id="807-5L-Zqj">
-                    <rect key="frame" x="274" y="23" width="25" height="25"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="H9A-nO-4DS">
+                    <rect key="frame" x="0.0" y="71" width="320" height="0.0"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ppQ-h0-iSZ"/>
+                        <outlet property="delegate" destination="-1" id="ldh-36-dhq"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nMu-Ub-tFJ">
+                    <rect key="frame" x="253" y="0.0" width="67" height="71"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="right-arrow.png"/>
+                    <connections>
+                        <action selector="btnShowEmailPopup:" destination="-1" eventType="touchUpInside" id="ObR-x1-HAq"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="755" y="2.5"/>
         </view>
-        <view contentMode="scaleToFill" id="ZfG-c4-4El">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+        <view contentMode="scaleToFill" id="vlX-VI-FmW">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radio-checked.png" id="068-RT-P0e">
-                    <rect key="frame" x="20" y="26" width="27" height="27"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OZk-0I-NEC">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TG9-OC-24F">
-                    <rect key="frame" x="67" y="15" width="160" height="21"/>
+                    <color key="backgroundColor" white="0.1131359213" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="whJ-Nk-HWX">
+                    <rect key="frame" x="25" y="40" width="253" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" red="0.0" green="0.29523422120882109" blue="0.59083017676767668" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="987 - 6543 - 210" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gqq-Or-rLI">
-                    <rect key="frame" x="67" y="30" width="228" height="39"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John DOE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cjq-ur-8KK">
+                    <rect key="frame" x="24" y="7" width="253" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="25"/>
+                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="26"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="K00-ob-2ir">
+                    <rect key="frame" x="0.0" y="71" width="320" height="0.0"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="DA7-EO-9is"/>
+                        <outlet property="delegate" destination="-1" id="qf5-oK-BfA"/>
+                    </connections>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6z8-6x-nV6">
+                    <rect key="frame" x="253" y="0.0" width="67" height="71"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uD0-YR-q5e">
+                    <rect key="frame" x="253" y="0.0" width="67" height="71"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="right-arrow.png"/>
+                    <connections>
+                        <action selector="btnDonePOPUPemail:" destination="-1" eventType="touchUpInside" id="ICf-0y-q3R"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="755" y="202.5"/>
+            <point key="canvasLocation" x="755" y="135.5"/>
         </view>
     </objects>
     <resources>
@@ -452,7 +502,6 @@
         <image name="email-icon.png" width="12" height="12"/>
         <image name="import-from-contacts.png" width="24" height="24"/>
         <image name="phone-icon.png" width="12" height="12"/>
-        <image name="radio-checked.png" width="17" height="17"/>
         <image name="right-arrow.png" width="30" height="30"/>
         <image name="user-icon.png" width="12" height="12"/>
     </resources>

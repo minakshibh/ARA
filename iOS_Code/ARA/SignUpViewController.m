@@ -992,7 +992,7 @@ if ([response_status isEqualToString:@"passed"])
             NSString *usertype = [userDetailDict valueForKey:@"UserType"];
             if([usertype isEqualToString:@"Client"])
                {
-                   [HelperAlert alertWithTwoBtns:AlertTitle description:@"We already have your details. Are you a previous client of ARA ?" okBtn:OkButtonTitle cancelBtn:@"Yes i am" withTag:2 forController:self];
+                   [HelperAlert alertWithTwoBtns:AlertTitle description:@"Are you a previous client of Automotive Avenues?" okBtn:@"No" cancelBtn:@"Yes" withTag:2 forController:self];
 
                    
 //                   UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"We already have your details. Are you a previous client of ARA ?" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Yes i am",nil];
