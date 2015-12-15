@@ -285,7 +285,7 @@
             android:textColor="@color/white"
             android:padding="10dp"
             android:gravity="center"
-            android:text="QUATER" />
+            android:text="QUARTER" />
   <TextView
             android:id="@+id/button_Year"
             android:layout_width="0dp"
