@@ -61,6 +61,13 @@
         btnSold.titleLabel.font=[lblheading.font fontWithSize:24];
         btnUpcoming.titleLabel.font=[lblheading.font fontWithSize:24];
         btnback.titleLabel.font=[lblheading.font fontWithSize:24];
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblheading.font=[lblheading.font fontWithSize:30];
+            btnSold.titleLabel.font=[lblheading.font fontWithSize:30];
+            btnUpcoming.titleLabel.font=[lblheading.font fontWithSize:30];
+            btnback.titleLabel.font=[lblheading.font fontWithSize:30];
+        }
     }
 }
 

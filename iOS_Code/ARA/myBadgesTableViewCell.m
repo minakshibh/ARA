@@ -88,6 +88,18 @@
         badagesNo.frame = CGRectMake(badagesNo.frame.origin.x-20, badagesNo.frame.origin.y, badagesNo.frame.size.width, badagesNo.frame.size.height);
         
         //badagesImage.frame = CGRectMake(badagesImage.frame.origin.x, badagesImage.frame.origin.y, badagesImage.frame.size.width, badagesImage.frame.size.height+5);
+        
+        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            badagesName.font=[badagesName.font fontWithSize:30];
+            badagesDate.font=[badagesDate.font fontWithSize:24];
+            badagesNo.font=[badagesNo.font fontWithSize:24];
+            badagesImage.contentMode = UIViewContentModeScaleAspectFit;
+            
+            badagesNo.frame = CGRectMake(badagesNo.frame.origin.x, badagesNo.frame.origin.y+3, badagesNo.frame.size.width, badagesNo.frame.size.height);
+             badagesDate.frame = CGRectMake(badagesDate.frame.origin.x, badagesDate.frame.origin.y+3, badagesDate.frame.size.width, badagesDate.frame.size.height);
+        }
     }
 }
 @end

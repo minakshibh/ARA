@@ -91,7 +91,15 @@
         btnAllTime.titleLabel.font = [btnAllTime.titleLabel.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
 
-        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            self.lblHeader.font = [self.lblHeader.font fontWithSize:30];
+            
+            btnQuater.titleLabel.font = [btnQuater.titleLabel.font fontWithSize:30];
+            btnYear.titleLabel.font = [btnYear.titleLabel.font fontWithSize:30];
+            btnAllTime.titleLabel.font = [btnAllTime.titleLabel.font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+        }
 
     }
 }

@@ -103,6 +103,14 @@
         lbltag.font = [lbltag.font fontWithSize:24];
         
         lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y, lblDate.frame.size.width, lblDate.frame.size.height);
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblName.font = [lblName.font fontWithSize:30];
+            lblDate.font = [lblDate.font fontWithSize:24];
+            lbltag.font = [lbltag.font fontWithSize:30];
+            
+            lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y+3, lblDate.frame.size.width, lblDate.frame.size.height);
+        }
     }
 }
 
@@ -118,7 +126,7 @@
     lblpriceReferral.text = [NSString stringWithFormat:@"$%@",price];
     lblDateReward.text = [NSString stringWithFormat:@"Sold Date: %@",date];
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
         lblAmontEarnedScoreboard.font=[lblAmontEarnedScoreboard.font fontWithSize:20];
         lblPricetxtScoreboard.font=[lblPricetxtScoreboard.font fontWithSize:20];
@@ -127,7 +135,16 @@
         lblDate.font=[lblDate.font fontWithSize:20];
         lblpriceReferral.font=[lblpriceReferral.font fontWithSize:20];
         lblDateReward.font=[lblDateReward.font fontWithSize:20];
-        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblAmontEarnedScoreboard.font=[lblAmontEarnedScoreboard.font fontWithSize:24];
+            lblPricetxtScoreboard.font=[lblPricetxtScoreboard.font fontWithSize:24];
+            lblPriceScoreboard.font=[lblPriceScoreboard.font fontWithSize:24];
+            lblName.font=[lblName.font fontWithSize:24];
+            lblDate.font=[lblDate.font fontWithSize:24];
+            lblpriceReferral.font=[lblpriceReferral.font fontWithSize:24];
+            lblDateReward.font=[lblDateReward.font fontWithSize:24];
+        }
     }
     
 }
@@ -223,6 +240,13 @@
         lblAmontEarnedScoreboard.font = [lblAmontEarnedScoreboard.font fontWithSize:17];
          lblPriceScoreboard.frame = CGRectMake(lblPriceScoreboard.frame.origin.x,lblPriceScoreboard.frame.origin.y, lblPriceScoreboard.frame.size.width,
         lblPriceScoreboard.frame.size.height);
+        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblNameScoreboard.font = [lblNameScoreboard.font fontWithSize:30];
+            lblPriceScoreboard.font = [lblPriceScoreboard.font fontWithSize:25];
+            lblAmontEarnedScoreboard.font = [lblAmontEarnedScoreboard.font fontWithSize:25];
+        }
     }
     
     

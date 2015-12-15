@@ -117,8 +117,24 @@
         txtEmail.font = [txtEmail.font fontWithSize:24];
         txtmea.font = [txtmea.font fontWithSize:24];
         txtComment.font = [txtComment.font fontWithSize:24];
+        lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:24];
         //btnImportContacts.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 90);
         
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            
+            lblheading.font = [lblheading.font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            btnImportContacts.titleLabel.font = [btnImportContacts.titleLabel.font fontWithSize:30];
+            btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:30];
+            txtFirstname.font = [txtFirstname.font fontWithSize:30];
+            txtLastname.font = [txtLastname.font fontWithSize:30];
+            txtPhoneno.font = [txtPhoneno.font fontWithSize:30];
+            txtEmail.font = [txtEmail.font fontWithSize:30];
+            txtmea.font = [txtmea.font fontWithSize:30];
+            txtComment.font = [txtComment.font fontWithSize:30];
+            lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:30];
+        }
     }
 }
 
@@ -143,12 +159,12 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    txtComment.text =@"";
-    txtEmail.text =@"";
-    txtFirstname.text =@"";
-    txtLastname.text =@"";
-    txtPhoneno.text =@"";
-    txtEmail.text =@"";
+//    txtComment.text =@"";
+//    txtEmail.text =@"";
+//    txtFirstname.text =@"";
+//    txtLastname.text =@"";
+//    txtPhoneno.text =@"";
+//    txtEmail.text =@"";
     
 }
 - (void)didReceiveMemoryWarning {
@@ -509,6 +525,31 @@
         
         
     //    [self.view makeToast:@"Just wait a movement we are verifying your email address."];
+    if (webservice!=5) {
+            
+        
+            imagecheckforemailView.hidden = YES;
+            if(txtEmail.text.length>0){
+                if (![txtEmail emailValidation]==YES) {
+                    lblemailerror.text = @"Enter a valid email";
+                }else{
+                    //activityIndicatorObject.center = CGPointMake(0, 0);
+                    activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50,   0.50);
+                    activityIndicatorObject1.color=[UIColor whiteColor];
+                    [viewEmailindicator addSubview:activityIndicatorObject1];
+                    [activityIndicatorObject1 startAnimating];
+                
+                    CGRect frame = viewEmailindicator.frame;
+                    frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width;
+                    frame.origin.y = txtEmail.frame.origin.y +1;
+                    viewEmailindicator.frame = frame;
+                    [self checkforavailability];
+                }
+            }
+        
+        }
+        
+        
         
         [txtEmail resignFirstResponder];
         return;
@@ -627,7 +668,6 @@
             }
         });
     }
-    
 }
 
 #pragma mark - AddressBook Delegate Methods
@@ -644,8 +684,14 @@
     ABMultiValueRef fnameProperty = ABRecordCopyValue(person, kABPersonFirstNameProperty);
     ABMultiValueRef lnameProperty = ABRecordCopyValue(person, kABPersonLastNameProperty);
     
-    lblNamePOPUPView.text= [NSString stringWithFormat:@"%@ %@",fnameProperty,lnameProperty];
-    lblNamePOPUPEmail.text = [NSString stringWithFormat:@"%@ %@",fnameProperty,lnameProperty];
+    if (lnameProperty != nil) {
+        lblNamePOPUPView.text= [NSString stringWithFormat:@"%@ %@",fnameProperty,lnameProperty];
+        lblNamePOPUPEmail.text = [NSString stringWithFormat:@"%@ %@",fnameProperty,lnameProperty];
+    }else{
+        lblNamePOPUPView.text= [NSString stringWithFormat:@"%@",fnameProperty];
+        lblNamePOPUPEmail.text = [NSString stringWithFormat:@"%@",fnameProperty];
+    }
+    
     
     ABMultiValueRef phoneProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
     ABMultiValueRef emailProperty = ABRecordCopyValue(person, kABPersonEmailProperty);
@@ -657,7 +703,7 @@
     
     ABMultiValueRef phones = phoneProperty;
     ABMultiValueRef email = emailProperty;
-    selectedIndex = nil;
+    selectedIndex = 20;
     [selectedContactDict removeAllObjects];
     
     NSMutableArray *phonelbl = [[NSMutableArray alloc]init];
@@ -707,9 +753,12 @@
 //    
 
     [self dismissViewControllerAnimated:YES completion:nil];
+    if (fnameProperty != nil) {
     txtFirstname.text = [NSString stringWithFormat:@"%@",fnameProperty];
+    }
+    if (lnameProperty != nil) {
     txtLastname.text = [NSString stringWithFormat:@"%@",lnameProperty];
-    
+    }
     
     if([phoneArray count]){
         
@@ -752,18 +801,31 @@
 
     lblTypeheaderpopup.text = @"Select Phone Number";
     
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+        [lblheaderbackgroungPopup setFrame:CGRectMake(lblheaderbackgroungPopup.frame.origin.x,lblheaderbackgroungPopup.frame.origin.y,lblheaderbackgroungPopup.frame.size.width-20, lblheaderbackgroungPopup.frame.size.height)];
+        
+        [btnShowEmailPopup setFrame:CGRectMake(btnShowEmailPopup.frame.origin.x-20,btnShowEmailPopup.frame.origin.y,btnShowEmailPopup.frame.size.width, btnShowEmailPopup.frame.size.height)];
+        
+        [viewHeaderPOPUP setFrame:CGRectMake(viewHeaderPOPUP.frame.origin.x,viewHeaderPOPUP.frame.origin.y,viewHeaderPOPUP.frame.size.width-20, viewHeaderPOPUP.frame.size.height)];
+        tableViewPopup.frame=CGRectMake(tableViewPopup.frame.origin.x, tableViewPopup.frame.origin.y, viewHeaderPOPUP.frame.size.width, tableViewPopup.frame.size.height);
+    }
+    
+    
     
     if([value count]<=3)
     {
+        
         float height_table =  tableViewPopup.frame.size.height+79*[value count];
         tableViewPopup.frame=CGRectMake(0, tableViewPopup.frame.origin.y, tableViewPopup.frame.size.width, height_table);
         
         [viewHeaderPOPUP setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUP.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUP.frame.size.height/2-tableViewPopup.frame.size.height/2, viewHeaderPOPUP.frame.size.width, viewHeaderPOPUP.frame.size.height + tableViewPopup.frame.size.height)];
+        tableViewPopup.scrollEnabled = NO;
     }else{
         float height_table =  tableViewPopup.frame.size.height+79*3;
         tableViewPopup.frame=CGRectMake(0, tableViewPopup.frame.origin.y, tableViewPopup.frame.size.width, height_table);
         
         [viewHeaderPOPUP setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUP.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUP.frame.size.height/2-tableViewPopup.frame.size.height/2, viewHeaderPOPUP.frame.size.width, viewHeaderPOPUP.frame.size.height + tableViewPopup.frame.size.height)];
+        tableViewPopup.scrollEnabled = YES;
     }
     
     [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUP andAnimated:YES];
@@ -778,10 +840,21 @@
     
     isPhoneNo = false;
     unSelected = true;
-    selectedIndex = nil;
+    selectedIndex = 20;
     
     NSArray *value = [contactDict valueForKey:@"contact_email"];
     lblTypePOPUPEmail.text = @"Select Email";
+    
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+        [lblheaderbackgroungPopupEmail setFrame:CGRectMake(lblheaderbackgroungPopupEmail.frame.origin.x,lblheaderbackgroungPopupEmail.frame.origin.y,lblheaderbackgroungPopupEmail.frame.size.width-20, lblheaderbackgroungPopupEmail.frame.size.height)];
+        
+        [btnDonePOPUPemail setFrame:CGRectMake(btnDonePOPUPemail.frame.origin.x-20,btnDonePOPUPemail.frame.origin.y,btnDonePOPUPemail.frame.size.width, btnDonePOPUPemail.frame.size.height)];
+        
+        [viewHeaderPOPUPemail setFrame:CGRectMake(viewHeaderPOPUPemail.frame.origin.x,viewHeaderPOPUPemail.frame.origin.y,viewHeaderPOPUPemail.frame.size.width-20, viewHeaderPOPUPemail.frame.size.height)];
+        tableViewPopupEmail.frame=CGRectMake(tableViewPopupEmail.frame.origin.x, tableViewPopupEmail.frame.origin.y, viewHeaderPOPUPemail.frame.size.width, tableViewPopupEmail.frame.size.height);
+    }
+    
+    
     
     if([value count]<=3)
     {
@@ -789,11 +862,15 @@
         tableViewPopupEmail.frame=CGRectMake(0, tableViewPopupEmail.frame.origin.y, tableViewPopupEmail.frame.size.width, height_table);
         
         [viewHeaderPOPUPemail setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUPemail.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUPemail.frame.size.height/2-tableViewPopupEmail.frame.size.height/2, viewHeaderPOPUPemail.frame.size.width, viewHeaderPOPUPemail.frame.size.height + tableViewPopupEmail.frame.size.height)];
+        
+        tableViewPopupEmail.scrollEnabled = NO;
     }else{
-        float height_table =  tableViewPopup.frame.size.height+79*3;
+        float height_table =  tableViewPopupEmail.frame.size.height+79*3;
         tableViewPopupEmail.frame=CGRectMake(0, tableViewPopupEmail.frame.origin.y, tableViewPopupEmail.frame.size.width, height_table);
         
         [viewHeaderPOPUPemail setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUPemail.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUPemail.frame.size.height/2-tableViewPopupEmail.frame.size.height/2, viewHeaderPOPUPemail.frame.size.width, viewHeaderPOPUPemail.frame.size.height + tableViewPopupEmail.frame.size.height)];
+        tableViewPopupEmail.scrollEnabled = YES;
+
     }
     
     [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUPemail andAnimated:YES];
@@ -1224,13 +1301,13 @@
         }
         
         NSString *imageName;
-        if (selectedIndex ==indexPath) {
+        if (selectedIndex ==indexPath.row) {
             imageName = @"radio-checked.png";
         }else{
          imageName = @"radio-unchecked.png";
         }
         
-        if (indexPath==selectedIndex) {
+        if (indexPath.row==selectedIndex) {
             imageName =@"radio-checked.png";
         }
         
@@ -1279,7 +1356,7 @@
         
         
         [selectedContactDict setObject:[selectedValue objectAtIndex:indexPath.row] forKey:select];
-        selectedIndex = indexPath;
+        selectedIndex = indexPath.row;
         if (isPhoneNo) {
         [tableViewPopup reloadData];
         }else{

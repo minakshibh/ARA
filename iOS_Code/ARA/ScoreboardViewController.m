@@ -96,6 +96,29 @@
         lblBackgroundEarning.layer.borderWidth = 1;
         lblbackgroundReferral.layer.borderWidth = 1;
         lblbackgroundSoldReferrals.layer.borderWidth = 1;
+        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:30];
+            lblHeading.font = [lblHeading.font fontWithSize:30];
+            
+            lblhighest.font = [lblhighest.font fontWithSize:24];
+            lblEarning.font = [lblEarning.font fontWithSize:30];
+            lblhighestReferral.font = [lblhighestReferral.font fontWithSize:30];
+            lblhighestref.font = [lblhighestref.font fontWithSize:24];
+            lblHighestSOLDReferral.font = [lblHighestSOLDReferral.font fontWithSize:24];
+            lblHighestsoldreferral.font = [lblHighestsoldreferral.font fontWithSize:30];
+            
+            
+            btnQuater.titleLabel.font = [btnQuater.titleLabel.font fontWithSize:30];
+            btnYear.titleLabel.font = [btnYear.titleLabel.font fontWithSize:30];
+            btnAllTime.titleLabel.font = [btnAllTime.titleLabel.font fontWithSize:30];
+            
+            
+            lblHighestEarningPrice.font = [lblHighestEarningPrice.font fontWithSize:64];
+            lblReferralCount.font = [lblReferralCount.font fontWithSize:64];
+            lblSoldReferralCount.font = [lblSoldReferralCount.font fontWithSize:64];
+        }
     }
 }
 

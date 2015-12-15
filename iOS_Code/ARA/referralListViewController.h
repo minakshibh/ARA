@@ -21,6 +21,7 @@
     BOOL sort_value,filter_value;
     UIView *sort_back_view;
     IBOutlet UILabel *lblheader;
+    IBOutlet UILabel *lblSelectFilter;
     BOOL radio_soldOnly;
     UIImage *btnImage1,*btnImage2,*btnImage3,*btnImage4;
     IBOutlet UIButton *btnSoldOnly;
@@ -32,6 +33,7 @@
     IBOutlet UIView *sortFilterView;
     int create_tag_btn;
     IBOutlet UILabel *lbltagbackground;
+     IBOutlet UILabel *lblSelectSort;
     IBOutlet UIButton *btnSort;
     IBOutlet UIButton *btnFilter;
     IBOutlet UILabel *lblpartition;

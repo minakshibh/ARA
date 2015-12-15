@@ -15,6 +15,7 @@
 
     IBOutlet UITableView *tableView;
     IBOutlet UILabel *btnheading;
+     IBOutlet UILabel *lblbelowHeader;
     NSMutableData *webData;
     NSString *result_status;
     int webservice,count;

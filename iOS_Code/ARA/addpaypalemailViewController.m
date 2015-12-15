@@ -92,6 +92,17 @@
         btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:24];
         selectPaymentMode.titleLabel.font = [selectPaymentMode.titleLabel.font fontWithSize:24];
         txtDropDown.font=[txtEmail .font fontWithSize:24];
+        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblheading.font=[lblheading .font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            txtEmail.font=[txtEmail .font fontWithSize:30];
+            btnSavechanges.titleLabel.font = [btnSavechanges.titleLabel.font fontWithSize:30];
+            btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:30];
+            selectPaymentMode.titleLabel.font = [selectPaymentMode.titleLabel.font fontWithSize:30];
+            txtDropDown.font=[txtEmail .font fontWithSize:30];
+        }
     }
 }
 -(void)viewWillAppear:(BOOL)animated{

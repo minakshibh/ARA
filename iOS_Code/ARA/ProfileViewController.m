@@ -112,7 +112,42 @@
         btnedit.titleLabel.font = [btnedit.titleLabel.font fontWithSize:24];
         btnSave.titleLabel.font = [btnSave.titleLabel.font fontWithSize:24];
          btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
-        
+        btnEditImage.titleLabel.font = [btnback.titleLabel.font fontWithSize:20];
+        lblUserID.font=[lblUserID.font fontWithSize:24];
+
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            namelbl.font=[namelbl.font fontWithSize:30];
+            lastnamelbl.font=[lastnamelbl.font fontWithSize:30];
+            lblName.font=[lblName.font fontWithSize:30];
+            lblLastname.font=[lblLastname.font fontWithSize:30];
+            lblEmail.font=[lblEmail.font fontWithSize:30];
+            lblPhoneno.font=[lblPhoneno.font fontWithSize:30];
+            lblRole.font=[lblRole.font fontWithSize:30];
+            lblMEAname.font=[lblMEAname.font fontWithSize:30];
+            lblPurchased.font=[lblPurchased.font fontWithSize:30];
+            txtName.font=[txtName.font fontWithSize:30];
+            txtLastname.font=[txtLastname.font fontWithSize:30];
+            txtPhoneNo.font=[txtPhoneNo.font fontWithSize:30];
+            txtEmail.font=[txtEmail.font fontWithSize:30];
+            txtRole.font=[txtRole.font fontWithSize:30];
+            txtMEA.font=[txtMEA.font fontWithSize:30];
+            lblpassword.font=[lblpassword.font fontWithSize:30];
+            lblheading.font=[lblheading.font fontWithSize:30];
+            lblemail1.font=[lblemail1.font fontWithSize:30];
+            lblphoneno1.font=[lblphoneno1.font fontWithSize:30];
+            lblrole1.font=[lblrole1.font fontWithSize:30];
+            lblmea1.font=[lblmea1.font fontWithSize:30];
+            lblpurchased1.font=[lblpurchased1.font fontWithSize:30];
+            lblpassword1.font=[lblpassword1.font fontWithSize:30];
+            btnChangePassword.titleLabel.font = [btnChangePassword.titleLabel.font fontWithSize:30];
+            
+            btnedit.titleLabel.font = [btnedit.titleLabel.font fontWithSize:30];
+            btnSave.titleLabel.font = [btnSave.titleLabel.font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            btnEditImage.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
+            lblUserID.font=[lblUserID.font fontWithSize:30];
+        }
     }
 }
 
@@ -632,6 +667,12 @@
         frame.size.height = 190;
         frame.origin.x = frame.origin.x +18;
         frame.origin.y = frame.origin.y -5;
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            frame.size.width = 230;
+            frame.size.height = 230;
+            frame.origin.x = frame.origin.x +15;
+        }
         imageProfile.frame = frame;
         
         imageProfile.layer.cornerRadius = imageProfile.frame.size.width /2;

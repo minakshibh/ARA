@@ -21,6 +21,9 @@
 }
 -(void)setLabelText:(NSString*)image :(NSString*)contactType : (NSString*)contactDetails :(BOOL*)isPhoneno
 {
+    
+    
+    
     NSString *imageName = [NSString stringWithFormat:@"%@",image];
     imageViewSelection.image = [UIImage imageNamed:imageName];
     
@@ -29,6 +32,11 @@
     
     if (!isPhoneno) {
         lblContactDetail.font=[lblContactDetail.font fontWithSize:22];
+    }
+    
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+        lblContactType.font=[lblContactType.font fontWithSize:14];
+        lblContactDetail.font=[lblContactDetail.font fontWithSize:21];
     }
 }
 @end

@@ -93,6 +93,17 @@
        btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
          BUILDSIZE.font = [BUILDSIZE.font fontWithSize:24];
         btnheading.font = [btnheading.font fontWithSize:24];
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+
+            BUILDVERSION.font = [BUILDVERSION.font fontWithSize:30];
+            buildVersion.font = [buildVersion.font fontWithSize:30];
+            buildSize.font = [buildSize.font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            BUILDSIZE.font = [BUILDSIZE.font fontWithSize:30];
+            btnheading.font = [btnheading.font fontWithSize:30];
+            
+        }
     }
 }
 

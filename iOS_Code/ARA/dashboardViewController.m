@@ -119,16 +119,54 @@
         lblEmailSideMenu.font=[lblEmailSideMenu.font fontWithSize:20];
         
 
-        btnmyprofile.titleLabel.font=[lblPotentialaward.font fontWithSize:24];
-        btnreferral.titleLabel.font=[lblPotentialaward.font fontWithSize:24];
-        btnPaymentaccount.titleLabel.font=[lblPotentialaward.font fontWithSize:24];
-        btnmybadges.titleLabel.font=[lblPotentialaward.font fontWithSize:24];
-        btnRewards.titleLabel.font=[lblPotentialaward.font fontWithSize:24];
-        btnScoreboard.titleLabel.font=[lblPotentialaward.font fontWithSize:24];
-        btnAboutApp.titleLabel.font=[lblPotentialaward.font fontWithSize:24];
-        btnLogout.titleLabel.font=[btnLogout.font fontWithSize:24];
+        btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:24];
+        btnreferral.titleLabel.font=[btnreferral.titleLabel.font fontWithSize:24];
+        btnPaymentaccount.titleLabel.font=[btnPaymentaccount.titleLabel.font fontWithSize:24];
+        btnmybadges.titleLabel.font=[btnmybadges.titleLabel.font fontWithSize:24];
+        btnRewards.titleLabel.font=[btnRewards.titleLabel.font fontWithSize:24];
+        btnScoreboard.titleLabel.font=[btnScoreboard.titleLabel.font fontWithSize:24];
+        btnAboutApp.titleLabel.font=[btnAboutApp.titleLabel.font fontWithSize:24];
+        btnLogout.titleLabel.font=[btnLogout.titleLabel.font fontWithSize:24];
         
-        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            
+            btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:30];
+            lblheader.font=[lblheader.font fontWithSize:30];
+            lblActiveReferral.font=[lblActiveReferral.font fontWithSize:30];
+            lblSoldreferral.font=[lblSoldreferral.font fontWithSize:30];
+            lblInactivereferral.font=[lblInactivereferral.font fontWithSize:30];
+            lblTotalreferral.font=[lblTotalreferral.font fontWithSize:30];
+            
+            
+            lblPotentialaward.font=[lblPotentialaward.font fontWithSize:21];
+            lblAwardEarned.font=[lblAwardEarned.font fontWithSize:21];
+            lblPotentialaward.frame = CGRectMake(lblPotentialaward.frame.origin.x, lblPotentialaward.frame.origin.y, lblPotentialaward.frame.size.width, lblPotentialaward.frame.size.height);
+            lblAwardEarned.frame = CGRectMake(lblAwardEarned.frame.origin.x, lblAwardEarned.frame.origin.y, lblAwardEarned.frame.size.width, lblAwardEarned.frame.size.height);
+            
+            lblActiveAmount.font=[lblActiveAmount.font fontWithSize:44];
+            lblNameMenu.font=[lblNameMenu.font fontWithSize:44];
+            lblSoldreferralAmount.font=[lblSoldreferralAmount.font fontWithSize:44];
+            
+            lblActivereferralcount.font=[lblActivereferralcount.font fontWithSize:94];
+            lblSoldreferralcount.font=[lblSoldreferralcount.font fontWithSize:94];
+            
+            lblInactivereferralcount.font=[lblInactivereferralcount.font fontWithSize:94];
+            lbltotalreferralcount.font=[lbltotalreferralcount.font fontWithSize:94];
+            lblEmailSideMenu.font=[lblEmailSideMenu.font fontWithSize:24];
+            
+            
+            btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:30];
+            btnreferral.titleLabel.font=[btnreferral.titleLabel.font fontWithSize:30];
+            btnPaymentaccount.titleLabel.font=[btnPaymentaccount.titleLabel.font fontWithSize:30];
+            btnmybadges.titleLabel.font=[btnmybadges.titleLabel.font fontWithSize:30];
+            btnRewards.titleLabel.font=[btnRewards.titleLabel.font fontWithSize:30];
+            btnScoreboard.titleLabel.font=[btnScoreboard.titleLabel.font fontWithSize:30];
+            btnAboutApp.titleLabel.font=[btnAboutApp.titleLabel.font fontWithSize:30];
+            btnLogout.titleLabel.font=[btnLogout.titleLabel.font fontWithSize:30];
+            
+            
+        }
         
     }
     
@@ -587,6 +625,13 @@ if([recieved_status isEqualToString:@"passed"])
         frame.size.height = 210;
         frame.origin.x = frame.origin.x +14;
         frame.origin.y = frame.origin.y -10;
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            frame.origin.x = frame.origin.x + 10;
+            frame.size.width = 260;
+            frame.size.height = 260;
+        }
+        
         imageViewMenuProfile.frame = frame;
         
         imageViewMenuProfile.layer.cornerRadius = imageViewMenuProfile.frame.size.width /2;

@@ -48,6 +48,8 @@
                 <outlet property="lblTypePOPUPEmail" destination="whJ-Nk-HWX" id="TwK-SV-njt"/>
                 <outlet property="lblTypeheaderpopup" destination="6JL-VZ-KTJ" id="Zu1-n9-JvR"/>
                 <outlet property="lblemailerror" destination="BGH-Xt-gJL" id="IGc-mj-QAv"/>
+                <outlet property="lblheaderbackgroungPopup" destination="U8M-DU-c2S" id="xX2-Zf-BF7"/>
+                <outlet property="lblheaderbackgroungPopupEmail" destination="OZk-0I-NEC" id="qx2-J2-gXb"/>
                 <outlet property="lblheading" destination="FFW-g6-Ocw" id="2DO-9K-7n8"/>
                 <outlet property="lblphonenoerror" destination="dnn-N6-DB8" id="xCC-Wv-XFE"/>
                 <outlet property="scrollView" destination="qHv-zc-XYL" id="XLr-S5-eWs"/>
@@ -409,14 +411,6 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2DH-2g-N4f">
-                    <rect key="frame" x="253" y="0.0" width="67" height="71"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="H9A-nO-4DS">
                     <rect key="frame" x="0.0" y="71" width="320" height="0.0"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -429,6 +423,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nMu-Ub-tFJ">
                     <rect key="frame" x="253" y="0.0" width="67" height="71"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <state key="normal" image="right-arrow.png"/>
                     <connections>
                         <action selector="btnShowEmailPopup:" destination="-1" eventType="touchUpInside" id="ObR-x1-HAq"/>
@@ -473,17 +468,10 @@
                         <outlet property="delegate" destination="-1" id="qf5-oK-BfA"/>
                     </connections>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6z8-6x-nV6">
-                    <rect key="frame" x="253" y="0.0" width="67" height="71"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uD0-YR-q5e">
                     <rect key="frame" x="253" y="0.0" width="67" height="71"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <state key="normal" image="right-arrow.png"/>
                     <connections>
                         <action selector="btnDonePOPUPemail:" destination="-1" eventType="touchUpInside" id="ICf-0y-q3R"/>
@@ -492,7 +480,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="755" y="135.5"/>
+            <point key="canvasLocation" x="755" y="2.5"/>
         </view>
     </objects>
     <resources>

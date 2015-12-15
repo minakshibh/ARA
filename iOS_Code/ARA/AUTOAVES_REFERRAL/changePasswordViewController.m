@@ -76,7 +76,19 @@
         txtNewpwd.font=[txtNewpwd.font fontWithSize:24];
         txtConfirmnewpwd.font=[txtConfirmnewpwd.font fontWithSize:24];
         
-        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            btncahngpassword.titleLabel.font = [btncahngpassword.titleLabel.font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            
+            
+            lblheading.font=[lblheading.font fontWithSize:30];
+            
+            txtOldpwd.font=[txtOldpwd.font fontWithSize:30];
+            
+            txtNewpwd.font=[txtNewpwd.font fontWithSize:30];
+            txtConfirmnewpwd.font=[txtConfirmnewpwd.font fontWithSize:30];
+        }
 
         
     }

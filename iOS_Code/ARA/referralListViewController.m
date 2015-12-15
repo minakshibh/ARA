@@ -99,12 +99,33 @@ UIButton *tag_btn,*tag_cancel_btn;
         
         lblDIrectreferral.font=[lblDIrectreferral.font fontWithSize:18];
         lblIndirectreferral.font=[lblIndirectreferral.font fontWithSize:18];
-        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblheadingView.font=[lblheadingView.font fontWithSize:30];
+            btnSort.titleLabel.font = [btnSort.titleLabel.font fontWithSize:30];
+            btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:30];
+            btnFilter.titleLabel.font = [btnFilter.titleLabel.font fontWithSize:30];
+            
+            imagedirectregerral.frame = CGRectMake(imagedirectregerral.frame.origin.x+20, imagedirectregerral.frame.origin.y, imagedirectregerral.frame.size.width, imagedirectregerral.frame.size.height);
+            imageindirectreferral.frame = CGRectMake(imageindirectreferral.frame.origin.x+20, imageindirectreferral.frame.origin.y, imageindirectreferral.frame.size.width, imageindirectreferral.frame.size.height);
+            lblDIrectreferral.frame = CGRectMake(lblDIrectreferral.frame.origin.x+20, lblDIrectreferral.frame.origin.y, lblDIrectreferral.frame.size.width, lblDIrectreferral.frame.size.height);
+            lblIndirectreferral.frame = CGRectMake(lblIndirectreferral.frame.origin.x+20, lblIndirectreferral.frame.origin.y, lblIndirectreferral.frame.size.width, lblIndirectreferral.frame.size.height);
+            
+            lblDIrectreferral.font=[lblDIrectreferral.font fontWithSize:24];
+            lblIndirectreferral.font=[lblIndirectreferral.font fontWithSize:24];
+            
+            btnSortByname.titleLabel.font = [btnSortByname.titleLabel.font fontWithSize:30];
+            btnSortBydate.titleLabel.font = [btnSortBydate.titleLabel.font fontWithSize:30];
+            btnSortnone.titleLabel.font = [btnSortnone.titleLabel.font fontWithSize:30];
+            lblSelectSort.font=[lblSelectSort.font fontWithSize:24];
+            
+            btnOpenOnly.titleLabel.font = [btnOpenOnly.titleLabel.font fontWithSize:30];
+            btnSoldOnly.titleLabel.font = [btnSoldOnly.titleLabel.font fontWithSize:30];
+            btnFilternone.titleLabel.font = [btnFilternone.titleLabel.font fontWithSize:30];
+            lblSelectFilter.font=[lblSelectFilter.font fontWithSize:24];
+
+        }
     }
-    
-    
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{

@@ -55,7 +55,7 @@
     IBOutlet UITableView *tableViewPopup;
     NSMutableDictionary *contactDict,*selectedContactDict;
     IBOutlet UITableView *tableViewPopupEmail;
-    NSIndexPath *selectedIndex;
+    int selectedIndex;
     IBOutlet UIButton *btnShowEmailPopup;
     float viewPopUp_h,tableviewPopup_h;
     IBOutlet UILabel *lblNamePOPUPView;
@@ -65,6 +65,8 @@
     IBOutlet UILabel *lblNamePOPUPEmail;
     NSTimer *aTimer;
     IBOutlet UIButton *btnDonePOPUPemail;
+     IBOutlet UILabel *lblheaderbackgroungPopup;
+    IBOutlet UILabel *lblheaderbackgroungPopupEmail;
 }
 - (IBAction)btnShowEmailPopup:(id)sender;
 - (IBAction)btnDonePOPUPemail:(id)sender;

@@ -58,7 +58,16 @@
         btnheading.font=[btnheading.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
         btnAdd.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
-        
+        lblbelowHeader.font=[lblbelowHeader.font fontWithSize:14];
+
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            btnheading.font=[btnheading.font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            btnAdd.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            lblbelowHeader.font=[lblbelowHeader.font fontWithSize:17];
+
+        }
     }
 }
 -(void)viewWillAppear:(BOOL)animated

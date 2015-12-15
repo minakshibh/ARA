@@ -38,7 +38,10 @@ int i=0;
     {
         lblEmail.font=[lblEmail.font fontWithSize:24];
         iamgeViewTick.frame = CGRectMake(iamgeViewTick.frame.origin.x+10, iamgeViewTick.frame.origin.y, iamgeViewTick.frame.size.width, iamgeViewTick.frame.size.height);
-
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+             lblEmail.font=[lblEmail.font fontWithSize:30];
+        }
     }
 }
 @end

@@ -103,6 +103,23 @@
         ;
         txtPassword.font = [lblAlreadyHaveAnAccount.font fontWithSize:24]
         ;
+        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:24];
+            btnForgotPassword.titleLabel.font = [btnForgotPassword.titleLabel.font fontWithSize:24];
+            lblAlreadyHaveAnAccount.font = [lblAlreadyHaveAnAccount.font fontWithSize:24]
+            ;
+            btnSignUp.titleLabel.font = [btnSignUp.titleLabel.font fontWithSize:24];
+            
+            btnLogin.titleLabel.font = [btnLogin.titleLabel.font fontWithSize:30];
+            btnFacebookLogin.titleLabel.font = [btnFacebookLogin.titleLabel.font fontWithSize:30];
+            txtEmail.font = [lblAlreadyHaveAnAccount.font fontWithSize:30]
+            ;
+            txtPassword.font = [lblAlreadyHaveAnAccount.font fontWithSize:30]
+            ;
+        }
+        
     }
     [self.view endEditing:YES];
 }

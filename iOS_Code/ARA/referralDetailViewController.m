@@ -246,7 +246,33 @@
         lblsolddate1.font = [lblsolddate1.font fontWithSize:24];
         btndirectindirect.font = [btndirectindirect.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
-
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblheading.font = [lblheading.font fontWithSize:30];
+            
+            
+            lblName.font = [lblName.font fontWithSize:30];
+            lblPhoneno.font = [lblReferrerName.font fontWithSize:30];
+            lblEmail.font = [lblEmail.font fontWithSize:30];
+            lblMEAname.font = [lblMEAname.font fontWithSize:30];
+            lblCreateDate.font = [lblCreateDate.font fontWithSize:30];
+            lblSoldDate.font = [lblSoldDate.font fontWithSize:30];
+            lblReferrerName.font = [lblReferrerName.font fontWithSize:30];
+            lblCommentValue.font = [lblCommentValue.font fontWithSize:30];
+            lblCommenttxt.font = [lblCommenttxt.font fontWithSize:30];
+            lblreferraltxt.font = [lblreferraltxt.font fontWithSize:30];
+            
+            lblname1.font = [lblname1.font fontWithSize:30];
+            lblphoneno1.font = [lblphoneno1.font fontWithSize:30];
+            lblemail1.font = [lblemail1.font fontWithSize:30];
+            lblmea1.font = [lblmea1.font fontWithSize:30];
+            lblcreateddate1.font = [lblcreateddate1.font fontWithSize:30];
+            lblsolddate1.font = [lblsolddate1.font fontWithSize:30];
+            btndirectindirect.font = [btndirectindirect.font fontWithSize:30];
+            btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
+            
+            
+        }
         
     }
 }

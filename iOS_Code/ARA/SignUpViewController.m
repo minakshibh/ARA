@@ -110,6 +110,30 @@
         txtPreviousCoustomer.font = [txtPreviousCoustomer.font fontWithSize:20];
         txtMEA.font = [txtMEA.font fontWithSize:20];
         
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            btnCheckBox.titleLabel.font = [btnCheckBox.titleLabel.font fontWithSize:24];
+            btnSignup.titleLabel.font = [btnSignup.titleLabel.font fontWithSize:30];
+            
+            lblAlready.font = [lblAlready.font fontWithSize:24];
+            btnLogIn.titleLabel.font = [btnLogIn.titleLabel.font fontWithSize:24];
+            
+            
+            btnMEA.titleLabel.font = [btnMEA.titleLabel.font fontWithSize:30];
+            btnPreviewCustomer.titleLabel.font = [btnPreviewCustomer.titleLabel.font fontWithSize:30];
+            
+            
+            txtFirstName.font = [txtFirstName.font fontWithSize:30];
+            txtLastName.font = [txtLastName.font fontWithSize:30];
+            txtUserId.font = [txtUserId.font fontWithSize:30];
+            txtPhoneNo.font = [txtPhoneNo.font fontWithSize:30];
+            txtEmail.font = [txtEmail.font fontWithSize:30];
+            txtPassword.font = [txtPassword.font fontWithSize:30];
+            txtPreviousCoustomer.font = [txtPreviousCoustomer.font fontWithSize:30];
+            txtMEA.font = [txtMEA.font fontWithSize:30];
+
+            
+        }
     }
 }
 

@@ -51,6 +51,16 @@
         btnSingUp.titleLabel.font = [btnSingUp.titleLabel.font fontWithSize:20];
         btnResetPassword.titleLabel.font = [btnSingUp.titleLabel.font fontWithSize:24];
         lblOr.font = [lblOr.font fontWithSize:20];
+        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            txtEmail.font=[txtEmail.font fontWithSize:30];
+            
+            btnLogIn.titleLabel.font = [btnLogIn.titleLabel.font fontWithSize:24];
+            btnSingUp.titleLabel.font = [btnSingUp.titleLabel.font fontWithSize:24];
+            btnResetPassword.titleLabel.font = [btnSingUp.titleLabel.font fontWithSize:30];
+            lblOr.font = [lblOr.font fontWithSize:24];
+        }
     }
 }
 

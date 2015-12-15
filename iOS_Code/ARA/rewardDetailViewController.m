@@ -86,10 +86,34 @@
         lblRewardAmount.font=[lblRewardAmount.font fontWithSize:24];
         btnreferraldetails.titleLabel.font=[btnBack.titleLabel.font fontWithSize:24];
         
-        
-        
         btnBack.titleLabel.font=[btnBack.titleLabel.font fontWithSize:24];
-        
+        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        {
+            lblHeading.font=[lblHeading.font fontWithSize:30];
+            
+            lblrewardAmount.font=[lblrewardAmount.font fontWithSize:30];
+            
+            lblrewarddesc.font=[lblrewarddesc.font fontWithSize:30];
+            
+            lblrewardname.font=[lblrewardname.font fontWithSize:30];
+            lblrewardtype.font=[lblrewardtype.font fontWithSize:30];
+            lblrewardlevel.font=[lblrewardlevel.font fontWithSize:30];
+            lblReferralId.font=[lblReferralId.font fontWithSize:30];
+            lblTransitionid.font=[lblTransitionid.font fontWithSize:30];
+            
+            
+            lblRewardAmount.font=[lblRewardAmount.font fontWithSize:30];
+            lblRewardDescription.font=[lblRewardDescription.font fontWithSize:30];
+            lblRewardName.font=[lblRewardName.font fontWithSize:30];
+            lblRewardType.font=[lblRewardType.font fontWithSize:30];
+            lblRewardlevel.font=[lblRewardlevel.font fontWithSize:30];
+            lblReferralID.font=[lblReferralID.font fontWithSize:30];
+            lblTransactionID.font=[lblTransactionID.font fontWithSize:30];
+            lblRewardAmount.font=[lblRewardAmount.font fontWithSize:30];
+            btnreferraldetails.titleLabel.font=[btnBack.titleLabel.font fontWithSize:30];
+            
+            btnBack.titleLabel.font=[btnBack.titleLabel.font fontWithSize:30];
+        }
     }
 }
 
