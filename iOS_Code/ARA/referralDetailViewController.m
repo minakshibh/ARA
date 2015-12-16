@@ -246,7 +246,7 @@
         lblsolddate1.font = [lblsolddate1.font fontWithSize:24];
         btndirectindirect.font = [btndirectindirect.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             lblheading.font = [lblheading.font fontWithSize:30];
             

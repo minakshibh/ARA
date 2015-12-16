@@ -115,7 +115,7 @@
         btnEditImage.titleLabel.font = [btnback.titleLabel.font fontWithSize:20];
         lblUserID.font=[lblUserID.font fontWithSize:24];
 
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             namelbl.font=[namelbl.font fontWithSize:30];
             lastnamelbl.font=[lastnamelbl.font fontWithSize:30];
@@ -404,10 +404,10 @@
         return;
         }
     }
-    namelbl.textColor = [UIColor lightGrayColor];
-    phonelbl.textColor = [UIColor lightGrayColor];
-    purchasedlbl.textColor = [UIColor lightGrayColor];
-    lastnamelbl.textColor= [UIColor lightGrayColor];
+    namelbl.textColor = [UIColor darkGrayColor];
+    phonelbl.textColor = [UIColor darkGrayColor];
+    purchasedlbl.textColor = [UIColor darkGrayColor];
+    lastnamelbl.textColor= [UIColor darkGrayColor];
     
     [txtPhoneNo resignFirstResponder];
     [txtName resignFirstResponder];
@@ -667,7 +667,7 @@
         frame.size.height = 190;
         frame.origin.x = frame.origin.x +18;
         frame.origin.y = frame.origin.y -5;
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366 )
         {
             frame.size.width = 230;
             frame.size.height = 230;

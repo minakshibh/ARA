@@ -90,7 +90,7 @@
         //badagesImage.frame = CGRectMake(badagesImage.frame.origin.x, badagesImage.frame.origin.y, badagesImage.frame.size.width, badagesImage.frame.size.height+5);
         
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             badagesName.font=[badagesName.font fontWithSize:30];
             badagesDate.font=[badagesDate.font fontWithSize:24];

@@ -97,7 +97,7 @@
         lblbackgroundReferral.layer.borderWidth = 1;
         lblbackgroundSoldReferrals.layer.borderWidth = 1;
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:30];
             lblHeading.font = [lblHeading.font fontWithSize:30];

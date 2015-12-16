@@ -120,7 +120,7 @@
         lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:24];
         //btnImportContacts.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 90);
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             
             lblheading.font = [lblheading.font fontWithSize:30];
@@ -411,6 +411,13 @@
 }
 
 - (IBAction)btnDonePOPUPemail:(id)sender {
+    
+    NSString *str =    [selectedContactDict valueForKey:@"email"];
+    if (str == nil) {
+          [self.view makeToast:@"Kindly select an email first..."];
+        return;
+    }
+
     [[KGModal sharedInstance] hideAnimated:YES];
     
     NSArray *name = [lblNamePOPUPEmail.text componentsSeparatedByString:@" "];
@@ -656,18 +663,9 @@
     }
     else {
         // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
-        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
-            if (granted) {
-                picker.peoplePickerDelegate = self;
-                
-                [self presentModalViewController:picker animated:YES];
-                [picker setPeoplePickerDelegate:self];
-                [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
-            } else {
-                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
-            }
-        });
-    }
+        NSString *msgStr = @"You've disabled access to contacts. To re-enable, please go to Settings and enable Contacts for ARA.";
+        [HelperAlert alertWithOneBtn:AlertTitle description:msgStr okBtn:OkButtonTitle];
+        }
 }
 
 #pragma mark - AddressBook Delegate Methods
@@ -716,9 +714,14 @@
     }
     for(CFIndex j = 0; j < ABMultiValueGetCount(email); j++)
     {
-    CFStringRef emailLabel = ABMultiValueCopyLabelAtIndex(phones, j);
+        
+    CFStringRef emailLabel = ABMultiValueCopyLabelAtIndex(email, j);
     NSString *emailLabel1 =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(emailLabel);
         NSLog(@"%@",emailLabel1);
+        if (j==0) {
+            [emaillbl addObject:@"email"];
+            continue;
+        }
         [emaillbl addObject:emailLabel1];
     }
     
@@ -1314,7 +1317,6 @@
         
         
         [cell setLabelText:imageName :[valueLbl objectAtIndex:indexPath.row] :[valueToSet objectAtIndex:indexPath.row] :&(isPhoneNo)];
-        
         
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return  cell;

@@ -52,7 +52,7 @@
         btnResetPassword.titleLabel.font = [btnSingUp.titleLabel.font fontWithSize:24];
         lblOr.font = [lblOr.font fontWithSize:20];
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             txtEmail.font=[txtEmail.font fontWithSize:30];
             

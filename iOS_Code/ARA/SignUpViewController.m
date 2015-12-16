@@ -91,7 +91,7 @@
     if (IS_IPAD)
     {
         btnCheckBox.titleLabel.font = [btnCheckBox.titleLabel.font fontWithSize:20];
-        btnSignup.titleLabel.font = [btnSignup.titleLabel.font fontWithSize:20];
+        btnSignup.titleLabel.font = [btnSignup.titleLabel.font fontWithSize:24];
         
         lblAlready.font = [lblAlready.font fontWithSize:20];
         btnLogIn.titleLabel.font = [btnLogIn.titleLabel.font fontWithSize:20];
@@ -110,7 +110,9 @@
         txtPreviousCoustomer.font = [txtPreviousCoustomer.font fontWithSize:20];
         txtMEA.font = [txtMEA.font fontWithSize:20];
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        btnCheckBox.frame = CGRectMake(btnCheckBox.frame.origin.x, btnCheckBox.frame.origin.y-3, btnCheckBox.frame.size.width, btnCheckBox.frame.size.height);
+        
+        if(IS_IPAD_PRO_1366)
         {
             btnCheckBox.titleLabel.font = [btnCheckBox.titleLabel.font fontWithSize:24];
             btnSignup.titleLabel.font = [btnSignup.titleLabel.font fontWithSize:30];
@@ -1111,7 +1113,9 @@ if(tableView == tableViewPreviousCustomer)
     [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
     scrollView.scrollEnabled = YES;
 
-  
+    if (IS_IPAD) {
+        return 50;
+    }
     
     
     return 35;
@@ -1140,9 +1144,9 @@ if(tableView == tableViewPreviousCustomer)
     [tableView flashScrollIndicators];
     
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
-        cell.textLabel.font = [UIFont systemFontOfSize:17.0];
+        cell.textLabel.font = [UIFont systemFontOfSize:25.0];
     }
     tableViewPreviousCustomer.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableViewMEA.separatorStyle = UITableViewCellSeparatorStyleNone;

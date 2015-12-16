@@ -99,7 +99,8 @@ UIButton *tag_btn,*tag_cancel_btn;
         
         lblDIrectreferral.font=[lblDIrectreferral.font fontWithSize:18];
         lblIndirectreferral.font=[lblIndirectreferral.font fontWithSize:18];
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        
+        if(IS_IPAD_PRO_1366)
         {
             lblheadingView.font=[lblheadingView.font fontWithSize:30];
             btnSort.titleLabel.font = [btnSort.titleLabel.font fontWithSize:30];

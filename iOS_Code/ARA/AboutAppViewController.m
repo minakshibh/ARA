@@ -93,7 +93,7 @@
        btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
          BUILDSIZE.font = [BUILDSIZE.font fontWithSize:24];
         btnheading.font = [btnheading.font fontWithSize:24];
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
 
             BUILDVERSION.font = [BUILDVERSION.font fontWithSize:30];

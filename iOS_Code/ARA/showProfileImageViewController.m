@@ -65,7 +65,7 @@
         
         btnProfile.titleLabel.font = [btnProfile.titleLabel.font fontWithSize:24];
 
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             lblheading.font=[lblheading.font fontWithSize:30];
             

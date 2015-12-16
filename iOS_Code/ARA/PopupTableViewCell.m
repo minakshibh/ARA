@@ -30,8 +30,8 @@
     lblContactType.text = [NSString stringWithFormat:@"%@",contactType];
     lblContactDetail.text = [NSString stringWithFormat:@"%@",contactDetails];
     
-    if (!isPhoneno) {
-        lblContactDetail.font=[lblContactDetail.font fontWithSize:22];
+    if (isPhoneno==NO) {
+        lblContactDetail.font=[lblContactDetail.font fontWithSize:15];
     }
     
     if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {

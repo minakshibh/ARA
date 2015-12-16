@@ -31,12 +31,13 @@
     {
         
         
-        imageViewimage.image =[UIImage imageNamed:@"direct_ref.png"];;
+        imageViewimage.image =[UIImage imageNamed:@"direct_ref.png"];
     }else //if ([ReferralType isEqualToString:@"Direct"])
     {
         imageViewimage.image = [UIImage imageNamed:@"chained_ref.png"];
     }
-    
+  imageViewimage.contentMode = UIViewContentModeScaleAspectFit;
+
     lblAmontEarnedScoreboard.hidden =YES;
     lblPricetxtScoreboard.hidden = YES;
     lblPriceScoreboard.hidden = YES;
@@ -61,7 +62,7 @@
         lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:14];
 
     }else if([tag isEqualToString:@"sold"]){
-        lbltag.textColor = [UIColor colorWithRed:118.0f/255.0f green:178.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
+        lbltag.textColor = [UIColor colorWithRed:105.0f/255.0f green:160.0f/255.0f blue:208.0f/255.0f alpha:1.0f];
       //  lbltag.textColor = [UIColor whiteColor];
         lbltag.text = @"SOLD";
         
@@ -99,11 +100,11 @@
         imageViewimage.frame = CGRectMake(imageViewimage.frame.origin.x+2, imageViewimage.frame.origin.y-3, imageViewimage.frame.size.width-4, imageViewimage.frame.size.height+10);
         
         lblName.font = [lblName.font fontWithSize:24];
-        lblDate.font = [lblDate.font fontWithSize:20];
+        lblDate.font = [lblDate.font fontWithSize:18];
         lbltag.font = [lbltag.font fontWithSize:24];
         
         lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y, lblDate.frame.size.width, lblDate.frame.size.height);
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             lblName.font = [lblName.font fontWithSize:30];
             lblDate.font = [lblDate.font fontWithSize:24];
@@ -135,7 +136,7 @@
         lblDate.font=[lblDate.font fontWithSize:20];
         lblpriceReferral.font=[lblpriceReferral.font fontWithSize:20];
         lblDateReward.font=[lblDateReward.font fontWithSize:20];
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             lblAmontEarnedScoreboard.font=[lblAmontEarnedScoreboard.font fontWithSize:24];
             lblPricetxtScoreboard.font=[lblPricetxtScoreboard.font fontWithSize:24];
@@ -241,7 +242,7 @@
          lblPriceScoreboard.frame = CGRectMake(lblPriceScoreboard.frame.origin.x,lblPriceScoreboard.frame.origin.y, lblPriceScoreboard.frame.size.width,
         lblPriceScoreboard.frame.size.height);
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             lblNameScoreboard.font = [lblNameScoreboard.font fontWithSize:30];
             lblPriceScoreboard.font = [lblPriceScoreboard.font fontWithSize:25];

@@ -128,7 +128,7 @@
         btnAboutApp.titleLabel.font=[btnAboutApp.titleLabel.font fontWithSize:24];
         btnLogout.titleLabel.font=[btnLogout.titleLabel.font fontWithSize:24];
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366 )
         {
             
             btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:30];
@@ -625,7 +625,7 @@ if([recieved_status isEqualToString:@"passed"])
         frame.size.height = 210;
         frame.origin.x = frame.origin.x +14;
         frame.origin.y = frame.origin.y -10;
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366 )
         {
             frame.origin.x = frame.origin.x + 10;
             frame.size.width = 260;

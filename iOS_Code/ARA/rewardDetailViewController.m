@@ -87,7 +87,7 @@
         btnreferraldetails.titleLabel.font=[btnBack.titleLabel.font fontWithSize:24];
         
         btnBack.titleLabel.font=[btnBack.titleLabel.font fontWithSize:24];
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             lblHeading.font=[lblHeading.font fontWithSize:30];
             

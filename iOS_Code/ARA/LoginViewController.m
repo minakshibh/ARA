@@ -99,12 +99,12 @@
         
         btnLogin.titleLabel.font = [btnLogin.titleLabel.font fontWithSize:24];
         btnFacebookLogin.titleLabel.font = [btnFacebookLogin.titleLabel.font fontWithSize:24];
-        txtEmail.font = [lblAlreadyHaveAnAccount.font fontWithSize:24]
+        txtEmail.font = [lblAlreadyHaveAnAccount.font fontWithSize:20]
         ;
-        txtPassword.font = [lblAlreadyHaveAnAccount.font fontWithSize:24]
+        txtPassword.font = [lblAlreadyHaveAnAccount.font fontWithSize:20]
         ;
         
-        if(IS_IPAD_PRO_1366 || IS_IPAD_PRO_1024)
+        if(IS_IPAD_PRO_1366)
         {
             btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:24];
             btnForgotPassword.titleLabel.font = [btnForgotPassword.titleLabel.font fontWithSize:24];
@@ -132,8 +132,7 @@
         [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
     }
     
-    [txtEmail resignFirstResponder];
-    [txtPassword resignFirstResponder];
+    [self.view endEditing:YES];
     
     
     int d = 0; // standard display
