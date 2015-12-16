@@ -509,6 +509,8 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 	}
 
 	private void validationCheck(String id, String value) {
+		if (Util.isNetworkAvailable(RegisterActivity.this)) {
+
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
 		nameValuePairs.add(new BasicNameValuePair(id, value));
@@ -518,6 +520,9 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 				false, "Please wait...",false);
 		mWebPageTask.delegate = (AsyncResponseForARA) RegisterActivity.this;
 		mWebPageTask.execute();
+		} else {
+			Util.alertMessage(RegisterActivity.this, Util.network_error);
+		}
 	}
 
 	@Override
@@ -652,7 +657,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 												.getLastName());
 										if(!usermodel.getUserId().equals("0"))
 										{
-										userId.setText(usermodel.getUserId());
+											userId.setText(usermodel.getUserId());
 										}
 										phNumber.setText(usermodel.getPhoneNumber());
 										emailId.setText(usermodel.getEmail());
