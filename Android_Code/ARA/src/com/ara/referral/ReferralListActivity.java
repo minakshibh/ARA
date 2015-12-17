@@ -486,19 +486,18 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				imageview.setImageResource(R.drawable.indirect);
 			}
 			
-			if (referral.getReferralStatus().equalsIgnoreCase(
-					DashBoardActivity.STATUS_SOLD)) {
+			if (referral.getReferralStatus().equalsIgnoreCase(DashBoardActivity.STATUS_SOLD)) {
 				date.setText("Sold date: " + referral.getSoldDate());
 				date.setTypeface(BaseActivity.typeface_roboto);
-				status.setBackgroundResource(R.drawable.blue_rounded_btn);
+				status.setTextColor(getResources().getColor(R.color.app_blue));
 
 			} else {
 				date.setText("Submitted date: " + referral.getCreatedDate());
 				if (referral.getReferralStatus().equalsIgnoreCase(
 						DashBoardActivity.STATUS_OPEN)) {
-					status.setBackgroundResource(R.drawable.green_rounded_btn);
+					status.setTextColor(getResources().getColor(R.color.app_green));
 				} else {
-					status.setBackgroundResource(R.drawable.orange_rounded_btn);
+					status.setTextColor(getResources().getColor(R.color.app_orange));
 				}
 			}
 

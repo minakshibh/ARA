@@ -1,6 +1,9 @@
 package com.ara.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +20,7 @@ import com.ara.model.Reward;
 import com.ara.model.Role;
 import com.ara.model.ScoreBoard;
 import com.ara.model.User;
+
 
 import android.content.Context;
 
@@ -480,23 +484,23 @@ public class ARAParser {
 	public ArrayList<Badge> parseBadgeContent(String output) {
 		// TODO Auto-generated method stub
 		
-	/*	[
-		  {
-		    "BadgeId": 2,
-		    "BadgeName": "Gold",
-		    "BadgeUrl": "http://112.196.24.205:89/badgesicon/gold-badges.png",
-		    "EarnedDate": null,
-		    "CreatedDate": "2015-28-09 7:16:59 PM",
-		    "BadgesCrieteria": {
-		      "BadgeCriteriaId": 6,
-		      "BadgeType": "Referral",
-		      "BadgeStatus": "sold",
-		      "MinimumReferralsRequired": 3,
-		      "ApplicableTimeFrameInDays": 30,
-		      "CreatedDate": "2015-28-09 7:13:38 PM"
-		    }
-		  },
-		]*/
+	/*	  {
+			    "BadgeId": 5,
+			    "BadgeEarnedUserId": 0,
+			    "BadgeEarnedId": 0,
+			    "BadgeName": "Bronze",
+			    "BadgeUrl": "http://63.255.19.72:801/badgesicon/Bronze-badges.png",
+			    "EarnedDate": "2015-10-12 11:41:50 PM",
+			    "CreatedDate": "2015-28-09 7:18:40 PM",
+			    "IsBadgeEarned": true,
+			    "BadgesCrieteria": {
+			      "BadgeCriteriaId": 7,
+			      "BadgeType": "Referral",
+			      "BadgeStatus": "open",
+			      "MinimumReferralsRequired": 1,
+			      "ApplicableTimeFrameInDays": 30,
+			      "CreatedDate": "2015-28-09 7:18:24 PM"
+			    }*/
 		
 		ArrayList<Badge> array_Badge=new ArrayList<Badge>();
 		try {
@@ -512,8 +516,9 @@ public class ARAParser {
 			
 			badge.setEarnedDate(jsonObject.getString("EarnedDate").toString());
 			badge.setCreatedDate(jsonObject.getString("CreatedDate").toString());
+			String earned=jsonObject.getString("IsBadgeEarned").toString();
+			badge.setIsBadgeEarned(earned);
 			
-
 			JSONObject jsonObject_BadgesCrieteria =new JSONObject(jsonObject.getString("BadgesCrieteria"));
 			
 			badge.setBadgeCriteriaId(jsonObject_BadgesCrieteria.getString("BadgeCriteriaId")
@@ -526,9 +531,43 @@ public class ARAParser {
 					.toString());
 			badge.setApplicableTimeFrameInDays(jsonObject_BadgesCrieteria.getString("ApplicableTimeFrameInDays"));
 			badge.setBadgesCrieteria_CreatedDate(jsonObject_BadgesCrieteria.getString("CreatedDate"));
-			
+			//if(earned.equalsIgnoreCase("true"))
 			array_Badge.add(badge);
-				}
+			
+				
+			}
+				//sorted
+				ArrayList<Badge> sortarArrayList1=new ArrayList<Badge>();
+				
+				 Collections.sort(array_Badge, new Comparator<Badge>() {
+					 public int compare(Badge v1, Badge v2) {
+					 return v1.getBadgeName().compareTo(v2.getBadgeName());
+					 }
+					 });
+
+					Iterator<Badge> iterator1 = array_Badge.iterator();
+					while (iterator1.hasNext()) {
+						sortarArrayList1.add(iterator1.next());
+					}
+					array_Badge.clear();
+					array_Badge.addAll(sortarArrayList1);
+					
+					
+				///earned sorted	
+					ArrayList<Badge> sortarArrayList2=new ArrayList<Badge>();
+					
+					 Collections.sort(array_Badge, new Comparator<Badge>() {
+						 public int compare(Badge v1, Badge v2) {
+						 return v2.getIsBadgeEarned().compareTo(v1.getIsBadgeEarned());
+						 }
+						 });
+
+						Iterator<Badge> iterator2 = array_Badge.iterator();
+						while (iterator2.hasNext()) {
+							sortarArrayList2.add(iterator2.next());
+						}
+						array_Badge.clear();
+						array_Badge.addAll(sortarArrayList2);
 			return array_Badge;
 				
 		} 

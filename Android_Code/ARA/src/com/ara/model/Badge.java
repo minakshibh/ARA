@@ -2,7 +2,15 @@ package com.ara.model;
 
 public class Badge {
   String BadgeId,BadgeName,BadgeUrl,EarnedDate,CreatedDate,BadgeCriteriaId,BadgeType,
-  BadgeStatus,MinimumReferralsRequired,ApplicableTimeFrameInDays,BadgesCrieteria_CreatedDate;
+  BadgeStatus,MinimumReferralsRequired,ApplicableTimeFrameInDays,BadgesCrieteria_CreatedDate,IsBadgeEarned;
+
+public String getIsBadgeEarned() {
+	return IsBadgeEarned;
+}
+
+public void setIsBadgeEarned(String isBadgeEarned) {
+	IsBadgeEarned = isBadgeEarned;
+}
 
 public String getBadgeId() {
 	return BadgeId;
