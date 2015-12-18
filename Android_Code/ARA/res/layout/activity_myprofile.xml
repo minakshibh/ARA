@@ -435,7 +435,7 @@
                       android:layout_weight="6"
                         android:gravity="end"
                         
-                        android:text="CHANGE PASSWORD"
+                        android:text="Change Password"
                         android:textColor="@color/app_blue"
                         android:textStyle="bold" />
                 </LinearLayout>
