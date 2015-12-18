@@ -495,7 +495,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				date.setText("Submitted date: " + referral.getCreatedDate());
 				if (referral.getReferralStatus().equalsIgnoreCase(
 						DashBoardActivity.STATUS_OPEN)) {
-					status.setTextColor(getResources().getColor(R.color.app_green));
+					status.setTextColor(getResources().getColor(R.color.bright_green));
 				} else {
 					status.setTextColor(getResources().getColor(R.color.app_orange));
 				}

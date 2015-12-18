@@ -29,7 +29,7 @@ public class ReferralsDetailsActivity extends Activity {
 	private TextView txtName, txtEmail, txtPhone, txtSoldDate,
 			txtSubmittedDate, txtMea, txtComment,textView_back;
 	private TextView lblName, lblEmail, lblPhonenumber, lblSubmittedDate,
-			lblSoldDate, lblMEA, lblComment,lbl_DirectReferral;
+			lblSoldDate, lblMEA, lblComment,lbl_DirectReferral,txtHeaderOutput;
 	private Referral referral;
 	private TextView colorStripe, header,txt_DirectReferral;
 	private ImageView imageView_back,imageView_referralType;
@@ -57,10 +57,10 @@ public class ReferralsDetailsActivity extends Activity {
 
 		textView_back=(TextView)findViewById(R.id.textView_back);
 		textView_back.setTypeface(BaseActivity.typeface_roboto);
-		//textView_title=(TextView)findViewById(R.id.textView_title);
-		//textView_title.setTypeface(BaseActivity.typeface_timeburner);
+		txtHeaderOutput=(TextView)findViewById(R.id.txtHeaderOutput);
+		txtHeaderOutput.setTypeface(BaseActivity.typeface_timeburner);
 		imageView_back=(ImageView)findViewById(R.id.imageView_back);
-		imageView_referralType=(ImageView)findViewById(R.id.imageView_referralType);
+		//imageView_referralType=(ImageView)findViewById(R.id.imageView_referralType);
 		lblName = (TextView) findViewById(R.id.lblName);
 		lblName.setTypeface(BaseActivity.typeface_roboto);
 
@@ -196,12 +196,12 @@ public class ReferralsDetailsActivity extends Activity {
 				
 				if(reward.getReferralType().equalsIgnoreCase("direct"))
 				{
-					imageView_referralType.setImageResource(R.drawable.direct_ref);
+					txtHeaderOutput.setText("DIRECT");
 					lay_directReferral.setVisibility(View.GONE);
 				}
 				else
 				{
-					imageView_referralType.setImageResource(R.drawable.chained_ref);
+					txtHeaderOutput.setText("INDIRECT");
 					lay_directReferral.setVisibility(View.VISIBLE);
 					txt_DirectReferral.setText(reward.getReferrerName());
 				}
@@ -218,7 +218,7 @@ public class ReferralsDetailsActivity extends Activity {
 					colorStripe.setBackgroundColor(getResources().getColor(
 							R.color.bright_orange));
 	
-				header.setText("REFERRAL ID: " + reward.getUniqueReferralNumber());
+				header.setText("CURRENT REFERRAL ID");// + reward.getUniqueReferralNumber());
 				
 			
 			
@@ -318,12 +318,12 @@ public class ReferralsDetailsActivity extends Activity {
 						
 						if(referral.getReferralType().equalsIgnoreCase("direct"))
 						{
-							imageView_referralType.setImageResource(R.drawable.direct_ref);
+							txtHeaderOutput.setText("DIRECT");
 							lay_directReferral.setVisibility(View.GONE);
 						}
 						else
 						{
-							imageView_referralType.setImageResource(R.drawable.chained_ref);
+							txtHeaderOutput.setText("INDIRECT");
 							lay_directReferral.setVisibility(View.VISIBLE);
 							txt_DirectReferral.setText(referral.getReferrerName());
 						}
@@ -340,7 +340,7 @@ public class ReferralsDetailsActivity extends Activity {
 							colorStripe.setBackgroundColor(getResources().getColor(
 									R.color.bright_orange));
 				
-						header.setText("REFERRAL ID: " + referral.getReferralNumber());
+						header.setText("CURRENT REFERRAL");
 						
 						
 						}
