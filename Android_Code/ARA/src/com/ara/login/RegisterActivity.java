@@ -58,6 +58,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 	private boolean flag_setspinner=false;
 	private boolean flagClient=false;
 	private String clientId="";
+	private String phone=null;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -528,6 +529,8 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 	@Override
 	public void processFinish(final String output, String methodName) {
 		// TODO Auto-generated method stub
+		
+		
 		final ARAParser parser = new ARAParser(RegisterActivity.this);
 
 		if (methodName.equalsIgnoreCase("users/mea")) {
@@ -640,6 +643,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 							
 					if (usermodel.getUserType().equalsIgnoreCase("client")) {
 
+						
 						AlertDialog.Builder alert = new AlertDialog.Builder(
 								RegisterActivity.this);
 						alert.setMessage("We already have your details. Are you a previous client of ARA ?");
@@ -659,7 +663,11 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 										{
 											userId.setText(usermodel.getUserId());
 										}
-										phNumber.setText(usermodel.getPhoneNumber());
+										phone=usermodel.getPhoneNumber();
+										if(phone!=null)
+										{
+											phNumber.setText(phone);
+											}
 										emailId.setText(usermodel.getEmail());
 										// check for error or emailid
 									

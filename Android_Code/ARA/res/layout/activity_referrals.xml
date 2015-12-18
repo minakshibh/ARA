@@ -52,6 +52,8 @@
               android:visibility="invisible"
             android:textColor="@color/white" />
     </LinearLayout> 
+    
+
    <TextView
          android:layout_below="@+id/LinearLayout_header"
         android:id="@+id/txtHeader"
@@ -62,44 +64,12 @@
         android:padding="5dp"
       
         android:textColor="@color/app_blue" />
-
-	<LinearLayout 
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:padding="10dp"
-	    android:layout_below="@+id/txtHeader"
-	    android:background="@color/light_gray"
-	    android:visibility="gone"
-	    android:id="@+id/filterContainer">
-	    <TextView 
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:id="@+id/appliedFilter"
-	        android:text="Sold Only  X"
-	        android:paddingTop="5dp"
-	        android:paddingBottom="5dp"
-	        android:paddingLeft="10dp"
-	        android:paddingRight="10dp"
-	        android:textStyle="bold"
-	        android:textColor="@color/white"
-	        android:background="@drawable/blue_rounded_btn"/>
-	</LinearLayout>
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="fill_parent"
-        android:background="@color/listview_bg"
-        android:layout_height="fill_parent" 
-        android:layout_below="@+id/filterContainer"
-        android:layout_above="@+id/LinearLayout_footer">
-    </ListView>
-
-    <LinearLayout
+<LinearLayout
         android:id="@+id/LinearLayout_footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/txtHeader"
         android:orientation="horizontal" >
         
         
@@ -108,7 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="15dp"
+        android:padding="12dp"
         android:background="@color/white"
       >
 
@@ -131,15 +101,20 @@
              android:textColor="@color/black" />
 
     </RelativeLayout>
-
+<TextView
+          
+             android:layout_width="1dp"
+             android:layout_height="fill_parent"
+            android:background="@color/gray"
+            />
           <RelativeLayout
         android:id="@+id/RelativeLayout_filter"
         android:layout_width="0dp"
         android:layout_height="match_parent"
    		android:layout_weight="1"
-   		 android:padding="15dp"
+   		android:padding="12dp"
         android:background="@color/white"
-         android:layout_gravity="center"
+        android:layout_gravity="center"
         >
 
            <ImageView
@@ -162,4 +137,108 @@
 
     </RelativeLayout>
     </LinearLayout>
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="10dp"
+	    android:layout_below="@+id/txtHeader"
+	  android:layout_above="@+id/LinearLayout_footer"
+	    android:background="@color/light_gray"
+	    android:visibility="gone"
+	    android:id="@+id/filterContainer">
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/appliedFilter"
+	        android:text="Sold Only  X"
+	        android:paddingTop="5dp"
+	        android:paddingBottom="5dp"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:textStyle="bold"
+	        android:textColor="@color/white"
+	        android:background="@drawable/blue_rounded_btn"/>
+	</LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:background="@color/listview_bg"
+        android:layout_height="fill_parent" 
+        android:layout_below="@+id/LinearLayout_footer"
+       >
+    </ListView>
+<LinearLayout
+        android:id="@+id/LinearLayoutDirect"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+       	android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+	    
+    
+         <RelativeLayout
+        android:id="@+id/RelativeLayout_Direct"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".5"
+        android:background="@color/white"
+      >
+
+         <ImageView
+             android:id="@+id/imageViewDirect"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+            
+             android:src="@drawable/direct"
+               android:layout_marginLeft="10dp"
+             android:layout_toLeftOf="@+id/textViewDirect" />
+
+         <TextView
+             android:id="@+id/textViewDirect"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:layout_marginLeft="5dp"
+             android:text="Direct Referral"
+             android:textSize="15sp"
+             android:textColor="@color/black" />
+
+    </RelativeLayout>
+<TextView
+          
+             android:layout_width="1dp"
+             android:layout_height="fill_parent"
+            android:background="@color/gray"
+            />
+          <RelativeLayout
+        android:id="@+id/RelativeLayoutIndirect"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+   		android:layout_weight=".5"
+   	    android:background="@color/white"
+         android:layout_gravity="center"
+        >
+
+           <ImageView
+               android:id="@+id/imageViewIndirect"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/indirect" 
+               android:layout_marginLeft="10dp"
+               android:layout_toLeftOf="@+id/textViewIndirect"/>
+
+           <TextView
+               android:id="@+id/textViewIndirect"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+               android:text="Indirect Referral"
+               android:textSize="15sp"
+               android:textColor="@color/black" />
+
+    </RelativeLayout>
+	    </LinearLayout>
+    
 </RelativeLayout>
