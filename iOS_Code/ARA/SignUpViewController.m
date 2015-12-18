@@ -11,6 +11,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "LoginViewController.h"
+#import "UIView+Toast.h"
 
 @interface SignUpViewController ()
 
@@ -355,6 +356,16 @@
             return;
         }
     }
+    if (![webserviceStatus isEqualToString:@"checked"])
+    {
+        [self.view makeToast:@"Please wait a moment while we check your email."];
+        internal=1;
+        
+        [self checkforAvailability];
+        return;
+    }
+    
+    
     if (![txtEmail emailValidation]) {
         message = @"Please check your email address";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
@@ -405,9 +416,9 @@
         return;
     }
 
-    if([lblemailerror.text isEqualToString:@"Email already exist"])
+    if([lblemailerror.text isEqualToString:@"Email already registered."])
     {
-        message = @"Please select a different email address.";
+        message = @"Unable to add user--email address already exists.";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
 
         return;
@@ -549,6 +560,7 @@
     }
     if(textField==txtEmail){
         lblemailerror.text = @"";
+        webserviceStatus = nil;
         imagecheckforemailView.image=nil;
 
     }
@@ -915,6 +927,7 @@ if ([response_status isEqualToString:@"passed"])
                 [mutable addObject:[array objectAtIndex:i]];
             }
             name_array_Mea = mutable;
+          //  [tableViewMEA reloadData];
         }else if (webservice==4)
         {   webservice=0;
             if([response_status isEqualToString:@"passed"])
@@ -1000,6 +1013,7 @@ if ([response_status isEqualToString:@"passed"])
             
         }else if (webservice==6) {
             webservice=0;
+            webserviceStatus = @"checked";
             if ([responseString rangeOfString:@"Email address not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
                 
@@ -1078,8 +1092,12 @@ if ([response_status isEqualToString:@"passed"])
             return;
         }
     }
+    
+    if ([responseString isEqualToString:@"Email address already exist"]) {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Unable to add user--email address already exists." okBtn:OkButtonTitle];
+    }else{
     [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
-
+    }
    
 
 }
@@ -1221,8 +1239,11 @@ if(tableView == tableViewPreviousCustomer)
             
         }else{
            
-            
+            if (error==1) {
+                
+            }else{
                 lblemailerror.text = @"";
+            }
             
             imageMEAdropdown.hidden = NO;
             txtMEA.text = @"";
@@ -1267,6 +1288,9 @@ if(tableView == tableViewPreviousCustomer)
         if(buttonIndex == 0)//OK button pressed
         {
             lblemailerror.text = @"Email already registered.";
+            error = 1;
+            
+          //  [HelperAlert alertWithOneBtn:AlertTitle description:@"Unable to add user--email address already exists." okBtn:OkButtonTitle];
         }
         else if(buttonIndex == 1)//Annul button pressed.
         {
@@ -1297,6 +1321,7 @@ if(tableView == tableViewPreviousCustomer)
     }
     if(internal==2){
         webservice=6;
+        webserviceStatus = @"checking";
         _postData = [NSString stringWithFormat:@"Email=%@",txtEmail.text];
         
     }

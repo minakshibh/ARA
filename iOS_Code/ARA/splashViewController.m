@@ -9,7 +9,7 @@
 #import "splashViewController.h"
 #import "LoginViewController.h"
 #import "dashboardViewController.h"
-
+#import <Crittercism/Crittercism.h>
 
 @interface splashViewController ()
 
@@ -22,6 +22,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -31,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//   
+//
 //    NSDate *date1 = [NSDate date];
 //    NSDateFormatter* formatter1 = [[NSDateFormatter alloc] init] ;
 //    [formatter1 setDateFormat:@"yyyy-MM-dd"];
@@ -44,9 +45,22 @@
 //    emailid=[value valueForKey:@"Emailid"];
 //
 //
-//    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    appDelegate.navigator.navigationBarHidden = YES;
+//
+    @try {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        appDelegate.navigator.navigationBarHidden = YES;
+    }
+    @catch (NSException *exception) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-1" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+
+    }
+    @finally {
+        
+    }
+   
+    
+
 //
 //    NSArray *animationArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"1.jpg"],[UIImage imageNamed:@"1.jpg"],[UIImage imageNamed:@"1.jpg"],[UIImage imageNamed:@"1.jpg"],[UIImage imageNamed:@"2.jpg"],[UIImage imageNamed:@"3.jpg"],[UIImage imageNamed:@"4.jpg"],[UIImage imageNamed:@"5.jpg"],[UIImage imageNamed:@"6.jpg"],[UIImage imageNamed:@"7.jpg"],[UIImage imageNamed:@"8.jpg"],[UIImage imageNamed:@"9.jpg"],[UIImage imageNamed:@"10.jpg"], [UIImage imageNamed:@"11.jpg"],[UIImage imageNamed:@"12.jpg"], [UIImage imageNamed:@"13.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],[UIImage imageNamed:@"14.jpg"],nil];
 //    NSLog(@"%f",[[UIScreen mainScreen] bounds].size.height);
@@ -90,12 +104,14 @@
 //    
 //   
 //    
-//    
+//
+    @try {
+    
     int d = 0; // standard display
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
         d = 1; // is retina display
     }
-    
+
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         d += 2;
     }
@@ -112,28 +128,61 @@
     if (d==3) {
         imageView.image = [UIImage imageNamed:@"AutoAves Splash_320@2x~ipad.jpg"];
     }
+
+    }@catch (NSException *exception) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-2" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    @finally {
+        
+    }
+    
+    
+    @try {
+        
     [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(presentnextView) userInfo:nil repeats:NO];
     [super viewDidLoad];
-
-
-
+   
+  
+    }@catch (NSException *exception) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-3" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    @finally {
+        
+    }
 
 }
 -(void)presentnextView
 {
     
-    
-    //--check for user already loggedin
+    @try {
+       //--check for user already loggedin
     NSUserDefaults *user123 = [NSUserDefaults standardUserDefaults];
     NSString *already_logged_in = [NSString stringWithFormat:@"%@",[user123 valueForKey:@"l_loggedin"]];
     
     if([already_logged_in isEqualToString:@"yes"])
     {
+
         dashboardViewController *obj = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
         [self.navigationController pushViewController:obj animated:NO];
         return;
     }
     
+    }@catch (NSException *exception) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-4" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    @finally {
+        
+    }
+    
+
+    @try {
+   
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSUserDefaults * value = [NSUserDefaults standardUserDefaults];
     NSString *myString = [value objectForKey:@"preferedDate"];
@@ -141,11 +190,20 @@
     if(myString==nil)
         myString=@"";
     
+
     LoginViewController *home;
     home = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     //this is iphone 5 xib
+        
     [self.navigationController pushViewController:home animated:YES];
-    
+    }@catch (NSException *exception) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-5" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    @finally {
+        
+    }
     
 }
 

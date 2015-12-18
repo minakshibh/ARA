@@ -65,10 +65,11 @@
     IBOutlet UIImageView *imagecheckforemailView;
     IBOutlet UIImageView *imagecheckforuseridView;
     IBOutlet UILabel *lbluseriderror;
-    NSString* firstname,*lastname,*phoneno,*UserDetailId,*found_client,*response_status,*selected_meaid,*selected_previousid;
+    NSString* firstname,*lastname,*phoneno,*UserDetailId,*found_client,*response_status,*selected_meaid,*selected_previousid,*webserviceStatus;
     
     BOOL status,status1,flag;
     IBOutlet UIView *loweView;
+    int error;
 }
 - (IBAction)btnMEA:(id)sender;
 - (IBAction)btnPreviewCustomer:(id)sender;

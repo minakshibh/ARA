@@ -324,8 +324,8 @@
                     [tableView reloadData];
                     return;
                 }
-                lblheading.text =[NSString stringWithFormat:@"ALL BADGES (%lu)",(unsigned long)userDetailDict.count];
-                
+              //lblheading.text =[NSString stringWithFormat:@"ALL BADGES (%lu)",(unsigned long)userDetailDict.count];
+               lblheading.text =[NSString stringWithFormat:@"ALL BADGES"];
                 for (int i=0; i<userDetailDict.count; i++) {
                     badges *obj = [[badges alloc]init];
                     
@@ -349,13 +349,9 @@
 //                [self getData:@"local"];
             }else if(webservices==2)
             {
-                
-                
-                
-                
-                
                 mybadges = @"yes";
-                lblheading.text =[NSString stringWithFormat:@"BADGES (%lu)",(unsigned long)userDetailDict.count];
+          //     lblheading.text =[NSString stringWithFormat:@"BADGES (%lu)",(unsigned long)userDetailDict.count];
+                lblheading.text =[NSString stringWithFormat:@"BADGES"];
                 
                 if(userDetailDict.count<1)
                 {
@@ -395,12 +391,6 @@
                 
                 
                 badges *obj = [[badges alloc]init];
-                
-                
-                
-                
-               
-                
                 NSArray *sortedStrings =
                 [earnedBadgesNames sortedArrayUsingSelector:@selector(compare:)];
                 NSMutableArray *finalarray = [[NSMutableArray alloc]init];
@@ -463,11 +453,7 @@
                      NSLog(@"%@",obj.BadgeName);
                     [badgesArray addObject:obj];
                 }
-               
-                
-              
-                
-                [tableView reloadData];
+               [tableView reloadData];
             }
         }
 }

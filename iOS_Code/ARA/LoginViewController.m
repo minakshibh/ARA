@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "dashboardViewController.h"
 #import "ASIHTTPRequest.h"
+#import <Crittercism/Crittercism.h>
 
 @interface LoginViewController (){
     IBOutlet UIImageView *imagelogo;
@@ -46,13 +47,15 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
+
+
     
     //---initialize checkbox value first tiem with false
     checkbox_Value = false;
     
     [HelperUDLib removeObject:@"self"];
 
-    NSLog(@"%@",[HelperUDLib valueForKey:@"remember_me_status"]);
+    NSLog(@"---%@",[NSString stringWithFormat:@"%@",[HelperUDLib valueForKey:@"remember_me_status"]]);
     
     if([HelperUDLib valueForKey:@"remember_me_status"])
     {
@@ -61,7 +64,7 @@
         [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
         checkbox_Value = true;
     }
-    
+
     //--scrolview initialization
     scrollView.scrollEnabled = YES;
     scrollView.delegate = self;
@@ -87,7 +90,7 @@
     
     
     
-    
+
     
     if (IS_IPAD)
     {
@@ -103,7 +106,7 @@
         ;
         txtPassword.font = [lblAlreadyHaveAnAccount.font fontWithSize:20]
         ;
-        
+
         if(IS_IPAD_PRO_1366)
         {
             btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:24];
@@ -125,6 +128,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+
     if([[HelperUDLib valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
     {
         txtEmail.text = [HelperUDLib valueForKey:@"remember_me_status_email"];
@@ -134,7 +138,7 @@
     
     [self.view endEditing:YES];
     
-    
+
     int d = 0; // standard display
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
         d = 1; // is retina display
@@ -143,7 +147,7 @@
     if (IS_IPAD) {
         d += 2;
     }
-    
+
     if (d==0) {
         imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
     }

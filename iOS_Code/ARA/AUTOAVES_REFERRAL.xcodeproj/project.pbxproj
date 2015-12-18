@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D913AFD01C227846007D3D6E /* Crittercism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D913AFCF1C227846007D3D6E /* Crittercism.framework */; };
 		D916BB0A1BBBAB0B00AECF5D /* submit_ref@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D916BB091BBBAB0B00AECF5D /* submit_ref@2x.png */; };
 		D916BB0C1BBBAB1500AECF5D /* submit_ref.png in Resources */ = {isa = PBXBuildFile; fileRef = D916BB0B1BBBAB1500AECF5D /* submit_ref.png */; };
 		D91B9DFE1B87407D008B0FEB /* checkbox-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = D91B9DFD1B87407D008B0FEB /* checkbox-unchecked.png */; };
@@ -251,6 +252,8 @@
 		D97FAB181BE9D49500540E38 /* 640X1136.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB141BE9D49500540E38 /* 640X1136.png */; };
 		D98429671B943DB1008E5557 /* changePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D98429651B943DB1008E5557 /* changePasswordViewController.m */; };
 		D98429681B943DB1008E5557 /* changePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98429661B943DB1008E5557 /* changePasswordViewController.xib */; };
+		D99A74481C24034200880859 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = D99A74471C24034200880859 /* Icon-76.png */; };
+		D99A744A1C24036500880859 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99A74491C24036500880859 /* Icon-76@2x.png */; };
 		D9AF3CA01B8ECE2200F98881 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D956673A1B8ECBE900E01477 /* CFNetwork.framework */; };
 		D9AF3CA11B8ECE2E00F98881 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D956673C1B8ECC0400E01477 /* SystemConfiguration.framework */; };
 		D9AF3CA21B8ECE3700F98881 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D956673E1B8ECC0F00E01477 /* MobileCoreServices.framework */; };
@@ -302,6 +305,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D913AFCF1C227846007D3D6E /* Crittercism.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crittercism.framework; sourceTree = "<group>"; };
 		D916BB091BBBAB0B00AECF5D /* submit_ref@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "submit_ref@2x.png"; sourceTree = "<group>"; };
 		D916BB0B1BBBAB1500AECF5D /* submit_ref.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit_ref.png; sourceTree = "<group>"; };
 		D91B9DFD1B87407D008B0FEB /* checkbox-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-unchecked.png"; sourceTree = "<group>"; };
@@ -632,6 +636,8 @@
 		D98429641B943DB1008E5557 /* changePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changePasswordViewController.h; sourceTree = "<group>"; };
 		D98429651B943DB1008E5557 /* changePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changePasswordViewController.m; sourceTree = "<group>"; };
 		D98429661B943DB1008E5557 /* changePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = changePasswordViewController.xib; sourceTree = "<group>"; };
+		D99A74471C24034200880859 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		D99A74491C24036500880859 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
 		D9AF3CA51B8ED27800F98881 /* ARA-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARA-Prefix.pch"; sourceTree = "<group>"; };
 		D9AF3CA71B8EE5BD00F98881 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D9AF3CA81B8EE5BD00F98881 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -694,6 +700,7 @@
 				D9AF3CA21B8ECE3700F98881 /* MobileCoreServices.framework in Frameworks */,
 				D9AF3CA11B8ECE2E00F98881 /* SystemConfiguration.framework in Frameworks */,
 				D9AF3CA01B8ECE2200F98881 /* CFNetwork.framework in Frameworks */,
+				D913AFD01C227846007D3D6E /* Crittercism.framework in Frameworks */,
 				D956674C1B8ECC8700E01477 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1265,6 +1272,7 @@
 		D96650A91C19505F00C1399C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D913AFCF1C227846007D3D6E /* Crittercism.framework */,
 				D9F3B0321C1EC41900828219 /* KGModal */,
 				D96650AA1C19515000C1399C /* Helper Classes */,
 				D92164281B84408000B92589 /* SDWebImage */,
@@ -1304,6 +1312,8 @@
 				D969127A1BE37280001D6E5E /* AppIcon_80.png */,
 				D969127B1BE37280001D6E5E /* AppIcon_120.png */,
 				D969127C1BE37280001D6E5E /* AppIcon_1024.png */,
+				D99A74471C24034200880859 /* Icon-76.png */,
+				D99A74491C24036500880859 /* Icon-76@2x.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -1703,8 +1713,10 @@
 				D916BB0C1BBBAB1500AECF5D /* submit_ref.png in Resources */,
 				D96912991BE387EF001D6E5E /* inner-logo_240.png in Resources */,
 				D93569CC1B81E74300777DD3 /* inner-logo.png in Resources */,
+				D99A74481C24034200880859 /* Icon-76.png in Resources */,
 				D9356A101B81E82000777DD3 /* paypal-icon@2x.png in Resources */,
 				D94BEABE1B7872EB008BCF5F /* Images.xcassets in Resources */,
+				D99A744A1C24036500880859 /* Icon-76@2x.png in Resources */,
 				D93569DF1B81E74300777DD3 /* user-icon.png in Resources */,
 				D9356A0A1B81E82000777DD3 /* inner-logo@2x.png in Resources */,
 				D9DDB9A61B7CC788006F5A37 /* Roboto-Black.ttf in Resources */,
@@ -1905,7 +1917,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "76c505b8-ac62-4ffb-a2d4-a02853f8996f";
+				PROVISIONING_PROFILE = "e162e085-d212-47a8-8b68-074545fd8bf0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1941,7 +1953,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "17f57e95-79b3-43b4-8e66-d3999c57e532";
+				PROVISIONING_PROFILE = "144a0a30-92b2-4b2d-a812-dae06f6b52e3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1951,6 +1963,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
 				ENABLE_BITCODE = NO;
@@ -1969,7 +1982,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "76c505b8-ac62-4ffb-a2d4-a02853f8996f";
+				PROVISIONING_PROFILE = "e162e085-d212-47a8-8b68-074545fd8bf0";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1978,6 +1991,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
 				ENABLE_BITCODE = NO;
@@ -1996,7 +2010,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "17f57e95-79b3-43b4-8e66-d3999c57e532";
+				PROVISIONING_PROFILE = "144a0a30-92b2-4b2d-a812-dae06f6b52e3";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

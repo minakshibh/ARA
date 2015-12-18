@@ -1274,7 +1274,7 @@
     
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-        return 50;
+        return 57;
     }
     return 35;
 }
@@ -1334,9 +1334,9 @@
     cell.textLabel.text = [name_mea_array objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:13.0];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( IS_IPAD )
     {
-        cell.textLabel.font = [UIFont systemFontOfSize:17.0];
+        cell.textLabel.font = [UIFont systemFontOfSize:20.0];
     }
     return  cell;
 }

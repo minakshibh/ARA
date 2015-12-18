@@ -12,8 +12,9 @@
 #import "LoginViewController.h"
 #import "dashboardViewController.h"
 #import "referralListViewController.h"
+#import <Crittercism/Crittercism.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () <CrittercismDelegate>
 
 @end
 
@@ -27,10 +28,11 @@
 //    {
 //        NSLog(@"Family:'%@'",fontfamilyname);
 //    }
-
-   
     
-        
+
+    @try {
+   [Crittercism enableWithAppID:@"56723ec36c33dc0f00f11469"];
+    
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
         
         // If there's one, just open the session silently, without showing the user the login UI
@@ -44,7 +46,6 @@
                                       }];
     }
 
-    
     //---setting root view controller
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     splashViewController *rootVC = [[splashViewController alloc]initWithNibName:@"splashViewController" bundle:nil];
@@ -76,19 +77,49 @@
      UIRemoteNotificationTypeSound];
     
 #endif
-    
-    
+  
+//#ifdef __IPHONE_8_0
+//    //Right, that is the point
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//#else
+//    //register to receive notifications
+//    UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+//    
+//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+//#endif
+       
     return YES;
+    } @catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"App Delegate 1" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+
+    }@finally {
+        
+    }
 }
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    if (notificationSettings.types != UIUserNotificationTypeNone) {
-        NSLog(@"didRegisterUser");
+    @try {
+   
+//    if (notificationSettings.types != UIUserNotificationTypeNone) {
+//        NSLog(@"didRegisterUser");
         [application registerForRemoteNotifications];
+//    }
+        
+    }@catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"App Delegate 2" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }@finally {
+        
     }
 }
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken: (NSData *)_deviceToken
 {
-    
+    @try {
+     
     // Get a hex string from the device token with no spaces or < >
     NSString*deviceToken = [[[[_deviceToken description] stringByReplacingOccurrencesOfString:@"<"withString:@""]
                              stringByReplacingOccurrencesOfString:@">" withString:@""]
@@ -98,7 +129,14 @@
 
     [[NSUserDefaults standardUserDefaults ]removeObjectForKey:@"deviceToken"];
     [[NSUserDefaults standardUserDefaults]setValue:deviceToken forKey:@"deviceToken"];
-    
+    }@catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"App Delegate 3" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }@finally {
+        
+    }
     
     
 }
@@ -124,7 +162,7 @@
 
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"Error in registration. Error: %@", error);
+ //   NSLog(@"Error in registration. Error: %@", error);
 }
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -135,6 +173,8 @@
 }
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
 {
+    @try {
+      
     // If the session was opened successfully
     if (!error && state == FBSessionStateOpen){
         
@@ -210,6 +250,14 @@
         [FBSession.activeSession closeAndClearTokenInformation];
         // Show the user the logged-out UI
         //[self userLoggedOut];
+    }
+    }@catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"App Delegate 1" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }@finally {
+        
     }
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
