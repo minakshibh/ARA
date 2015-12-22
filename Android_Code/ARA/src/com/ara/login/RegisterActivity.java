@@ -539,8 +539,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			System.err.println(arrayList_Mea.toString());
 			ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,
 					android.R.layout.simple_spinner_item, arrayList_Mea);
-			spinnerArrayAdapter
-					.setDropDownViewResource(R.layout.spinner_dropdown);
+			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 			// Step 3: Tell the spinner about our adapter
 			System.err.println("sizeeeeee===" + arrayList_Mea.size());
 
@@ -643,12 +642,12 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 							
 					if (usermodel.getUserType().equalsIgnoreCase("client")) {
 
-						
-						AlertDialog.Builder alert = new AlertDialog.Builder(
-								RegisterActivity.this);
-						alert.setMessage("We already have your details. Are you a previous client of ARA ?");
-						alert.setPositiveButton("Yes",
-								new DialogInterface.OnClickListener() {
+						//"We already have your details. Are you a previous client of ARA?" This should state, 
+						//"Are you a previous client of Automotive Avenues?"
+						//"We already have your details. Are you a previous client of ARA ?"
+AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
+alert.setMessage("Are you a previous client of Automotive Avenues?");
+alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface arg0,
 											int arg1) {
 
@@ -685,7 +684,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 
 									}
 								});
-						alert.setNegativeButton("No",
+						alert.setNegativeButton("ok",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface arg0,
 											int arg1) {
@@ -699,7 +698,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 							
 							if(role_spinner.getSelectedItemPosition()!=2)
 							{
-								emailId.setError("Email address already exist");
+								emailId.setError("Unable to add user--email address already exists");
 								img_emailId.setVisibility(View.INVISIBLE);
 								checkemail = 2;
 							}

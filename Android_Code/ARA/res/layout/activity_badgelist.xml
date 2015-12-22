@@ -82,6 +82,11 @@
              android:background="@color/listview_bg"
             android:layout_height="wrap_content" >
         </ListView>
-
+    <TextView
+      
+        android:layout_width="fill_parent"
+        android:layout_height=".7dp"
+        android:background="@color/gray"
+        />
         </LinearLayout>
         </RelativeLayout>
