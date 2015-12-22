@@ -64,7 +64,7 @@
     <TextView
         android:id="@+id/txtHeader"
         android:layout_width="0dp"
-         android:layout_weight="9"
+         android:layout_weight="7"
         android:layout_height="wrap_content"
        
         android:gravity="start|center_vertical"
@@ -72,14 +72,24 @@
         android:text="REFERRAL DETAILS"
         android:textColor="@color/app_blue" />
     
-     <ImageView
+    <!--  <ImageView
         android:id="@+id/imageView_referralType"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginRight="5dp"
         android:layout_height="wrap_content"
-        />
+        /> -->
+          <TextView
+        android:id="@+id/txtHeaderOutput"
+        android:layout_width="0dp"
+         android:layout_weight="3"
+ 		android:text="demo"
+  		android:textColor="@color/app_blue"
+        android:layout_gravity="center_vertical"
+        android:gravity="end"
+        android:layout_marginRight="5dp"
+        android:layout_height="wrap_content" />
     
     </LinearLayout>
 

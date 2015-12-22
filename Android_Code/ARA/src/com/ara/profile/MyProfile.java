@@ -40,7 +40,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 	private ImageView image_purchase;
 	private ImageView imageView_profilepic;
 	private String purchase = "";
-	private TextView textView_back;
+	private TextView textView_back,lbl_changepass;
 	private TextView textView_name,textView_lastname,textView_email,textView_phone,textView_role,textView_mea,
 	textView_purchase,textview_purchase_no;
 	private String imageurl="",phonenumber="";
@@ -76,7 +76,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		editText_mea = (EditText) findViewById(R.id.editText_mea);
 		editText_mea.setTypeface(BaseActivity.typeface_roboto);
 		
-	
+		lbl_changepass= (TextView) findViewById(R.id.lbl_changepass);
 		text_changepass = (TextView) findViewById(R.id.text_changepass);
 		textView_username = (TextView) findViewById(R.id.textView_username);
 		//text_changepass.setTypeface(BaseActivity.typeface_roboto);
@@ -100,7 +100,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		textView_myprofile=(TextView)findViewById(R.id.textView_myprofile);
 		textView_myprofile.setTypeface(BaseActivity.typeface_timeburner);
 		
-		
+		lbl_changepass.setTypeface(BaseActivity.typeface_roboto);
 		
 		 textView_name=(TextView)findViewById(R.id.textView_name);
 		 textView_name.setTypeface(BaseActivity.typeface_roboto);
@@ -237,7 +237,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		textView_email.setEnabled(false);
 		textView_phone.setEnabled(false);
 		textView_mea.setEnabled(false);
-		
+		lbl_changepass.setEnabled(false);
 		textView_role.setEnabled(false);
 		textview_purchase_no.setEnabled(false);
 		textview_purchase_no.setVisibility(View.VISIBLE);
@@ -258,7 +258,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		textView_purchase.setEnabled(true);
 		textview_purchase_no.setVisibility(View.GONE);
 		image_purchase.setVisibility(View.VISIBLE);
-
+		lbl_changepass.setEnabled(false);
 	}
 
 	private void loginAPI() {

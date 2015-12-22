@@ -27,7 +27,7 @@ import android.widget.TextView;
 public class ChangePasswordActivity extends Activity implements AsyncResponseForARA {
 
 	private ImageView imageView_back;
-	private TextView textView_back;
+	private TextView textView_back,textView_header;
 	private Button btn_changepass;
 	private User user_model;
 	private EditText oldpassword, newpassword, confirm_pass;
@@ -52,8 +52,8 @@ public class ChangePasswordActivity extends Activity implements AsyncResponseFor
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		oldpassword = (EditText) findViewById(R.id.oldpassword);
 		newpassword = (EditText) findViewById(R.id.newpassword);
-		//textView_title = (TextView) findViewById(R.id.textView_title);
-		//textView_title.setTypeface(BaseActivity.typeface_timeburner);
+		textView_header= (TextView) findViewById(R.id.textView_header);
+		textView_header.setTypeface(BaseActivity.typeface_timeburner);
 
 		confirm_pass = (EditText) findViewById(R.id.confirm_pass);
 		btn_changepass = (Button) findViewById(R.id.btn_changepass);

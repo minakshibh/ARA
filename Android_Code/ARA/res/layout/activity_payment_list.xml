@@ -44,7 +44,7 @@
              />
 
         <TextView
-            android:id="@+id/add"
+          
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -52,34 +52,59 @@
             android:layout_alignParentRight="true"
             android:text="Add"
             android:padding="8dp"
+            android:visibility="gone"
             android:textColor="@color/white" />
 
 </RelativeLayout>
-   <TextView
-         android:layout_below="@+id/LinearLayout_header"
+
+<LinearLayout
+    android:id="@+id/LinearLayout_header2"
+    android:layout_width="match_parent"
+    android:layout_below="@+id/LinearLayout_header"
+    android:layout_height="wrap_content"
+     android:background="@color/app_yellow"
+    android:orientation="horizontal" >
+
+    <TextView
         android:id="@+id/txtHeader"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        
+        android:layout_weight="7"
         android:background="@color/app_yellow"
         android:gravity="start|center_vertical"
         android:padding="5dp"
-      android:text="PAYMENT ACCOUNTS"
+        android:text="PAYMENT ACCOUNTS"
         android:textColor="@color/app_blue" />
 
-<TextView
-         android:layout_below="@+id/txtHeader"
-        android:id="@+id/swipeInfo"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/add"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/light_gray"
-        android:gravity="start|center_vertical"
-        android:paddingLeft="5dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-      android:text="Swipe left to Edit or Delete"
-      android:textSize="10sp"
-      android:textStyle="bold"
-        android:textColor="@color/dark_gray" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:layout_weight="3"
+        android:gravity="end"
+        android:padding="5dp"
+        android:text="ADD"
+        android:textColor="@color/app_blue"
+        android:textStyle="bold" />
+</LinearLayout>
+
+<TextView
+    android:id="@+id/swipeInfo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/LinearLayout_header2"
+    android:background="@color/light_gray"
+    android:gravity="start|center_vertical"
+    android:paddingBottom="2dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="2dp"
+    android:text="Swipe left to Edit or Delete"
+    android:textColor="@color/dark_gray"
+    android:textSize="10sp"
+    android:textStyle="bold" />
 
     <ListView
         android:id="@+id/paymentListView"
