@@ -218,51 +218,51 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 
 				Intent intent = new Intent(BaseActivity.this, MyProfile.class);
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 				
 			} else if (v == referrals) {
 				Intent intent = new Intent(BaseActivity.this,ReferralListActivity.class);
 				intent.putExtra("referralStatus", "all");
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			} 
 			else if (v == submitReferral) {
 				Intent intent = new Intent(BaseActivity.this,SubmitReferralActivity.class);
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			} 
 			else if (v == paymentAccounts) {
 				Intent intent = new Intent(BaseActivity.this,PaymentListActivity.class);
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			} 
 			else if (v == myBadges) {
 
 				Intent intent = new Intent(BaseActivity.this,BadgeListActivity.class);
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			} 
 			else if (v == myRewards) {
 
 				Intent intent = new Intent(BaseActivity.this,RewardsListActivity.class);
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			} 
 			else if (v == layout_imagename) {
 				Intent intent = new Intent(BaseActivity.this, MyProfile.class);
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			}
 			else if (v == scoreboard) {
 				Intent intent = new Intent(BaseActivity.this, ScoreBoardActivity.class);
 				intent.putExtra("base", "yes");
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			} 
 			else if (v == about) {
 				Intent intent = new Intent(BaseActivity.this, AboutActivity.class);
 				startActivity(intent);
-				DrawerLayoutClose();
+				//DrawerLayoutClose();
 			} 
 			else if (v == logout) {
 				
@@ -289,9 +289,9 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 	}
 	private void DrawerLayoutClose()
 	{
-		if (mDrawerLayout.isDrawerOpen(flyoutDrawerRl)) {
+		//if (mDrawerLayout.isDrawerOpen(flyoutDrawerRl)) {
 			mDrawerLayout.closeDrawers();
-		}
+		//}
 	}
 	private void logoutApi()
 	{

@@ -52,7 +52,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 	private LinearLayout emailLayout;
 	private EditText emailId;
 	private Spinner paymentModeSpinner;
-	private ArrayList<PaymentMode> paymentModeList;
+	private ArrayList<PaymentMode> paymentModeList=new ArrayList<PaymentMode>();
 	private String paymentModeId = "-1", trigger;
 	private Button save;
 	private SharedPreferences spref;
@@ -69,8 +69,9 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 		setContentView(R.layout.add_payment_account);
 
 		setUI();
-		setOnClickListener();
 		LoadPaymentModes();
+		setOnClickListener();
+		
 	}
 
 	private void setUI() {
@@ -284,6 +285,8 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 		if (methodName.equalsIgnoreCase("paymentmodes")) {
 			paymentModeList = parser.parsePaymentModeResponse(output);
 		
+		
+			
 			if(trigger.equalsIgnoreCase("edit")){
 				for(int i = 0; i<paymentModeList.size(); i++){
 					
@@ -299,7 +302,11 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			spinnerArrayAdapter
 					.setDropDownViewResource(R.layout.spinner_dropdown);
 			paymentModeSpinner.setAdapter(spinnerArrayAdapter);
-			paymentModeSpinner.setSelection(selectedIndex);
+			//paymentModeSpinner.setSelection(selectedIndex);
+			if(paymentModeList.size()>1)
+			{
+				paymentModeSpinner.setSelection(1);
+				}
 			
 		}else if (methodName.equalsIgnoreCase("paymentaccountinfo")) {
 			PaymentListActivity.paymentList = parser.parsePaymentListResponse(output);
