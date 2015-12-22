@@ -69,28 +69,28 @@
 //    lblNameMenu.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"user_name"];
     
     
-    
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        d += 2;
-    }
-    
-    if (d==0) {
-        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-    }
-    if (d==1) {
-        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-    }
-    if (d==2) {
-        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-    }
-    if (d==3) {
-        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-    }
+//    
+//    int d = 0; // standard display
+//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
+//        d = 1; // is retina display
+//    }
+//    
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        d += 2;
+//    }
+//    
+//    if (d==0) {
+//        headerImage.image = [UIImage imageNamed:@"320X480.png"];
+//    }
+//    if (d==1) {
+//        headerImage.image = [UIImage imageNamed:@"320X568.png"];
+//    }
+//    if (d==2) {
+//        headerImage.image = [UIImage imageNamed:@"480X800.png"];
+//    }
+//    if (d==3) {
+//        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
+//    }
 
     if ( IS_IPAD )
     {

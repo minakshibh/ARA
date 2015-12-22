@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Bold.ttf">
@@ -145,7 +145,7 @@
                                 <action selector="btnForgotPassword:" destination="-1" eventType="touchUpInside" id="17g-iv-LJ5"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner-logo.png" id="QmB-z6-MMI">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner-logo_iphone.png" id="QmB-z6-MMI">
                             <rect key="frame" x="115" y="114" width="180" height="71"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -192,7 +192,7 @@
     <resources>
         <image name="checkbox-unchecked.png" width="17" height="17"/>
         <image name="email-icon.png" width="12" height="12"/>
-        <image name="inner-logo.png" width="140" height="51"/>
+        <image name="inner-logo_iphone.png" width="140" height="51"/>
         <image name="login-with-facebook.png" width="37" height="37"/>
         <image name="password-icon.png" width="12" height="12"/>
     </resources>

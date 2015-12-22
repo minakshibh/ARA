@@ -53,17 +53,22 @@
     //---initialize checkbox value first tiem with false
     checkbox_Value = false;
     
-    [HelperUDLib removeObject:@"self"];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
 
-    NSLog(@"---%@",[NSString stringWithFormat:@"%@",[HelperUDLib valueForKey:@"remember_me_status"]]);
+    NSLog(@"---%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status"]]);
     
-    if([HelperUDLib valueForKey:@"remember_me_status"])
-    {
-        txtEmail.text = [HelperUDLib valueForKey:@"remember_me_status_email"];
-        txtPassword.text = [HelperUDLib valueForKey:@"remember_me_status_pass"];
-        [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
-        checkbox_Value = true;
+    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] != nil) {
+        
+        if([[[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
+        {
+            txtEmail.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status_email"];
+            txtPassword.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status_pass"];
+            [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
+            checkbox_Value = true;
+        }
+        
     }
+    
 
     //--scrolview initialization
     scrollView.scrollEnabled = YES;
@@ -82,14 +87,14 @@
     
     //---Make cornor round of button and text fields
     
-    [cornerRadius setRadiusofButton:btnLogin :3.0];
-    [cornerRadius setRadiusofButton:btnCheckbox :3.0];
-    [cornerRadius setRadiusofLabel:lblEmail :2.0];
-    [cornerRadius setRadiusofLabel:lblPass :2.0];
-
-    
-    
-    
+    btnLogin.layer.cornerRadius = 3.0;
+    [btnLogin setClipsToBounds:YES];
+    lblEmail.layer.cornerRadius = 2.0;
+    [lblEmail setClipsToBounds:YES];
+    lblPass.layer.cornerRadius = 2.0;
+    [lblPass setClipsToBounds:YES];
+    btnCheckbox.layer.cornerRadius = 2.0;
+    [btnCheckbox setClipsToBounds:YES];
 
     
     if (IS_IPAD)
@@ -124,49 +129,50 @@
         }
         
     }
-    [self.view endEditing:YES];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-
-    if([[HelperUDLib valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
+  if ([[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] != nil) {
+    
+    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
     {
-        txtEmail.text = [HelperUDLib valueForKey:@"remember_me_status_email"];
-        txtPassword.text = [HelperUDLib valueForKey:@"remember_me_status_pass"];
+        txtEmail.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status_email"];
+        txtPassword.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status_pass"];
         [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
     }
     
-    [self.view endEditing:YES];
+  }
+    [txtEmail resignFirstResponder];
+    [txtPassword resignFirstResponder];
     
 
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
-    
-    if (IS_IPAD) {
-        d += 2;
-    }
-
-    if (d==0) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
-    }
-    if (d==1) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
-    }
-    if (d==2) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
-    }
-    if (d==3) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
-    }
+//    int d = 0; // standard display
+//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
+//        d = 1; // is retina display
+//    }
+//    
+//    if (IS_IPAD) {
+//        d += 2;
+//    }
+//
+//    if (d==0) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
+//    }
+//    if (d==1) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
+//    }
+//    if (d==2) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
+//    }
+//    if (d==3) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
+//    }
 
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     txtPassword.text =@"";
     txtEmail.text =@"";
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -280,27 +286,32 @@
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
-       return;
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
     }
-    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
-        NSLog(@"ERROR with the Connection ");
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
 
@@ -322,8 +333,9 @@
     NSError *error;
     if([status isEqualToString:@"failed"])
     {
-        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
-       
+//        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
         return;
     }
     SBJsonParser *json = [[SBJsonParser alloc] init];
@@ -346,39 +358,40 @@
     NSString *purchased_before = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PurchasedBefore"]];
     NSString *profile_picture = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"ProfilePicName"]];
         
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+
         
-        
-    [HelperUDLib setObject:email forKey:@""];
-    [HelperUDLib setObject:email forKey:@"l_email"];
-    [HelperUDLib setObject:first_name forKey:@"l_firstName"];
-    [HelperUDLib setObject:last_name forKey:@"l_lastName"];
-    [HelperUDLib setObject:facebook_user forKey:@"l_facebookUser"];
-    [HelperUDLib setObject:mea_id forKey:@"l_meaId"];
-    [HelperUDLib setObject:mea_name forKey:@"l_meaName"];
-    [HelperUDLib setObject:phone_no forKey:@"l_phoneNo"];
-    [HelperUDLib setObject:user_name forKey:@"l_userName"];
-    [HelperUDLib setObject:user_id forKey:@"l_userid"];
-    [HelperUDLib setObject:role_name forKey:@"l_roleName"];
-    [HelperUDLib setObject:role_id forKey:@"l_roleId"];
-    [HelperUDLib setObject:purchased_before forKey:@"l_purchasedBefore"];
-    [HelperUDLib setObject:password forKey:@"l_password"];
-    [HelperUDLib setObject:@"yes" forKey:@"l_loggedin"];
-    [HelperUDLib setObject:profile_picture forKey:@"l_image"];
+    [user setObject:email forKey:@""];
+    [user setObject:email forKey:@"l_email"];
+    [user setObject:first_name forKey:@"l_firstName"];
+    [user setObject:last_name forKey:@"l_lastName"];
+    [user setObject:facebook_user forKey:@"l_facebookUser"];
+    [user setObject:mea_id forKey:@"l_meaId"];
+    [user setObject:mea_name forKey:@"l_meaName"];
+    [user setObject:phone_no forKey:@"l_phoneNo"];
+    [user setObject:user_name forKey:@"l_userName"];
+    [user setObject:user_id forKey:@"l_userid"];
+    [user setObject:role_name forKey:@"l_roleName"];
+    [user setObject:role_id forKey:@"l_roleId"];
+    [user setObject:purchased_before forKey:@"l_purchasedBefore"];
+    [user setObject:password forKey:@"l_password"];
+    [user setObject:@"yes" forKey:@"l_loggedin"];
+    [user setObject:profile_picture forKey:@"l_image"];
         
         
        
-    [HelperUDLib setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]] forKey:@"UserToken"];
+    [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]] forKey:@"UserToken"];
     NSLog(@"%@",[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]]);
         
     if(checkbox_Value == true)
     {
-        [HelperUDLib setObject:@"yes" forKey:@"remember_me_status"];
-        [HelperUDLib setObject:email forKey:@"remember_me_status_email"];
-        [HelperUDLib setObject:password forKey:@"remember_me_status_pass"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"remember_me_status"];
+        [[NSUserDefaults standardUserDefaults] setObject:email forKey:@"remember_me_status_email"];
+        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"remember_me_status_pass"];
     }else{
-        [HelperUDLib removeObject:@"remember_me_status"];
-        [HelperUDLib removeObject:@"remember_me_status_email"];
-        [HelperUDLib removeObject:@"remember_me_status_pass"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status_email"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status_pass"];
     }
     
     
@@ -388,7 +401,9 @@
     
     [self.navigationController pushViewController:obj animated:YES];
     }else{
-        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+//        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
     }
     [kappDelegate HideIndicator];
 
@@ -406,8 +421,8 @@
         NSString *emailstr = [dict1 valueForKey:@"email"];
         NSString *firstnamestr = [dict1 valueForKey:@"first_name"];
         NSString *lastnamestr = [dict1 valueForKey:@"last_name"];
-        [HelperUDLib setObject:emailstr forKey:@"user_email"];
-        [HelperUDLib setObject:[NSString stringWithFormat:@"%@ %@",firstnamestr,lastnamestr]   forKey:@"user_name"];
+        [[NSUserDefaults standardUserDefaults] setObject:emailstr forKey:@"user_email"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@ %@",firstnamestr,lastnamestr]   forKey:@"user_name"];
 
     }
     
@@ -419,13 +434,13 @@
         NSDictionary* dict=[NSJSONSerialization JSONObjectWithData:dataURL options:NSJSONReadingMutableContainers error:Nil];
         
         NSString *facebookID= [dict valueForKey:@"id"];
-        [HelperUDLib setObject:facebookID forKey:@"user_fb_id"];
+        [[NSUserDefaults standardUserDefaults] setObject:facebookID forKey:@"user_fb_id"];
 
         NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-        [HelperUDLib setObject:[NSString stringWithFormat:@"%@",pictureURL] forKey:@"l_image"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",pictureURL] forKey:@"l_image"];
 
         NSData *imageData = [NSData dataWithContentsOfURL:pictureURL];
-        [HelperUDLib setObject:imageData forKey:@"user_image"];
+        [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"user_image"];
     }
 }
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
@@ -436,10 +451,10 @@
         
         NSString * fbToken = [[FBSession activeSession] accessToken];
         [self getFacebookProfile:fbToken];
-        [HelperUDLib setValue:fbToken forKey:@"TokenData"];
+        [[NSUserDefaults standardUserDefaults] setValue:fbToken forKey:@"TokenData"];
         // Show the user the logged-in UI
         SUvc.from_fb_button = @"yes";
-        [HelperUDLib setObject:@"yes" forKey:@"from_fb"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"from_fb"];
         [self.navigationController pushViewController:SUvc animated:YES];
 
         return;
@@ -448,21 +463,21 @@
         // If the session is closed
         NSLog(@"Session closed");
         // Show the user the logged-out UI
-        [HelperUDLib removeObject:@"l_email"];
-        [HelperUDLib removeObject:@"l_firstName"];
-        [HelperUDLib removeObject:@"l_lastName"];
-        [HelperUDLib removeObject:@"l_facebookUser"];
-        [HelperUDLib removeObject:@"l_meaId"];
-        [HelperUDLib removeObject:@"l_meaName"];
-        [HelperUDLib removeObject:@"l_phoneNo"];
-        [HelperUDLib removeObject:@"l_userName"];
-        [HelperUDLib removeObject:@"l_userid"];
-        [HelperUDLib removeObject:@"l_roleName"];
-        [HelperUDLib removeObject:@"l_roleId"];
-        [HelperUDLib removeObject:@"l_purchasedBefore"];
-        [HelperUDLib removeObject:@"l_image"];
-        [HelperUDLib removeObject:@"l_loggedin"];
-        [HelperUDLib removeObject:@"from_fb"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_email"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_firstName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_lastName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_facebookUser"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaId"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_phoneNo"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userid"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleId"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_purchasedBefore"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_image"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
 
         LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
         [self.navigationController pushViewController:LIvc animated:YES];
@@ -558,16 +573,18 @@
     
     UIAlertView *alert;
     NSString *message;
-    if ([txtEmail isEmpty] ) {
+    if (emailStr.length==0) {
         message = @"Please enter email address";
-        //        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        //        [alert show];
-        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+                alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+//        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
-    }else if ([txtPassword isEmpty]) {
+    }else if (passwordNameStr.length==0) {
         message = @"Please enter password";
         
-        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+//        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
 
         return;
     }
@@ -585,10 +602,10 @@
     //
     //    }
     
-    [self.view endEditing:YES];
+//    [self.view endEditing:YES];
     
-    //    [txtPassword resignFirstResponder];
-    //    [txtEmail resignFirstResponder];
+        [txtPassword resignFirstResponder];
+        [txtEmail resignFirstResponder];
     [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
     
     [self login:emailStr password:passwordNameStr];

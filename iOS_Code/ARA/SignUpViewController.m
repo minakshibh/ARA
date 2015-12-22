@@ -39,16 +39,17 @@
     
     //---doing corner radious of all objects
     
-    [cornerRadius setRadiusofButton:btnSignup :2.0];
-    [cornerRadius setRadiusofButton:btnCheckBox :2.0];
-    [cornerRadius setRadiusofLabel:lblMEA :2.0];
-    [cornerRadius setRadiusofLabel:lblPassword :2.0];
-    [cornerRadius setRadiusofLabel:lblpreview :2.0];
-    [cornerRadius setRadiusofLabel:lblFirstname :2.0];
-    [cornerRadius setRadiusofLabel:lbllastname :2.0];
-    [cornerRadius setRadiusofLabel:lblUserId :2.0];
-    [cornerRadius setRadiusofLabel:lblPhoneNo :2.0];
-    [cornerRadius setRadiusofLabel:lblEmail :2.0];
+    lblMEA.layer.cornerRadius = 2.0;  [lblMEA setClipsToBounds:YES];
+    lblPassword.layer.cornerRadius = 2.0;  [lblPassword setClipsToBounds:YES];
+    lblpreview.layer.cornerRadius = 2.0;  [lblpreview setClipsToBounds:YES];
+    lblFirstname.layer.cornerRadius = 2.0;  [lblFirstname setClipsToBounds:YES];
+    lbllastname.layer.cornerRadius = 2.0;  [lblFirstname setClipsToBounds:YES];
+    lblUserId.layer.cornerRadius = 2.0;  [lblUserId setClipsToBounds:YES];
+    lblPhoneNo.layer.cornerRadius = 2.0;  [lblPhoneNo setClipsToBounds:YES];
+    lblEmail.layer.cornerRadius = 2.0;  [lblEmail setClipsToBounds:YES];
+    btnCheckBox.layer.cornerRadius = 2.0;  [btnCheckBox setClipsToBounds:YES];
+    btnSignup.layer.cornerRadius = 2.0;  [btnSignup setClipsToBounds:YES];
+
     
     //checking if coming to this view throudh facebook
     if([_from_fb_button isEqualToString:@"yes"])
@@ -182,27 +183,27 @@
     [self getPreviousCustomer];
     
     
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        d += 2;
-    }
-    
-    if (d==0) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
-    }
-    if (d==1) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
-    }
-    if (d==2) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
-    }
-    if (d==3) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
-    }
+//    int d = 0; // standard display
+//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
+//        d = 1; // is retina display
+//    }
+//    
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        d += 2;
+//    }
+//    
+//    if (d==0) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
+//    }
+//    if (d==1) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
+//    }
+//    if (d==2) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
+//    }
+//    if (d==3) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
+//    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -356,14 +357,7 @@
             return;
         }
     }
-    if (![webserviceStatus isEqualToString:@"checked"])
-    {
-        [self.view makeToast:@"Please wait a moment while we check your email."];
-        internal=1;
-        
-        [self checkforAvailability];
-        return;
-    }
+    
     
     
     if (![txtEmail emailValidation]) {
@@ -431,7 +425,15 @@
         return;
     }
     
-    
+    if (![webserviceStatus isEqualToString:@"checked"])
+    {
+        [self.view makeToast:@"Please wait a moment while we check your email."];
+        internal=2;
+        [txtEmail resignFirstResponder];
+        [self checkforAvailability];
+        [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        return;
+    }
     
     NSString *fb_status,*value;
     //--check if user came from facebook
@@ -863,9 +865,6 @@
     NSLog(@"responseString:%@",responseString);
 if ([response_status isEqualToString:@"passed"])
 {
-        
-    
-    
     if ([responseString rangeOfString:@"User name already exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
         [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
@@ -1013,7 +1012,7 @@ if ([response_status isEqualToString:@"passed"])
             
         }else if (webservice==6) {
             webservice=0;
-            webserviceStatus = @"checked";
+            
             if ([responseString rangeOfString:@"Email address not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
                 
@@ -1024,7 +1023,7 @@ if ([response_status isEqualToString:@"passed"])
                 frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width+3;
                 frame.origin.y = txtEmail.frame.origin.y +txtEmail.frame.size.height/4;
                 viewEmailindicator.frame = frame;
-                
+                 webserviceStatus = @"checked";
                 imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
                 [activityIndicatorObject1 stopAnimating];
                 return;
@@ -1060,6 +1059,7 @@ if ([response_status isEqualToString:@"passed"])
 }else{
     
     if (webservice==5) {
+       
         if ([responseString rangeOfString:@"User Name not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
             imagecheckforuseridView.hidden =NO;
@@ -1086,7 +1086,7 @@ if ([response_status isEqualToString:@"passed"])
             frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width+3;
             frame.origin.y = txtEmail.frame.origin.y +txtEmail.frame.size.height/4;
             viewEmailindicator.frame = frame;
-            
+             webserviceStatus = @"checked";
             imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
             [activityIndicatorObject1 stopAnimating];
             return;
@@ -1263,10 +1263,17 @@ if(tableView == tableViewPreviousCustomer)
         if([ txtMEA.text isEqualToString:@"Any Member Experience Advisor (Sales)"])
             
         {
+            if(IS_IPAD){
+                
+            }else{
             txtMEA.font=[txtMEA.font fontWithSize:12];
-  
+            }
         }else{
+            if(IS_IPAD){
+                
+            }else{
             txtMEA.font=[txtMEA.font fontWithSize:13];
+            }
         }
         
         
@@ -1303,6 +1310,7 @@ if(tableView == tableViewPreviousCustomer)
                 txtPhoneNo.text = phoneno;
             }
             found_client = @"yes";
+             webserviceStatus = @"checked";
             imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
         }
     }

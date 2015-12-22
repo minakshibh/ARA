@@ -38,28 +38,28 @@
     [lblemailback setClipsToBounds:YES];
     
     
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        d += 2;
-    }
-    
-    if (d==0) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
-    }
-    if (d==1) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
-    }
-    if (d==2) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
-    }
-    if (d==3) {
-        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
-    }
-
+//    int d = 0; // standard display
+//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
+//        d = 1; // is retina display
+//    }
+//    
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        d += 2;
+//    }
+//    
+//    if (d==0) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
+//    }
+//    if (d==1) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
+//    }
+//    if (d==2) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
+//    }
+//    if (d==3) {
+//        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
+//    }
+/*
     int c = 0; // standard display
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
         c = 1; // is retina display
@@ -81,7 +81,7 @@
     if (c==3) {
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
-    
+    */
     
     if (IS_IPAD)
     {

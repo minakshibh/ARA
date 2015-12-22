@@ -216,6 +216,10 @@
 		D959D19B1B7DC9B40073C2D9 /* rewardListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D959D1991B7DC9B40073C2D9 /* rewardListViewController.xib */; };
 		D959D1A21B7E1CE40073C2D9 /* 1001fonts-timeburner-eula.txt in Resources */ = {isa = PBXBuildFile; fileRef = D959D1A01B7E1CE40073C2D9 /* 1001fonts-timeburner-eula.txt */; };
 		D959D1A31B7E1CE40073C2D9 /* timeburner_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D959D1A11B7E1CE40073C2D9 /* timeburner_regular.ttf */; };
+		D95D23C11C27F706000A9E7A /* inner-logo_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D95D23BD1C27F706000A9E7A /* inner-logo_iphone.png */; };
+		D95D23C21C27F706000A9E7A /* inner-logo_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D95D23BE1C27F706000A9E7A /* inner-logo_iphone@2x.png */; };
+		D95D23C31C27F706000A9E7A /* inner-logo_iphone@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D95D23BF1C27F706000A9E7A /* inner-logo_iphone@2x~ipad.png */; };
+		D95D23C41C27F706000A9E7A /* inner-logo_iphone~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D95D23C01C27F706000A9E7A /* inner-logo_iphone~ipad.png */; };
 		D96650AF1C19516E00C1399C /* UITextfieldValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AC1C19516E00C1399C /* UITextfieldValidations.m */; };
 		D96650B01C19516E00C1399C /* UITextField+HelperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AE1C19516E00C1399C /* UITextField+HelperTextField.m */; };
 		D96650B31C1955DA00C1399C /* HelperAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650B21C1955DA00C1399C /* HelperAlert.m */; };
@@ -246,10 +250,10 @@
 		D96F54861C08615C005C3265 /* AboutAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96F54841C08615C005C3265 /* AboutAppViewController.xib */; };
 		D96F54881C08831D005C3265 /* about_320.png in Resources */ = {isa = PBXBuildFile; fileRef = D96F54871C08831D005C3265 /* about_320.png */; };
 		D96F548A1C088325005C3265 /* about_320@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = D96F54891C088325005C3265 /* about_320@2X.png */; };
-		D97FAB151BE9D49500540E38 /* 320X480.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB111BE9D49500540E38 /* 320X480.png */; };
-		D97FAB161BE9D49500540E38 /* 320X568.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB121BE9D49500540E38 /* 320X568.png */; };
-		D97FAB171BE9D49500540E38 /* 480X800.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB131BE9D49500540E38 /* 480X800.png */; };
-		D97FAB181BE9D49500540E38 /* 640X1136.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB141BE9D49500540E38 /* 640X1136.png */; };
+		D97FAB151BE9D49500540E38 /* header-image.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB111BE9D49500540E38 /* header-image.png */; };
+		D97FAB161BE9D49500540E38 /* header-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB121BE9D49500540E38 /* header-image@2x.png */; };
+		D97FAB171BE9D49500540E38 /* header-image~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB131BE9D49500540E38 /* header-image~ipad.png */; };
+		D97FAB181BE9D49500540E38 /* header-image@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB141BE9D49500540E38 /* header-image@2x~ipad.png */; };
 		D98429671B943DB1008E5557 /* changePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D98429651B943DB1008E5557 /* changePasswordViewController.m */; };
 		D98429681B943DB1008E5557 /* changePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98429661B943DB1008E5557 /* changePasswordViewController.xib */; };
 		D99A74481C24034200880859 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = D99A74471C24034200880859 /* Icon-76.png */; };
@@ -592,6 +596,10 @@
 		D959D1991B7DC9B40073C2D9 /* rewardListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rewardListViewController.xib; sourceTree = "<group>"; };
 		D959D1A01B7E1CE40073C2D9 /* 1001fonts-timeburner-eula.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "1001fonts-timeburner-eula.txt"; sourceTree = "<group>"; };
 		D959D1A11B7E1CE40073C2D9 /* timeburner_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeburner_regular.ttf; sourceTree = "<group>"; };
+		D95D23BD1C27F706000A9E7A /* inner-logo_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inner-logo_iphone.png"; sourceTree = "<group>"; };
+		D95D23BE1C27F706000A9E7A /* inner-logo_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inner-logo_iphone@2x.png"; sourceTree = "<group>"; };
+		D95D23BF1C27F706000A9E7A /* inner-logo_iphone@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inner-logo_iphone@2x~ipad.png"; sourceTree = "<group>"; };
+		D95D23C01C27F706000A9E7A /* inner-logo_iphone~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inner-logo_iphone~ipad.png"; sourceTree = "<group>"; };
 		D96650AB1C19516E00C1399C /* UITextfieldValidations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextfieldValidations.h; path = "Helper Classes/UITextfieldValidations.h"; sourceTree = "<group>"; };
 		D96650AC1C19516E00C1399C /* UITextfieldValidations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITextfieldValidations.m; path = "Helper Classes/UITextfieldValidations.m"; sourceTree = "<group>"; };
 		D96650AD1C19516E00C1399C /* UITextField+HelperTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+HelperTextField.h"; path = "Helper Classes/UITextField+HelperTextField.h"; sourceTree = "<group>"; };
@@ -629,10 +637,10 @@
 		D96F54841C08615C005C3265 /* AboutAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutAppViewController.xib; sourceTree = "<group>"; };
 		D96F54871C08831D005C3265 /* about_320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_320.png; sourceTree = "<group>"; };
 		D96F54891C088325005C3265 /* about_320@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_320@2X.png"; sourceTree = "<group>"; };
-		D97FAB111BE9D49500540E38 /* 320X480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 320X480.png; sourceTree = "<group>"; };
-		D97FAB121BE9D49500540E38 /* 320X568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 320X568.png; sourceTree = "<group>"; };
-		D97FAB131BE9D49500540E38 /* 480X800.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 480X800.png; sourceTree = "<group>"; };
-		D97FAB141BE9D49500540E38 /* 640X1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 640X1136.png; sourceTree = "<group>"; };
+		D97FAB111BE9D49500540E38 /* header-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-image.png"; sourceTree = "<group>"; };
+		D97FAB121BE9D49500540E38 /* header-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-image@2x.png"; sourceTree = "<group>"; };
+		D97FAB131BE9D49500540E38 /* header-image~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-image~ipad.png"; sourceTree = "<group>"; };
+		D97FAB141BE9D49500540E38 /* header-image@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-image@2x~ipad.png"; sourceTree = "<group>"; };
 		D98429641B943DB1008E5557 /* changePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changePasswordViewController.h; sourceTree = "<group>"; };
 		D98429651B943DB1008E5557 /* changePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changePasswordViewController.m; sourceTree = "<group>"; };
 		D98429661B943DB1008E5557 /* changePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = changePasswordViewController.xib; sourceTree = "<group>"; };
@@ -718,10 +726,10 @@
 		D920E1501BE78A3F00359CA6 /* header images */ = {
 			isa = PBXGroup;
 			children = (
-				D97FAB111BE9D49500540E38 /* 320X480.png */,
-				D97FAB121BE9D49500540E38 /* 320X568.png */,
-				D97FAB131BE9D49500540E38 /* 480X800.png */,
-				D97FAB141BE9D49500540E38 /* 640X1136.png */,
+				D97FAB111BE9D49500540E38 /* header-image.png */,
+				D97FAB121BE9D49500540E38 /* header-image@2x.png */,
+				D97FAB131BE9D49500540E38 /* header-image~ipad.png */,
+				D97FAB141BE9D49500540E38 /* header-image@2x~ipad.png */,
 			);
 			name = "header images";
 			sourceTree = "<group>";
@@ -1247,6 +1255,17 @@
 			name = Reward;
 			sourceTree = "<group>";
 		};
+		D95D23B41C27F6AD000A9E7A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				D95D23BD1C27F706000A9E7A /* inner-logo_iphone.png */,
+				D95D23BE1C27F706000A9E7A /* inner-logo_iphone@2x.png */,
+				D95D23BF1C27F706000A9E7A /* inner-logo_iphone@2x~ipad.png */,
+				D95D23C01C27F706000A9E7A /* inner-logo_iphone~ipad.png */,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		D96650A71C19502800C1399C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1335,6 +1354,7 @@
 		D96912931BE387E1001D6E5E /* updated Logo */ = {
 			isa = PBXGroup;
 			children = (
+				D95D23B41C27F6AD000A9E7A /* New Group */,
 				D96912941BE387EF001D6E5E /* inner-logo_240.png */,
 				D96912951BE387EF001D6E5E /* inner-logo_320.png */,
 				D96912961BE387EF001D6E5E /* inner-logo_480.png */,
@@ -1615,7 +1635,7 @@
 				D9356A1B1B81E82000777DD3 /* submit-referral@2x.png in Resources */,
 				D9F3B0311C1E79C800828219 /* PopupTableViewCell.xib in Resources */,
 				D92D41301B7B1F9800AB588F /* SubmitReferralViewController.xib in Resources */,
-				D97FAB171BE9D49500540E38 /* 480X800.png in Resources */,
+				D97FAB171BE9D49500540E38 /* header-image~ipad.png in Resources */,
 				D94BEAED1B788630008BCF5F /* ForgotPasswordViewController.xib in Resources */,
 				D9356A0C1B81E82000777DD3 /* logout@2x.png in Resources */,
 				D969128D1BE381FD001D6E5E /* AutoAves Splash_320.jpg in Resources */,
@@ -1651,6 +1671,7 @@
 				D9527D531B9E9EE900630F9F /* 8.jpg in Resources */,
 				D96F54861C08615C005C3265 /* AboutAppViewController.xib in Resources */,
 				D969128F1BE381FD001D6E5E /* AutoAves Splash_600.jpg in Resources */,
+				D95D23C41C27F706000A9E7A /* inner-logo_iphone~ipad.png in Resources */,
 				D9527D671B9E9F3500630F9F /* 13.jpg in Resources */,
 				D92D414F1B7B726100AB588F /* referralDetailViewController.xib in Resources */,
 				D9356A1D1B81E82000777DD3 /* user-icon@2x.png in Resources */,
@@ -1658,6 +1679,7 @@
 				D93569CA1B81E74300777DD3 /* gold-badge.png in Resources */,
 				D9356A061B81E82000777DD3 /* email-icon@2x.png in Resources */,
 				D959D1931B7DB68C0073C2D9 /* myBadgesTableViewCell.xib in Resources */,
+				D95D23C31C27F706000A9E7A /* inner-logo_iphone@2x~ipad.png in Resources */,
 				D9527D501B9E9EE900630F9F /* 5.jpg in Resources */,
 				D9527D371B9E9DAC00630F9F /* splashViewController.xib in Resources */,
 				D93E40C81BA13AE00071AB61 /* camera.jpg in Resources */,
@@ -1679,14 +1701,15 @@
 				D96912801BE37280001D6E5E /* AppIcon_60.png in Resources */,
 				D9527D711B9E9F3500630F9F /* 9@2x.jpg in Resources */,
 				D969127F1BE37280001D6E5E /* AppIcon_58.png in Resources */,
+				D95D23C21C27F706000A9E7A /* inner-logo_iphone@2x.png in Resources */,
 				D9DDB9A81B7CC788006F5A37 /* Roboto-Bold.ttf in Resources */,
 				D9356A0D1B81E82000777DD3 /* menu-icon@2x.png in Resources */,
 				D93569DA1B81E74300777DD3 /* silver-badge.png in Resources */,
 				D93569C51B81E74300777DD3 /* comments-icon.png in Resources */,
 				D93569C21B81E74300777DD3 /* badges.png in Resources */,
-				D97FAB161BE9D49500540E38 /* 320X568.png in Resources */,
+				D97FAB161BE9D49500540E38 /* header-image@2x.png in Resources */,
 				D98429681B943DB1008E5557 /* changePasswordViewController.xib in Resources */,
-				D97FAB151BE9D49500540E38 /* 320X480.png in Resources */,
+				D97FAB151BE9D49500540E38 /* header-image.png in Resources */,
 				D93569D71B81E74300777DD3 /* referrals-icon.png in Resources */,
 				D959D1A31B7E1CE40073C2D9 /* timeburner_regular.ttf in Resources */,
 				D93569CF1B81E74300777DD3 /* menu-icon.png in Resources */,
@@ -1701,9 +1724,10 @@
 				D94D66FD1BA000BD00DF9FA0 /* direct_ref@2x1.png in Resources */,
 				D96F54881C08831D005C3265 /* about_320.png in Resources */,
 				D94BEADB1B787447008BCF5F /* SignUpViewController.xib in Resources */,
-				D97FAB181BE9D49500540E38 /* 640X1136.png in Resources */,
+				D97FAB181BE9D49500540E38 /* header-image@2x~ipad.png in Resources */,
 				D92EC4191B83009800E8EB8D /* PaypalAccountsViewController.xib in Resources */,
 				D9356A0F1B81E82000777DD3 /* password-icon@2x.png in Resources */,
+				D95D23C11C27F706000A9E7A /* inner-logo_iphone.png in Resources */,
 				D9527D691B9E9F3500630F9F /* 1@2x.jpg in Resources */,
 				D9DDB9B01B7CC788006F5A37 /* Roboto-Thin.ttf in Resources */,
 				D93569D41B81E74300777DD3 /* platinum-badge.png in Resources */,

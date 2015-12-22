@@ -191,7 +191,7 @@
                             <rect key="frame" x="57" y="372" width="14" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner-logo.png" id="4wq-pj-0Po">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner-logo_iphone.png" id="4wq-pj-0Po">
                             <rect key="frame" x="119" y="3" width="177" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -487,7 +487,7 @@
         <image name="checkbox-unchecked.png" width="17" height="17"/>
         <image name="dropdown-arrow.png" width="12" height="12"/>
         <image name="email-icon.png" width="12" height="12"/>
-        <image name="inner-logo.png" width="140" height="51"/>
+        <image name="inner-logo_iphone.png" width="140" height="51"/>
         <image name="password-icon.png" width="12" height="12"/>
         <image name="phone-icon.png" width="12" height="12"/>
         <image name="role-icon.png" width="12" height="12"/>

@@ -41,14 +41,29 @@
     //--hide navigation bar
    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
-    [cornerRadius setRadiusofLabel:lblComments :2.0];
-    [cornerRadius setRadiusofLabel:lblEmail :2.0];
-    [cornerRadius setRadiusofLabel:lblFirstname :2.0];
-    [cornerRadius setRadiusofLabel:lblLastname :2.0];
-    [cornerRadius setRadiusofLabel:lblMEA :2.0];
-    [cornerRadius setRadiusofLabel:lblPhoneno :2.0];
-    [cornerRadius setRadiusofButton:btnSubmitReferral :2.0];
-    [cornerRadius setRadiusofButton:btnImportContacts :2.0];
+    lblComments.layer.cornerRadius = 2.0;
+    [lblComments setClipsToBounds:YES];
+    
+    lblEmail.layer.cornerRadius = 2.0;
+    [lblEmail setClipsToBounds:YES];
+    
+    lblFirstname.layer.cornerRadius = 2.0;
+    [lblFirstname setClipsToBounds:YES];
+    
+    lblLastname.layer.cornerRadius = 2.0;
+    [lblLastname setClipsToBounds:YES];
+    
+    lblMEA.layer.cornerRadius = 2.0;
+    [lblMEA setClipsToBounds:YES];
+    
+    lblPhoneno.layer.cornerRadius = 2.0;
+    [lblPhoneno setClipsToBounds:YES];
+    
+    btnSubmitReferral.layer.cornerRadius = 2.0;
+    [btnSubmitReferral setClipsToBounds:YES];
+    
+    btnImportContacts.layer.cornerRadius = 2.0;
+    [btnImportContacts setClipsToBounds:YES];
     
 
     NSString *role_name = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleName"]];
@@ -77,27 +92,29 @@
     txtPhoneno.inputAccessoryView = numberToolbar;
     
     
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
+//    int d = 0; // standard display
+//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
+//        d = 1; // is retina display
+//    }
+//    
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        d += 2;
+//    }
+//    
+//    if (d==0) {
+//        headerImage.image = [UIImage imageNamed:@"320X480.png"];
+//    }
+//    if (d==1) {
+//        headerImage.image = [UIImage imageNamed:@"320X568.png"];
+//    }
+//    if (d==2) {
+//        headerImage.image = [UIImage imageNamed:@"480X800.png"];
+//    }
+//    if (d==3) {
+//        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
+//    }
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        d += 2;
-    }
     
-    if (d==0) {
-        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-    }
-    if (d==1) {
-        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-    }
-    if (d==2) {
-        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-    }
-    if (d==3) {
-        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-    }
     [self iPadDesignInitialization];
     
     
@@ -1250,7 +1267,7 @@
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     
     
-    [self.view endEditing:YES];
+//    [self.view endEditing:YES];
     
     if (tableView == tableViewPopup || tableView==tableViewPopupEmail) {
         NSArray *value;

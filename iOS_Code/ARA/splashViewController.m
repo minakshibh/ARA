@@ -106,7 +106,8 @@
 //    
 //
     @try {
-    
+   
+    /*
     int d = 0; // standard display
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
         d = 1; // is retina display
@@ -127,7 +128,7 @@
     }
     if (d==3) {
         imageView.image = [UIImage imageNamed:@"AutoAves Splash_320@2x~ipad.jpg"];
-    }
+    }  */
 
     }@catch (NSException *exception) {
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-2" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -160,31 +161,23 @@
     
     @try {
        //--check for user already loggedin
-    NSUserDefaults *user123 = [NSUserDefaults standardUserDefaults];
-    NSString *already_logged_in = [NSString stringWithFormat:@"%@",[user123 valueForKey:@"l_loggedin"]];
+        NSUserDefaults *user123 = [NSUserDefaults standardUserDefaults];
+        NSString *already_logged_in = [NSString stringWithFormat:@"%@",[user123 valueForKey:@"l_loggedin"]];
     
-    if([already_logged_in isEqualToString:@"yes"])
-    {
+        if([already_logged_in isEqualToString:@"yes"])
+        {
 
-        dashboardViewController *obj = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
-        [self.navigationController pushViewController:obj animated:NO];
-        return;
-    }
+            dashboardViewController *obj = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
+            [self.navigationController pushViewController:obj animated:NO];
+            return;
+        }
     
-    }@catch (NSException *exception) {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-4" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        
-    }
-    @finally {
-        
-    }
-    
-
-    @try {
    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+   
+ //   AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSUserDefaults * value = [NSUserDefaults standardUserDefaults];
+        
+        
     NSString *myString = [value objectForKey:@"preferedDate"];
     
     if(myString==nil)

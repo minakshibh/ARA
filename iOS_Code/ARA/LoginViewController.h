@@ -11,7 +11,7 @@
 
 
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController<UIScrollViewDelegate>
 {
     
 }

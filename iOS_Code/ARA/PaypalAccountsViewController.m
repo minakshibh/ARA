@@ -30,7 +30,7 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
+/*
     int c = 0; // standard display
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
         c = 1; // is retina display
@@ -52,7 +52,7 @@
     if (c==3) {
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
-    
+ */   
     if (IS_IPAD)
     {
         btnheading.font=[btnheading.font fontWithSize:24];

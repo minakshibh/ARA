@@ -48,7 +48,7 @@
     [self getDataToDisplay:@"quaterly"];
     timestamp = @"quaterly";
     
-    
+   /*
     int d = 0; // standard display
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
         d = 1; // is retina display
@@ -70,6 +70,7 @@
     if (d==3) {
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
+    */
     
     if (IS_IPAD)
     {

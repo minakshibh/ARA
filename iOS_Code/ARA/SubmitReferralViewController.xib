@@ -362,7 +362,7 @@
                         <action selector="btnBack:" destination="-1" eventType="touchUpInside" id="RiT-cA-pS6"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="CL9-Fo-5QN">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header-image.png" id="CL9-Fo-5QN">
                     <rect key="frame" x="149" y="34" width="116" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -488,6 +488,7 @@
         <image name="comments-icon.png" width="12" height="12"/>
         <image name="dropdown-arrow.png" width="12" height="12"/>
         <image name="email-icon.png" width="12" height="12"/>
+        <image name="header-image.png" width="98" height="22"/>
         <image name="import-from-contacts.png" width="24" height="24"/>
         <image name="phone-icon.png" width="12" height="12"/>
         <image name="right-arrow.png" width="30" height="30"/>

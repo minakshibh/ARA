@@ -198,7 +198,7 @@
         }
     
     // Do any additional setup after loading the view from its nib.
-    
+ /*
     int d = 0; // standard display
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
         d = 1; // is retina display
@@ -221,6 +221,7 @@
         headerImage.image = [UIImage imageNamed:@"640X1136.png"];
     }
     
+    */
     
     if (IS_IPAD)
     {
