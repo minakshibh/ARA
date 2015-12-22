@@ -5,6 +5,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.RelativeLayout.LayoutParams;
+
 import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.model.MEA;
@@ -63,6 +66,8 @@ public class SubmitReferralActivity extends Activity implements
 	private int emailflag = 0;
 	private ImageView imageView_back;
 	private String phonenumber = "", firstName = "", lastName = "";
+	private String phoneNumber1="",phoneNumber2="";
+	private String email1="",email2="";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -262,6 +267,7 @@ public class SubmitReferralActivity extends Activity implements
 				getContactInfo(intent);
 
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 		}
@@ -296,6 +302,8 @@ public class SubmitReferralActivity extends Activity implements
 
 	protected void getContactInfo(Intent intent) {
 
+		int emailCount=0, phoneCount=0;
+		
 		Cursor cursor = managedQuery(intent.getData(), null, null, null, null);
 		while (cursor.moveToNext()) {
 			String contactId = cursor.getString(cursor
@@ -319,9 +327,7 @@ public class SubmitReferralActivity extends Activity implements
 
 			nameCursor.close();
 
-			// name =
-			// cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-
+			
 			String hasPhone = cursor
 					.getString(cursor
 							.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
@@ -334,13 +340,18 @@ public class SubmitReferralActivity extends Activity implements
 			if (Boolean.parseBoolean(hasPhone)) {
 				Cursor phones = getContentResolver().query(
 						ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-						null,
-						ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-								+ " = " + contactId, null, null);
+						null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
 				while (phones.moveToNext()) {
-					phoneNumber = phones
-							.getString(phones
-									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+					phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+					phoneCount++;
+					if(phoneCount==1)
+					{
+						phoneNumber1=phoneNumber;	
+					}
+					else if(phoneCount==2)
+					{
+						phoneNumber2=phoneNumber;
+					}
 					System.out.println("number is:" + name + phoneNumber);
 				}
 				phones.close();
@@ -350,14 +361,20 @@ public class SubmitReferralActivity extends Activity implements
 			Cursor emails = getContentResolver().query(
 					ContactsContract.CommonDataKinds.Email.CONTENT_URI,
 					null,
-					ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = "
-							+ contactId, null, null);
+					ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = "+ contactId, null, null);
 			while (emails.moveToNext()) {
-				email = emails
-						.getString(emails
-								.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-				System.out.println("number is:" + name + email);
-
+				email = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+			
+				emailCount++;
+				if(emailCount==1)
+				{
+					email1=email;	
+				}
+				else if(emailCount==2)
+				{
+					email2=email;
+				}
+				System.out.println("mail:" + name + email);
 			}
 			emails.close();
 
@@ -365,9 +382,117 @@ public class SubmitReferralActivity extends Activity implements
 		while (cursor.moveToNext())
 			cursor.close();
 
-		setContactInfo();
+		
 
+		showDialogPhone(firstName+lastName,phoneNumber1,phoneNumber2);
 	}
+
+	private void showDialogPhone(final String name,String phone1,String phone2) {
+		
+			final Dialog dialog = new Dialog(this);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialog.setContentView(R.layout.multi_phoneno);
+			
+			LinearLayout dailog_layout=(LinearLayout)dialog.findViewById(R.id.dailog_layout);
+			dailog_layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+			
+			
+			// dialog.setTitle("Title...");
+			dialog.setCanceledOnTouchOutside(false);
+			// set the custom dialog components - text, image and button
+			LinearLayout layPhone1 = (LinearLayout) dialog.findViewById(R.id.layphone1);
+			LinearLayout layPhone2 = (LinearLayout) dialog.findViewById(R.id.layphone2);
+			//LinearLayout layout_none = (LinearLayout) dialog.findViewById(R.id.layout3);
+			
+			TextView title = (TextView) dialog.findViewById(R.id.textView_title);
+			
+			title.setText(name);
+			TextView text1 = (TextView) dialog.findViewById(R.id.phone1);
+			text1.setText(phone1);
+			final ImageView image1 = (ImageView) dialog.findViewById(R.id.imageView1);
+			image1.setImageResource(R.drawable.radio_checked);
+			TextView text2 = (TextView) dialog.findViewById(R.id.phone2);
+			text2.setText(phone2);
+			final ImageView image2 = (ImageView) dialog.findViewById(R.id.imageView2);
+			
+			
+			layPhone1.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					image1.setImageResource(R.drawable.radio_checked);
+					phonenumber=phoneNumber1;
+					dialog.dismiss();
+					showDialogEmail(name,email1,email2);
+					
+				}
+			});
+			layPhone2.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					phonenumber=phoneNumber2;
+					image2.setImageResource(R.drawable.radio_checked);
+					dialog.dismiss();
+					showDialogEmail(name,email1,email2);
+				}
+			});
+			
+			    
+			dialog.show();
+		
+	}
+	
+	private void showDialogEmail(String name,final String email1,final String email2) {
+		
+		final Dialog dialog = new Dialog(this);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setContentView(R.layout.multi_phoneno);
+		
+		LinearLayout dailog_layout=(LinearLayout)dialog.findViewById(R.id.dailog_layout);
+		dailog_layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+		
+		
+		// dialog.setTitle("Title...");
+		dialog.setCanceledOnTouchOutside(false);
+		// set the custom dialog components - text, image and button
+		LinearLayout layPhone1 = (LinearLayout) dialog.findViewById(R.id.phone1);
+		LinearLayout layPhone2 = (LinearLayout) dialog.findViewById(R.id.phone2);
+		//LinearLayout layout_none = (LinearLayout) dialog.findViewById(R.id.layout3);
+		
+		TextView title = (TextView) dialog.findViewById(R.id.textView_title);
+		
+		title.setText(name);
+		TextView text1 = (TextView) dialog.findViewById(R.id.textView1);
+		text1.setText(email1);
+		final ImageView image1 = (ImageView) dialog.findViewById(R.id.imageView1);
+		image1.setImageResource(R.drawable.radio_checked);
+		TextView text2 = (TextView) dialog.findViewById(R.id.textView2);
+		text2.setText(email2);
+		final ImageView image2 = (ImageView) dialog.findViewById(R.id.imageView2);
+		
+		
+		layPhone1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				image1.setImageResource(R.drawable.radio_checked);
+				email=email1;
+				dialog.dismiss();
+				setContactInfo();
+			}
+		});
+		layPhone2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				email=email2;
+				image2.setImageResource(R.drawable.radio_checked);
+				dialog.dismiss();
+				setContactInfo();
+			}
+		});
+		
+		    
+		dialog.show();
+	
+}
 
 	private void setContactInfo() {
 
