@@ -144,7 +144,7 @@
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
-           <activity
+        <activity
             android:name="com.ara.referral.SubmitReferralActivity"
             android:windowSoftInputMode="stateHidden"
              android:theme="@android:style/Theme.Holo.Light"
