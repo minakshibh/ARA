@@ -255,7 +255,8 @@ public class SubmitReferralActivity extends Activity implements
 		firstName = "";
 		lastName = null;
 		PICK_CONTACT = 1;
-		phoneNumber1="";phoneNumber2="";
+		phoneNumber1="";phoneNumber2="";phoneNumber3="";phonetype3="";
+		phonetype1="";phonetype2="";
 		email1="";email2="";
 		Intent intent = new Intent(Intent.ACTION_PICK,ContactsContract.Contacts.CONTENT_URI);
 		startActivityForResult(intent, PICK_CONTACT);
