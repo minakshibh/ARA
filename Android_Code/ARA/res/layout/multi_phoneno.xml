@@ -31,16 +31,17 @@
         android:textSize="20sp"
         android:textStyle="bold" />
             <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:layout_gravity="center_vertical"
             android:layout_weight="2"
+            android:padding="5dp"
             android:src="@drawable/right_arrow" />
             </LinearLayout>
 <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/massage"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -73,7 +74,7 @@
         android:orientation="vertical"
          >
           <TextView
-            android:id="@+id/mobile"
+            android:id="@+id/type1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -119,7 +120,7 @@
         android:orientation="vertical"
          >
           <TextView
-            android:id="@+id/phone"
+            android:id="@+id/type2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -143,11 +144,14 @@
             android:background="@color/light_gray"
             android:layout_height="1dp"
             />
-<!--     <LinearLayout
-           android:id="@+id/layout3"
+
+
+<LinearLayout
+        android:id="@+id/layphone3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+		android:visibility="gone"
         android:orientation="horizontal" >
 
         <ImageView
@@ -158,17 +162,31 @@
             android:layout_weight="2"
             android:gravity="end"
             android:src="@drawable/radio_unchecked" />
-
+<LinearLayout
+       
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+         >
+          <TextView
+            android:id="@+id/type3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Phone"
+            android:textColor="@color/app_blue"
+            android:textSize="8sp" />
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
+            android:id="@+id/phone3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="8"
             android:gravity="start"
-            android:text="None"
+            android:text="9446546546"
             android:textColor="@color/black"
             android:textSize="20sp" />
-    </LinearLayout> -->
+        </LinearLayout>
+    </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

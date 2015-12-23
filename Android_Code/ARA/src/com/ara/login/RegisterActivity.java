@@ -5,6 +5,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
+import android.text.TextUtils.TruncateAt;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -537,10 +539,15 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			arrayList_Mea = parser.parseMEAResponse(output);
 			Log.e(methodName, output);
 			System.err.println(arrayList_Mea.toString());
-			ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,
-					android.R.layout.simple_spinner_item, arrayList_Mea);
+	ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,android.R.layout.simple_spinner_item, arrayList_Mea);
+			View v = getLayoutInflater().inflate(R.layout.spinner_dropdown, null);
+			TextView textView=(TextView)v.findViewById(R.id.textView1);
+			 textView.setEllipsize(TruncateAt.MARQUEE);
+		     textView.setSelected(true);
+		     textView.setSingleLine(true);
 			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-			// Step 3: Tell the spinner about our adapter
+		
+			
 			System.err.println("sizeeeeee===" + arrayList_Mea.size());
 
 			mea_spinner.setAdapter(spinnerArrayAdapter);
