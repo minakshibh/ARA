@@ -5,15 +5,10 @@
   	android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:singleLine="true"
-    android:ellipsize="marquee" 
-    android:marqueeRepeatLimit="marquee_forever"
-    android:scrollHorizontally="true" 
     android:paddingLeft="15dip" 
     android:paddingRight="15dip" 
-    android:focusable="true" 
+  
     android:id="@id/textView1"
     android:padding="5dp"
-    android:focusableInTouchMode="true" 
-    android:freezesText="true"
-    android:background="@color/white"
+     android:background="@color/white"
 />

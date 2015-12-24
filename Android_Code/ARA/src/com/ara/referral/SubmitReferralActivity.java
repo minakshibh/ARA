@@ -172,14 +172,15 @@ public class SubmitReferralActivity extends Activity implements
 	
 		String gettingEmail = edittext_email.getText().toString();
 		if (edittext_email.getText().toString().equals("")) {
-			Util.ToastMessage(SubmitReferralActivity.this,"Please enter a valid email address");
+			//Util.ToastMessage(SubmitReferralActivity.this,"Please enter a valid email address");
+			message("Please enter a valid email address");
 			img_email_check.setVisibility(View.INVISIBLE);
 			emailflag = 0;
 		}
 		else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(gettingEmail)
 				.matches() && !TextUtils.isEmpty(gettingEmail)) {
-			 Util.ToastMessage(SubmitReferralActivity.this,"Please enter a valid email address");
-
+			// Util.ToastMessage(SubmitReferralActivity.this,"Please enter a valid email address");
+			 message("Please enter a valid email address");
 			img_email_check.setVisibility(View.INVISIBLE);
 			emailflag = 0;
 		} else {
@@ -205,22 +206,17 @@ public class SubmitReferralActivity extends Activity implements
 			else if (v == button_submit) {
 			
 				if (edittext_firstname.getText().toString().trim().equals("")) {
-					Util.ToastMessage(SubmitReferralActivity.this,
-							"Please enter first name");
+					message("Please enter first name");
+					//Util.ToastMessage(SubmitReferralActivity.this,"Please enter first name");
 				} else if (edittext_lastname.getText().toString().trim().equals("")) {
-					Util.ToastMessage(SubmitReferralActivity.this,
-							"Please enter last name");
+					//Util.ToastMessage(SubmitReferralActivity.this,"Please enter last name");
+					message("Please enter last name");
 				} 
 				/*else if (edittext_phonenumber.getText().toString().equals("")) {
 					Util.ToastMessage(SubmitReferralActivity.this,
 							"Please enter phone number");
 				}*/
-				/*else if (!Util.isValidPhoneNumber(edittext_phonenumber
-						.getText().toString())) {
-					Util.ToastMessage(SubmitReferralActivity.this,
-							"Please enter valid phone number");
-
-				}*/
+				
 
 				/*else if (edittext_comment.getText().toString().equals("")) {
 					Util.ToastMessage(SubmitReferralActivity.this,
@@ -239,8 +235,24 @@ public class SubmitReferralActivity extends Activity implements
 				else {
 
 					// Util.ToastMessage(SubmitReferralActivity.this,"Just wait a movement we are verifying your email address.");
-					emailCheck();
-
+				
+					 if(edittext_phonenumber.getText().toString().length()>0)
+					{
+						  if (!Util.isValidPhoneNumber(edittext_phonenumber
+								.getText().toString())) {
+							message("Please enter valid phone number");
+							}
+						  else if(edittext_phonenumber.getText().toString().length()<9)
+						  {
+								message("Please enter valid phone number"); 
+						  }
+						 else{
+							 emailCheck();
+						 	}
+						}
+					 else{
+						 emailCheck();
+					 }
 				
 				}
 			}
@@ -279,6 +291,7 @@ public class SubmitReferralActivity extends Activity implements
 	}
 
 	private void validationCheck(String id, String value) {
+		if (Util.isNetworkAvailable(SubmitReferralActivity.this)) {
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
 		nameValuePairs.add(new BasicNameValuePair(id, value));
@@ -288,6 +301,11 @@ public class SubmitReferralActivity extends Activity implements
 				nameValuePairs, false, "Please wait...", false);
 		mWebPageTask.delegate = (AsyncResponseForARA) SubmitReferralActivity.this;
 		mWebPageTask.execute();
+		}
+		else {
+			Util.alertMessage(SubmitReferralActivity.this,
+					"Please check your internet connection");
+		}
 	}
 
 	private void getMEAData() {
@@ -748,8 +766,7 @@ public class SubmitReferralActivity extends Activity implements
 			//{
 				AlertDialog.Builder alert = new AlertDialog.Builder(
 						SubmitReferralActivity.this);
-				alert.setMessage("Your referral has been submitted. You can track the same by referral id "
-						+ output);
+				alert.setMessage("Your referral has been submitted.");// You can track the same by referral id "/+ output);
 				alert.setPositiveButton("ok",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface arg0, int arg1) {
 
@@ -851,9 +868,8 @@ public class SubmitReferralActivity extends Activity implements
 	{
 		if (emailflag == 1) {
 			if (emailCheck) {
-				Util.ToastMessage(SubmitReferralActivity.this,
-						"Email address already exist");
-
+				//Util.ToastMessage(SubmitReferralActivity.this,"Email address already exist");
+				message("Email address already exist");
 			}
 			else {
 				
@@ -868,8 +884,16 @@ public class SubmitReferralActivity extends Activity implements
 						}
 			}
 	} else {
-		Util.ToastMessage(SubmitReferralActivity.this,
-				"Email address not valid");
+		//Util.ToastMessage(SubmitReferralActivity.this,"Email address not valid");
+		message("Email address not valid");
 	}
+	}
+	private void message(String str)
+	{
+		AlertDialog.Builder alert = new AlertDialog.Builder(
+				SubmitReferralActivity.this);
+		alert.setMessage(str);
+		alert.setPositiveButton("ok",null);
+		alert.show();
 	}
 }

@@ -1,5 +1,8 @@
 package com.ara.referral;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -141,7 +144,12 @@ public class ReferralsDetailsActivity extends Activity {
 					}
 				else
 				{
-					txtSubmittedDate.setText(reward.getCreatedDate());
+					String newDate="";
+					if(reward.getCreatedDate()!=null)
+					{
+					 	newDate=parseDateToddMMyyyy(reward.getCreatedDate());
+						}
+					txtSubmittedDate.setText(newDate);
 					
 					}
 				
@@ -156,7 +164,12 @@ public class ReferralsDetailsActivity extends Activity {
 					}
 				else
 				{
-					txtSoldDate.setText(reward.getSoldDate());
+					String newDate1="";
+					if(reward.getSoldDate()!=null)
+					{
+					 	newDate1=parseDateToddMMyyyy(reward.getSoldDate());
+						}
+					txtSoldDate.setText(newDate1);
 					
 					}
 					
@@ -223,7 +236,7 @@ public class ReferralsDetailsActivity extends Activity {
 			
 			
 		}
-		else
+else
 				{
 						txtName.setText(referral.getFirstName() + " " + referral.getLastName());
 						txtName.setTypeface(BaseActivity.typeface_roboto);
@@ -263,7 +276,14 @@ public class ReferralsDetailsActivity extends Activity {
 							}
 						else
 						{
-							txtSubmittedDate.setText(referral.getCreatedDate());
+							
+							String newDate1="";
+							if(referral.getCreatedDate()!=null)
+							{
+							 	newDate1=parseDateToddMMyyyy(referral.getCreatedDate());
+								}
+							txtSubmittedDate.setText(newDate1);
+							
 							
 							}
 						
@@ -278,7 +298,14 @@ public class ReferralsDetailsActivity extends Activity {
 							}
 						else
 						{
-							txtSoldDate.setText(referral.getSoldDate());
+							String newDate1="";
+							if(referral.getSoldDate()!=null)
+							{
+							 	newDate1=parseDateToddMMyyyy(referral.getSoldDate());
+								}
+							txtSoldDate.setText(newDate1);
+							
+							
 							
 							}
 							
@@ -367,4 +394,22 @@ public class ReferralsDetailsActivity extends Activity {
 					
 		}
 	};
+	
+	public String parseDateToddMMyyyy(String time) {
+	    String inputPattern = "yyyy-dd-MM HH:mm:ss";
+	    String outputPattern = "MM/dd/yyyy";
+	    SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+	    SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+	    Date date = null;
+	    String str = null;
+
+	    try {
+	        date = inputFormat.parse(time);
+	        str = outputFormat.format(date);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return str;
+	}
 }

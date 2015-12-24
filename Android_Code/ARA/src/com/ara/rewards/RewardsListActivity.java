@@ -241,7 +241,7 @@ AsyncResponseForARA {
 		{
 			AlertDialog.Builder alert = new AlertDialog.Builder(
 					RewardsListActivity.this);
-			alert.setMessage("No payment display yet.");
+			alert.setMessage("No rewards display yet.");
 			alert.setPositiveButton("ok",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface arg0, int arg1) {

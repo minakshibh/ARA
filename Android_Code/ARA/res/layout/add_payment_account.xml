@@ -182,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Set this account as Default."
+                android:text="Make this as Default."
                 android:textColor="@color/white" />
         </LinearLayout>
 

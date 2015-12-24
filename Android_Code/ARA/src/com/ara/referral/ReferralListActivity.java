@@ -1,8 +1,10 @@
 package com.ara.referral;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import org.apache.http.NameValuePair;
 
@@ -13,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -192,7 +195,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 		
 		title.setText("SELECT SORT");
 		TextView text1 = (TextView) dialog.findViewById(R.id.textView1);
-		text1.setText("By Name");
+		text1.setText("By First Name");
 		final ImageView image1 = (ImageView) dialog
 				.findViewById(R.id.imageView1);
 
@@ -433,6 +436,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 		private Context context;
 		private TextView userID, date, status;
 		private ImageView imageview;
+		private String newDate;
 
 		public ReferralListAdapter(Context ctx) {
 			context = ctx;
@@ -487,12 +491,21 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			}
 			
 			if (referral.getReferralStatus().equalsIgnoreCase(DashBoardActivity.STATUS_SOLD)) {
-				date.setText("Sold date: " + referral.getSoldDate());
+				if(referral.getSoldDate()!=null)
+				{
+					newDate=parseDateToddMMyyyy(referral.getSoldDate());
+					}
+				date.setText("Sold date: " + newDate);
 				date.setTypeface(BaseActivity.typeface_roboto);
 				status.setTextColor(getResources().getColor(R.color.app_blue));
 
 			} else {
-				date.setText("Submitted date: " + referral.getCreatedDate());
+				String newDate1="";
+				if(referral.getCreatedDate()!=null)
+				{
+					 newDate1=parseDateToddMMyyyy(referral.getCreatedDate());
+					}
+				date.setText("Submitted date: " + newDate1);
 				if (referral.getReferralStatus().equalsIgnoreCase(
 						DashBoardActivity.STATUS_OPEN)) {
 					status.setTextColor(getResources().getColor(R.color.bright_green));
@@ -527,18 +540,20 @@ private View.OnClickListener listener = new View.OnClickListener() {
 	@Override
 	public void processFinish(String output, String methodName) {
 		// TODO Auto-generated method stub
-		ARAParser parser = new ARAParser(ReferralListActivity.this);
-		referralList = parser.parseReferralList(output);
-		sortedFilteredList.clear();
-		sortedFilteredList.addAll(referralList);
-		
+		try{
+			ARAParser parser = new ARAParser(ReferralListActivity.this);
+			referralList = parser.parseReferralList(output);
+			sortedFilteredList.clear();
+			sortedFilteredList.addAll(referralList);
+		}
+		catch(Exception e){}
 		setHeader(referralType,  sortedFilteredList.size());
 		
-		if (output.contains("Not Found")) {
+		if (output.contains("No referrals to display yet")) {
 			AlertDialog.Builder alert = new AlertDialog.Builder(
 					ReferralListActivity.this);
 		
-			alert.setMessage("no record..!");
+			alert.setMessage("No referrals to display yet. Start submitting some referrals.");
 			alert.setPositiveButton("ok",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface arg0, int arg1) {
@@ -551,5 +566,22 @@ private View.OnClickListener listener = new View.OnClickListener() {
 		
 			listView.setAdapter(new ReferralListAdapter(ReferralListActivity.this));
 		}
+	}
+	public String parseDateToddMMyyyy(String time) {
+	    String inputPattern = "yyyy-dd-MM HH:mm:ss";
+	    String outputPattern = "MM/dd/yyyy";
+	    SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+	    SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+	    Date date = null;
+	    String str = null;
+
+	    try {
+	        date = inputFormat.parse(time);
+	        str = outputFormat.format(date);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return str;
 	}
 }

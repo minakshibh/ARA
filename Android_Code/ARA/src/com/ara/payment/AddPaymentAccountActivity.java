@@ -62,6 +62,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 	private Payment paymentAccount;
 	private int selectedIndex = 0;
 	private LinearLayout lay_isDefault;
+	private PaymentMode paymentMode;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,7 +77,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 
 	private void setUI() {
 		// TODO Auto-generated method stub
-		
+		 paymentMode =new PaymentMode();
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		emailLayout = (LinearLayout) findViewById(R.id.emailLayout);
 		emailId =(EditText) findViewById(R.id.emailId);
@@ -239,6 +240,9 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 	private void addPaymentAccountAPI() {
 		String userId = spref.getString("userid", "");
 		
+		paymentModeId = paymentModeList.get(0).getModeID();
+		
+		
 		if (Util.isNetworkAvailable(AddPaymentAccountActivity.this)) {
 		
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -252,6 +256,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			nameValuePairs.add(new BasicNameValuePair("PaypalEmail", emailId.getText().toString().trim()));
 			
 
+			Log.e("payment", nameValuePairs.toString());
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
 					AddPaymentAccountActivity.this, "post", "paymentaccountinfo", nameValuePairs,
 					true, "Please wait...",true);
@@ -299,14 +304,13 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			
 			ArrayAdapter<PaymentMode> spinnerArrayAdapter = new ArrayAdapter<PaymentMode>(this,
 					android.R.layout.simple_spinner_item, paymentModeList);
-			spinnerArrayAdapter
-					.setDropDownViewResource(R.layout.spinner_dropdown);
+			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 			paymentModeSpinner.setAdapter(spinnerArrayAdapter);
-			//paymentModeSpinner.setSelection(selectedIndex);
-			if(paymentModeList.size()>1)
+			paymentModeSpinner.setSelection(selectedIndex);
+			/*if(paymentModeList.size()>1)
 			{
 				paymentModeSpinner.setSelection(1);
-				}
+				}*/
 			
 		}else if (methodName.equalsIgnoreCase("paymentaccountinfo")) {
 			PaymentListActivity.paymentList = parser.parsePaymentListResponse(output);
@@ -325,6 +329,8 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			}
 			else
 			{
+				
+				
 				Toast.makeText(AddPaymentAccountActivity.this, "This email is not a verified Paypal email.", Toast.LENGTH_LONG).show();
 				}
 			

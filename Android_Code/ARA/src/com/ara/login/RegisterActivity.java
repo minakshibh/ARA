@@ -540,11 +540,11 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			Log.e(methodName, output);
 			System.err.println(arrayList_Mea.toString());
 	ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,android.R.layout.simple_spinner_item, arrayList_Mea);
-			View v = getLayoutInflater().inflate(R.layout.spinner_dropdown, null);
+			/*View v = getLayoutInflater().inflate(R.layout.spinner_dropdown, null);
 			TextView textView=(TextView)v.findViewById(R.id.textView1);
 			 textView.setEllipsize(TruncateAt.MARQUEE);
 		     textView.setSelected(true);
-		     textView.setSingleLine(true);
+		     textView.setSingleLine(true);*/
 			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 		
 			

@@ -44,24 +44,58 @@
             android:layout_weight=".3"
             android:gravity="center|end"
             android:text="Edit"
+            android:visibility="invisible"
            android:layout_marginRight="8dp"
+           
             android:textColor="@color/white" />
     </LinearLayout>
-     <LinearLayout
-        android:id="@+id/LinearLayout_middle"
+    
+        <LinearLayout
+        android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/app_yellow" >
+
+        <TextView
+            android:id="@+id/textView_myprofile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".7"
+            android:gravity="start|center_vertical"
+            android:paddingLeft="10dp"
+            android:text="MY PROFILE"
+            android:textColor="@color/app_blue" />
+
+        <TextView
+            android:id="@+id/textView_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".3"
+            android:gravity="end|center_vertical"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:textColor="@color/app_blue"
+            android:textSize="12sp" />
+    </LinearLayout>
+     <RelativeLayout
+        android:id="@+id/LinearLayout_middle"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="8.2"
-        android:orientation="horizontal" >
+        >
 
          <ImageView
              android:id="@+id/imageView_profile"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:layout_margin="20dp"
-             />
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+             android:layout_centerVertical="true"
+             android:background="@drawable/camera" />
          
-        </LinearLayout>
+        </RelativeLayout>
         
      <LinearLayout
         android:id="@+id/LinearLayout_bottom"
