@@ -242,7 +242,7 @@ public class SubmitReferralActivity extends Activity implements
 								.getText().toString())) {
 							message("Please enter valid phone number");
 							}
-						  else if(edittext_phonenumber.getText().toString().length()<9)
+						  else if(edittext_phonenumber.getText().toString().length()<14)
 						  {
 								message("Please enter valid phone number"); 
 						  }

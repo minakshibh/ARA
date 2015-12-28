@@ -384,7 +384,11 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter valid phone number");
 					}
-					
+					else if(phNumber.getText().toString().length()<14)
+					{
+						Util.ToastMessage(RegisterActivity.this,
+								"Please enter valid phone number");
+					}
 					else if (emailId.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter email address");
