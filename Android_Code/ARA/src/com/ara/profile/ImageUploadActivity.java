@@ -34,6 +34,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ara.base.BaseActivity;
@@ -47,6 +48,7 @@ public class ImageUploadActivity extends Activity {
 	private ImageView imageView_back, imageView_profile;
 	private TextView textView_back, textView_edit;
 	private String mCurrentPhotoPath = "", imagePath = "";
+	private RelativeLayout Layout_middle;
 	private SharedPreferences spref;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class ImageUploadActivity extends Activity {
 		imageView_profile = (ImageView) findViewById(R.id.imageView_profile);
 		imageView_back = (ImageView) findViewById(R.id.imageView_back);
 		textView_back = (TextView) findViewById(R.id.textView_back);
+		Layout_middle=(RelativeLayout)findViewById(R.id.LinearLayout_middle);
 		//textView_title=(TextView)findViewById(R.id.textView_title);
 		//textView_title.setTypeface(BaseActivity.typeface_timeburner);
 		textView_back.setText("Profile");
@@ -79,9 +82,9 @@ public class ImageUploadActivity extends Activity {
 	private void setOnClickListener() {
 
 		imageView_back.setOnClickListener(listener);
-		textView_edit.setOnClickListener(listener);
+		//textView_edit.setOnClickListener(listener);
 		textView_back.setOnClickListener(listener);
-		imageView_profile.setOnClickListener(listener);
+		Layout_middle.setOnClickListener(listener);
 
 	}
 
@@ -100,7 +103,7 @@ public class ImageUploadActivity extends Activity {
 
 				finish();
 			}
-			else if (v == imageView_profile) {
+			else if (v == Layout_middle) {
 
 				selectImage();
 			}

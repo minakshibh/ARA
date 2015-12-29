@@ -116,9 +116,9 @@ public class ARAParser {
 		
 		PaymentMode paymentModeObject = null;
 		paymentModeObject = new PaymentMode();
-		paymentModeObject.setModeID("-1");
-		paymentModeObject.setModeName("Select Payment Mode");
-		paymentModeList.add(paymentModeObject);
+		//paymentModeObject.setModeID("-1");
+		//paymentModeObject.setModeName("Select Payment Mode");
+		//paymentModeList.add(paymentModeObject);
 		
 		try {
 			JSONArray jsonArray = new JSONArray(response);

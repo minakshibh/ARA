@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
@@ -45,6 +46,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 	textView_purchase,textview_purchase_no;
 	private String imageurl="",phonenumber="";
 	private ImageLoader imageLoader;
+	LinearLayout LinearLayout_footer;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -123,6 +125,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		 textView_purchase=(TextView)findViewById(R.id.textView_purchase);
 		 textView_purchase.setTypeface(BaseActivity.typeface_roboto);
 		 textview_purchase_no=(TextView)findViewById(R.id.textview_purchase_no);
+		 LinearLayout_footer=(LinearLayout)findViewById(R.id.LinearLayout_footer);
 	}
 
 	private void setOnClickListener() {
@@ -146,8 +149,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		public void onClick(View v) {
 			if (v == text_changepass) {
 
-				Intent intent = new Intent(MyProfile.this,
-						ChangePasswordActivity.class);
+				Intent intent = new Intent(MyProfile.this,ChangePasswordActivity.class);
 				startActivity(intent);
 			} else if (v == textView_edit) {
 				count++;
@@ -203,8 +205,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 					purchase = "true";
 					textview_purchase_no.setText("Yes");
 				} else if (count_purchase == 2) {
-					image_purchase
-							.setImageResource(R.drawable.checkbox2_unchecked);
+					image_purchase.setImageResource(R.drawable.checkbox2_unchecked);
 					count_purchase = 0;
 					purchase = "false";
 					textview_purchase_no.setText("No");
@@ -244,6 +245,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		textView_purchase.setEnabled(false);
 		image_purchase.setVisibility(View.GONE);
 		textView_photoedit.setVisibility(View.VISIBLE);
+		LinearLayout_footer.setVisibility(View.VISIBLE);
 	}
 
 	private void enableData() {
@@ -259,6 +261,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		textview_purchase_no.setVisibility(View.GONE);
 		image_purchase.setVisibility(View.VISIBLE);
 		lbl_changepass.setEnabled(false);
+		LinearLayout_footer.setVisibility(View.GONE);
 	}
 
 	private void loginAPI() {
