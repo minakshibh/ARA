@@ -182,28 +182,24 @@
     //---get tableview data
     [self getPreviousCustomer];
     
-    
-//    int d = 0; // standard display
-//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-//        d = 1; // is retina display
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        d += 2;
-//    }
-//    
-//    if (d==0) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
-//    }
-//    if (d==1) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
-//    }
-//    if (d==2) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
-//    }
-//    if (d==3) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
-//    }
+    if ([_fromEmailView isEqualToString:@"yes"]) {
+        if (_valuesArray.count>0) {
+            if ([_isClient isEqualToString:@"yes"]) {
+                found_client = @"yes";
+            }
+            txtFirstName.text = [_valuesArray objectAtIndex:0];
+            txtLastName.text = [_valuesArray objectAtIndex:1];
+            if ([[_valuesArray objectAtIndex:2] rangeOfString:@"<null>" options:NSCaseInsensitiveSearch].location != NSNotFound){
+                txtPhoneNo.text = @"";
+            }else{
+                txtPhoneNo.text = [_valuesArray objectAtIndex:2];
+
+            }
+            UserDetailId = [NSString stringWithFormat:@"%@",[_valuesArray objectAtIndex:3]];
+            txtEmail.text = [_valuesArray objectAtIndex:4];
+            webserviceStatus = @"checked" ;
+        }
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -421,7 +417,6 @@
     {
         message = @"Please select a different email address.";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
-
         return;
     }
     
@@ -1177,7 +1172,7 @@ if(tableView == tableViewPreviousCustomer)
         
         if ([txtPreviousCoustomer.text isEqualToString:@"AAI - MEA"]) {
             internal=2;
-            [self checkforAvailability];
+            //[self checkforAvailability];
         }
         
         
@@ -1255,7 +1250,7 @@ if(tableView == tableViewPreviousCustomer)
         if(flag==true && ![txtPreviousCoustomer.text isEqualToString:@"AAI - MEA"])
         {
             internal=2;
-            [self checkforAvailability];
+         //   [self checkforAvailability];
         }
     }else if(tableView==tableViewMEA)
     {

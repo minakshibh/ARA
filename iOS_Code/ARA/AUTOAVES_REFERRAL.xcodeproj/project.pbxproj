@@ -272,6 +272,8 @@
 		D9AF3CC01B8EE5BD00F98881 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF3CB51B8EE5BD00F98881 /* AFURLRequestSerialization.m */; };
 		D9AF3CC11B8EE5BD00F98881 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF3CB71B8EE5BD00F98881 /* AFURLResponseSerialization.m */; };
 		D9AF3CC21B8EE5BD00F98881 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF3CB91B8EE5BD00F98881 /* AFURLSessionManager.m */; };
+		D9CAFFC01C3292A00055FDE8 /* SignupEmailCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CAFFBE1C3292A00055FDE8 /* SignupEmailCheckViewController.m */; };
+		D9CAFFC11C3292A00055FDE8 /* SignupEmailCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CAFFBF1C3292A00055FDE8 /* SignupEmailCheckViewController.xib */; };
 		D9DA1B631B7CA7A600554220 /* TLTagsControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DA1B621B7CA7A600554220 /* TLTagsControl.m */; };
 		D9DDB9A51B7CC788006F5A37 /* Apache License.txt in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9921B7CC787006F5A37 /* Apache License.txt */; };
 		D9DDB9A61B7CC788006F5A37 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9931B7CC788006F5A37 /* Roboto-Black.ttf */; };
@@ -666,6 +668,9 @@
 		D9AF3CB71B8EE5BD00F98881 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		D9AF3CB81B8EE5BD00F98881 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		D9AF3CB91B8EE5BD00F98881 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		D9CAFFBD1C3292A00055FDE8 /* SignupEmailCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupEmailCheckViewController.h; sourceTree = "<group>"; };
+		D9CAFFBE1C3292A00055FDE8 /* SignupEmailCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupEmailCheckViewController.m; sourceTree = "<group>"; };
+		D9CAFFBF1C3292A00055FDE8 /* SignupEmailCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupEmailCheckViewController.xib; sourceTree = "<group>"; };
 		D9DA1B611B7CA7A600554220 /* TLTagsControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTagsControl.h; sourceTree = "<group>"; };
 		D9DA1B621B7CA7A600554220 /* TLTagsControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTagsControl.m; sourceTree = "<group>"; };
 		D9DDB9921B7CC787006F5A37 /* Apache License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Apache License.txt"; sourceTree = "<group>"; };
@@ -1064,6 +1069,9 @@
 				D94BEAD71B787447008BCF5F /* SignUpViewController.h */,
 				D94BEAD81B787447008BCF5F /* SignUpViewController.m */,
 				D94BEAD91B787447008BCF5F /* SignUpViewController.xib */,
+				D9CAFFBD1C3292A00055FDE8 /* SignupEmailCheckViewController.h */,
+				D9CAFFBE1C3292A00055FDE8 /* SignupEmailCheckViewController.m */,
+				D9CAFFBF1C3292A00055FDE8 /* SignupEmailCheckViewController.xib */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -1663,6 +1671,7 @@
 				D94FFFB61BFF23CA006A37AA /* GoogleService-Info.plist in Resources */,
 				D9527D4F1B9E9EE900630F9F /* 4.jpg in Resources */,
 				D9527D661B9E9F3500630F9F /* 12@2x.jpg in Resources */,
+				D9CAFFC11C3292A00055FDE8 /* SignupEmailCheckViewController.xib in Resources */,
 				D94EE3391C0F0A68000FE550 /* chained_ref.png in Resources */,
 				D9356A1A1B81E82000777DD3 /* Splash@2x.png in Resources */,
 				D9527D6C1B9E9F3500630F9F /* 4@2x.jpg in Resources */,
@@ -1818,6 +1827,7 @@
 				D9DA1B631B7CA7A600554220 /* TLTagsControl.m in Sources */,
 				D93D09BD1B79C9E50011E46B /* ProfileViewController.m in Sources */,
 				D95667121B8EC65B00E01477 /* SBJsonStreamParserAdapter.m in Sources */,
+				D9CAFFC01C3292A00055FDE8 /* SignupEmailCheckViewController.m in Sources */,
 				D95667181B8EC65B00E01477 /* SBJsonUTF8Stream.m in Sources */,
 				D92D414E1B7B726100AB588F /* referralDetailViewController.m in Sources */,
 				D94BEAB61B7872EB008BCF5F /* AppDelegate.m in Sources */,

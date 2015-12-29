@@ -13,6 +13,7 @@
 #import "dashboardViewController.h"
 #import "ASIHTTPRequest.h"
 #import <Crittercism/Crittercism.h>
+#import "SignupEmailCheckViewController.h"
 
 @interface LoginViewController (){
     IBOutlet UIImageView *imagelogo;
@@ -240,7 +241,9 @@
 }
 
 - (IBAction)btnSignUp:(id)sender {
-    [self.navigationController pushViewController:SUvc animated:YES];
+    SignupEmailCheckViewController *signupEmail = [[SignupEmailCheckViewController alloc]initWithNibName:@"SignupEmailCheckViewController" bundle:nil];
+    [self.navigationController pushViewController:signupEmail animated:YES];
+   // [self.navigationController pushViewController:SUvc animated:YES];
 }
 
 - (IBAction)btnFacebookLogin:(id)sender {
