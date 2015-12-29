@@ -48,7 +48,7 @@
     IBOutlet UILabel *lblemailerror;
     IBOutlet UILabel *lblphonenoerror;
     NSString *response_status,*email_checked;
-    NSMutableArray *contact_name,*contact_phoneno,*contact_email;
+    NSMutableArray *contact_name,*contact_phoneno,*contact_email,*twoValueArray,*twoValueArrayID;
     IBOutlet UIView *viewHeaderPOPUP;
     IBOutlet UIView *viewDetailPOPUP;
     UIScrollView *scrollViewPOPUP;

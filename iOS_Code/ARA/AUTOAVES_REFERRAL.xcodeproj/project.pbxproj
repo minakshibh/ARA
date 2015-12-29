@@ -1532,6 +1532,11 @@
 					D94BEAAC1B7872EB008BCF5F = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = T5DY39F2BR;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					D94BEAC51B7872EB008BCF5F = {
 						CreatedOnToolsVersion = 6.1;

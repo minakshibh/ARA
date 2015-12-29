@@ -1153,6 +1153,58 @@
         {
             id_mea_array = [userDetailDict valueForKey:@"ID"];
             name_mea_array= [userDetailDict valueForKey:@"Name"];
+            
+            
+            //---------29th dec modification Start
+
+            //showing only previously selected mea and any membor advisor
+            twoValueArray = [[NSMutableArray alloc]init];
+            twoValueArrayID = [[NSMutableArray alloc]init];
+            
+            //to add any membor advisior as first option in dropdown
+            for (int i=0; i<name_mea_array.count; i++) {
+                
+                if ([[NSString stringWithFormat:@"%@",[name_mea_array objectAtIndex:i]] rangeOfString:@"Any Member" options:NSCaseInsensitiveSearch].location != NSNotFound){
+                    [twoValueArray addObject:[NSString stringWithFormat:@"%@",[name_mea_array objectAtIndex:i]]];
+                }
+                
+            }
+            
+           // Check if user already selected the any menbor advisor other wise add the vale selected at the time of signup
+            if (![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]] isEqualToString:[twoValueArray objectAtIndex:0]]){
+                 [twoValueArray addObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]]];
+            }
+           
+            
+            //getting objects id
+            for (int j=0; j<twoValueArray.count; j++) {
+                NSInteger indexValue1 = [name_mea_array indexOfObject:[twoValueArray objectAtIndex:j]];
+                [twoValueArrayID addObject:[NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexValue1]]];
+            }
+            
+            id_mea_array = [[NSArray alloc]init];
+            name_mea_array = [[NSArray alloc]init];
+            
+                id_mea_array = twoValueArrayID;
+                name_mea_array = twoValueArray;
+            
+            
+            NSLog(@"asdasdasd");
+            
+            //---------29th dec modification end
+            
+            
+            
+            
+            
+            
+//            NSString *compare =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
+            
+            
+//            if ([responseString rangeOfString:@"Validation failed for one or more entities" options:NSCaseInsensitiveSearch].location != NSNotFound)
+//            {
+//                
+//            }
         }else if(webservice==2)
         {
             
@@ -1279,7 +1331,7 @@
         }
         return [value count];
     }
-    
+   
     return id_mea_array.count;
     
 }
@@ -1291,7 +1343,13 @@
     
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
+        if (id_mea_array.count<=3) {
+            tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, 57*id_mea_array.count);
+        }
         return 57;
+    }
+    if (id_mea_array.count<=3) {
+        tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, 35*id_mea_array.count);
     }
     return 35;
 }
