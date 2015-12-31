@@ -122,32 +122,27 @@
                             <rect key="frame" x="44" y="1" width="331" height="96"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sep.png" id="vxs-7W-ZLk">
-                                    <rect key="frame" x="119" y="42" width="67" height="10"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="step2_enabled.png" id="vdR-lB-nlc">
-                                    <rect key="frame" x="184" y="17" width="60" height="59"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter email address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bJH-ex-aXN">
-                                    <rect key="frame" x="12" y="60" width="184" height="21"/>
+                                    <rect key="frame" x="6" y="60" width="184" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                     <color key="textColor" red="0.043137254901960784" green="0.1803921568627451" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compose your profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G5p-js-yuO">
-                                    <rect key="frame" x="122" y="74" width="184" height="21"/>
+                                    <rect key="frame" x="133" y="74" width="184" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BMq-PT-DT7">
-                                    <rect key="frame" x="76" y="18" width="56" height="56"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="step2.png" id="xpb-z8-Ern">
+                                    <rect key="frame" x="45" y="7" width="240" height="74"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="step1_disabled.png"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BMq-PT-DT7">
+                                    <rect key="frame" x="70" y="16" width="56" height="56"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <connections>
                                         <action selector="step1btnAction:" destination="-1" eventType="touchUpInside" id="47o-Zn-kcJ"/>
                                     </connections>
@@ -524,9 +519,7 @@
         <image name="password-icon.png" width="12" height="12"/>
         <image name="phone-icon.png" width="12" height="12"/>
         <image name="role-icon.png" width="12" height="12"/>
-        <image name="sep.png" width="61" height="4"/>
-        <image name="step1_disabled.png" width="56" height="56"/>
-        <image name="step2_enabled.png" width="56" height="56"/>
+        <image name="step2.png" width="139" height="55"/>
         <image name="user-icon.png" width="12" height="12"/>
     </resources>
 </document>

@@ -268,6 +268,10 @@
 		D98429681B943DB1008E5557 /* changePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98429661B943DB1008E5557 /* changePasswordViewController.xib */; };
 		D99A74481C24034200880859 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = D99A74471C24034200880859 /* Icon-76.png */; };
 		D99A744A1C24036500880859 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99A74491C24036500880859 /* Icon-76@2x.png */; };
+		D9A435531C352EB100FC3406 /* step1.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A435511C352EB100FC3406 /* step1.png */; };
+		D9A435541C352EB100FC3406 /* step2.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A435521C352EB100FC3406 /* step2.png */; };
+		D9A435571C352EBC00FC3406 /* step1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A435551C352EBC00FC3406 /* step1@2x.png */; };
+		D9A435581C352EBC00FC3406 /* step2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A435561C352EBC00FC3406 /* step2@2x.png */; };
 		D9AF3CA01B8ECE2200F98881 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D956673A1B8ECBE900E01477 /* CFNetwork.framework */; };
 		D9AF3CA11B8ECE2E00F98881 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D956673C1B8ECC0400E01477 /* SystemConfiguration.framework */; };
 		D9AF3CA21B8ECE3700F98881 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D956673E1B8ECC0F00E01477 /* MobileCoreServices.framework */; };
@@ -668,6 +672,10 @@
 		D98429661B943DB1008E5557 /* changePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = changePasswordViewController.xib; sourceTree = "<group>"; };
 		D99A74471C24034200880859 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		D99A74491C24036500880859 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		D9A435511C352EB100FC3406 /* step1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step1.png; sourceTree = "<group>"; };
+		D9A435521C352EB100FC3406 /* step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step2.png; sourceTree = "<group>"; };
+		D9A435551C352EBC00FC3406 /* step1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step1@2x.png"; sourceTree = "<group>"; };
+		D9A435561C352EBC00FC3406 /* step2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step2@2x.png"; sourceTree = "<group>"; };
 		D9AF3CA51B8ED27800F98881 /* ARA-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARA-Prefix.pch"; sourceTree = "<group>"; };
 		D9AF3CA71B8EE5BD00F98881 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D9AF3CA81B8EE5BD00F98881 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -872,6 +880,8 @@
 		D93569A01B81E70700777DD3 /* 320X480 */ = {
 			isa = PBXGroup;
 			children = (
+				D9A435511C352EB100FC3406 /* step1.png */,
+				D9A435521C352EB100FC3406 /* step2.png */,
 				D9154F031C33F33300FE0E6E /* sep.png */,
 				D9154F041C33F33300FE0E6E /* step1_disabled.png */,
 				D9154F051C33F33300FE0E6E /* step1_enabled.png */,
@@ -921,6 +931,8 @@
 		D93569A11B81E72A00777DD3 /* 640X1136 */ = {
 			isa = PBXGroup;
 			children = (
+				D9A435551C352EBC00FC3406 /* step1@2x.png */,
+				D9A435561C352EBC00FC3406 /* step2@2x.png */,
 				D9154EF91C33F32600FE0E6E /* sep@2x.png */,
 				D9154EFA1C33F32600FE0E6E /* step1_disabled@2x.png */,
 				D9154EFB1C33F32600FE0E6E /* step1_enabled@2x.png */,
@@ -1632,6 +1644,7 @@
 				D9527D6B1B9E9F3500630F9F /* 3@2x.jpg in Resources */,
 				D9356A0E1B81E82000777DD3 /* my-profile@2x.png in Resources */,
 				D9DDB9AF1B7CC788006F5A37 /* Roboto-Regular.ttf in Resources */,
+				D9A435571C352EBC00FC3406 /* step1@2x.png in Resources */,
 				D92D414A1B7B5D5E00AB588F /* Referral_List.jpg in Resources */,
 				D93569DD1B81E74300777DD3 /* submit-referral.png in Resources */,
 				D9356A001B81E82000777DD3 /* badges@2x.png in Resources */,
@@ -1661,8 +1674,10 @@
 				D9356A181B81E82000777DD3 /* silver-badge@2x.png in Resources */,
 				D93D09BE1B79C9E50011E46B /* ProfileViewController.xib in Resources */,
 				D9527D541B9E9EE900630F9F /* 9.jpg in Resources */,
+				D9A435581C352EBC00FC3406 /* step2@2x.png in Resources */,
 				D9DDB9B11B7CC788006F5A37 /* Roboto-ThinItalic.ttf in Resources */,
 				D9356A071B81E82000777DD3 /* filter-icon@2x.png in Resources */,
+				D9A435531C352EB100FC3406 /* step1.png in Resources */,
 				D959D18E1B7D9D670073C2D9 /* myBadgesViewController.xib in Resources */,
 				D9356A031B81E82000777DD3 /* comments-icon@2x.png in Resources */,
 				D9DDB9B21B7CC788006F5A37 /* RobotoCondensed-Bold.ttf in Resources */,
@@ -1670,6 +1685,7 @@
 				D969129D1BE387EF001D6E5E /* inner-logo_640.png in Resources */,
 				D9DDB9A71B7CC788006F5A37 /* Roboto-BlackItalic.ttf in Resources */,
 				D959D1A21B7E1CE40073C2D9 /* 1001fonts-timeburner-eula.txt in Resources */,
+				D9A435541C352EB100FC3406 /* step2.png in Resources */,
 				D92D41481B7B579100AB588F /* ReferralTableViewCell.xib in Resources */,
 				D9DDB9AA1B7CC788006F5A37 /* Roboto-Italic.ttf in Resources */,
 				D93D09B41B79BF710011E46B /* dashboardViewController.xib in Resources */,

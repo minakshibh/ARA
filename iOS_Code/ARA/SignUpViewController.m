@@ -92,6 +92,10 @@
     
     if (IS_IPAD)
     {
+        lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:14];
+        lblComposeyourprofile.font = [lblComposeyourprofile.font fontWithSize:16];
+
+        
         btnCheckBox.titleLabel.font = [btnCheckBox.titleLabel.font fontWithSize:20];
         btnSignup.titleLabel.font = [btnSignup.titleLabel.font fontWithSize:24];
         
@@ -113,6 +117,9 @@
         txtMEA.font = [txtMEA.font fontWithSize:20];
         
         btnCheckBox.frame = CGRectMake(btnCheckBox.frame.origin.x, btnCheckBox.frame.origin.y-3, btnCheckBox.frame.size.width, btnCheckBox.frame.size.height);
+        
+        lblEnteremailaddress.frame = CGRectMake(lblEnteremailaddress.frame.origin.x+12, lblEnteremailaddress.frame.origin.y+2, lblEnteremailaddress.frame.size.width, lblEnteremailaddress.frame.size.height);
+        lblComposeyourprofile.frame = CGRectMake(lblComposeyourprofile.frame.origin.x-12, lblComposeyourprofile.frame.origin.y, lblComposeyourprofile.frame.size.width, lblComposeyourprofile.frame.size.height);
         
         if(IS_IPAD_PRO_1366)
         {

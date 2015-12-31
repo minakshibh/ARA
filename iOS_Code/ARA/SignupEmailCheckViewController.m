@@ -55,8 +55,8 @@
         lblComposeyourprofile.font = [lblEnteremailaddress.font fontWithSize:8];
     }
     if (IS_IPAD) {
-        lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:14];
-        lblComposeyourprofile.font = [lblEnteremailaddress.font fontWithSize:15];
+        lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:16];
+        lblComposeyourprofile.font = [lblEnteremailaddress.font fontWithSize:14];
         
         
         txtEmail.font = [lblEnteremailaddress.font fontWithSize:20];
@@ -66,6 +66,8 @@
         btnLogin.titleLabel.font = [btnLogin.titleLabel.font fontWithSize:20];
 
 
+        lblEnteremailaddress.frame = CGRectMake(lblEnteremailaddress.frame.origin.x+12, lblEnteremailaddress.frame.origin.y, lblEnteremailaddress.frame.size.width, lblEnteremailaddress.frame.size.height);
+        lblComposeyourprofile.frame = CGRectMake(lblComposeyourprofile.frame.origin.x-15, lblComposeyourprofile.frame.origin.y, lblComposeyourprofile.frame.size.width, lblComposeyourprofile.frame.size.height);
         
     }
 }
