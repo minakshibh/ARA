@@ -72,10 +72,10 @@
 
         lblheading.font=[lblheading.font fontWithSize:24];
 
-        txtOldpwd.font=[txtOldpwd.font fontWithSize:24];
+        txtOldpwd.font=[txtOldpwd.font fontWithSize:20];
 
-        txtNewpwd.font=[txtNewpwd.font fontWithSize:24];
-        txtConfirmnewpwd.font=[txtConfirmnewpwd.font fontWithSize:24];
+        txtNewpwd.font=[txtNewpwd.font fontWithSize:20];
+        txtConfirmnewpwd.font=[txtConfirmnewpwd.font fontWithSize:20];
         
         if(IS_IPAD_PRO_1366)
         {
@@ -85,10 +85,10 @@
             
             lblheading.font=[lblheading.font fontWithSize:30];
             
-            txtOldpwd.font=[txtOldpwd.font fontWithSize:30];
+            txtOldpwd.font=[txtOldpwd.font fontWithSize:28];
             
-            txtNewpwd.font=[txtNewpwd.font fontWithSize:30];
-            txtConfirmnewpwd.font=[txtConfirmnewpwd.font fontWithSize:30];
+            txtNewpwd.font=[txtNewpwd.font fontWithSize:28];
+            txtConfirmnewpwd.font=[txtConfirmnewpwd.font fontWithSize:28];
         }
 
         

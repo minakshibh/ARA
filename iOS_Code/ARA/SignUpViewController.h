@@ -40,6 +40,8 @@
     IBOutlet UIImageView *imageMEAdropdown;
     IBOutlet UIButton *btnCheckBox;
     IBOutlet UILabel *lblPurchaseVehicle;
+    IBOutlet UILabel *lblEnteremailaddress;
+    IBOutlet UILabel *lblComposeyourprofile;
     IBOutlet UIButton *btnSignup;
     IBOutlet UILabel *lblAlready;
      CGPoint svos;
@@ -70,6 +72,7 @@
     BOOL status,status1,flag;
     IBOutlet UIView *loweView;
     int error;
+    IBOutlet UIImageView *imageViewDisablestep1;
 }
 - (IBAction)btnMEA:(id)sender;
 - (IBAction)btnPreviewCustomer:(id)sender;

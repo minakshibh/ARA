@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		D913AFD01C227846007D3D6E /* Crittercism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D913AFCF1C227846007D3D6E /* Crittercism.framework */; };
+		D9154EFE1C33F32600FE0E6E /* sep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154EF91C33F32600FE0E6E /* sep@2x.png */; };
+		D9154EFF1C33F32600FE0E6E /* step1_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154EFA1C33F32600FE0E6E /* step1_disabled@2x.png */; };
+		D9154F001C33F32600FE0E6E /* step1_enabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154EFB1C33F32600FE0E6E /* step1_enabled@2x.png */; };
+		D9154F011C33F32600FE0E6E /* step2_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154EFC1C33F32600FE0E6E /* step2_disabled@2x.png */; };
+		D9154F021C33F32600FE0E6E /* step2_enabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154EFD1C33F32600FE0E6E /* step2_enabled@2x.png */; };
+		D9154F081C33F33300FE0E6E /* sep.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154F031C33F33300FE0E6E /* sep.png */; };
+		D9154F091C33F33300FE0E6E /* step1_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154F041C33F33300FE0E6E /* step1_disabled.png */; };
+		D9154F0A1C33F33300FE0E6E /* step1_enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154F051C33F33300FE0E6E /* step1_enabled.png */; };
+		D9154F0B1C33F33300FE0E6E /* step2_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154F061C33F33300FE0E6E /* step2_disabled.png */; };
+		D9154F0C1C33F33300FE0E6E /* step2_enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D9154F071C33F33300FE0E6E /* step2_enabled.png */; };
 		D916BB0A1BBBAB0B00AECF5D /* submit_ref@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D916BB091BBBAB0B00AECF5D /* submit_ref@2x.png */; };
 		D916BB0C1BBBAB1500AECF5D /* submit_ref.png in Resources */ = {isa = PBXBuildFile; fileRef = D916BB0B1BBBAB1500AECF5D /* submit_ref.png */; };
 		D91B9DFE1B87407D008B0FEB /* checkbox-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = D91B9DFD1B87407D008B0FEB /* checkbox-unchecked.png */; };
@@ -312,6 +322,16 @@
 
 /* Begin PBXFileReference section */
 		D913AFCF1C227846007D3D6E /* Crittercism.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crittercism.framework; sourceTree = "<group>"; };
+		D9154EF91C33F32600FE0E6E /* sep@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sep@2x.png"; sourceTree = "<group>"; };
+		D9154EFA1C33F32600FE0E6E /* step1_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step1_disabled@2x.png"; sourceTree = "<group>"; };
+		D9154EFB1C33F32600FE0E6E /* step1_enabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step1_enabled@2x.png"; sourceTree = "<group>"; };
+		D9154EFC1C33F32600FE0E6E /* step2_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step2_disabled@2x.png"; sourceTree = "<group>"; };
+		D9154EFD1C33F32600FE0E6E /* step2_enabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step2_enabled@2x.png"; sourceTree = "<group>"; };
+		D9154F031C33F33300FE0E6E /* sep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sep.png; sourceTree = "<group>"; };
+		D9154F041C33F33300FE0E6E /* step1_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step1_disabled.png; sourceTree = "<group>"; };
+		D9154F051C33F33300FE0E6E /* step1_enabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step1_enabled.png; sourceTree = "<group>"; };
+		D9154F061C33F33300FE0E6E /* step2_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step2_disabled.png; sourceTree = "<group>"; };
+		D9154F071C33F33300FE0E6E /* step2_enabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step2_enabled.png; sourceTree = "<group>"; };
 		D916BB091BBBAB0B00AECF5D /* submit_ref@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "submit_ref@2x.png"; sourceTree = "<group>"; };
 		D916BB0B1BBBAB1500AECF5D /* submit_ref.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit_ref.png; sourceTree = "<group>"; };
 		D91B9DFD1B87407D008B0FEB /* checkbox-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-unchecked.png"; sourceTree = "<group>"; };
@@ -852,6 +872,11 @@
 		D93569A01B81E70700777DD3 /* 320X480 */ = {
 			isa = PBXGroup;
 			children = (
+				D9154F031C33F33300FE0E6E /* sep.png */,
+				D9154F041C33F33300FE0E6E /* step1_disabled.png */,
+				D9154F051C33F33300FE0E6E /* step1_enabled.png */,
+				D9154F061C33F33300FE0E6E /* step2_disabled.png */,
+				D9154F071C33F33300FE0E6E /* step2_enabled.png */,
 				D96F54871C08831D005C3265 /* about_320.png */,
 				D916BB0B1BBBAB1500AECF5D /* submit_ref.png */,
 				D94EE3371C0F0A68000FE550 /* chained_ref.png */,
@@ -896,6 +921,11 @@
 		D93569A11B81E72A00777DD3 /* 640X1136 */ = {
 			isa = PBXGroup;
 			children = (
+				D9154EF91C33F32600FE0E6E /* sep@2x.png */,
+				D9154EFA1C33F32600FE0E6E /* step1_disabled@2x.png */,
+				D9154EFB1C33F32600FE0E6E /* step1_enabled@2x.png */,
+				D9154EFC1C33F32600FE0E6E /* step2_disabled@2x.png */,
+				D9154EFD1C33F32600FE0E6E /* step2_enabled@2x.png */,
 				D96F54891C088325005C3265 /* about_320@2X.png */,
 				D916BB091BBBAB0B00AECF5D /* submit_ref@2x.png */,
 				D94EE3331C0F0A58000FE550 /* chained_ref@2x.png */,
@@ -1581,6 +1611,7 @@
 				D93569D81B81E74300777DD3 /* right-arrow.png in Resources */,
 				D96912901BE381FD001D6E5E /* AutoAves Splash_320@2x.jpg in Resources */,
 				D9356A171B81E82000777DD3 /* role-icon@2x.png in Resources */,
+				D9154F0C1C33F33300FE0E6E /* step2_enabled.png in Resources */,
 				D9356A051B81E82000777DD3 /* edit-icon@2x.png in Resources */,
 				D92EC41E1B8305CE00E8EB8D /* PaypalAccountsTableViewCell.xib in Resources */,
 				D93569D51B81E74300777DD3 /* radio-checked.png in Resources */,
@@ -1604,6 +1635,7 @@
 				D92D414A1B7B5D5E00AB588F /* Referral_List.jpg in Resources */,
 				D93569DD1B81E74300777DD3 /* submit-referral.png in Resources */,
 				D9356A001B81E82000777DD3 /* badges@2x.png in Resources */,
+				D9154F001C33F32600FE0E6E /* step1_enabled@2x.png in Resources */,
 				D9DDB9B41B7CC788006F5A37 /* RobotoCondensed-Italic.ttf in Resources */,
 				D91B9E001B874082008B0FEB /* checkbox2_checked.png in Resources */,
 				D9356A121B81E82000777DD3 /* platinum-badge@2x.png in Resources */,
@@ -1618,12 +1650,14 @@
 				D9DDB9A91B7CC788006F5A37 /* Roboto-BoldItalic.ttf in Resources */,
 				D9DDB9B51B7CC788006F5A37 /* RobotoCondensed-Light.ttf in Resources */,
 				D93569D11B81E74300777DD3 /* password-icon.png in Resources */,
+				D9154F081C33F33300FE0E6E /* sep.png in Resources */,
 				D93569DC1B81E74300777DD3 /* Splash.png in Resources */,
 				D91B9E0A1B87415A008B0FEB /* checkbox-unchecked@2x.png in Resources */,
 				D9527D681B9E9F3500630F9F /* 14.jpg in Resources */,
 				D969129B1BE387EF001D6E5E /* inner-logo_480.png in Resources */,
 				D94EE3361C0F0A58000FE550 /* direct_ref@2x.png in Resources */,
 				D9DDB9AE1B7CC788006F5A37 /* Roboto-MediumItalic.ttf in Resources */,
+				D9154F0A1C33F33300FE0E6E /* step1_enabled.png in Resources */,
 				D9356A181B81E82000777DD3 /* silver-badge@2x.png in Resources */,
 				D93D09BE1B79C9E50011E46B /* ProfileViewController.xib in Resources */,
 				D9527D541B9E9EE900630F9F /* 9.jpg in Resources */,
@@ -1641,10 +1675,12 @@
 				D93D09B41B79BF710011E46B /* dashboardViewController.xib in Resources */,
 				D9527D4C1B9E9EE900630F9F /* 14.jpg in Resources */,
 				D96912921BE381FD001D6E5E /* AutoAves Splash_320@2x~ipad.jpg in Resources */,
+				D9154EFE1C33F32600FE0E6E /* sep@2x.png in Resources */,
 				D9DDB9A51B7CC788006F5A37 /* Apache License.txt in Resources */,
 				D969129C1BE387EF001D6E5E /* inner-logo_600.png in Resources */,
 				D93569FF1B81E82000777DD3 /* back-icon@2x.png in Resources */,
 				D93569C81B81E74300777DD3 /* email-icon.png in Resources */,
+				D9154F0B1C33F33300FE0E6E /* step2_disabled.png in Resources */,
 				D9356A1B1B81E82000777DD3 /* submit-referral@2x.png in Resources */,
 				D9F3B0311C1E79C800828219 /* PopupTableViewCell.xib in Resources */,
 				D92D41301B7B1F9800AB588F /* SubmitReferralViewController.xib in Resources */,
@@ -1664,6 +1700,7 @@
 				D9527D6D1B9E9F3500630F9F /* 5@2x.jpg in Resources */,
 				D9527D651B9E9F3500630F9F /* 11@2x.jpg in Resources */,
 				D9356A041B81E82000777DD3 /* dropdown-arrow@2x.png in Resources */,
+				D9154F021C33F32600FE0E6E /* step2_enabled@2x.png in Resources */,
 				D9527D491B9E9EE900630F9F /* 11.jpg in Resources */,
 				D9527D471B9E9EE900630F9F /* 1.jpg in Resources */,
 				D91B9E121B87415A008B0FEB /* scoreboard@2x.png in Resources */,
@@ -1678,12 +1715,14 @@
 				D96912821BE37280001D6E5E /* AppIcon_120.png in Resources */,
 				D9527D6A1B9E9F3500630F9F /* 2@2x.jpg in Resources */,
 				D969129A1BE387EF001D6E5E /* inner-logo_320.png in Resources */,
+				D9154EFF1C33F32600FE0E6E /* step1_disabled@2x.png in Resources */,
 				D9356A141B81E82000777DD3 /* radio-unchecked@2x.png in Resources */,
 				D96912831BE37280001D6E5E /* AppIcon_1024.png in Resources */,
 				D94D54AE1B995CAF00C03639 /* tick2@2x.png in Resources */,
 				D91B9E0F1B87415A008B0FEB /* login-with-facebook@2x.png in Resources */,
 				D9527D531B9E9EE900630F9F /* 8.jpg in Resources */,
 				D96F54861C08615C005C3265 /* AboutAppViewController.xib in Resources */,
+				D9154F091C33F33300FE0E6E /* step1_disabled.png in Resources */,
 				D969128F1BE381FD001D6E5E /* AutoAves Splash_600.jpg in Resources */,
 				D95D23C41C27F706000A9E7A /* inner-logo_iphone~ipad.png in Resources */,
 				D9527D671B9E9F3500630F9F /* 13.jpg in Resources */,
@@ -1691,6 +1730,7 @@
 				D9356A1D1B81E82000777DD3 /* user-icon@2x.png in Resources */,
 				D9356A131B81E82000777DD3 /* radio-checked@2x.png in Resources */,
 				D93569CA1B81E74300777DD3 /* gold-badge.png in Resources */,
+				D9154F011C33F32600FE0E6E /* step2_disabled@2x.png in Resources */,
 				D9356A061B81E82000777DD3 /* email-icon@2x.png in Resources */,
 				D959D1931B7DB68C0073C2D9 /* myBadgesTableViewCell.xib in Resources */,
 				D95D23C31C27F706000A9E7A /* inner-logo_iphone@2x~ipad.png in Resources */,
@@ -2003,8 +2043,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2021,7 +2061,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e162e085-d212-47a8-8b68-074545fd8bf0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2031,8 +2071,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2049,7 +2089,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "144a0a30-92b2-4b2d-a812-dae06f6b52e3";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

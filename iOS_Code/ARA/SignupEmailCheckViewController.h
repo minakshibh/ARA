@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SignupEmailCheckViewController : UIViewController
-
+@interface SignupEmailCheckViewController : UIViewController<UITextFieldDelegate,UIGestureRecognizerDelegate>
+{
+    IBOutlet UILabel *lblComposeyourprofile;
+    IBOutlet UILabel *lblEnteremailaddress;
+    CGPoint svos;
+    IBOutlet UIImageView *imageViewDisablestep2;
+}
 @end

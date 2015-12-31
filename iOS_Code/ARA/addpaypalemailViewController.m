@@ -87,21 +87,21 @@
     {
         lblheading.font=[lblheading .font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
-        txtEmail.font=[txtEmail .font fontWithSize:24];
+        txtEmail.font=[txtEmail .font fontWithSize:20];
         btnSavechanges.titleLabel.font = [btnSavechanges.titleLabel.font fontWithSize:24];
         btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:24];
         selectPaymentMode.titleLabel.font = [selectPaymentMode.titleLabel.font fontWithSize:24];
-        txtDropDown.font=[txtEmail .font fontWithSize:24];
+        txtDropDown.font=[txtEmail .font fontWithSize:20];
         
         if(IS_IPAD_PRO_1366)
         {
             lblheading.font=[lblheading .font fontWithSize:30];
             btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
-            txtEmail.font=[txtEmail .font fontWithSize:30];
+            txtEmail.font=[txtEmail .font fontWithSize:28];
             btnSavechanges.titleLabel.font = [btnSavechanges.titleLabel.font fontWithSize:30];
             btnCheckbox.titleLabel.font = [btnCheckbox.titleLabel.font fontWithSize:30];
             selectPaymentMode.titleLabel.font = [selectPaymentMode.titleLabel.font fontWithSize:30];
-            txtDropDown.font=[txtEmail .font fontWithSize:30];
+            txtDropDown.font=[txtEmail .font fontWithSize:28];
         }
     }
 }

@@ -139,11 +139,31 @@
             
         }
     }
+    
 }
-
-
+- (IBAction)step1btnAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    if (IS_IPHONE_5) {
+        lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:8];
+        lblComposeyourprofile.font = [lblEnteremailaddress.font fontWithSize:9];
+    }
+    if (IS_IPAD) {
+        lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:12];
+        lblComposeyourprofile.font = [lblEnteremailaddress.font fontWithSize:11];
+    }
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [imageViewDisablestep1 addGestureRecognizer:singleFingerTap];
+
     //--assigning values to label
     if([_from_fb_button isEqualToString:@"yes"])
     {
@@ -298,7 +318,8 @@
         [obj facebookLogin];
         return;
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    [self.navigationController pushViewController:loginView animated:YES];
 }
 
 - (IBAction)btnSignup:(id)sender {
@@ -1159,7 +1180,7 @@ if(tableView == tableViewPreviousCustomer)
     
     if ( IS_IPAD )
     {
-        cell.textLabel.font = [UIFont systemFontOfSize:25.0];
+        cell.textLabel.font = [UIFont systemFontOfSize:20.0];
     }
     tableViewPreviousCustomer.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableViewMEA.separatorStyle = UITableViewCellSeparatorStyleNone;

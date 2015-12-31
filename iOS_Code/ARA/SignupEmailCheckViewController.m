@@ -16,15 +16,59 @@
     int webservice;
     NSString *response_status,*firstname,*lastname,*phoneno,*UserDetailId;
     IBOutlet UIScrollView *scrollView;
+    IBOutlet UIButton *btnVerifyEmail;
+    IBOutlet UIButton *btnLogin;
+    IBOutlet UIButton *lblAlreadyhaveanaccount;
 }
 @end
 
 @implementation SignupEmailCheckViewController
 
 - (void)viewDidLoad {
+    txtEmail.delegate=self;
     [super viewDidLoad];
+    
+   
+
+}
+- (IBAction)step2btnAction:(id)sender {
+    NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    txtEmail.text = emailStr;
+    if(emailStr.length==0) {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter email address" okBtn:OkButtonTitle];
+        return;
+    }else  if (![txtEmail emailValidation]) {
+        NSString* message = @"Please check your email address";
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        
+        [txtEmail becomeFirstResponder];
+        return;
+    }
+    [self.view endEditing:YES];
+    [self checkforAvailability:emailStr];
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    if (IS_IPHONE_5) {
+        lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:9];
+        lblComposeyourprofile.font = [lblEnteremailaddress.font fontWithSize:8];
+    }
+    if (IS_IPAD) {
+        lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:14];
+        lblComposeyourprofile.font = [lblEnteremailaddress.font fontWithSize:15];
+        
+        
+        txtEmail.font = [lblEnteremailaddress.font fontWithSize:20];
+
+        btnVerifyEmail.titleLabel.font = [btnVerifyEmail.titleLabel.font fontWithSize:24];
+        lblAlreadyhaveanaccount.font = [lblEnteremailaddress.font fontWithSize:20];
+        btnLogin.titleLabel.font = [btnLogin.titleLabel.font fontWithSize:20];
+
+
+        
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -44,6 +88,7 @@
     }
     [self.view endEditing:YES];
     [self checkforAvailability:emailStr];
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
 }
 
 - (IBAction)btnLogin:(id)sender {
@@ -195,7 +240,7 @@
         if ([responseString rangeOfString:@"Please check your" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
             [kappDelegate HideIndicator];
-            UIAlertController * alert=   [UIAlertController
+            UIAlertController * alert= [UIAlertController
                                           alertControllerWithTitle:AlertTitle
                                           message:responseString
                                           preferredStyle:UIAlertControllerStyleAlert];
@@ -206,7 +251,7 @@
                                         {
                                             //Handel your yes please button action here
                                             [alert dismissViewControllerAnimated:YES completion:nil];
-                                            
+                                            [self.navigationController popViewControllerAnimated:YES];
                                         }];
             [alert addAction:okButton];
             [self presentViewController:alert animated:YES completion:nil];
@@ -283,8 +328,9 @@
                                                style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action)
                                                {
-                                                   [alert dismissViewControllerAnimated:YES completion:nil];
                                                    
+                                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   [self.navigationController popViewControllerAnimated:YES];
                                                }];
                     
                     [alert addAction:yesButton];
@@ -308,21 +354,65 @@
     }else{
         
         if (webservice==6) {
-        if ([responseString rangeOfString:@"Email address not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
-        {
-            NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([responseString rangeOfString:@"Email address not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
-            SignUpViewController *signupView = [[SignUpViewController alloc]initWithNibName:@"SignUpViewController" bundle:nil];
-            NSArray *value = [[NSArray alloc]initWithObjects:@"",@"",@"",@"",emailStr, nil];
-            signupView.fromEmailView = @"yes";
-            signupView.valuesArray = value;
-            [self.navigationController pushViewController:signupView animated:YES];
+                SignUpViewController *signupView = [[SignUpViewController   alloc]initWithNibName:@"SignUpViewController" bundle:nil];
+                NSArray *value = [[NSArray alloc]initWithObjects:@"",@"",@"",@"",emailStr, nil];
+                signupView.fromEmailView = @"yes";
+                signupView.valuesArray = value;
+                [self.navigationController pushViewController:signupView animated:YES];
            
-            return;
-        }
+                return;
+            }
+        }else if(webservice==7)
+            {
+                [kappDelegate HideIndicator];
+                 if ([responseString rangeOfString:@"Failure sending mail" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                     UIAlertController * alert=   [UIAlertController
+                                                   alertControllerWithTitle:AlertTitle
+                                                   message:@"Failed to send email. Kindly try again."
+                                                   preferredStyle:UIAlertControllerStyleAlert];
+                     
+                     UIAlertAction* noButton = [UIAlertAction
+                                                actionWithTitle:@"Ok"
+                                                style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction * action)
+                                                {
+                                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                                    
+                                                }];
+                     
+                     [alert addAction:noButton];
+                     
+                     [self presentViewController:alert animated:YES completion:nil];
+                }
+               
+            }
+    
     }
-    
-    
+    [kappDelegate HideIndicator];
+}
+#pragma  mark- textView Delegates
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [txtEmail resignFirstResponder ];
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+
+    return  YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    svos = scrollView.contentOffset;
+    if(textField == txtEmail) {
+        
+        CGPoint pt;
+        CGRect rc = [textField bounds];
+        rc = [textField convertRect:rc toView:scrollView];
+        pt = rc.origin;
+        pt.x = 0;
+        pt.y -=200;
+        [scrollView setContentOffset:pt animated:YES];
     }
 }
 @end

@@ -128,13 +128,13 @@
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
         btnImportContacts.titleLabel.font = [btnImportContacts.titleLabel.font fontWithSize:24];
         btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
-        txtFirstname.font = [txtFirstname.font fontWithSize:24];
-        txtLastname.font = [txtLastname.font fontWithSize:24];
-        txtPhoneno.font = [txtPhoneno.font fontWithSize:24];
-        txtEmail.font = [txtEmail.font fontWithSize:24];
-        txtmea.font = [txtmea.font fontWithSize:24];
-        txtComment.font = [txtComment.font fontWithSize:24];
-        lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:24];
+        txtFirstname.font = [txtFirstname.font fontWithSize:20];
+        txtLastname.font = [txtLastname.font fontWithSize:20];
+        txtPhoneno.font = [txtPhoneno.font fontWithSize:20];
+        txtEmail.font = [txtEmail.font fontWithSize:20];
+        txtmea.font = [txtmea.font fontWithSize:20];
+        txtComment.font = [txtComment.font fontWithSize:20];
+        lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:20];
         //btnImportContacts.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 90);
         
         if(IS_IPAD_PRO_1366)
@@ -144,13 +144,13 @@
             btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:30];
             btnImportContacts.titleLabel.font = [btnImportContacts.titleLabel.font fontWithSize:30];
             btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:30];
-            txtFirstname.font = [txtFirstname.font fontWithSize:30];
-            txtLastname.font = [txtLastname.font fontWithSize:30];
-            txtPhoneno.font = [txtPhoneno.font fontWithSize:30];
-            txtEmail.font = [txtEmail.font fontWithSize:30];
-            txtmea.font = [txtmea.font fontWithSize:30];
-            txtComment.font = [txtComment.font fontWithSize:30];
-            lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:30];
+            txtFirstname.font = [txtFirstname.font fontWithSize:28];
+            txtLastname.font = [txtLastname.font fontWithSize:28];
+            txtPhoneno.font = [txtPhoneno.font fontWithSize:28];
+            txtEmail.font = [txtEmail.font fontWithSize:28];
+            txtmea.font = [txtmea.font fontWithSize:28];
+            txtComment.font = [txtComment.font fontWithSize:28];
+            lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:28];
         }
     }
 }

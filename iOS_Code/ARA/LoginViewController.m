@@ -237,11 +237,13 @@
 - (IBAction)btnForgotPassword:(id)sender {
     ForgotPasswordViewController *FPvc = [[ForgotPasswordViewController alloc]initWithNibName:@"ForgotPasswordViewController" bundle:nil];
     FPvc.email = txtEmail.text;
+    [self.view endEditing:YES];
     [self.navigationController pushViewController:FPvc animated:YES];
 }
 
 - (IBAction)btnSignUp:(id)sender {
     SignupEmailCheckViewController *signupEmail = [[SignupEmailCheckViewController alloc]initWithNibName:@"SignupEmailCheckViewController" bundle:nil];
+    [self.view endEditing:YES];
     [self.navigationController pushViewController:signupEmail animated:YES];
    // [self.navigationController pushViewController:SUvc animated:YES];
 }
@@ -250,6 +252,7 @@
   
     [self facebookLogin];
 }
+
 - (IBAction)btnLogin:(id)sender {
     
     [self checkLogin];
