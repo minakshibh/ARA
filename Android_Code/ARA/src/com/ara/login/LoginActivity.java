@@ -193,7 +193,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 				}
 			} else if (v == signup) {
 				Intent intent = new Intent(LoginActivity.this,
-						RegisterActivity.class);
+						EmailValidatorActivity.class);
 				startActivity(intent);
 				
 			} else if (v == forgotpassword) {
@@ -412,7 +412,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 		  }
 		  if(!first_name.equals(""))
 		  {
-		   Intent intent1=new Intent(LoginActivity.this,RegisterActivity.class);
+		   Intent intent1=new Intent(LoginActivity.this,EmailValidatorActivity.class);
 		   intent1.putExtra("firstname", first_name);
 		   intent1.putExtra("lastname", last_name);
 		   intent1.putExtra("username", username);

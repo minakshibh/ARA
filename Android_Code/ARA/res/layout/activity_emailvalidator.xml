@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_blue"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="8"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/step_a" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_rounded_btn"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:src="@drawable/email_icon" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray" />
+
+            <EditText
+                android:id="@+id/confirm_pass"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Email Address"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/default_text_size" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnProceedNext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/yellow_rounded_btn"
+            android:padding="10dp"
+            android:text="PROCEED TO NEXT STEP"
+            android:textColor="@color/app_blue"
+            android:textSize="@dimen/default_text_size"
+            android:textStyle="bold" />
+
+         <LinearLayout
+                android:id="@+id/login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/txt_Alreadyhave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Log In Here"
+                    android:textColor="@color/app_yellow"
+                    android:textStyle="bold" />
+            </LinearLayout>
+    </LinearLayout>
+  <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp" >
+         </LinearLayout>
+</LinearLayout>

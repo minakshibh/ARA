@@ -5,10 +5,8 @@
   	android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:singleLine="true"
-    android:paddingLeft="15dip" 
-    android:paddingRight="15dip" 
-  
+  	android:textSize="16sp"
     android:id="@id/textView1"
     android:padding="5dp"
-     android:background="@color/white"
+    android:background="@color/white"
 />

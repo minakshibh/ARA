@@ -50,6 +50,7 @@ public class SubmitReferralActivity extends Activity implements
 
 	private Spinner mea_spinner;
 	private ArrayList<MEA> arrayList_Mea = new ArrayList<MEA>();
+	private ArrayList<MEA> onlyTwo_Mea = new ArrayList<MEA>();
 	private int PICK_CONTACT;
 	private String email, name, mea_id = "";
 	private LinearLayout layout_importcontacts;
@@ -142,7 +143,7 @@ public class SubmitReferralActivity extends Activity implements
 
 						mea_id = mea_Model.getId();
 
-						System.err.println("spinnerrr  mea");
+						System.err.println("spinnerrr  mea"+mea_id);
 
 					}
 
@@ -727,19 +728,9 @@ public class SubmitReferralActivity extends Activity implements
 			MEA mMEA = new MEA();
 			String getId;
 			int gettingStatePosition = 0;
+			
+			
 			arrayList_Mea = parser.parseMEAResponse(output);
-			Log.e(methodName, output);
-			System.err.println(arrayList_Mea.toString());
-			ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,
-					android.R.layout.simple_spinner_item, arrayList_Mea);
-			spinnerArrayAdapter
-					.setDropDownViewResource(R.layout.spinner_dropdown);
-			// Step 3: Tell the spinner about our adapter
-			System.err.println("sizeeeeee===" + arrayList_Mea.size());
-
-			mea_spinner.setAdapter(spinnerArrayAdapter);
-			mea_id = spref.getString("meaid", "");
-
 			try {
 				if (arrayList_Mea.size() > 0) {
 
@@ -749,15 +740,32 @@ public class SubmitReferralActivity extends Activity implements
 						String id = mea.getId();
 						if (getId.equals(id)) {
 							gettingStatePosition = i;
+							onlyTwo_Mea.add(arrayList_Mea.get(i));
 						}
 						i++;
 					}
 				}
 				mea_spinner.setSelection(gettingStatePosition);
+				MEA mea_Model = new MEA("Any Member Experience Advisor (Sales)","221","testkrishna@gmail.com");
+				onlyTwo_Mea.add(mea_Model);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			Log.e(methodName, output);
+			System.err.println(arrayList_Mea.toString());
+			
+			ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,
+			android.R.layout.simple_spinner_item, onlyTwo_Mea);
+			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+			// Step 3: Tell the spinner about our adapter
+			System.err.println("sizeeeeee===" + onlyTwo_Mea.size());
+
+			mea_spinner.setAdapter(spinnerArrayAdapter);
+			mea_id = spref.getString("meaid", "");
+
+			
 
 		} else if (methodName.equals("referrals")) {
 			Log.e(methodName, output);
