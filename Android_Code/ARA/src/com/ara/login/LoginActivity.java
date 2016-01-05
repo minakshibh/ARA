@@ -291,7 +291,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
-		finish();
+		moveTaskToBack(true);
 	}
 	private void checkNotNull(Object reference, String name) {
 		if (reference == null) {

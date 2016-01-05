@@ -164,6 +164,9 @@ public class EmailValidatorActivity  extends Activity implements AsyncResponseFo
 			intent.putExtra("lastname",getIntent().getStringExtra("lastname"));
 			intent.putExtra("username",getIntent().getStringExtra("username"));
 		}
+		else{
+			intent.putExtra("newEmail",email.getText().toString());
+		}
 		startActivity(intent);
 		
 	}
@@ -263,8 +266,8 @@ public class EmailValidatorActivity  extends Activity implements AsyncResponseFo
 								
 								
 								Intent intent = new Intent(EmailValidatorActivity.this,RegisterActivity.class);
-								intent.putExtra("firstName", usermodel.getFirstName());
-								intent.putExtra("lastName", usermodel.getLastName());
+								intent.putExtra("fName", usermodel.getFirstName());
+								intent.putExtra("lName", usermodel.getLastName());
 								intent.putExtra("clientId",usermodel.getUserDetailId());
 								intent.putExtra("email",email.getText().toString());
 								if(!usermodel.getUserId().equals("0"))

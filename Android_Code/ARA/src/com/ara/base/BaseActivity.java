@@ -326,7 +326,7 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 			ed.putString("access_token","");
 			ed.commit();
 			Intent intent = new Intent(BaseActivity.this,LoginActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			finish();
 			}

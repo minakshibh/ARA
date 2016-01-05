@@ -61,7 +61,8 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 	private boolean flag_setspinner=false;
 	private boolean flagClient=false;
 	private String clientId="";
-	private String phone=null;
+	private String phone=null,getemail=null;
+	
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,7 +129,8 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			firstName.setText(getIntent().getStringExtra("firstname"));
 			lastName.setText(getIntent().getStringExtra("lastname"));
 			userId.setText(getIntent().getStringExtra("username"));
-			emailId.setText(getIntent().getStringExtra("email"));
+			getemail=getIntent().getStringExtra("email");
+			emailId.setText(getemail);
 			userId.setFocusableInTouchMode(true);
 			userId.requestFocus();
 			userId.setSelection(userId.getText().length());
@@ -140,10 +142,11 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		//clientId
 		else if(getIntent().getStringExtra("clientId")!=null)
 		{
-			 flagClient=true;
-			firstName.setText(getIntent().getStringExtra("firstName"));
-			lastName.setText(getIntent().getStringExtra("lastName"));
-			emailId.setText(getIntent().getStringExtra("email"));
+			flagClient=true;
+			firstName.setText(getIntent().getStringExtra("fName"));
+			lastName.setText(getIntent().getStringExtra("lName"));
+			getemail=getIntent().getStringExtra("email");
+			emailId.setText(getemail);
 			clientId=getIntent().getStringExtra("clientId");
 			 if(getIntent().getStringExtra("phone")!=null)
 			 {
@@ -156,8 +159,13 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			 
 			
 		}
+		else if(getIntent().getStringExtra("newEmail")!=null)
+		{
+			getemail=getIntent().getStringExtra("newEmail");
+		}
 		else{
 			 flagClient=false;
+			 getemail=getIntent().getStringExtra("newEmail");
 		}
 	}
 	private void getMEAData() {
@@ -422,10 +430,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 					{
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter valid phone number");
-					}
+						/*}
 					else if (emailId.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter email address");
+								"Please enter email address");*/
 					} else if (password.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter password");
@@ -453,7 +461,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 					else {
 						
 						//signUpAPI();
-					if(role_spinner.getSelectedItemPosition()==2)
+					/*if(role_spinner.getSelectedItemPosition()==2)
 					{
 						if(str_userId.equals("0"))
 						{
@@ -465,9 +473,8 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 							//Util.ToastMessage(RegisterActivity.this, "mea register with userid="+str_userId);
 							signUpAPI();
 							}
-					}
-					else
-					{
+					}*/
+					
 						//Util.ToastMessage(RegisterActivity.this, "other role register with userid="+str_userId);
 						signUpAPI();
 						
@@ -493,7 +500,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 							signUpAPI();
 						
 						}*/
-					}
+					
 
 				}
 		}
@@ -509,45 +516,66 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		System.err.println(phonenumber);
 		
 		
-		if (Util.isNetworkAvailable(RegisterActivity.this)) {
-
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-			nameValuePairs.add(new BasicNameValuePair("UserName", userId
-					.getText().toString()));
-			nameValuePairs.add(new BasicNameValuePair("Password", password
-					.getText().toString().trim()));
-			nameValuePairs.add(new BasicNameValuePair("RoleID", role_id));
-			nameValuePairs.add(new BasicNameValuePair("FirstName", firstName
-					.getText().toString().trim()));
-			nameValuePairs.add(new BasicNameValuePair("LastName", lastName
-					.getText().toString().trim()));
-			nameValuePairs.add(new BasicNameValuePair("PhoneNumber",phonenumber));
-			nameValuePairs.add(new BasicNameValuePair("Email", emailId
-					.getText().toString()));
-			nameValuePairs
-					.add(new BasicNameValuePair("IsFacebookUser", IsFacebookUser));
-
-			nameValuePairs.add(new BasicNameValuePair("PurchasedBefore",
-					PurchasedBefore));
-			nameValuePairs
-					.add(new BasicNameValuePair("ProfilePicName", ""));
-			nameValuePairs.add(new BasicNameValuePair("MEAID", mea_id));
-			nameValuePairs.add(new BasicNameValuePair("userId", str_userId));
-			if(flagClient)
+		
+		if(role_spinner.getSelectedItemPosition()==2)
+		{
+			// checking for existing mea	
+			for(int i=0;i<arrayList_Mea.size();i++)
 			{
-				nameValuePairs.add(new BasicNameValuePair("UserDetailId", clientId));
 				
-			}
+					if(getemail.equals(arrayList_Mea.get(i).getEmail()))//checking mea list email exit or not
+					{
+					
+						signUP2();
+						
+					}
+					
+				/*String name=arrayList_Mea.get(i).getName();
+				int gettingStatePosition=0;
+				str_userId=arrayList_Mea.get(i).getId();
+				
+				role_spinner.setSelection(2); //set role spinner position
+				
+				try {
+					if (arrayList_Mea.size() > 0) { ///get mea spinner position
 
-			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
-					RegisterActivity.this, "post", "users", nameValuePairs,
-					true, "Please wait...",false);
-			mWebPageTask.delegate = (AsyncResponseForARA) RegisterActivity.this;
-			mWebPageTask.execute();
-		} else {
-			Util.alertMessage(RegisterActivity.this, Util.network_error);
+						int j = 0;
+						for (MEA mea : arrayList_Mea) {
+							String getname = mea.getName();
+							if (name.equals(getname)) {
+								gettingStatePosition = j;
+							
+								break;
+							}
+							j++;
+						}
+					}
+					flag_setspinner=true;
+					
+					mea_spinner.setSelection(gettingStatePosition);
+					img_emailId.setVisibility(View.VISIBLE);
+					//emailId.setError(null);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}*/
+										
+			
+			else
+			{
+				//flag_setspinner=false;
+				
+				//emailId.setError("Email address already exist");
+				//img_emailId.setVisibility(View.INVISIBLE);
+				//checkemail = 2;
+				Util.ToastMessage(RegisterActivity.this, "This email address not register as a MEA, Please change role and try again") ;
+			}
+			}
 		}
+		
+		else{
+			signUP2();
+	}
 	}
 
 	private void validationCheck(String id, String value) {
@@ -566,7 +594,50 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			Util.alertMessage(RegisterActivity.this, Util.network_error);
 		}
 	}
+	
+private void signUP2()
+{
+	if (Util.isNetworkAvailable(RegisterActivity.this)) {
 
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+		nameValuePairs.add(new BasicNameValuePair("UserName", userId
+				.getText().toString()));
+		nameValuePairs.add(new BasicNameValuePair("Password", password
+				.getText().toString().trim()));
+		nameValuePairs.add(new BasicNameValuePair("RoleID", role_id));
+		nameValuePairs.add(new BasicNameValuePair("FirstName", firstName
+				.getText().toString().trim()));
+		nameValuePairs.add(new BasicNameValuePair("LastName", lastName
+				.getText().toString().trim()));
+		nameValuePairs.add(new BasicNameValuePair("PhoneNumber",phonenumber));
+		nameValuePairs.add(new BasicNameValuePair("Email", emailId
+				.getText().toString()));
+		nameValuePairs
+				.add(new BasicNameValuePair("IsFacebookUser", IsFacebookUser));
+
+		nameValuePairs.add(new BasicNameValuePair("PurchasedBefore",
+				PurchasedBefore));
+		nameValuePairs
+				.add(new BasicNameValuePair("ProfilePicName", ""));
+		nameValuePairs.add(new BasicNameValuePair("MEAID", mea_id));
+		nameValuePairs.add(new BasicNameValuePair("userId", str_userId));
+		if(flagClient)
+		{
+			nameValuePairs.add(new BasicNameValuePair("UserDetailId", clientId));
+			
+		}
+
+		AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
+				RegisterActivity.this, "post", "users", nameValuePairs,
+				true, "Please wait...",false);
+		mWebPageTask.delegate = (AsyncResponseForARA) RegisterActivity.this;
+		mWebPageTask.execute();
+	} else {
+		Util.alertMessage(RegisterActivity.this, Util.network_error);
+	}
+	
+}
 	@Override
 	public void processFinish(final String output, String methodName) {
 		// TODO Auto-generated method stub
@@ -620,6 +691,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 					img_userId.setVisibility(View.INVISIBLE);
 					checkuserid = 2;
 				}
+				
+				
+
+				
 			}
 			else if (parameter.equalsIgnoreCase("Email")) {
 				
@@ -638,10 +713,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 					usermodel = new User();
 					usermodel = parser.parseSignUpResponse(output);
 			
-				// checking for existing mea	
+					// checking for existing mea	
 					for(int i=0;i<arrayList_Mea.size();i++)
 					{
-					if(usermodel.getEmail().equals(arrayList_Mea.get(i).getEmail()))//checking mea list email exit or not
+					if(getemail.equals(arrayList_Mea.get(i).getEmail()))//checking mea list email exit or not
 					{
 						String name=arrayList_Mea.get(i).getName();
 						int gettingStatePosition=0;
@@ -789,6 +864,7 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 								/////
 								Intent intent = new Intent(RegisterActivity.this,DashBoardActivity.class);
 								intent.putExtra("user", usermodel);
+								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(intent);
 								finish();
 							}
