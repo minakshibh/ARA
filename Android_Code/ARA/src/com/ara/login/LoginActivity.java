@@ -401,6 +401,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 	  @Override
 	  protected void onPostExecute(String result) {
 	   pd.dismiss();
+	   System.err.println("name"+first_name+"userName"+userName+"");
 	  if (Connectiontimeout != true) {
 		  
 		  try{
@@ -416,8 +417,8 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 		   intent1.putExtra("firstname", first_name);
 		   intent1.putExtra("lastname", last_name);
 		   intent1.putExtra("username", username);
-			intent1.putExtra("email", emailAddress);
-			startActivity(intent1);
+		   intent1.putExtra("email", emailAddress);
+		   startActivity(intent1);
 		  }
 		  else
 		  {

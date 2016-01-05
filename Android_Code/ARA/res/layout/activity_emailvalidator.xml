@@ -14,11 +14,45 @@
         android:orientation="vertical"
         android:padding="10dp" >
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/step_a" />
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textViewComposeProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textViewEmailAdress"
+                android:text="Compose your profile"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/textViewEmailAdress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textViewComposeProfile"
+                android:layout_alignBottom="@+id/textViewComposeProfile"
+                android:layout_alignParentLeft="true"
+                android:text="Enter email address"
+                android:textColor="@color/white"
+                   android:padding="5dp"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textViewEmailAdress"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/step_a" />
+
+        </RelativeLayout>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -49,12 +83,12 @@
                 android:background="@color/gray" />
 
             <EditText
-                android:id="@+id/confirm_pass"
+                android:id="@+id/email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
                 android:hint="Email Address"
-                android:inputType="textPassword"
+                android:inputType="textEmailAddress"
                 android:padding="5dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
@@ -87,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:text="Already have an account?"
                     android:textColor="@color/white"
-                    android:textStyle="bold" />
+                     />
 
                 <TextView
                     android:id="@+id/txt_login"
@@ -96,7 +130,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Log In Here"
                     android:textColor="@color/app_yellow"
-                    android:textStyle="bold" />
+                   />
             </LinearLayout>
     </LinearLayout>
   <LinearLayout

@@ -40,7 +40,8 @@ import com.ara.base.R;
 import com.ara.board.DashBoardActivity;
 
 public class RegisterActivity extends Activity implements AsyncResponseForARA {
-	private TextView signUp, logIn,txt_purchase,txt_login,txt_Alreadyhave,txt_mea_name;
+	private TextView signUp, logIn,txt_purchase,txt_login,txt_Alreadyhave,txt_mea_name,
+	textViewComposeProfile,textViewEmailAdress;;
 	private LinearLayout login,layout_mea;
 	private Button btn_signUp;
 	private EditText firstName, lastName, userId, phNumber, emailId, password, role;
@@ -48,7 +49,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 	private ArrayList<Role> arrayList_role = new ArrayList<Role>();
 	private Spinner mea_spinner, role_spinner;
 	private String parameter = "";
-	private int checkuserid = 0, checkemail = 0;
+	private int checkuserid = 0;// checkemail = 0;
 	private ImageView img_userId, img_emailId, purchase_chkBox;
 	private String mea_id = "-1", role_id = "-1";
 	private String PurchasedBefore = "false";
@@ -83,7 +84,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		firstName = (EditText) findViewById(R.id.firstName);
 		
-	
+		textViewComposeProfile=(TextView)findViewById(R.id.textViewComposeProfile);
+		textViewComposeProfile.setTypeface(BaseActivity.typeface_roboto);
+		textViewEmailAdress=(TextView)findViewById(R.id.textViewEmailAdress);
+		textViewEmailAdress.setTypeface(BaseActivity.typeface_roboto);
 		progressBar_email=(ProgressBar)findViewById(R.id.progressBar_email);
 		progressBar_username=(ProgressBar)findViewById(R.id.progressBar_username);
 		lastName = (EditText) findViewById(R.id.lastName);
@@ -131,7 +135,30 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			
 			//usernameChecker();
 			emailChecker();
+			 flagClient=false;
 			}
+		//clientId
+		else if(getIntent().getStringExtra("clientId")!=null)
+		{
+			 flagClient=true;
+			firstName.setText(getIntent().getStringExtra("firstName"));
+			lastName.setText(getIntent().getStringExtra("lastName"));
+			emailId.setText(getIntent().getStringExtra("email"));
+			clientId=getIntent().getStringExtra("clientId");
+			 if(getIntent().getStringExtra("phone")!=null)
+			 {
+				 phNumber.setText(getIntent().getStringExtra("phone"));
+			 }
+			 if(getIntent().getStringExtra("userid")!=null)
+			 {
+				 userId.setText(getIntent().getStringExtra("userid"));
+			 }
+			 
+			
+		}
+		else{
+			 flagClient=false;
+		}
 	}
 	private void getMEAData() {
 		if (Util.isNetworkAvailable(RegisterActivity.this)) {
@@ -155,7 +182,14 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 
 	private void setOnClickListener() {
 
-		
+		textViewEmailAdress.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
 		userId.setOnFocusChangeListener(new OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
@@ -177,7 +211,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			    
 			    }else {
 			    	
-			    	emailChecker();
+			    	//emailChecker();
 
 			   }
 			}
@@ -212,12 +246,12 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						{
 							
 							str_userId="0";
-							if(flag_setspinner)
+							/*if(flag_setspinner)
 							{
-								checkemail = 2;
+								//checkemail = 2;
 								emailId.setError("Email address already exist");
 								img_emailId.setVisibility(View.INVISIBLE);
-							}
+							}*/
 							
 							try{
 							mea_spinner.setSelection(0);
@@ -333,7 +367,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			emailCheck=1;
 			img_emailId.setVisibility(View.INVISIBLE);
 			progressBar_email.setVisibility(View.VISIBLE);
-			validationCheck("Email", emailId.getText().toString());
+		//	validationCheck("Email", emailId.getText().toString());
 		}
 	}
 	private View.OnClickListener listener = new View.OnClickListener() {
@@ -399,17 +433,18 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please select role");
 					} 					
-					else if (emailCheck == 0) {
+					/*else if (emailCheck == 0) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter valid Email address");
-					} else if (checkuserid == 2) {
+					}*/ 
+					else if (checkuserid == 2) {
 						Util.ToastMessage(RegisterActivity.this,
 								"User already exist");
 					} 
-					else if (checkemail == 2) {
+					/*else if (checkemail == 2) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Email address already exist");
-					}
+					}*/
 					else if(mea_id.equals("-1"))
 					{
 						Util.ToastMessage(RegisterActivity.this,"Please select mea");
@@ -592,7 +627,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 				if (output.contains("Email address not exist")) {
 					img_emailId.setVisibility(View.VISIBLE);
 					emailId.setError(null);
-					checkemail = 1;
+				//	checkemail = 1;
 					mea_spinner.setSelection(0);
 					role_spinner.setSelection(0);
 					flag_setspinner=false;
@@ -653,7 +688,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 							
 					if (usermodel.getUserType().equalsIgnoreCase("client")) {
 
-						//"We already have your details. Are you a previous client of ARA?" This should state, 
+					/*	//"We already have your details. Are you a previous client of ARA?" This should state, 
 						//"Are you a previous client of Automotive Avenues?"
 						//"We already have your details. Are you a previous client of ARA ?"
 AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
@@ -704,10 +739,10 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 										flagClient=false;
 									}
 								});
-						alert.show();
+						alert.show();*/
 					} else {
 							
-							if(role_spinner.getSelectedItemPosition()!=2)
+							/*if(role_spinner.getSelectedItemPosition()!=2)
 							{
 								emailId.setError("Unable to add user--email address already exists");
 								img_emailId.setVisibility(View.INVISIBLE);
@@ -717,7 +752,7 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 							{
 								//role_spinner.setSelection(0);
 								//mea_spinner.setSelection(0);
-							}
+							}*/
 					}
 				}
 			} 
@@ -728,8 +763,7 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 		else if (methodName.equals("users")) {
 			if (output.contains("UserId")) {
 
-				AlertDialog.Builder alert = new AlertDialog.Builder(
-						RegisterActivity.this);
+				AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
 				alert.setMessage("You are sucessfully registered with us.");
 				alert.setPositiveButton("ok",
 						new DialogInterface.OnClickListener() {

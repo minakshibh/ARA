@@ -149,6 +149,12 @@
             android:windowSoftInputMode="stateHidden"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
+           />
+        <activity
+            android:name="com.ara.login.EmailValidatorActivity"
+            android:windowSoftInputMode="stateHidden"
+             android:theme="@android:style/Theme.Holo.Light"
+             android:screenOrientation="portrait"
            />  
              <activity
             android:name="com.ara.board.DashBoardActivity"

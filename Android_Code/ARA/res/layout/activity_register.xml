@@ -15,11 +15,45 @@
             android:orientation="vertical"
             android:padding="10dp" >
 
-            <ImageView
+             <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textViewComposeProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/logo" />
+                android:layout_below="@+id/imageView1"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/textViewEmailAdress"
+                android:text="Compose your profile"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/textViewEmailAdress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textViewComposeProfile"
+                android:layout_alignBottom="@+id/textViewComposeProfile"
+                android:layout_alignParentLeft="true"
+                android:text="Enter email address"
+                android:textColor="@color/black"
+                   android:padding="5dp"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textViewEmailAdress"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/step_b" />
+
+        </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -276,6 +310,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                  android:visibility="gone"
                 android:orientation="horizontal" >
 
                 <ImageView
@@ -289,6 +324,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="9"
+                    
                     android:background="@drawable/white_rounded_btn"
                     android:orientation="horizontal" >
 
@@ -319,6 +355,7 @@
                         android:layout_weight="9"
                         android:background="@color/transparent"
                         android:hint="Email Address"
+                      
                         android:inputType="textEmailAddress"
                         android:textSize="@dimen/default_text_size"
                         android:paddingLeft="@dimen/text_margin_left"
