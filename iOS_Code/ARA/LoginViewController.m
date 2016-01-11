@@ -50,7 +50,7 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-    
+    NSLog(@"login view");
 
     
     //---initialize checkbox value first tiem with false
