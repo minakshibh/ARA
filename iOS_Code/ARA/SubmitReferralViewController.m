@@ -29,6 +29,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
     selectedContactDict = [[NSMutableDictionary alloc]init];
     email_checked = @"no";
     
@@ -1516,21 +1519,21 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag==3){
-        if(buttonIndex == 0)//OK button pressed
+        if(buttonIndex == 0) //OK button pressed
         {
             dashboardViewController *obj  =[[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
             [self.navigationController pushViewController:obj animated:YES];
         }
     }else if(alertView.tag==8){
         
-        if(buttonIndex == 0)//OK button pressed
+        if(buttonIndex == 0) //OK button pressed
         {
             lblemailerror.text = @"Email already registered.";
             txtFirstname.text = @"";
             txtLastname.text = @"";
             txtPhoneno.text = @"";
         }
-        else if(buttonIndex == 1)//Annul button pressed.
+        else if(buttonIndex == 1) //Annul button pressed.
         {
             txtFirstname.text = firstname;
             txtLastname.text = lastname;
@@ -1593,8 +1596,10 @@
         NSLog(@"connection is NULL");
     }
 }
+
 -(void)checkforavailability
 {
+    
     NSMutableURLRequest *request ;
     NSString*_postData ;
     email_checked = @"no";

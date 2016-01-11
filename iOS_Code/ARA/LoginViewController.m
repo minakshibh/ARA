@@ -15,6 +15,7 @@
 #import <Crittercism/Crittercism.h>
 #import "SignupEmailCheckViewController.h"
 
+
 @interface LoginViewController (){
     IBOutlet UIImageView *imagelogo;
     CGPoint svos;
@@ -49,6 +50,7 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
+    
 
     
     //---initialize checkbox value first tiem with false
@@ -461,7 +463,9 @@
         // Show the user the logged-in UI
         SUvc.from_fb_button = @"yes";
         [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"from_fb"];
-        [self.navigationController pushViewController:SUvc animated:YES];
+        
+        SignupEmailCheckViewController *SignupEmailCheck = [[SignupEmailCheckViewController alloc]initWithNibName:@"SignupEmailCheckViewController" bundle:nil];
+        [self.navigationController pushViewController:SignupEmailCheck animated:YES];
 
         return;
     }

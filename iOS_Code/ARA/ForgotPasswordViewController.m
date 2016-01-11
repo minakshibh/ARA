@@ -7,8 +7,9 @@
 //
 
 #import "ForgotPasswordViewController.h"
-#import "SignUpViewController.h"
+#import "SignupEmailCheckViewController.h"
 #import "ASIHTTPRequest.h"
+#import "LoginViewController.h"
 
 @interface ForgotPasswordViewController ()
 
@@ -70,12 +71,13 @@
 
 #pragma  mark Buttons
 - (IBAction)btnSingUp:(id)sender {
-    SignUpViewController *SUvc = [[SignUpViewController alloc]initWithNibName:@"SignUpViewController" bundle:nil];
+    SignupEmailCheckViewController *SUvc = [[SignupEmailCheckViewController alloc]initWithNibName:@"SignupEmailCheckViewController" bundle:nil];
     [self.navigationController pushViewController:SUvc animated:YES];
 }
 
 - (IBAction)btnLogIn:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    [self.navigationController pushViewController:loginView animated:YES];
 }
 - (IBAction)btnResetPassword:(id)sender {
     
@@ -241,6 +243,8 @@
     if ([responseString rangeOfString:@"Please check your email for further instructions." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
 //        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
+        LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+        [self.navigationController pushViewController:loginView animated:YES];
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
 
@@ -249,6 +253,8 @@
     if ([responseString rangeOfString:@"Failure sending mail" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
 //        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
+        
+        
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         return;

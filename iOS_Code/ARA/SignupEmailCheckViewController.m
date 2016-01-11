@@ -8,6 +8,7 @@
 
 #import "SignupEmailCheckViewController.h"
 #import "SignUpViewController.h"
+#import "LoginViewController.h"
 
 @interface SignupEmailCheckViewController ()
 {
@@ -28,25 +29,18 @@
     txtEmail.delegate=self;
     [super viewDidLoad];
     
-   
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *valCheck = [NSString stringWithFormat:@"%@",[user valueForKey:@"from_fb"]];
+    
+    
+    if ([valCheck isEqualToString:@"yes"]) {
+      txtEmail.text = [NSString stringWithFormat:@"%@",[user valueForKey:@"user_email"]];
+         [self checkEmail];
+    }
 
 }
 - (IBAction)step2btnAction:(id)sender {
-    NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    txtEmail.text = emailStr;
-    if(emailStr.length==0) {
-        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter email address" okBtn:OkButtonTitle];
-        return;
-    }else  if (![txtEmail emailValidation]) {
-        NSString* message = @"Please check your email address";
-        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
-        
-        [txtEmail becomeFirstResponder];
-        return;
-    }
-    [self.view endEditing:YES];
-    [self checkforAvailability:emailStr];
-    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+     [self checkEmail];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -76,13 +70,17 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnVerifyEmail:(id)sender {
+    [self checkEmail];
+}
+-(void)checkEmail
+{
     NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     txtEmail.text = emailStr;
     if(emailStr.length==0) {
         [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter email address" okBtn:OkButtonTitle];
         return;
     }else  if (![txtEmail emailValidation]) {
-       NSString* message = @"Please check your email address";
+        NSString* message = @"Please check your email address";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         
         [txtEmail becomeFirstResponder];
@@ -92,7 +90,6 @@
     [self checkforAvailability:emailStr];
     [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
 }
-
 - (IBAction)btnLogin:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -330,9 +327,16 @@
                                                style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action)
                                                {
+                                                   NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                                                   if ([[NSString stringWithFormat:@"%@",[user valueForKey:@"from_fb"]] isEqualToString:@"yes"]) {
+                                                       LoginViewController *obj = [[LoginViewController alloc]init];
+                                                       [obj facebookLogin];
+                                                   }else{
+                                                        [self.navigationController popViewControllerAnimated:YES];
+                                                   }
                                                    
                                                    [alert dismissViewControllerAnimated:YES completion:nil];
-                                                   [self.navigationController popViewControllerAnimated:YES];
+                                                  
                                                }];
                     
                     [alert addAction:yesButton];
@@ -408,13 +412,15 @@
     svos = scrollView.contentOffset;
     if(textField == txtEmail) {
         
-        CGPoint pt;
-        CGRect rc = [textField bounds];
-        rc = [textField convertRect:rc toView:scrollView];
-        pt = rc.origin;
-        pt.x = 0;
-        pt.y -=200;
-        [scrollView setContentOffset:pt animated:YES];
+        if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5){
+            CGPoint pt;
+            CGRect rc = [textField bounds];
+            rc = [textField convertRect:rc toView:scrollView];
+            pt = rc.origin;
+            pt.x = 0;
+            pt.y -= 200;
+            [scrollView setContentOffset:pt animated:YES];
+        }
     }
 }
 @end

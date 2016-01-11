@@ -197,32 +197,6 @@
             lblTagColor.backgroundColor = [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
         }
     
-    // Do any additional setup after loading the view from its nib.
- /*
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        d += 2;
-    }
-    
-    if (d==0) {
-        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-    }
-    if (d==1) {
-        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-    }
-    if (d==2) {
-        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-    }
-    if (d==3) {
-        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-    }
-    
-    */
-    
     if (IS_IPAD)
     {
         lblheading.font = [lblheading.font fontWithSize:24];
@@ -247,6 +221,7 @@
         lblsolddate1.font = [lblsolddate1.font fontWithSize:24];
         btndirectindirect.font = [btndirectindirect.font fontWithSize:24];
         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
+        
         if(IS_IPAD_PRO_1366)
         {
             lblheading.font = [lblheading.font fontWithSize:30];
