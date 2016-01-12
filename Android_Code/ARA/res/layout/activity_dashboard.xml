@@ -2,9 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+     android:background="@color/white"
     android:orientation="vertical" >
-    
-   <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".8"
+        android:background="@color/app_blue"
+        android:orientation="horizontal" >
+
+     <!--    <ImageView
+            android:id="@+id/imageView_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".1"
+            android:src="@drawable/back_icon" /> -->
+
+        <TextView
+            android:id="@+id/textView_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".22"
+            android:textSize="16sp"
+            android:gravity="start|center_vertical"
+            android:text="Back"
+            android:padding="5dp"
+            android:visibility="invisible"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white" />
+
+      <ImageView
+             android:src="@drawable/header_icon"
+            android:layout_width="0dp"
+            android:padding="5dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".45"
+          android:layout_margin="5dp"
+             />
+
+        <TextView
+            android:id="@+id/txtSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            android:layout_weight=".28"
+            android:gravity="center"
+            android:text="Submit Referral"
+            android:textSize="10sp"
+            android:background="@drawable/yellow_rounded_btn"
+            android:textColor="@color/black" />
+    </LinearLayout>
+   <!-- <TextView
         android:id="@+id/referralDashboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -13,13 +64,53 @@
         android:gravity="start|center_vertical"
         android:paddingLeft="10dp"
         android:text="REFERRAL DASHBOARD"
-        android:textColor="@color/app_blue" />
+        android:textColor="@color/app_blue" /> -->
+		
+		<LinearLayout
+                android:id="@+id/LinearLayout_profilepic"
+                android:layout_width="match_parent"
+               	android:layout_height="0dp"
+        		android:layout_weight="2.7"
+                android:background="@color/white"
+                android:orientation="vertical" >
 
+                <com.ara.util.RoundedImageView
+                    android:id="@+id/imageView_profilepic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/profile_image"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            <TextView
+                    android:id="@+id/txtProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" Profile "
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:background="@drawable/yellow_rounded_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:textSize="11sp" />
+                
+            </LinearLayout>
   <LinearLayout
         android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="4"
+       
         android:background="@color/white"
         android:orientation="vertical"
         android:layout_margin="10dp" >
@@ -37,99 +128,76 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@color/app_green"
                 android:orientation="vertical"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_margin="10dp" >
+             >
 
-	       <TextView
-	           android:id="@+id/textView_activeReferral"
+	       <ImageView
+	           android:id="@+id/imageReferral"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="3"
-	           android:gravity="start|center_vertical"
-	           android:text="ACTIVE REFERRALS"
-	           android:textColor="@color/white"
-	           android:textSize="11sp" />
+	           android:layout_height="wrap_content"
+	           android:gravity="center_vertical"
+	           android:layout_gravity="center"
+	           android:src="@drawable/referrals_icon" />
 
 	       <TextView
 	           android:id="@+id/activeReferralCount"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="5"
-	           android:gravity="start"
-	           android:textColor="@color/white"
-	           android:textSize="35sp" />
+	           android:layout_height="wrap_content"
+	           android:gravity="center"
+	           android:text="Referrals"
+	            android:layout_gravity="center"
+	           android:textColor="@color/black"
+	           android:textSize="15sp" />
 
 	       <TextView
 	           android:id="@+id/activeReferralAmount"
-	           android:layout_width="match_parent"
-	           android:layout_height="0dp"
-	           android:layout_weight="3"
-	           android:gravity="end|center_vertical"
-	           android:textColor="@color/white"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:gravity="center_vertical"
+	           android:textColor="@color/gray"
 	           android:text="($600)"
+	            android:layout_gravity="center"
 	           android:textSize="15sp" />
 	       
-	       <TextView
-	           android:layout_width="fill_parent"
-	           android:layout_height="0dp"
-	           android:layout_weight="1.5"
-	           android:text="POTENTIAL AWARD"
-	           android:gravity="end|center_vertical"
-	           android:textColor="@color/white"
-	           android:textSize="9sp" />
+	      
+	    
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/soldReferralLayout"
+                android:id="@+id/RewardReferralLayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@color/light_blue"
+                android:background="@color/white"
                 android:orientation="vertical"
-                 android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_margin="10dp" >
-	        <TextView
-	           android:id="@+id/textView_soldReferral"
+                >
+	        <ImageView
+	           android:id="@+id/imageReferralReward"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="3"
-	           android:gravity="start|center_vertical"
-	           android:text="SOLD REFERRALS"
-	           android:textColor="@color/white"
-	           android:textSize="11sp" />
+	           android:layout_height="wrap_content"
+	           android:gravity="center_vertical"
+	           android:layout_gravity="center"
+	           android:src="@drawable/rewards_icon" />
 
 	       <TextView
-	           android:id="@+id/soldReferralCount"
+	           android:id="@+id/activeReward"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="5"
-	           android:gravity="start"
-	           android:textColor="@color/white"
-	           android:textSize="35sp" />
+	           android:layout_height="wrap_content"
+	           android:gravity="center"
+	           android:text="Referrals Reward"
+	            android:layout_gravity="center"
+	           android:textColor="@color/black"
+	           android:textSize="15sp" />
 
 	       <TextView
-	           android:id="@+id/soldReferralAmount"
-	           android:layout_width="match_parent"
-	           android:layout_height="0dp"
-	           android:layout_weight="3"
-	           android:gravity="end|center_vertical"
-	           android:textColor="@color/white"
+	           android:id="@+id/activeRewardAmount"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:gravity="center_vertical"
+	           android:textColor="@color/gray"
+	            android:layout_gravity="center"
 	           android:text="($600)"
 	           android:textSize="15sp" />
-	       
-	       <TextView
-	           android:layout_width="fill_parent"
-	           android:layout_height="0dp"
-	           android:layout_weight="1.5"
-	           android:text="AWARD EARNED TO DATE"
-	           android:gravity="end|center_vertical"
-	           android:textColor="@color/white"
-	           android:singleLine="true"
-	           android:textSize="9sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -137,81 +205,74 @@
             android:id="@+id/LinearLayout_down"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="4"
             android:background="@color/white"
             android:orientation="horizontal" >
 
             <LinearLayout
-                android:id="@+id/inActiveReferralLayout"
+                android:id="@+id/LayShdulerService"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@color/app_orange"
+              
                 android:orientation="vertical"
-                 android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_margin="10dp" >
-	        <TextView
-	           android:id="@+id/textView_inactiveRederral"
+                >
+	         <ImageView
+	           android:id="@+id/imageSService"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="3"
-	           android:gravity="start|center_vertical"
-	           android:text="INACTIVE REFERRALS"
-	           android:textColor="@color/white"
-	           android:textSize="11sp" />
+	           android:layout_height="wrap_content"
+	           android:gravity="center_vertical"
+	           android:layout_gravity="center"
+	           android:src="@drawable/services_icon" />
 
 	       <TextView
-	           android:id="@+id/inActiveReferralCount"
+	           android:id="@+id/txtSService"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="5"
-	           android:gravity="start"
-	           android:textColor="@color/white"
-	           android:textSize="35sp" />
-
-	       <TextView
-	           android:id="@+id/textView_inactiveempty"
-	           android:layout_width="match_parent"
-	           android:layout_height="0dp"
-	           android:layout_weight="3"
-	           android:gravity="end|center_vertical"
-	           android:textColor="@color/white"
-	           android:visibility="invisible"
+	           android:layout_height="wrap_content"
+	           android:gravity="center"
+	           android:text="Schedule Service"
+	            android:layout_gravity="center"
+	           android:textColor="@color/black"
 	           android:textSize="15sp" />
+
+	      <!--  <TextView
+	           android:id="@+id/activeReferralAmount"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:gravity="center_vertical"
+	           android:textColor="@color/gray"
+	           android:text="($600)"
+	            android:layout_gravity="center"
+	           android:textSize="15sp" /> -->
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/totalReferralLayout"
+                android:id="@+id/layoutAANews"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@color/light_yellow"
+                
                 android:orientation="vertical"
-                 android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_margin="10dp">
+             >
 	       
-                 <TextView
-	           android:id="@+id/textView_total_Referral"
+                <ImageView
+	           android:id="@+id/imageAANews"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="3"
-	           android:gravity="start|center_vertical"
-	           android:text="TOTAL REFERRALS"
-	           android:textColor="@color/white"
-	           android:textSize="11sp" />
+	           android:layout_height="wrap_content"
+	           android:gravity="center_vertical"
+	           android:layout_gravity="center"
+	           android:src="@drawable/news_icon" />
 
 	       <TextView
-	           android:id="@+id/totalReferralCount"
+	           android:id="@+id/txtAANews"
 	           android:layout_width="wrap_content"
-	           android:layout_height="0dp"
-	           android:layout_weight="5"
-	           android:gravity="start"
-	           android:textColor="@color/white"
-	           android:textSize="35sp" />
-
-	       <TextView
+	           android:layout_height="wrap_content"
+	           android:gravity="center"
+	           android:text="Schedule Service"
+	            android:layout_gravity="center"
+	           android:textColor="@color/black"
+	           android:textSize="15sp" />
+	      <!--  <TextView
 	           android:id="@+id/textView_totalt"
 	           android:layout_width="match_parent"
 	           android:layout_height="0dp"
@@ -219,17 +280,87 @@
 	           android:gravity="end|center_vertical"
 	           android:textColor="@color/white"
 	           android:visibility="invisible"
-	           android:textSize="15sp" />
+	           android:textSize="15sp" /> -->
             </LinearLayout>
         </LinearLayout>
   </LinearLayout>
- <LinearLayout
+ <RelativeLayout
         android:id="@+id/LinearLayout_fotter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:background="@color/white"
+        android:layout_weight="2.5"
         android:orientation="vertical"
-        android:padding="20dp" >
-</LinearLayout>
+       >
+     <LinearLayout   
+   	  
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+      <TextView
+	           android:id="@+id/textViewConatctUs"
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="Contact Us"
+	           android:gravity="center_horizontal"
+	           android:textColor="@color/black"
+	           android:textSize="13sp" />
+       <TextView
+	           android:id="@+id/textViewEmail"
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="Email:skj@sg.com"
+	           android:gravity="center_horizontal"
+	           android:textColor="@color/gray"
+	           android:textSize="13sp" />
+        <TextView
+	           android:id="@+id/textViewPhone"
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="Phone:654654654"
+	           android:gravity="center_horizontal"
+	           android:textColor="@color/gray"
+	           android:textSize="13sp" />
+        </LinearLayout>
+         <LinearLayout
+      
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="12dp"
+        android:orientation="horizontal"
+        android:background="@color/black"
+        >
+             
+           <TextView
+	           android:id="@+id/txtAbout"
+	           android:layout_width="0dp"
+	           android:layout_weight="3"
+	           android:layout_height="wrap_content"
+	           android:text="About App"
+	           android:layout_gravity="center_vertical"
+	           android:gravity="start"
+	           android:textColor="@color/gray"
+	           android:textSize="13sp" />
+            <TextView
+	           android:id="@+id/txtWebLink"
+	           android:layout_gravity="center_vertical"
+	           android:layout_width="0dp"
+	           android:layout_weight="4"
+	          android:layout_height="wrap_content"
+	           android:text="www.autoaves.com"
+	           android:textColor="@color/gray"
+	           android:textSize="13sp" />
+             <TextView
+	           android:id="@+id/txtLogout"
+	           android:layout_width="0dp"
+	           android:layout_weight="3"
+	           android:layout_height="wrap_content"
+	           android:text="Logout"
+	           android:gravity="end"
+	           android:layout_gravity="center_vertical"
+	           android:textColor="@color/gray"
+	           android:textSize="13sp" />   
+         </LinearLayout>
+</RelativeLayout>
 </LinearLayout>
