@@ -114,7 +114,13 @@
 //    if (d==3) {
 //        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
 //    }
-
+    if ( IS_IPHONE_5) {
+         imageViewMenuProfile.frame = CGRectMake(imageViewMenuProfile.frame.origin.x-6, imageViewMenuProfile.frame.origin.y-4, imageViewMenuProfile.frame.size.width, imageViewMenuProfile.frame.size.height);
+        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-15, btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width+15, btnSubmitReferral.frame.size.height);
+        btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:10];
+    }
+    
+    
     if ( IS_IPAD )
     {
       //   btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
@@ -175,6 +181,7 @@
 
         btnLogout.titleLabel.font=[btnLogout.titleLabel.font fontWithSize:20];
         btnnewAppURL.titleLabel.font=[btnnewAppURL.titleLabel.font fontWithSize:20];
+        imageViewMenuProfile.frame = CGRectMake(imageViewMenuProfile.frame.origin.x+2, imageViewMenuProfile.frame.origin.y+4, imageViewMenuProfile.frame.size.width, imageViewMenuProfile.frame.size.height);
         /*
          Ipad pro  12.9-inch
          
@@ -305,8 +312,8 @@
 
 - (IBAction)btnnewEmail:(id)sender{
     
-    NSString *emailStr = btnnewEmail.titleLabel.text;
-    
+    NSArray *emailArr = [btnnewEmail.titleLabel.text componentsSeparatedByString:@" "];
+    NSString *emailStr = [emailArr objectAtIndex:1];
     NSString *recipients = [NSString stringWithFormat:@"mailto:%@",emailStr];
     
 //    NSString *body = @"&body= ";
