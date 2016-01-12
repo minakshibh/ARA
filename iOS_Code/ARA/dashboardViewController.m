@@ -19,6 +19,7 @@
 #import "AboutAppViewController.h"
 #import "AFURLConnectionOperation.h"
 #import "AFHTTPRequestOperation.h"
+
 // #import "UIView+Toast.h"
 
 @interface dashboardViewController ()
@@ -32,6 +33,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     i=0;
+    
+    
+    
+    
+    
+    
+    btnSubmitReferral.layer.cornerRadius = 2.0;
+    btnmyprofile.layer.cornerRadius = 2.0;
+    imageViewMenuProfile.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor yellowColor]);
+    
+    [self.view addSubview:viewNew];
+    [self.view bringSubviewToFront:viewNew];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
 
     //--hide navigation bar
@@ -48,6 +61,16 @@
     
     
     lblEmailSideMenu.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]];
+    [btnnewEmail setTitle:[NSString stringWithFormat:@"Email: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]] forState:UIControlStateNormal];
+    
+    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
+         lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+       [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
+    }else{
+        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
+    }
+   
+    
     
     NSLog(@"%@",lblEmailSideMenu.text);
     
@@ -94,7 +117,11 @@
 
     if ( IS_IPAD )
     {
-       btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
+      //   btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
+       btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:18];
+        
+        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x+20, btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width-17, btnSubmitReferral.frame.size.height);
+        
        lblheader.font=[lblheader.font fontWithSize:24];
         lblActiveReferral.font=[lblActiveReferral.font fontWithSize:24];
          lblSoldreferral.font=[lblSoldreferral.font fontWithSize:24];
@@ -108,7 +135,10 @@
         lblAwardEarned.frame = CGRectMake(lblAwardEarned.frame.origin.x, lblAwardEarned.frame.origin.y-2, lblAwardEarned.frame.size.width, lblAwardEarned.frame.size.height);
         
         lblActiveAmount.font=[lblActiveAmount.font fontWithSize:35];
-        lblNameMenu.font=[lblNameMenu.font fontWithSize:35];
+//        lblNameMenu.font=[lblNameMenu.font fontWithSize:35];
+        lblNameMenu.font=[lblNameMenu.font fontWithSize:32];
+         lblNameMenu.frame = CGRectMake(lblNameMenu.frame.origin.x, lblNameMenu.frame.origin.y+3, lblNameMenu.frame.size.width, lblNameMenu.frame.size.height);
+        
         lblSoldreferralAmount.font=[lblSoldreferralAmount.font fontWithSize:35];
         
         lblActivereferralcount.font=[lblActivereferralcount.font fontWithSize:85];
@@ -119,6 +149,7 @@
         lblEmailSideMenu.font=[lblEmailSideMenu.font fontWithSize:20];
         
 
+//        btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:24];
         btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:24];
         btnreferral.titleLabel.font=[btnreferral.titleLabel.font fontWithSize:24];
         btnPaymentaccount.titleLabel.font=[btnPaymentaccount.titleLabel.font fontWithSize:24];
@@ -128,6 +159,33 @@
         btnAboutApp.titleLabel.font=[btnAboutApp.titleLabel.font fontWithSize:24];
         btnLogout.titleLabel.font=[btnLogout.titleLabel.font fontWithSize:24];
         
+        lblnewContactUs.font=[lblnewContactUs.font fontWithSize:26];
+        btnnewEmail.titleLabel.font=[btnnewEmail.titleLabel.font fontWithSize:20];
+        btnnewPhoneNo.titleLabel.font=[btnnewPhoneNo.titleLabel.font fontWithSize:20];
+        btnnewEmail.frame = CGRectMake(btnnewEmail.frame.origin.x, btnnewEmail.frame.origin.y, btnnewEmail.frame.size.width, btnnewEmail.frame.size.height);
+        
+        lblnewActiveSoldCount.font = [lblnewActiveSoldCount.font fontWithSize:22];
+        lblnewEarnedAwardePrice.font = [lblnewActiveSoldCount.font fontWithSize:22];
+        lblnewReferrals.font = [lblnewReferrals.font fontWithSize:26];
+        lblnewReferralsReward.font = [lblnewReferralsReward.font fontWithSize:26];
+        lblnewScheduleService.font = [lblnewScheduleService.font fontWithSize:26];
+        lblnewAutoAvenews.font = [lblnewAutoAvenews.font fontWithSize:26];
+        
+        btnAboutApp.titleLabel.font=[btnAboutApp.titleLabel.font fontWithSize:20];
+
+        btnLogout.titleLabel.font=[btnLogout.titleLabel.font fontWithSize:20];
+        btnnewAppURL.titleLabel.font=[btnnewAppURL.titleLabel.font fontWithSize:20];
+        /*
+         Ipad pro  12.9-inch
+         
+         ipad air  7.5
+         
+         ipad air 2  9.7
+         
+         ipad mini 2 7.2
+         
+         ipad 2   9.7
+         */
         if(IS_IPAD_PRO_1366 )
         {
             
@@ -234,6 +292,32 @@
 }
 
 #pragma  mark - Buttons
+- (IBAction)btnnewAppURL:(id)sender{
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@",btnnewAppURL.titleLabel.text];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+
+}
+
+- (IBAction)btnnewPhoneNo:(id)sender{
+    NSString *phoneStr = [NSString stringWithFormat:@"telprompt://%@",btnnewPhoneNo.titleLabel.text];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneStr]];
+}
+
+- (IBAction)btnnewEmail:(id)sender{
+    
+    NSString *emailStr = btnnewEmail.titleLabel.text;
+    
+    NSString *recipients = [NSString stringWithFormat:@"mailto:%@",emailStr];
+    
+//    NSString *body = @"&body= ";
+    
+    NSString *email = [NSString stringWithFormat:@"%@", recipients];
+    
+    email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+}
+
 - (IBAction)btnAboutApp:(id)sender {
     AboutAppViewController *AAVC = [[AboutAppViewController alloc]initWithNibName:@"AboutAppViewController" bundle:nil];
     [self.navigationController pushViewController:AAVC animated:YES];
@@ -485,6 +569,8 @@ if([recieved_status isEqualToString:@"passed"])
     NSArray *refType = [userDetailDict valueForKey:@"ReferralType"];
     
     [kappDelegate HideIndicator];
+        
+        NSString * value ;
     for (int k=0; k<refType.count; k++) {
         
         if([[refType objectAtIndex:k] isEqualToString:@"open"])
@@ -492,12 +578,36 @@ if([recieved_status isEqualToString:@"passed"])
             NSString *amountstr = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]];
             lblActiveAmount.text = amountstr;
             lblActivereferralcount.text = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"] objectAtIndex:k ]];
+            
+            lblnewActiveSoldCount.text = [NSString stringWithFormat:@"%@ Open /",[[userDetailDict valueForKey:@"ReferralCount"] objectAtIndex:k]];
+            value = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"] objectAtIndex:k]];
+            
         }
         if([[refType objectAtIndex:k] isEqualToString:@"sold"])
         {
             NSLog(@"%@",[NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]]);
+            lblnewEarnedAwardePrice.text = [NSString stringWithFormat:@"$%@",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]];
             lblSoldreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]];
             lblSoldreferralcount.text = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"]objectAtIndex:k]];
+            
+            NSString *finalStr= [NSString stringWithFormat:@"%@ %@ Sold",lblnewActiveSoldCount.text,[[userDetailDict valueForKey:@"ReferralCount"]objectAtIndex:k]];
+            
+            
+            NSMutableAttributedString *coloredText = [[NSMutableAttributedString alloc] initWithString:finalStr];
+            
+            
+            
+            int a = lblnewActiveSoldCount.text.length+1;
+            int b = finalStr.length-5;
+           
+            NSMutableAttributedString * string1 = [[NSMutableAttributedString alloc] initWithString:finalStr];
+            [string1 addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,value.length)];
+            
+            
+            lblnewActiveSoldCount.attributedText = string1;
+            
+             
+            
         }
         if([[refType objectAtIndex:k] isEqualToString:@"inactive"])
         {
@@ -621,8 +731,13 @@ if([recieved_status isEqualToString:@"passed"])
     {
         
         CGRect frame = imageViewMenuProfile.frame;
-        frame.size.width = 210;
-        frame.size.height = 210;
+//        frame.size.width = 210;
+//        frame.size.height = 210;
+//        frame.origin.x = frame.origin.x +14;
+//        frame.origin.y = frame.origin.y -10;
+        frame.size.width = 170;
+        frame.size.height = 170;
+        
         frame.origin.x = frame.origin.x +14;
         frame.origin.y = frame.origin.y -10;
         if(IS_IPAD_PRO_1366 )

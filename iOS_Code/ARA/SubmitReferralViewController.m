@@ -448,6 +448,7 @@
         txtLastname.text = [name objectAtIndex:1];
     }
     
+    
     txtPhoneno.text = [selectedContactDict valueForKey:@"phone_no"];
     txtEmail.text = [selectedContactDict valueForKey:@"email"];
 }
@@ -1005,7 +1006,8 @@
         }else{
             mutStr = [NSMutableString stringWithFormat:@"%@%@",mutStr,abc];
         }
-        [self showmaskonnumber:mutStr];
+     NSString *returnedStr =   [self showmaskonnumber:mutStr];
+        txtPhoneno.text = returnedStr;
     }
     
     //txtPhoneno.text = str;
@@ -1017,7 +1019,7 @@
     [txtEmail becomeFirstResponder];
     return YES;
 }
--(void)showmaskonnumber:(NSString*)number
+-(NSString*)showmaskonnumber:(NSString*)number
 {
     
     NSString *newString = number;
@@ -1031,7 +1033,7 @@
     if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 10)) {
         [txtPhoneno becomeFirstResponder];
         
-        return;
+        return number;
     }
     
     NSUInteger index = 0;
@@ -1058,7 +1060,8 @@
     [formattedString appendString:remainder];
     
    // NSString *abc = formattedString;
-    txtPhoneno.text = formattedString;
+    return  formattedString;
+    
 }
 
 #pragma mark - connection delegate
@@ -1372,10 +1375,48 @@
             cell = [nib objectAtIndex:0];
             
         }
-        NSArray *valueToSet,*valueLbl;
+        NSMutableArray *valueToSet,*valueLbl;
+        valueToSet = [[NSMutableArray alloc]init];
+        valueLbl = [[NSMutableArray alloc]init];
+        
         if (isPhoneNo) {
             valueToSet = [contactDict valueForKey:@"contact_phone"];
            valueLbl = [contactDict valueForKey:@"contact_lbl"];
+            
+            NSMutableArray *savedStrArray = [[NSMutableArray alloc]init];
+            for (int i=0; i<valueToSet.count; i++) {
+                NSString *phoneNoStr = [NSString stringWithFormat:@"%@",[valueToSet objectAtIndex:i]];
+                
+                phoneNoStr = [phoneNoStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                
+                NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
+                phoneNoStr = [[phoneNoStr componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
+                
+                
+                
+                NSMutableString *mutStr = [[NSMutableString alloc]init];
+                NSString *returnedStr;
+                for (int i = 0; i<phoneNoStr.length; i++)
+                {
+                    NSString *abc = [NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:i]];
+                    if(i==0){
+                        mutStr =[NSMutableString stringWithFormat:@"%@",abc];
+                    }else{
+                        mutStr = [NSMutableString stringWithFormat:@"%@%@",mutStr,abc];
+                    }
+                   returnedStr =   [self showmaskonnumber:mutStr];
+                    
+                }
+                [savedStrArray addObject:returnedStr];
+                
+            }
+            
+            valueToSet = [[NSMutableArray alloc]init];
+            valueToSet = savedStrArray;
+            
+            [contactDict removeObjectForKey:@"contact_phone"];
+            [contactDict setObject:valueToSet forKey:@"contact_phone"];
+            
         }else{
             valueToSet = [contactDict valueForKey:@"contact_email"];
             valueLbl = [contactDict valueForKey:@"contact_emaillbl"];
@@ -1450,14 +1491,23 @@
     }
     txtmea.text = [name_mea_array objectAtIndex:indexPath.row];
     
-    if([txtmea.text isEqualToString:@"Any Member Experience Advisor (Sales)"])
-    {
-         txtmea.font=[txtmea.font fontWithSize:12];
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+        if([txtmea.text isEqualToString:@"Any Member Experience Advisor (Sales)"])
+        {
+            txtmea.font=[txtmea.font fontWithSize:12];
+        }else{
+            
+            txtmea.font=[txtmea.font fontWithSize:13];
+            
+        }
     }else{
-    
-    txtmea.font=[txtmea.font fontWithSize:13];
-    
+        
+        if([txtmea.text isEqualToString:@"Any Member Experience Advisor (Sales)"])
+        {
+            txtmea.font=[txtmea.font fontWithSize:14];
+        }
     }
+    
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
         txtmea.font=[txtmea.font fontWithSize:24];

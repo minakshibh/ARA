@@ -665,7 +665,7 @@
         CGRect frame = imageProfile.frame;
         frame.size.width = 190;
         frame.size.height = 190;
-        frame.origin.x = frame.origin.x +18;
+        frame.origin.x = frame.origin.x +20;
         frame.origin.y = frame.origin.y -5;
         if(IS_IPAD_PRO_1366 )
         {
