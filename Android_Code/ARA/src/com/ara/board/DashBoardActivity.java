@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -40,7 +42,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			soldReferralCount, totalReferralCount, activeReferralAmount,
 			soldReferralAmount,referralDashboard,textView_activeReferral,textView_soldReferral,
 			textView_inactiveRederral,textView_total_Referral,txt_username,textViewName,txtAbout,
-			txtProfile,txtSubmit,txtLogout;
+			txtProfile,txtSubmit,txtLogout,textViewEmail,textViewPhone,activeRewardAmount,txtWebLink,SoldAmount;
 	private SharedPreferences spref;
 	private ArrayList<ReferralType> referralTypeArray;
 	private ImageView submit_Referral;
@@ -78,6 +80,18 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		LayShdulerService = (LinearLayout)findViewById(R.id.LayShdulerService);
 		layoutAANews = (LinearLayout)findViewById(R.id.layoutAANews);
 		
+		textViewEmail=(TextView)findViewById(R.id.textViewEmail);
+		textViewEmail.setTypeface(typeface_roboto);
+		textViewPhone=(TextView)findViewById(R.id.textViewPhone);
+		textViewPhone.setTypeface(typeface_roboto);
+		
+		activeReferralAmount = (TextView)findViewById(R.id.activeReferralAmount);
+		activeReferralAmount.setTypeface(typeface_roboto);
+		activeRewardAmount= (TextView)findViewById(R.id.activeRewardAmount);
+		activeRewardAmount.setTypeface(typeface_roboto);
+		
+		SoldAmount= (TextView)findViewById(R.id.SoldAmount);
+		SoldAmount.setTypeface(typeface_roboto);
 		/*activeReferralCount = (TextView)findViewById(R.id.activeReferralCount);
 		activeReferralCount.setTypeface(typeface_roboto);
 		soldReferralCount = (TextView)findViewById(R.id.soldReferralCount);
@@ -108,6 +122,9 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		textView_total_Referral=(TextView)findViewById(R.id.textView_total_Referral);
 		textView_total_Referral.setTypeface(typeface_roboto);*/
 		
+		txtWebLink=(TextView) findViewById(R.id.txtWebLink);
+		txtWebLink.setTypeface(typeface_roboto);
+		
 		txtProfile = (TextView) findViewById(R.id.txtProfile);
 		txtProfile.setTypeface(typeface_roboto);
 		
@@ -124,6 +141,9 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		user_Model = (User) getIntent().getParcelableExtra("user");
 		if(user_Model!=null)
 		{
+			textViewEmail.setText("Email :"+user_Model.getEmail());
+			textViewPhone.setText("Phone :"+user_Model.getPhoneNumber());
+			//textViewPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 			textViewName.setText(user_Model.getFirstName()+" "+ user_Model.getLastName());
 			}
 	}
@@ -147,6 +167,9 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		txtProfile.setOnClickListener(listener);
 		txtSubmit.setOnClickListener(listener);
 		txtLogout.setOnClickListener(listener);
+		textViewEmail.setOnClickListener(listener);
+		textViewPhone.setOnClickListener(listener);
+		txtWebLink.setOnClickListener(listener);
 	}
 	private View.OnClickListener listener = new View.OnClickListener() {
 		
@@ -182,6 +205,23 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			else if(v == txtSubmit){
 				Intent intent = new Intent(DashBoardActivity.this, SubmitReferralActivity.class);
 				startActivity(intent);
+			}
+			else if(v == textViewEmail){
+				Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+	                    "mailto",  user_Model.getEmail(), null));
+	            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+			}
+			else if(v == textViewPhone){
+				  String uri = "tel:" + user_Model.getPhoneNumber();
+                  Intent intent = new Intent(Intent.ACTION_CALL);
+                  intent.setData(Uri.parse(uri));
+                  startActivity(intent);
+			}
+			else if(v == txtWebLink){
+				
+				Intent i = new Intent(Intent.ACTION_VIEW, 
+					       Uri.parse("http://"+txtWebLink.getText().toString()));
+					startActivity(i);
 			}
 			else if(v == txtLogout){
 				logoutApi();
@@ -232,24 +272,30 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	@Override
 	public void processFinish(String output, String methodName) {
 		// TODO Auto-generated method stub
+		String reward="";
 		ARAParser parser = new ARAParser(DashBoardActivity.this);
 		if(methodName.contains("dashboard"))
 		{
+			String activeCount="",soldCount="";
 			referralTypeArray = parser.parseDashboardContent(output);
 			for(int i = 0; i<referralTypeArray.size(); i++){
 				ReferralType referralType = referralTypeArray.get(i);
 				if(referralType.getType().equalsIgnoreCase(STATUS_OPEN)){
-					activeReferralCount.setText(referralType.getCount());
-					activeReferralAmount.setText("($"+referralType.getAmount()+")");
+					activeCount=referralType.getCount();
+					reward=referralType.getAmount();
+					//activeReferralAmount.setText("($"+referralType.getAmount()+")");
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_SOLD)){
-					soldReferralCount.setText(referralType.getCount());
-					soldReferralAmount.setText("($"+referralType.getAmount()+")");
+					soldCount=referralType.getCount();
+					//soldReferralAmount.setText("($"+referralType.getAmount()+")");
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_INACTIVE)){
-					inActiveReferralCount.setText(referralType.getCount());
+					//inActiveReferralCount.setText(referralType.getCount());
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_TOTAL)){
-					totalReferralCount.setText(referralType.getCount());
+					//totalReferralCount.setText(referralType.getCount());
 				}
 			}
+			activeReferralAmount.setText(activeCount);//+" Active/"+soldCount+" Sold");
+			SoldAmount.setText(" "+soldCount);
+			activeRewardAmount.setText("$ "+reward);
 		}
 		else if(methodName.contains("logout"))
 			{

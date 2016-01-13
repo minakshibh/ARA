@@ -18,6 +18,9 @@ public class User implements Parcelable {
 		 RoleID = source.readString();
 		 FirstName = source.readString();
 		 LastName = source.readString();
+		 Email=source.readString();
+		 PhoneNumber=source.readString();
+				 
 		
 	}
 	 
@@ -196,5 +199,7 @@ public class User implements Parcelable {
 		dest.writeString(RoleID);
 		dest.writeString(FirstName);
 		dest.writeString(LastName);
+		dest.writeString(Email);
+		dest.writeString(PhoneNumber);
 	}
 }
