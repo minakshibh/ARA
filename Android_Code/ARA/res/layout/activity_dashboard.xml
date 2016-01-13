@@ -7,8 +7,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/app_blue"
+        android:layout_weight=".9"
+        android:background="@color/black"
         android:orientation="horizontal" >
 
     
@@ -70,17 +70,33 @@
                 android:id="@+id/LinearLayout_profilepic"
                 android:layout_width="match_parent"
                	android:layout_height="0dp"
-        		android:layout_weight="2.7"
+        		android:layout_weight="2.8"
                 android:background="@color/white"
                 android:orientation="vertical" >
 
-                <com.ara.util.RoundedImageView
+		    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay_rel_img"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/profile_image">
+ <com.ara.util.CircularImageView
                     android:id="@+id/imageView_profilepic"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/profile_image"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="3dp" />
+                    /> 
+           <!--  <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:id="@+id/imageView_profilepic"
+                android:src="@drawable/profile_image"
+                android:layout_centerHorizontal="true"/> -->
+
+        </RelativeLayout>
+              
 
                 <TextView
                     android:id="@+id/textViewName"
@@ -258,20 +274,20 @@
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
 	           android:gravity="center"
-	           android:text="Schedule"
+	           android:text="Schedule Service"
 	            android:layout_gravity="center"
 	           android:textColor="@color/black"
 	           android:textSize="15sp" />
 
-	       <TextView
-	           android:id="@+id/txtService"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:textColor="@color/gray"
-	           android:text="Service"
-	           android:layout_gravity="center"
-	           android:textSize="12sp" /> 
+<!-- 	       <TextView -->
+<!-- 	           android:id="@+id/txtService" -->
+<!-- 	           android:layout_width="wrap_content" -->
+<!-- 	           android:layout_height="wrap_content" -->
+<!-- 	           android:gravity="center_vertical" -->
+<!-- 	           android:textColor="@color/gray" -->
+<!-- 	           android:text="Service" -->
+<!-- 	           android:layout_gravity="center" -->
+<!-- 	           android:textSize="12sp" />  -->
             </LinearLayout>
 
             <LinearLayout
@@ -295,11 +311,11 @@
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
 	           android:gravity="center"
-	           android:text="AutoAves"
+	           android:text="AutoAves News"
 	            android:layout_gravity="center"
 	           android:textColor="@color/black"
 	           android:textSize="15sp" />
-	       <TextView
+	     <!--   <TextView
 	           android:id="@+id/txtNews"
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
@@ -307,7 +323,7 @@
 	           android:textColor="@color/gray"
 	           android:text="News"
 	           android:layout_gravity="center"
-	           android:textSize="12sp" /> 
+	           android:textSize="12sp" />  -->
             </LinearLayout>
         </LinearLayout>
   </LinearLayout>
@@ -336,7 +352,8 @@
 	           android:id="@+id/textViewEmail"
 	           android:layout_width="match_parent"
 	           android:layout_height="wrap_content"
-	           android:text="Email:skj@sg.com"
+	           android:text="Email:"
+	           android:layout_marginTop="10dp"
 	           android:gravity="center_horizontal"
 	           android:textColor="@color/gray"
 	           android:textSize="13sp" />
@@ -344,9 +361,9 @@
 	           android:id="@+id/textViewPhone"
 	           android:layout_width="match_parent"
 	           android:layout_height="wrap_content"
-	           android:text="Phone:654654654"
+	           android:text="Phone:"
 	           android:gravity="center_horizontal"
-	           android:layout_marginTop="5dp"
+	           android:layout_marginTop="2dp"
 	           android:textColor="@color/gray"
 	           android:textSize="13sp" />
         </LinearLayout>

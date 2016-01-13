@@ -101,13 +101,14 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical" >
-
-                <com.ara.util.RoundedImageView
+   
+                <com.ara.util.CircularImageView
                     android:id="@+id/imageView_profilepic"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp" />
+                    />
+                
 
                 <TextView
                     android:id="@+id/textView_photoedit"

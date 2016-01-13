@@ -179,7 +179,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			
 			if(v == activeReferrals){
 				Intent intent = new Intent(DashBoardActivity.this, ReferralListActivity.class);
-				intent.putExtra("referralStatus", STATUS_OPEN);
+				intent.putExtra("referralStatus", "all");
 				startActivity(intent);
 			}else if (v == RewardReferralLayout){
 				Intent intent = new Intent(DashBoardActivity.this, RewardsListActivity.class);
