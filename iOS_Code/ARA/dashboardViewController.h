@@ -65,6 +65,10 @@
     IBOutlet UILabel *lblnewScheduleService;
     IBOutlet UILabel *lblnewAutoAvenews;
     unsigned long long bytes;
+    IBOutlet UIView *viewnewNotification;
+    IBOutlet UIImageView *imagenotification;
+    IBOutlet UIImageView *imagenotificationcount;
+    
 }
 - (IBAction)btnnewAppURL:(id)sender;
 
