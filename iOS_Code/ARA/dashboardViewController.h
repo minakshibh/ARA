@@ -71,7 +71,7 @@
     
 }
 - (IBAction)btnnewAppURL:(id)sender;
-
+- (IBAction)btnnewnotificationView:(id)sender;
 - (IBAction)btnnewPhoneNo:(id)sender;
 - (IBAction)btnnewEmail:(id)sender;
 - (IBAction)btnAboutApp:(id)sender;

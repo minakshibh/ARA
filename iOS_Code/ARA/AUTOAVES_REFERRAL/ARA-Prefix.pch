@@ -26,6 +26,7 @@
 #import "JSON.h"
 #import "SBJson.h"
 #import "cornerRadius.h"
+#import "UILabel+helper.h"
 #endif
 
 #define AlertTitle @"ARA"

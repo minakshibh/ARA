@@ -19,7 +19,7 @@
 #import "AboutAppViewController.h"
 #import "AFURLConnectionOperation.h"
 #import "AFHTTPRequestOperation.h"
-
+#import "notificationViewController.h"
 // #import "UIView+Toast.h"
 
 @interface dashboardViewController ()
@@ -375,6 +375,11 @@
 }
 
 #pragma  mark - Buttons
+- (IBAction)btnnewnotificationView:(id)sender{
+    
+    notificationViewController *notificationView = [[notificationViewController alloc]initWithNibName:@"notificationViewController" bundle:nil];
+    [self.navigationController pushViewController:notificationView animated:YES];
+}
 - (IBAction)btnnewAppURL:(id)sender{
     NSString *urlStr = [NSString stringWithFormat:@"http://%@",btnnewAppURL.titleLabel.text];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
