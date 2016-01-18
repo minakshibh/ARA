@@ -378,7 +378,7 @@
                  if ([responseString rangeOfString:@"Failure sending mail" options:NSCaseInsensitiveSearch].location != NSNotFound) {
                      UIAlertController * alert=   [UIAlertController
                                                    alertControllerWithTitle:AlertTitle
-                                                   message:@"Failed to send email. Kindly try again."
+                                                   message:@"Something went wrong. Please try after some time."
                                                    preferredStyle:UIAlertControllerStyleAlert];
                      
                      UIAlertAction* noButton = [UIAlertAction

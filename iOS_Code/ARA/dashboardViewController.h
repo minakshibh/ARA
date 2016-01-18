@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface dashboardViewController : UIViewController
 {
     
+    IBOutlet UIView *viewNew;
     IBOutlet UIImageView *imageViewMenuProfile;
     IBOutlet UIImageView *headerImage;
     IBOutlet UIView *sideView;
@@ -18,6 +20,8 @@
     IBOutlet UILabel *lblEmailSideMenu;
     IBOutlet UILabel *lblNameMenu;
     NSMutableData *webData;
+    IBOutlet UILabel *lblnewEarnedAwardePrice;
+    IBOutlet UILabel *lblnewActiveSoldCount;
     IBOutlet UILabel *lblActivereferralcount;
     IBOutlet UILabel *lblActiveAmount;
     IBOutlet UILabel *lblSoldreferralcount;
@@ -26,6 +30,8 @@
     IBOutlet UILabel *lbltotalreferralcount;
     IBOutlet UILabel *lblInactivereferralAmount;
     IBOutlet UILabel *lbltotalreferralAmount;
+    IBOutlet UILabel *lblnewPhoneNo;
+    
     int webservice,i;
     NSString *recieved_status;
     IBOutlet UIButton *btnSubmitReferral;
@@ -46,8 +52,28 @@
     IBOutlet UIButton *btnScoreboard;
     IBOutlet UIButton *btnAboutApp;
     IBOutlet UIButton *btnLogout;
+    IBOutlet UIButton *btnnewEmail;
+    IBOutlet UIButton *btnnewPhoneNo;
+    IBOutlet UIButton *btnnewAppURL;
+    
+    
+    
+    IBOutlet UILabel *lblnewContactUs;
+    
+    IBOutlet UILabel *lblnewReferrals;
+    IBOutlet UILabel *lblnewReferralsReward;
+    IBOutlet UILabel *lblnewScheduleService;
+    IBOutlet UILabel *lblnewAutoAvenews;
     unsigned long long bytes;
+    IBOutlet UIView *viewnewNotification;
+    IBOutlet UIImageView *imagenotification;
+    IBOutlet UIImageView *imagenotificationcount;
+    
 }
+- (IBAction)btnnewAppURL:(id)sender;
+- (IBAction)btnnewnotificationView:(id)sender;
+- (IBAction)btnnewPhoneNo:(id)sender;
+- (IBAction)btnnewEmail:(id)sender;
 - (IBAction)btnAboutApp:(id)sender;
 - (IBAction)btnMyRewards:(id)sender;
 - (IBAction)btnReferrals:(id)sender;
@@ -64,6 +90,5 @@
 - (IBAction)btnSoldReferrals:(id)sender;
 @property (nonatomic,strong) NSString *from_login;
 -(void)getData;
-
 
 @end
