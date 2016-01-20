@@ -60,7 +60,7 @@
         android:background="@color/app_yellow"
         android:gravity="start|center_vertical"
         android:padding="5dp"
-        android:text="Notification"
+        android:text="Notifications"
         android:textColor="@color/app_blue" />
 
     <ExpandableListView

@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 
@@ -63,6 +64,13 @@ private void setAdapter() {
   
 	listAdapter = (ExpandableListAdapter) new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
+	DisplayMetrics metrics;
+	int width;
+	metrics = new DisplayMetrics();
+	getWindowManager().getDefaultDisplay().getMetrics(metrics);
+	width = metrics.widthPixels;
+	
+	expListView.setIndicatorBounds(width - GetDipsFromPixel(50), width - GetDipsFromPixel(10));
     // setting list adapter
     expListView.setAdapter(listAdapter);
     
@@ -122,7 +130,13 @@ private void setAdapter() {
     });*/
 }
 
-
+public int GetDipsFromPixel(float pixels)
+{
+ // Get the screen's density scale
+ final float scale = getResources().getDisplayMetrics().density;
+ // Convert the dps to pixels, based on density scale
+ return (int) (pixels * scale + 0.5f);
+}
 
 
 private void initUIComponents() {
