@@ -9,6 +9,8 @@ import com.ara.base.BaseActivity;
 import com.ara.model.User;
 import com.ara.util.Util;
 import com.ara.base.R;
+import com.ara.board.DashBoardActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -53,15 +55,15 @@ public class ChangePasswordActivity extends Activity implements AsyncResponseFor
 		oldpassword = (EditText) findViewById(R.id.oldpassword);
 		newpassword = (EditText) findViewById(R.id.newpassword);
 		textView_header= (TextView) findViewById(R.id.textView_header);
-		textView_header.setTypeface(BaseActivity.typeface_timeburner);
+		textView_header.setTypeface(DashBoardActivity.typeface_timeburner);
 
 		confirm_pass = (EditText) findViewById(R.id.confirm_pass);
 		btn_changepass = (Button) findViewById(R.id.btn_changepass);
-		btn_changepass.setTypeface(BaseActivity.typeface_roboto);
+		btn_changepass.setTypeface(DashBoardActivity.typeface_roboto);
 
 		imageView_back = (ImageView) findViewById(R.id.imageView_back);
 		textView_back = (TextView) findViewById(R.id.textView_back);
-		textView_back.setTypeface(BaseActivity.typeface_roboto);
+		textView_back.setTypeface(DashBoardActivity.typeface_roboto);
 	}
 
 	private View.OnClickListener listener = new View.OnClickListener() {

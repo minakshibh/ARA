@@ -5,9 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <!-- local url=http://112.196.24.205:88/api -->
+<!--     http://112.196.24.205:89/api -->
    <!-- client url= http://10.10.10.219:801/api -->
     <!-- <string name="baseUrl">http://112.196.24.205:89/api</string> -->
-    <string name="baseUrl">http://63.255.19.72:801/api</string>
+   <!--  <string name="baseUrl">http://63.255.19.72:801/api</string> -->
+     <string name="baseUrl">http://112.196.24.205:89/api</string> 
     <string name="facebook_appid">1466930973610943</string>
     
     

@@ -24,6 +24,7 @@ import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.base.BaseActivity;
 import com.ara.base.R;
+import com.ara.board.DashBoardActivity;
 import com.ara.model.Payment;
 import com.ara.util.ARAParser;
 import com.ara.util.Util;
@@ -60,7 +61,7 @@ public class PaymentListActivity extends Activity implements
 		paymentList = new ArrayList<Payment>();
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		txtHeader = (TextView)findViewById(R.id.txtHeader);
-		txtHeader.setTypeface(BaseActivity.typeface_timeburner);
+		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 		//title = (TextView)findViewById(R.id.txtTitle);
 		//title.setTypeface(BaseActivity.typeface_timeburner);
 		back = (TextView)findViewById(R.id.back);

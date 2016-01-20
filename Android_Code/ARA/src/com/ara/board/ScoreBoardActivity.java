@@ -50,46 +50,46 @@ public void onCreate(Bundle savedInstanceState) {
 		
 		//spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		txtHeader = (TextView)findViewById(R.id.txtHeader);
-		txtHeader.setTypeface(BaseActivity.typeface_timeburner);	
+		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);	
 		//title = (TextView)findViewById(R.id.txtTitle);
 		//title.setTypeface(BaseActivity.typeface_timeburner);
 		back = (TextView)findViewById(R.id.back);
-		back.setTypeface(BaseActivity.typeface_roboto);
+		back.setTypeface(DashBoardActivity.typeface_roboto);
 		backArrow = (ImageView)findViewById(R.id.back_arrow);
 		
 		lbl_Highest1 = (TextView)findViewById(R.id.lbl1);
-		lbl_Highest1.setTypeface(BaseActivity.typeface_roboto);
+		lbl_Highest1.setTypeface(DashBoardActivity.typeface_roboto);
 		lbl_Highest2 = (TextView)findViewById(R.id.lbl2);
-		lbl_Highest2.setTypeface(BaseActivity.typeface_roboto);
+		lbl_Highest2.setTypeface(DashBoardActivity.typeface_roboto);
 		lbl_Highest3 = (TextView)findViewById(R.id.lbl3);
-		lbl_Highest3.setTypeface(BaseActivity.typeface_roboto);
+		lbl_Highest3.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		
 		lbl_Earning = (TextView)findViewById(R.id.lbl_Earning);
-		lbl_Earning.setTypeface(BaseActivity.typeface_roboto);
+		lbl_Earning.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		
 		lbl_Referral = (TextView)findViewById(R.id.lbl_Referral);
-		lbl_Referral.setTypeface(BaseActivity.typeface_roboto);
+		lbl_Referral.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		
 		soldReferral = (TextView)findViewById(R.id.soldReferral);
-		soldReferral.setTypeface(BaseActivity.typeface_roboto);
+		soldReferral.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		lblsoldReferral = (TextView)findViewById(R.id.lblsoldReferral);
-		lblsoldReferral.setTypeface(BaseActivity.typeface_roboto);
+		lblsoldReferral.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		Earning = (TextView)findViewById(R.id.Earning);
-		Earning.setTypeface(BaseActivity.typeface_roboto);
+		Earning.setTypeface(DashBoardActivity.typeface_roboto);
 		Referral= (TextView)findViewById(R.id.Referral);
-		Referral.setTypeface(BaseActivity.typeface_roboto);
+		Referral.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		button_Year=(TextView)findViewById(R.id.button_Year);
-		button_Year.setTypeface(BaseActivity.typeface_roboto);
+		button_Year.setTypeface(DashBoardActivity.typeface_roboto);
 		button_Quater=(TextView)findViewById(R.id.button_Quater);
-		button_Quater.setTypeface(BaseActivity.typeface_roboto);
+		button_Quater.setTypeface(DashBoardActivity.typeface_roboto);
 		button_AllTime=(TextView)findViewById(R.id.button_AllTime);
-		button_AllTime.setTypeface(BaseActivity.typeface_roboto);
+		button_AllTime.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		lay_Earning=(LinearLayout)findViewById(R.id.lay_Earning);
 		lay_Referrals=(LinearLayout)findViewById(R.id.lay_Referrals);

@@ -51,20 +51,20 @@ public void onCreate(Bundle savedInstanceState) {
 private void initUIComponents() {
 	// TODO Auto-generated method stub
 	txtHeader = (TextView)findViewById(R.id.txtHeader);
-	txtHeader.setTypeface(BaseActivity.typeface_timeburner);
+	txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 	txtHeader.setText(ScoreBoardActivity.headertxt);
 	//title = (TextView)findViewById(R.id.txtTitle);
 	//title.setTypeface(BaseActivity.typeface_timeburner);
 	back = (TextView)findViewById(R.id.back);
-	back.setTypeface(BaseActivity.typeface_roboto);
+	back.setTypeface(DashBoardActivity.typeface_roboto);
 	backArrow = (ImageView)findViewById(R.id.back_arrow);
 	listview=(ListView)findViewById(R.id.listview);
 	button_Year=(TextView)findViewById(R.id.button_Year);
-	button_Year.setTypeface(BaseActivity.typeface_roboto);
+	button_Year.setTypeface(DashBoardActivity.typeface_roboto);
 	button_Quater=(TextView)findViewById(R.id.button_Quater);
-	button_Quater.setTypeface(BaseActivity.typeface_roboto);
+	button_Quater.setTypeface(DashBoardActivity.typeface_roboto);
 	button_AllTime=(TextView)findViewById(R.id.button_AllTime);
-	button_AllTime.setTypeface(BaseActivity.typeface_roboto);
+	button_AllTime.setTypeface(DashBoardActivity.typeface_roboto);
 	
 	if(ScoreBoardActivity.timestamp.equalsIgnoreCase("quaterly"))
 	{

@@ -89,7 +89,7 @@ public class SubmitReferralActivity extends Activity implements
 		usermodel = new User();
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		textView_back = (TextView) findViewById(R.id.textView_back);
-		textView_back.setTypeface(BaseActivity.typeface_roboto);
+		textView_back.setTypeface(DashBoardActivity.typeface_roboto);
 		imageView_back = (ImageView) findViewById(R.id.imageView_back);
 		//textView_title = (TextView) findViewById(R.id.textView_title);
 		//textView_title.setTypeface(BaseActivity.typeface_timeburner);
@@ -99,19 +99,19 @@ public class SubmitReferralActivity extends Activity implements
 		layout_importcontacts = (LinearLayout) findViewById(R.id.layout_importcontacts);
 
 		edittext_firstname = (EditText) findViewById(R.id.edittext_firstname);
-		edittext_firstname.setTypeface(BaseActivity.typeface_roboto);
+		edittext_firstname.setTypeface(DashBoardActivity.typeface_roboto);
 
 		edittext_lastname = (EditText) findViewById(R.id.edittext_lastname);
-		edittext_lastname.setTypeface(BaseActivity.typeface_roboto);
+		edittext_lastname.setTypeface(DashBoardActivity.typeface_roboto);
 
 		edittext_phonenumber = (EditText) findViewById(R.id.edittext_phonenumber);
-		edittext_phonenumber.setTypeface(BaseActivity.typeface_roboto);
+		edittext_phonenumber.setTypeface(DashBoardActivity.typeface_roboto);
 
 		edittext_email = (EditText) findViewById(R.id.edittext_email);
-		edittext_email.setTypeface(BaseActivity.typeface_roboto);
+		edittext_email.setTypeface(DashBoardActivity.typeface_roboto);
 
 		edittext_comment = (EditText) findViewById(R.id.edittext_comment);
-		edittext_comment.setTypeface(BaseActivity.typeface_roboto);
+		edittext_comment.setTypeface(DashBoardActivity.typeface_roboto);
 
 		mea_spinner = (Spinner) findViewById(R.id.mea_spinner);
 		button_submit = (Button) findViewById(R.id.button_submit);

@@ -66,17 +66,17 @@ AsyncResponseForARA {
 		rewardList = new ArrayList<Reward>();
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		txtHeader = (TextView)findViewById(R.id.txtHeader);
-		txtHeader.setTypeface(BaseActivity.typeface_timeburner);
+		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 		//title = (TextView)findViewById(R.id.txtTitle);
 		//title.setTypeface(BaseActivity.typeface_timeburner);
 		back = (TextView)findViewById(R.id.back);
-		back.setTypeface(BaseActivity.typeface_roboto);
+		back.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		button_Earned=(TextView)findViewById(R.id.button_Earned);
-		button_Earned.setTypeface(BaseActivity.typeface_roboto);
+		button_Earned.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		button_Upcoming=(TextView)findViewById(R.id.button_Upcoming);
-		button_Upcoming.setTypeface(BaseActivity.typeface_roboto);
+		button_Upcoming.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		rewardListView = (ListView)findViewById(R.id.rewardListView);
 		backArrow = (ImageView)findViewById(R.id.back_arrow);

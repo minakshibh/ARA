@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.ara.badge.BadgeListActivity;
 import com.ara.base.BaseActivity;
 import com.ara.base.R;
+import com.ara.board.DashBoardActivity;
 import com.ara.board.ScoreBoardActivity;
 import com.ara.payment.PaymentListActivity;
 import com.ara.profile.MyProfile;
@@ -74,19 +75,19 @@ private void setValue() {
 private void initUIComponents() {
 	// TODO Auto-generated method stub
 	txtBack = (TextView)findViewById(R.id.back);
-	txtBack.setTypeface(BaseActivity.typeface_roboto);
+	txtBack.setTypeface(DashBoardActivity.typeface_roboto);
 	backArrow = (ImageView)findViewById(R.id.back_arrow);
 	txtHeader=(TextView)findViewById(R.id.txtHeader);
-	txtHeader.setTypeface(BaseActivity.typeface_timeburner);
+	txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 	backArrow=(ImageView)findViewById(R.id.backArrow);
 	txtBuildVersion=(TextView)findViewById(R.id.txtBuildVersion);
-	txtBuildVersion.setTypeface(BaseActivity.typeface_roboto);
+	txtBuildVersion.setTypeface(DashBoardActivity.typeface_roboto);
 	txtBuildVersionOutput=(TextView)findViewById(R.id.txtBuildVersionOutput);
-	txtBuildVersionOutput.setTypeface(BaseActivity.typeface_roboto);
+	txtBuildVersionOutput.setTypeface(DashBoardActivity.typeface_roboto);
 	txtBuildSize=(TextView)findViewById(R.id.txtBuildSize);
-	txtBuildSize.setTypeface(BaseActivity.typeface_roboto);
+	txtBuildSize.setTypeface(DashBoardActivity.typeface_roboto);
 	txtBuildSizeOutput=(TextView)findViewById(R.id.txtBuildSizeOutput);
-	txtBuildSizeOutput.setTypeface(BaseActivity.typeface_roboto);
+	txtBuildSizeOutput.setTypeface(DashBoardActivity.typeface_roboto);
 }
 private View.OnClickListener listener = new View.OnClickListener() {
 

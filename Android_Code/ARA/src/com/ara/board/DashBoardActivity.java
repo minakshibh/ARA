@@ -2,6 +2,8 @@ package com.ara.board;
 
 import java.util.ArrayList;
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import com.ara.async_tasks.AsyncResponseForARA;
@@ -41,7 +44,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	private TextView activeReferralCount, inActiveReferralCount,
 			soldReferralCount, totalReferralCount, activeReferralAmount,
 			soldReferralAmount,referralDashboard,textView_activeReferral,textView_soldReferral,
-			textView_inactiveRederral,textView_total_Referral,txt_username,textViewName,txtAbout,
+			textView_inactiveRederral,textView_total_Referral,txt_username,textViewName,txtAbout,TxtNotiCount,
 			txtProfile,txtSubmit,txtLogout,textViewEmail,textViewPhone,activeRewardAmount,txtWebLink,SoldAmount;
 	private SharedPreferences spref;
 	private ArrayList<ReferralType> referralTypeArray;
@@ -52,6 +55,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	public static final String STATUS_TOTAL = "Total";
 	private User user_Model=null;
 	private ImageLoader imageLoader;
+	private RelativeLayout RelNotification;
 	private String imageurl="";
 	private ImageView imageView_profilepic;
 	public static Typeface typeface_roboto,typeface_timeburner;
@@ -74,7 +78,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		typeface_roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
 		
 		imageView_profilepic=(ImageView)findViewById(R.id.imageView_profilepic);
-		
+		RelNotification=(RelativeLayout)findViewById(R.id.RelNotification);
 		activeReferrals = (LinearLayout)findViewById(R.id.activeReferralLayout);
 		RewardReferralLayout = (LinearLayout)findViewById(R.id.RewardReferralLayout);
 		LayShdulerService = (LinearLayout)findViewById(R.id.LayShdulerService);
@@ -84,6 +88,9 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		textViewEmail.setTypeface(typeface_roboto);
 		textViewPhone=(TextView)findViewById(R.id.textViewPhone);
 		textViewPhone.setTypeface(typeface_roboto);
+		
+		TxtNotiCount=(TextView)findViewById(R.id.TxtNotiCount);
+		TxtNotiCount.setTypeface(typeface_roboto);
 		
 		activeReferralAmount = (TextView)findViewById(R.id.activeReferralAmount);
 		activeReferralAmount.setTypeface(typeface_roboto);
@@ -170,6 +177,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		textViewEmail.setOnClickListener(listener);
 		textViewPhone.setOnClickListener(listener);
 		txtWebLink.setOnClickListener(listener);
+		RelNotification.setOnClickListener(listener);
 	}
 	private View.OnClickListener listener = new View.OnClickListener() {
 		
@@ -223,6 +231,11 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 					       Uri.parse("http://"+txtWebLink.getText().toString()));
 					startActivity(i);
 			}
+			else if(v==RelNotification)
+			{
+				Intent intent = new Intent(DashBoardActivity.this, NotificationActivity.class);
+				startActivity(intent);
+			}
 			else if(v == txtLogout){
 				logoutApi();
 			}
@@ -256,9 +269,13 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		if(Util.isNetworkAvailable(DashBoardActivity.this)){
 			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 			String userid=spref.getString("userid", "");
-				
+		// [HttpPost]dashboard  (userId, Timestamp)
+			String time="";
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-				AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(DashBoardActivity.this,"get","dashboard/"+userid,nameValuePairs, false, "Please wait...",true);
+				nameValuePairs.add(new BasicNameValuePair("userId", userid));
+				nameValuePairs.add(new BasicNameValuePair("Timestamp", time));		
+				
+				AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(DashBoardActivity.this,"post","dashboard",nameValuePairs, false, "Please wait...",true);
 				mWebPageTask.delegate = (AsyncResponseForARA) DashBoardActivity.this;
 				mWebPageTask.execute();	
 				
@@ -296,6 +313,15 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			activeReferralAmount.setText(activeCount);//+" Active/"+soldCount+" Sold");
 			SoldAmount.setText(" "+soldCount);
 			activeRewardAmount.setText("$ "+reward);
+			if(referralTypeArray.get(0).getNotificationCount().equals("0"))
+			{
+				TxtNotiCount.setVisibility(View.GONE);
+			}
+			else
+				{
+					TxtNotiCount.setVisibility(View.VISIBLE);
+					TxtNotiCount.setText(referralTypeArray.get(0).getNotificationCount());
+					}
 		}
 		else if(methodName.contains("logout"))
 			{

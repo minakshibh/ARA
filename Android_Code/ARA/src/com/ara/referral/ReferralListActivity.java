@@ -75,18 +75,18 @@ public class ReferralListActivity extends Activity implements
 		sortedFilteredList = new ArrayList<Referral>();
 		
 		txtHeader=(TextView)findViewById(R.id.txtHeader);
-		txtHeader.setTypeface(BaseActivity.typeface_timeburner);
+		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 		appliedFilter = (TextView)findViewById(R.id.appliedFilter);
 		//textView_title=(TextView)findViewById(R.id.textView_title);
 		//textView_title.setTypeface(BaseActivity.typeface_timeburner);
 		
 		textView_back=(TextView)findViewById(R.id.textView_back);
-		textView_back.setTypeface(BaseActivity.typeface_roboto);
+		textView_back.setTypeface(DashBoardActivity.typeface_roboto);
 		textView_sort = (TextView) findViewById(R.id.textView_sort);
-		textView_sort.setTypeface(BaseActivity.typeface_roboto);
+		textView_sort.setTypeface(DashBoardActivity.typeface_roboto);
 		imageView_back=(ImageView)findViewById(R.id.imageView_back);
 		textView_filter = (TextView) findViewById(R.id.textView_filter);
-		textView_filter.setTypeface(BaseActivity.typeface_roboto);
+		textView_filter.setTypeface(DashBoardActivity.typeface_roboto);
 
 		listView = (ListView) findViewById(R.id.listView);
 

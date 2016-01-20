@@ -59,34 +59,34 @@ public class ReferralsDetailsActivity extends Activity {
 	private void setUI() {
 
 		textView_back=(TextView)findViewById(R.id.textView_back);
-		textView_back.setTypeface(BaseActivity.typeface_roboto);
+		textView_back.setTypeface(DashBoardActivity.typeface_roboto);
 		txtHeaderOutput=(TextView)findViewById(R.id.txtHeaderOutput);
-		txtHeaderOutput.setTypeface(BaseActivity.typeface_timeburner);
+		txtHeaderOutput.setTypeface(DashBoardActivity.typeface_timeburner);
 		imageView_back=(ImageView)findViewById(R.id.imageView_back);
 		//imageView_referralType=(ImageView)findViewById(R.id.imageView_referralType);
 		lblName = (TextView) findViewById(R.id.lblName);
-		lblName.setTypeface(BaseActivity.typeface_roboto);
+		lblName.setTypeface(DashBoardActivity.typeface_roboto);
 
 		lblEmail = (TextView) findViewById(R.id.lblEmail);
-		lblEmail.setTypeface(BaseActivity.typeface_roboto);
+		lblEmail.setTypeface(DashBoardActivity.typeface_roboto);
 
 		lblPhonenumber = (TextView) findViewById(R.id.lblPhonenumber);
-		lblPhonenumber.setTypeface(BaseActivity.typeface_roboto);
+		lblPhonenumber.setTypeface(DashBoardActivity.typeface_roboto);
 
 		lblSubmittedDate = (TextView) findViewById(R.id.lblSubmittedDate);
-		lblSubmittedDate.setTypeface(BaseActivity.typeface_roboto);
+		lblSubmittedDate.setTypeface(DashBoardActivity.typeface_roboto);
 		lbl_DirectReferral= (TextView) findViewById(R.id.lbl_DirectReferral);
-		lbl_DirectReferral.setTypeface(BaseActivity.typeface_roboto);
+		lbl_DirectReferral.setTypeface(DashBoardActivity.typeface_roboto);
 		lblSoldDate = (TextView) findViewById(R.id.lblSoldDate);
-		lblSoldDate.setTypeface(BaseActivity.typeface_roboto);
+		lblSoldDate.setTypeface(DashBoardActivity.typeface_roboto);
 
 		txt_DirectReferral = (TextView) findViewById(R.id.txt_DirectReferral);
-		txt_DirectReferral.setTypeface(BaseActivity.typeface_roboto);
+		txt_DirectReferral.setTypeface(DashBoardActivity.typeface_roboto);
 		lblMEA = (TextView) findViewById(R.id.lblMEA);
-		lblMEA.setTypeface(BaseActivity.typeface_roboto);
+		lblMEA.setTypeface(DashBoardActivity.typeface_roboto);
 
 		lblComment = (TextView) findViewById(R.id.lblComment);
-		lblComment.setTypeface(BaseActivity.typeface_roboto);
+		lblComment.setTypeface(DashBoardActivity.typeface_roboto);
 
 		txtName = (TextView) findViewById(R.id.txtName);
 		txtEmail = (TextView) findViewById(R.id.txtEmail);
@@ -99,7 +99,7 @@ public class ReferralsDetailsActivity extends Activity {
 		lay_directReferral.setVisibility(View.GONE);
 		colorStripe = (TextView) findViewById(R.id.colorStripe);
 		header = (TextView) findViewById(R.id.txtHeader);
-		header.setTypeface(BaseActivity.typeface_timeburner);
+		header.setTypeface(DashBoardActivity.typeface_timeburner);
 
 		
 		if(getIntent().getStringExtra("rewardcheck")!=null)
@@ -107,7 +107,7 @@ public class ReferralsDetailsActivity extends Activity {
 				reward=getIntent().getParcelableExtra("reward");
 				
 				txtName.setText(reward.getFirstName() + " " + reward.getLastName());
-				txtName.setTypeface(BaseActivity.typeface_roboto);
+				txtName.setTypeface(DashBoardActivity.typeface_roboto);
 				
 				
 				if(reward.getEmail()==null | reward.getEmail().equals("null"))

@@ -2,8 +2,16 @@ package com.ara.model;
 
 public class ReferralType {
 
-	private String Type, Amount, Count;
+	private String Type, Amount, Count,NotificationCount;
 	
+	public String getNotificationCount() {
+		return NotificationCount;
+	}
+
+	public void setNotificationCount(String notificationCount) {
+		NotificationCount = notificationCount;
+	}
+
 	public String getType() {
 		return Type;
 	}

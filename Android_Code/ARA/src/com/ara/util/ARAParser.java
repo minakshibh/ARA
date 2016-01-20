@@ -190,20 +190,23 @@ public class ARAParser {
 		ArrayList<ReferralType> referralTypeArray = new ArrayList<ReferralType>();
 
 		try {
-			JSONArray jsonArray = new JSONArray(response);
+			ReferralType referralType = null;
+			JSONObject DashboardResult = new JSONObject(response);
+			JSONArray jsonArray = DashboardResult.getJSONArray("DashboardResult");
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-				ReferralType referralType = new ReferralType();
+				 referralType = new ReferralType();
 				referralType.setAmount(jsonObject.getString("Amount")
 						.toString());
 				referralType.setCount(jsonObject.getString("ReferralCount")
 						.toString());
 				referralType.setType(jsonObject.getString("ReferralType")
 						.toString());
-
+				referralType.setNotificationCount(DashboardResult.getString("NotificationsCount"));
 				referralTypeArray.add(referralType);
 			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

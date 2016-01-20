@@ -27,6 +27,7 @@ import com.ara.model.User;
 import com.ara.util.ARAParser;
 import com.ara.util.Util;
 import com.ara.base.R;
+import com.ara.board.DashBoardActivity;
 
 public class MyProfile extends Activity implements AsyncResponseForARA {
 
@@ -65,18 +66,18 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		usermodel = new User();
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		editText_name = (EditText) findViewById(R.id.editText_name);
-		editText_name.setTypeface(BaseActivity.typeface_roboto);
+		editText_name.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		editText_email = (EditText) findViewById(R.id.editText_email);
 		editText_email.setTypeface(BaseActivity.typeface_roboto);
 		editText_phone = (EditText) findViewById(R.id.editText_phone);
-		editText_phone.setTypeface(BaseActivity.typeface_roboto);
+		editText_phone.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		editText_role = (EditText) findViewById(R.id.editText_role);
-		editText_role.setTypeface(BaseActivity.typeface_roboto);
+		editText_role.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		editText_mea = (EditText) findViewById(R.id.editText_mea);
-		editText_mea.setTypeface(BaseActivity.typeface_roboto);
+		editText_mea.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		lbl_changepass= (TextView) findViewById(R.id.lbl_changepass);
 		text_changepass = (TextView) findViewById(R.id.text_changepass);
@@ -85,45 +86,45 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		editText_lastname = (EditText) findViewById(R.id.editText_lastname);
 		imageView_profilepic = (ImageView) findViewById(R.id.imageView_profilepic);
 		textView_edit = (TextView) findViewById(R.id.textView_edit);
-		textView_edit.setTypeface(BaseActivity.typeface_roboto);
+		textView_edit.setTypeface(DashBoardActivity.typeface_roboto);
 		textView_edit.setText("Edit");
 		count=0;
 		textView_photoedit = (TextView) findViewById(R.id.textView_photoedit);
-		textView_photoedit.setTypeface(BaseActivity.typeface_roboto);
+		textView_photoedit.setTypeface(DashBoardActivity.typeface_roboto);
 		image_purchase = (ImageView) findViewById(R.id.image_purchase);
 		//textView_title=(TextView)findViewById(R.id.textView_title);
 		//textView_title.setTypeface(BaseActivity.typeface_timeburner);
 		imageView_back=(ImageView)findViewById(R.id.imageView_back);
 		
 		textView_back=(TextView)findViewById(R.id.textView_back);
-		textView_back.setTypeface(BaseActivity.typeface_roboto);
+		textView_back.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		
 		textView_myprofile=(TextView)findViewById(R.id.textView_myprofile);
-		textView_myprofile.setTypeface(BaseActivity.typeface_timeburner);
+		textView_myprofile.setTypeface(DashBoardActivity.typeface_timeburner);
 		
-		lbl_changepass.setTypeface(BaseActivity.typeface_roboto);
+		lbl_changepass.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		 textView_name=(TextView)findViewById(R.id.textView_name);
-		 textView_name.setTypeface(BaseActivity.typeface_roboto);
+		 textView_name.setTypeface(DashBoardActivity.typeface_roboto);
 			
 		 textView_lastname=(TextView)findViewById(R.id.textView_lastname);
-		 textView_lastname.setTypeface(BaseActivity.typeface_roboto);
+		 textView_lastname.setTypeface(DashBoardActivity.typeface_roboto);
 			
 		 textView_email=(TextView)findViewById(R.id.textView_email);
-		 textView_email.setTypeface(BaseActivity.typeface_roboto);
+		 textView_email.setTypeface(DashBoardActivity.typeface_roboto);
 			
 		 textView_phone=(TextView)findViewById(R.id.textView_phone);
-		 textView_phone.setTypeface(BaseActivity.typeface_roboto);
+		 textView_phone.setTypeface(DashBoardActivity.typeface_roboto);
 			
 		 textView_role=(TextView)findViewById(R.id.textView_role);
-		 textView_role.setTypeface(BaseActivity.typeface_roboto);
+		 textView_role.setTypeface(DashBoardActivity.typeface_roboto);
 			
 		 textView_mea=(TextView)findViewById(R.id.textView_mea);
-		 textView_mea.setTypeface(BaseActivity.typeface_roboto);
+		 textView_mea.setTypeface(DashBoardActivity.typeface_roboto);
 			
 		 textView_purchase=(TextView)findViewById(R.id.textView_purchase);
-		 textView_purchase.setTypeface(BaseActivity.typeface_roboto);
+		 textView_purchase.setTypeface(DashBoardActivity.typeface_roboto);
 		 textview_purchase_no=(TextView)findViewById(R.id.textview_purchase_no);
 		 LinearLayout_footer=(LinearLayout)findViewById(R.id.LinearLayout_footer);
 	}
