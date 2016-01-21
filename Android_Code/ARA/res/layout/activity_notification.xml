@@ -63,12 +63,12 @@
         android:text="Notifications"
         android:textColor="@color/app_blue" />
 
-    <ExpandableListView
-        android:id="@+id/expandableListView"
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/txtHeader" >
-    </ExpandableListView>
+    </ListView>
 
     </RelativeLayout>

@@ -53,8 +53,8 @@
                android:layout_marginTop="-10dp"
                android:text="1"
                android:textSize="12dp"
-               android:layout_marginLeft="6dp"
-               
+               android:layout_marginLeft="12dp"
+               android:textColor="@color/white"
            		android:paddingLeft="3dp"
                android:background="@drawable/notification_count"
               />
