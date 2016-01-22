@@ -10,7 +10,7 @@
 #import "ReferralTableViewCell.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
-
+#import "PaypalAccountsViewController.h"
 #import "rewardDetailViewController.h"
 
 @interface rewardListViewController ()
@@ -62,6 +62,7 @@
         btnSold.titleLabel.font=[lblheading.font fontWithSize:24];
         btnUpcoming.titleLabel.font=[lblheading.font fontWithSize:24];
         btnback.titleLabel.font=[lblheading.font fontWithSize:24];
+        btnPaymentAccounts.titleLabel.font=[btnPaymentAccounts.font fontWithSize:20];
         if(IS_IPAD_PRO_1366)
         {
             lblheading.font=[lblheading.font fontWithSize:30];
@@ -77,6 +78,10 @@
 }
 
 #pragma mark - Buttons
+- (IBAction)btnPaymentAccounts:(id)sender{
+    PaypalAccountsViewController *PayPalAccountsVC = [[PaypalAccountsViewController alloc]initWithNibName:@"PaypalAccountsViewController" bundle:nil];
+    [self.navigationController pushViewController:PayPalAccountsVC animated:YES];
+}
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

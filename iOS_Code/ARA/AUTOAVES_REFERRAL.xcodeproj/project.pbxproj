@@ -336,6 +336,17 @@
 		D9AF3CC01B8EE5BD00F98881 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF3CB51B8EE5BD00F98881 /* AFURLRequestSerialization.m */; };
 		D9AF3CC11B8EE5BD00F98881 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF3CB71B8EE5BD00F98881 /* AFURLResponseSerialization.m */; };
 		D9AF3CC21B8EE5BD00F98881 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF3CB91B8EE5BD00F98881 /* AFURLSessionManager.m */; };
+		D9B162F81C509FB7000A9DBB /* ScheduleServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B162F61C509FB7000A9DBB /* ScheduleServiceViewController.m */; };
+		D9B162F91C509FB7000A9DBB /* ScheduleServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B162F71C509FB7000A9DBB /* ScheduleServiceViewController.xib */; };
+		D9B163081C50FBB5000A9DBB /* Schedule_Service (1).jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */; };
+		D9B1630E1C510588000A9DBB /* calander-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630B1C510588000A9DBB /* calander-icon@3x.png */; };
+		D9B1630F1C510588000A9DBB /* setting-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630C1C510588000A9DBB /* setting-icon@3x.png */; };
+		D9B163101C510588000A9DBB /* time-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630D1C510588000A9DBB /* time-icon@3x.png */; };
+		D9B163141C510594000A9DBB /* calander-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163111C510594000A9DBB /* calander-icon@2x.png */; };
+		D9B163151C510594000A9DBB /* setting-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163121C510594000A9DBB /* setting-icon@2x.png */; };
+		D9B163161C510594000A9DBB /* time-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163131C510594000A9DBB /* time-icon@2x.png */; };
+		D9B4A9D31C4E0318006364F0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B4A9D21C4E0318006364F0 /* libsqlite3.tbd */; };
+		D9B4A9DB1C4E24CD006364F0 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A9DA1C4E24CD006364F0 /* DBManager.m */; };
 		D9BEB0981C48C9E200FED0C5 /* 1back_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = D9BEB0891C48C9E200FED0C5 /* 1back_btn.png */; };
 		D9BEB0991C48C9E200FED0C5 /* 1bell_read.png in Resources */ = {isa = PBXBuildFile; fileRef = D9BEB08A1C48C9E200FED0C5 /* 1bell_read.png */; };
 		D9BEB09A1C48C9E200FED0C5 /* 1bell_unread.png in Resources */ = {isa = PBXBuildFile; fileRef = D9BEB08B1C48C9E200FED0C5 /* 1bell_unread.png */; };
@@ -844,6 +855,19 @@
 		D9AF3CB71B8EE5BD00F98881 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		D9AF3CB81B8EE5BD00F98881 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		D9AF3CB91B8EE5BD00F98881 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		D9B162F51C509FB7000A9DBB /* ScheduleServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleServiceViewController.h; sourceTree = "<group>"; };
+		D9B162F61C509FB7000A9DBB /* ScheduleServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleServiceViewController.m; sourceTree = "<group>"; };
+		D9B162F71C509FB7000A9DBB /* ScheduleServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleServiceViewController.xib; sourceTree = "<group>"; };
+		D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Schedule_Service (1).jpg"; sourceTree = "<group>"; };
+		D9B1630B1C510588000A9DBB /* calander-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calander-icon@3x.png"; sourceTree = "<group>"; };
+		D9B1630C1C510588000A9DBB /* setting-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-icon@3x.png"; sourceTree = "<group>"; };
+		D9B1630D1C510588000A9DBB /* time-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-icon@3x.png"; sourceTree = "<group>"; };
+		D9B163111C510594000A9DBB /* calander-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calander-icon@2x.png"; sourceTree = "<group>"; };
+		D9B163121C510594000A9DBB /* setting-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-icon@2x.png"; sourceTree = "<group>"; };
+		D9B163131C510594000A9DBB /* time-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-icon@2x.png"; sourceTree = "<group>"; };
+		D9B4A9D21C4E0318006364F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D9B4A9D91C4E24CD006364F0 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		D9B4A9DA1C4E24CD006364F0 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		D9BEB0891C48C9E200FED0C5 /* 1back_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1back_btn.png; sourceTree = "<group>"; };
 		D9BEB08A1C48C9E200FED0C5 /* 1bell_read.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1bell_read.png; sourceTree = "<group>"; };
 		D9BEB08B1C48C9E200FED0C5 /* 1bell_unread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1bell_unread.png; sourceTree = "<group>"; };
@@ -931,6 +955,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9B4A9D31C4E0318006364F0 /* libsqlite3.tbd in Frameworks */,
 				D94FFFC81BFF2426006A37AA /* CoreData.framework in Frameworks */,
 				D959CE041BFDDC3300CE4BC4 /* AdSupport.framework in Frameworks */,
 				D9AF3CA41B8ECE4D00F98881 /* libz.dylib in Frameworks */,
@@ -1064,6 +1089,7 @@
 		D92D412B1B7B1F6200AB588F /* Referrals Process */ = {
 			isa = PBXGroup;
 			children = (
+				D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */,
 				D9F3B02D1C1E79C800828219 /* PopupTableViewCell.h */,
 				D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */,
 				D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */,
@@ -1284,6 +1310,7 @@
 		D94514A31C475B6600DA1573 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				D9B4A9C21C4E0024006364F0 /* DataBase Classes */,
 				D9BEB0C61C48CA2C00FED0C5 /* iphone 6 + */,
 				D9BEB0A71C48C9E800FED0C5 /* iphone 6 */,
 				D94514D21C47CC0300DA1573 /* Iphone 5 */,
@@ -1342,6 +1369,7 @@
 		D94BEAA41B7872EB008BCF5F = {
 			isa = PBXGroup;
 			children = (
+				D9B4A9D21C4E0318006364F0 /* libsqlite3.tbd */,
 				D96650A91C19505F00C1399C /* Controllers */,
 				D96650A81C19505100C1399C /* Modal */,
 				D96650A71C19502800C1399C /* Views */,
@@ -1405,6 +1433,7 @@
 		D94BEAD61B7873F9008BCF5F /* ARA */ = {
 			isa = PBXGroup;
 			children = (
+				D9B162F41C509F70000A9DBB /* Schedule Service */,
 				D9408ADC1BABFA690078129A /* cross.png */,
 				D92EC4141B83006A00E8EB8D /* PayPal */,
 				D93569911B819F1100777DD3 /* Scoreboard */,
@@ -1794,6 +1823,55 @@
 			path = AUTOAVES_REFERRAL;
 			sourceTree = "<group>";
 		};
+		D9B162F41C509F70000A9DBB /* Schedule Service */ = {
+			isa = PBXGroup;
+			children = (
+				D9B1630A1C51056F000A9DBB /* 640x1136 */,
+				D9B163091C510563000A9DBB /* 320x568 */,
+				D9B162F51C509FB7000A9DBB /* ScheduleServiceViewController.h */,
+				D9B162F61C509FB7000A9DBB /* ScheduleServiceViewController.m */,
+				D9B162F71C509FB7000A9DBB /* ScheduleServiceViewController.xib */,
+			);
+			name = "Schedule Service";
+			sourceTree = "<group>";
+		};
+		D9B163091C510563000A9DBB /* 320x568 */ = {
+			isa = PBXGroup;
+			children = (
+				D9B163111C510594000A9DBB /* calander-icon@2x.png */,
+				D9B163121C510594000A9DBB /* setting-icon@2x.png */,
+				D9B163131C510594000A9DBB /* time-icon@2x.png */,
+			);
+			name = 320x568;
+			sourceTree = "<group>";
+		};
+		D9B1630A1C51056F000A9DBB /* 640x1136 */ = {
+			isa = PBXGroup;
+			children = (
+				D9B1630B1C510588000A9DBB /* calander-icon@3x.png */,
+				D9B1630C1C510588000A9DBB /* setting-icon@3x.png */,
+				D9B1630D1C510588000A9DBB /* time-icon@3x.png */,
+			);
+			name = 640x1136;
+			sourceTree = "<group>";
+		};
+		D9B4A9C21C4E0024006364F0 /* DataBase Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D9B4A9D81C4E24BA006364F0 /* New Group */,
+				D9B4A9D91C4E24CD006364F0 /* DBManager.h */,
+				D9B4A9DA1C4E24CD006364F0 /* DBManager.m */,
+			);
+			name = "DataBase Classes";
+			sourceTree = "<group>";
+		};
+		D9B4A9D81C4E24BA006364F0 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		D9BEB0A71C48C9E800FED0C5 /* iphone 6 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1989,6 +2067,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D94D54B51B99BA9B00C03639 /* 123.jpg in Resources */,
+				D9B1630F1C510588000A9DBB /* setting-icon@3x.png in Resources */,
 				D93569D81B81E74300777DD3 /* right-arrow.png in Resources */,
 				D96912901BE381FD001D6E5E /* AutoAves Splash_320@2x.jpg in Resources */,
 				D90A92551C450BB700A52A17 /* news_icon@3x.png in Resources */,
@@ -2023,6 +2102,7 @@
 				D92D414A1B7B5D5E00AB588F /* Referral_List.jpg in Resources */,
 				D93569DD1B81E74300777DD3 /* submit-referral.png in Resources */,
 				D94514D11C47CBBC00DA1573 /* 1title_bdr_btm@2x~ipad.png in Resources */,
+				D9B162F91C509FB7000A9DBB /* ScheduleServiceViewController.xib in Resources */,
 				D90A924B1C450BA400A52A17 /* rewards_icon@2x.png in Resources */,
 				D9BEB0A11C48C9E200FED0C5 /* 1notification_icon.png in Resources */,
 				D9356A001B81E82000777DD3 /* badges@2x.png in Resources */,
@@ -2073,6 +2153,7 @@
 				D94514C41C47CBBC00DA1573 /* 1bell_read@2x~ipad.png in Resources */,
 				D9A435531C352EB100FC3406 /* step1.png in Resources */,
 				D959D18E1B7D9D670073C2D9 /* myBadgesViewController.xib in Resources */,
+				D9B163081C50FBB5000A9DBB /* Schedule_Service (1).jpg in Resources */,
 				D90A923B1C450B9100A52A17 /* referrals_icon.png in Resources */,
 				D9356A031B81E82000777DD3 /* comments-icon@2x.png in Resources */,
 				D9DDB9B21B7CC788006F5A37 /* RobotoCondensed-Bold.ttf in Resources */,
@@ -2086,6 +2167,7 @@
 				D92D41481B7B579100AB588F /* ReferralTableViewCell.xib in Resources */,
 				D9DDB9AA1B7CC788006F5A37 /* Roboto-Italic.ttf in Resources */,
 				D93D09B41B79BF710011E46B /* dashboardViewController.xib in Resources */,
+				D9B163141C510594000A9DBB /* calander-icon@2x.png in Resources */,
 				D94514C31C47CBBC00DA1573 /* 1back_btn@2x~ipad.png in Resources */,
 				D9527D4C1B9E9EE900630F9F /* 14.jpg in Resources */,
 				D90A925A1C450BB700A52A17 /* rewards_icon@3x.png in Resources */,
@@ -2150,13 +2232,16 @@
 				D9BEB0DB1C48CA6E00FED0C5 /* 1expand_icon@3x.png in Resources */,
 				D9356A141B81E82000777DD3 /* radio-unchecked@2x.png in Resources */,
 				D94514C51C47CBBC00DA1573 /* 1bell_unread@2x~ipad.png in Resources */,
+				D9B163151C510594000A9DBB /* setting-icon@2x.png in Resources */,
 				D96912831BE37280001D6E5E /* AppIcon_1024.png in Resources */,
 				D94D54AE1B995CAF00C03639 /* tick2@2x.png in Resources */,
 				D91B9E0F1B87415A008B0FEB /* login-with-facebook@2x.png in Resources */,
 				D9527D531B9E9EE900630F9F /* 8.jpg in Resources */,
+				D9B163101C510588000A9DBB /* time-icon@3x.png in Resources */,
 				D96F54861C08615C005C3265 /* AboutAppViewController.xib in Resources */,
 				D9154F091C33F33300FE0E6E /* step1_disabled.png in Resources */,
 				D969128F1BE381FD001D6E5E /* AutoAves Splash_600.jpg in Resources */,
+				D9B1630E1C510588000A9DBB /* calander-icon@3x.png in Resources */,
 				D94514D01C47CBBC00DA1573 /* 1services_icon@2x~ipad.png in Resources */,
 				D9BEB0D71C48CA6E00FED0C5 /* 1bell_read@3x.png in Resources */,
 				D9BEB0B71C48CA2800FED0C5 /* 1back_btn@2x.png in Resources */,
@@ -2231,6 +2316,7 @@
 				D93569CF1B81E74300777DD3 /* menu-icon.png in Resources */,
 				D93569D31B81E74300777DD3 /* phone-icon.png in Resources */,
 				D9BEB0BC1C48CA2800FED0C5 /* 1expand_icon@2x.png in Resources */,
+				D9B163161C510594000A9DBB /* time-icon@2x.png in Resources */,
 				D94D54AC1B995CA100C03639 /* tick2.png in Resources */,
 				D93569CE1B81E74300777DD3 /* logout.png in Resources */,
 				D9356A161B81E82000777DD3 /* right-arrow@2x.png in Resources */,
@@ -2347,6 +2433,7 @@
 				D9DA1B631B7CA7A600554220 /* TLTagsControl.m in Sources */,
 				D93D09BD1B79C9E50011E46B /* ProfileViewController.m in Sources */,
 				D95667121B8EC65B00E01477 /* SBJsonStreamParserAdapter.m in Sources */,
+				D9B4A9DB1C4E24CD006364F0 /* DBManager.m in Sources */,
 				D9CAFFC01C3292A00055FDE8 /* SignupEmailCheckViewController.m in Sources */,
 				D95667181B8EC65B00E01477 /* SBJsonUTF8Stream.m in Sources */,
 				D92D414E1B7B726100AB588F /* referralDetailViewController.m in Sources */,
@@ -2373,6 +2460,7 @@
 				D92164511B84409A00B92589 /* SDWebImageManager.m in Sources */,
 				D956670F1B8EC65B00E01477 /* SBJsonParser.m in Sources */,
 				D921644B1B84409A00B92589 /* NSData+ImageContentType.m in Sources */,
+				D9B162F81C509FB7000A9DBB /* ScheduleServiceViewController.m in Sources */,
 				D92D41471B7B579100AB588F /* ReferralTableViewCell.m in Sources */,
 				D95667131B8EC65B00E01477 /* SBJsonStreamParserState.m in Sources */,
 				D94BEAB31B7872EB008BCF5F /* main.m in Sources */,
@@ -2478,7 +2566,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "e162e085-d212-47a8-8b68-074545fd8bf0";
+				PROVISIONING_PROFILE = "117df66d-c27d-435c-993e-9745df0fc3df";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2514,7 +2602,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "144a0a30-92b2-4b2d-a812-dae06f6b52e3";
+				PROVISIONING_PROFILE = "05724438-c093-4443-bfdb-e5a9008d33e7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2525,8 +2613,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2543,7 +2631,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "117df66d-c27d-435c-993e-9745df0fc3df";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2553,8 +2641,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2571,7 +2659,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "05724438-c093-4443-bfdb-e5a9008d33e7";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

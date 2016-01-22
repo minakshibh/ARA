@@ -412,7 +412,7 @@
     svos = scrollView.contentOffset;
     if(textField == txtEmail) {
         
-        if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5){
+        if (IS_IPHONE_4_OR_LESS ){
             CGPoint pt;
             CGRect rc = [textField bounds];
             rc = [textField convertRect:rc toView:scrollView];

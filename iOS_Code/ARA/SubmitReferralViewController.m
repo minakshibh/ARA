@@ -44,29 +44,53 @@
     //--hide navigation bar
    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
-    lblComments.layer.cornerRadius = 2.0;
+    lblComments.layer.cornerRadius = 5.0;
     [lblComments setClipsToBounds:YES];
     
-    lblEmail.layer.cornerRadius = 2.0;
+    lblCommentsBackground.layer.cornerRadius = 5.0;
+    lblCommentsBackground.layer.borderWidth = 1.0;
+    lblCommentsBackground.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
+    [lblCommentsBackground setClipsToBounds:YES];
+    
+    lblEmail.layer.cornerRadius = 5.0;
+    lblEmail.layer.borderWidth = 1.0;
+    lblEmail.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblEmail setClipsToBounds:YES];
     
-    lblFirstname.layer.cornerRadius = 2.0;
+    lblFirstname.layer.cornerRadius = 5.0;
+    lblFirstname.layer.borderWidth = 1.0;
+    lblFirstname.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblFirstname setClipsToBounds:YES];
     
-    lblLastname.layer.cornerRadius = 2.0;
+    lblLastname.layer.cornerRadius = 5.0;
+    lblLastname.layer.borderWidth = 1.0;
+    lblLastname.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblLastname setClipsToBounds:YES];
     
-    lblMEA.layer.cornerRadius = 2.0;
+    lblMEA.layer.cornerRadius = 5.0;
+    lblMEA.layer.borderWidth = 1.0;
+    lblMEA.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblMEA setClipsToBounds:YES];
     
-    lblPhoneno.layer.cornerRadius = 2.0;
+    lblPhoneno.layer.cornerRadius = 5.0;
+    lblPhoneno.layer.borderWidth = 1.0;
+    lblPhoneno.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblPhoneno setClipsToBounds:YES];
     
-    btnSubmitReferral.layer.cornerRadius = 2.0;
+    btnSubmitReferral.layer.cornerRadius = 7.0;
     [btnSubmitReferral setClipsToBounds:YES];
     
-    btnImportContacts.layer.cornerRadius = 2.0;
+    btnImportContacts.layer.cornerRadius = 5.0;
+    btnImportContacts.layer.borderWidth = 2.0;
+    btnImportContacts.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [btnImportContacts setClipsToBounds:YES];
+    
+    [txtFirstname setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtLastname setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtPhoneno setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtEmail setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtmea setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    
     
 
     NSString *role_name = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleName"]];
@@ -359,11 +383,7 @@
 {
     if(textField==txtPhoneno)
     {
-       
-        
-        
-        
-        
+  
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         if(newString.length==0)
         {   txtPhoneno.text=@"";
@@ -375,7 +395,8 @@
         NSUInteger length = decimalString.length;
         BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
         
-        if (length == 0  || (length > 10 && !hasLeadingOne) || (length > 11)) {
+        if (length == 0  || (length > 10 && !hasLeadingOne) || (length ==12)) {
+            
             [txtPhoneno becomeFirstResponder];
             
             return NO;
@@ -812,13 +833,13 @@
         }
     }
     
-    
+    [self.view endEditing:YES];
 }
 -(void)showPhoneNoPOPUP
 {
     isPhoneNo = true;
     unSelected = true;
-    
+    [txtPhoneno resignFirstResponder];
     NSArray *value = [contactDict valueForKey:@"contact_phone"];
     
     [self popupTableViewreloadHeight];
@@ -859,6 +880,7 @@
 }
 -(void)showEmailPopup
 {
+    [self.view endEditing:YES];
     viewHeaderPOPUPemail.frame = CGRectMake(viewHeaderPOPUPemail.frame.origin.x, viewHeaderPOPUPemail.frame.origin.y, viewHeaderPOPUPemail.frame.size.width, viewPopUp_h);
     tableViewPopupEmail.frame = CGRectMake(tableViewPopupEmail.frame.origin.x, tableViewPopupEmail.frame.origin.y, tableViewPopupEmail.frame.size.width, tableviewPopup_h);
     
@@ -1452,6 +1474,8 @@
     }
     cell.textLabel.text = [name_mea_array objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+    cell.textLabel.textColor = [UIColor colorWithRed:25.0f/255.0f green:93.0f/255.0f blue:172.0f/255.0f alpha:1.0f];
+    
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if ( IS_IPAD )
     {
@@ -1510,7 +1534,7 @@
     
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-        txtmea.font=[txtmea.font fontWithSize:24];
+        txtmea.font=[txtmea.font fontWithSize:20];
     }
     selected_text_id = [NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexPath.row]];
     [btnMEA setTitle:@"" forState:UIControlStateNormal];

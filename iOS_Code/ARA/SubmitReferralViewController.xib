@@ -37,6 +37,7 @@
                 <outlet property="headerImage" destination="CL9-Fo-5QN" id="rSz-vb-pv0"/>
                 <outlet property="imagecheckforemailView" destination="fBh-NU-jg7" id="IEa-s3-lXb"/>
                 <outlet property="lblComments" destination="cCX-fx-X5z" id="xtK-uM-qzG"/>
+                <outlet property="lblCommentsBackground" destination="ltu-ga-AaU" id="3EI-PK-FoK"/>
                 <outlet property="lblCommentsPlaceholder" destination="cCX-fx-X5z" id="fUd-f4-Dht"/>
                 <outlet property="lblEmail" destination="vmp-Pv-Ass" id="8Zw-3T-uel"/>
                 <outlet property="lblFirstname" destination="yQj-1G-65s" id="ahE-KJ-u8Q"/>
@@ -76,15 +77,15 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="29a-8x-XVf">
                     <rect key="frame" x="0.0" y="21" width="414" height="715"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.12941176470588234" green="0.396078431372549" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lOx-Gj-3Hz">
-                    <rect key="frame" x="0.0" y="21" width="414" height="55"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.070588235294117646" green="0.33725490196078434" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="GujaratiSangamMN-Bold" family="Gujarati Sangam MN" pointSize="55"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -116,6 +117,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" id="9gc-gS-3o8">
                             <rect key="frame" x="92" y="90" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             <connections>
@@ -125,6 +127,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" id="W5B-af-Ue4">
                             <rect key="frame" x="92" y="146" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             <connections>
@@ -134,7 +137,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hdP-M2-idO">
                             <rect key="frame" x="81" y="152" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.72156862745098038" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -142,7 +145,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tdw-bt-OTc">
                             <rect key="frame" x="81" y="96" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.72156862745098038" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -174,6 +177,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number (Optional)" minimumFontSize="17" id="rBI-mg-2LG">
                             <rect key="frame" x="92" y="201" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next"/>
                             <connections>
@@ -190,6 +194,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" id="yD7-lp-p1e">
                             <rect key="frame" x="92" y="256" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             <connections>
@@ -199,7 +204,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sje-3I-neK">
                             <rect key="frame" x="81" y="262" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.72156862745098038" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -207,7 +212,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ayQ-8C-Dfk">
                             <rect key="frame" x="81" y="207" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.72156862745098038" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -227,7 +232,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nxf-1B-K4H">
                             <rect key="frame" x="81" y="317" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.72156862745098038" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -239,6 +244,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="QBj-Vp-HJG">
                             <rect key="frame" x="92" y="311" width="265" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             <connections>
@@ -250,6 +256,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                             <state key="normal" title="SELECT MEA">
+                                <color key="titleColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -271,7 +278,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="31A-vm-3xu">
                             <rect key="frame" x="81" y="372" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.72156862745098038" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -284,13 +291,13 @@
                             <rect key="frame" x="90" y="372" width="282" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.56470588235294117" green="0.72156862745098038" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="rJJ-CQ-htc">
                             <rect key="frame" x="88" y="367" width="284" height="86"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                             <connections>
@@ -327,7 +334,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" red="0.12941176469999999" green="0.39607843139999999" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BGH-Xt-gJL">
                             <rect key="frame" x="86" y="254" width="288" height="12"/>
@@ -395,7 +402,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.11313592132769133" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6JL-VZ-KTJ">
                     <rect key="frame" x="25" y="40" width="253" height="21"/>
@@ -443,7 +450,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.1131359213" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="whJ-Nk-HWX">
                     <rect key="frame" x="25" y="40" width="253" height="21"/>

@@ -24,7 +24,6 @@
                 <outlet property="emailview" destination="e4R-io-LCy" id="HEO-rg-X7Y"/>
                 <outlet property="headerImage" destination="gKE-eC-Sdo" id="Ij0-ch-8vg"/>
                 <outlet property="imageDropDownIcon" destination="uaN-xb-ipt" id="w5W-oL-hqu"/>
-                <outlet property="imagelogo" destination="NI6-Fy-SIi" id="ygv-QE-VCc"/>
                 <outlet property="lblDropdown" destination="DNg-GE-l42" id="zKl-c7-irK"/>
                 <outlet property="lblemailback" destination="L9d-Tf-WQt" id="cZ2-Bx-DpG"/>
                 <outlet property="lblheading" destination="4r5-FX-HAJ" id="gp4-Kh-c8F"/>
@@ -44,15 +43,15 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zhN-03-vaD">
                     <rect key="frame" x="0.0" y="21" width="414" height="715"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.062745098039215685" green="0.42352941176470588" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uGu-oA-hFM">
-                    <rect key="frame" x="0.0" y="21" width="414" height="55"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.070588235294117646" green="0.33725490196078434" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="GujaratiSangamMN-Bold" family="Gujarati Sangam MN" pointSize="55"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -69,7 +68,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ghH-wW-sor">
-                    <rect key="frame" x="0.0" y="77" width="414" height="36"/>
+                    <rect key="frame" x="0.0" y="76" width="414" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -77,22 +76,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAYMENT ACCOUNT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4r5-FX-HAJ">
-                    <rect key="frame" x="8" y="79" width="313" height="38"/>
+                    <rect key="frame" x="8" y="78" width="313" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="TimeBurner" family="TimeBurner" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="kcd-FC-jVF">
-                    <rect key="frame" x="0.0" y="113" width="414" height="623"/>
+                    <rect key="frame" x="0.0" y="111" width="414" height="625"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner-logo_iphone.png" id="NI6-Fy-SIi">
-                            <rect key="frame" x="117" y="111" width="180" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNg-GE-l42">
-                            <rect key="frame" x="39" y="192" width="337" height="46"/>
+                            <rect key="frame" x="39" y="131" width="337" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -100,12 +95,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="role-icon.png" id="gMb-Ax-7dy">
-                            <rect key="frame" x="51" y="207" width="15" height="15"/>
+                            <rect key="frame" x="51" y="146" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="n6w-Vy-MU7">
-                            <rect key="frame" x="92" y="192" width="284" height="45"/>
+                            <rect key="frame" x="92" y="132" width="284" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             <connections>
@@ -113,7 +109,7 @@
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GKN-ez-YJi">
-                            <rect key="frame" x="91" y="193" width="280" height="45"/>
+                            <rect key="frame" x="91" y="132" width="280" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                             <state key="normal" title="Select Payment Mode">
@@ -124,20 +120,16 @@
                                 <action selector="selectPaymentMode:" destination="-1" eventType="touchUpInside" id="0gQ-bX-LJh"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown-arrow.png" id="uaN-xb-ipt">
-                            <rect key="frame" x="349" y="207" width="15" height="15"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FuQ-LL-Xp9">
-                            <rect key="frame" x="80" y="199" width="1" height="32"/>
+                            <rect key="frame" x="80" y="138" width="1" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.81805968920000005" green="0.81805968920000005" blue="0.81805968920000005" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view hidden="YES" contentMode="scaleToFill" id="e4R-io-LCy">
-                            <rect key="frame" x="39" y="254" width="337" height="161"/>
+                        <view contentMode="scaleToFill" id="e4R-io-LCy">
+                            <rect key="frame" x="39" y="193" width="337" height="161"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L9d-Tf-WQt">
@@ -151,6 +143,7 @@
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Email Address" minimumFontSize="17" id="Oyn-vL-ssv">
                                     <rect key="frame" x="53" y="2" width="284" height="45"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="textColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     <connections>
@@ -186,6 +179,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <state key="normal" title="   Set as default" image="checkbox-unchecked.png">
+                                        <color key="titleColor" red="0.098039215686274508" green="0.36470588235294116" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -193,10 +187,10 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.062745098040000002" green="0.42352941179999998" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RwQ-sc-h5O">
-                            <rect key="frame" x="82" y="238" width="294" height="128"/>
+                            <rect key="frame" x="82" y="177" width="294" height="128"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -204,6 +198,10 @@
                                 <outlet property="delegate" destination="-1" id="Mds-3z-Eed"/>
                             </connections>
                         </tableView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown-arrow.png" id="uaN-xb-ipt">
+                            <rect key="frame" x="349" y="146" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                 </scrollView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header-image.png" id="gKE-eC-Sdo">
@@ -222,7 +220,6 @@
         <image name="dropdown-arrow.png" width="12" height="12"/>
         <image name="email-icon.png" width="12" height="12"/>
         <image name="header-image.png" width="98" height="22"/>
-        <image name="inner-logo_iphone.png" width="140" height="51"/>
         <image name="role-icon.png" width="12" height="12"/>
     </resources>
 </document>

@@ -17,6 +17,7 @@
     IBOutlet UITableView *tableView;
     IBOutlet UIButton *btnSold;
     IBOutlet UIButton *btnUpcoming;
+    IBOutlet UIButton *btnPaymentAccounts;
     ReferralObj *obj;
     NSMutableData *webData;
     NSString *response_status;
@@ -25,5 +26,6 @@
 - (IBAction)btnBack:(id)sender;
 - (IBAction)btnSold:(id)sender;
 - (IBAction)btnUpcoming:(id)sender;
+- (IBAction)btnPaymentAccounts:(id)sender;
 
 @end

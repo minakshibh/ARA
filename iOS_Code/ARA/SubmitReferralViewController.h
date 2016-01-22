@@ -5,7 +5,6 @@
 //  Created by Krishna Mac Mini 2 on 12/08/15.
 //  Copyright (c) 2015 Krishna_Mac_2. All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
@@ -50,6 +49,7 @@
     NSString *response_status,*email_checked;
     NSMutableArray *contact_name,*contact_phoneno,*contact_email,*twoValueArray,*twoValueArrayID;
     IBOutlet UIView *viewHeaderPOPUP;
+    IBOutlet UILabel *lblCommentsBackground;
     IBOutlet UIView *viewDetailPOPUP;
     UIScrollView *scrollViewPOPUP;
     IBOutlet UITableView *tableViewPopup;

@@ -88,7 +88,10 @@
 - (IBAction)btnInActiveReferrals:(id)sender;
 - (IBAction)btnTotalReferrals:(id)sender;
 - (IBAction)btnSoldReferrals:(id)sender;
+- (IBAction)btnScheduleServices:(id)sender;
 @property (nonatomic,strong) NSString *from_login;
+@property (nonatomic,strong) NSTimer *timerDashboard;
 -(void)getData;
+-(void)timerInvalidate;
 
 @end

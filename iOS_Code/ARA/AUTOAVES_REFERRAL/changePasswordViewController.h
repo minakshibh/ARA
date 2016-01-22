@@ -23,6 +23,10 @@
     CGPoint svos;
     NSString *recieved_status;
     IBOutlet UIImageView *imagelogo;
+    
+    IBOutlet UILabel *lbloldPwd;
+    IBOutlet UILabel *lblNewpwd;
+    IBOutlet UILabel *lblConfirmPwd;
 }
 - (IBAction)btnBack:(id)sender;
 - (IBAction)btnChangePWD:(id)sender;

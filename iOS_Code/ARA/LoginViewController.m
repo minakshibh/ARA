@@ -14,7 +14,7 @@
 #import "ASIHTTPRequest.h"
 #import <Crittercism/Crittercism.h>
 #import "SignupEmailCheckViewController.h"
-
+#import "DBManager.h"
 
 @interface LoginViewController (){
     IBOutlet UIImageView *imagelogo;
@@ -402,12 +402,18 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status_pass"];
     }
     
-    
+        DBManager *db = [[DBManager alloc]init];
+        bool createDB = [db createDB];
+        
+        
     [kappDelegate HideIndicator];
     dashboardViewController *obj = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
     obj.from_login = @"yes";
     
     [self.navigationController pushViewController:obj animated:YES];
+        
+        
+        
     }else{
 //        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
