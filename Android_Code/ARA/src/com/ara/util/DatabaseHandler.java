@@ -39,7 +39,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TITLE + " TEXT,"
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TITLE + " TEXT,"
                 + KEY_DESCRIPTION + " TEXT," + KEY_DATE + " TEXT,"+ KEY_READ + " TEXT"+ ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
@@ -83,13 +83,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
  
         Notification contact = new Notification(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2),cursor.getString(3));
+                cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4));
         // return contact
         return contact;
     }
      
     // Getting All Contacts
-    public List<Notification> getAllContacts() {
+    public List<Notification> getAllNotification() {
         List<Notification> contactList = new ArrayList<Notification>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
@@ -101,11 +101,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
             	Notification contact = new Notification();
-                contact.setId(Integer.parseInt(cursor.getString(0)));
-                contact.setTitle(cursor.getString(1));
-                contact.setDescription(cursor.getString(2));
-                contact.setDate(cursor.getString(3));
-                contact.setRead(cursor.getString(4));
+                contact.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
+                contact.setTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
+                contact.setDescription(cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)));
+                contact.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                contact.setRead(cursor.getString(cursor.getColumnIndex(KEY_READ)));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
@@ -116,21 +116,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
  
     // Updating single contact
-    public int updateContact(Notification contact) {
+    public int updateNotification(int notificationId) {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
-        values.put(KEY_TITLE, contact.getTitle());
-        values.put(KEY_DESCRIPTION, contact.getDescription());
-        values.put(KEY_DATE, contact.getDate());
-        values.put(KEY_READ, contact.getRead());
+        values.put(KEY_READ, "read");
         // updating row
         return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(contact.getId()) });
+                new String[] { String.valueOf(notificationId) });
     }
  
     // Deleting single contact
-    public void deleteContact(Notification contact) {
+    public void deleteNotification(Notification contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
                 new String[] { String.valueOf(contact.getId()) });
