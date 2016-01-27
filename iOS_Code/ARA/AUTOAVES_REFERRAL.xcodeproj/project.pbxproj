@@ -152,7 +152,6 @@
 		D9356A1D1B81E82000777DD3 /* user-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93569FE1B81E82000777DD3 /* user-icon@2x.png */; };
 		D93D08BE1BB5194800C9573E /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = D93D08BD1BB5194800C9573E /* UIView+Toast.m */; };
 		D93D09B31B79BF710011E46B /* dashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93D09B11B79BF710011E46B /* dashboardViewController.m */; };
-		D93D09B41B79BF710011E46B /* dashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93D09B21B79BF710011E46B /* dashboardViewController.xib */; };
 		D93D09BD1B79C9E50011E46B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93D09BB1B79C9E50011E46B /* ProfileViewController.m */; };
 		D93D09BE1B79C9E50011E46B /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93D09BC1B79C9E50011E46B /* ProfileViewController.xib */; };
 		D93D09C01B79D14B0011E46B /* dummy-user-img.png in Resources */ = {isa = PBXBuildFile; fileRef = D93D09BF1B79D14B0011E46B /* dummy-user-img.png */; };
@@ -279,6 +278,7 @@
 		D965D05A1C58B00200558B49 /* ScheduleServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D965D0571C58B00200558B49 /* ScheduleServiceViewController.xib */; };
 		D965D05E1C58B1F800558B49 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D965D05D1C58B1F800558B49 /* DBManager.m */; };
 		D965D0601C58BDB000558B49 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D965D05F1C58BDB000558B49 /* libsqlite3.tbd */; };
+		D965D0621C58BF5000558B49 /* dashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D965D0611C58BF5000558B49 /* dashboardViewController.xib */; };
 		D96650AF1C19516E00C1399C /* UITextfieldValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AC1C19516E00C1399C /* UITextfieldValidations.m */; };
 		D96650B01C19516E00C1399C /* UITextField+HelperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AE1C19516E00C1399C /* UITextField+HelperTextField.m */; };
 		D96650B31C1955DA00C1399C /* HelperAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650B21C1955DA00C1399C /* HelperAlert.m */; };
@@ -599,7 +599,6 @@
 		D93D08BD1BB5194800C9573E /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		D93D09B01B79BF710011E46B /* dashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dashboardViewController.h; sourceTree = "<group>"; };
 		D93D09B11B79BF710011E46B /* dashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dashboardViewController.m; sourceTree = "<group>"; };
-		D93D09B21B79BF710011E46B /* dashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = dashboardViewController.xib; sourceTree = "<group>"; };
 		D93D09BA1B79C9E50011E46B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		D93D09BB1B79C9E50011E46B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		D93D09BC1B79C9E50011E46B /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -779,6 +778,7 @@
 		D965D05C1C58B1F800558B49 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		D965D05D1C58B1F800558B49 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		D965D05F1C58BDB000558B49 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D965D0611C58BF5000558B49 /* dashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = dashboardViewController.xib; path = ../../../../dashboardViewController.xib; sourceTree = "<group>"; };
 		D96650AB1C19516E00C1399C /* UITextfieldValidations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextfieldValidations.h; path = "Helper Classes/UITextfieldValidations.h"; sourceTree = "<group>"; };
 		D96650AC1C19516E00C1399C /* UITextfieldValidations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITextfieldValidations.m; path = "Helper Classes/UITextfieldValidations.m"; sourceTree = "<group>"; };
 		D96650AD1C19516E00C1399C /* UITextField+HelperTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+HelperTextField.h"; path = "Helper Classes/UITextField+HelperTextField.h"; sourceTree = "<group>"; };
@@ -1274,7 +1274,7 @@
 				D9A45DE41C438EC400D79C1A /* 44.png */,
 				D93D09B01B79BF710011E46B /* dashboardViewController.h */,
 				D93D09B11B79BF710011E46B /* dashboardViewController.m */,
-				D93D09B21B79BF710011E46B /* dashboardViewController.xib */,
+				D965D0611C58BF5000558B49 /* dashboardViewController.xib */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -2119,7 +2119,6 @@
 				D9A45DE61C438EC400D79C1A /* 22.png in Resources */,
 				D92D41481B7B579100AB588F /* ReferralTableViewCell.xib in Resources */,
 				D9DDB9AA1B7CC788006F5A37 /* Roboto-Italic.ttf in Resources */,
-				D93D09B41B79BF710011E46B /* dashboardViewController.xib in Resources */,
 				D94514C31C47CBBC00DA1573 /* 1back_btn@2x~ipad.png in Resources */,
 				D9527D4C1B9E9EE900630F9F /* 14.jpg in Resources */,
 				D90A925A1C450BB700A52A17 /* rewards_icon@3x.png in Resources */,
@@ -2248,6 +2247,7 @@
 				D94514C81C47CBBC00DA1573 /* 1expand_icon@2x~ipad.png in Resources */,
 				D9BEB0A31C48C9E200FED0C5 /* 1referrals_icon.png in Resources */,
 				D969127F1BE37280001D6E5E /* AppIcon_58.png in Resources */,
+				D965D0621C58BF5000558B49 /* dashboardViewController.xib in Resources */,
 				D95D23C21C27F706000A9E7A /* inner-logo_iphone@2x.png in Resources */,
 				D9BEB09D1C48C9E200FED0C5 /* 1expand_icon.png in Resources */,
 				D9DDB9A81B7CC788006F5A37 /* Roboto-Bold.ttf in Resources */,
