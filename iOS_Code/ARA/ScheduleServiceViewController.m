@@ -23,12 +23,13 @@
     
     pickerDateStatus = false;
     
-    selectTimeSlotArr = [[NSMutableArray alloc]initWithObjects:@"Morning",@"Evening",@"No Preference", nil];
+    selectTimeSlotArr = [[NSMutableArray alloc]initWithObjects:@"Morning",@"Afternoon",@"No Preference", nil];
     selectTimeSlotIdArr = [[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",nil];
     
     pickerDate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     pickerDate.datePickerMode = UIDatePickerModeDate;
     [pickerDate addTarget:self action:@selector(dueDateChanged:) forControlEvents:UIControlEventValueChanged];
+    [pickerDate setMinimumDate: [NSDate date]];
     if (IS_IPAD) {
         
     }
@@ -229,6 +230,7 @@
     tableViewTypeOfService.hidden=NO;
     statusService = true;
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [tableViewTypeOfService reloadData];
         return;
     }
     
@@ -246,10 +248,11 @@
     NSLog(@"Picked the date %@", [dateFormatter stringFromDate:[sender date]]);
     pickerSelectedDate = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[sender date]]];
     
+    NSString *today1 =[dateFormatter stringFromDate:[NSDate date]];
+    NSDate *today = (NSDate*)today1;
     
-    
-    NSDate *today = [NSDate date]; // it will give you current date
-    NSDate *dateChoosed = [dateFormatter dateFromString:pickerSelectedDate]; // your date
+    //NSDate *today = [NSDate date]; // it will give you current date
+    NSDate *dateChoosed = (NSDate*)pickerSelectedDate; // your date
     
     NSComparisonResult result;
     //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
@@ -273,10 +276,26 @@
     if (pickerDateStatus) {
         txtPrefferedDate.text = pickerSelectedDate;
         viewPickerbackground.hidden = YES;
-         [txtComments becomeFirstResponder];
+        [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        tableViewSelectTimeSlot.hidden = NO;
+        statusTime = true;
         return;
     }else{
-         [self.view makeToast:@"Please select a valid date..."];
+        if (pickerSelectedDate==nil) {
+            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init] ;
+            [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+            [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+            pickerSelectedDate = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[NSDate date]]];
+            
+            txtPrefferedDate.text = pickerSelectedDate;
+            viewPickerbackground.hidden = YES;
+            
+            [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+            tableViewSelectTimeSlot.hidden = NO;
+            statusTime = true;
+            return;
+        }
+        [self.view makeToast:@"Please select a valid date..."];
     }
     
    }
@@ -291,6 +310,7 @@
         tableViewSelectTimeSlot.hidden=NO;
         statusTime = true;
         [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [tableViewSelectTimeSlot reloadData];
         return;
     }
 }
@@ -454,6 +474,11 @@
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField{
+    tableViewSelectTimeSlot.hidden = YES;
+    tableViewTypeOfService.hidden = YES;
+    statusService  = false;
+    statusTime = false;
+    
     if (textField==txtPrefferedDate) {
          [txtFirstname resignFirstResponder];
          [txtLastName resignFirstResponder];
@@ -504,11 +529,15 @@
     }else if(textField == txtemailAddress)
     {
         [txtemailAddress resignFirstResponder];
-        [txtPrefferedDate becomeFirstResponder];
+        [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        tableViewTypeOfService.hidden = NO;
+        statusService = true;
         return YES;
     }else if(textField == txtPrefferedDate)
     {
-        [txtComments becomeFirstResponder];
+        [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        tableViewSelectTimeSlot.hidden = NO;
+        statusTime = true;
         return YES;
     }
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -571,11 +600,24 @@
 - (void)textViewDidChange:(UITextView *)textView{
     
     lblCommentsCount.hidden = NO;
-    NSInteger restrictedLength=250;
+    NSInteger restrictedLength=249;
     
     NSString *temp=textView.text;
-    
+    if (temp.length==0) {
+        lblCommentsCount.hidden = YES;
+    }
     NSInteger remainingCount = 250 - temp.length;
+    NSLog(@"%lu",(unsigned long)temp.length);
+    NSString *tempStr;
+    
+    if (temp.length > 250) {
+        tempStr =  [temp substringToIndex:249];
+        NSLog(@"%lu",(unsigned long)tempStr.length);
+        remainingCount = 0;
+        textView.text = tempStr;
+        
+    }
+    
     lblCommentsCount.text = [NSString stringWithFormat:@"%ld",(long)remainingCount];
     
     if([[textView text] length] > restrictedLength){
@@ -597,6 +639,8 @@
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+     viewPickerbackground.hidden = YES;
+    
     scrollView.scrollEnabled = YES;
     svos = scrollView.contentOffset;
     if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5 || IS_IPHONE_6 ||IS_IPHONE_6P) {
@@ -895,6 +939,15 @@
 #pragma mark- TableView Delegates
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [txtFirstname resignFirstResponder];
+    [txtLastName resignFirstResponder];
+    [txtemailAddress resignFirstResponder];
+    [txtPrefferedDate resignFirstResponder];
+    [txtComments resignFirstResponder];
+    [txtPhoneNo resignFirstResponder];
+     viewPickerbackground.hidden = YES;
+    
     if (tableViewTypeOfService) {
        
         if (IS_IPAD) {
@@ -986,6 +1039,7 @@
         tableViewTypeOfService.hidden = YES;
         txtTypeOfService.text = selectedService;
         [btnTypeOfService setTitle:@"" forState:UIControlStateNormal];
+        [txtPrefferedDate becomeFirstResponder];
     }else{
         NSString *timeSlotStr = [selectTimeSlotArr objectAtIndex:indexPath.row];
         
@@ -995,6 +1049,7 @@
         tableViewSelectTimeSlot.hidden = YES;
         txtSelectTimeSlot.text = timeSlotStr;
         [btnSelectTimeSlot setTitle:@"" forState:UIControlStateNormal];
+        [txtComments becomeFirstResponder];
     }
 }
 @end

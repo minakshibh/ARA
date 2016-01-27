@@ -379,27 +379,22 @@
     // Return YES if you want the specified item to be editable.
     return YES;
 }
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)atableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
+        database = [[DBManager alloc]init];
+        database = [notificationDataArr objectAtIndex:indexPath.row];
+        
+        bool success = [database deleteTableNotification:database.NotificationId];
+        if (success) {
+            notificationDataArr = [database showData];
+            [tableView reloadData];
+            [self.view makeToast:@"Notification Deleted"];
+        }
+        [tableView reloadData];
+
     }
 }
-- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    database = [[DBManager alloc]init];
-    database = [notificationDataArr objectAtIndex:indexPath.row];
-    
-    bool success = [database deleteTableNotification:database.NotificationId];
-    if (success) {
-        notificationDataArr = [database showData];
-        [tableView reloadData];
-        [self.view makeToast:@"Notification Deleted"];
-    }
-        [tableView reloadData];
-    
-    
-    return UITableViewCellEditingStyleNone;
-}
+
 #pragma mark- Buttons
 
 - (IBAction)btnBack:(id)sender{

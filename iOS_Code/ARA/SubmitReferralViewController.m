@@ -29,7 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    noShowOnPopUp = false;
+    popupActive = false;
     
     
     selectedContactDict = [[NSMutableDictionary alloc]init];
@@ -306,6 +307,14 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
+    if (popupActive) {
+        [txtFirstname resignFirstResponder];
+        [txtLastname resignFirstResponder];
+        [txtPhoneno resignFirstResponder];
+        
+        return;
+    }
+    
    if(textField==txtPhoneno)
    {
        lblphonenoerror.text = @"";
@@ -396,10 +405,11 @@
         BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
         
         if (length == 0  || (length > 10 && !hasLeadingOne) || (length ==12)) {
-            
+            if (length == 0  || (length > 10 && !hasLeadingOne) || (length ==12)) {
             [txtPhoneno becomeFirstResponder];
             
             return NO;
+            }
         }
         
         NSUInteger index = 0;
@@ -440,7 +450,8 @@
         //KGModal *obj = [KGModal sharedInstance];
         [[KGModal sharedInstance] hideAnimated:YES];
         
-        
+        txtFirstname.text = selectedPersonFName;
+        txtLastname.text = selectedPersonLName;
     aTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(aTime) userInfo:nil repeats:NO];
 
       //  [self.view bringSubviewToFront:self.view];
@@ -747,7 +758,7 @@
     [selectedContactDict removeAllObjects];
     
     NSMutableArray *phonelbl = [[NSMutableArray alloc]init];
-     NSMutableArray *emaillbl = [[NSMutableArray alloc]init];
+    NSMutableArray *emaillbl = [[NSMutableArray alloc]init];
     for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
     {
         CFStringRef locLabel = ABMultiValueCopyLabelAtIndex(phones, j);
@@ -757,8 +768,8 @@
     for(CFIndex j = 0; j < ABMultiValueGetCount(email); j++)
     {
         
-    CFStringRef emailLabel = ABMultiValueCopyLabelAtIndex(email, j);
-    NSString *emailLabel1 =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(emailLabel);
+        CFStringRef emailLabel = ABMultiValueCopyLabelAtIndex(email, j);
+        NSString *emailLabel1 =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(emailLabel);
         NSLog(@"%@",emailLabel1);
         if (j==0) {
             [emaillbl addObject:@"email"];
@@ -782,61 +793,195 @@
     [contactDict setObject:phonelbl forKey:@"contact_lbl"];
     [contactDict setObject:emaillbl forKey:@"contact_emaillbl"];
     
-//    NSString *name,*phone,*email;
-//    phone = [[NSString alloc]init];
-//    email = [[NSString alloc]init];
-//    name = [[NSString alloc]init];
-//    
-//    
-//    if (fnameProperty != nil) {
-//        name = [NSString stringWithFormat:@"%@", fnameProperty];
-//    }
-//    if (lnameProperty != nil) {
-//        name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
-//    }
-//    
-//    
-
+    //    NSString *name,*phone,*email;
+    //    phone = [[NSString alloc]init];
+    //    email = [[NSString alloc]init];
+    //    name = [[NSString alloc]init];
+    //
+    //
+    //    if (fnameProperty != nil) {
+    //        name = [NSString stringWithFormat:@"%@", fnameProperty];
+    //    }
+    //    if (lnameProperty != nil) {
+    //        name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
+    //    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     if (fnameProperty != nil) {
-    txtFirstname.text = [NSString stringWithFormat:@"%@",fnameProperty];
+        selectedPersonFName = [NSString stringWithFormat:@"%@",fnameProperty];
+    }else{
+        selectedPersonFName = @"";
     }
+    
     if (lnameProperty != nil) {
-    txtLastname.text = [NSString stringWithFormat:@"%@",lnameProperty];
+        selectedPersonLName = [NSString stringWithFormat:@"%@",lnameProperty];
+    }else {
+        selectedPersonLName = @"";
     }
     
     if([phoneArray count]){
         
         if ([phoneArray count] ==0 ) {
             NSString* select = @"phone_no";
+            txtFirstname.text = selectedPersonFName;
+            txtLastname.text = selectedPersonLName;
             [selectedContactDict setObject:@"" forKey:select];
             txtPhoneno.text = @"";
-
+            popupActive = false;
         }else if ([phoneArray count] ==1 ){
             NSString* select = @"phone_no";
-            [selectedContactDict setObject:[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0] forKey:select];
-            txtPhoneno.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0]];
+            
+            txtFirstname.text = selectedPersonFName;
+            txtLastname.text = selectedPersonLName;
+            //  txtPhoneno.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0]];
+            popupActive = false;
+            
+            /// --- put mask on number
+            
+            NSString *phoneNoStr = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0]];
+            
+            
+            if (phoneNoStr.length>0) {
+                
+                
+                if (phoneNoStr.length<10 ) {
+                    [HelperAlert  alertWithOneBtn:AlertTitle description:@"Selected contact does't have a valid phone number." okBtn:OkButtonTitle];
+                    
+                    
+                    
+                }else if (phoneNoStr.length>10 ) {
+                    if([[NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:0]] isEqual:@"1"]  && phoneNoStr.length==11)
+                    {
+                        
+                    }else{
+                        
+                        // msgstr = @"Please enter phone no. of atmost 10 digits";
+                        NSString* msgstr = @"Selected contact does't have a valid phone number.";
+                        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
+                        
+                        
+                    }
+                }else{
+                    
+                    
+                    
+                    phoneNoStr = [phoneNoStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    
+                    NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
+                    phoneNoStr = [[phoneNoStr componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
+                    
+                    noShowOnPopUp = false;
+                    if(phoneNoStr.length >10){
+                        noShowOnPopUp = true;
+                    }
+                    NSMutableString *mutStr = [[NSMutableString alloc]init];
+                    NSString *returnedStr;
+                    for (int i = 0; i<phoneNoStr.length; i++)
+                    {
+                        NSString *abc = [NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:i]];
+                        if(i==0){
+                            mutStr =[NSMutableString stringWithFormat:@"%@",abc];
+                        }else{
+                            mutStr = [NSMutableString stringWithFormat:@"%@%@",mutStr,abc];
+                        }
+                        txtPhoneno.text =   [self showmaskonnumber:mutStr];
+                        
+                    }
+                    [selectedContactDict setObject:[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0] forKey:select];
+                }
+            }
+            //-----//-----check if email exist
+            if ([emailArray count] ==1 ){
+                NSString* select = @"email";
+                [selectedContactDict setObject:[[contactDict valueForKey:@"contact_email"]objectAtIndex:0] forKey:select];
+                
+                txtFirstname.text = selectedPersonFName;
+                txtLastname.text = selectedPersonLName;
+                NSString *emailStr = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
+                
+                if (![self validateEmailWithString:emailStr]==YES) {
+                    NSString* msgstr = @"Selected contact does't have a valid email address.";
+                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                    [txtEmail becomeFirstResponder];
+                    return;
+                }
+                
+                txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
+                
+            }else if([emailArray count] >1){
+                [self showEmailPopup];
+            }
+            
+            
+            
+            
         }else if([phoneArray count]>1){
-        [self showPhoneNoPOPUP];
+            [self showPhoneNoPOPUP];
         }
-    }else if([emailArray count]){
-        if ([emailArray count] ==0 ) {
+    }else{
+        NSString* select = @"phone_no";
+        txtFirstname.text = selectedPersonFName;
+        txtLastname.text = selectedPersonLName;
+        [selectedContactDict setObject:@"" forKey:select];
+        txtPhoneno.text = @"";
+        popupActive = false;
+        
+        
+        if([emailArray count]){
+            
+            if ([emailArray count] ==0 ) {
+                NSString* select = @"email";
+                
+                [selectedContactDict setObject:@"" forKey:select];
+                txtFirstname.text = selectedPersonFName;
+                txtLastname.text = selectedPersonLName;
+                txtEmail.text = @"";
+            }else if ([emailArray count] ==1 ){
+                NSString* select = @"email";
+                [selectedContactDict setObject:[[contactDict valueForKey:@"contact_email"]objectAtIndex:0] forKey:select];
+                
+                txtFirstname.text = selectedPersonFName;
+                txtLastname.text = selectedPersonLName;
+                NSString *emailStr =[NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
+                
+                if (![self validateEmailWithString:emailStr]==YES) {
+                    NSString* msgstr = @"Selected contact does't have a valid email address.";
+                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                    [txtEmail becomeFirstResponder];
+                    return;
+                }
+                txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
+                
+            }else if([emailArray count] >1){
+                [self showEmailPopup];
+            }
+        }else{
             NSString* select = @"email";
+            
             [selectedContactDict setObject:@"" forKey:select];
+            txtFirstname.text = selectedPersonFName;
+            txtLastname.text = selectedPersonLName;
             txtEmail.text = @"";
-        }else if ([emailArray count] ==1 ){
-            NSString* select = @"email";
-            [selectedContactDict setObject:[[contactDict valueForKey:@"contact_email"]objectAtIndex:0] forKey:select];
-            txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
-        }else if([emailArray count] >1){
-        [self showEmailPopup];
+            
         }
+        
     }
     
-    [self.view endEditing:YES];
+    
+    [txtPhoneno resignFirstResponder];
+    
+}
+- (BOOL)validateEmailWithString:(NSString*)email
+{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
 }
 -(void)showPhoneNoPOPUP
 {
+    popupActive = true;
     isPhoneNo = true;
     unSelected = true;
     [txtPhoneno resignFirstResponder];
@@ -1052,10 +1197,14 @@
     NSUInteger length = decimalString.length;
     BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
     
+    if (noShowOnPopUp) {
+        
+    }else{
     if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 10)) {
         [txtPhoneno becomeFirstResponder];
         
         return number;
+    }
     }
     
     NSUInteger index = 0;
@@ -1414,7 +1563,10 @@
                 NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
                 phoneNoStr = [[phoneNoStr componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
                 
-                
+                noShowOnPopUp = false;
+                if(phoneNoStr.length >10){
+                    noShowOnPopUp = true;
+                }
                 
                 NSMutableString *mutStr = [[NSMutableString alloc]init];
                 NSString *returnedStr;
@@ -1492,6 +1644,38 @@
         if (isPhoneNo) {
         selectedValue = [contactDict valueForKey:@"contact_phone"];
             select = @"phone_no";
+            
+            NSString *phoneStr = [NSString stringWithFormat:@"%@",[selectedValue objectAtIndex:indexPath.row]];
+            
+            
+            phoneStr = [phoneStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
+            phoneStr = [[phoneStr componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
+            
+            
+            if (phoneStr.length!=0 ) {
+                
+                
+                if (phoneStr.length<10 ) {
+                    [HelperAlert  alertWithOneBtn:AlertTitle description:@"Selected phone number is not valid." okBtn:OkButtonTitle];
+                    return;
+                }
+            }
+            if (phoneStr.length>10 ) {
+                if([[NSString stringWithFormat:@"%C",[phoneStr characterAtIndex:0]] isEqual:@"1"] && phoneStr.length==11)
+                {
+                    
+                }else{
+                    
+                    NSString* msgstr = @"Selected phone number is not valid.";
+                    [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
+                    
+                    return;
+                }
+            }
+            
+
         }else{
             selectedValue = [contactDict valueForKey:@"contact_email"];
             select = @"email";
@@ -1539,6 +1723,7 @@
     selected_text_id = [NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexPath.row]];
     [btnMEA setTitle:@"" forState:UIControlStateNormal];
     tableView.hidden =YES;
+    status = false;
 }
 #pragma  mark Other methods
 -(void)submitReferral:(NSString*)firstname1 lastname:(NSString*)lastname1 phoneno:(NSString*)phoneno1 email:(NSString*)email mea:(NSString*)mea comment:(NSString*)comment

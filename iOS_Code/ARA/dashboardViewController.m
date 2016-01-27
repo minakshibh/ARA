@@ -62,30 +62,30 @@
     
     
     lblEmailSideMenu.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]];
-    [btnnewEmail setTitle:[NSString stringWithFormat:@"Email: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]] forState:UIControlStateNormal];
-    
-    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
-         lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-       [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
-        // set masking on number befroe displaying
-        
-        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-        // lblPhoneno.text=@"5454564564564564564";
-        NSMutableString *mutstr = [[NSMutableString alloc]init];
-        for (int h = 0; h<phone.length; h++)
-        {
-            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
-            if(h==0){
-                mutstr =[NSMutableString stringWithFormat:@"%@",character];
-            }else{
-                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
-            }
-            [self showmaskonnumber:mutstr];
-        }
-
-    }else{
-        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
-    }
+//    [btnnewEmail setTitle:[NSString stringWithFormat:@"Email: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]] forState:UIControlStateNormal];
+//    
+//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
+//         lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+//       [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
+//        // set masking on number befroe displaying
+//        
+//        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+//        // lblPhoneno.text=@"5454564564564564564";
+//        NSMutableString *mutstr = [[NSMutableString alloc]init];
+//        for (int h = 0; h<phone.length; h++)
+//        {
+//            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
+//            if(h==0){
+//                mutstr =[NSMutableString stringWithFormat:@"%@",character];
+//            }else{
+//                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
+//            }
+//            [self showmaskonnumber:mutstr];
+//        }
+//
+//    }else{
+//        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
+//    }
    
     
     
@@ -367,27 +367,27 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
-        lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-        [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
-        
-        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-        // lblPhoneno.text=@"5454564564564564564";
-        NSMutableString *mutstr = [[NSMutableString alloc]init];
-        for (int h = 0; h<phone.length; h++)
-        {
-            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
-            if(h==0){
-                mutstr =[NSMutableString stringWithFormat:@"%@",character];
-            }else{
-                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
-            }
-            [self showmaskonnumber:mutstr];
-        }
-
-    }else{
-        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
-    }
+//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
+//        lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+//        [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
+//        
+//        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+//        // lblPhoneno.text=@"5454564564564564564";
+//        NSMutableString *mutstr = [[NSMutableString alloc]init];
+//        for (int h = 0; h<phone.length; h++)
+//        {
+//            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
+//            if(h==0){
+//                mutstr =[NSMutableString stringWithFormat:@"%@",character];
+//            }else{
+//                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
+//            }
+//            [self showmaskonnumber:mutstr];
+//        }
+//
+//    }else{
+//        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
+//    }
     [self getData];
    
     NSString* namestr = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"],[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
