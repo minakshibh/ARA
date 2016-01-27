@@ -42,12 +42,12 @@
     NSString *selected_mea_value,*selected_text_id;
     IBOutlet UITableView *tableView;
     IBOutlet UIButton *btnMEA;
-    BOOL status,isPhoneNo,unSelected;
+    BOOL status,isPhoneNo,unSelected,popupActive,noShowOnPopUp;
     IBOutlet UIView *viewEmailindicator;
     IBOutlet UIImageView *imagecheckforemailView;
     IBOutlet UILabel *lblemailerror;
     IBOutlet UILabel *lblphonenoerror;
-    NSString *response_status,*email_checked;
+    NSString *response_status,*email_checked,*selectedPersonFName,*selectedPersonLName;
     NSMutableArray *contact_name,*contact_phoneno,*contact_email,*twoValueArray,*twoValueArrayID;
     IBOutlet UIView *viewHeaderPOPUP;
     IBOutlet UIView *viewDetailPOPUP;

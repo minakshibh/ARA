@@ -270,6 +270,46 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)atableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    database = [[DBManager alloc]init];
+    database = [notificationDataArr objectAtIndex:indexPath.row];
+    
+    bool success = [database deleteTableNotification:database.NotificationId];
+    if (success) {
+        notificationDataArr = [database showData];
+        [tableView reloadData];
+        [self.view makeToast:@"Notification Deleted"];
+    }
+        [tableView reloadData];
+    }
+}
+-(NSArray *)tableView:(UITableView *)atableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        database = [[DBManager alloc]init];
+                                        database = [notificationDataArr objectAtIndex:indexPath.row];
+                                        
+                                        bool success = [database deleteTableNotification:database.NotificationId];
+                                        if (success) {
+                                            notificationDataArr = [database showData];
+                                            [tableView reloadData];
+                                            [self.view makeToast:@"Notification Deleted"];
+                                        }
+                                        [tableView reloadData];
+                                    }];
+    button.backgroundColor = [UIColor colorWithRed:224.0f/255.0f green:80.0f/255.0f blue:85.0f/255.0f alpha:1.0f]; //arbitrary color
+    
+    
+    return @[button];
+}
 #pragma mark- Buttons
 
 - (IBAction)btnBack:(id)sender{

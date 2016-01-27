@@ -152,7 +152,7 @@
                                     <rect key="frame" x="53" y="2" width="284" height="45"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="ngl-t3-Bzv"/>
                                     </connections>
