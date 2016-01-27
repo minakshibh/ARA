@@ -9,6 +9,7 @@
 #import "notificationViewController.h"
 #import "AboutAppViewController.h"
 #import "LoginViewController.h"
+#import "UIView+Toast.h"
 
 @interface notificationViewController ()
 

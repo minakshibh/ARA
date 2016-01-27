@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "CommonHelperClass.h"
+#import "DBManager.h"
 
 @interface notificationViewController : UIViewController
 {
@@ -22,6 +23,8 @@
     int webservice;
     NSString *recieved_status;
     NSArray *modified;
+    DBManager *database;
+    NSMutableArray*notificationDataArr;
 }
 - (IBAction)btnAboutApp:(id)sender;
 - (IBAction)btnAutoAvesURL:(id)sender;

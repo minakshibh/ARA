@@ -277,6 +277,8 @@
 		D95D23C41C27F706000A9E7A /* inner-logo_iphone~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D95D23C01C27F706000A9E7A /* inner-logo_iphone~ipad.png */; };
 		D965D0591C58B00200558B49 /* ScheduleServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D965D0561C58B00200558B49 /* ScheduleServiceViewController.m */; };
 		D965D05A1C58B00200558B49 /* ScheduleServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D965D0571C58B00200558B49 /* ScheduleServiceViewController.xib */; };
+		D965D05E1C58B1F800558B49 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D965D05D1C58B1F800558B49 /* DBManager.m */; };
+		D965D0601C58BDB000558B49 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D965D05F1C58BDB000558B49 /* libsqlite3.tbd */; };
 		D96650AF1C19516E00C1399C /* UITextfieldValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AC1C19516E00C1399C /* UITextfieldValidations.m */; };
 		D96650B01C19516E00C1399C /* UITextField+HelperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AE1C19516E00C1399C /* UITextField+HelperTextField.m */; };
 		D96650B31C1955DA00C1399C /* HelperAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650B21C1955DA00C1399C /* HelperAlert.m */; };
@@ -774,6 +776,9 @@
 		D965D0561C58B00200558B49 /* ScheduleServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleServiceViewController.m; sourceTree = "<group>"; };
 		D965D0571C58B00200558B49 /* ScheduleServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleServiceViewController.xib; sourceTree = "<group>"; };
 		D965D0581C58B00200558B49 /* ScheduleServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleServiceViewController.h; sourceTree = "<group>"; };
+		D965D05C1C58B1F800558B49 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		D965D05D1C58B1F800558B49 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		D965D05F1C58BDB000558B49 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D96650AB1C19516E00C1399C /* UITextfieldValidations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextfieldValidations.h; path = "Helper Classes/UITextfieldValidations.h"; sourceTree = "<group>"; };
 		D96650AC1C19516E00C1399C /* UITextfieldValidations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITextfieldValidations.m; path = "Helper Classes/UITextfieldValidations.m"; sourceTree = "<group>"; };
 		D96650AD1C19516E00C1399C /* UITextField+HelperTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+HelperTextField.h"; path = "Helper Classes/UITextField+HelperTextField.h"; sourceTree = "<group>"; };
@@ -936,6 +941,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D965D0601C58BDB000558B49 /* libsqlite3.tbd in Frameworks */,
 				D94FFFC81BFF2426006A37AA /* CoreData.framework in Frameworks */,
 				D959CE041BFDDC3300CE4BC4 /* AdSupport.framework in Frameworks */,
 				D9AF3CA41B8ECE4D00F98881 /* libz.dylib in Frameworks */,
@@ -1289,6 +1295,7 @@
 		D94514A31C475B6600DA1573 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				D965D05B1C58B1E300558B49 /* DB Class */,
 				D9BEB0C61C48CA2C00FED0C5 /* iphone 6 + */,
 				D9BEB0A71C48C9E800FED0C5 /* iphone 6 */,
 				D94514D21C47CC0300DA1573 /* Iphone 5 */,
@@ -1347,6 +1354,7 @@
 		D94BEAA41B7872EB008BCF5F = {
 			isa = PBXGroup;
 			children = (
+				D965D05F1C58BDB000558B49 /* libsqlite3.tbd */,
 				D96650A91C19505F00C1399C /* Controllers */,
 				D96650A81C19505100C1399C /* Modal */,
 				D96650A71C19502800C1399C /* Views */,
@@ -1651,6 +1659,15 @@
 				D965D0571C58B00200558B49 /* ScheduleServiceViewController.xib */,
 			);
 			name = "Schedule Services";
+			sourceTree = "<group>";
+		};
+		D965D05B1C58B1E300558B49 /* DB Class */ = {
+			isa = PBXGroup;
+			children = (
+				D965D05C1C58B1F800558B49 /* DBManager.h */,
+				D965D05D1C58B1F800558B49 /* DBManager.m */,
+			);
+			name = "DB Class";
 			sourceTree = "<group>";
 		};
 		D96650A71C19502800C1399C /* Views */ = {
@@ -2402,6 +2419,7 @@
 				D9AF3CC01B8EE5BD00F98881 /* AFURLRequestSerialization.m in Sources */,
 				D9F8F07C1C1AD77D007745FA /* cornerRadius.m in Sources */,
 				D95667371B8EC74500E01477 /* ASIInputStream.m in Sources */,
+				D965D05E1C58B1F800558B49 /* DBManager.m in Sources */,
 				D9AF3CBD1B8EE5BD00F98881 /* AFNetworkReachabilityManager.m in Sources */,
 				D94BEAE61B78820E008BCF5F /* LoginViewController.m in Sources */,
 				D935699B1B81B15800777DD3 /* ScoreboardViewController.m in Sources */,
