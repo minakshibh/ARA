@@ -392,7 +392,7 @@
             
             return NO;
         }
-        
+        }
         NSUInteger index = 0;
         NSMutableString *formattedString = [NSMutableString string];
         
@@ -422,7 +422,9 @@
     }
     return YES;
 }
-#pragma mark Buttons
+
+#pragma mark - Buttons
+
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -704,7 +706,6 @@
 }
 
 #pragma mark - AddressBook Delegate Methods
-
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
     [self peoplePickerNavigationController:peoplePicker shouldContinueAfterSelectingPerson:person property:property identifier:identifier];
 }
