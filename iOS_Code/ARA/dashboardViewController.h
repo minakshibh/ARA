@@ -70,6 +70,7 @@
     IBOutlet UIImageView *imagenotificationcount;
     
 }
+- (IBAction)btnScheduleServices:(id)sender;
 - (IBAction)btnnewAppURL:(id)sender;
 - (IBAction)btnnewnotificationView:(id)sender;
 - (IBAction)btnnewPhoneNo:(id)sender;

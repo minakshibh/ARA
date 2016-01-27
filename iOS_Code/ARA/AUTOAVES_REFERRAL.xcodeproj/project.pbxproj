@@ -278,7 +278,8 @@
 		D965D05A1C58B00200558B49 /* ScheduleServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D965D0571C58B00200558B49 /* ScheduleServiceViewController.xib */; };
 		D965D05E1C58B1F800558B49 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D965D05D1C58B1F800558B49 /* DBManager.m */; };
 		D965D0601C58BDB000558B49 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D965D05F1C58BDB000558B49 /* libsqlite3.tbd */; };
-		D965D0621C58BF5000558B49 /* dashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D965D0611C58BF5000558B49 /* dashboardViewController.xib */; };
+		D965D0641C58C0B900558B49 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D965D0631C58C0B900558B49 /* Info.plist */; };
+		D965D0661C58C39400558B49 /* dashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D965D0651C58C39400558B49 /* dashboardViewController.xib */; };
 		D96650AF1C19516E00C1399C /* UITextfieldValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AC1C19516E00C1399C /* UITextfieldValidations.m */; };
 		D96650B01C19516E00C1399C /* UITextField+HelperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650AE1C19516E00C1399C /* UITextField+HelperTextField.m */; };
 		D96650B31C1955DA00C1399C /* HelperAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D96650B21C1955DA00C1399C /* HelperAlert.m */; };
@@ -626,7 +627,6 @@
 		D94A837A1BBA8E7400F6529C /* badges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = badges.h; sourceTree = "<group>"; };
 		D94A837B1BBA8E7400F6529C /* badges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = badges.m; sourceTree = "<group>"; };
 		D94BEAAD1B7872EB008BCF5F /* AUTOAVES_REFERRAL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AUTOAVES_REFERRAL.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D94BEAB11B7872EB008BCF5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D94BEAB21B7872EB008BCF5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D94BEAB41B7872EB008BCF5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AUTOAVES_REFERRAL/AppDelegate.h; sourceTree = "<group>"; };
 		D94BEAB51B7872EB008BCF5F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = AUTOAVES_REFERRAL/AppDelegate.m; sourceTree = "<group>"; };
@@ -778,7 +778,8 @@
 		D965D05C1C58B1F800558B49 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		D965D05D1C58B1F800558B49 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		D965D05F1C58BDB000558B49 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		D965D0611C58BF5000558B49 /* dashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = dashboardViewController.xib; path = ../../../../dashboardViewController.xib; sourceTree = "<group>"; };
+		D965D0631C58C0B900558B49 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D965D0651C58C39400558B49 /* dashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = dashboardViewController.xib; sourceTree = "<group>"; };
 		D96650AB1C19516E00C1399C /* UITextfieldValidations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextfieldValidations.h; path = "Helper Classes/UITextfieldValidations.h"; sourceTree = "<group>"; };
 		D96650AC1C19516E00C1399C /* UITextfieldValidations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITextfieldValidations.m; path = "Helper Classes/UITextfieldValidations.m"; sourceTree = "<group>"; };
 		D96650AD1C19516E00C1399C /* UITextField+HelperTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+HelperTextField.h"; path = "Helper Classes/UITextField+HelperTextField.h"; sourceTree = "<group>"; };
@@ -1274,7 +1275,7 @@
 				D9A45DE41C438EC400D79C1A /* 44.png */,
 				D93D09B01B79BF710011E46B /* dashboardViewController.h */,
 				D93D09B11B79BF710011E46B /* dashboardViewController.m */,
-				D965D0611C58BF5000558B49 /* dashboardViewController.xib */,
+				D965D0651C58C39400558B49 /* dashboardViewController.xib */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -1391,8 +1392,8 @@
 			children = (
 				D935699F1B81E70200777DD3 /* Images */,
 				D9DDB9B81B7CCCD6006F5A37 /* Fonts */,
-				D94BEAB11B7872EB008BCF5F /* Info.plist */,
 				D94BEAB21B7872EB008BCF5F /* main.m */,
+				D965D0631C58C0B900558B49 /* Info.plist */,
 				D9AF3CA51B8ED27800F98881 /* ARA-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -2168,6 +2169,7 @@
 				D9BEB0BF1C48CA2800FED0C5 /* 1notification_count@2x.png in Resources */,
 				D9BEB0E11C48CA6E00FED0C5 /* 1referrals_icon@3x.png in Resources */,
 				D9A45DEA1C43955800D79C1A /* landing-pagev5.jpg in Resources */,
+				D965D0661C58C39400558B49 /* dashboardViewController.xib in Resources */,
 				D9527D4F1B9E9EE900630F9F /* 4.jpg in Resources */,
 				D9527D661B9E9F3500630F9F /* 12@2x.jpg in Resources */,
 				D9CAFFC11C3292A00055FDE8 /* SignupEmailCheckViewController.xib in Resources */,
@@ -2247,7 +2249,6 @@
 				D94514C81C47CBBC00DA1573 /* 1expand_icon@2x~ipad.png in Resources */,
 				D9BEB0A31C48C9E200FED0C5 /* 1referrals_icon.png in Resources */,
 				D969127F1BE37280001D6E5E /* AppIcon_58.png in Resources */,
-				D965D0621C58BF5000558B49 /* dashboardViewController.xib in Resources */,
 				D95D23C21C27F706000A9E7A /* inner-logo_iphone@2x.png in Resources */,
 				D9BEB09D1C48C9E200FED0C5 /* 1expand_icon.png in Resources */,
 				D9DDB9A81B7CC788006F5A37 /* Roboto-Bold.ttf in Resources */,
@@ -2277,6 +2278,7 @@
 				D96F54881C08831D005C3265 /* about_320.png in Resources */,
 				D94BEADB1B787447008BCF5F /* SignUpViewController.xib in Resources */,
 				D9BEB0A01C48C9E200FED0C5 /* 1notification_count.png in Resources */,
+				D965D0641C58C0B900558B49 /* Info.plist in Resources */,
 				D9A45DE81C438EC400D79C1A /* 44.png in Resources */,
 				D97FAB181BE9D49500540E38 /* header-image@2x~ipad.png in Resources */,
 				D92EC4191B83009800E8EB8D /* PaypalAccountsViewController.xib in Resources */,
