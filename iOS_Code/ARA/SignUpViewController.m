@@ -12,6 +12,7 @@
 #import "ASIHTTPRequest.h"
 #import "LoginViewController.h"
 #import "UIView+Toast.h"
+#import "DBManager.h"
 
 @interface SignUpViewController ()
 
@@ -156,6 +157,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    txtPreviousCoustomer.text = @"Customer";
+    selected_previousid = [NSString stringWithFormat:@"2"];
     
     if (IS_IPHONE_5) {
         lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:8];
@@ -1003,6 +1007,8 @@ if ([response_status isEqualToString:@"passed"])
 //                [alert show];
                 return;
             }
+                DBManager *db = [[DBManager alloc]init];
+                bool createDB = [db createDB];
             }else{
                 [HelperAlert alertWithOneBtn:AlertTitle description:@"Not able to communate to the server. kindly try again." okBtn:OkButtonTitle];
 

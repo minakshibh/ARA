@@ -9,7 +9,7 @@
         android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue_header" >
+        android:background="@color/black" >
 
         <ImageView
             android:id="@+id/back_arrow"

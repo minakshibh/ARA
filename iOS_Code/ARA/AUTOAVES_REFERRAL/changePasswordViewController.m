@@ -99,6 +99,31 @@
     [txtConfirmnewpwd resignFirstResponder];
     [txtNewpwd resignFirstResponder];
     [txtOldpwd resignFirstResponder];
+    
+    
+    lbloldPwd.layer.cornerRadius = 5.0;
+    lbloldPwd.layer.borderWidth = 1.0;
+    lbloldPwd.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
+    [lbloldPwd setClipsToBounds:YES];
+    
+    lblConfirmPwd.layer.cornerRadius = 5.0;
+    lblConfirmPwd.layer.borderWidth = 1.0;
+    lblConfirmPwd.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
+    [lblConfirmPwd setClipsToBounds:YES];
+    
+    lblNewpwd.layer.cornerRadius = 5.0;
+    lblNewpwd.layer.borderWidth = 1.0;
+    lblNewpwd.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
+    [lblNewpwd setClipsToBounds:YES];
+    
+    btncahngpassword.layer.cornerRadius = 5.0;
+    btncahngpassword.layer.borderWidth = 1.0;
+    btncahngpassword.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
+    [btncahngpassword setClipsToBounds:YES];
+    
+    [txtOldpwd setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtNewpwd setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtConfirmnewpwd setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

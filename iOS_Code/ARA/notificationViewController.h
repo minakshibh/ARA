@@ -21,14 +21,20 @@
     IBOutlet UIButton *btnLogOut;
     NSMutableData *webData;
     int webservice;
-    NSString *recieved_status;
-    NSArray *modified;
+    NSString *recieved_status,*notificationTimeStamp;
+    NSMutableArray *notificationDataArr,*saveData;
+    NSIndexPath *clickedIndex;
+    int countInitialVal,countFinalVal;
     DBManager *database;
-    NSMutableArray*notificationDataArr;
+    UIRefreshControl *refreshControl;
+    bool status1;
+    IBOutlet UIView *bottomView;
 }
 - (IBAction)btnAboutApp:(id)sender;
 - (IBAction)btnAutoAvesURL:(id)sender;
 - (IBAction)btnLogOut:(id)sender;
 - (IBAction)btnBack:(id)sender;
+
 @property (nonatomic) NSIndexPath *expandedIndexPath;
+@property (nonatomic) CGFloat changeX;
 @end

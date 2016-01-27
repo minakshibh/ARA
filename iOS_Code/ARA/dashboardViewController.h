@@ -70,7 +70,6 @@
     IBOutlet UIImageView *imagenotificationcount;
     
 }
-- (IBAction)btnScheduleServices:(id)sender;
 - (IBAction)btnnewAppURL:(id)sender;
 - (IBAction)btnnewnotificationView:(id)sender;
 - (IBAction)btnnewPhoneNo:(id)sender;
@@ -89,7 +88,10 @@
 - (IBAction)btnInActiveReferrals:(id)sender;
 - (IBAction)btnTotalReferrals:(id)sender;
 - (IBAction)btnSoldReferrals:(id)sender;
+- (IBAction)btnScheduleServices:(id)sender;
 @property (nonatomic,strong) NSString *from_login;
+@property (nonatomic,strong) NSTimer *timerDashboard;
 -(void)getData;
+-(void)timerInvalidate;
 
 @end

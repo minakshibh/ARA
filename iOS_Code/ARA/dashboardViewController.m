@@ -20,6 +20,7 @@
 #import "AFURLConnectionOperation.h"
 #import "AFHTTPRequestOperation.h"
 #import "notificationViewController.h"
+#import "ScheduleServiceViewController.h"
 // #import "UIView+Toast.h"
 
 @interface dashboardViewController ()
@@ -35,7 +36,7 @@
     i=0;
     
     
-    
+    imagenotificationcount.hidden = YES;
     
     
     
@@ -61,36 +62,30 @@
     
     
     lblEmailSideMenu.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]];
-//    [btnnewEmail setTitle:[NSString stringWithFormat:@"Email: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]] forState:UIControlStateNormal];
+    [btnnewEmail setTitle:[NSString stringWithFormat:@"Email: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]] forState:UIControlStateNormal];
     
     if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
          lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
        [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
+        // set masking on number befroe displaying
+        
+        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+        // lblPhoneno.text=@"5454564564564564564";
+        NSMutableString *mutstr = [[NSMutableString alloc]init];
+        for (int h = 0; h<phone.length; h++)
+        {
+            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
+            if(h==0){
+                mutstr =[NSMutableString stringWithFormat:@"%@",character];
+            }else{
+                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
+            }
+            [self showmaskonnumber:mutstr];
+        }
+
     }else{
         [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
     }
-//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
-//         lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//       [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
-//        // set masking on number befroe displaying
-//        
-//        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//        // lblPhoneno.text=@"5454564564564564564";
-//        NSMutableString *mutstr = [[NSMutableString alloc]init];
-//        for (int h = 0; h<phone.length; h++)
-//        {
-//            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
-//            if(h==0){
-//                mutstr =[NSMutableString stringWithFormat:@"%@",character];
-//            }else{
-//                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
-//            }
-//            [self showmaskonnumber:mutstr];
-//        }
-//
-//    }else{
-//        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
-//    }
    
     
     
@@ -362,36 +357,37 @@
                                    selector:@selector(targetMethod:)
                                    userInfo:nil
                                     repeats:NO];
+//    self.timerDashboard = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(dashboardWebservice) userInfo:nil repeats:YES];
+
+}
+
+-(void)dashboardWebservice
+{
+    [self getData];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
         lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
         [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
+        
+        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
+        // lblPhoneno.text=@"5454564564564564564";
+        NSMutableString *mutstr = [[NSMutableString alloc]init];
+        for (int h = 0; h<phone.length; h++)
+        {
+            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
+            if(h==0){
+                mutstr =[NSMutableString stringWithFormat:@"%@",character];
+            }else{
+                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
+            }
+            [self showmaskonnumber:mutstr];
+        }
+
     }else{
         [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
     }
-//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
-//        lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//        [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
-//        
-//        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//        // lblPhoneno.text=@"5454564564564564564";
-//        NSMutableString *mutstr = [[NSMutableString alloc]init];
-//        for (int h = 0; h<phone.length; h++)
-//        {
-//            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
-//            if(h==0){
-//                mutstr =[NSMutableString stringWithFormat:@"%@",character];
-//            }else{
-//                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
-//            }
-//            [self showmaskonnumber:mutstr];
-//        }
-//
-//    }else{
-//        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
-//    }
     [self getData];
    
     NSString* namestr = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"],[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
@@ -419,7 +415,8 @@
 
 #pragma  mark - Buttons
 - (IBAction)btnScheduleServices:(id)sender{
-    asd
+    ScheduleServiceViewController *scheduleServicesVC = [[ScheduleServiceViewController alloc]initWithNibName:@"ScheduleServiceViewController" bundle:nil];
+    [self.navigationController pushViewController:scheduleServicesVC animated:YES];
 }
 - (IBAction)btnnewnotificationView:(id)sender{
     
@@ -433,7 +430,14 @@
 }
 
 - (IBAction)btnnewPhoneNo:(id)sender{
-    NSArray *phoneArr = [btnnewPhoneNo.titleLabel.text componentsSeparatedByString:@" "];
+    NSString* phoneno = [btnnewPhoneNo.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
+    phoneno = [[phoneno componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
+    
+    
+    
+    NSArray *phoneArr = [phoneno componentsSeparatedByString:@":"];
     NSString *phoneStr = [phoneArr objectAtIndex:1];
     
     NSString *phoneStr1 = [NSString stringWithFormat:@"tel:%@",phoneStr];
@@ -522,7 +526,7 @@
 
 - (IBAction)btnlogout:(id)sender {
     
-   
+    [self.timerDashboard invalidate];
     
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"from_fb"] isEqualToString:@"yes"])
     {
@@ -703,41 +707,57 @@ if([recieved_status isEqualToString:@"passed"])
     {
 //    NSArray *amount = [userDetailDict valueForKey:@"Amount"];
 //    NSArray *refCount = [userDetailDict valueForKey:@"ReferralCount"];
-    NSArray *refType = [userDetailDict valueForKey:@"ReferralType"];
-    
+    NSArray *refType = [userDetailDict valueForKey:@"DashboardResult"];
+    NSString *notificationCountStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"NotificationsCount"]];
+      //  int notificationCount = (int)notificationCountStr;
+        
+        UILabel *lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width+2, imagenotificationcount.frame.size.height)];
+        lblNotificationCount.text = notificationCountStr;
+         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:11] : [UIFont fontWithName:@"Roboto-Regular" size:11];
+        lblNotificationCount.textAlignment = NSTextAlignmentCenter;
+        lblNotificationCount.textColor = [UIColor whiteColor];
+        [imagenotificationcount addSubview:lblNotificationCount];
+        
+        int noti = [notificationCountStr intValue];
+        if (noti > 0) {
+            imagenotificationcount.hidden = NO;
+        }else{
+            imagenotificationcount.hidden = YES;
+        }
+        
     [kappDelegate HideIndicator];
         
         NSString * value ;
     for (int k=0; k<refType.count; k++) {
         
-        if([[refType objectAtIndex:k] isEqualToString:@"open"])
+        if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"open"])
         {
-            NSString *amountstr = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]];
+            NSString *amountstr = [NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
             lblActiveAmount.text = amountstr;
-            lblActivereferralcount.text = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"] objectAtIndex:k ]];
+            lblActivereferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"] objectAtIndex:k ]];
             
-            lblnewActiveSoldCount.text = [NSString stringWithFormat:@"%@ Open / ",[[userDetailDict valueForKey:@"ReferralCount"] objectAtIndex:k]];
-            value = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"] objectAtIndex:k]];
+            lblnewActiveSoldCount.text = [NSString stringWithFormat:@"%@ Open / ",[[refType valueForKey:@"ReferralCount"] objectAtIndex:k]];
+            value = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"] objectAtIndex:k]];
             
         }
-        if([[refType objectAtIndex:k] isEqualToString:@"sold"])
+        if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"sold"])
         {
-            NSLog(@"%@",[NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]]);
-            lblnewEarnedAwardePrice.text = [NSString stringWithFormat:@"$%@",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]];
-            lblSoldreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:k]];
-            lblSoldreferralcount.text = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"]objectAtIndex:k]];
+            NSLog(@"%@",[NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]]);
+            lblnewEarnedAwardePrice.text = [NSString stringWithFormat:@"$%@",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
+            lblSoldreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
+            lblSoldreferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
             
-            NSString *finalStr= [NSString stringWithFormat:@"%@%@ Sold",lblnewActiveSoldCount.text,[[userDetailDict valueForKey:@"ReferralCount"]objectAtIndex:k]];
-            finalStr = @"19 Open / 13 Sold";
-            value = @"13";
-            NSString *val1 =[NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"]objectAtIndex:k]];
-            val1 = @"23";
+            NSString *finalStr= [NSString stringWithFormat:@"%@%@ Sold",lblnewActiveSoldCount.text,[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
+         //   finalStr = @"19 Open / 13 Sold";
+         //   value = @"13";
+            NSString *val1 =[NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
+         //   val1 = @"23";
             NSLog(@"%lu",(unsigned long)val1.length);
            
             
             NSLog(@"%@",lblnewActiveSoldCount.text);
             
-            NSUInteger length1 = lblnewActiveSoldCount.text.length+1;
+            NSUInteger length1 = lblnewActiveSoldCount.text.length;
             NSUInteger length2 = val1.length ;
             
             
@@ -748,19 +768,20 @@ if([recieved_status isEqualToString:@"passed"])
             [string addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(length1,length2)];
             lblnewActiveSoldCount.attributedText = string;
             
+            
            
             
         }
-        if([[refType objectAtIndex:k] isEqualToString:@"inactive"])
+        if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"inactive"])
         {
             //  lblInactivereferralAmount.text = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:i]];
-            lblInactivereferralcount.text = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"]objectAtIndex:k]];
+            lblInactivereferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
             }
-            if([[refType objectAtIndex:k] isEqualToString:@"Total"])
+        if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"Total"])
             {
            
                 //lbltotalreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"]objectAtIndex:i]];
-                lbltotalreferralcount.text = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralCount"]objectAtIndex:k]];
+                lbltotalreferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
                 }
             }
             [self registerDevice];
@@ -782,6 +803,15 @@ if([recieved_status isEqualToString:@"passed"])
             return;
         }
     }else{
+        
+        if (webservice==1) {    
+            
+            if ([responseString rangeOfString:@"An error occurred while updating the entries." options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                return;
+            }
+           
+        }
         [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
 
         
@@ -792,6 +822,54 @@ if([recieved_status isEqualToString:@"passed"])
 }
 
 #pragma  mark - Other Methods
+-(void)getNotificationCount
+{
+    [kappDelegate ShowIndicator];
+    webservice=3;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSURLConnection *connection;
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
+    //    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //    NSString *currSys = @"ios";
+    //    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"POST"];
+    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+
+}
 
 -(void)logout
 {
@@ -950,12 +1028,15 @@ if([recieved_status isEqualToString:@"passed"])
     NSLog(@"%@",[user valueForKey:@"l_userid"]);
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard/%@",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSString *dashboardTimeStamp = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
+    
+    _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     NSLog(@"data post >>> %@",_postData);
     
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
     //[request addValue:mea forHTTPHeaderField:@"MEAId"];
     NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]);
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
@@ -1032,5 +1113,51 @@ if([recieved_status isEqualToString:@"passed"])
     
     
 }
-
+-(void)showmaskonnumber:(NSString*)number
+{
+    
+    NSString *newString = number;
+    if(newString.length==0)
+    {   [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];;
+        return ;
+    }
+    NSArray *components = [newString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
+    NSString *decimalString = [components componentsJoinedByString:@""];
+    
+    NSUInteger length = decimalString.length;
+    BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
+    
+    if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 11)) {
+//        [txtPhoneNo becomeFirstResponder];
+        
+        return;
+    }
+    
+    NSUInteger index = 0;
+    NSMutableString *formattedString = [NSMutableString string];
+    
+    if (hasLeadingOne) {
+        [formattedString appendString:@"1 "];
+        index += 1;
+    }
+    
+    if (length - index > 3) {
+        NSString *areaCode = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"(%@) ",areaCode];
+        index += 3;
+    }
+    
+    if (length - index > 3) {
+        NSString *prefix = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"%@-",prefix];
+        index += 3;
+    }
+    
+    NSString *remainder = [decimalString substringFromIndex:index];
+    [formattedString appendString:remainder];
+    
+    NSString *frmtStr = formattedString;
+    
+    [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",frmtStr] forState:UIControlStateNormal];
+}
 @end

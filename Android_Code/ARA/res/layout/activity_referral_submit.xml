@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@color/app_blue"
     android:orientation="vertical" >
     
  <LinearLayout
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         
-        android:background="@color/blue_header"
+        android:background="@color/black"
         android:orientation="horizontal" >
 
        <ImageView
@@ -69,7 +69,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="9.5"
-       
+        android:background="@color/app_blue"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -79,7 +79,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
-             android:background="@drawable/blue_rounded_btn"
+             android:background="@drawable/white_rounded_btn"
             android:orientation="horizontal" >
 
             <ImageView
@@ -108,7 +108,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
         
-            android:background="@drawable/blue_rounded_btn"
+            android:background="@drawable/white_rounded_btn"
             android:orientation="horizontal" >
 
             <ImageView
@@ -150,7 +150,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
         
-            android:background="@drawable/blue_rounded_btn"
+            android:background="@drawable/white_rounded_btn"
             android:orientation="horizontal" >
 
             <ImageView
@@ -192,7 +192,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
         
-             android:background="@drawable/blue_rounded_btn"
+             android:background="@drawable/white_rounded_btn"
             android:orientation="horizontal" >
 
             <ImageView
@@ -237,7 +237,7 @@
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
                  android:layout_weight="9"
-                 android:background="@drawable/blue_rounded_btn"
+                 android:background="@drawable/white_rounded_btn"
                  android:orientation="horizontal" >
 
                  <ImageView
@@ -300,7 +300,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
-             android:background="@drawable/blue_rounded_btn"
+             android:background="@drawable/white_rounded_btn"
             android:orientation="horizontal" >
 
             <ImageView
@@ -349,7 +349,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/blue_rounded_btn"
+            android:background="@drawable/white_rounded_btn"
             android:orientation="horizontal" >
 
             <ImageView
@@ -389,12 +389,11 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
           	android:padding="10dp"
-          	android:textSize="18sp"
-          	android:textStyle="bold"
             android:background="@drawable/yellow_rounded_btn"
             android:text="SUBMIT REFERRAL"
             android:textColor="@color/app_blue"
-           />
+            android:textStyle="bold"
+            android:textSize="@dimen/default_text_size" />
 
         
     </LinearLayout>

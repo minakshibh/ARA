@@ -22,22 +22,21 @@
     
     [self getpaymentmedia];
     
-    lblDropdown.layer.borderColor = [UIColor grayColor].CGColor;
+    lblDropdown.layer.cornerRadius = 5.0;
     lblDropdown.layer.borderWidth = 1.0;
-    lblDropdown.layer.cornerRadius = 4.0;
+    lblDropdown.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblDropdown setClipsToBounds:YES];
     
-    btnSavechanges.layer.borderColor = [UIColor grayColor].CGColor;
-    btnSavechanges.layer.borderWidth = 1.0;
-    btnSavechanges.layer.cornerRadius = 4.0;
+    btnSavechanges.layer.cornerRadius = 7.0;
     [btnSavechanges setClipsToBounds:YES];
     
-    lblemailback.layer.borderColor = [UIColor grayColor].CGColor;
+    lblemailback.layer.cornerRadius = 5.0;
     lblemailback.layer.borderWidth = 1.0;
-    lblemailback.layer.cornerRadius = 4.0;
+    lblemailback.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblemailback setClipsToBounds:YES];
     
-    
+    [txtEmail setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtDropDown setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
 //    int d = 0; // standard display
 //    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
 //        d = 1; // is retina display
