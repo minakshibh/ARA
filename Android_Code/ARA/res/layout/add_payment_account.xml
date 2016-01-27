@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_blue" >
+    android:background="@color/white" >
 
     <RelativeLayout
         android:id="@+id/LinearLayout_header"
@@ -65,13 +65,14 @@
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:src="@drawable/logo" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/white_rounded_btn"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/blue_rounded_btn"
             android:orientation="horizontal" >
 
             <RelativeLayout
@@ -107,6 +108,7 @@
                     android:background="@color/white"
                     android:paddingRight="15dp"
                     android:singleLine="true"
+                   
                     android:textSize="@dimen/default_text_size" />
 
                 <ImageView
@@ -124,7 +126,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/white_rounded_btn"
+            android:background="@drawable/blue_rounded_btn"
             android:orientation="horizontal" >
 
             <RelativeLayout
@@ -157,6 +159,8 @@
                 android:inputType="textEmailAddress"
                 android:paddingLeft="@dimen/text_margin_left"
                 android:singleLine="true"
+              
+                android:textColor="@color/blue_header"
                 android:textSize="@dimen/default_text_size" >
 
                 <requestFocus />
@@ -183,7 +187,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Set as Default."
-                android:textColor="@color/white" />
+                android:textColor="@color/blue_header" />
         </LinearLayout>
 
         <Button

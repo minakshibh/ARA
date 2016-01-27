@@ -60,18 +60,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/LinearLayout_header"
         android:background="@color/app_yellow"
-        android:gravity="start|center_vertical"
+        android:gravity="start|center"
         android:padding="5dp"
-        android:text="PAYMENT EARNED"
+         android:text="PAYMENT EARNED"
         android:textColor="@color/app_blue" />
 
-
+ <TextView
+        android:id="@+id/txtPayment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtHeader"
+        android:background="@color/app_blue"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="Payment Accounts"
+        android:textColor="@color/white" />
 
     <ListView
         android:id="@+id/rewardListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/txtHeader"
+        android:layout_below="@+id/txtPayment"
+        android:layout_marginTop="10dp"
         android:background="@color/listview_bg" >
     </ListView>
 

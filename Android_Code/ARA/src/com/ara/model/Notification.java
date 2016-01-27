@@ -4,7 +4,7 @@ public class Notification {
 
 	String title,date,description,read;
 	int id;
-
+String NotificationTypeId,NotificationTitle,NotificationText,IsScheduled,ScheduledAt,CreatedDate,ModifiedDate;
 	public int getId() {
 		return id;
 	}
@@ -63,6 +63,62 @@ public class Notification {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getNotificationTypeId() {
+		return NotificationTypeId;
+	}
+
+	public void setNotificationTypeId(String notificationTypeId) {
+		NotificationTypeId = notificationTypeId;
+	}
+
+	public String getNotificationTitle() {
+		return NotificationTitle;
+	}
+
+	public void setNotificationTitle(String notificationTitle) {
+		NotificationTitle = notificationTitle;
+	}
+
+	public String getNotificationText() {
+		return NotificationText;
+	}
+
+	public void setNotificationText(String notificationText) {
+		NotificationText = notificationText;
+	}
+
+	public String getIsScheduled() {
+		return IsScheduled;
+	}
+
+	public void setIsScheduled(String isScheduled) {
+		IsScheduled = isScheduled;
+	}
+
+	public String getScheduledAt() {
+		return ScheduledAt;
+	}
+
+	public void setScheduledAt(String scheduledAt) {
+		ScheduledAt = scheduledAt;
+	}
+
+	public String getCreatedDate() {
+		return CreatedDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		CreatedDate = createdDate;
+	}
+
+	public String getModifiedDate() {
+		return ModifiedDate;
+	}
+
+	public void setModifiedDate(String modifiedDate) {
+		ModifiedDate = modifiedDate;
 	}
 	
 }

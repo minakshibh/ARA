@@ -55,7 +55,6 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_base);
 
 		
 		

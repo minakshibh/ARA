@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.ara.model.Badge;
 import com.ara.model.MEA;
+import com.ara.model.Notification;
 import com.ara.model.Payment;
 import com.ara.model.PaymentMode;
 import com.ara.model.Referral;
@@ -487,7 +488,7 @@ public class ARAParser {
 	public ArrayList<Badge> parseBadgeContent(String output) {
 		// TODO Auto-generated method stub
 		
-	/*	  {
+	/*	 [ {
 			    "BadgeId": 5,
 			    "BadgeEarnedUserId": 0,
 			    "BadgeEarnedId": 0,
@@ -503,7 +504,8 @@ public class ARAParser {
 			      "MinimumReferralsRequired": 1,
 			      "ApplicableTimeFrameInDays": 30,
 			      "CreatedDate": "2015-28-09 7:18:24 PM"
-			    }*/
+			    }
+			    ]*/
 		
 		ArrayList<Badge> array_Badge=new ArrayList<Badge>();
 		try {
@@ -582,6 +584,87 @@ public class ARAParser {
 		
 		
 	}
-	
+	public ArrayList<Notification> parseNotification(String output) {
+		// TODO Auto-generated method stub
+		
+	/*	"Notifications": [
+    {
+      "NotificationId": 10,
+      "NotificationType": {
+        "ID": 5,
+        "Name": "Service"
+      },
+      "NotificationTypeId": 0,
+      "NotificationTitle": "Notification 2",
+      "NotificationText": "This is the second service notification.",
+      "IsScheduled": true,
+      "ScheduledAt": "2016-01-15T18:30:00",
+      "CreatedDate": "2016-01-15T16:30:00",
+      "ModifiedDate": "2016-01-15T00:00:00",
+      "Recipients": [
+        {
+          "ID": 179,
+          "Name": "David Test"
+        },
+        {
+          "ID": 191,
+          "Name": "Manu Test1"
+        }
+      ]
+    },
+			    ]*/
+		
+		ArrayList<Notification> array_noti=new ArrayList<Notification>();
+		try {
+				
+				
+			
+				JSONObject jsonNotification = new JSONObject(output);
+				JSONArray jsonArray = jsonNotification.getJSONArray("Notifications");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+			Notification noti=new Notification();
+			
+			
+			noti.setNotificationTypeId(jsonObject.getString("NotificationTypeId").toString());
+			noti.setNotificationTitle(jsonObject.getString("NotificationTitle").toString());
+			noti.setNotificationText(jsonObject.getString("NotificationText").toString());
+			
+			noti.setIsScheduled(jsonObject.getString("IsScheduled").toString());
+			noti.setScheduledAt(jsonObject.getString("ScheduledAt").toString());
+			noti.setCreatedDate(jsonObject.getString("CreatedDate").toString());
+			noti.setModifiedDate(jsonObject.getString("ModifiedDate").toString());
+			noti.setCreatedDate(jsonObject.getString("CreatedDate").toString());
+			
+			
+			//JSONObject jsonObject_BadgesCrieteria =new JSONObject(jsonObject.getString("BadgesCrieteria"));
+			
+		/*	badge.setBadgeCriteriaId(jsonObject_BadgesCrieteria.getString("BadgeCriteriaId")
+					.toString());
+			badge.setBadgeType(jsonObject_BadgesCrieteria.getString("BadgeType")
+					.toString());
+			badge.setBadgeStatus(jsonObject_BadgesCrieteria.getString("BadgeStatus")
+					.toString());
+			badge.setMinimumReferralsRequired(jsonObject_BadgesCrieteria.getString("MinimumReferralsRequired")
+					.toString());
+			badge.setApplicableTimeFrameInDays(jsonObject_BadgesCrieteria.getString("ApplicableTimeFrameInDays"));
+			badge.setBadgesCrieteria_CreatedDate(jsonObject_BadgesCrieteria.getString("CreatedDate"));*/
+			//if(earned.equalsIgnoreCase("true"))
+			array_noti.add(noti);
+			
+				
+			}
+				
+			return array_noti;
+				
+		} 
+				catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+	}
 
 }

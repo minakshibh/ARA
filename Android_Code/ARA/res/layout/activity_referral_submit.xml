@@ -136,6 +136,7 @@
                 android:hint="First Name"
                 android:capitalize="words"
                 android:maxLength="25"
+                android:textColor="@color/blue_header"
                 android:inputType="textCapSentences|textNoSuggestions"
                 android:paddingLeft="10dp"
                 android:textSize="@dimen/default_text_size"
@@ -179,6 +180,7 @@
                 android:paddingLeft="10dp"
                 android:capitalize="words"
                 android:maxLength="25"
+                 android:textColor="@color/blue_header"
                 android:inputType="textCapSentences|textNoSuggestions"
                 android:textSize="@dimen/default_text_size"
                 android:singleLine="true" />
@@ -219,6 +221,7 @@
                 android:background="@color/white"
                 android:hint="Phone Number (Optional)"
                 android:maxLength="14"
+                 android:textColor="@color/blue_header"
                 android:paddingLeft="10dp"
                 android:inputType="phone"
                 android:textSize="@dimen/default_text_size"
@@ -265,7 +268,7 @@
                 android:hint="Email Address"
                 android:paddingLeft="10dp"
                 android:inputType="textEmailAddress"
-              
+               android:textColor="@color/blue_header"
                 android:textSize="@dimen/default_text_size"
                 android:singleLine="true" >
             <requestFocus />
@@ -376,6 +379,7 @@
                 android:gravity="top"
                 android:hint="Comments (Optional)"
                 android:lines="3"
+                 android:textColor="@color/blue_header"
                 android:textSize="@dimen/default_text_size"
                 android:paddingLeft="10dp"
                 android:singleLine="true" />

@@ -3,7 +3,6 @@ package com.ara.board;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,6 +22,7 @@ import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.base.R;
 import com.ara.model.Notification;
+import com.ara.util.ARAParser;
 import com.ara.util.DatabaseHandler;
 import com.ara.util.Util;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
@@ -34,7 +34,7 @@ public class NotificationActivity extends Activity implements
 	private ImageView backArrow;
 	public ListView listView;
 	private ArrayList<Notification> listDataHeader = new ArrayList<Notification>();
-
+	ArrayList<Notification> arrayList;
 	private int count = 0;
 	private ListAdapter adapter;
 
@@ -46,8 +46,8 @@ public class NotificationActivity extends Activity implements
 		initUIComponents();
 
 		OnClickListener();
-		// NotificationApi();
-		refresh();
+		 NotificationApi();
+		refreshView();
 //		prepareListData();
 
 	}
@@ -60,30 +60,10 @@ public class NotificationActivity extends Activity implements
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view,
 					int position, long arg3) {
-		//		Toast.makeText(NotificationActivity.this, "Clicked", Toast.LENGTH_LONG).show();
-				
-				// TODO Auto-generated method stub
-//				TextView lblListHeader = (TextView) view
-//						.findViewById(R.id.lblListHeader);
-//
-//				TextView date = (TextView) view.findViewById(R.id.Date);
+		
 				TextView Description = (TextView) view
 						.findViewById(R.id.Description);
-//				ImageView imageview = (ImageView) view
-//						.findViewById(R.id.imageView);
-//				ImageView imageReadBell = (ImageView) view
-//						.findViewById(R.id.imageReadBell);
 
-//				count++;
-//				if (count == 1) {
-//
-//					Description.setMaxLines(Integer.MAX_VALUE);
-//					imageview.setImageResource(R.drawable.collapse_icon);
-//				} else if (count == 2) {
-//					Description.setMaxLines(3);
-//					imageview.setImageResource(R.drawable.expand_icon);
-//					count = 0;
-//				}
 
 				DatabaseHandler db = new DatabaseHandler(
 						NotificationActivity.this);
@@ -100,7 +80,7 @@ public class NotificationActivity extends Activity implements
 		
 	}
 
-	private void refresh() {
+	private void refreshView() {
 		listDataHeader.clear();
 
 		Log.d("Reading: ", "Reading all contacts..");
@@ -110,9 +90,9 @@ public class NotificationActivity extends Activity implements
 
 			Notification notiModel = new Notification();
 			notiModel.setId(noti.getId());
-			notiModel.setTitle(noti.getTitle());
-			notiModel.setDescription(noti.getDescription());
-			notiModel.setDate(noti.getDate());
+			notiModel.setTitle(noti.getNotificationTitle());
+			notiModel.setDescription(noti.getNotificationText());
+			notiModel.setDate(noti.getCreatedDate());
 			notiModel.setRead(noti.getRead());
 			listDataHeader.add(notiModel);
 		}
@@ -155,9 +135,10 @@ public class NotificationActivity extends Activity implements
 	}
 
 	private void NotificationApi() {
-		/*
+		/*api/notification/user (userId, currentPage, pageSize)
 		 * [HttpGet] api/notification/user (userId, currentPage, pageSize)
 		 */
+		//http://112.196.24.205:89/api/notification/user?userId=179&currentPage=1&pageSize=10
 
 		if (Util.isNetworkAvailable(NotificationActivity.this)) {
 			SharedPreferences spref = getSharedPreferences("ara_prefs",
@@ -166,12 +147,12 @@ public class NotificationActivity extends Activity implements
 
 			String time = "";
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("userId", userid));
-			nameValuePairs.add(new BasicNameValuePair("currentPage", time));
-			nameValuePairs.add(new BasicNameValuePair("pageSize", time));
+			/*nameValuePairs.add(new BasicNameValuePair("userId", "179"));
+			nameValuePairs.add(new BasicNameValuePair("currentPage", "1"));
+			nameValuePairs.add(new BasicNameValuePair("pageSize", "10"));*/
 
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
-					NotificationActivity.this, "get", "notification",
+					NotificationActivity.this, "get", "/notification/user?userId=179&currentPage=1&pageSize=10",
 					nameValuePairs, false, "Please wait...", true);
 			mWebPageTask.delegate = (AsyncResponseForARA) NotificationActivity.this;
 			mWebPageTask.execute();
@@ -185,6 +166,9 @@ public class NotificationActivity extends Activity implements
 	public void processFinish(String output, String methodName) {
 		// TODO Auto-generated method stub
 
+		ARAParser araParser=new ARAParser(this);
+		 arrayList=araParser.parseNotification(output);
+		 prepareData();
 	}
 
 
@@ -218,14 +202,7 @@ public class NotificationActivity extends Activity implements
 			return position;
 		}
 
-		/*
-		 * // @Override public View getView(final int position, View
-		 * convertView, ViewGroup parent) { LayoutInflater inflater =
-		 * (LayoutInflater) context
-		 * .getSystemService(Context.LAYOUT_INFLATER_SERVICE); if (convertView
-		 * == null) { convertView = inflater.inflate(R.layout.list_group,
-		 * parent, false); }
-		 */
+		
 
 		@Override
 		public void notifyDataSetChanged() {
@@ -246,14 +223,7 @@ public class NotificationActivity extends Activity implements
 					.findViewById(R.id.imageReadBell);
 			deleteButton=(TextView)convertView.findViewById(R.id.deleteAccount);
 			Notification notification = listDataHeader.get(position);
-			/*
-			 * Description.post(new Runnable() {
-			 * 
-			 * @Override public void run() { lineCnt =
-			 * Description.getLineCount(); // Perform any actions you want based
-			 * on the line count here. System.err.println("length="+lineCnt); }
-			 * });
-			 */
+			
 
 			Description.setText(notification.getDescription());
 			lblListHeader.setText(notification.getTitle() + "");
@@ -347,19 +317,26 @@ public class NotificationActivity extends Activity implements
 	/*
 	 * Preparing the list data
 	 */
-	private void prepareListData() {
+	private void prepareData() {
 
 		DatabaseHandler db = new DatabaseHandler(this);
 		Notification noti = new Notification();
 
-		noti.setTitle("Notitifcation 1");
+		/*noti.setTitle("Notitifcation 1");
 		noti.setDescription("The Shawshank Redemption The Godfather The Godfather sdbgksbgk sg kg kdf gkdf g gk kdfgkjdf gk dfkgkdf gkdf kg dfk gkdf gk The Godfather: "
 				+ "Part II Pulp Fiction The Good, the Bad and the Ugly");
 		noti.setDate("2014-06-12");
-		noti.setRead("unread");
-
-		db.addContact(noti);
+		noti.setRead("unread");*/
+		for(int i=0;i<arrayList.size();i++)
+		{
 		noti = new Notification();
+		noti.setNotificationTitle(arrayList.get(i).getNotificationTitle());
+		noti.setNotificationText(arrayList.get(i).getNotificationText());
+		noti.setCreatedDate(arrayList.get(i).getCreatedDate());
+		noti.setRead("unread");
+		db.addContact(noti);
+		}
+		/*noti = new Notification();
 
 		noti.setTitle("Notitifcation 2");
 		noti.setDescription("The Shawshank Redemption Godfather: Part II Pulp Fiction The Good, the Bad and the Ugly");
@@ -368,7 +345,7 @@ public class NotificationActivity extends Activity implements
 
 		db.addContact(noti);
 		// saveDataBase();
-		getdata();
+*/		getdata();
 
 	}
 

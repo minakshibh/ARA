@@ -31,6 +31,7 @@ import com.ara.board.DashBoardActivity;
 import com.ara.login.RegisterActivity;
 import com.ara.model.Reward;
 import com.ara.model.User;
+import com.ara.payment.PaymentListActivity;
 import com.ara.util.ARAParser;
 import com.ara.util.Util;
 
@@ -42,7 +43,7 @@ AsyncResponseForARA {
 	public static ArrayList<Reward> rewardList;
 	private ImageView backArrow;
 	private SharedPreferences spref;
-	private TextView button_Earned,button_Upcoming;
+	private TextView button_Earned,button_Upcoming,txtPayment;
 	private String rewardType ="earned";
 	private String rewardTypeHeader ="PAYMENT EARNED";
 	
@@ -67,8 +68,8 @@ AsyncResponseForARA {
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		txtHeader = (TextView)findViewById(R.id.txtHeader);
 		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
-		//title = (TextView)findViewById(R.id.txtTitle);
-		//title.setTypeface(BaseActivity.typeface_timeburner);
+		txtPayment= (TextView)findViewById(R.id.txtPayment);
+		
 		back = (TextView)findViewById(R.id.back);
 		back.setTypeface(DashBoardActivity.typeface_roboto);
 		
@@ -88,9 +89,8 @@ AsyncResponseForARA {
 		backArrow.setOnClickListener(listener);
 		button_Earned.setOnClickListener(listener);
 		button_Upcoming.setOnClickListener(listener);
-		
+		txtPayment.setOnClickListener(listener);
 		rewardListView.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -101,6 +101,14 @@ AsyncResponseForARA {
 				intent.putExtra("reward", reward);
 				intent.putExtra("header", rewardTypeHeader);
 			    startActivity(intent);
+			}
+		});
+		txtPayment.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(RewardsListActivity.this,PaymentListActivity.class);
+				startActivity(intent);
 			}
 		});
 	}

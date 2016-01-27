@@ -117,7 +117,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 	}
 	
 	private void setOnClickListener() {
-		
+	
 		paymentModeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
@@ -304,7 +304,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			}
 			
 			ArrayAdapter<PaymentMode> spinnerArrayAdapter = new ArrayAdapter<PaymentMode>(this,
-					android.R.layout.simple_spinner_item, paymentModeList);
+					R.layout.spinner_dropdown, paymentModeList);
 			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 			paymentModeSpinner.setAdapter(spinnerArrayAdapter);
 			paymentModeSpinner.setSelection(selectedIndex);
