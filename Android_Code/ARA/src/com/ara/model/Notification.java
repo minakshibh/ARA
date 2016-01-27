@@ -13,17 +13,19 @@ public class Notification {
 		this.id = id;
 	}
 
-	public Notification(String string, String string2, String string3) {
+	public Notification(String string, String string2, String date,String string3) {
 		 
 	        this.title = string;
 	        this.description = string2;
+	        this.date = date;
 	        this.read = string3;// TODO Auto-generated constructor stub
 	}
-	public Notification(int id,String string, String string2, String string3) {
+	public Notification(int id,String string, String string2,String date, String string3) {
 		
 		 this.id=id;
         this.title = string;
         this.description = string2;
+        this.date = date;
         this.read = string3;// TODO Auto-generated constructor stub
 }
 

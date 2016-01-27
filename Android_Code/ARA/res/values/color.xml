@@ -22,5 +22,7 @@
     <color name="light_gray">#E6E6E6</color>
     <color name="dark_gray">#4c4c4c</color>
     <color name="dark_blue">#191B31</color>
+     <color name="blue_header">#1256A8</color> 
+    
   
 </resources>
