@@ -56,7 +56,7 @@
         txtComments.font = [txtComments.font fontWithSize:20];
         btnTypeOfService.titleLabel.font = [btnTypeOfService.titleLabel.font fontWithSize:20];
         btnSelectTimeSlot.titleLabel.font = [btnSelectTimeSlot.titleLabel.font fontWithSize:20];
-        btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:20];
+        btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:24];
         btnSubmit.titleLabel.font = [btnSubmit.titleLabel.font fontWithSize:24];
         lblheading.font = [lblheading.font fontWithSize:24];
         lblCommentPlaceholder.font = [lblCommentPlaceholder.font fontWithSize:20];

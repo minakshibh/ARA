@@ -43,6 +43,9 @@
 
   //  countInitialVal = (int)[notificationDataArr count];
     
+    if (IS_IPAD) {
+        lblHeading.font = [lblHeading.font fontWithSize:24];
+        btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:24];
     
     if (IS_IPAD_PRO_1366) {
         btnBack.titleLabel.font = [btnBack.titleLabel.font fontWithSize:24];
@@ -50,7 +53,7 @@
         btnLogOut.titleLabel.font = [btnLogOut  .titleLabel.font fontWithSize:20];
          btnAutoAvesURL.titleLabel.font = [btnLogOut  .titleLabel.font fontWithSize:20];
     }
-    
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,6 +156,10 @@
         DateDay.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:18] : DateDay.font;
         DateDay.textColor = [UIColor lightGrayColor];
         [cell.contentView addSubview:DateDay];
+        if (lines==1) {
+            DateDay.frame = CGRectMake(DateDay.frame.origin.x, DateDay.frame.origin.y-2, DateDay.frame.size.width, DateDay.frame.size.height);
+
+        }
         
             if (lines < 4) {
             
@@ -165,7 +172,10 @@
         UILabel * partitionlabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x, DateDay.frame.origin.y+DateDay.frame.size.height-5, tableView.frame.size.width-2*notificationImage.frame.origin.x, 1)];
         partitionlabel.backgroundColor= [UIColor lightGrayColor];
         [cell.contentView addSubview:partitionlabel];
-//        
+        if (lines==1) {
+            partitionlabel.frame = CGRectMake(partitionlabel.frame.origin.x, partitionlabel.frame.origin.y-2, partitionlabel.frame.size.width, partitionlabel.frame.size.height);
+            
+        }
 //        if (countFinalVal==0) {
 //            UILabel * cover = [[UILabel alloc]  initWithFrame: CGRectMake(0,0,partitionlabel.frame.origin.x+partitionlabel.frame.size.width ,tableView.frame.size.height )];
 //            cover.backgroundColor = [UIColor whiteColor];

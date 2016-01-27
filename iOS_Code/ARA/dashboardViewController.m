@@ -711,9 +711,9 @@ if([recieved_status isEqualToString:@"passed"])
     NSString *notificationCountStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"NotificationsCount"]];
       //  int notificationCount = (int)notificationCountStr;
         
-        UILabel *lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width+2, imagenotificationcount.frame.size.height)];
+        UILabel *lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
         lblNotificationCount.text = notificationCountStr;
-         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:11] : [UIFont fontWithName:@"Roboto-Regular" size:11];
+         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:15] : [UIFont fontWithName:@"Roboto-Regular" size:11];
         lblNotificationCount.textAlignment = NSTextAlignmentCenter;
         lblNotificationCount.textColor = [UIColor whiteColor];
         [imagenotificationcount addSubview:lblNotificationCount];

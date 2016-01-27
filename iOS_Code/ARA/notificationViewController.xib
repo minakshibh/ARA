@@ -22,6 +22,8 @@
                 <outlet property="btnAutoAvesURL" destination="fch-eD-EGQ" id="Src-v7-2Ge"/>
                 <outlet property="btnBack" destination="fde-WN-Wn9" id="Zc0-92-3gQ"/>
                 <outlet property="btnLogOut" destination="Gl9-Zq-2sa" id="kyW-tE-kZ6"/>
+                <outlet property="lblBack" destination="fde-WN-Wn9" id="cl8-gh-BSL"/>
+                <outlet property="lblHeading" destination="oxy-4C-a4J" id="bfN-yM-nL9"/>
                 <outlet property="tableView" destination="CgX-z2-LlC" id="1vj-Yq-b9W"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

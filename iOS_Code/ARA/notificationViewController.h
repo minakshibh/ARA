@@ -14,6 +14,8 @@
 @interface notificationViewController : UIViewController
 {
     
+    IBOutlet UIButton *lblBack;
+    IBOutlet UILabel *lblHeading;
     IBOutlet UIButton *btnBack;
     IBOutlet UITableView *tableView;
     IBOutlet UIButton *btnAutoAvesURL;

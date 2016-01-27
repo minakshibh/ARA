@@ -548,7 +548,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DM3-az-p78">
-                    <rect key="frame" x="316" y="43" width="90" height="22"/>
+                    <rect key="frame" x="316" y="36" width="90" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -564,7 +564,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qaB-fz-5MV">
-                    <rect key="frame" x="156" y="259" width="102" height="29"/>
+                    <rect key="frame" x="156" y="254" width="102" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
@@ -625,19 +625,19 @@
                     <color key="backgroundColor" red="0.098039215686274508" green="0.10588235294117647" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="XJ8-uc-awC">
-                    <rect key="frame" x="8" y="44" width="37" height="25"/>
+                    <rect key="frame" x="8" y="25" width="55" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification_icon.png" id="mUZ-IN-agl">
-                            <rect key="frame" x="0.0" y="5" width="30" height="20"/>
+                            <rect key="frame" x="0.0" y="12" width="30" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification_count.png" id="lpC-Xz-m1C">
-                            <rect key="frame" x="18" y="1" width="12" height="12"/>
+                            <rect key="frame" x="19" y="6" width="15" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8it-1b-L5k">
-                            <rect key="frame" x="0.0" y="-18" width="62" height="51"/>
+                            <rect key="frame" x="0.0" y="-7" width="62" height="51"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <connections>
                                 <action selector="btnnewnotificationView:" destination="-1" eventType="touchUpInside" id="oqP-qy-y23"/>
@@ -708,7 +708,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="Email: Robert.Seeley@autoaves.com">
-                        <color key="titleColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="btnnewEmail:" destination="-1" eventType="touchUpInside" id="AZP-NS-wgm"/>
@@ -718,8 +718,8 @@
                     <rect key="frame" x="50" y="650" width="305" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="Phone: 303-750-5000">
-                        <color key="titleColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Phone: (303) 750-5000">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="btnnewPhoneNo:" destination="-1" eventType="touchUpInside" id="s9j-dg-Max"/>
@@ -746,18 +746,18 @@
                         <action selector="btnTotalReferrals:" destination="-1" eventType="touchUpInside" id="6r2-pr-YeL"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JvH-MT-8aO">
-                    <rect key="frame" x="296" y="30" width="110" height="48"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <connections>
-                        <action selector="btnSubmitReferral:" destination="-1" eventType="touchUpInside" id="uN9-qx-JFz"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wef-RY-SSY">
                     <rect key="frame" x="21" y="450" width="166" height="133"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="btnScheduleServices:" destination="-1" eventType="touchUpInside" id="qGq-77-IWF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JvH-MT-8aO">
+                    <rect key="frame" x="296" y="30" width="110" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="btnSubmitReferral:" destination="-1" eventType="touchUpInside" id="uN9-qx-JFz"/>
                     </connections>
                 </button>
             </subviews>
