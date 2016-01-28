@@ -192,7 +192,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="8"
                 android:background="@color/white"
-                android:hint="Phone Number (Optional)"
+                android:hint="Phone Number"
                 android:maxLength="14"
                  android:textColor="@color/blue_header"
                 android:paddingLeft="10dp"
@@ -285,7 +285,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:src="@drawable/user_icon" />
+                android:src="@drawable/setting_icon" />
 
             <TextView
                 android:layout_width="1dp"
@@ -339,7 +339,7 @@
                      android:layout_gravity="center_vertical"
                      android:layout_weight="1"
                      android:padding="5dp"
-                     android:src="@drawable/email_icon" />
+                     android:src="@drawable/calander_icon" />
 
             <TextView
                 android:layout_width="1dp"
@@ -382,7 +382,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:src="@drawable/user_icon" />
+                android:src="@drawable/time_icon" />
 
             <TextView
                 android:layout_width="1dp"

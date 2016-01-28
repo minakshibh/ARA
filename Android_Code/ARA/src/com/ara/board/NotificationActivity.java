@@ -64,7 +64,7 @@ public class NotificationActivity extends Activity implements
 		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 		backArrow = (ImageView) findViewById(R.id.backArrow);
 		
-		if(spref.getString("noti", "no").equalsIgnoreCase("yes"))
+		if(spref.getString("noti", "no").equalsIgnoreCase("no"))
 		{
 			NotificationApi();
 			Editor ed=spref.edit();
@@ -142,10 +142,6 @@ public class NotificationActivity extends Activity implements
 		listView.setAdapter(adapter);
 		
 	}
-
-
-
-	
 
 	
 
