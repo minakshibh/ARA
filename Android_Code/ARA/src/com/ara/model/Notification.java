@@ -2,9 +2,9 @@ package com.ara.model;
 
 public class Notification {
 
-	String title,date,description,read;
+	
 	int id;
-String NotificationTypeId,NotificationTitle,NotificationText,IsScheduled,ScheduledAt,CreatedDate,ModifiedDate;
+String NotificationTypeId,NotificationTitle,NotificationText,IsScheduled,ScheduledAt,CreatedDate,ModifiedDate,read;
 	public int getId() {
 		return id;
 	}
@@ -13,20 +13,20 @@ String NotificationTypeId,NotificationTitle,NotificationText,IsScheduled,Schedul
 		this.id = id;
 	}
 
-	public Notification(String string, String string2, String date,String string3) {
+	public Notification(String title, String des, String date,String string3) {
 		 
-	        this.title = string;
-	        this.description = string2;
-	        this.date = date;
+	        this.NotificationTitle = title;
+	        this.NotificationText = des;
+	        this.CreatedDate = date;
 	        this.read = string3;// TODO Auto-generated constructor stub
 	}
-	public Notification(int id,String string, String string2,String date, String string3) {
+	public Notification(int id,String title, String des,String date, String read) {
 		
 		 this.id=id;
-        this.title = string;
-        this.description = string2;
-        this.date = date;
-        this.read = string3;// TODO Auto-generated constructor stub
+        this.NotificationTitle = title;
+        this.NotificationText = des;
+        this.CreatedDate = date;
+        this.read = read;// TODO Auto-generated constructor stub
 }
 
 	public Notification() {
@@ -41,29 +41,7 @@ String NotificationTypeId,NotificationTitle,NotificationText,IsScheduled,Schedul
 		this.read = read;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 
 	public String getNotificationTypeId() {
 		return NotificationTypeId;

@@ -63,9 +63,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
-        values.put(KEY_TITLE, contact.getTitle()); //  title
-        values.put(KEY_DESCRIPTION, contact.getDescription()); //  des
-        values.put(KEY_DATE, contact.getDate());
+        values.put(KEY_TITLE, contact.getNotificationTitle()); //  title
+        values.put(KEY_DESCRIPTION, contact.getNotificationText()); //  des
+        values.put(KEY_DATE, contact.getCreatedDate());
         values.put(KEY_READ, contact.getRead());
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
@@ -102,9 +102,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
             	Notification contact = new Notification();
                 contact.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
-                contact.setTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
-                contact.setDescription(cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)));
-                contact.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                contact.setNotificationTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
+                contact.setNotificationText(cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)));
+                contact.setCreatedDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
                 contact.setRead(cursor.getString(cursor.getColumnIndex(KEY_READ)));
                 // Adding contact to list
                 contactList.add(contact);

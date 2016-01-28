@@ -197,10 +197,11 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				/*Intent intent = new Intent(DashBoardActivity.this, ReferralListActivity.class);
 				intent.putExtra("referralStatus", STATUS_INACTIVE);
 				startActivity(intent);*/
+				
 			}else if(v == LayShdulerService){
-				/*Intent intent = new Intent(DashBoardActivity.this, ReferralListActivity.class);
-				intent.putExtra("referralStatus", "all");
-				startActivity(intent);*/
+				Intent intent = new Intent(DashBoardActivity.this, ScheduleActivity.class);
+				intent.putExtra("user", user_Model);
+				startActivity(intent);
 			}
 			else if(v == txtAbout){
 				Intent intent = new Intent(DashBoardActivity.this, AboutActivity.class);

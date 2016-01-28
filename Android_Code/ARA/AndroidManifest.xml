@@ -105,7 +105,7 @@
             android:windowSoftInputMode="stateHidden"  
              android:theme="@android:style/Theme.Holo.Light"
             android:screenOrientation="portrait"
-             />  
+             />   
             
          <activity
             android:name="com.ara.login.ForgotPasswordActivity"
@@ -165,6 +165,11 @@
            />  
              <activity
             android:name="com.ara.board.DashBoardActivity"
+            android:windowSoftInputMode="stateHidden"
+             android:theme="@android:style/Theme.Holo.Light"
+             android:screenOrientation="portrait"
+           />    <activity
+            android:name="com.ara.board.ScheduleActivity"
             android:windowSoftInputMode="stateHidden"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"

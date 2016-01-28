@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ara.board.ScheduleActivity;
 import com.ara.model.Badge;
 import com.ara.model.MEA;
 import com.ara.model.Notification;
@@ -19,10 +20,12 @@ import com.ara.model.ReferralEarn;
 import com.ara.model.ReferralType;
 import com.ara.model.Reward;
 import com.ara.model.Role;
+import com.ara.model.ScheduleService;
 import com.ara.model.ScoreBoard;
 import com.ara.model.User;
 
 
+import android.app.Service;
 import android.content.Context;
 
 public class ARAParser {
@@ -666,5 +669,30 @@ public class ARAParser {
 		
 		
 	}
+	public ArrayList<ScheduleService> parseServiceResponse(String response) {
+		ArrayList<ScheduleService> array_list_service = new ArrayList<ScheduleService>();
+		ScheduleService service_Model = null;
+		service_Model = new ScheduleService();
+		service_Model.setId("-1");
+		service_Model.setName("Select Service");
+		array_list_service.add(service_Model);
 
+		try {
+			JSONArray jsonArray = new JSONArray(response);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			service_Model = new ScheduleService();
+			service_Model.setId(jsonObject.getString("ID").toString());
+			service_Model.setName(jsonObject.getString("Name").toString());
+				
+				array_list_service.add(service_Model);
+				System.err.println("add service");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return array_list_service;
+	}
 }

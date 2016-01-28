@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class NotificationActivity extends Activity implements
 	ArrayList<Notification> arrayList;
 	private int count = 0;
 	private ListAdapter adapter;
+	private SharedPreferences spref;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,68 +48,36 @@ public class NotificationActivity extends Activity implements
 		initUIComponents();
 
 		OnClickListener();
-		 NotificationApi();
+		
 		refreshView();
 //		prepareListData();
 
 	}
-
-	private void setAdapter() {
-		 adapter = new ListAdapter(NotificationActivity.this);
-		listView = (ListView) findViewById(R.id.listView);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View view,
-					int position, long arg3) {
-		
-				TextView Description = (TextView) view
-						.findViewById(R.id.Description);
-
-
-				DatabaseHandler db = new DatabaseHandler(
-						NotificationActivity.this);
-				
-				db.updateNotification(listDataHeader.get(position).getId());
-				db.close();
-				listDataHeader.get(position).setRead("read");
-				adapter.notifyDataSetChanged();
-
-				Description.setMaxLines(Integer.MAX_VALUE);
-			}
-		});
-		listView.setAdapter(adapter);
-		
-	}
-
-	private void refreshView() {
-		listDataHeader.clear();
-
-		Log.d("Reading: ", "Reading all contacts..");
-		DatabaseHandler db = new DatabaseHandler(NotificationActivity.this);
-		List<Notification> notification = db.getAllNotification();
-		for (Notification noti : notification) {
-
-			Notification notiModel = new Notification();
-			notiModel.setId(noti.getId());
-			notiModel.setTitle(noti.getNotificationTitle());
-			notiModel.setDescription(noti.getNotificationText());
-			notiModel.setDate(noti.getCreatedDate());
-			notiModel.setRead(noti.getRead());
-			listDataHeader.add(notiModel);
-		}
-		setAdapter();
-	}
-
+	
 	private void initUIComponents() {
 		// TODO Auto-generated method stub
-
+		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		txtBack = (TextView) findViewById(R.id.back);
 		txtBack.setTypeface(DashBoardActivity.typeface_roboto);
 		backArrow = (ImageView) findViewById(R.id.back_arrow);
 		txtHeader = (TextView) findViewById(R.id.txtHeader);
 		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 		backArrow = (ImageView) findViewById(R.id.backArrow);
+		
+		if(spref.getString("noti", "no").equalsIgnoreCase("yes"))
+		{
+			NotificationApi();
+			Editor ed=spref.edit();
+			ed.putString("noti", "yes");
+			ed.commit();
+		}
+
+	}
+	
+	public void OnClickListener() {
+
+		txtBack.setOnClickListener(listener);
+		backArrow.setOnClickListener(listener);
 
 	}
 
@@ -126,14 +96,60 @@ public class NotificationActivity extends Activity implements
 
 		}
 	};
+	private void refreshView() {
+		listDataHeader.clear();
 
-	public void OnClickListener() {
+		Log.d("Reading: ", "Reading all contacts..");
+		DatabaseHandler db = new DatabaseHandler(NotificationActivity.this);
+		List<Notification> listNotification = db.getAllNotification();
+		
+		for (Notification noti : listNotification) {
 
-		txtBack.setOnClickListener(listener);
-		backArrow.setOnClickListener(listener);
+			Log.e("database", noti.toString());
+			Notification notiModel = new Notification();
+			notiModel.setId(noti.getId());
+			notiModel.setNotificationTitle(noti.getNotificationTitle());
+			notiModel.setNotificationText(noti.getNotificationText());
+			notiModel.setCreatedDate(noti.getCreatedDate());
+			notiModel.setRead(noti.getRead());
+			listDataHeader.add(notiModel);
+		}
+		setAdapter();
+	}
+	private void setAdapter() {
+		adapter = new ListAdapter(NotificationActivity.this);
+		listView = (ListView) findViewById(R.id.listView);
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view,
+					int position, long arg3) {
+		
+				TextView Description = (TextView) view.findViewById(R.id.Description);
+
+
+				DatabaseHandler db = new DatabaseHandler(NotificationActivity.this);
+				
+				db.updateNotification(listDataHeader.get(position).getId());
+				db.close();
+				listDataHeader.get(position).setRead("read");
+				adapter.notifyDataSetChanged();
+
+				Description.setMaxLines(Integer.MAX_VALUE);
+			}
+		});
+		listView.setAdapter(adapter);
+		
 	}
 
+
+
+	
+
+	
+
+	
 	private void NotificationApi() {
 		/*api/notification/user (userId, currentPage, pageSize)
 		 * [HttpGet] api/notification/user (userId, currentPage, pageSize)
@@ -168,7 +184,7 @@ public class NotificationActivity extends Activity implements
 
 		ARAParser araParser=new ARAParser(this);
 		 arrayList=araParser.parseNotification(output);
-		 prepareData();
+		 saveData();
 	}
 
 
@@ -222,38 +238,45 @@ public class NotificationActivity extends Activity implements
 			imageReadBell = (ImageView) convertView
 					.findViewById(R.id.imageReadBell);
 			deleteButton=(TextView)convertView.findViewById(R.id.deleteAccount);
+		
 			Notification notification = listDataHeader.get(position);
-			
+		
 
-			Description.setText(notification.getDescription());
-			lblListHeader.setText(notification.getTitle() + "");
-			date.setText(notification.getDate());
+			Description.setText(notification.getNotificationText());
+			lblListHeader.setText(notification.getNotificationTitle() + "");
+			date.setText(notification.getCreatedDate());
 			Description.setMaxLines(3);
-			
+			Description.post(new Runnable() {
+			    @Override
+			    public void run() {
+			    	lineCnt = Description.getLineCount();
+			        // Use lineCount here
+			    }
+			});
+			if(lineCnt<3)
+			{
+				imageview.setVisibility(View.GONE);
+				}
 			System.err.println("Read=" + listDataHeader.get(position).getRead()
 					+ "=Read");
 			if (notification.getRead().equalsIgnoreCase("unread")) {
 
-				lblListHeader.setTypeface(null,
-						Typeface.BOLD);
+				lblListHeader.setTypeface(null,Typeface.BOLD);
 				date.setTypeface(null, Typeface.BOLD);
-				Description.setTypeface(null,
-						Typeface.BOLD);
-//				lblListHeader.setTextColor(Color.GREEN);
+				Description.setTypeface(null,Typeface.BOLD);
+
 				imageReadBell.setImageResource(R.drawable.bell_unread);
 			} else {
 				lblListHeader.setTypeface(null,
 						Typeface.NORMAL);
 				date.setTypeface(null, Typeface.NORMAL);
-				Description.setTypeface(null,
-						Typeface.NORMAL);
-//				lblListHeader.setTextColor(Color.GRAY);
+				Description.setTypeface(null,Typeface.NORMAL);
+
 				imageReadBell.setImageResource(R.drawable.bell_read);
 			}
 			deleteButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					
 					
 					
 					
@@ -295,10 +318,11 @@ public class NotificationActivity extends Activity implements
 				}
 			});
 		}
+		
 
 		@Override
 		public View generateView(int arg0, ViewGroup arg1) {
-			Log.e("df", "swipe");
+			//Log.e("df", "swipe");
 			return LayoutInflater.from(NotificationActivity.this).inflate(
 					R.layout.list_group, null);
 
@@ -306,7 +330,7 @@ public class NotificationActivity extends Activity implements
 
 		@Override
 		public int getSwipeLayoutResourceId(int position) {
-			System.err.println("swipe");
+			//System.err.println("swipe");
 
 			
 			return R.id.swipe;
@@ -317,51 +341,40 @@ public class NotificationActivity extends Activity implements
 	/*
 	 * Preparing the list data
 	 */
-	private void prepareData() {
+	private void saveData() {
 
 		DatabaseHandler db = new DatabaseHandler(this);
 		Notification noti = new Notification();
 
-		/*noti.setTitle("Notitifcation 1");
-		noti.setDescription("The Shawshank Redemption The Godfather The Godfather sdbgksbgk sg kg kdf gkdf g gk kdfgkjdf gk dfkgkdf gkdf kg dfk gkdf gk The Godfather: "
-				+ "Part II Pulp Fiction The Good, the Bad and the Ugly");
-		noti.setDate("2014-06-12");
-		noti.setRead("unread");*/
 		for(int i=0;i<arrayList.size();i++)
 		{
-		noti = new Notification();
-		noti.setNotificationTitle(arrayList.get(i).getNotificationTitle());
-		noti.setNotificationText(arrayList.get(i).getNotificationText());
-		noti.setCreatedDate(arrayList.get(i).getCreatedDate());
-		noti.setRead("unread");
-		db.addContact(noti);
+			noti = new Notification();
+			//noti.setNotificationTypeId(arrayList.get(i).getNotificationTypeId());
+			noti.setNotificationTitle(arrayList.get(i).getNotificationTitle());
+			noti.setNotificationText(arrayList.get(i).getNotificationText());
+			noti.setCreatedDate(arrayList.get(i).getCreatedDate());
+			noti.setRead("unread");
+			db.addContact(noti);
 		}
-		/*noti = new Notification();
-
-		noti.setTitle("Notitifcation 2");
-		noti.setDescription("The Shawshank Redemption Godfather: Part II Pulp Fiction The Good, the Bad and the Ugly");
-		noti.setDate("2016-06-13");
-		noti.setRead("unread");
-
-		db.addContact(noti);
-		// saveDataBase();
-*/		getdata();
+	getDatabase();
 
 	}
 
-	private void getdata() {
+	private void getDatabase() {
 		// Reading all data
 		DatabaseHandler db = new DatabaseHandler(this);
 		Log.d("Reading: ", "Reading all contacts..");
+		
 		List<Notification> listnoti = db.getAllNotification();
 		System.err.println("size=" + listnoti.size());
 		listDataHeader = new ArrayList<Notification>();
 		for (Notification cn : listnoti) {
 
 			Notification noti = new Notification();
-			noti.setTitle(cn.getTitle());
-			noti.setDescription(cn.getDescription());
-			noti.setDate(cn.getDate());
+			noti.setId(cn.getId());
+			noti.setNotificationTitle(cn.getNotificationTitle());
+			noti.setNotificationText(cn.getNotificationText());
+			noti.setCreatedDate(cn.getCreatedDate());
 			noti.setRead(cn.getRead());
 			listDataHeader.add(noti);
 		}
