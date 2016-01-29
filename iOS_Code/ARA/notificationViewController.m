@@ -142,7 +142,7 @@
         
         [cell.contentView addSubview:TitleLabel];
         
-        UILabel * Description = [[UILabel alloc]  initWithFrame: CGRectMake(TitleLabel.frame.origin.x, TitleLabel.frame.origin.y+TitleLabel.frame.size.height, 250+450*IS_IPAD+50*IS_IPHONE_6+85*IS_IPHONE_6P+250*IS_IPAD_PRO_1366, 18)];
+        UILabel * Description = [[UILabel alloc]  initWithFrame: CGRectMake(TitleLabel.frame.origin.x, TitleLabel.frame.origin.y+TitleLabel.frame.size.height+1*IS_IPAD, 250+450*IS_IPAD+50*IS_IPHONE_6+85*IS_IPHONE_6P+250*IS_IPAD_PRO_1366, 18)];
         Description.text= database.NotificationText;
         Description.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:15] : [UIFont fontWithName:fontNameStr size:13];
         Description.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:19] : Description.font;
@@ -223,7 +223,7 @@
         [cell.contentView addSubview:TitleLabel];
         
         
-        UILabel * Description = [[UILabel alloc]  initWithFrame: CGRectMake(TitleLabel.frame.origin.x, TitleLabel.frame.origin.y+TitleLabel.frame.size.height, 250+450*IS_IPAD+50*IS_IPHONE_6+85*IS_IPHONE_6P+250*IS_IPAD_PRO_1366, 65+20*IS_IPAD_PRO_1366)];
+        UILabel * Description = [[UILabel alloc]  initWithFrame: CGRectMake(TitleLabel.frame.origin.x, TitleLabel.frame.origin.y+TitleLabel.frame.size.height+1*IS_IPAD, 250+450*IS_IPAD+50*IS_IPHONE_6+85*IS_IPHONE_6P+250*IS_IPAD_PRO_1366, 65+20*IS_IPAD_PRO_1366)];
         Description.text= database.NotificationText;
         Description.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:15] : [UIFont fontWithName:fontNameStr size:13];
         Description.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:19] : Description.font;
@@ -609,6 +609,9 @@
                 database.ScheduledAt = ScheduledAt;
                 
                 NSString *serviceName = [NSString stringWithFormat:@"%@",[[data valueForKey:@"NotificationTitle"]objectAtIndex:i]];
+                NSArray *NotificationTypeArr =[[data valueForKey:@"NotificationType"]objectAtIndex:i];
+                NSString *notificationTypeStr = [NSString stringWithFormat:@"%@",[NotificationTypeArr valueForKey:@"Name"]];
+                serviceName = [NSString stringWithFormat:@"%@ - %@",notificationTypeStr,serviceName];
                 database.serviceName = serviceName;
                 
                 NSString *NotificationId = [NSString stringWithFormat:@"%@",[[data valueForKey:@"NotificationId"]objectAtIndex:i]];

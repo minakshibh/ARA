@@ -34,7 +34,9 @@
         imageViewimage.image =[UIImage imageNamed:@"direct_ref.png"];
     }else //if ([ReferralType isEqualToString:@"Direct"])
     {
-        imageViewimage.image = [UIImage imageNamed:@"chained_ref.png"];
+        
+        imageViewimage.image = [UIImage imageNamed:@"direct_ref.png"];
+   //     imageViewimage.image = [UIImage imageNamed:@"chained_ref.png"];
     }
   imageViewimage.contentMode = UIViewContentModeScaleAspectFit;
 

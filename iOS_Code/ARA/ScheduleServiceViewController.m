@@ -248,28 +248,43 @@
     NSLog(@"Picked the date %@", [dateFormatter stringFromDate:[sender date]]);
     pickerSelectedDate = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[sender date]]];
     
-    NSString *today1 =[dateFormatter stringFromDate:[NSDate date]];
-    NSDate *today = (NSDate*)today1;
+//    NSString *today1 =[dateFormatter stringFromDate:[NSDate date]];
+//    NSDate *today = (NSDate*)today1;
+//    
+//    //NSDate *today = [NSDate date]; // it will give you current date
+//    NSDate *dateChoosed = (NSDate*)pickerSelectedDate; // your date
+//    
+//    NSComparisonResult result;
+//    //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
+//    
+//    result = [today compare:dateChoosed]; // comparing two dates
+//    
+    NSDateFormatter* dateFormatter1 = [[NSDateFormatter alloc] init];
+    dateFormatter1.dateFormat = @"yyyy-MM-dd";
+    NSDate *date1 = (NSDate*)[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[sender date]]];
+    NSString *today11 =[dateFormatter stringFromDate:[NSDate date]];
+    NSDate *date2 = (NSDate*)today11;
     
-    //NSDate *today = [NSDate date]; // it will give you current date
-    NSDate *dateChoosed = (NSDate*)pickerSelectedDate; // your date
-    
-    NSComparisonResult result;
-    //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
-    
-    result = [today compare:dateChoosed]; // comparing two dates
-    
-    if(result==NSOrderedAscending){
-        NSLog(@"today is less");
-        pickerDateStatus = true;
-        
-    }else if(result==NSOrderedDescending){
-        NSLog(@"newDate is less");
-        pickerDateStatus = false;
-    }else{
-        NSLog(@"Both dates are same");
+    pickerDateStatus = false;
+
+    if ([date1 compare: date2]== NSOrderedSame || NSOrderedDescending)
+    {
+        NSLog(@"enteredDate is later or the same as today");
         pickerDateStatus = true;
     }
+
+    
+//if(result==NSOrderedAscending){
+//        NSLog(@"today is less");
+//    pickerDateStatus = true;
+//        
+//    }else if(result==NSOrderedDescending){
+//        NSLog(@"newDate is less");
+//        pickerDateStatus = false;
+//    }else{
+//        NSLog(@"Both dates are same");
+//        pickerDateStatus = true;
+//    }
     
 }
 - (IBAction)btnDonePicker:(id)sender {
@@ -323,6 +338,10 @@
     [txtPrefferedDate resignFirstResponder];
     [txtComments resignFirstResponder];
     [txtPhoneNo resignFirstResponder];
+    tableViewSelectTimeSlot.hidden = YES;
+    tableViewTypeOfService.hidden = YES;
+    statusService = false;
+    statusTime= false;
     
     NSString* firstNameStr = [txtFirstname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* lastNameStr = [txtLastName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -912,7 +931,7 @@
                                               preferredStyle:UIAlertControllerStyleAlert];
                 
                 UIAlertAction* yesButton = [UIAlertAction
-                                            actionWithTitle:@"Okay"
+                                            actionWithTitle:@"Ok"
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action)
                                             {

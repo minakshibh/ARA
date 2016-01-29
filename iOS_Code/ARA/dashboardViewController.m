@@ -46,7 +46,7 @@
     
     [self.view addSubview:viewNew];
     [self.view bringSubviewToFront:viewNew];
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
+//    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
 
     //--hide navigation bar
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
@@ -1032,6 +1032,7 @@ if([recieved_status isEqualToString:@"passed"])
     NSString *dashboardTimeStamp = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
     
     _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]];
+    
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     NSLog(@"data post >>> %@",_postData);

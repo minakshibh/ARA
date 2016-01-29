@@ -140,22 +140,23 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [kappDelegate HideIndicator];
-    NSString *noti = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"self"]];
-    if([noti isEqualToString:@"self"])
-    {
-    
-    }else{
+//    NSString *noti = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"self"]];
+//    if([noti isEqualToString:@"self"])
+//    {
+//    
+//    }else{
         NSArray *array = [userInfo valueForKey:@"aps"];
         NSString *noti_msg = [array valueForKey:@"alert"];
         
         [HelperAlert alertWithOneBtn:AlertTitle description:noti_msg okBtn:OkButtonTitle];
         
-        dashboardViewController *Dvc = [[dashboardViewController alloc]init];
-        referralListViewController *RLvc = [[referralListViewController alloc]init];
-        [Dvc getData];
-        NSString *trigger =[[NSUserDefaults standardUserDefaults]valueForKey:@"webservice_trigger"];
-        [RLvc getList:trigger];
-    }
+//        dashboardViewController *Dvc = [[dashboardViewController alloc]init];
+//        [Dvc getData];
+//        referralListViewController *RLvc = [[referralListViewController alloc]init];
+        
+//        NSString *trigger =[[NSUserDefaults standardUserDefaults]valueForKey:@"webservice_trigger"];
+//        [RLvc getList:trigger];
+//    }
 
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

@@ -88,11 +88,11 @@
     if([_obj.ReferralType isEqualToString:@"Direct"])
     {
 //        imagechainunchained.image = [UIImage imageNamed:@"direct_ref.png"];
-        lblsoldOpen.text = @"DIRECT";
+//        lblsoldOpen.text = @"DIRECT";
     }else //if ([ReferralType isEqualToString:@"Direct"])
     {
 //        imagechainunchained.image = [UIImage imageNamed:@"chained_ref.png"];
-        lblsoldOpen.text = @"CHAINED";
+//        lblsoldOpen.text = @"CHAINED";
     }
     
     lblName.text = [NSString stringWithFormat:@"%@ %@",_obj.first_name,_obj.last_name];

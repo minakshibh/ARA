@@ -1835,7 +1835,7 @@
         NSLog(@"connection is NULL");
     }
     NSString *objStr = @"self";
-    [[NSUserDefaults standardUserDefaults]setObject:objStr forKey:@"self"];
+//    [[NSUserDefaults standardUserDefaults]setObject:objStr forKey:@"self"];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

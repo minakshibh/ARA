@@ -56,7 +56,7 @@
     //---initialize checkbox value first tiem with false
     checkbox_Value = false;
     
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
+//    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
 
     NSLog(@"---%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status"]]);
     
