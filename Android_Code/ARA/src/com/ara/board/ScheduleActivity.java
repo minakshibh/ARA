@@ -322,7 +322,7 @@ public class ScheduleActivity   extends Activity implements
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
 					ScheduleActivity.this, "get", "/scheduledService/types",
-					nameValuePairs, false, "Please wait...", true);
+					nameValuePairs, true, "Please wait...", true);
 			mWebPageTask.delegate = (AsyncResponseForARA) ScheduleActivity.this;
 			mWebPageTask.execute();
 

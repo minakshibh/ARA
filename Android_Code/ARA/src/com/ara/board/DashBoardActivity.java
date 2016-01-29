@@ -324,85 +324,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				if(referralType.getType().equalsIgnoreCase(STATUS_OPEN)){
 					
 					countOpen=referralType.getCount();
-					if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}if(Description.getLineCount()>3)
-					{
-						imageview.setVisibility(View.VISIBLE);
-						}
-					else{
-						imageview.setVisibility(View.GONE);
-					}					reward=referralType.getAmount();
+				
+				reward=referralType.getAmount();
 					//activeReferralAmount.setText("($"+referralType.getAmount()+")");
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_SOLD)){
 					soldCount=referralType.getCount();
