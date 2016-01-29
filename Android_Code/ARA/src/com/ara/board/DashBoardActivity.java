@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -59,6 +60,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	private String imageurl="";
 	private ImageView imageView_profilepic;
 	public static Typeface typeface_roboto,typeface_timeburner;
+	public static String notiCount="0";
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -148,8 +150,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		user_Model = (User) getIntent().getParcelableExtra("user");
 		if(user_Model!=null)
 		{
-			textViewEmail.setText("Email :"+user_Model.getEmail());
-			textViewPhone.setText("Phone :"+user_Model.getPhoneNumber());
+			//textViewEmail.setText("Email :"+user_Model.getEmail());
+			//textViewPhone.setText("Phone :"+user_Model.getPhoneNumber());
 			//textViewPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 			textViewName.setText(user_Model.getFirstName()+" "+ user_Model.getLastName());
 			}
@@ -271,11 +273,12 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 			String userid=spref.getString("userid", "");
 		// [HttpPost]dashboard  (userId, Timestamp)
-			String time="";
+				String time=spref.getString("Timestamp", "");
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 				nameValuePairs.add(new BasicNameValuePair("userId", userid));
 				nameValuePairs.add(new BasicNameValuePair("Timestamp", time));		
 				
+				Log.e("dashboard", nameValuePairs.toString());
 				AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(DashBoardActivity.this,"post","dashboard",nameValuePairs, false, "Please wait...",true);
 				mWebPageTask.delegate = (AsyncResponseForARA) DashBoardActivity.this;
 				mWebPageTask.execute();	
@@ -294,12 +297,30 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		ARAParser parser = new ARAParser(DashBoardActivity.this);
 		if(methodName.contains("dashboard"))
 		{
-			String activeCount="",soldCount="";
+			int activeCount=0;
+			String soldCount="";
+			
+			try{
+				activeCount=Integer.parseInt(notiCount);
+					}
+				catch (Exception e) {
+					// TODO: handle exception
+				}
+			if(activeCount>0)
+			{
+				TxtNotiCount.setText(activeCount);
+				TxtNotiCount.setVisibility(View.VISIBLE);
+				}
+			else
+			{
+				TxtNotiCount.setVisibility(View.GONE);
+				}//+" Active/"+soldCount+" Sold");
 			referralTypeArray = parser.parseDashboardContent(output);
 			for(int i = 0; i<referralTypeArray.size(); i++){
 				ReferralType referralType = referralTypeArray.get(i);
+				
 				if(referralType.getType().equalsIgnoreCase(STATUS_OPEN)){
-					activeCount=referralType.getCount();
+					
 					reward=referralType.getAmount();
 					//activeReferralAmount.setText("($"+referralType.getAmount()+")");
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_SOLD)){
@@ -311,10 +332,10 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 					//totalReferralCount.setText(referralType.getCount());
 				}
 			}
-			activeReferralAmount.setText(activeCount);//+" Active/"+soldCount+" Sold");
+			
 			SoldAmount.setText(" "+soldCount);
 			activeRewardAmount.setText("$ "+reward);
-			if(referralTypeArray.get(0).getNotificationCount().equals("0"))
+			/*if(referralTypeArray.get(0).getNotificationCount().equals("0"))
 			{
 				TxtNotiCount.setVisibility(View.GONE);
 			}
@@ -322,7 +343,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				{
 					TxtNotiCount.setVisibility(View.VISIBLE);
 					TxtNotiCount.setText(referralTypeArray.get(0).getNotificationCount());
-					}
+					}*/
 		}
 		else if(methodName.contains("logout"))
 			{

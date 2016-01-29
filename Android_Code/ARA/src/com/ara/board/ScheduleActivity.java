@@ -47,7 +47,7 @@ public class ScheduleActivity   extends Activity implements
 	private TextView  textViewPayPal, textView_back;
 	private SharedPreferences spref;
 	private ImageView imageView_back;
-	private String ScheduledServiceId="0",TimeSlotId="0";
+	private String ScheduledServiceId="0",TimeSlotId="3";
 
 	public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -173,11 +173,11 @@ public class ScheduleActivity   extends Activity implements
 			else if (v == button_submit) {
 				if(edittext_firstname.getText().toString().trim().equals(""))
 				{
-					Toast.makeText(ScheduleActivity.this, "Please enter first name", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ScheduleActivity.this, "Please enter First Name", Toast.LENGTH_SHORT).show();
 					}
 				else if(edittext_lastname.getText().toString().trim().equals(""))
 				{
-					Toast.makeText(ScheduleActivity.this, "Please enter last name", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ScheduleActivity.this, "Please enter Last Name", Toast.LENGTH_SHORT).show();
 					}
 				else{
 						if(!edittext_email.getText().toString().trim().equals(""))
@@ -187,7 +187,7 @@ public class ScheduleActivity   extends Activity implements
 							 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(gettingEmail)
 										.matches() && !TextUtils.isEmpty(gettingEmail))
 							 {
-								Toast.makeText(ScheduleActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+								Toast.makeText(ScheduleActivity.this, "Please enter a valid Email Address", Toast.LENGTH_SHORT).show();
 									
 							 	}
 							 else{
@@ -201,7 +201,7 @@ public class ScheduleActivity   extends Activity implements
 							}
 						else{
 												
-							Toast.makeText(ScheduleActivity.this, "Please enter phone number or email address", Toast.LENGTH_SHORT).show();
+							Toast.makeText(ScheduleActivity.this, "Please enter Phone Number or Email Address", Toast.LENGTH_SHORT).show();
 						}
 				}
 				
@@ -296,7 +296,7 @@ public class ScheduleActivity   extends Activity implements
 		{
 			AlertDialog.Builder alert = new AlertDialog.Builder(ScheduleActivity.this);
 			alert.setTitle("ARA");
-			alert.setMessage("Service Data Updated Successfully");
+			alert.setMessage("Your Service Request has been sent. You will be contacted to confirm an appointment. Thank you!");
 			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 				
 				@Override
@@ -317,7 +317,7 @@ public class ScheduleActivity   extends Activity implements
 	    selectTimeSlotIdArr = [[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",nil];*/
 		arrayListTimeSlot= new ArrayList<TimeSlot>();
 		
-		TimeSlot timeSlot = new TimeSlot("Select Time Slot","-1");
+		TimeSlot timeSlot = new TimeSlot("Select Time Slot","3");
 		arrayListTimeSlot.add(timeSlot);
 		
 		timeSlot = new TimeSlot("Morning","1");

@@ -46,8 +46,8 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 	private Button btn_signUp;
 	private EditText firstName, lastName, userId, phNumber, emailId, password, role;
 	private ArrayList<MEA> arrayList_Mea = new ArrayList<MEA>();
-	private ArrayList<Role> arrayList_role = new ArrayList<Role>();
-	private Spinner mea_spinner, role_spinner;
+//	private ArrayList<Role> arrayList_role = new ArrayList<Role>();
+	private Spinner mea_spinner;
 	private String parameter = "";
 	private int checkuserid = 0;// checkemail = 0;
 	private ImageView img_userId, img_emailId, purchase_chkBox;
@@ -114,7 +114,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		btn_signUp = (Button) findViewById(R.id.btn_signUp);
 		btn_signUp.setTypeface(BaseActivity.typeface_roboto);
 		mea_spinner = (Spinner) findViewById(R.id.spinnermea);
-		role_spinner = (Spinner) findViewById(R.id.role_spinner);
+		//role_spinner = (Spinner) findViewById(R.id.role_spinner);
 		img_userId = (ImageView) findViewById(R.id.img_userId);
 		img_emailId = (ImageView) findViewById(R.id.img_emailId);
 		purchase_chkBox = (ImageView) findViewById(R.id.purchase_chkBox);
@@ -176,11 +176,11 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			mWebPageTask.delegate = (AsyncResponseForARA) this;
 			mWebPageTask.execute();
 
-			AsyncTaskForARA mWebPageTask1 = new AsyncTaskForARA(
+			/*AsyncTaskForARA mWebPageTask1 = new AsyncTaskForARA(
 					RegisterActivity.this, "get", "roles",
 					new ArrayList<NameValuePair>(), true, "Please wait...",false);
 			mWebPageTask1.delegate = (AsyncResponseForARA) this;
-			mWebPageTask1.execute();
+			mWebPageTask1.execute();*/
 
 		} else {
 			Util.alertMessage(RegisterActivity.this,
@@ -239,7 +239,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		System.err.println(phonenumber);
 		
 	
-		role_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		/*role_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
 							int position, long arg3) {
 						// TODO Auto-generated method stub
@@ -254,12 +254,12 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						{
 							
 							str_userId="0";
-							/*if(flag_setspinner)
+							if(flag_setspinner)
 							{
 								//checkemail = 2;
 								emailId.setError("Email address already exist");
 								img_emailId.setVisibility(View.INVISIBLE);
-							}*/
+							}
 							
 							try{
 							mea_spinner.setSelection(0);
@@ -272,7 +272,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						else
 						{
 							mea_spinner.setSelection(0);
-							/*String gettingEmail=emailId.getText().toString();
+							String gettingEmail=emailId.getText().toString();
 						
 							 if (android.util.Patterns.EMAIL_ADDRESS.matcher(
 										gettingEmail).matches()
@@ -282,10 +282,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 									img_emailId.setVisibility(View.INVISIBLE);
 									progressBar_email.setVisibility(View.VISIBLE);
 									validationCheck("Email", emailId.getText().toString());
-					    	}*/
+					    	}
 							
 						}
-						/*String mea_name= role_Model.getName();
+						String mea_name= role_Model.getName();
 						System.err.println("spinnerrr  mea");
 						if(mea_name.equals("MEA"))
 						{
@@ -300,7 +300,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 							layout_mea.setVisibility(View.VISIBLE);
 							usertype=true;
 							
-						}*/
+						}
 						
 					}
 
@@ -308,7 +308,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						// TODO Auto-generated method stub
 
 					}
-				});
+				});*/
 		mea_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
@@ -437,10 +437,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 					} else if (password.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter password");
-					} else if (role_id.equals("-1")) {
+					} /*else if (role_id.equals("-1")) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please select role");
-					} 					
+					} 					*/
 					/*else if (emailCheck == 0) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter valid Email address");
@@ -459,6 +459,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						}
 					
 					else {
+						signUpAPI();
+						
+					}
+				
 						
 						//signUpAPI();
 					/*if(role_spinner.getSelectedItemPosition()==2)
@@ -476,9 +480,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 					}*/
 					
 						//Util.ToastMessage(RegisterActivity.this, "other role register with userid="+str_userId);
-						signUpAPI();
 						
-						}
 						
 						
 						/*if(usertype)
@@ -515,12 +517,11 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		phonenumber=phonenumber.replace(" ", "");
 		System.err.println(phonenumber);
 		
+		signUP2();
+	}
 		
-		
-		if(role_spinner.getSelectedItemPosition()==2)
-		{
-			// checking for existing mea	
-			for(int i=0;i<arrayList_Mea.size();i++)
+		// checking for existing mea	
+	/*		for(int i=0;i<arrayList_Mea.size();i++)
 			{
 				
 					if(getemail.equals(arrayList_Mea.get(i).getEmail()))//checking mea list email exit or not
@@ -530,7 +531,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						
 					}
 					
-				/*String name=arrayList_Mea.get(i).getName();
+				String name=arrayList_Mea.get(i).getName();
 				int gettingStatePosition=0;
 				str_userId=arrayList_Mea.get(i).getId();
 				
@@ -558,7 +559,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 
 				} catch (Exception e) {
 					e.printStackTrace();
-				}*/
+				}
 										
 			
 			else
@@ -573,10 +574,10 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 			}
 		}
 		
-		else{
-			signUP2();
-	}
-	}
+		else{*/
+			//signUP2();
+	//}
+//	}
 
 	private void validationCheck(String id, String value) {
 		if (Util.isNetworkAvailable(RegisterActivity.this)) {
@@ -605,14 +606,13 @@ private void signUP2()
 				.getText().toString()));
 		nameValuePairs.add(new BasicNameValuePair("Password", password
 				.getText().toString().trim()));
-		nameValuePairs.add(new BasicNameValuePair("RoleID", role_id));
+		nameValuePairs.add(new BasicNameValuePair("RoleID", "2"));
 		nameValuePairs.add(new BasicNameValuePair("FirstName", firstName
 				.getText().toString().trim()));
 		nameValuePairs.add(new BasicNameValuePair("LastName", lastName
 				.getText().toString().trim()));
 		nameValuePairs.add(new BasicNameValuePair("PhoneNumber",phonenumber));
-		nameValuePairs.add(new BasicNameValuePair("Email", emailId
-				.getText().toString()));
+		nameValuePairs.add(new BasicNameValuePair("Email",getemail));
 		nameValuePairs
 				.add(new BasicNameValuePair("IsFacebookUser", IsFacebookUser));
 
@@ -664,7 +664,7 @@ private void signUP2()
 
 		}
 
-		else if (methodName.equalsIgnoreCase("roles")) {
+		/*else if (methodName.equalsIgnoreCase("roles")) {
 			Log.e(methodName, output);
 			arrayList_role = parser.parseRoleResponse(output);
 
@@ -673,7 +673,7 @@ private void signUP2()
 			spinnerArrayAdapterRole
 					.setDropDownViewResource(R.layout.spinner_dropdown);
 			role_spinner.setAdapter(spinnerArrayAdapterRole);
-		}
+		}*/
 
 		// email validation username
 		else if (methodName.equals("users/confirm")) {
@@ -704,7 +704,7 @@ private void signUP2()
 					emailId.setError(null);
 				//	checkemail = 1;
 					mea_spinner.setSelection(0);
-					role_spinner.setSelection(0);
+					
 					flag_setspinner=false;
 					str_userId="0";
 				}
@@ -722,7 +722,7 @@ private void signUP2()
 						int gettingStatePosition=0;
 						str_userId=arrayList_Mea.get(i).getId();
 						
-						role_spinner.setSelection(2); //set role spinner position
+					
 						
 						try {
 							if (arrayList_Mea.size() > 0) { ///get mea spinner position

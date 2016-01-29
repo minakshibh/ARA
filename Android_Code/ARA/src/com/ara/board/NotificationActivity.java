@@ -225,8 +225,7 @@ public class NotificationActivity extends Activity implements
 		@Override
 		public void fillValues(final int position, View convertView) {
 
-			lblListHeader = (TextView) convertView
-					.findViewById(R.id.lblListHeader);
+			lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
 
 			Description = (TextView) convertView.findViewById(R.id.Description);
 			date = (TextView) convertView.findViewById(R.id.Date);
@@ -237,9 +236,14 @@ public class NotificationActivity extends Activity implements
 		
 			Notification notification = listDataHeader.get(position);
 		
-
+			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
+			
+			Editor ed=spref.edit();
+			ed.putString("Timestamp", listDataHeader.get(0).getCreatedDate());
+			ed.commit();
+			
 			Description.setText(notification.getNotificationText());
-			lblListHeader.setText(notification.getNotificationTitle() + "");
+			lblListHeader.setText("Service - "+notification.getNotificationTitle() + "");
 			date.setText(notification.getCreatedDate());
 			Description.setMaxLines(3);
 			Description.post(new Runnable() {

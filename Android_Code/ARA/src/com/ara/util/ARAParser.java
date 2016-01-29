@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ara.board.DashBoardActivity;
 import com.ara.board.ScheduleActivity;
 import com.ara.model.Badge;
 import com.ara.model.MEA;
@@ -207,10 +208,10 @@ public class ARAParser {
 						.toString());
 				referralType.setType(jsonObject.getString("ReferralType")
 						.toString());
-				referralType.setNotificationCount(DashboardResult.getString("NotificationsCount"));
+				
 				referralTypeArray.add(referralType);
 			}
-			
+			DashBoardActivity.notiCount=DashboardResult.getString("NotificationsCount");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

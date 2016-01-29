@@ -26,9 +26,9 @@
             android:id="@+id/editAccount"
             />
         <TextView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Delete"
-            android:background="@color/app_yellow"
+            android:background="@color/bright_orange"
             android:textColor="@color/white"
           	android:layout_marginRight="5dp"
             android:padding="10dp"
@@ -62,6 +62,7 @@
         android:id="@+id/lblListHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:text="dbfsdafg"
         android:textColor="@color/black"
@@ -71,7 +72,8 @@
         android:id="@+id/imageReadBell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+      android:baseline="@+id/lblListHeader"
         android:layout_centerVertical="true"
         android:src="@drawable/bell_unread" />
 

@@ -487,7 +487,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			}
 			else
 			{
-				imageview.setImageResource(R.drawable.indirect);
+				imageview.setImageResource(R.drawable.direct);
 			}
 			
 			if (referral.getReferralStatus().equalsIgnoreCase(DashBoardActivity.STATUS_SOLD)) {

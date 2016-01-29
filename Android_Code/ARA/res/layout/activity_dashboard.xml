@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight=".9"
-        android:background="@color/black"
+        android:background="@color/blue_header"
         android:orientation="horizontal" >
 
      <ImageView
@@ -81,7 +81,7 @@
             android:layout_marginRight="5dp"
 			android:gravity="center"
             android:text="Submit Referral"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:background="@drawable/yellow_rounded_btn"
             android:textColor="@color/black" />
     </LinearLayout>
@@ -269,7 +269,7 @@
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
 	           android:gravity="center_vertical"
-	           android:textColor="@color/gray"
+	           android:textColor="@color/black"
 	            android:layout_gravity="center"
 	           android:text=""
 	           android:textSize="13sp" />
@@ -382,19 +382,19 @@
 	           android:id="@+id/textViewEmail"
 	           android:layout_width="match_parent"
 	           android:layout_height="wrap_content"
-	           android:text="Email:"
+	           android:text="Email: Robert.Seeley@autoaves.com"
 	           android:layout_marginTop="10dp"
 	           android:gravity="center_horizontal"
-	           android:textColor="@color/gray"
+	           android:textColor="@color/black"
 	           android:textSize="13sp" />
         <TextView
 	           android:id="@+id/textViewPhone"
 	           android:layout_width="match_parent"
 	           android:layout_height="wrap_content"
-	           android:text="Phone:"
+	           android:text="Phone:(303) 750-5000"
 	           android:gravity="center_horizontal"
 	           android:layout_marginTop="2dp"
-	           android:textColor="@color/gray"
+	           android:textColor="@color/black"
 	           android:textSize="13sp" />
         </LinearLayout>
          <LinearLayout

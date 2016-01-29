@@ -61,7 +61,7 @@
         android:background="@color/app_yellow"
         android:gravity="start|center_vertical"
         android:paddingLeft="10dp"
-        android:text="PAYPAL ACCOUNT"
+        android:text="SCHEDULE SERVICE"
         android:textColor="@color/app_blue" />
 
     <LinearLayout
@@ -449,7 +449,8 @@
                 android:gravity="top"
                 android:hint="Additional Comments"
                 android:lines="3"
-                 android:textColor="@color/blue_header"
+                android:maxLength="250"
+                android:textColor="@color/blue_header"
                 android:textSize="@dimen/default_text_size"
                 android:paddingLeft="10dp"
                 android:singleLine="true" />
