@@ -30,10 +30,9 @@
             android:text="Delete"
             android:background="@color/bright_orange"
             android:textColor="@color/white"
-          	android:layout_marginRight="5dp"
-            android:padding="10dp"
-            android:gravity="center|bottom"
-            android:layout_marginLeft="10dp"
+        	android:padding="10dp"
+            android:gravity="center"
+          
             android:id="@+id/deleteAccount"
             />
 
@@ -73,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-      android:baseline="@+id/lblListHeader"
+     	android:layout_marginTop="5dp"
         android:layout_centerVertical="true"
         android:src="@drawable/bell_unread" />
 
@@ -82,7 +81,7 @@
         android:id="@+id/Description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-         android:textColor="@color/black"
+        android:textColor="@color/black"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:text="dbfsdafg"
         android:textSize="13dp" />

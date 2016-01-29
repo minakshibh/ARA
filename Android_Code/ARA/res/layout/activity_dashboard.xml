@@ -56,6 +56,7 @@
                android:layout_marginLeft="12dp"
                android:textColor="@color/white"
            		android:paddingLeft="3dp"
+           		android:visibility="gone"
                android:background="@drawable/notification_count"
               />
 
@@ -215,7 +216,7 @@
 	           android:layout_height="wrap_content"
 	           android:gravity="center_vertical"
 	           android:textColor="@color/gray"
-	           android:text=" Active /"
+	           android:text=" Open /"
 	           android:textSize="13sp" />
 	         <TextView
 	           android:id="@+id/SoldAmount"

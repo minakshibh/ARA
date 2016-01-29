@@ -61,6 +61,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	private ImageView imageView_profilepic;
 	public static Typeface typeface_roboto,typeface_timeburner;
 	public static String notiCount="0";
+
+	private String countOpen="0";
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -308,7 +310,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				}
 			if(activeCount>0)
 			{
-				TxtNotiCount.setText(activeCount);
+				TxtNotiCount.setText(""+activeCount);
 				TxtNotiCount.setVisibility(View.VISIBLE);
 				}
 			else
@@ -321,7 +323,86 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				
 				if(referralType.getType().equalsIgnoreCase(STATUS_OPEN)){
 					
-					reward=referralType.getAmount();
+					countOpen=referralType.getCount();
+					if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}if(Description.getLineCount()>3)
+					{
+						imageview.setVisibility(View.VISIBLE);
+						}
+					else{
+						imageview.setVisibility(View.GONE);
+					}					reward=referralType.getAmount();
 					//activeReferralAmount.setText("($"+referralType.getAmount()+")");
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_SOLD)){
 					soldCount=referralType.getCount();
@@ -335,6 +416,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			
 			SoldAmount.setText(" "+soldCount);
 			activeRewardAmount.setText("$ "+reward);
+			activeReferralAmount.setText(countOpen);
 			/*if(referralTypeArray.get(0).getNotificationCount().equals("0"))
 			{
 				TxtNotiCount.setVisibility(View.GONE);

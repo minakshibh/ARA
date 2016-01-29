@@ -159,7 +159,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingLeft="@dimen/text_margin_left"
                 android:singleLine="true"
-              
+              	android:textColorHint="@color/blue_header"
                 android:textColor="@color/blue_header"
                 android:textSize="@dimen/default_text_size" >
 

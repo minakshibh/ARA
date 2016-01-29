@@ -127,7 +127,7 @@ public class NotificationActivity extends Activity implements
 					int position, long arg3) {
 		
 				TextView Description = (TextView) view.findViewById(R.id.Description);
-
+				//Description.setMaxLines(Integer.MAX_VALUE);
 
 				DatabaseHandler db = new DatabaseHandler(NotificationActivity.this);
 				
@@ -136,7 +136,7 @@ public class NotificationActivity extends Activity implements
 				listDataHeader.get(position).setRead("read");
 				adapter.notifyDataSetChanged();
 
-				Description.setMaxLines(Integer.MAX_VALUE);
+				
 			}
 		});
 		listView.setAdapter(adapter);
@@ -164,7 +164,7 @@ public class NotificationActivity extends Activity implements
 			nameValuePairs.add(new BasicNameValuePair("pageSize", "10"));*/
 
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
-					NotificationActivity.this, "get", "/notification/user?userId=179&currentPage=1&pageSize=10",
+					NotificationActivity.this, "get", "/notification/user?userId="+userid+"&currentPage=1&pageSize=10",
 					nameValuePairs, false, "Please wait...", true);
 			mWebPageTask.delegate = (AsyncResponseForARA) NotificationActivity.this;
 			mWebPageTask.execute();
@@ -228,6 +228,7 @@ public class NotificationActivity extends Activity implements
 			lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
 
 			Description = (TextView) convertView.findViewById(R.id.Description);
+			
 			date = (TextView) convertView.findViewById(R.id.Date);
 			imageview = (ImageView) convertView.findViewById(R.id.imageView);
 			imageReadBell = (ImageView) convertView
@@ -253,10 +254,7 @@ public class NotificationActivity extends Activity implements
 			        // Use lineCount here
 			    }
 			});
-			if(lineCnt<3)
-			{
-				imageview.setVisibility(View.GONE);
-				}
+			
 			System.err.println("Read=" + listDataHeader.get(position).getRead()
 					+ "=Read");
 			if (notification.getRead().equalsIgnoreCase("unread")) {
@@ -274,6 +272,36 @@ public class NotificationActivity extends Activity implements
 
 				imageReadBell.setImageResource(R.drawable.bell_read);
 			}
+			/*if(Description.getLineCount()>3)
+			{
+				imageview.setVisibility(View.VISIBLE);
+				}
+			else{
+				imageview.setVisibility(View.GONE);
+			}*/
+			
+			Description.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					
+					count++;
+					if(count==1)
+					{
+						imageview.setImageResource(R.drawable.close_icon);
+						Description.setMaxLines(Integer.MAX_VALUE);
+					}
+					else if(count==2)
+					{
+						imageview.setImageResource(R.drawable.expand_icon);
+						Description.setMaxLines(3);
+						count=0;
+					}
+					
+				}
+			});
+			
 			deleteButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
