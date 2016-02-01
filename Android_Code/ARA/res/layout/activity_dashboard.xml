@@ -156,8 +156,7 @@
         android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
-       
+        android:layout_weight="4.3"
         android:background="@color/white"
         android:orientation="vertical"
         android:layout_margin="10dp" >
@@ -308,7 +307,7 @@
 	           android:text="Schedule Service"
 	            android:layout_gravity="center"
 	           android:textColor="@color/black"
-	           android:textSize="15sp" />
+	           android:textSize="14sp" />
 
 <!-- 	       <TextView -->
 <!-- 	           android:id="@+id/txtService" -->
@@ -345,16 +344,19 @@
 	           android:text="AutoAves News"
 	            android:layout_gravity="center"
 	           android:textColor="@color/black"
-	           android:textSize="15sp" />
-	     <!--   <TextView
-	           android:id="@+id/txtNews"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:textColor="@color/gray"
-	           android:text="News"
-	           android:layout_gravity="center"
-	           android:textSize="12sp" />  -->
+	           android:textSize="14sp" />
+	    <TextView
+           
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+          	android:paddingLeft="4dp"
+          	android:paddingRight="4dp"
+			android:gravity="center"
+            android:text="Coming Soon"
+            android:textSize="12sp"
+            android:background="@drawable/gray_rounded_btn"
+            android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
   </LinearLayout>
@@ -362,7 +364,7 @@
         android:id="@+id/LinearLayout_fotter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5"
+        android:layout_weight="2.2"
         android:orientation="vertical"
        >
      <LinearLayout   
@@ -384,7 +386,7 @@
 	           android:layout_width="match_parent"
 	           android:layout_height="wrap_content"
 	           android:text="Email: Robert.Seeley@autoaves.com"
-	           android:layout_marginTop="10dp"
+	           android:layout_marginTop="3dp"
 	           android:gravity="center_horizontal"
 	           android:textColor="@color/black"
 	           android:textSize="13sp" />

@@ -623,8 +623,8 @@ public class ARAParser {
 				
 				
 			
-				JSONObject jsonNotification = new JSONObject(output);
-				JSONArray jsonArray = jsonNotification.getJSONArray("Notifications");
+			JSONArray jsonArray = new JSONArray(output);
+				/*JSONArray jsonArray = jsonNotification.getJSONArray("Notifications");*/
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = jsonArray.getJSONObject(i);
 			Notification noti=new Notification();

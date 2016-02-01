@@ -111,6 +111,10 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		{
 			delegate.processFinish(result, methodName);
 		}
+		else if(methodName.contains("notification/user"))
+		{
+			delegate.processFinish(result, methodName);
+		}
 		else if(result==null)
 		{
 			Toast.makeText(activity, "Poor network connection, please try again", Toast.LENGTH_LONG).show();	

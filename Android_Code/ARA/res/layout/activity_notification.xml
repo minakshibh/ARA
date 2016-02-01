@@ -63,12 +63,28 @@
         android:text="NOTIFICATIONS"
         android:textColor="@color/app_blue" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
+<LinearLayout
+  		android:layout_below="@+id/txtHeader"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtHeader" >
-    </ListView>
+        android:orientation="vertical"
+          >
+ <ListView
+     android:id="@+id/listView"
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     android:layout_weight="9"
+      >
 
+ </ListView>
+ <TextView
+        android:id="@+id/txtMore"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+       	android:background="@color/white"
+        android:gravity="center"
+        android:text="Load More.."
+        android:textColor="@color/app_blue" />
+ </LinearLayout>
     </RelativeLayout>
