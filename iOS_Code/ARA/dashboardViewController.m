@@ -34,11 +34,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     i=0;
-    
+    lblComingSoon.layer.cornerRadius = 5.0;
+    [lblComingSoon setClipsToBounds:YES];
     
     imagenotificationcount.hidden = YES;
-    
-    
     
     btnSubmitReferral.layer.cornerRadius = 4.0;
     btnmyprofile.layer.cornerRadius = 4.0;
@@ -131,15 +130,20 @@
 //    if (d==3) {
 //        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
 //    }
+    
+    
+   
+    
     if (IS_IPHONE_6P) {
         viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
         lblnewContactUs.font = [lblnewContactUs.font fontWithSize:15];
         lblnewContactUs.frame = CGRectMake(lblnewContactUs.frame.origin.x, lblnewContactUs.frame.origin.y+7, lblnewContactUs.frame.size.width, lblnewContactUs.frame.size.height);
+         lblComingSoon.font = [lblComingSoon.font fontWithSize:lblComingSoon.font.pointSize-1];
     }
     if (IS_IPHONE_6) {
          btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-8, btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width+8, btnSubmitReferral.frame.size.height);
         viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
-        
+        lblComingSoon.font = [lblComingSoon.font fontWithSize:12];
     }
     if ( IS_IPHONE_5) {
          imageViewMenuProfile.frame = CGRectMake(imageViewMenuProfile.frame.origin.x-6, imageViewMenuProfile.frame.origin.y-7, imageViewMenuProfile.frame.size.width, imageViewMenuProfile.frame.size.height);
@@ -157,8 +161,10 @@
         lblnewAutoAvenews.font = [lblnewAutoAvenews.font fontWithSize:14];
         
         lblnewPhoneNo.frame = CGRectMake(lblnewPhoneNo.frame.origin.x, lblnewPhoneNo.frame.origin.y+3, lblnewPhoneNo.frame.size.width, lblnewPhoneNo.frame.size.height);
+        lblComingSoon.font = [lblComingSoon.font fontWithSize:11];
     }
     if (IS_IPHONE_4_OR_LESS) {
+        lblComingSoon.font = [lblComingSoon.font fontWithSize:11];
          imageViewMenuProfile.frame = CGRectMake(imageViewMenuProfile.frame.origin.x, imageViewMenuProfile.frame.origin.y-7, imageViewMenuProfile.frame.size.width, imageViewMenuProfile.frame.size.height);
         lblNameMenu.frame = CGRectMake(lblNameMenu.frame.origin.x, lblNameMenu.frame.origin.y+2, lblNameMenu.frame.size.width, lblNameMenu.frame.size.height);
         btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:9];
@@ -188,6 +194,11 @@
     
     if ( IS_IPAD )
     {
+         lblComingSoon.font = [lblComingSoon.font fontWithSize:lblComingSoon.font.pointSize+2];
+         lblComingSoon.frame = CGRectMake(lblComingSoon.frame.origin.x+13, lblComingSoon.frame.origin.y, lblComingSoon.frame.size.width-25, lblComingSoon.frame.size.height);
+        
+        
+        
       //   btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
        btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:18];
         
@@ -357,10 +368,28 @@
                                    selector:@selector(targetMethod:)
                                    userInfo:nil
                                     repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:4
+//                                     target:self
+//                                   selector:@selector(labelTransformation:)
+//                                   userInfo:nil
+//                                    repeats:YES];
 //    self.timerDashboard = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(dashboardWebservice) userInfo:nil repeats:YES];
 
 }
-
+//-(void)labelTransformation:(NSTimer *)timer
+//{
+//    if (lblComingSoon.font.pointSize == 16) {
+//    lblComingSoon.font = [UIFont boldSystemFontOfSize:14];
+//    }else{
+//        lblComingSoon.font = [UIFont boldSystemFontOfSize:16];
+//    }
+//    
+//    lblComingSoon.transform = CGAffineTransformScale(lblComingSoon.transform, 0.25, 0.25);
+//    [self.view addSubview:lblComingSoon];
+//    [UIView animateWithDuration:2.0 animations:^{
+//        lblComingSoon.transform = CGAffineTransformScale(lblComingSoon.transform, 4, 4);
+//    }];
+//}
 -(void)dashboardWebservice
 {
     [self getData];
@@ -1030,6 +1059,7 @@ if([recieved_status isEqualToString:@"passed"])
     
     
     NSString *dashboardTimeStamp = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
+    NSLog(@"%@",dashboardTimeStamp);
     
     _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]];
     

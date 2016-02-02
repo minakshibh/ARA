@@ -66,6 +66,7 @@
                 <outlet property="lblActiveReferral" destination="cG1-ax-7MG" id="n5s-VO-sVa"/>
                 <outlet property="lblActivereferralcount" destination="gRQ-Hk-Rgv" id="IQC-tp-nKg"/>
                 <outlet property="lblAwardEarned" destination="W58-Md-OgB" id="OPD-DE-JSx"/>
+                <outlet property="lblComingSoon" destination="twr-hT-FBP" id="roL-Lq-2PM"/>
                 <outlet property="lblInactivereferral" destination="BZQ-5w-3Qk" id="2wS-Mj-flD"/>
                 <outlet property="lblInactivereferralcount" destination="nya-uM-Yld" id="Mqu-D8-txO"/>
                 <outlet property="lblNameMenu" destination="BYf-bx-T27" id="BnP-cn-BBS"/>
@@ -733,7 +734,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zkZ-xx-7LS">
-                    <rect key="frame" x="221" y="302" width="166" height="133"/>
+                    <rect key="frame" x="227" y="302" width="166" height="133"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="btnMyRewards:" destination="-1" eventType="touchUpInside" id="W83-UC-JEV"/>
@@ -760,6 +761,14 @@
                         <action selector="btnSubmitReferral:" destination="-1" eventType="touchUpInside" id="uN9-qx-JFz"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="twr-hT-FBP">
+                    <rect key="frame" x="256" y="566" width="95" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>

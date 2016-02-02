@@ -1032,7 +1032,12 @@
     
     
     [txtPhoneno resignFirstResponder];
+    
+    
     popupActive = false;
+    lblemailerror.text = @"";
+    email_checked = @"no";
+    imagecheckforemailView.image=nil;
     
 }
 - (BOOL)validateEmailWithString:(NSString*)email

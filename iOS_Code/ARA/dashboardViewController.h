@@ -36,7 +36,7 @@
     NSString *recieved_status;
     IBOutlet UIButton *btnSubmitReferral;
     IBOutlet UILabel *lblheader;
-    
+    IBOutlet UILabel *lblComingSoon;
     IBOutlet UIProgressView *progressbar;
     IBOutlet UILabel *lblAwardEarned;
     IBOutlet UILabel *lblPotentialaward;

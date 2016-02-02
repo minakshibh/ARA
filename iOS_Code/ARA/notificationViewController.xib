@@ -7,8 +7,6 @@
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
         </mutableArray>
         <mutableArray key="timeburner_regular.ttf">
             <string>TimeBurner</string>
@@ -17,11 +15,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="notificationViewController">
             <connections>
-                <outlet property="bottomView" destination="8zP-Vq-zqb" id="lU2-25-bbf"/>
-                <outlet property="btnAboutApp" destination="Eb3-iL-A8f" id="3ew-U9-yYe"/>
-                <outlet property="btnAutoAvesURL" destination="fch-eD-EGQ" id="Src-v7-2Ge"/>
                 <outlet property="btnBack" destination="fde-WN-Wn9" id="Zc0-92-3gQ"/>
-                <outlet property="btnLogOut" destination="Gl9-Zq-2sa" id="kyW-tE-kZ6"/>
                 <outlet property="lblBack" destination="fde-WN-Wn9" id="cl8-gh-BSL"/>
                 <outlet property="lblHeading" destination="oxy-4C-a4J" id="bfN-yM-nL9"/>
                 <outlet property="tableView" destination="CgX-z2-LlC" id="1vj-Yq-b9W"/>
@@ -66,47 +60,6 @@
                         <outlet property="delegate" destination="-1" id="EYR-0a-DAv"/>
                     </connections>
                 </tableView>
-                <view hidden="YES" alpha="0.94999998807907104" contentMode="scaleToFill" id="8zP-Vq-zqb">
-                    <rect key="frame" x="0.0" y="688" width="414" height="48"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eb3-iL-A8f">
-                            <rect key="frame" x="8" y="15" width="133" height="18"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
-                            <state key="normal" title="About App">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnAboutApp:" destination="-1" eventType="touchUpInside" id="RVw-eM-tXx"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gl9-Zq-2sa">
-                            <rect key="frame" x="328" y="9" width="78" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
-                            <state key="normal" title="Logout">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnLogOut:" destination="-1" eventType="touchUpInside" id="FrZ-oV-SeV"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fch-eD-EGQ">
-                            <rect key="frame" x="74" y="9" width="267" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="www.autoaves.com">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnAutoAvesURL:" destination="-1" eventType="touchUpInside" id="tRZ-cc-R50"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.098039215690000001" green="0.1058823529" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TYk-SH-Uvu">
                     <rect key="frame" x="0.0" y="81" width="414" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
