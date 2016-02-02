@@ -61,6 +61,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	private ImageView imageView_profilepic;
 	public static Typeface typeface_roboto,typeface_timeburner;
 	public static String notiCount="0";
+	private int activeCount=0;
 
 	private String countOpen="0";
 	public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		
 		TxtNotiCount=(TextView)findViewById(R.id.TxtNotiCount);
 		TxtNotiCount.setTypeface(typeface_roboto);
+		TxtNotiCount.setVisibility(View.GONE);
+		
 		
 		activeReferralAmount = (TextView)findViewById(R.id.activeReferralAmount);
 		activeReferralAmount.setTypeface(typeface_roboto);
@@ -271,6 +274,9 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 
 	protected void onResume() {
 		super.onResume();
+		
+		
+		
 		if(Util.isNetworkAvailable(DashBoardActivity.this)){
 			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 			String userid=spref.getString("userid", "");
@@ -299,7 +305,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		ARAParser parser = new ARAParser(DashBoardActivity.this);
 		if(methodName.contains("dashboard"))
 		{
-			int activeCount=0;
+			referralTypeArray = parser.parseDashboardContent(output);
+		
 			String soldCount="";
 			
 			try{
@@ -317,7 +324,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			{
 				TxtNotiCount.setVisibility(View.GONE);
 				}//+" Active/"+soldCount+" Sold");
-			referralTypeArray = parser.parseDashboardContent(output);
+			
 			for(int i = 0; i<referralTypeArray.size(); i++){
 				ReferralType referralType = referralTypeArray.get(i);
 				
