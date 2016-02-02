@@ -149,7 +149,7 @@
                     android:background="@drawable/yellow_rounded_btn"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
                 
             </LinearLayout>
   <LinearLayout

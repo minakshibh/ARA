@@ -359,7 +359,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		if (!android.util.Patterns.EMAIL_ADDRESS.matcher(
 					gettingEmail).matches()
 					&& !TextUtils.isEmpty(gettingEmail)) {
-				Util.ToastMessage(RegisterActivity.this,"Please enter a valid email address");
+				Util.ToastMessage(RegisterActivity.this,"Please enter a valid Email Address");
 				emailCheck=0;
 				
 				img_emailId.setVisibility(View.INVISIBLE);
@@ -408,35 +408,35 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 					if (firstName.getText().toString().equals("")) {
 
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter first name");
+								"Please enter First Name");
 					} else if (lastName.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter last name");
+								"Please enter Last Name");
 					}// here check email address is valid or not
 					else if (userId.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter user name");
+								"Please enter User Name");
 					} else if (phNumber.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter phone number");
+								"Please enter Phone Number");
 					}
 					
 					else if(!Util.isValidPhoneNumber(phNumber.getText().toString()))
 					{
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter valid phone number");
+								"Please enter valid Phone Number");
 					}
 					else if(phNumber.getText().toString().length()<14)
 					{
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter valid phone number");
+								"Please enter valid Phone Number");
 						/*}
 					else if (emailId.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter email address");*/
 					} else if (password.getText().toString().equals("")) {
 						Util.ToastMessage(RegisterActivity.this,
-								"Please enter password");
+								"Please enter Password");
 					} /*else if (role_id.equals("-1")) {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please select role");
@@ -649,7 +649,7 @@ private void signUP2()
 			arrayList_Mea = parser.parseMEAResponse(output);
 			Log.e(methodName, output);
 			System.err.println(arrayList_Mea.toString());
-	ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,android.R.layout.simple_spinner_item, arrayList_Mea);
+	ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,R.layout.spinner_text, arrayList_Mea);
 			/*View v = getLayoutInflater().inflate(R.layout.spinner_dropdown, null);
 			TextView textView=(TextView)v.findViewById(R.id.textView1);
 			 textView.setEllipsize(TruncateAt.MARQUEE);

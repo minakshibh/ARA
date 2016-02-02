@@ -62,9 +62,22 @@
         android:padding="5dp"
         android:text="NOTIFICATIONS"
         android:textColor="@color/app_blue" />
-
+<TextView
+    android:id="@+id/swipeInfo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/txtHeader"
+    android:background="@color/light_gray"
+    android:gravity="start|center_vertical"
+    android:paddingBottom="2dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="2dp"
+    android:text="Swipe left to Delete"
+    android:textColor="@color/dark_gray"
+    android:textSize="10sp"
+    android:textStyle="bold" />
 <LinearLayout
-  		android:layout_below="@+id/txtHeader"
+  		android:layout_below="@+id/swipeInfo"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"

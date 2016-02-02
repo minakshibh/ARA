@@ -23,7 +23,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "aradatabase";
  
     // Contacts table name
-    private static final String TABLE_CONTACTS = "notification";
+    private static final String TABLE_NOTIFICATION = "notification";
  
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
@@ -38,7 +38,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_NOTIFICATION + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TITLE + " TEXT,"
                 + KEY_DESCRIPTION + " TEXT," + KEY_DATE + " TEXT,"+ KEY_READ + " TEXT"+ ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
@@ -48,7 +48,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTIFICATION);
  
         // Create tables again
         onCreate(db);
@@ -68,7 +68,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DATE, contact.getCreatedDate());
         values.put(KEY_READ, contact.getRead());
         // Inserting Row
-        db.insert(TABLE_CONTACTS, null, values);
+        db.insert(TABLE_NOTIFICATION, null, values);
         db.close(); // Closing database connection
     }
  
@@ -76,7 +76,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     Notification getContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
  
-        Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
+        Cursor cursor = db.query(TABLE_NOTIFICATION, new String[] { KEY_ID,
                 KEY_TITLE, KEY_DESCRIPTION,KEY_DATE ,KEY_READ}, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
@@ -92,7 +92,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Notification> getAllNotification() {
         List<Notification> contactList = new ArrayList<Notification>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTIFICATION +" ORDER BY "+ KEY_DATE + " DESC";
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -122,14 +122,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_READ, "read");
         // updating row
-        return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
+        return db.update(TABLE_NOTIFICATION, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(notificationId) });
     }
  
     // Deleting single contact
     public void deleteNotification(Notification contact) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
+        db.delete(TABLE_NOTIFICATION, KEY_ID + " = ?",
                 new String[] { String.valueOf(contact.getId()) });
         db.close();
     }
@@ -137,7 +137,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
     // Getting contacts Count
     public int getContactsCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+        String countQuery = "SELECT  * FROM " + TABLE_NOTIFICATION;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();

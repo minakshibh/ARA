@@ -393,7 +393,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			// for name sort................
 				selectedFilter = "sold";
 				appliedFilter.setText("Sold Only  X");
-				appliedFilter.setBackgroundResource(R.drawable.blue_rounded_btn);
+				appliedFilter.setBackgroundResource(R.drawable.bluedark_rounded_btn);
 				filterContainer.setVisibility(View.VISIBLE);
 				
 				filterReferrals();

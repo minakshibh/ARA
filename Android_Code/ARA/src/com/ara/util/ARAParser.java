@@ -674,7 +674,7 @@ public class ARAParser {
 		ArrayList<ScheduleService> array_list_service = new ArrayList<ScheduleService>();
 		ScheduleService service_Model = null;
 		service_Model = new ScheduleService();
-		service_Model.setId("-1");
+		service_Model.setId("null");
 		service_Model.setName("Select Service");
 		array_list_service.add(service_Model);
 

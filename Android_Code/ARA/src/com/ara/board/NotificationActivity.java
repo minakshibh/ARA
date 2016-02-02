@@ -133,14 +133,15 @@ public class NotificationActivity extends Activity implements
 				// TODO Auto-generated method stub
 				listCount++;
 				try{
-				getSize(listCount);
-				adapter.notifyDataSetChanged();
+				
+					getSize(listCount);
+				//adapter.notifyDataSetChanged();
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
-				}
-				//setAdapter();
+					}
+				setAdapter();
 				
 				/*if(listCount==1)
 				{
@@ -322,7 +323,7 @@ public class NotificationActivity extends Activity implements
 			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 			
 			Editor ed=spref.edit();
-			ed.putString("Timestamp", getDataBaseList.get(getDataBaseList.size()-1).getCreatedDate());
+			ed.putString("Timestamp", getDataBaseList.get(0).getCreatedDate());
 			ed.commit();
 			
 			Description.setText(notification.getNotificationText());
@@ -354,13 +355,13 @@ public class NotificationActivity extends Activity implements
 
 				imageReadBell.setImageResource(R.drawable.bell_read);
 			}
-			/*if(Description.getLineCount()>3)
+			if(Description.getText().toString().length()>110)
 			{
 				imageview.setVisibility(View.VISIBLE);
 				}
 			else{
 				imageview.setVisibility(View.GONE);
-			}*/
+			}
 			
 			
 			
