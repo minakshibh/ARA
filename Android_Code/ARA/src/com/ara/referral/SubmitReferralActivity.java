@@ -757,7 +757,7 @@ public class SubmitReferralActivity extends Activity implements
 			System.err.println(arrayList_Mea.toString());
 			
 			ArrayAdapter<MEA> spinnerArrayAdapter = new ArrayAdapter<MEA>(this,
-					R.layout.spinner_dropdown, onlyTwo_Mea);
+					R.layout.spinner_text, onlyTwo_Mea);
 			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 			// Step 3: Tell the spinner about our adapter
 			System.err.println("sizeeeeee===" + onlyTwo_Mea.size());

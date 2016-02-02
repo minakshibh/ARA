@@ -569,6 +569,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:background="@color/white"
                                 android:paddingRight="15dp"
+               
                                 android:textSize="@dimen/default_text_size"
                                 android:singleLine="true" />
 

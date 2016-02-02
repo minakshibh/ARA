@@ -58,7 +58,7 @@ public class ScheduleActivity   extends Activity implements
 	private TextView  textViewPayPal, textView_back;
 	private SharedPreferences spref;
 	private ImageView imageView_back;
-	private String ScheduledServiceId="0",TimeSlotId="3";
+	private String ScheduledServiceId="null",TimeSlotId="3";
 	private LinearLayout layout_Predate;
 	int year, month,day;
 	
@@ -119,15 +119,11 @@ public class ScheduleActivity   extends Activity implements
 
 	          public void afterTextChanged(Editable s) {
 
-	            // you can call or do what you want with your EditText here
-	        
-	        	
-	        	
 	        	txtCount.setText(""+(250-s.length()));
 	        	if(s.length()==0)
 	        	{
 	        		txtCount.setVisibility(View.GONE);
-	        	}
+	        		}
 	        	else{
 	        		txtCount.setVisibility(View.VISIBLE);
 	        	}
@@ -162,8 +158,6 @@ public class ScheduleActivity   extends Activity implements
 		textView_back.setOnClickListener(listener);
 		imageView_back.setOnClickListener(listener);
 		edittextPreDate.setOnClickListener(listener);
-		
-		
 		
 		spService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -225,38 +219,46 @@ public class ScheduleActivity   extends Activity implements
 					Toast.makeText(ScheduleActivity.this, "Please enter Last Name", Toast.LENGTH_SHORT).show();
 					}
 				else{
-						if(!edittext_email.getText().toString().trim().equals(""))
-						{
-							
-							String gettingEmail=edittext_email.getText().toString().trim();
-							 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(gettingEmail)
-										.matches() && !TextUtils.isEmpty(gettingEmail))
-							 {
-								Toast.makeText(ScheduleActivity.this, "Please enter a valid Email Address", Toast.LENGTH_SHORT).show();
+							if(!edittext_email.getText().toString().trim().equals(""))
+							{
+								
+								String gettingEmail=edittext_email.getText().toString().trim();
+								 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(gettingEmail)
+											.matches() && !TextUtils.isEmpty(gettingEmail))
+								 {
+									Toast.makeText(ScheduleActivity.this, "Please enter a valid Email Address", Toast.LENGTH_SHORT).show();
+										
+								 	}
+								 else{
+									scheduleApi();
+								 	}
+								}
+							else if(!edittext_phonenumber.getText().toString().trim().equals(""))
+							{
+								if (!Util.isValidPhoneNumber(edittext_phonenumber.getText().toString())) {
 									
-							 	}
-							 else{
-								scheduleApi();
-							 	}
+									Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+									}
+								  else if(edittext_phonenumber.getText().toString().length()<14)
+								  {
+									Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+								  	}
+								 else{
+									 scheduleApi();
+								 	}
+								
+								}
+							else{
+													
+								Toast.makeText(ScheduleActivity.this, "Please enter Phone Number or Email Address", Toast.LENGTH_SHORT).show();
 							}
-						else if(!edittext_phonenumber.getText().toString().trim().equals(""))
-						{
-							//Toast.makeText(ScheduleActivity.this, "Submit", Toast.LENGTH_SHORT).show();
-							scheduleApi();
-							}
-						else{
-												
-							Toast.makeText(ScheduleActivity.this, "Please enter Phone Number or Email Address", Toast.LENGTH_SHORT).show();
 						}
-				}
-				
-				
-			
-			}
-			else if(v==edittextPreDate)
-			{
-				date();
-			}
+					
+					}
+					else if(v==edittextPreDate)
+					{
+						getdate();
+						}
 		}//
 
 		private void scheduleApi() {
@@ -271,9 +273,10 @@ public class ScheduleActivity   extends Activity implements
 				phoneNumber = phoneNumber.replace(" ", "");
 			}catch(Exception e)
 			{
-				
+				e.printStackTrace();
 			}
 				
+			//Toast.makeText(ScheduleActivity.this, "submitted", Toast.LENGTH_SHORT).show();
 				/*_postData = [NSString stringWithFormat:@"FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&ScheduledServiceTypeId=
 				 * %@&PreferredDate=%@&TimeSlot=%@&Comments=%@",firstName,lastName,phoneNumber,email,scheduleServiceTyperId,preferredDate,timeSlot,comments];
 			    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/scheduledService",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
@@ -308,11 +311,13 @@ public class ScheduleActivity   extends Activity implements
 							nameValuePairs, true, "Please wait...", true);
 					mWebPageTask.delegate = (AsyncResponseForARA) ScheduleActivity.this;
 					mWebPageTask.execute();
+					
+					
 				} else {
 					Util.alertMessage(ScheduleActivity.this, Util.network_error);
 				}
 			
-		}
+	}
 	};
 
 	private void serviceApi() {
@@ -334,8 +339,6 @@ public class ScheduleActivity   extends Activity implements
 	@Override
 	public void processFinish(String output, String methodName) {
 		// TODO Auto-generated method stub
-	
-		
 		if(methodName.contains("scheduledService/types")){
 			ARAParser araParser=new ARAParser(this);
 			arrayListService=araParser.parseServiceResponse(output);
@@ -381,7 +384,7 @@ public class ScheduleActivity   extends Activity implements
 		
 		
 		ArrayAdapter<TimeSlot> spinnerArrayAdapter = new ArrayAdapter<TimeSlot>(this,
-				R.layout.spinner_dropdown, arrayListTimeSlot);
+				R.layout.spinner_text, arrayListTimeSlot);
 		spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 		spTimeSlot.setAdapter(spinnerArrayAdapter);	
 	}
@@ -391,11 +394,11 @@ public class ScheduleActivity   extends Activity implements
 	private void setSpinner()
 	{
 		ArrayAdapter<ScheduleService> spinnerArrayAdapter = new ArrayAdapter<ScheduleService>(this,
-				R.layout.spinner_dropdown, arrayListService);
+				R.layout.spinner_text, arrayListService);
 		spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 		spService.setAdapter(spinnerArrayAdapter);	
 		}
-	private void date()
+	private void getdate()
 	{
 	//	dateView = (TextView) findViewById(R.id.textView3);
 	   
@@ -404,13 +407,13 @@ public class ScheduleActivity   extends Activity implements
 	      showDialog(999);
 	   }
 
-	   @SuppressWarnings("deprecation")
+	  /* @SuppressWarnings("deprecation")
 	   public void setDate(View view) {
 	      showDialog(999);
 	    //  Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
 	    //  .show();
 	   }
-
+*/
 	   @Override
 	   protected Dialog onCreateDialog(int id) {
 	      // TODO Auto-generated method stub
@@ -430,8 +433,9 @@ public class ScheduleActivity   extends Activity implements
 	       
 	    	
 	    	  int getmont=month1+1;
-	    	 long getdate= milliseconds(""+year1+"-"+getmont+"-"+"-"+day1);
+	    	 long getdate= milliseconds(""+year1+"-"+getmont+"-"+day1);
 	    	 long currentdate = System.currentTimeMillis();
+	    	 System.out.println("currentdate date in milli :: " + currentdate);
 	    	  if(getdate>=currentdate)
 	    	  {
 	    		  showDate(year1, month1+1, day1);
@@ -439,6 +443,12 @@ public class ScheduleActivity   extends Activity implements
 	    	  else{
 	    		 
 				  showDate(year, month+1, day);
+				  if(day1==day)
+				  {
+					  
+				  }else{
+					  Toast.makeText(getApplicationContext(), "Please select current or future date", Toast.LENGTH_SHORT).show();
+				  }
 			  }
 	    	 
 	         
@@ -467,7 +477,7 @@ public class ScheduleActivity   extends Activity implements
 	       try {
 	           Date mDate = sdf.parse(date);
 	           long timeInMilliseconds = mDate.getTime();
-	           System.out.println("Date in milli :: " + timeInMilliseconds);
+	           System.out.println("dailog date in milli :: " + timeInMilliseconds);
 	           return timeInMilliseconds;
 	       }
 	       catch (Exception e) {
