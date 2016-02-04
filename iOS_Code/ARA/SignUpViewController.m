@@ -992,6 +992,11 @@ if ([response_status isEqualToString:@"passed"])
             
             [[NSUserDefaults standardUserDefaults] synchronize];
             
+                
+                DBManager *db = [[DBManager alloc]init];
+                bool createDB = [db createDB];
+                
+                
             if(internal1==11){
                 [HelperAlert alertWithOneBtn:AlertTitle description:@"Profile updated successfully" okBtn:OkButtonTitle];
 
@@ -999,7 +1004,10 @@ if ([response_status isEqualToString:@"passed"])
             }else{
                 
                 [HelperAlert alertWithOneBtn:@"Thank You" description:@"You are sucessfully registered with us." okBtn:@"Ok" withTag:3 forController:self];
-
+                NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+                dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+                NSString* dateStr = [dateFormatter stringFromDate:[NSDate date]];
+                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:@"loginDateSaved"];
                 
 //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thank You" message:@"You are sucessfully registered with us." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 //                
@@ -1007,8 +1015,7 @@ if ([response_status isEqualToString:@"passed"])
 //                [alert show];
                 return;
             }
-                DBManager *db = [[DBManager alloc]init];
-                bool createDB = [db createDB];
+                
             }else{
                 [HelperAlert alertWithOneBtn:AlertTitle description:@"Not able to communate to the server. kindly try again." okBtn:OkButtonTitle];
 

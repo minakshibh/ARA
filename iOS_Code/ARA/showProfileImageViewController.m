@@ -82,6 +82,13 @@
 }
 
 #pragma  mark - buttons
+- (IBAction)btnCancel:(id)sender {
+    AFHTTPRequestOperationManager *manager ;
+    [manager.operationQueue cancelAllOperations];
+    NSLog(@"Cancelled------------");
+   
+}
+
 - (IBAction)btnEdit:(id)sender {
     [self.view endEditing:YES];
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
@@ -221,6 +228,7 @@
 -(void)imageUpload
 {
     [kappDelegate ShowIndicator];
+    [self.view bringSubviewToFront:btnCancel];
     
     NSString *imagePostUrl = [NSString stringWithFormat:@"%@/users/%@/profilepic",Kwebservices,[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
     //

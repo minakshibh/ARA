@@ -730,6 +730,7 @@
             for (int i=0; i<data.count; i++)
 //                for (int i=0; i<55; i++)
             {
+                
                 NSString *saveStr = [[data valueForKey:@"CreatedDate"]objectAtIndex:0] ;
                 [[NSUserDefaults standardUserDefaults]setObject:saveStr forKey:@"dashboardNotificationTimeStamp"];
                 
@@ -862,13 +863,11 @@
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     
 //    _postData = [NSString stringWithFormat:@"userId=%@&currentPage=%@&pageSize=%@",@"179",notificationTimeStamp,@"10"];
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    NSString* dateStr = [dateFormatter stringFromDate:[NSDate date]];
     
-    _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",@"175",dateStr];
+    
+    _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
     if (timeSS !=nil) {
-        _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",@"175",timeSS];
+        _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,timeSS];
     }
     
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/notification/user",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];

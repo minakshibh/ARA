@@ -303,7 +303,7 @@
     else if (IS_IPHONE_6)
     {
         activityIndicatorObject.center = CGPointMake(self.window.frame.size.width/2, self.window.frame.size.height/2);
-        DisableView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
+        DisableView=[[UIView alloc] initWithFrame:CGRectMake( 0, 0, self.window.frame.size.width, self.window.frame.size.height)];
         
     }
     else if(IS_IPHONE_6P)

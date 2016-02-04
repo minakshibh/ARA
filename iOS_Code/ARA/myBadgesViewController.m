@@ -84,7 +84,7 @@
     }
     return 93;
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+- (NSInteger)tableView:(UITableView *)atableView numberOfRowsInSection:(NSInteger)section
     {
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return badgesArray.count;

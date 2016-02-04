@@ -20,6 +20,5 @@
 
 -(void)ShowIndicator;
 -(void)HideIndicator;
-+(void)fixHeightOfThisLabel:(UILabel *)aLabel;
 @end
 

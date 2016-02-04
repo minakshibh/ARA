@@ -17,7 +17,6 @@
 -(BOOL)createDB;
 - (BOOL) saveData:(NSString*)userId isRead:(NSString*)isRead
 notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)notificationDetail notificationDate:(NSString*)notificationDate NotificationId:(NSString*)NotificationId CreatedDate:(NSString*)CreatedDate;
--(NSArray*) findByRegisterNumber:(NSString*)registerNumber;
 @property (strong,nonatomic) NSString *ScheduledAt,*NotificationText,*serviceName,*isRead,*NotificationId,*CreatedDate;
 - (NSMutableArray*)showData;
 - (BOOL)updateTableNotification:(NSString*)NotificationId;

@@ -554,7 +554,7 @@
 }
 
 - (IBAction)btnlogout:(id)sender {
-    
+     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"dashboardNotificationTimeStamp"];
     [self.timerDashboard invalidate];
     
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"from_fb"] isEqualToString:@"yes"])
@@ -739,10 +739,11 @@ if([recieved_status isEqualToString:@"passed"])
     NSArray *refType = [userDetailDict valueForKey:@"DashboardResult"];
     NSString *notificationCountStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"NotificationsCount"]];
       //  int notificationCount = (int)notificationCountStr;
+        [lblNotificationCount removeFromSuperview];
         
-        UILabel *lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
+        lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
         lblNotificationCount.text = notificationCountStr;
-         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:15] : [UIFont fontWithName:@"Roboto-Regular" size:11];
+         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:14] : [UIFont fontWithName:@"Roboto-Regular" size:10];
         lblNotificationCount.textAlignment = NSTextAlignmentCenter;
         lblNotificationCount.textColor = [UIColor whiteColor];
         [imagenotificationcount addSubview:lblNotificationCount];
@@ -1060,8 +1061,15 @@ if([recieved_status isEqualToString:@"passed"])
     
     NSString *dashboardTimeStamp = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
     NSLog(@"%@",dashboardTimeStamp);
+    NSArray *strArr = [[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]] componentsSeparatedByString:@"."];
     
-    _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]];
+    
+    _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
+    if(dashboardTimeStamp!=nil)
+    {
+        _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]];
+    }
+    
     
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     

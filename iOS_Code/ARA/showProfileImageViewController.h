@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "AFHTTPRequestOperation.h"
 @interface showProfileImageViewController : ViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
     
@@ -15,8 +15,12 @@
     IBOutlet UIButton *btnProfile;
     IBOutlet UILabel *lblheading;
     NSData *imagedata;
+    IBOutlet UIButton *btnCancel;
 }
+- (IBAction)btnCancel:(id)sender;
 - (IBAction)btnEdit:(id)sender;
 - (IBAction)btnProfile:(id)sender;
 @property (nonatomic, strong) UIPopoverController *popoverImageViewController;
+@property (strong, nonatomic) AFHTTPRequestOperation *op;
+
 @end

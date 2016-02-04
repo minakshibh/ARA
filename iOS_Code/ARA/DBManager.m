@@ -460,5 +460,77 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     }
     return NO;
 }
+- (NSMutableArray*)getLastRecord
+{
+    NSString *docsDir;
+    NSArray *dirPaths;
+    // Get the documents directory
+    dirPaths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = dirPaths[0];
+    // Build the path to the database file
+    databasePath = [[NSString alloc] initWithString:
+                    [docsDir stringByAppendingPathComponent: @"notification.db"]];
+    
+    NSString *userid = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
+    NSMutableArray *data = [[NSMutableArray alloc]init];
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK)
+    {
+        
+        NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where userId = \"%@\" ORDER BY notificationDate DESC LIMIT 10",userid];
+        
+        
+        
+        const char *query_stmt = [querySQL UTF8String];
+        
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                DBManager *database = [[DBManager alloc]init];
+                NSString *ScheduledAt = [[NSString alloc] initWithUTF8String:
+                                         (const char*) sqlite3_column_text(statement, 4)];
+                database.ScheduledAt = ScheduledAt;
+                
+                NSString *NotificationText = [[NSString alloc] initWithUTF8String:
+                                              (const char *) sqlite3_column_text(statement, 3)];
+                database.NotificationText = NotificationText;
+                
+                NSString *serviceName = [[NSString alloc]initWithUTF8String:
+                                         (const char *) sqlite3_column_text(statement, 2)];
+                database.serviceName = serviceName;
+                
+                NSString *isRead = [[NSString alloc]initWithUTF8String:
+                                    (const char *) sqlite3_column_text(statement, 1)];
+                database.isRead = isRead;
+                
+                NSString *NotificationId = [[NSString alloc]initWithUTF8String:
+                                            (const char *) sqlite3_column_text(statement, 5)];
+                database.NotificationId = NotificationId;
+                
+                lastnotificationId = [[NSString alloc]initWithUTF8String:
+                                      (const char *) sqlite3_column_text(statement, 6)];
+                NSLog(@"%@",lastnotificationId);
+                
+                NSString *createdDate = [[NSString alloc]initWithUTF8String:
+                                         (const char *) sqlite3_column_text(statement, 7)];
+                database.CreatedDate = createdDate;
+                
+                [data addObject:database];
+            }
+            [[NSUserDefaults standardUserDefaults]setObject:lastnotificationId forKey:@"lastnotificationId"];
+            return data;
+        }
+        else{
+            NSLog(@"Not found");
+            return data;
+        }
+        //   sqlite3_reset(statement);
+    }
+    return data;
+}
 
 @end

@@ -56,7 +56,7 @@
     IBOutlet UIButton *btnnewPhoneNo;
     IBOutlet UIButton *btnnewAppURL;
     
-    
+    UILabel *lblNotificationCount;
     
     IBOutlet UILabel *lblnewContactUs;
     

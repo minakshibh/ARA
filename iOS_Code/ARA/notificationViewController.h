@@ -33,6 +33,7 @@
     bool status1;
     IBOutlet UIView *bottomView;
     UIView *newView;
+    NSMutableDictionary *dec;
 }
 - (IBAction)btnLoadMore:(id)sender;
 - (IBAction)btnAutoAvesURL:(id)sender;
