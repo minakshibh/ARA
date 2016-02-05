@@ -230,14 +230,14 @@ public class NotificationActivity extends Activity implements
 			SharedPreferences spref = getSharedPreferences("ara_prefs",MODE_PRIVATE);
 			String userid = spref.getString("userid", "");
 
-			String time =  spref.getString("currentdate", "");
-			String time1=spref.getString("Timestamp", time);
+			String userDate =  spref.getString(userid, "");
+			String time1=spref.getString("TS"+userid, userDate);
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("UserId", userid));
 			nameValuePairs.add(new BasicNameValuePair("TimeStamp", time1));		
 		
 
-			Log.e("noti", nameValuePairs.toString());
+			Log.e("notification=", nameValuePairs.toString());
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
 					//NotificationActivity.this, "get", "/notification/user?userId="+userid+"&currentPage=1&pageSize=10",
 					NotificationActivity.this, "post", "/notification/user",
@@ -321,9 +321,15 @@ public class NotificationActivity extends Activity implements
 			Notification notification = getDataBaseList.get(position);
 		
 			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
-			
+			String userId=spref.getString("userid", "");
 			Editor ed=spref.edit();
-			ed.putString("Timestamp", getDataBaseList.get(0).getCreatedDate());
+			if(!spref.getString("TS"+userId,"").equals(""))
+			{
+				ed.putString("TS"+userId, getDataBaseList.get(0).getCreatedDate());
+				}
+			else{
+				ed.putString("TS"+userId, getDataBaseList.get(0).getCreatedDate());
+			}
 			ed.commit();
 			
 			Description.setText(notification.getNotificationText());

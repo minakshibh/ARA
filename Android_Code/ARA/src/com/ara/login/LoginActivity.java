@@ -276,9 +276,28 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 				ed.putString("userimage", usermodel.getProfilePicName());
 				ed.putString("usertoken", usermodel.getUserToken());
 				ed.putString("meaid", usermodel.getMEAID());
-				ed.putString("currentdate", currentDate);
 				ed.commit();
 
+				if(!spref.getString(usermodel.getUserId().trim(), "").equals(""))
+				{
+					/*if(!spref.getString(usermodel.getUserId().trim(), "").equals(""))
+					{
+						
+						
+						}
+					else{
+						
+					}*/
+					
+					}
+				else
+				{
+					ed.putString(usermodel.getUserId().trim(), currentDate);
+					
+					}
+				ed.commit();
+				
+				
 				/// notification code
 				ServerUtilities sUtil = new ServerUtilities();
 				sUtil.deviceRegister(LoginActivity.this);

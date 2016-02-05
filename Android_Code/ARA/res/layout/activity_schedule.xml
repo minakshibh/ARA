@@ -5,12 +5,22 @@
     android:background="@color/white"
     android:orientation="vertical" >
     
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+       
+    
  <LinearLayout
     
         android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        
         android:background="@color/blue_header"
         android:orientation="horizontal" >
 
@@ -83,6 +93,8 @@
         
             android:background="@drawable/blue_rounded_btn"
             android:orientation="horizontal" >
+
+    
 
             <ImageView
                 android:layout_width="0dp"
@@ -499,5 +511,6 @@
 
         
     </LinearLayout>
-
+ </LinearLayout>
+    </ScrollView>
 </LinearLayout>

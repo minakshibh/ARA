@@ -284,10 +284,10 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		if(Util.isNetworkAvailable(DashBoardActivity.this)){
 			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 			String userid=spref.getString("userid", "");
-		// [HttpPost]dashboard  (userId, Timestamp)currentdate
-			String date=spref.getString("currentdate", getCurrentDate());
-			String date_after="";
-				String time=spref.getString("Timestamp",""+date);
+	
+			String date=spref.getString(userid, "");
+			
+			String timeStamp=spref.getString("TS"+userid,date);
 				/*try{
 					date_after = formateDateFromstring("yyyy-MM-dd'T'HH:mm:ss.SSS", "yyyy-MM-dd'T'HH:mm:ss.SSS", time);
 				}catch(Exception e)
@@ -296,7 +296,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				}*/
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 				nameValuePairs.add(new BasicNameValuePair("userId", userid));
-				nameValuePairs.add(new BasicNameValuePair("Timestamp", time));		
+				nameValuePairs.add(new BasicNameValuePair("Timestamp", timeStamp));		
 				
 				Log.e("dashboard", nameValuePairs.toString());
 				AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(DashBoardActivity.this,"post","dashboard",nameValuePairs, false, "Please wait...",true);
@@ -381,11 +381,10 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				ed.putString("useremail", "");
 				ed.putString("userid", "");
 				ed.putString("access_token","");
-				ed.putString("Timestamp","");
 				ed.commit();
 				
 				Intent intent = new Intent(DashBoardActivity.this,LoginActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 				finish();
 				}
