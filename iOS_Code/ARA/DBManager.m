@@ -114,17 +114,17 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
         
-        NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where userId = \"%@\" and Id > \"%@\" ORDER BY notificationDate DESC LIMIT 10",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"lastnotificationId"]];
+        NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where userId = \"%@\" and NotificationId < \"%@\" ORDER BY NotificationId DESC LIMIT 10",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"lastnotificationId"]];
 
        
-        
+//         NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where userId = \"%@\" ORDER BY notificationDate DESC and NotificationId > \"%@\" LIMIT 10",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"lastnotificationId"]];
         
         
         const char *query_stmt = [querySQL UTF8String];
         
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
-            int i=0;
+            int i=0,k=0;
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 i++;
@@ -149,10 +149,14 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
                                             (const char *) sqlite3_column_text(statement, 5)];
                 database.NotificationId = NotificationId;
                 
+                
+
                 lastnotificationId = [[NSString alloc]initWithUTF8String:
-                                      (const char *) sqlite3_column_text(statement, 6)];
-                NSLog(@"%@",lastnotificationId);
+                                      (const char *) sqlite3_column_text(statement,5)];
+                NSLog(@"lastnotificationId ---- %@",lastnotificationId);
                  [[NSUserDefaults standardUserDefaults]setObject:lastnotificationId forKey:@"lastnotificationId"];
+                
+               
                 
                 NSString *createdDate = [[NSString alloc]initWithUTF8String:
                                          (const char *) sqlite3_column_text(statement, 7)];
@@ -249,6 +253,7 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             
+            int i=0;
             while (sqlite3_step(statement) == SQLITE_ROW)
             { 
                 DBManager *database = [[DBManager alloc]init];
@@ -272,9 +277,14 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
                                     (const char *) sqlite3_column_text(statement, 5)];
                 database.NotificationId = NotificationId;
                 
+                
+                
+                    
+                
                 lastnotificationId = [[NSString alloc]initWithUTF8String:
-                                            (const char *) sqlite3_column_text(statement, 6)];
+                                            (const char *) sqlite3_column_text(statement, 5)];
                 NSLog(@"%@",lastnotificationId);
+                
                 
                 NSString *createdDate = [[NSString alloc]initWithUTF8String:
                                             (const char *) sqlite3_column_text(statement, 7)];

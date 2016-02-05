@@ -1004,10 +1004,33 @@ if ([response_status isEqualToString:@"passed"])
             }else{
                 
                 [HelperAlert alertWithOneBtn:@"Thank You" description:@"You are sucessfully registered with us." okBtn:@"Ok" withTag:3 forController:self];
+                
+                
+                
+                //---------
                 NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
                 dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
                 NSString* dateStr = [dateFormatter stringFromDate:[NSDate date]];
-                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:@"loginDateSaved"];
+                
+                NSMutableDictionary *saveDateDict = [[NSMutableDictionary alloc]init];
+                
+                if ([user valueForKey:@"loginDateSaved"]!=nil) {
+                    NSData *data = [user objectForKey:@"loginDateSaved"];
+                    NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                    
+                    saveDateDict  = dict;
+                    if ([saveDateDict valueForKey:[user valueForKey:@"l_userid"]]) {
+                        
+                    }else{
+                        [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:[user valueForKey:@"l_userid"]];
+                    }
+                }else{
+                    [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:[user valueForKey:@"l_userid"]];
+                }
+                
+                NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:saveDateDict];
+                [user setObject:data1 forKey:@"loginDateSaved"];
+                //-------------
                 
 //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thank You" message:@"You are sucessfully registered with us." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 //                

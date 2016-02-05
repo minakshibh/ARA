@@ -391,7 +391,25 @@
         NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         NSString* dateStr = [dateFormatter stringFromDate:[NSDate date]];
-        [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:@"loginDateSaved"];
+        
+        NSMutableDictionary *saveDateDict = [[NSMutableDictionary alloc]init];
+        
+        if ([user valueForKey:@"loginDateSaved"]!=nil) {
+            NSData *data = [user objectForKey:@"loginDateSaved"];
+            NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            
+            saveDateDict  = dict;
+            if ([saveDateDict valueForKey:[user valueForKey:@"l_userid"]]) {
+                
+            }else{
+                 [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:user_id];
+            }
+        }else{
+            [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:[user valueForKey:@"l_userid"]];
+        }
+        
+        NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:saveDateDict];
+        [user setObject:data1 forKey:@"loginDateSaved"];
         
        
     [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]] forKey:@"UserToken"];

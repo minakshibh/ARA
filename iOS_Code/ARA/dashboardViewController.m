@@ -554,7 +554,7 @@
 }
 
 - (IBAction)btnlogout:(id)sender {
-     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"dashboardNotificationTimeStamp"];
+     //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"dashboardNotificationTimeStamp"];
     [self.timerDashboard invalidate];
     
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"from_fb"] isEqualToString:@"yes"])
@@ -1059,15 +1059,24 @@ if([recieved_status isEqualToString:@"passed"])
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     
     
-    NSString *dashboardTimeStamp = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
-    NSLog(@"%@",dashboardTimeStamp);
-    NSArray *strArr = [[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]] componentsSeparatedByString:@"."];
+//    NSString *dashboardTimeStamp = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
+//    NSLog(@"%@",dashboardTimeStamp);
+   
+    NSData *data2222 = [[NSUserDefaults standardUserDefaults] objectForKey:@"dashboardNotificationTimeStamp"];
+    NSMutableDictionary *dict3333 = [NSKeyedUnarchiver unarchiveObjectWithData:data2222];
+    NSString *latestCreatedDateStr = [dict3333 valueForKey:userid];
+    
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginDateSaved"];
+    NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSString *loginDateStr = [dict valueForKey:userid];
     
     
-    _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
-    if(dashboardTimeStamp!=nil)
+    _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,loginDateStr];
+    
+    //_postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
+    if(latestCreatedDateStr!=nil)
     {
-        _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"]];
+        _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,latestCreatedDateStr];
     }
     
     

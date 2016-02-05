@@ -181,7 +181,7 @@
         notificationImage.image = [UIImage imageNamed:imageNotification];
         [cell.contentView addSubview:notificationImage];
 
-        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200, 30)];
+        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200+350*IS_IPAD, 30)];
          TitleLabel.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:17] : [UIFont fontWithName:fontNameStr size:15];
         TitleLabel.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:22] : TitleLabel.font;
         TitleLabel.text= database.serviceName;
@@ -266,7 +266,7 @@
         notificationImage.image = [UIImage imageNamed:imageNotification];
         [cell.contentView addSubview:notificationImage];
         
-        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200, 30)];
+        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200+350*IS_IPAD, 30)];
         TitleLabel.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:17] : [UIFont fontWithName:fontNameStr size:15];
         TitleLabel.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:22] : TitleLabel.font;
         TitleLabel.text= database.serviceName;
@@ -506,9 +506,28 @@
     NSMutableArray *additionalDataArray = [[NSMutableArray alloc]init];
     
     additionalDataArray = [database loadMoreData];
-    
+   // additionalDataArray=[[[additionalDataArray reverseObjectEnumerator] allObjects] mutableCopy];
+
     for (int i = 0; i<additionalDataArray.count; i++) {
+        database = [[DBManager alloc]init];
+        database = [additionalDataArray objectAtIndex:i];
+        NSString *notiID = database.NotificationId;
+        bool result =false;
+        for (int g=0; g<notificationDataArr.count; g++) {
+            DBManager *databse2 = [[DBManager alloc]init];
+            databse2 = [notificationDataArr objectAtIndex:g];
+            NSString *notiID1 = databse2.NotificationId;
+            if (notiID==notiID1) {
+                result=true;
+                break;
+            }
+            
+        }
+        if (result) {
+            
+        }else{
         [notificationDataArr addObject:[additionalDataArray objectAtIndex:i]];
+        }
     }
     
     
@@ -726,13 +745,39 @@
              NSDictionary *data = userDetailDict;
             saveData = [[NSMutableArray alloc] init];
             
+             NSString *saveStr = [[data valueForKey:@"CreatedDate"]objectAtIndex:0] ;
+            
+            //---------
+            NSMutableDictionary *saveDateDict = [[NSMutableDictionary alloc]init];
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            
+            if ([user valueForKey:@"dashboardNotificationTimeStamp"]!=nil) {
+                NSData *data = [user objectForKey:@"dashboardNotificationTimeStamp"];
+                NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                
+                saveDateDict  = dict;
+                if ([saveDateDict valueForKey:[user valueForKey:@"l_userid"]]) {
+                    
+                    [saveDateDict  removeObjectForKey:[user valueForKey:@"l_userid"]];
+                    [saveDateDict setObject:saveStr forKey:[user valueForKey:@"l_userid"]];
+                }else{
+                    [saveDateDict setObject:[NSString stringWithFormat:@"%@",saveStr] forKey:[user valueForKey:@"l_userid"]];
+                }
+            }else{
+                [saveDateDict setObject:[NSString stringWithFormat:@"%@",saveStr] forKey:[user valueForKey:@"l_userid"]];
+            }
+            
+            NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:saveDateDict];
+            [user setObject:data1 forKey:@"dashboardNotificationTimeStamp"];
+            //-------------
+            
             
             for (int i=0; i<data.count; i++)
 //                for (int i=0; i<55; i++)
             {
                 
-                NSString *saveStr = [[data valueForKey:@"CreatedDate"]objectAtIndex:0] ;
-                [[NSUserDefaults standardUserDefaults]setObject:saveStr forKey:@"dashboardNotificationTimeStamp"];
+//                NSString *saveStr = [[data valueForKey:@"CreatedDate"]objectAtIndex:0] ;
+//                [[NSUserDefaults standardUserDefaults]setObject:saveStr forKey:@"dashboardNotificationTimeStamp"];
                 
                 
                 database = [[DBManager alloc] init];
@@ -858,16 +903,25 @@
     NSLog(@"%@",[user valueForKey:@"l_userid"]);
     
     notificationTimeStamp = [user valueForKey:@"timeStamp"];
-    NSString *timeSS = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
-    
+ //   NSString *timeSS = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     
+    NSData *data2222 = [[NSUserDefaults standardUserDefaults] objectForKey:@"dashboardNotificationTimeStamp"];
+    NSMutableDictionary *dict3333 = [NSKeyedUnarchiver unarchiveObjectWithData:data2222];
+    NSString *latestCreatedDateStr = [dict3333 valueForKey:userid];
+    
+    
 //    _postData = [NSString stringWithFormat:@"userId=%@&currentPage=%@&pageSize=%@",@"179",notificationTimeStamp,@"10"];
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginDateSaved"];
+    NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
+    NSString *loginDateStr = [dict valueForKey:userid];
+
     
-    _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
-    if (timeSS !=nil) {
-        _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,timeSS];
+   // _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
+     _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,loginDateStr];
+    if (latestCreatedDateStr !=nil) {
+        _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,latestCreatedDateStr];
     }
     
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/notification/user",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
