@@ -280,15 +280,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 
 				if(!spref.getString(usermodel.getUserId().trim(), "").equals(""))
 				{
-					/*if(!spref.getString(usermodel.getUserId().trim(), "").equals(""))
-					{
-						
-						
-						}
-					else{
-						
-					}*/
-					
+										
 					}
 				else
 				{

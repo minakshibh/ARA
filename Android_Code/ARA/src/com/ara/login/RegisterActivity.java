@@ -849,6 +849,7 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 
 								parser.parseSignUpResponse(output);
 								String currentDate=getCurrentDate();
+								
 								usermodel = new User();
 								usermodel = parser.parseSignUpResponse(output);
 								Editor ed = spref.edit();
@@ -859,9 +860,8 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 								ed.putString("userimage", usermodel.getProfilePicName());
 								ed.putString("usertoken", usermodel.getUserToken());
 								ed.putString("meaid", usermodel.getMEAID());
-								ed.putString("currentdate", currentDate);
+								ed.putString(usermodel.getUserId().trim(), currentDate);
 								ed.commit();
-								
 								/// notification code
 								ServerUtilities sUtil = new ServerUtilities();
 								sUtil.deviceRegister(RegisterActivity.this);
