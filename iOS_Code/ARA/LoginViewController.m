@@ -52,6 +52,8 @@
 
     NSLog(@"login view");
 
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    [scrollView addGestureRecognizer:singleTap];
     
     //---initialize checkbox value first tiem with false
     checkbox_Value = false;
@@ -386,6 +388,28 @@
     [user setObject:@"yes" forKey:@"l_loggedin"];
     [user setObject:profile_picture forKey:@"l_image"];
         
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        NSString* dateStr = [dateFormatter stringFromDate:[NSDate date]];
+        
+        NSMutableDictionary *saveDateDict = [[NSMutableDictionary alloc]init];
+        
+        if ([user valueForKey:@"loginDateSaved"]!=nil) {
+            NSData *data = [user objectForKey:@"loginDateSaved"];
+            NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            
+            saveDateDict  = dict;
+            if ([saveDateDict valueForKey:[user valueForKey:@"l_userid"]]) {
+                
+            }else{
+                 [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:user_id];
+            }
+        }else{
+            [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:[user valueForKey:@"l_userid"]];
+        }
+        
+        NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:saveDateDict];
+        [user setObject:data1 forKey:@"loginDateSaved"];
         
        
     [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]] forKey:@"UserToken"];
@@ -424,6 +448,11 @@
 }
 
 #pragma mark Methods
+- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+{
+    [self.view endEditing:YES];
+    
+}
 -(void)getFacebookProfile:(NSString *)token
 {
     NSString *urlString1 = [NSString stringWithFormat:@"https://graph.facebook.com/me?access_token=%@&fields=email,first_name,last_name",token];

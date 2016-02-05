@@ -23,16 +23,19 @@
     IBOutlet UIButton *btnLogOut;
     NSMutableData *webData;
     int webservice;
-    NSString *recieved_status,*notificationTimeStamp;
-    NSMutableArray *notificationDataArr,*saveData;
+    NSString *recieved_status,*notificationTimeStamp,*executeFirtTime;
+    int dataCount;
+    NSMutableArray *notificationDataArr,*saveData,*noOfLinesArr;
     NSIndexPath *clickedIndex;
     int countInitialVal,countFinalVal;
     DBManager *database;
     UIRefreshControl *refreshControl;
     bool status1;
     IBOutlet UIView *bottomView;
+    UIView *newView;
+    
 }
-- (IBAction)btnAboutApp:(id)sender;
+- (IBAction)btnLoadMore:(id)sender;
 - (IBAction)btnAutoAvesURL:(id)sender;
 - (IBAction)btnLogOut:(id)sender;
 - (IBAction)btnBack:(id)sender;

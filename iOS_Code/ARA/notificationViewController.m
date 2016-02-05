@@ -22,12 +22,13 @@
     [super viewDidLoad];
     countFinalVal =0;
     
-    notificationDataArr = [[NSMutableArray alloc]init];
-    database = [[DBManager alloc]init];
-    notificationDataArr = [database showData];
+    noOfLinesArr = [[NSMutableArray alloc]init];
+
     
     
-    [self getNotifications];
+    
+    
+  //
     
     refreshControl = [[UIRefreshControl alloc]init];
     [tableView addSubview:refreshControl];
@@ -36,6 +37,44 @@
  
     tableView.allowsMultipleSelectionDuringEditing = NO;
     // Do any additional setup after loading the view from its nib.
+    
+    newView = [[UIView alloc]initWithFrame:CGRectMake(-45, 70, self.view.frame.size.width, 30)];
+    if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+        newView = [[UIView alloc]initWithFrame:CGRectMake(-45, 70, self.view.frame.size.width, 30)];
+    }
+    if (IS_IPHONE_6) {
+        newView = [[UIView alloc]initWithFrame:CGRectMake(-10, 70, self.view.frame.size.width, 30)];
+    }
+    if (IS_IPHONE_6P) {
+        newView = [[UIView alloc]initWithFrame:CGRectMake(-10, 70, self.view.frame.size.width+25, 30)];
+    }
+    if (IS_IPAD) {
+         newView = [[UIView alloc]initWithFrame:CGRectMake(-10, 70, self.view.frame.size.width+400, 30)];
+    }
+    UIButton* submit = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [submit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //[submit setTitleColor:[UIColor colorWithWhite:0.0 alpha:0.56] forState:UIControlStateDisabled];
+    [submit.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [submit setFrame:CGRectMake(0.0, 0.0, newView.frame.size.width, newView.frame.size.height)];
+    [submit addTarget:self action:@selector(LoadMore:) forControlEvents:UIControlEventTouchUpInside];
+    [submit setTitle:@"Load more" forState:UIControlStateNormal];
+    submit.backgroundColor = [UIColor lightGrayColor];
+    [newView addSubview:submit];
+    
+    [tableView setTableFooterView:newView];
+    
+    
+    notificationDataArr = [[NSMutableArray alloc]init];
+    database = [[DBManager alloc]init];
+    notificationDataArr = [database showData];
+    int count = [database GetDataCount];
+    if (count>notificationDataArr.count) {
+        newView.hidden = NO;
+    }else{
+        newView.hidden = YES;
+    }
+    
+    [self getNotifications];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -55,7 +94,9 @@
     }
     }
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"lastnotificationId"];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -90,6 +131,11 @@
     }
  //   return 133-15*IS_IPHONE_4_OR_LESS-15*IS_IPHONE_5-15*IS_IPHONE_6-15*IS_IPHONE_6P-8*IS_IPAD+30*IS_IPAD_PRO_1366;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.0f;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -135,7 +181,7 @@
         notificationImage.image = [UIImage imageNamed:imageNotification];
         [cell.contentView addSubview:notificationImage];
 
-        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200, 30)];
+        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200+350*IS_IPAD, 30)];
          TitleLabel.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:17] : [UIFont fontWithName:fontNameStr size:15];
         TitleLabel.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:22] : TitleLabel.font;
         TitleLabel.text= database.serviceName;
@@ -209,6 +255,10 @@
             imageNotification = @"1bell_unread.png";
         }
         
+        
+        
+        
+        
         UIImageView * notificationImage = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 15, 18)];
         if (IS_IPHONE_6P) {
             notificationImage = [[UIImageView alloc] initWithFrame:CGRectMake(15, 12, 15, 16)];
@@ -216,7 +266,7 @@
         notificationImage.image = [UIImage imageNamed:imageNotification];
         [cell.contentView addSubview:notificationImage];
         
-        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200, 30)];
+        UILabel * TitleLabel = [[UILabel alloc]  initWithFrame: CGRectMake(notificationImage.frame.origin.x+notificationImage.frame.size.width+15, 5, 200+350*IS_IPAD, 30)];
         TitleLabel.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:17] : [UIFont fontWithName:fontNameStr size:15];
         TitleLabel.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:22] : TitleLabel.font;
         TitleLabel.text= database.serviceName;
@@ -228,6 +278,7 @@
         Description.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:15] : [UIFont fontWithName:fontNameStr size:13];
         Description.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:19] : Description.font;
         int lines = [Description getNoOflines];
+        [noOfLinesArr addObject:[NSString stringWithFormat:@"%d",lines]];
         if (lines == 1 || lines == 2 || lines == 3) {
             Description.frame = CGRectMake(Description.frame.origin.x, Description.frame.origin.y, Description.frame.size.width, 18);
             [Description autosizeForWidth];
@@ -344,7 +395,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-    
+    int count = (int)[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"loadMoreCount"]];
     
     
     
@@ -358,19 +409,56 @@
         [modifiedRows addObject:self.expandedIndexPath];
         self.expandedIndexPath = nil;
     } else {
+        
+        database = [[DBManager alloc]init];
+        database = [notificationDataArr objectAtIndex:indexPath.row];
+        
+        
+        UILabel * Description = [[UILabel alloc]  initWithFrame: CGRectMake(0, 0, 250+450*IS_IPAD+50*IS_IPHONE_6+85*IS_IPHONE_6P+250*IS_IPAD_PRO_1366, 65+20*IS_IPAD_PRO_1366)];
+        Description.text= database.NotificationText;
+        Description.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:15] : [UIFont fontWithName:@"Roboto-Regular" size:13];
+        Description.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:@"Roboto-Regular" size:19] : Description.font;
+        int lines = [Description getNoOflines];
+        
+        
+        int nooflines =  lines;
+        if (nooflines <4) {
+            NSLog(@"%d",nooflines);
+            if ([database.isRead isEqualToString:@"false"]) {
+                bool success =  [database updateTableNotification:database.NotificationId];
+                if (success) {
+                    database.isRead = @"true";
+                    [notificationDataArr replaceObjectAtIndex:indexPath.row withObject:database];
+                    
+                    // notificationDataArr = [database showData];
+                }
+            }
+            [modifiedRows addObject:indexPath];
+            clickedIndex = indexPath;
+            // This will animate updating the row sizes
+            [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            // Preserve the deselection animation (if desired)
+            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            return;
+        }
+        
         if (self.expandedIndexPath)
             [modifiedRows addObject:self.expandedIndexPath];
         
         self.expandedIndexPath = indexPath;
         [modifiedRows addObject:indexPath];
         
-        database = [[DBManager alloc]init];
-        database = [notificationDataArr objectAtIndex:indexPath.row];
+        
         
         if ([database.isRead isEqualToString:@"false"]) {
           bool success =  [database updateTableNotification:database.NotificationId];
             if (success) {
-                notificationDataArr = [database showData];
+                database.isRead = @"true";
+                [notificationDataArr replaceObjectAtIndex:indexPath.row withObject:database];
+                
+               // notificationDataArr = [database showData];
             }
            
         }
@@ -397,6 +485,14 @@
         bool success = [database deleteTableNotification:database.NotificationId];
         if (success) {
             notificationDataArr = [database showData];
+            int count = [database GetDataCount];
+            if (count>notificationDataArr.count) {
+                newView.hidden = NO;
+            }else{
+                newView.hidden = YES;
+            }
+            
+            
             [tableView reloadData];
             [self.view makeToast:@"Notification Deleted"];
         }
@@ -406,7 +502,46 @@
 }
 
 #pragma mark- Buttons
+- (IBAction)LoadMore:(id)sender{
+    NSMutableArray *additionalDataArray = [[NSMutableArray alloc]init];
+    
+    additionalDataArray = [database loadMoreData];
+   // additionalDataArray=[[[additionalDataArray reverseObjectEnumerator] allObjects] mutableCopy];
 
+    for (int i = 0; i<additionalDataArray.count; i++) {
+        database = [[DBManager alloc]init];
+        database = [additionalDataArray objectAtIndex:i];
+        NSString *notiID = database.NotificationId;
+        bool result =false;
+        for (int g=0; g<notificationDataArr.count; g++) {
+            DBManager *databse2 = [[DBManager alloc]init];
+            databse2 = [notificationDataArr objectAtIndex:g];
+            NSString *notiID1 = databse2.NotificationId;
+            if (notiID==notiID1) {
+                result=true;
+                break;
+            }
+            
+        }
+        if (result) {
+            
+        }else{
+        [notificationDataArr addObject:[additionalDataArray objectAtIndex:i]];
+        }
+    }
+    
+    
+//    notificationDataArr
+    
+    int count = [database GetDataCount];
+    if (count>notificationDataArr.count) {
+         newView.hidden = NO;
+    }else{
+        newView.hidden = YES;
+    }
+    
+    [tableView reloadData];
+}
 - (IBAction)btnBack:(id)sender{
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -544,26 +679,41 @@
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
         [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
+        if (status1==true) {
+            [refreshControl endRefreshing];
+        }
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
         [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
+        if (status1==true) {
+            [refreshControl endRefreshing];
+        }
         return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
         [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
+        if (status1==true) {
+            [refreshControl endRefreshing];
+        }
         return;
     }
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
         [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
+        if (status1==true) {
+            [refreshControl endRefreshing];
+        }
         return;
     }
     [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
+    if (status1==true) {
+        [refreshControl endRefreshing];
+    }
     webData =nil;
 }
 
@@ -591,14 +741,43 @@
     {
         if (webservice==1) {
             
-            NSArray *data = [userDetailDict valueForKey:@"Notifications"];
+//            NSArray *data = [userDetailDict valueForKey:@"Notifications"];
+             NSDictionary *data = userDetailDict;
             saveData = [[NSMutableArray alloc] init];
+            
+             NSString *saveStr = [[data valueForKey:@"CreatedDate"]objectAtIndex:0] ;
+            
+            //---------
+            NSMutableDictionary *saveDateDict = [[NSMutableDictionary alloc]init];
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            
+            if ([user valueForKey:@"dashboardNotificationTimeStamp"]!=nil) {
+                NSData *data = [user objectForKey:@"dashboardNotificationTimeStamp"];
+                NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                
+                saveDateDict  = dict;
+                if ([saveDateDict valueForKey:[user valueForKey:@"l_userid"]]) {
+                    
+                    [saveDateDict  removeObjectForKey:[user valueForKey:@"l_userid"]];
+                    [saveDateDict setObject:saveStr forKey:[user valueForKey:@"l_userid"]];
+                }else{
+                    [saveDateDict setObject:[NSString stringWithFormat:@"%@",saveStr] forKey:[user valueForKey:@"l_userid"]];
+                }
+            }else{
+                [saveDateDict setObject:[NSString stringWithFormat:@"%@",saveStr] forKey:[user valueForKey:@"l_userid"]];
+            }
+            
+            NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:saveDateDict];
+            [user setObject:data1 forKey:@"dashboardNotificationTimeStamp"];
+            //-------------
             
             
             for (int i=0; i<data.count; i++)
+//                for (int i=0; i<55; i++)
             {
-                NSString *saveStr = [[data valueForKey:@"CreatedDate"]objectAtIndex:0] ;
-                [[NSUserDefaults standardUserDefaults]setObject:saveStr forKey:@"dashboardNotificationTimeStamp"];
+                
+//                NSString *saveStr = [[data valueForKey:@"CreatedDate"]objectAtIndex:0] ;
+//                [[NSUserDefaults standardUserDefaults]setObject:saveStr forKey:@"dashboardNotificationTimeStamp"];
                 
                 
                 database = [[DBManager alloc] init];
@@ -607,7 +786,7 @@
                 
                 NSString* ScheduledAt = [NSString stringWithFormat:@"%@",[[data valueForKey:@"ScheduledAt"]objectAtIndex:i]];
                 database.ScheduledAt = ScheduledAt;
-                
+//
                 NSString *serviceName = [NSString stringWithFormat:@"%@",[[data valueForKey:@"NotificationTitle"]objectAtIndex:i]];
                 NSArray *NotificationTypeArr =[[data valueForKey:@"NotificationType"]objectAtIndex:i];
                 NSString *notificationTypeStr = [NSString stringWithFormat:@"%@",[NotificationTypeArr valueForKey:@"Name"]];
@@ -617,8 +796,46 @@
                 NSString *NotificationId = [NSString stringWithFormat:@"%@",[[data valueForKey:@"NotificationId"]objectAtIndex:i]];
                 database.NotificationId = NotificationId;
                 
+                NSString *CreatedDate = [NSString stringWithFormat:@"%@",[[data valueForKey:@"CreatedDate"]objectAtIndex:i]];
+                database.CreatedDate = CreatedDate;
+//                
+//             NSString*   NotificationText = [NSString stringWithFormat:@"%d notification text this is for testing notification text this is for testing notification text this is for testing notification text this is for testing notification text this is for testing notification text this is for testing notification text this is for testing notification text this is for testing notification text this is for testing notification text this is for testing ",i];
+//             NSString*   ScheduledAt = [NSString stringWithFormat:@"%@--%d",[NSDate date],i];
+//             NSString*   serviceName = [NSString stringWithFormat:@"Service - Test Notification %d",i];
+//             NSString*   NotificationId = [NSString stringWithFormat:@"%d",i];
+//                
+//                database.NotificationText = NotificationText;
+//                database.ScheduledAt = ScheduledAt;
+//                database.serviceName = serviceName;
+//                database.NotificationId = NotificationId;
+                
+                
                 [saveData addObject:database];
             }
+            
+//            if (executeFirtTime==nil) {
+//                executeFirtTime = @"true";
+//            }else{
+//                NSMutableArray *allData = [[NSMutableArray alloc]init];
+//                allData = [database getAllData];
+//                saveData=[[[saveData reverseObjectEnumerator] allObjects] mutableCopy];
+//                
+//                
+//                
+//                for (int k=0; k<saveData.count; k++) {
+//                    
+//                    [allData insertObject:[saveData objectAtIndex:0] atIndex:0];
+//                }
+//                saveData = allData;
+//                BOOL status = [database deleteAllData];
+//                if (status) {
+//                    [self savenotificationsToDB:saveData];
+//                }
+//            }
+            
+            
+            
+            
             [self savenotificationsToDB:saveData];
             
             int val = [notificationTimeStamp intValue];
@@ -627,6 +844,12 @@
             
             database = [[DBManager alloc]init];
             notificationDataArr = [database showData];
+            int count = [database GetDataCount];
+            if (count>notificationDataArr.count) {
+                newView.hidden = NO;
+            }else{
+                newView.hidden = YES;
+            }
             
             if (status1==true) {
                 [refreshControl endRefreshing];
@@ -661,8 +884,10 @@
         }
     [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
         
-        
-        
+        if (status1==true) {
+            [refreshControl endRefreshing];
+        }
+ 
     }
 }
 #pragma mark - Save Data to DataBase
@@ -678,25 +903,38 @@
     NSLog(@"%@",[user valueForKey:@"l_userid"]);
     
     notificationTimeStamp = [user valueForKey:@"timeStamp"];
-    if (notificationTimeStamp == nil || [notificationTimeStamp isEqualToString:@"0"])
-    {
-        notificationTimeStamp = @"1";
-    }
-    
+ //   NSString *timeSS = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     
+    NSData *data2222 = [[NSUserDefaults standardUserDefaults] objectForKey:@"dashboardNotificationTimeStamp"];
+    NSMutableDictionary *dict3333 = [NSKeyedUnarchiver unarchiveObjectWithData:data2222];
+    NSString *latestCreatedDateStr = [dict3333 valueForKey:userid];
+    
+    
 //    _postData = [NSString stringWithFormat:@"userId=%@&currentPage=%@&pageSize=%@",@"179",notificationTimeStamp,@"10"];
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginDateSaved"];
+    NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    NSString *loginDateStr = [dict valueForKey:userid];
 
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/notification/user?userId=%@&currentPage=%@&pageSize=%@",Kwebservices,@"179",notificationTimeStamp,@"10"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+   // _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
+     _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,loginDateStr];
+    if (latestCreatedDateStr !=nil) {
+        _postData = [NSString stringWithFormat:@"UserId=%@&TimeStamp=%@",userid,latestCreatedDateStr];
+    }
+    
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/notification/user",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     NSLog(@"data post >>> %@",_postData);
     
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
     //[request addValue:mea forHTTPHeaderField:@"MEAId"];
   //  NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]);
     //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
     
 //    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     if(connection)
@@ -728,7 +966,7 @@
         for (int i =0; i<data.count; i++) {
             database = [data objectAtIndex:i];
             
-            [database saveData:userid isRead:@"false" notificationtitle:database.serviceName notificationDetail:database.NotificationText notificationDate:database.ScheduledAt NotificationId:database.NotificationId];
+            [database saveData:userid isRead:@"false" notificationtitle:database.serviceName notificationDetail:database.NotificationText notificationDate:database.ScheduledAt NotificationId:database.NotificationId CreatedDate:database.CreatedDate];
             
         }
     }
@@ -743,6 +981,13 @@
         bool success = [database deleteTableNotification:database.NotificationId];
         if (success) {
              notificationDataArr = [database showData];
+            int count = [database GetDataCount];
+            if (count>notificationDataArr.count) {
+                newView.hidden = NO;
+            }else{
+                newView.hidden = YES;
+            }
+            
             [tableView reloadData];
             [self.view makeToast:@"Notification Deleted"];
         }

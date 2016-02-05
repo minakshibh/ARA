@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="showProfileImageViewController">
             <connections>
+                <outlet property="btnCancel" destination="MMe-SE-iB1" id="ytw-wv-eXn"/>
                 <outlet property="btnProfile" destination="UGi-PP-uqB" id="muI-0y-Cj0"/>
                 <outlet property="imageViewProfile" destination="ugG-HQ-EnF" id="T8q-Iq-xCL"/>
                 <outlet property="lblheading" destination="OUd-aa-wKF" id="PaK-YF-MeG"/>
@@ -87,9 +88,17 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ugG-HQ-EnF">
-                    <rect key="frame" x="0.0" y="112" width="414" height="624"/>
+                    <rect key="frame" x="0.0" y="112" width="414" height="512"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MMe-SE-iB1">
+                    <rect key="frame" x="0.0" y="689" width="414" height="47"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button Cancel"/>
+                    <connections>
+                        <action selector="btnCancel:" destination="-1" eventType="touchUpInside" id="F48-bu-zvL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>

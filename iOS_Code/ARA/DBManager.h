@@ -10,16 +10,19 @@
 #import <sqlite3.h>
 @interface DBManager : NSObject
 {
-    NSString *databasePath;
+    NSString *databasePath,*lastnotificationId;
 }
 
 +(DBManager*)getSharedInstance;
 -(BOOL)createDB;
 - (BOOL) saveData:(NSString*)userId isRead:(NSString*)isRead
-notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)notificationDetail notificationDate:(NSString*)notificationDate NotificationId:(NSString*)NotificationId;
--(NSArray*) findByRegisterNumber:(NSString*)registerNumber;
-@property (strong,nonatomic) NSString *ScheduledAt,*NotificationText,*serviceName,*isRead,*NotificationId;
+notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)notificationDetail notificationDate:(NSString*)notificationDate NotificationId:(NSString*)NotificationId CreatedDate:(NSString*)CreatedDate;
+@property (strong,nonatomic) NSString *ScheduledAt,*NotificationText,*serviceName,*isRead,*NotificationId,*CreatedDate;
 - (NSMutableArray*)showData;
 - (BOOL)updateTableNotification:(NSString*)NotificationId;
 - (BOOL)deleteTableNotification:(NSString*)NotificationId;
-;@end
+- (NSMutableArray*)loadMoreData;
+- (int) GetDataCount;
+- (NSMutableArray*)getAllData;
+- (BOOL)deleteAllData;
+@end
