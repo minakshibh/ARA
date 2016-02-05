@@ -1,6 +1,9 @@
 package com.ara.login;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
@@ -845,7 +848,7 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface arg0, int arg1) {
 
 								parser.parseSignUpResponse(output);
-
+								String currentDate=getCurrentDate();
 								usermodel = new User();
 								usermodel = parser.parseSignUpResponse(output);
 								Editor ed = spref.edit();
@@ -856,6 +859,7 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 								ed.putString("userimage", usermodel.getProfilePicName());
 								ed.putString("usertoken", usermodel.getUserToken());
 								ed.putString("meaid", usermodel.getMEAID());
+								ed.putString("currentdate", currentDate);
 								ed.commit();
 								
 								/// notification code
@@ -878,5 +882,13 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 
 	}
 	
-	
+	 private String getCurrentDate()
+		{
+			Calendar c = Calendar.getInstance();
+			System.out.println("Current time => " + c.getTime());
+				//2016-01-15 14:15:00.000
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+			String formattedDate = df.format(c.getTime());
+			return formattedDate;
+		}
 }

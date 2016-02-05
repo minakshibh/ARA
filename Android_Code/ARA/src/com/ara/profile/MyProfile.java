@@ -23,6 +23,7 @@ import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.base.BaseActivity;
 import com.ara.imageloader.ImageLoader;
 import com.ara.login.ChangePasswordActivity;
+import com.ara.login.LoginActivity;
 import com.ara.model.User;
 import com.ara.util.ARAParser;
 import com.ara.util.Util;
@@ -214,10 +215,16 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 				}
 			}
 			else if (v == textView_back) {
+				Intent intent = new Intent(MyProfile.this,DashBoardActivity.class);
+				intent.putExtra("user", usermodel);
+				startActivity(intent);
 				finish();
 			
 			}
 			else if (v == imageView_back) {
+				Intent intent = new Intent(MyProfile.this,DashBoardActivity.class);
+				intent.putExtra("user", usermodel);
+				startActivity(intent);
 				finish();
 			
 			}
@@ -348,7 +355,12 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		// sign up response
 		else if (methodName.equals("users")) {
 			if (output.contains("UserId")) {
-
+				try{
+				usermodel = parser.parseSignUpResponse(output);
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 				AlertDialog.Builder alert = new AlertDialog.Builder(
 						MyProfile.this);
 				alert.setMessage("Profile updated successfully");

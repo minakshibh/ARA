@@ -87,8 +87,7 @@ public class GCMIntentService extends GCMBaseIntentService{
 			generateNotification(context, message);
 			Log.e("message", message);
 			
-		
-		}
+				}
 	}
 
 	protected void onDeletedMessages(Context context, int total) {
@@ -141,7 +140,12 @@ public class GCMIntentService extends GCMBaseIntentService{
 
 		Random r = new Random();
 		int random = r.nextInt(100);
-		notificationManager.notify(message.length() + random, notification);	     
+		try{
+		notificationManager.notify(message.length() + random, notification);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 

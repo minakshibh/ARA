@@ -304,7 +304,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			}
 			
 			ArrayAdapter<PaymentMode> spinnerArrayAdapter = new ArrayAdapter<PaymentMode>(this,
-					R.layout.spinner_dropdown, paymentModeList);
+					R.layout.spinner_text, paymentModeList);
 			spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 			paymentModeSpinner.setAdapter(spinnerArrayAdapter);
 			paymentModeSpinner.setSelection(selectedIndex);

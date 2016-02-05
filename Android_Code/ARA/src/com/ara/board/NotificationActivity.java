@@ -230,7 +230,7 @@ public class NotificationActivity extends Activity implements
 			SharedPreferences spref = getSharedPreferences("ara_prefs",MODE_PRIVATE);
 			String userid = spref.getString("userid", "");
 
-			String time = getCurrentDate();
+			String time =  spref.getString("currentdate", "");
 			String time1=spref.getString("Timestamp", time);
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("UserId", userid));
@@ -435,12 +435,12 @@ public class NotificationActivity extends Activity implements
 
 		DatabaseHandler db = new DatabaseHandler(this);
 		Notification noti = new Notification();
-
+		String userid=spref.getString("userid", "");
 		try{
 			for(int i=0;i<arrayList.size();i++)
 			{
 				noti = new Notification();
-				//noti.setNotificationTypeId(arrayList.get(i).getNotificationTypeId());
+				noti.setUserID(userid);
 				noti.setNotificationTitle(arrayList.get(i).getNotificationTitle());
 				noti.setNotificationText(arrayList.get(i).getNotificationText());
 				noti.setCreatedDate(arrayList.get(i).getCreatedDate());
@@ -462,8 +462,8 @@ public class NotificationActivity extends Activity implements
 		// Reading all data
 		DatabaseHandler db = new DatabaseHandler(this);
 		Log.d("Reading: ", "Reading all contacts..");
-		
-		List<Notification> listnoti = db.getAllNotification();
+		String userid=spref.getString("userid", "");
+		List<Notification> listnoti = db.getAllNotification(userid);
 		System.err.println("size=" + listnoti.size());
 		getDataBaseList = new ArrayList<Notification>();
 		for (Notification cn : listnoti) {
@@ -490,7 +490,7 @@ public class NotificationActivity extends Activity implements
 		}
 		setAdapter();
 	}
-	private String getCurrentDate()
+	/*private String getCurrentDate()
 	{
 		Calendar c = Calendar.getInstance();
 		System.out.println("Current time => " + c.getTime());
@@ -498,6 +498,6 @@ public class NotificationActivity extends Activity implements
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 		String formattedDate = df.format(c.getTime());
 		return formattedDate;
-	}
+	}*/
 
 }

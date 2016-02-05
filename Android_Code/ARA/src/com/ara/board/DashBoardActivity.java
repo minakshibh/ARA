@@ -1,6 +1,10 @@
 package com.ara.board;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -261,7 +265,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			String userid=spref.getString("userid", "");
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			
-
+			
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
 					DashBoardActivity.this, "post", "users/"+userid+"/logout", nameValuePairs,
 					true, "Please wait...",true);
@@ -280,8 +284,16 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		if(Util.isNetworkAvailable(DashBoardActivity.this)){
 			spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 			String userid=spref.getString("userid", "");
-		// [HttpPost]dashboard  (userId, Timestamp)
-				String time=spref.getString("Timestamp", "");
+		// [HttpPost]dashboard  (userId, Timestamp)currentdate
+			String date=spref.getString("currentdate", getCurrentDate());
+			String date_after="";
+				String time=spref.getString("Timestamp",""+date);
+				/*try{
+					date_after = formateDateFromstring("yyyy-MM-dd'T'HH:mm:ss.SSS", "yyyy-MM-dd'T'HH:mm:ss.SSS", time);
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}*/
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 				nameValuePairs.add(new BasicNameValuePair("userId", userid));
 				nameValuePairs.add(new BasicNameValuePair("Timestamp", time));		
@@ -291,6 +303,12 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				mWebPageTask.delegate = (AsyncResponseForARA) DashBoardActivity.this;
 				mWebPageTask.execute();	
 				
+			//ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				//AsyncTaskForARA mWebPageTask1 = new AsyncTaskForARA(
+						//DashBoardActivity.this, "get", "/users/"+userid+"/SendUserNotification", nameValuePairs,
+						//true, "Please wait...",true);
+				//mWebPageTask1.delegate = (AsyncResponseForARA) DashBoardActivity.this;
+				//mWebPageTask1.execute();
 		}
 		else
 		{
@@ -363,12 +381,46 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 				ed.putString("useremail", "");
 				ed.putString("userid", "");
 				ed.putString("access_token","");
+				ed.putString("Timestamp","");
 				ed.commit();
+				
 				Intent intent = new Intent(DashBoardActivity.this,LoginActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
 				}
+		
+	//else if(methodName.contains("SendUserNotification"))
+	//{
+	//	System.err.println(output);
+	//}
+	}
+	 public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate){
+
+		    Date parsed = null;
+		    String outputDate = "";
+
+		    SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
+		    SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
+
+		    try {
+		        parsed = df_input.parse(inputDate);
+		        outputDate = df_output.format(parsed);
+
+		    } catch (Exception e) { 
+		      //  LOGE(TAG, "ParseException - dateFormat");
+		    }
+
+		    return outputDate;
+
 		}
-	
+	 private String getCurrentDate()
+		{
+			Calendar c = Calendar.getInstance();
+			System.out.println("Current time => " + c.getTime());
+				//2016-01-15 14:15:00.000
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+			String formattedDate = df.format(c.getTime());
+			return formattedDate;
+		}
 }

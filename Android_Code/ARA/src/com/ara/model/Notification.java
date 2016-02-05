@@ -4,7 +4,16 @@ public class Notification {
 
 	
 	int id;
-String NotificationTypeId,NotificationTitle,NotificationText,IsScheduled,ScheduledAt,CreatedDate,ModifiedDate,read;
+	
+String NotificationTypeId,NotificationTitle,NotificationText,IsScheduled,ScheduledAt,CreatedDate,ModifiedDate,read,userID;
+	public String getUserID() {
+	return userID;
+}
+
+public void setUserID(String userID) {
+	this.userID = userID;
+}
+
 	public int getId() {
 		return id;
 	}
