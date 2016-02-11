@@ -591,13 +591,14 @@ public class ARAParser {
 	public ArrayList<Notification> parseNotification(String output) {
 		// TODO Auto-generated method stub
 		
-	/*	"Notifications": [
-    {
-      "NotificationId": 10,
-      "NotificationType": {
-        "ID": 5,
-        "Name": "Service"
-      },
+		/*[
+		  {
+		    "NotificationId": 51,
+		    "NotificationType": 
+		    {
+		      "ID": 5,
+		      "Name": "Service"
+		    },
       "NotificationTypeId": 0,
       "NotificationTitle": "Notification 2",
       "NotificationText": "This is the second service notification.",
@@ -628,10 +629,12 @@ public class ARAParser {
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = jsonArray.getJSONObject(i);
 			Notification noti=new Notification();
-			
+				
+				JSONObject NotificationType=jsonObject.getJSONObject("NotificationType");
+				String type=NotificationType.getString("Name");
 			
 			noti.setNotificationTypeId(jsonObject.getString("NotificationTypeId").toString());
-			noti.setNotificationTitle(jsonObject.getString("NotificationTitle").toString());
+			noti.setNotificationTitle(type+" - "+jsonObject.getString("NotificationTitle").toString());
 			noti.setNotificationText(jsonObject.getString("NotificationText").toString());
 			
 			noti.setIsScheduled(jsonObject.getString("IsScheduled").toString());

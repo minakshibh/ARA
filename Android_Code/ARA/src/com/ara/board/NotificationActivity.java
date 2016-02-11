@@ -1,12 +1,10 @@
 package com.ara.board;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -333,7 +331,7 @@ public class NotificationActivity extends Activity implements
 			ed.commit();
 			
 			Description.setText(notification.getNotificationText());
-			lblListHeader.setText("Service - "+notification.getNotificationTitle() + "");
+			lblListHeader.setText(notification.getNotificationTitle() + "");
 			date.setText(notification.getCreatedDate());
 			Description.setMaxLines(3);
 			Description.post(new Runnable() {
