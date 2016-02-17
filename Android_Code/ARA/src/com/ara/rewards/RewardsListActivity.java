@@ -1,6 +1,9 @@
 package com.ara.rewards;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import org.apache.http.NameValuePair;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -114,7 +117,7 @@ AsyncResponseForARA {
 	}
 	private void LoadRewardsList() {
 		// TODO Auto-generated method stub
-		
+	
 		String userid=spref.getString("userid", "");
 		
 		if (Util.isNetworkAvailable(RewardsListActivity.this)) {
@@ -147,6 +150,7 @@ AsyncResponseForARA {
 			else if (v == button_Earned){
 				rewardType="earned";
 				LoadRewardsList();
+				
 				rewardTypeHeader="PAYMENT EARNED";
 				txtHeader.setText(rewardTypeHeader);
 				button_Earned.setBackgroundColor(getResources().getColor(R.color.app_yellow));
@@ -225,8 +229,14 @@ AsyncResponseForARA {
 			
 			amount.setText("$ "+reward.getRewardAmount());
 			amount.setTypeface(BaseActivity.typeface_roboto);
-			
-			date.setText("Sold Date : "+reward.getSoldDate());
+			String date_after="";
+			try{
+			 date_after = formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", reward.getSoldDate());
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			date.setText("Sold Date : "+date_after);
 			date.setTypeface(BaseActivity.typeface_roboto);
 
 			return convertView;
@@ -239,14 +249,16 @@ AsyncResponseForARA {
 		System.err.println(output);
 		
 		ARAParser parser = new ARAParser(RewardsListActivity.this);
+	
 		rewardList = parser.parseRewardListResponse(output);
 				
 		if(rewardList.size()>0)
 		{
-		rewardListView.setAdapter(new RewardListAdapter(RewardsListActivity.this));
-		}
+			rewardListView.setAdapter(new RewardListAdapter(RewardsListActivity.this));
+			}
 		else
 		{
+			rewardListView.setAdapter(new RewardListAdapter(RewardsListActivity.this));
 			AlertDialog.Builder alert = new AlertDialog.Builder(
 					RewardsListActivity.this);
 			alert.setMessage("No rewards to display yet.");
@@ -260,4 +272,24 @@ AsyncResponseForARA {
 			alert.show();
 		}
 	}
+	
+	  public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate){
+
+		    Date parsed = null;
+		    String outputDate = "";
+
+		    SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
+		    SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
+
+		    try {
+		        parsed = df_input.parse(inputDate);
+		        outputDate = df_output.format(parsed);
+
+		    } catch (Exception e) { 
+		      //  LOGE(TAG, "ParseException - dateFormat");
+		    }
+
+		    return outputDate;
+
+		}
 }

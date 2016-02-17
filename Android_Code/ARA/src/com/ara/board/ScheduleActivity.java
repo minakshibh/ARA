@@ -96,7 +96,7 @@ public class ScheduleActivity   extends Activity implements
 		edittext_lastname.setTypeface(DashBoardActivity.typeface_roboto);
 
 		edittext_phonenumber = (EditText) findViewById(R.id.edittext_phonenumber);
-		edittext_phonenumber.setTypeface(DashBoardActivity.typeface_roboto);
+		edittext_phonenumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
 		edittext_email = (EditText) findViewById(R.id.edittext_email);
 		edittext_email.setTypeface(DashBoardActivity.typeface_roboto);
@@ -146,7 +146,7 @@ public class ScheduleActivity   extends Activity implements
 		{
 			edittext_email.setText(user_Model.getEmail());
 			edittext_phonenumber.setText(user_Model.getPhoneNumber());
-			edittext_phonenumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+			
 			edittext_firstname.setText(user_Model.getFirstName());
 			edittext_lastname.setText(user_Model.getLastName());
 			}

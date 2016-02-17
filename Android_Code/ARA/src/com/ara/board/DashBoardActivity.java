@@ -319,7 +319,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	@Override
 	public void processFinish(String output, String methodName) {
 		// TODO Auto-generated method stub
-		String reward="";
+		String rewardAmount="";
 		ARAParser parser = new ARAParser(DashBoardActivity.this);
 		if(methodName.contains("dashboard"))
 		{
@@ -350,10 +350,11 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 					
 					countOpen=referralType.getCount();
 				
-				reward=referralType.getAmount();
+				
 					//activeReferralAmount.setText("($"+referralType.getAmount()+")");
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_SOLD)){
 					soldCount=referralType.getCount();
+					rewardAmount=referralType.getAmount();
 					//soldReferralAmount.setText("($"+referralType.getAmount()+")");
 				}else if(referralType.getType().equalsIgnoreCase(STATUS_INACTIVE)){
 					//inActiveReferralCount.setText(referralType.getCount());
@@ -363,7 +364,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			}
 			
 			SoldAmount.setText(" "+soldCount);
-			activeRewardAmount.setText("$ "+reward);
+			activeRewardAmount.setText("$ "+rewardAmount);
 			activeReferralAmount.setText(countOpen);
 			/*if(referralTypeArray.get(0).getNotificationCount().equals("0"))
 			{
