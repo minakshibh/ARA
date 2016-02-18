@@ -164,6 +164,7 @@ public class SplashActivity extends Activity implements AsyncResponseForARA {
 				Editor ed = spref.edit();
 				ed.putString("usertoken", usermodel.getUserToken());
 				ed.putString("meaid", usermodel.getMEAID());
+				ed.putString("userimage", usermodel.getProfilePicName());
 				ed.commit();
 
 				/// notification code

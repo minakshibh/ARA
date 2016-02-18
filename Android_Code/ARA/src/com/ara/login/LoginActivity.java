@@ -297,6 +297,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 				
 				Intent intent = new Intent(LoginActivity.this,DashBoardActivity.class);
 				intent.putExtra("user", usermodel);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 				finish();
 			}
