@@ -51,6 +51,7 @@
          android:singleLine="true"
          android:text="n/a"
          android:gravity="end"
+         android:textStyle="bold"
          android:textColor="@color/black"
          android:textSize="@dimen/default_text_size" />
 

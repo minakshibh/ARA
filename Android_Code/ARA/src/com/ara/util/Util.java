@@ -5,22 +5,53 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.SocketException;
+import java.security.KeyStore;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +65,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.preference.PreferenceActivity.Header;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +73,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.ara.base.R;
+import com.ara.imageloader.Utils;
 
 public class Util {
 static 	Context context;
@@ -93,6 +126,25 @@ static int statusCode;
 	        return android.util.Patterns.PHONE.matcher(target).matches();
 	    }
 	}
+	 public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate){
+
+		    Date parsed = null;
+		    String outputDate = "";
+
+		    SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
+		    SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
+
+		    try {
+		        parsed = df_input.parse(inputDate);
+		        outputDate = df_output.format(parsed);
+
+		    } catch (Exception e) { 
+		      //  LOGE(TAG, "ParseException - dateFormat");
+		    }
+
+		    return outputDate;
+
+		}
 	public static String getResponseFromUrlPost(Boolean token,String functionName, List<NameValuePair> param, Context context){
 		String responseString = "";
 		SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
@@ -351,18 +403,38 @@ static int statusCode;
 		String responseString = "";
 		//SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
 		String getemail=email.trim();
-		try {
 		
-			
+		// ios code
+			 /*_postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
+			    
+			    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:
+			    @"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+			    //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
+			    //customer and upcoming
+			    NSLog(@"data post >>> %@",_postData);
+			    
+			    [request setHTTPMethod:@"POST"];
+			    [request addValue:@"jb-us-seller_api1.paypal.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
+			    [request addValue:@"WX4WTU3S8MY44S7F" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
+			    [request addValue:@"AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
+			    [request addValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
+			    [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
+			    [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
+			    
+			    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+			    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];*/
+		
+		
+		try{
 			HttpParams httpParameters = new BasicHttpParams();
 			int timeoutConnection = 60000;
 			HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
 			int timeoutSocket = 61000;
 			HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 			
-			
+			//_getNewHttpClient();https://svcs.paypal.com
 			DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
-			  HttpGet request = new HttpGet("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="+getemail+"&matchCriteria=NONE");
+			  HttpGet request = new HttpGet("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="+getemail+"&matchCriteria=NONE");
 	     
 	    	 request.setHeader("Accept", "application/json");
 	         request.setHeader("Content-type", "application/json");
@@ -414,8 +486,63 @@ static int statusCode;
 			//Util.alertMessage(context, "Please check your internet connection or try again later");
 		}
 		return responseString;
+			
+	/*		try {
+
+	            HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+
+	            DefaultHttpClient client = new DefaultHttpClient();
+
+	            SchemeRegistry registry = new SchemeRegistry();
+	            SSLSocketFactory socketFactory = SSLSocketFactory
+	                    .getSocketFactory();
+	            socketFactory
+	                    .setHostnameVerifier((X509HostnameVerifier) hostnameVerifier);
+	           // registry.register(new Scheme("http", socketFactory,80));
+	            registry.register(new Scheme("https", socketFactory, 443));
+	            SingleClientConnManager mgr = new SingleClientConnManager( client.getParams(), registry);
+	            DefaultHttpClient httpClient = new DefaultHttpClient(mgr,client.getParams());
+	            getHttpsClient(httpClient);
+	            HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
+	   
+	           
+	           
+	         
+	            HttpPost request = new HttpPost("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+	            +email+"&matchCriteria=NONE");
+	            
+	           
+	            
+	            
+	            request.setHeader("Accept", "application/json");
+		        request.setHeader("Content-type", "application/json");
+		        
+		     
+		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
+		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
+				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
+				 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
+				 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
+				 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
+				// request.setHeader("payKey","AP-70M68096ML426802W");
+			   
+				 HttpResponse response = httpClient.execute(request);
+
+				 HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
+
+	            //String response = "";
+	         
+				 responseString=response.toString();
+	            Log.e("my response", response.toString());
+
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	        }
+	        return responseString;*/
+	    }
 	
-	}	
+		
 	
 
 	
@@ -440,4 +567,9 @@ static int statusCode;
 	}
 	
 	
+	
+	
+	
+	
 }
+

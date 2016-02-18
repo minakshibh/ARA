@@ -71,20 +71,20 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 	protected String doInBackground(String... urls) {
 		if(method_type.equalsIgnoreCase("get"))
 		{
-		result = Util.getResponseFromUrlGet(token,methodName, nameValuePairs, activity);
-		}
+			result = Util.getResponseFromUrlGet(token,methodName, nameValuePairs, activity);
+			}
 		else if(method_type.equalsIgnoreCase("post"))
 		{
 			result = Util.getResponseFromUrlPost(token,methodName, nameValuePairs, activity);
-		}
+			}
 		else if(method_type.equalsIgnoreCase("paypal"))
 		{
 			result = Util.getResponsePostPayPal(token,methodName, nameValuePairs, email,activity);
-		}
+			}
 		else
 		{
 			result = Util.getResponseFromUrlGetHeader(methodName, nameValuePairs,name,pass, activity);
-		}
+			}
 		return result;
 	}
 

@@ -735,19 +735,35 @@ public class SubmitReferralActivity extends Activity implements
 				if (arrayList_Mea.size() > 0) {
 
 					getId = spref.getString("meaid", "");
+					
 					int i = 0;
 					for (MEA mea : arrayList_Mea) {
 						String id = mea.getId();
+						
 						if (getId.equals(id)) {
 							gettingStatePosition = i;
-							onlyTwo_Mea.add(arrayList_Mea.get(i));
+							if(!id.equals("221"))
+							{
+								onlyTwo_Mea.add(arrayList_Mea.get(i));
+								}
 						}
+						
 						i++;
 					}
 				}
 				mea_spinner.setSelection(gettingStatePosition);
-				MEA mea_Model = new MEA("Any Member Experience Advisor (Sales)","221","testkrishna@gmail.com");
-				onlyTwo_Mea.add(mea_Model);
+				/*MEA mea_Model = new MEA("Any Member Experience Advisor (Sales)","221","testkrishna@gmail.com");
+				onlyTwo_Mea.add(mea_Model);*/
+				String saleId="221";
+				int i = 0;
+				for (MEA mea : arrayList_Mea) {
+				String id = mea.getId();
+				 if(saleId.equals(id))
+				 {
+					onlyTwo_Mea.add(arrayList_Mea.get(i));
+					}
+				 i++;
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();

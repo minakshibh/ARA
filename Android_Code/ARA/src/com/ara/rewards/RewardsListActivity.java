@@ -48,7 +48,7 @@ AsyncResponseForARA {
 	private SharedPreferences spref;
 	private TextView button_Earned,button_Upcoming,txtPayment;
 	private String rewardType ="earned";
-	private String rewardTypeHeader ="PAYMENT EARNED";
+	private String rewardTypeHeader ="PAYMENT PAID";
 	
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -77,13 +77,21 @@ AsyncResponseForARA {
 		back.setTypeface(DashBoardActivity.typeface_roboto);
 		
 		button_Earned=(TextView)findViewById(R.id.button_Earned);
-		button_Earned.setTypeface(DashBoardActivity.typeface_roboto);
+		button_Earned.setTypeface(DashBoardActivity.typeface_timeburner);
 		
 		button_Upcoming=(TextView)findViewById(R.id.button_Upcoming);
-		button_Upcoming.setTypeface(DashBoardActivity.typeface_roboto);
+		button_Upcoming.setTypeface(DashBoardActivity.typeface_timeburner);
 		
 		rewardListView = (ListView)findViewById(R.id.rewardListView);
 		backArrow = (ImageView)findViewById(R.id.back_arrow);
+		
+		rewardTypeHeader="PAYMENT PAID";
+		txtHeader.setText(rewardTypeHeader);
+		button_Earned.setBackgroundColor(getResources().getColor(R.color.app_yellow));
+		button_Earned.setTextColor(getResources().getColor(R.color.black));
+		
+		button_Upcoming.setTextColor(getResources().getColor(R.color.white));
+		button_Upcoming.setBackgroundColor(getResources().getColor(R.color.black));
 		
 	}
 	private void setOnClickListener() {
@@ -151,7 +159,7 @@ AsyncResponseForARA {
 				rewardType="earned";
 				LoadRewardsList();
 				
-				rewardTypeHeader="PAYMENT EARNED";
+				rewardTypeHeader="PAYMENT PAID";
 				txtHeader.setText(rewardTypeHeader);
 				button_Earned.setBackgroundColor(getResources().getColor(R.color.app_yellow));
 				button_Earned.setTextColor(getResources().getColor(R.color.black));
@@ -161,7 +169,7 @@ AsyncResponseForARA {
 			}
 			else if (v == button_Upcoming){
 			  rewardType="upcoming";
-			  rewardTypeHeader="PAYMENT UPCOMING";
+			  rewardTypeHeader="PAYMENT PENDING";
 			  txtHeader.setText(rewardTypeHeader);
 			
 			  button_Upcoming.setBackgroundColor(getResources().getColor(R.color.app_yellow));
@@ -231,7 +239,7 @@ AsyncResponseForARA {
 			amount.setTypeface(BaseActivity.typeface_roboto);
 			String date_after="";
 			try{
-			 date_after = formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", reward.getSoldDate());
+			 date_after = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", reward.getSoldDate());
 			}catch(Exception e)
 			{
 				e.printStackTrace();
@@ -273,23 +281,5 @@ AsyncResponseForARA {
 		}
 	}
 	
-	  public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate){
-
-		    Date parsed = null;
-		    String outputDate = "";
-
-		    SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
-		    SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
-
-		    try {
-		        parsed = df_input.parse(inputDate);
-		        outputDate = df_output.format(parsed);
-
-		    } catch (Exception e) { 
-		      //  LOGE(TAG, "ParseException - dateFormat");
-		    }
-
-		    return outputDate;
-
-		}
+	 
 }

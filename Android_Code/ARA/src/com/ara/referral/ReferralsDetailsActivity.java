@@ -147,7 +147,13 @@ public class ReferralsDetailsActivity extends Activity {
 					String newDate="";
 					if(reward.getCreatedDate()!=null)
 					{
-					 	newDate=parseDateToddMMyyyy(reward.getCreatedDate());
+					 	//newDate=parseDateToddMMyyyy(reward.getCreatedDate());//"yyyy-dd-MM HH:mm:ss";
+						try{
+							newDate = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", reward.getCreatedDate());
+							}catch(Exception e)
+							{
+								e.printStackTrace();
+							}
 						}
 					txtSubmittedDate.setText(newDate);
 					
@@ -167,7 +173,12 @@ public class ReferralsDetailsActivity extends Activity {
 					String newDate1="";
 					if(reward.getSoldDate()!=null)
 					{
-					 	newDate1=parseDateToddMMyyyy(reward.getSoldDate());
+						try{
+							newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", reward.getSoldDate());
+							}catch(Exception e)
+							{
+								e.printStackTrace();
+							}
 						}
 					txtSoldDate.setText(newDate1);
 					
@@ -231,7 +242,7 @@ public class ReferralsDetailsActivity extends Activity {
 					colorStripe.setBackgroundColor(getResources().getColor(
 							R.color.bright_orange));
 	
-				header.setText("CURRENT REFERRAL ID");// + reward.getUniqueReferralNumber());
+				header.setText("CURRENT REFERRAL");// + reward.getUniqueReferralNumber());
 				
 			
 			
@@ -280,7 +291,12 @@ else
 							String newDate1="";
 							if(referral.getCreatedDate()!=null)
 							{
-							 	newDate1=parseDateToddMMyyyy(referral.getCreatedDate());
+								try{
+									newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
+									}catch(Exception e)
+									{
+										e.printStackTrace();
+									}
 								}
 							txtSubmittedDate.setText(newDate1);
 							
@@ -301,7 +317,12 @@ else
 							String newDate1="";
 							if(referral.getSoldDate()!=null)
 							{
-							 	newDate1=parseDateToddMMyyyy(referral.getSoldDate());
+								try{
+									newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getSoldDate());
+									}catch(Exception e)
+									{
+										e.printStackTrace();
+									}
 								}
 							txtSoldDate.setText(newDate1);
 							
@@ -395,7 +416,7 @@ else
 		}
 	};
 	
-	public String parseDateToddMMyyyy(String time) {
+	/*public String parseDateToddMMyyyy(String time) {
 	    String inputPattern = "yyyy-dd-MM HH:mm:ss";
 	    String outputPattern = "MM/dd/yyyy";
 	    SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
@@ -411,5 +432,5 @@ else
 	        e.printStackTrace();
 	    }
 	    return str;
-	}
+	}*/
 }

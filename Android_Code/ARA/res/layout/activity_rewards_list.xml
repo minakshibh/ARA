@@ -62,7 +62,7 @@
         android:background="@color/app_yellow"
         android:gravity="start|center"
         android:padding="5dp"
-         android:text="PAYMENT EARNED"
+         android:text="PAYMENT PAID"
         android:textColor="@color/app_blue" />
  <LinearLayout
      android:id="@+id/layPayment"
@@ -108,7 +108,7 @@
             android:background="@color/app_yellow"
             android:gravity="center"
             android:padding="10dp"
-            android:text="EARNED" />
+            android:text="PAID" />
 
         <TextView
             android:id="@+id/button_Upcoming"
@@ -119,7 +119,7 @@
             android:background="@color/black"
             android:gravity="center"
             android:padding="10dp"
-            android:text="UPCOMING"
+            android:text="PENDING"
             android:textColor="@color/white" />
     </LinearLayout>
 

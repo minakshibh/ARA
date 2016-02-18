@@ -493,7 +493,13 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			if (referral.getReferralStatus().equalsIgnoreCase(DashBoardActivity.STATUS_SOLD)) {
 				if(referral.getSoldDate()!=null)
 				{
-					newDate=parseDateToddMMyyyy(referral.getSoldDate());
+					try{
+						newDate = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getSoldDate());
+						}catch(Exception e)
+						{
+							e.printStackTrace();
+						}
+					
 					}
 				date.setText("Sold date: " + newDate);
 				date.setTypeface(BaseActivity.typeface_roboto);
@@ -503,7 +509,12 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				String newDate1="";
 				if(referral.getCreatedDate()!=null)
 				{
-					 newDate1=parseDateToddMMyyyy(referral.getCreatedDate());
+					try{
+						newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
+						}catch(Exception e)
+						{
+							e.printStackTrace();
+						}
 					}
 				date.setText("Submitted date: " + newDate1);
 				if (referral.getReferralStatus().equalsIgnoreCase(
@@ -567,7 +578,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			listView.setAdapter(new ReferralListAdapter(ReferralListActivity.this));
 		}
 	}
-	public String parseDateToddMMyyyy(String time) {
+	/*public String parseDateToddMMyyyy(String time) {
 	    String inputPattern = "yyyy-dd-MM HH:mm:ss";
 	    String outputPattern = "MM/dd/yyyy";
 	    SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
@@ -583,5 +594,5 @@ private View.OnClickListener listener = new View.OnClickListener() {
 	        e.printStackTrace();
 	    }
 	    return str;
-	}
+	}*/
 }

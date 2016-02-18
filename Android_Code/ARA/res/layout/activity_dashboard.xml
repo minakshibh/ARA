@@ -209,7 +209,7 @@
 	           android:layout_height="wrap_content"
 	           android:gravity="center_vertical"
 	           android:textColor="@color/dark_blue"
-	           android:text="0"
+	           android:text=""
 	            android:textStyle="bold"
 	           android:textSize="13sp" />
 	       <TextView
@@ -225,7 +225,7 @@
 	           android:layout_height="wrap_content"
 	           android:gravity="center_vertical"
 	           android:textColor="@color/dark_blue"
-	           android:text="0"
+	           android:text=""
 	           android:textStyle="bold"
 	           android:textSize="13sp" />
 	          <TextView

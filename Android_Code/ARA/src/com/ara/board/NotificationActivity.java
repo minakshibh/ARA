@@ -1,7 +1,9 @@
 package com.ara.board;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -325,6 +327,7 @@ public class NotificationActivity extends Activity implements
 			{
 				ed.putString("TS"+userId, getDataBaseList.get(0).getCreatedDate());
 				}
+			
 			else{
 				ed.putString("TS"+userId, getDataBaseList.get(0).getCreatedDate());
 			}
@@ -332,7 +335,14 @@ public class NotificationActivity extends Activity implements
 			
 			Description.setText(notification.getNotificationText());
 			lblListHeader.setText(notification.getNotificationTitle() + "");
-			date.setText(notification.getCreatedDate());
+			String date_after="";
+			try{
+				 date_after = formateDateFromstring("yyyy-MM-dd'T'hh:mm:ss.SSS", "MM/dd/yyyy hh:mm a", notification.getCreatedDate());
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			date.setText(date_after);
 			Description.setMaxLines(3);
 			Description.post(new Runnable() {
 			    @Override
@@ -503,5 +513,23 @@ public class NotificationActivity extends Activity implements
 		String formattedDate = df.format(c.getTime());
 		return formattedDate;
 	}*/
+	 public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate){
 
+		    Date parsed = null;
+		    String outputDate = "";
+
+		    SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
+		    SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
+
+		    try {
+		        parsed = df_input.parse(inputDate);
+		        outputDate = df_output.format(parsed);
+
+		    } catch (Exception e) { 
+		      //  LOGE(TAG, "ParseException - dateFormat");
+		    }
+
+		    return outputDate;
+
+		}
 }
