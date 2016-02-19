@@ -1,5 +1,7 @@
 package com.ara.profile;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -9,7 +11,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
@@ -18,7 +23,10 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.base.BaseActivity;
@@ -50,6 +58,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 	private String imageurl="",phonenumber="";
 	private ImageLoader imageLoader;
 	LinearLayout LinearLayout_footer;
+	private ProgressBar progressBar;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -69,7 +78,8 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		editText_name = (EditText) findViewById(R.id.editText_name);
 		editText_name.setTypeface(DashBoardActivity.typeface_roboto);
-		
+		progressBar=(ProgressBar)findViewById(R.id.progressBar);
+		progressBar.setVisibility(View.GONE);
 		editText_email = (EditText) findViewById(R.id.editText_email);
 		editText_email.setTypeface(BaseActivity.typeface_roboto);
 		editText_phone = (EditText) findViewById(R.id.editText_phone);
@@ -312,8 +322,8 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 				ed.putString("meaid", usermodel.getMEAID());
 				ed.putString("userimage", usermodel.getProfilePicName());
 				ed.commit();
+				
 				editText_name.setText(usermodel.getFirstName()) ;
-						
 				editText_lastname.setText(usermodel.getLastName());
 				editText_email.setText(usermodel.getEmail());
 				textView_username.setText(usermodel.getUserName());
@@ -334,7 +344,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 				
 					editText_mea.setText(usermodel.getMEAName());
 				}
-				imageurl=usermodel.getProfilePicName();
+			
 				
 				purchase = usermodel.getPurchasedBefore();
 
@@ -349,7 +359,10 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 
 				editText_lastname.setText(usermodel.getLastName());
 				  imageLoader = new ImageLoader(MyProfile.this);
-			     imageLoader.DisplayImage(imageurl, imageView_profilepic);
+				  imageurl=usermodel.getProfilePicName();
+				  System.err.println("MyProfile="+imageurl);
+				new LoadImage().execute(imageurl);
+			    // imageLoader.DisplayImage(imageurl, imageView_profilepic);
 			}
 
 		}
@@ -429,7 +442,36 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		loginAPI();
 		setOnClickListener();
 		disableData();
-	
-		
-	}
+		}
+	 public class LoadImage extends AsyncTask<String, String, Bitmap> {
+	     Bitmap bitmap;
+		 @Override
+	        protected void onPreExecute() {
+	            super.onPreExecute();
+	           /* pDialog = new ProgressDialog(MainActivity.this);
+	            pDialog.setMessage("Loading Image ....");
+	            pDialog.show();*/
+	            progressBar.setVisibility(View.VISIBLE);
+	 	        }
+	         protected Bitmap doInBackground(String... args) {
+	             try {
+	                   bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+	 
+	            } catch (Exception e) {
+	                  e.printStackTrace();
+	            }
+	            return bitmap;
+	         }
+	       protected void onPostExecute(Bitmap image) {
+	    	   progressBar.setVisibility(View.GONE);
+	            if(image != null){
+	            	 imageView_profilepic.setImageBitmap(image);
+	             //pDialog.dismiss();
+	             }else{
+	             //pDialog.dismiss();
+	             Toast.makeText(MyProfile.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+	 
+	             }
+	         }
+	     }
 }

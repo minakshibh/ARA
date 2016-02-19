@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketException;
+import java.net.URL;
 import java.security.KeyStore;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -62,14 +63,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.preference.PreferenceActivity.Header;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ara.base.R;
@@ -565,10 +570,57 @@ static int statusCode;
 			
 		return statusCode;
 		
-	}
+		}
 	
 	
-	
+	 public static class LoadImage extends AsyncTask<String, String, Bitmap> {
+		 Bitmap bitmap;
+		 static Context ctx1;
+		 static ImageView imageview;
+		 static String url;
+		 public static void execute(Context imageUploadActivity,
+					ImageView imageView_profile, String imageurl) {
+				// TODO Auto-generated method stub
+			ctx1= imageUploadActivity;
+			 imageview=imageView_profile;
+			 url=imageurl;
+				
+			}
+		
+	        @Override
+	        protected void onPreExecute() {
+	            super.onPreExecute();
+	           /* pDialog = new ProgressDialog(MainActivity.this);
+	            pDialog.setMessage("Loading Image ....");
+	            pDialog.show();*/
+	 
+	        }
+	         protected Bitmap doInBackground(String... args) {
+	             try {
+	                   bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+	 
+	            } catch (Exception e) {
+	                  e.printStackTrace();
+	            }
+	            return bitmap;
+	         }
+	 
+	         protected void onPostExecute(Bitmap image) {
+	 
+	             if(image != null){
+	            	 imageview.setImageBitmap(image);
+	            // pDialog.dismiss();
+	 
+	             }else{
+	 
+	             //pDialog.dismiss();
+	             Toast.makeText(ctx1, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+	 
+	             }
+	         }
+			
+	     }
+	 
 	
 	
 	

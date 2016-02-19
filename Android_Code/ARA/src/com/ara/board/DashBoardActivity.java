@@ -1,5 +1,7 @@
 package com.ara.board;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,8 +15,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
@@ -23,9 +28,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.base.BaseActivity;
@@ -35,6 +43,7 @@ import com.ara.login.AboutActivity;
 import com.ara.login.LoginActivity;
 import com.ara.model.ReferralType;
 import com.ara.model.User;
+import com.ara.profile.ImageUploadActivity;
 import com.ara.profile.MyProfile;
 import com.ara.referral.ReferralListActivity;
 import com.ara.referral.SubmitReferralActivity;
@@ -66,6 +75,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	public static Typeface typeface_roboto,typeface_timeburner;
 	public static String notiCount="0";
 	private int activeCount=0;
+	private ProgressBar progressBar;
 
 	private String countOpen="0";
 	public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +111,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		TxtNotiCount=(TextView)findViewById(R.id.TxtNotiCount);
 		TxtNotiCount.setTypeface(typeface_roboto);
 		TxtNotiCount.setVisibility(View.GONE);
-		
+		progressBar=(ProgressBar)findViewById(R.id.progressBar);
+		progressBar.setVisibility(View.GONE);
 		
 		activeReferralAmount = (TextView)findViewById(R.id.activeReferralAmount);
 		activeReferralAmount.setTypeface(typeface_roboto);
@@ -170,8 +181,10 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		
 		imageurl=spref.getString("userimage", "");
-		imageLoader = new ImageLoader(DashBoardActivity.this);
-	    imageLoader.DisplayImage(imageurl, imageView_profilepic);
+		//imageLoader = new ImageLoader(DashBoardActivity.this);
+		System.err.println("dashboard="+imageurl);
+	    //imageLoader.DisplayImage(imageurl, imageView_profilepic);
+		new LoadImage().execute(imageurl);
 	}
 
 	private void setClickListeners() {
@@ -423,4 +436,36 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			String formattedDate = df.format(c.getTime());
 			return formattedDate;
 		}
+	 public class LoadImage extends AsyncTask<String, String, Bitmap> {
+	     Bitmap bitmap;
+		 @Override
+	        protected void onPreExecute() {
+	            super.onPreExecute();
+	        	progressBar.setVisibility(View.VISIBLE);
+	           /* pDialog = new ProgressDialog(MainActivity.this);
+	            pDialog.setMessage("Loading Image ....");
+	            pDialog.show();*/
+	 	        }
+	         protected Bitmap doInBackground(String... args) {
+	             try {
+	                   bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+	 
+	            } catch (Exception e) {
+	                  e.printStackTrace();
+	            }
+	            return bitmap;
+	         }
+	       protected void onPostExecute(Bitmap image) {
+	    	   progressBar.setVisibility(View.GONE);
+	            if(image != null){
+	            	 imageView_profilepic.setImageBitmap(image);
+	             //pDialog.dismiss();
+	             }else{
+	             //pDialog.dismiss();
+	             Toast.makeText(DashBoardActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+	 
+	             }
+	         }
+	     }
+	 
 }

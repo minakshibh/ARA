@@ -158,7 +158,8 @@ public class SplashActivity extends Activity implements AsyncResponseForARA {
 
 				Util.ToastMessage(SplashActivity.this,
 						"Invalid User Name and Password");
-			} else {
+			} 
+			else {
 				usermodel = new User();
 				usermodel = parser.parseSignUpResponse(output);
 				Editor ed = spref.edit();
@@ -167,6 +168,7 @@ public class SplashActivity extends Activity implements AsyncResponseForARA {
 				ed.putString("userimage", usermodel.getProfilePicName());
 				ed.commit();
 
+				System.err.println("splash"+usermodel.getProfilePicName());
 				/// notification code
 				ServerUtilities sUtil = new ServerUtilities();
 				sUtil.deviceRegister(SplashActivity.this);

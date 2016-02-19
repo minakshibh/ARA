@@ -34,14 +34,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ara.base.BaseActivity;
 import com.ara.base.R;
+import com.ara.board.DashBoardActivity;
 import com.ara.imageloader.ImageLoader;
 import com.ara.util.ExifUtils;
 import com.ara.util.Util;
+import com.ara.util.Util.LoadImage;
 
 public class ImageUploadActivity extends Activity {
 
@@ -50,6 +54,8 @@ public class ImageUploadActivity extends Activity {
 	private String mCurrentPhotoPath = "", imagePath = "";
 	private RelativeLayout Layout_middle;
 	private SharedPreferences spref;
+	private String  imageurl=null;
+	private ProgressBar progressBar;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,14 +73,17 @@ public class ImageUploadActivity extends Activity {
 		textView_back.setTypeface(BaseActivity.typeface_roboto);
 		textView_edit = (TextView) findViewById(R.id.textView_edit);
 		textView_edit.setTypeface(BaseActivity.typeface_roboto);
-
+		progressBar=(ProgressBar)findViewById(R.id.progressBar);
+		progressBar.setVisibility(View.GONE);
 		setOnClickListener();
 		
-		String imageurl=getIntent().getStringExtra("url");
+		 imageurl=getIntent().getStringExtra("url");
 		if(imageurl!=null)
 		{
-		 ImageLoader imageLoader = new ImageLoader(ImageUploadActivity.this);
-	     imageLoader.DisplayImage(imageurl, imageView_profile);
+		// ImageLoader imageLoader = new ImageLoader(ImageUploadActivity.this);
+	    // imageLoader.DisplayImage(imageurl, imageView_profile);
+			System.err.println("image="+imageurl);
+			new LoadImage().execute(imageurl);
 		}
 		selectImage();
 	}
@@ -427,4 +436,35 @@ public class ImageUploadActivity extends Activity {
 		}
 		return sb.toString();
 	}
+	public class LoadImage extends AsyncTask<String, String, Bitmap> {
+	     Bitmap bitmap;
+		 @Override
+	        protected void onPreExecute() {
+	            super.onPreExecute();
+	            progressBar.setVisibility(View.VISIBLE);
+	           /* pDialog = new ProgressDialog(MainActivity.this);
+	            pDialog.setMessage("Loading Image ....");
+	            pDialog.show();*/
+	 	        }
+	         protected Bitmap doInBackground(String... args) {
+	             try {
+	                   bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+	 
+	            } catch (Exception e) {
+	                  e.printStackTrace();
+	            }
+	            return bitmap;
+	         }
+	       protected void onPostExecute(Bitmap image) {
+	    		progressBar.setVisibility(View.GONE);
+	            if(image != null){
+	            	imageView_profile.setImageBitmap(image);
+	             //pDialog.dismiss();
+	             }else{
+	             //pDialog.dismiss();
+	             Toast.makeText(ImageUploadActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+	 
+	             }
+	         }
+	     }
 }

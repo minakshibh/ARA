@@ -277,7 +277,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 				ed.putString("usertoken", usermodel.getUserToken());
 				ed.putString("meaid", usermodel.getMEAID());
 				ed.commit();
-
+				System.err.println("login"+usermodel.getProfilePicName());
 				if(!spref.getString(usermodel.getUserId().trim(), "").equals(""))
 				{
 										
