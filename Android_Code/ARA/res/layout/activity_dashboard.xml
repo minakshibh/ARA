@@ -11,21 +11,14 @@
         android:background="@color/blue_header"
         android:orientation="horizontal" >
 
-     <ImageView
-        
-            android:layout_width="0dp"
-            android:layout_weight=".1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-           
-          
-             />
+    
 
          <RelativeLayout
               android:id="@+id/RelNotification"
         	android:layout_height="fill_parent"
          	android:layout_width="0dp"
             android:layout_weight=".2"
+            android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             
@@ -51,7 +44,7 @@
                android:layout_height="wrap_content"
                android:layout_alignParentLeft="true"
                android:layout_marginTop="-10dp"
-           		android:gravity="center"
+           	   android:gravity="center"
                android:text="1"
                android:textSize="8dp"
                android:layout_marginLeft="12dp"
@@ -63,7 +56,15 @@
               />
 
             </RelativeLayout>
+           <ImageView
+        
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+           
           
+             />
 
       <ImageView
             android:src="@drawable/header_icon"
@@ -84,7 +85,7 @@
             android:layout_marginRight="5dp"
 			android:gravity="center"
             android:text="Submit Referral"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:background="@drawable/yellow_rounded_btn"
             android:textColor="@color/black" />
     </LinearLayout>
@@ -113,12 +114,13 @@
             android:id="@+id/lay_rel_img"
             android:layout_gravity="center"
             android:layout_marginTop="3dp"
-            android:background="@drawable/profile_image">
+           >
  <com.ara.util.CircularImageView
                     android:id="@+id/imageView_profilepic"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
+                     android:background="@drawable/profile_image"
                     /> 
            <!--  <ImageView
                 android:layout_width="80dp"
@@ -146,8 +148,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Profile"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
                     android:background="@drawable/yellow_rounded_btn"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"

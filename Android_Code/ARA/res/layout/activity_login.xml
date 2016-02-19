@@ -155,7 +155,7 @@
                  android:id="@+id/txt_anaccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don't have an account?"
+                android:text="Already have an account?"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 

@@ -124,7 +124,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/gray" />
+                android:background="@color/light_blue" />
 
             <EditText
                 android:id="@+id/edittext_firstname"
@@ -168,7 +168,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/gray" />
+                android:background="@color/light_blue" />
 
             <EditText
                 android:id="@+id/edittext_lastname"
@@ -212,7 +212,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/gray" />
+                android:background="@color/light_blue" />
 
             <EditText
                 android:id="@+id/edittext_phonenumber"
@@ -259,7 +259,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/gray" />
+                android:background="@color/light_blue" />
 
             <EditText
                 android:id="@+id/edittext_email"
@@ -323,7 +323,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/gray" />
+                android:background="@color/light_blue" />
  	<RelativeLayout
              android:layout_weight="8"
             android:layout_width="0dp"
@@ -372,7 +372,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/gray" />
+                android:background="@color/light_blue" />
 
             <EditText
                 android:id="@+id/edittext_comment"

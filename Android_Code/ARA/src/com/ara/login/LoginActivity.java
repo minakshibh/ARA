@@ -70,9 +70,9 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 	    String FILENAME = "AndroidSSO_data";
 	  	Context context = LoginActivity.this;
 	    // please put your APP-ID below
-	    String Facebook_APP_ID = "1466930973610943";
+	    //String Facebook_APP_ID = "557158811114993";// my account "1466930973610943" ;
 	    String access_token;
-	    Boolean Connectiontimeout = false;
+	    Boolean Connectiontimeout = true;
 	    String imageURL = "";
 	    String userName = "";
 	    String gender = "";
@@ -419,7 +419,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 	  protected void onPostExecute(String result) {
 	   pd.dismiss();
 	   System.err.println("name"+first_name+"userName"+userName+"");
-	  if (Connectiontimeout != true) {
+	  if (Connectiontimeout) {
 		  
 		  try{
 		  String[] separated = emailAddress.split("@");
@@ -489,13 +489,13 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 	    gender = jsonObj.getString("gender");
 	    emailAddress = jsonObj.getString("email");
 	    imageURL = jsonObjUrl.getString("url");
-	  
+	    Connectiontimeout = true;
 	  //  profilePic = BitmapFactory.decodeStream((InputStream) new URL(imageURL).getContent());
 	   }
 
 	  } catch (Exception e) {
 		  e.printStackTrace();
-	   Connectiontimeout = true;
+	   Connectiontimeout = false;
 	  }
 	 }
 	 private String getCurrentDate()

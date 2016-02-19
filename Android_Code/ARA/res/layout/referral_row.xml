@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" 
-   android:orientation="horizontal"
-    android:padding="10dp">
+    android:orientation="horizontal"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:src="@drawable/indirect"
+       android:src="@drawable/direct"
        android:layout_alignParentLeft="true"
        android:layout_centerInParent="true"
         />
@@ -40,10 +40,9 @@
             android:id="@+id/date"/>
     </LinearLayout>
     <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-        
-        android:text="Open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OPEN"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:id="@+id/referralStatus"

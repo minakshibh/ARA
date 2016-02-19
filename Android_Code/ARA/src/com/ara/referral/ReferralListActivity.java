@@ -478,8 +478,8 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			userID.setText(referral.getFirstName() + " "
 					+ referral.getLastName());
 			userID.setTypeface(BaseActivity.typeface_roboto);
-			status.setText(referral.getReferralStatus());
-			status.setTypeface(BaseActivity.typeface_roboto);
+			status.setText(referral.getReferralStatus().toUpperCase());
+			//status.setTypeface(BaseActivity.typeface_roboto);
 
 			if(referral.getReferralType().equalsIgnoreCase("direct"))
 			{
@@ -516,7 +516,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 							e.printStackTrace();
 						}
 					}
-				date.setText("Submitted date: " + newDate1);
+				date.setText("Submit Date: " + newDate1);
 				if (referral.getReferralStatus().equalsIgnoreCase(
 						DashBoardActivity.STATUS_OPEN)) {
 					status.setTextColor(getResources().getColor(R.color.bright_green));

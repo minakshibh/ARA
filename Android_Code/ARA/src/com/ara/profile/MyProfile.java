@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
@@ -82,6 +83,7 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 		
 		lbl_changepass= (TextView) findViewById(R.id.lbl_changepass);
 		text_changepass = (TextView) findViewById(R.id.text_changepass);
+		text_changepass.setPaintFlags(text_changepass.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 		textView_username = (TextView) findViewById(R.id.textView_username);
 		//text_changepass.setTypeface(BaseActivity.typeface_roboto);
 		editText_lastname = (EditText) findViewById(R.id.editText_lastname);

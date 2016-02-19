@@ -59,7 +59,7 @@ public class ChangePasswordActivity extends Activity implements AsyncResponseFor
 
 		confirm_pass = (EditText) findViewById(R.id.confirm_pass);
 		btn_changepass = (Button) findViewById(R.id.btn_changepass);
-		btn_changepass.setTypeface(DashBoardActivity.typeface_roboto);
+		//btn_changepass.setTypeface(DashBoardActivity.typeface_roboto);
 
 		imageView_back = (ImageView) findViewById(R.id.imageView_back);
 		textView_back = (TextView) findViewById(R.id.textView_back);

@@ -243,12 +243,11 @@
         android:id="@+id/seeReferralDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
         android:gravity="center|bottom"
         android:padding="20dp"
-        android:text="SEE REFERRAL'S DETAIL"
+        android:text="SEE REFERRAL&apos;S DETAIL"
+        android:layout_gravity="bottom"
         android:textColor="@color/app_blue"
-   	
         android:textStyle="bold" />
 
 </LinearLayout>
