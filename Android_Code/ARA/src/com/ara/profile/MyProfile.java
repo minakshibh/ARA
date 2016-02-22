@@ -227,17 +227,15 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 				}
 			}
 			else if (v == textView_back) {
-				Intent intent = new Intent(MyProfile.this,DashBoardActivity.class);
-				intent.putExtra("user", usermodel);
-				startActivity(intent);
-				finish();
 			
+				goToBack();
 			}
 			else if (v == imageView_back) {
-				Intent intent = new Intent(MyProfile.this,DashBoardActivity.class);
+				goToBack();
+				/*Intent intent = new Intent(MyProfile.this,DashBoardActivity.class);
 				intent.putExtra("user", usermodel);
 				startActivity(intent);
-				finish();
+				finish();*/
 			
 			}
 			
@@ -474,4 +472,15 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 	             }
 	         }
 	     }
+	 @Override
+	public void onBackPressed() {
+		 goToBack();
+	 }
+	 private void goToBack()
+	 {
+			Intent intent = new Intent(MyProfile.this,DashBoardActivity.class);
+			intent.putExtra("user", usermodel);
+			startActivity(intent);
+			finish();
+	 	}
 }

@@ -43,6 +43,8 @@ import com.ara.base.BaseActivity;
 import com.ara.base.R;
 import com.ara.board.DashBoardActivity;
 import com.ara.imageloader.ImageLoader;
+import com.ara.rewards.RewardDetailsActivity;
+import com.ara.rewards.RewardsListActivity;
 import com.ara.util.ExifUtils;
 import com.ara.util.Util;
 import com.ara.util.Util.LoadImage;
@@ -102,7 +104,7 @@ public class ImageUploadActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			if (v == imageView_back) {
-				finish();
+				goToBack();
 
 			} else if (v == textView_edit) {
 				
@@ -110,7 +112,7 @@ public class ImageUploadActivity extends Activity {
 				
 			} else if (v == textView_back) {
 
-				finish();
+				goToBack();
 			}
 			else if (v == Layout_middle) {
 
@@ -161,7 +163,7 @@ public class ImageUploadActivity extends Activity {
 							Intent.createChooser(intent, "Select Picture"), 2);
 				} else if (options[item].equals("Cancel")) {
 					dialog.dismiss();
-					finish();
+					goToBack();
 				}
 			}
 		});
@@ -466,4 +468,16 @@ public class ImageUploadActivity extends Activity {
 	             }
 	         }
 	     }
+	
+	private void goToBack()
+	{
+		/*Intent intent=new Intent(ImageUploadActivity.this,MyProfile.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+	    startActivity(intent);*/
+		finish();
+		}
+	@Override
+	public void onBackPressed() {
+		goToBack();
+	}
 }

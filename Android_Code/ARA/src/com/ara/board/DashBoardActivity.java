@@ -467,5 +467,12 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	             }
 	         }
 	     }
+	 @Override
+	public void onBackPressed() {
+		
+		finish();
+		moveTaskToBack(true);
+		
+	}
 	 
 }
