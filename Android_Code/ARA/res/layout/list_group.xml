@@ -62,6 +62,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:text="Title"
         android:singleLine="true"
@@ -83,6 +84,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:layout_marginRight="15dp"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:text="description"
         android:textSize="13dp" />

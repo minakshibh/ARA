@@ -1,5 +1,6 @@
 package com.ara.util;
 
+import android.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +15,7 @@ import android.widget.ImageView;
 
 public class CircularImageView extends ImageView
 {
-    private int borderWidth = 4;
+    private int borderWidth = 2;
     private int viewWidth;
     private int viewHeight;
     private Bitmap image;
@@ -46,10 +47,10 @@ public class CircularImageView extends ImageView
         paint = new Paint();
         paint.setAntiAlias(true);
         paintBorder = new Paint();
-        //setBorderColor(Color.YELLOW);
+        setBorderColor(Color.parseColor("#ffd11c"));
         paintBorder.setAntiAlias(true);
         this.setLayerType(LAYER_TYPE_SOFTWARE, paintBorder);
-        paintBorder.setShadowLayer(0.0f, 0.0f, 0.0f, Color.YELLOW);
+        paintBorder.setShadowLayer(0.0f, 0.0f, 0.0f, Color.parseColor("#ffd11c"));
     }
 
     public void setBorderWidth(int borderWidth)

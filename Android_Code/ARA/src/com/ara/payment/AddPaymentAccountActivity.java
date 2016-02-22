@@ -84,7 +84,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 		emailId =(EditText) findViewById(R.id.emailId);
 		paymentModeSpinner = (Spinner) findViewById(R.id.account_spinner);
 		save = (Button)findViewById(R.id.save);
-		save.setTypeface(DashBoardActivity.typeface_roboto);
+		//save.setTypeface(DashBoardActivity.typeface_roboto);
 		isDefault = (ImageView)findViewById(R.id.isDefault);
 		//txtTitle=(TextView)findViewById(R.id.txtTitle);
 		//txtTitle.setTypeface(BaseActivity.typeface_timeburner);

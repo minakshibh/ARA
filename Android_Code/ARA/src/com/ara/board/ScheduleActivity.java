@@ -109,7 +109,7 @@ public class ScheduleActivity   extends Activity implements
 		spTimeSlot = (Spinner) findViewById(R.id.spTimeSlot);
 		
 		button_submit = (Button) findViewById(R.id.button_submit);
-		button_submit.setTypeface(DashBoardActivity.typeface_roboto);
+		//button_submit.setTypeface(DashBoardActivity.typeface_roboto);
 	
 
 		textViewPayPal = (TextView) findViewById(R.id.textViewPayPal);

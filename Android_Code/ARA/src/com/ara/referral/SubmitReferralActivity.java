@@ -115,7 +115,7 @@ public class SubmitReferralActivity extends Activity implements
 
 		mea_spinner = (Spinner) findViewById(R.id.mea_spinner);
 		button_submit = (Button) findViewById(R.id.button_submit);
-		button_submit.setTypeface(DashBoardActivity.typeface_roboto);
+		//button_submit.setTypeface(DashBoardActivity.typeface_roboto);
 		textView_import = (TextView) findViewById(R.id.textView_import);
 		textView_import.setTypeface(DashBoardActivity.typeface_roboto);
 

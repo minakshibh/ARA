@@ -197,7 +197,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/yellow_rounded_btn"
             android:padding="10dp"
-            android:text="Add Payment Account"
+            android:text="ADD PAYMENT ACCOUNT"
             android:textColor="@color/app_blue"
             android:textSize="@dimen/default_text_size"
             android:textStyle="bold" />

@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-     android:background="@color/white"
+    android:background="@color/white"
     android:orientation="vertical" >
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -11,85 +12,78 @@
         android:background="@color/blue_header"
         android:orientation="horizontal" >
 
-    
-
-         <RelativeLayout
-              android:id="@+id/RelNotification"
-        	android:layout_height="fill_parent"
-         	android:layout_width="0dp"
-            android:layout_weight=".2"
-            android:layout_marginLeft="5dp"
-            android:gravity="center_vertical"
+        <RelativeLayout
+            android:id="@+id/RelNotification"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
             android:layout_gravity="center_vertical"
-            
-            >
-         
-           <ImageView
-            android:src="@drawable/notification_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_marginLeft="5dp"
+            android:layout_weight=".2"
+            android:gravity="center_vertical" >
 
-          <!--  <ImageView -->
-          <!--      android:id="@+id/ImgViewNotiCount"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/notification_icon" />
+
+            <!-- <ImageView -->
+            <!--
+                    android:id="@+id/ImgViewNotiCount"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_alignParentLeft="true"
                android:layout_marginTop="-10dp"
                android:layout_marginLeft="6dp"
               
-               android:src="@drawable/notification_count" /> -->
-             <TextView
-               android:id="@+id/TxtNotiCount"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentLeft="true"
-               android:layout_marginTop="-10dp"
-           	   android:gravity="center"
-               android:text="1"
-               android:textSize="8dp"
-               android:layout_marginLeft="12dp"
-               android:paddingLeft="2dp"
-               android:textColor="@color/white"
-              
-           		android:visibility="gone"
-               android:background="@drawable/notification_count"
-              />
+               android:src="@drawable/notification_count" />
+            -->
 
-            </RelativeLayout>
-           <ImageView
-        
+            <TextView
+                android:id="@+id/TxtNotiCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="-10dp"
+                android:background="@drawable/notification_count"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="8dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <ImageView
             android:layout_width="0dp"
-            android:layout_weight=".1"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-           
-          
-             />
+            android:layout_weight=".1" />
 
-      <ImageView
-            android:src="@drawable/header_icon"
+        <ImageView
             android:layout_width="0dp"
-            android:layout_weight=".4"
-            android:padding="12dp"
             android:layout_height="wrap_content"
-           	android:layout_gravity="center"
-          	android:gravity="center"
-             />
+            android:layout_gravity="center"
+            android:layout_weight=".4"
+            android:gravity="center"
+            android:padding="12dp"
+            android:src="@drawable/header_icon" />
 
         <TextView
             android:id="@+id/txtSubmit"
             android:layout_width="0dp"
-            android:layout_weight=".3"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="5dp"
-			android:gravity="center"
-            android:text="Submit Referral"
-            android:textSize="10sp"
+            android:layout_weight=".3"
             android:background="@drawable/yellow_rounded_btn"
-            android:textColor="@color/black" />
+            android:gravity="center"
+            android:text="Submit Referral"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
     </LinearLayout>
-   <!-- <TextView
+    <!--
+        <TextView
         android:id="@+id/referralDashboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -98,80 +92,80 @@
         android:gravity="start|center_vertical"
         android:paddingLeft="10dp"
         android:text="REFERRAL DASHBOARD"
-        android:textColor="@color/app_blue" /> -->
-		
-		<LinearLayout
-                android:id="@+id/LinearLayout_profilepic"
-                android:layout_width="match_parent"
-               	android:layout_height="0dp"
-        		android:layout_weight="2.8"
-                android:background="@color/white"
-                android:orientation="vertical" >
+        android:textColor="@color/app_blue" />
+    -->
 
-		    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/LinearLayout_profilepic"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.8"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/lay_rel_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lay_rel_img"
             android:layout_gravity="center"
-            android:layout_marginTop="3dp"
-           >
- <com.ara.util.CircularImageView
-                    android:id="@+id/imageView_profilepic"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center_horizontal"
-                     android:background="@drawable/profile_image"
-                    /> 
-           <!--  <ImageView
+            android:layout_marginTop="3dp" >
+
+            <com.ara.util.CircularImageView
+                android:id="@+id/imageView_profilepic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/profile_image" />
+            <!--
+                 <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:id="@+id/imageView_profilepic"
                 android:src="@drawable/profile_image"
-                android:layout_centerHorizontal="true"/> -->
+                android:layout_centerHorizontal="true"/>
+            -->
 
- <ProgressBar
-     android:id="@+id/progressBar"
-     style="?android:attr/progressBarStyle"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_centerHorizontal="true"
-     android:layout_centerVertical="true" />
-
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
         </RelativeLayout>
-              
 
-                <TextView
-                    android:id="@+id/textViewName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Name"
-                    android:textColor="@color/black"
-                    android:textSize="17sp" />
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
-            <TextView
-                    android:id="@+id/txtProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Profile"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:background="@drawable/yellow_rounded_btn"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-                
-            </LinearLayout>
-  <LinearLayout
+        <TextView
+            android:id="@+id/txtProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/yellow_rounded_btn"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="Profile"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:layout_weight="4.3"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_margin="10dp" >
+        android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/LinearLayout_up"
@@ -186,68 +180,69 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:orientation="vertical"
-             >
+                android:orientation="vertical" >
 
-	       <ImageView
-	           android:id="@+id/imageReferral"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:layout_gravity="center"
-	           android:src="@drawable/referrals_icon" />
+                <ImageView
+                    android:id="@+id/imageReferral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/referrals_icon" />
 
-	       <TextView
-	           android:id="@+id/activeReferralCount"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center"
-	           android:text="Referrals"
-	            android:layout_gravity="center"
-	           android:textColor="@color/black"
-	           android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/activeReferralCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Referrals"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-	        <LinearLayout
-               android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:orientation="horizontal">
-	       <TextView
-	           android:id="@+id/activeReferralAmount"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:textColor="@color/dark_blue"
-	           android:text=""
-	            android:textStyle="bold"
-	           android:textSize="13sp" />
-	       <TextView
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:textColor="@color/gray"
-	           android:text=" Open /"
-	           android:textSize="13sp" />
-	         <TextView
-	           android:id="@+id/SoldAmount"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:textColor="@color/dark_blue"
-	           android:text=""
-	           android:textStyle="bold"
-	           android:textSize="13sp" />
-	          <TextView
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:textColor="@color/gray"
-	           android:text=" Sold"
-	           android:textSize="13sp" />
-	       </LinearLayout>
-	      
-	    
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/activeReferralAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textColor="@color/dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text=" Open /"
+                        android:textColor="@color/gray"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/SoldAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textColor="@color/dark_blue"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text=" Sold"
+                        android:textColor="@color/gray"
+                        android:textSize="13sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -256,35 +251,35 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:background="@color/white"
-                android:orientation="vertical"
-                >
-	        <ImageView
-	           android:id="@+id/imageReferralReward"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:layout_gravity="center"
-	           android:src="@drawable/rewards_icon" />
+                android:orientation="vertical" >
 
-	       <TextView
-	           android:id="@+id/activeReward"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center"
-	           android:text="Referral Rewards"
-	            android:layout_gravity="center"
-	           android:textColor="@color/black"
-	           android:textSize="15sp" />
+                <ImageView
+                    android:id="@+id/imageReferralReward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/rewards_icon" />
 
-	       <TextView
-	           android:id="@+id/activeRewardAmount"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:textColor="@color/black"
-	            android:layout_gravity="center"
-	           android:text=""
-	           android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/activeReward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Referral Rewards"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/activeRewardAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -301,35 +296,35 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:orientation="vertical"
-                >
-	         <ImageView
-	           android:id="@+id/imageSService"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:layout_gravity="center"
-	           android:src="@drawable/services_icon" />
+                android:orientation="vertical" >
 
-	       <TextView
-	           android:id="@+id/txtSService"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center"
-	           android:text="Schedule Service"
-	            android:layout_gravity="center"
-	           android:textColor="@color/black"
-	           android:textSize="14sp" />
+                <ImageView
+                    android:id="@+id/imageSService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/services_icon" />
 
-<!-- 	       <TextView -->
-<!-- 	           android:id="@+id/txtService" -->
-<!-- 	           android:layout_width="wrap_content" -->
-<!-- 	           android:layout_height="wrap_content" -->
-<!-- 	           android:gravity="center_vertical" -->
-<!-- 	           android:textColor="@color/gray" -->
-<!-- 	           android:text="Service" -->
-<!-- 	           android:layout_gravity="center" -->
-<!-- 	           android:textSize="12sp" />  -->
+                <TextView
+                    android:id="@+id/txtSService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Schedule Service"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!-- <TextView -->
+                <!-- android:id="@+id/txtService" -->
+                <!-- android:layout_width="wrap_content" -->
+                <!-- android:layout_height="wrap_content" -->
+                <!-- android:gravity="center_vertical" -->
+                <!-- android:textColor="@color/gray" -->
+                <!-- android:text="Service" -->
+                <!-- android:layout_gravity="center" -->
+                <!-- android:textSize="12sp" /> -->
             </LinearLayout>
 
             <LinearLayout
@@ -337,125 +332,128 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-               android:orientation="vertical"
-             >
-	       
-                <ImageView
-	           android:id="@+id/imageAANews"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center_vertical"
-	           android:layout_gravity="center"
-	           android:src="@drawable/news_icon" />
+                android:orientation="vertical" >
 
-	       <TextView
-	           android:id="@+id/txtAANews"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:gravity="center"
-	           android:text="AutoAves News"
-	            android:layout_gravity="center"
-	           android:textColor="@color/black"
-	           android:textSize="14sp" />
-	    <TextView
-           
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-          	android:paddingLeft="4dp"
-          	android:paddingRight="4dp"
-			android:gravity="center"
-            android:text="Coming Soon"
-            android:textSize="12sp"
-            android:background="@drawable/gray_rounded_btn"
-            android:textColor="@color/black" />
+                <ImageView
+                    android:id="@+id/imageAANews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/news_icon" />
+
+                <TextView
+                    android:id="@+id/txtAANews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="AutoAves News"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gray_rounded_btn"
+                    android:gravity="center"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:text="Coming Soon"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
-  </LinearLayout>
- <RelativeLayout
+    </LinearLayout>
+
+    <RelativeLayout
         android:id="@+id/LinearLayout_fotter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2.2"
-        android:orientation="vertical"
-       >
-     <LinearLayout   
-   	  
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-      <TextView
-	           android:id="@+id/textViewConatctUs"
-	           android:layout_width="match_parent"
-	           android:layout_height="wrap_content"
-	           android:text="Contact Us"
-	           android:gravity="center_horizontal"
-	           android:textColor="@color/black"
-	           android:textSize="14sp" />
-       <TextView
-	           android:id="@+id/textViewEmail"
-	           android:layout_width="match_parent"
-	           android:layout_height="wrap_content"
-	           android:text="Email: Robert.Seeley@autoaves.com"
-	           android:layout_marginTop="3dp"
-	           android:gravity="center_horizontal"
-	           android:textColor="@color/black"
-	           android:textSize="13sp" />
-        <TextView
-	           android:id="@+id/textViewPhone"
-	           android:layout_width="match_parent"
-	           android:layout_height="wrap_content"
-	           android:text="Phone:(303) 750-5000"
-	           android:gravity="center_horizontal"
-	           android:textColor="@color/black"
-	           android:textSize="13sp" />
-        </LinearLayout>
-         <LinearLayout
-      
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="5dp"
-        android:orientation="horizontal"
-        android:background="@color/dark_blue"
-        >
-             
-           <TextView
-	           android:id="@+id/txtAbout"
-	           android:layout_width="0dp"
-	           android:layout_weight="3"
-	           android:layout_height="wrap_content"
-	           android:text="About App"
-	           android:layout_gravity="center_vertical"
-	           android:gravity="start"
-	           android:paddingTop="5dp"
-	           android:paddingBottom="5dp"
-	           android:textColor="@color/gray"
-	           android:textSize="13sp" />
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
             <TextView
-	           android:id="@+id/txtWebLink"
-	           android:layout_gravity="center_vertical"
-	           android:layout_width="0dp"
-	           android:layout_weight="4"
-	           android:paddingTop="5dp"
-	           android:paddingBottom="5dp"
-	           android:layout_height="wrap_content"
-	           android:text="www.autoaves.com"
-	           android:textColor="@color/gray"
-	           android:textSize="13sp" />
-             <TextView
-	           android:id="@+id/txtLogout"
-	           android:layout_width="0dp"
-	           android:layout_weight="3"
-	           android:layout_height="wrap_content"
-	           android:text="Logout"
-	           android:gravity="end"
-	           android:paddingTop="5dp"
-	           android:paddingBottom="5dp"
-	           android:layout_gravity="center_vertical"
-	           android:textColor="@color/gray"
-	           android:textSize="13sp" />   
-         </LinearLayout>
-</RelativeLayout>
+                android:id="@+id/textViewConatctUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Contact Us"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center_horizontal"
+                android:text="Email: Robert.Seeley@autoaves.com"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textViewPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Phone:(303) 750-5000"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/dark_blue"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/txtAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:gravity="start"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="About App"
+                android:textColor="@color/gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txtWebLink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="www.autoaves.com"
+                android:textColor="@color/gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txtLogout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:gravity="end"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="Logout"
+                android:textColor="@color/gray"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

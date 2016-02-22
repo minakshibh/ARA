@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-
 import org.apache.http.NameValuePair;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ParseException;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +29,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-
 import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.base.BaseActivity;
@@ -277,11 +275,29 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				
 				 public int compare(Referral v1, Referral v2) {
 					 if(selectedSort.equals("name"))
+					 {
 						 return  v1.getFirstName().toLowerCase().compareTo(v2.getFirstName().toLowerCase());
+					 	}
 					 else if(selectedSort.equals("date"))
-						 return  v2.getCreatedDate().compareTo(v1.getCreatedDate());
+					 {
+						 SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM hh:mm:ss a");
+						 Date datev2 = null,datev1=null;
+						 try {
+						      datev2 = format.parse(v2.getCreatedDate());
+				 		      datev1 = format.parse(v1.getCreatedDate());
+						    
+						 		} 
+						 catch (Exception e) {
+						     Log.e("log", e.getMessage(), e);
+						 	}
+
+						 return  datev2.compareTo(datev1);
+						// return  v2.getCreatedDate().compareTo(v1.getCreatedDate());
+					 	}
 					 else
+					 {
 						 return 0;
+					 	}
 				 }
 			});
 			listView.setAdapter(new ReferralListAdapter(ReferralListActivity.this));
@@ -292,11 +308,11 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			else if(selectedFilter.equals("sold"))
 			{
 				txtHeader.setText("SOLD REFERRALS"+" ("+sortedFilteredList.size()+")");
-			}
+				}
 			else
 			{
 				txtHeader.setText("TOTAL REFERRALS"+" ("+sortedFilteredList.size()+")");
-			}
+				}
 		}
 	}
 	
@@ -327,11 +343,11 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			else if(selectedFilter.equals("sold"))
 			{
 				txtHeader.setText("SOLD REFERRALS"+" ("+sortedFilteredList.size()+")");
-			}
+				}
 			else
 			{
 				txtHeader.setText("TOTAL REFERRALS"+" ("+sortedFilteredList.size()+")");
-			}
+				}
 		}
 	}
 	
@@ -484,11 +500,11 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			if(referral.getReferralType().equalsIgnoreCase("direct"))
 			{
 				imageview.setImageResource(R.drawable.direct);
-			}
+				}
 			else
 			{
 				imageview.setImageResource(R.drawable.direct);
-			}
+				}
 			
 			if (referral.getReferralStatus().equalsIgnoreCase(DashBoardActivity.STATUS_SOLD)) {
 				if(referral.getSoldDate()!=null)
@@ -511,7 +527,9 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				{
 					try{
 						newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
-						}catch(Exception e)
+						System.err.println(newDate1);	
+						
+					}catch(Exception e)
 						{
 							e.printStackTrace();
 						}

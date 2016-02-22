@@ -50,7 +50,7 @@ import com.ara.util.Util.LoadImage;
 public class ImageUploadActivity extends Activity {
 
 	private ImageView imageView_back, imageView_profile;
-	private TextView textView_back, textView_edit;
+	private TextView textView_back, textView_edit,textView_myprofile;
 	private String mCurrentPhotoPath = "", imagePath = "";
 	private RelativeLayout Layout_middle;
 	private SharedPreferences spref;
@@ -67,12 +67,12 @@ public class ImageUploadActivity extends Activity {
 		imageView_back = (ImageView) findViewById(R.id.imageView_back);
 		textView_back = (TextView) findViewById(R.id.textView_back);
 		Layout_middle=(RelativeLayout)findViewById(R.id.LinearLayout_middle);
-		//textView_title=(TextView)findViewById(R.id.textView_title);
-		//textView_title.setTypeface(BaseActivity.typeface_timeburner);
+		textView_myprofile=(TextView)findViewById(R.id.textView_myprofile);
+		textView_myprofile.setTypeface(DashBoardActivity.typeface_timeburner);
 		textView_back.setText("Profile");
-		textView_back.setTypeface(BaseActivity.typeface_roboto);
+		textView_back.setTypeface(DashBoardActivity.typeface_roboto);
 		textView_edit = (TextView) findViewById(R.id.textView_edit);
-		textView_edit.setTypeface(BaseActivity.typeface_roboto);
+		textView_edit.setTypeface(DashBoardActivity.typeface_roboto);
 		progressBar=(ProgressBar)findViewById(R.id.progressBar);
 		progressBar.setVisibility(View.GONE);
 		setOnClickListener();
@@ -121,8 +121,7 @@ public class ImageUploadActivity extends Activity {
 
 	protected void selectImage() {
 
-		final CharSequence[] options = { "Take Photo", "Choose from Gallery",
-				"Cancel" };
+		final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(
 				ImageUploadActivity.this);
