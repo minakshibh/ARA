@@ -2,6 +2,8 @@ package com.ara.login;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,8 +24,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -87,7 +94,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 		setUI();
 		setOnClickListener();
 		notificationGCM();
-
+		 
 	}
 
 	private void setUI() {
@@ -506,5 +513,20 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 			String formattedDate = df.format(c.getTime());
 			return formattedDate;
+			
 		}
+	 /*try {
+	        PackageInfo info = getPackageManager().getPackageInfo(
+	                "com.ara.base", PackageManager.GET_SIGNATURES);
+	        for (Signature signature : info.signatures) {
+	            MessageDigest md = MessageDigest.getInstance("SHA");
+	            md.update(signature.toByteArray());
+	            Log.i("KeyHash:",
+	                    Base64.encodeToString(md.digest(), Base64.DEFAULT));
+	        }
+	    } catch (NameNotFoundException e) {
+
+	    } catch (NoSuchAlgorithmException e) {
+
+	    }*/
 }

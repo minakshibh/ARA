@@ -130,6 +130,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 					PaymentListActivity.this, "get",
 					"paymentaccountinfo/"+userid, nameValuePairs,
 					true, "Please wait...", true);
+			
 			mWebPageTask.delegate = (AsyncResponseForARA) PaymentListActivity.this;
 			mWebPageTask.execute();
 		} else {

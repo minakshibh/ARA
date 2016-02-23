@@ -4,10 +4,18 @@ package com.ara.async_tasks;
 import java.util.ArrayList;
 import org.apache.http.NameValuePair;
 
+import com.ara.board.DashBoardActivity;
+import com.ara.login.LoginActivity;
+import com.ara.referral.ReferralListActivity;
 import com.ara.util.Util;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -117,8 +125,13 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		}
 		else if(result==null)
 		{
+			
 			Toast.makeText(activity, "Poor network connection, please try again", Toast.LENGTH_LONG).show();	
 		}
+		else if(result.contains("Invalid token"))
+		{
+			invalidToken();
+				}
 		else
 		{
 			Toast.makeText(activity, result, Toast.LENGTH_LONG).show();
@@ -132,5 +145,30 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		
 		
 	}
+	private void invalidToken()
+	{
+		AlertDialog.Builder alert = new AlertDialog.Builder(
+				activity);
+	
+		alert.setMessage("Your session has expired. Please log in again");
+		alert.setPositiveButton("ok",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						
+						SharedPreferences 	spref = activity.getSharedPreferences("ara_prefs", 1);
+						Editor ed = spref.edit();
+						ed.putString("useremail", "");
+						ed.putString("userid", "");
+						ed.putString("access_token","");
+						ed.commit();
+						
+						Intent intent = new Intent(activity,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+						activity.startActivity(intent);
+						
+					}
+				});
+		alert.show();
+		}
 	
 }

@@ -92,7 +92,7 @@ public class ReferralListActivity extends Activity implements
 		RelativeLayout_filter = (RelativeLayout) findViewById(R.id.RelativeLayout_filter);
 		filterContainer = (LinearLayout)findViewById(R.id.filterContainer);
 		
-		if(referralType.equals("all"))
+		if(referralType.equalsIgnoreCase("all"))
 		{
 			RelativeLayout_filter.setVisibility(View.VISIBLE);
 		}
@@ -262,8 +262,8 @@ private View.OnClickListener listener = new View.OnClickListener() {
 	}
 	private void sortReferrals(){
 		
-		if(selectedSort.equals("none")){
-			if(!selectedFilter.equals("none"))
+		if(selectedSort.equalsIgnoreCase("none")){
+			if(!selectedFilter.equalsIgnoreCase("none"))
 				filterReferrals();
 			else{
 				sortedFilteredList.clear();
@@ -274,13 +274,15 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			Collections.sort(sortedFilteredList, new Comparator<Referral>() {
 				
 				 public int compare(Referral v1, Referral v2) {
-					 if(selectedSort.equals("name"))
+					 if(selectedSort.equalsIgnoreCase("name"))
 					 {
 						 return  v1.getFirstName().toLowerCase().compareTo(v2.getFirstName().toLowerCase());
 					 	}
-					 else if(selectedSort.equals("date"))
+					 else if(selectedSort.equalsIgnoreCase("date"))
 					 {
-						 SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM hh:mm:ss a");
+						 //02-17-2016 3:04:25 PM",
+						 SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss a");
+						// SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM hh:mm:ss a");
 						 Date datev2 = null,datev1=null;
 						 try {
 						      datev2 = format.parse(v2.getCreatedDate());
@@ -301,11 +303,11 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				 }
 			});
 			listView.setAdapter(new ReferralListAdapter(ReferralListActivity.this));
-			if(selectedFilter.equals("open"))
+			if(selectedFilter.equalsIgnoreCase("open"))
 			{
 				txtHeader.setText("ACTIVE REFERRALS"+" ("+sortedFilteredList.size()+")");
 				}
-			else if(selectedFilter.equals("sold"))
+			else if(selectedFilter.equalsIgnoreCase("sold"))
 			{
 				txtHeader.setText("SOLD REFERRALS"+" ("+sortedFilteredList.size()+")");
 				}
@@ -319,7 +321,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 	private void filterReferrals(){
 		sortedFilteredList.clear();
 		
-		if(selectedFilter.equals("none")){
+		if(selectedFilter.equalsIgnoreCase("none")){
 			sortedFilteredList.addAll(referralList);
 		}else{
 			for(int i = 0; i<referralList.size(); i++)
@@ -329,18 +331,18 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			}
 		}
 		
-		if(!selectedSort.equals("none"))
+		if(!selectedSort.equalsIgnoreCase("none"))
 		{
 			sortReferrals();
 		}
 		else
 		{
 			listView.setAdapter(new ReferralListAdapter(ReferralListActivity.this));
-			if(selectedFilter.equals("open"))
+			if(selectedFilter.equalsIgnoreCase("open"))
 			{
 				txtHeader.setText("ACTIVE REFERRALS"+" ("+sortedFilteredList.size()+")");
 				}
-			else if(selectedFilter.equals("sold"))
+			else if(selectedFilter.equalsIgnoreCase("sold"))
 			{
 				txtHeader.setText("SOLD REFERRALS"+" ("+sortedFilteredList.size()+")");
 				}
@@ -510,7 +512,8 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				if(referral.getSoldDate()!=null)
 				{
 					try{
-						newDate = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getSoldDate());
+						//"CreatedDate": "12-27-2015 5:04:25 PM",
+						newDate = Util.formateDateFromstring("MM-dd-yyyy hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getSoldDate());
 						}catch(Exception e)
 						{
 							e.printStackTrace();
@@ -526,7 +529,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				if(referral.getCreatedDate()!=null)
 				{
 					try{
-						newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
+						newDate1 = Util.formateDateFromstring("MM-dd-yyyy hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
 						System.err.println(newDate1);	
 						
 					}catch(Exception e)
@@ -548,19 +551,19 @@ private View.OnClickListener listener = new View.OnClickListener() {
 	}
 	private void setHeader(String str, int count)
 	{
-		if(str.equals("open"))
+		if(str.equalsIgnoreCase("open"))
 		{
 			txtHeader.setText("ACTIVE REFERRALS"+" ("+count+")");
 			}
-		else if(str.equals("sold"))
+		else if(str.equalsIgnoreCase("sold"))
 		{
 			txtHeader.setText("SOLD REFERRALS"+" ("+count+")");
 			}
-		else if(str.equals("inactive"))
+		else if(str.equalsIgnoreCase("inactive"))
 		{
 			txtHeader.setText("INACTIVE REFERRALS"+" ("+count+")");
 			}
-		else if(str.equals("all"))
+		else if(str.equalsIgnoreCase("all"))
 		{
 			txtHeader.setText("TOTAL REFERRALS"+" ("+count+")");
 			}
