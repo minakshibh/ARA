@@ -9,8 +9,8 @@
    <!-- client1 url= http://10.10.10.219:801/api 557158811114993 parv -->
   <!--  client2 new http://63.255.19.72:801/api -->
   
-    <string name="baseUrl">http://63.255.19.72:801/api</string>
-  <!--   <string name="baseUrl">http://112.196.24.205:89/api</string>  -->
+    <!-- <string name="baseUrl">http://63.255.19.72:801/api</string> -->
+   <string name="baseUrl">http://112.196.24.205:89/api</string> 
     <string name="facebook_appid">193241737704378</string>
     
     

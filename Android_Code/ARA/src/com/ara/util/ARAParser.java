@@ -212,6 +212,15 @@ public class ARAParser {
 				referralTypeArray.add(referralType);
 			}
 			DashBoardActivity.notiCount=DashboardResult.getString("NotificationsCount");
+			try{
+				String strEarningRewards=DashboardResult.getString("EarnedRewards");
+				String strUpcoming=DashboardResult.getString("UpcomingRewards");
+				DashBoardActivity.EarnedRewards=strEarningRewards;//""+Integer.parseInt(strEarningRewards);
+				DashBoardActivity.UpcomingRewards=strUpcoming;//""+Integer.parseInt(strUpcoming);
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

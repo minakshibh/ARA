@@ -247,6 +247,7 @@ public class ReferralsDetailsActivity extends Activity {
 			
 			
 		}
+///////////////////referral details
 else
 				{
 						txtName.setText(referral.getFirstName() + " " + referral.getLastName());
@@ -292,7 +293,7 @@ else
 							if(referral.getCreatedDate()!=null)
 							{
 								try{
-									newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
+									newDate1 = Util.formateDateFromstring("MM-dd-yyyy hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
 									}catch(Exception e)
 									{
 										e.printStackTrace();
@@ -318,7 +319,7 @@ else
 							if(referral.getSoldDate()!=null)
 							{
 								try{
-									newDate1 = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getSoldDate());
+									newDate1 = Util.formateDateFromstring("MM-dd-yyyy hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getSoldDate());
 									}catch(Exception e)
 									{
 										e.printStackTrace();

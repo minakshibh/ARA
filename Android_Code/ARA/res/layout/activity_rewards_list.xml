@@ -91,10 +91,12 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/layPayment"
         android:layout_marginTop="10dp"
+        android:layout_above="@+id/LinearLayoutLower"
         android:background="@color/listview_bg" >
     </ListView>
 
     <LinearLayout
+        android:id="@+id/LinearLayoutLower"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

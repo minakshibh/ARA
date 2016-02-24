@@ -162,7 +162,8 @@
         android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_weight="4.3"
         android:background="@color/white"
         android:orientation="vertical" >
@@ -270,16 +271,57 @@
                     android:text="Referral Rewards"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/activeRewardAmount"
+  <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/txtPaidAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:text=""
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
+                 <TextView
+                    android:id="@+id/txtPaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text=" Paid /"
+                    android:textColor="@color/gray"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+                  
+                </LinearLayout>
+                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+                  <TextView
+                    android:id="@+id/txtPeningAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+                   <TextView
+                    android:id="@+id/txtPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text=" Pending"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+                   </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

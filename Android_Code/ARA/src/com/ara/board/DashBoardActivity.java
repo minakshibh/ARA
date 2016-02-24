@@ -73,9 +73,10 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	private String imageurl="";
 	private ImageView imageView_profilepic;
 	public static Typeface typeface_roboto,typeface_timeburner;
-	public static String notiCount="0";
+	public static String notiCount="0",EarnedRewards="0",UpcomingRewards="0";
 	private int activeCount=0;
 	private ProgressBar progressBar;
+	private TextView txtPaidAmount,txtPaid,txtPeningAmount,txtPending;
 
 	private String countOpen="0";
 	public void onCreate(Bundle savedInstanceState) {
@@ -116,11 +117,26 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		
 		activeReferralAmount = (TextView)findViewById(R.id.activeReferralAmount);
 		activeReferralAmount.setTypeface(typeface_roboto);
-		activeRewardAmount= (TextView)findViewById(R.id.activeRewardAmount);
-		activeRewardAmount.setTypeface(typeface_roboto);
+		
+		//activeRewardAmount= (TextView)findViewById(R.id.activeRewardAmount);
+		//activeRewardAmount.setTypeface(typeface_roboto);
+		//txtPaidAmount,txtPaid,txtPeningAmount,txtPending;
+		
 		
 		SoldAmount= (TextView)findViewById(R.id.SoldAmount);
 		SoldAmount.setTypeface(typeface_roboto);
+		
+		txtPaidAmount= (TextView)findViewById(R.id.txtPaidAmount);
+		txtPaidAmount.setTypeface(typeface_roboto);
+		
+		txtPaid= (TextView)findViewById(R.id.txtPaid);
+		txtPaid.setTypeface(typeface_roboto);
+		
+		txtPeningAmount= (TextView)findViewById(R.id.txtPeningAmount);
+		txtPeningAmount.setTypeface(typeface_roboto);
+		
+		txtPending= (TextView)findViewById(R.id.txtPending);
+		txtPending.setTypeface(typeface_roboto);
 		/*activeReferralCount = (TextView)findViewById(R.id.activeReferralCount);
 		activeReferralCount.setTypeface(typeface_roboto);
 		soldReferralCount = (TextView)findViewById(R.id.soldReferralCount);
@@ -377,8 +393,12 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			}
 			
 			SoldAmount.setText(" "+soldCount);
-			activeRewardAmount.setText("$ "+rewardAmount);
+			//activeRewardAmount.setText("$ "+rewardAmount);
 			activeReferralAmount.setText(countOpen);
+			
+			txtPaidAmount.setText("$"+EarnedRewards);
+			txtPeningAmount.setText("$"+UpcomingRewards);
+			
 			/*if(referralTypeArray.get(0).getNotificationCount().equals("0"))
 			{
 				TxtNotiCount.setVisibility(View.GONE);

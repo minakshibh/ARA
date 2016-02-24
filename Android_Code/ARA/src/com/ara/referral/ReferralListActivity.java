@@ -46,7 +46,7 @@ public class ReferralListActivity extends Activity implements
 	private ListView listView;
 	private RelativeLayout RelativeLayout_sort, RelativeLayout_filter;
 	private String referralType, selectedSort = "none", selectedFilter = "none";
-	private ArrayList<Referral> referralList, sortedFilteredList;
+	private ArrayList<Referral> referralList, sortedFilteredList,nextReferralList;
 	private SharedPreferences spref;
 	private ImageView imageView_back;
 	private LinearLayout filterContainer;
@@ -71,7 +71,7 @@ public class ReferralListActivity extends Activity implements
 		referralType = getIntent().getStringExtra("referralStatus");
 		referralList = new ArrayList<Referral>();
 		sortedFilteredList = new ArrayList<Referral>();
-		
+		nextReferralList= new ArrayList<Referral>();
 		txtHeader=(TextView)findViewById(R.id.txtHeader);
 		txtHeader.setTypeface(DashBoardActivity.typeface_timeburner);
 		appliedFilter = (TextView)findViewById(R.id.appliedFilter);
@@ -119,9 +119,15 @@ public class ReferralListActivity extends Activity implements
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				if(nextReferralList.size()>0)
+				{
+					nextReferralList.clear();
+					nextReferralList.addAll(sortedFilteredList);
+					}
+				
 				Intent intent = new Intent(ReferralListActivity.this,
 						ReferralsDetailsActivity.class);
-				intent.putExtra("referral", referralList.get(arg2));
+				intent.putExtra("referral", nextReferralList.get(arg2));
 				startActivity(intent);
 				//finish();
 			}
@@ -577,6 +583,8 @@ private View.OnClickListener listener = new View.OnClickListener() {
 			referralList = parser.parseReferralList(output);
 			sortedFilteredList.clear();
 			sortedFilteredList.addAll(referralList);
+			nextReferralList.clear();
+			nextReferralList.addAll(referralList);
 		}
 		catch(Exception e){}
 		setHeader(referralType,  sortedFilteredList.size());

@@ -174,14 +174,14 @@ public class SubmitReferralActivity extends Activity implements
 		String gettingEmail = edittext_email.getText().toString();
 		if (edittext_email.getText().toString().equals("")) {
 			//Util.ToastMessage(SubmitReferralActivity.this,"Please enter a valid email address");
-			message("Please enter a valid email address");
+			message("Please enter a valid Email Address");
 			img_email_check.setVisibility(View.INVISIBLE);
 			emailflag = 0;
 		}
 		else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(gettingEmail)
 				.matches() && !TextUtils.isEmpty(gettingEmail)) {
 			// Util.ToastMessage(SubmitReferralActivity.this,"Please enter a valid email address");
-			 message("Please enter a valid email address");
+			 message("Please enter a valid Email Address");
 			img_email_check.setVisibility(View.INVISIBLE);
 			emailflag = 0;
 		} else {
@@ -207,11 +207,11 @@ public class SubmitReferralActivity extends Activity implements
 			else if (v == button_submit) {
 			
 				if (edittext_firstname.getText().toString().trim().equals("")) {
-					message("Please enter first name");
+					message("Please enter First Name");
 					//Util.ToastMessage(SubmitReferralActivity.this,"Please enter first name");
 				} else if (edittext_lastname.getText().toString().trim().equals("")) {
 					//Util.ToastMessage(SubmitReferralActivity.this,"Please enter last name");
-					message("Please enter last name");
+					message("Please enter Last Name");
 				} 
 				/*else if (edittext_phonenumber.getText().toString().equals("")) {
 					Util.ToastMessage(SubmitReferralActivity.this,
@@ -241,11 +241,11 @@ public class SubmitReferralActivity extends Activity implements
 					{
 						  if (!Util.isValidPhoneNumber(edittext_phonenumber
 								.getText().toString())) {
-							message("Please enter valid phone number");
+							message("Please enter valid Phone Number");
 							}
 						  else if(edittext_phonenumber.getText().toString().length()<14)
 						  {
-								message("Please enter valid phone number"); 
+								message("Please enter valid Phone Number"); 
 						  }
 						 else{
 							 emailCheck();
