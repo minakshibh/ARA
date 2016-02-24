@@ -101,7 +101,7 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		logIn = (Button) findViewById(R.id.logIn);
-		logIn.setTypeface(BaseActivity.typeface_roboto);
+		//logIn.setTypeface(BaseActivity.typeface_roboto);
 		signup = (TextView) findViewById(R.id.SignUp);
 		signup.setTypeface(BaseActivity.typeface_roboto);
 		forgotpassword = (TextView) findViewById(R.id.forgotpassword);

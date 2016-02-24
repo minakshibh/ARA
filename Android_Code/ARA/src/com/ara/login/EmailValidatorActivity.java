@@ -61,7 +61,7 @@ public class EmailValidatorActivity  extends Activity implements AsyncResponseFo
 		textViewEmailAdress=(TextView)findViewById(R.id.textViewEmailAdress);
 		textViewEmailAdress.setTypeface(BaseActivity.typeface_roboto);
 		btnProceedNext=(Button)findViewById(R.id.btnProceedNext);
-		btnProceedNext.setTypeface(BaseActivity.typeface_roboto);
+		//btnProceedNext.setTypeface(BaseActivity.typeface_roboto);
 		txt_Alreadyhave=(TextView)findViewById(R.id.txt_Alreadyhave);
 		txt_Alreadyhave.setTypeface(BaseActivity.typeface_roboto);
 		txt_login=(TextView)findViewById(R.id.txt_login);

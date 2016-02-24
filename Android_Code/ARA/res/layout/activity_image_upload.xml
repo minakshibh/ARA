@@ -65,7 +65,7 @@
             android:layout_weight=".7"
             android:gravity="start|center_vertical"
             android:paddingLeft="10dp"
-            android:text="MY PROFILE"
+            android:text="PROFILE PHOTO"
             android:textColor="@color/app_blue" />
 
         <TextView

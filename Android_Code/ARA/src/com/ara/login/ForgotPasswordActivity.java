@@ -46,7 +46,7 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponseFor
 		signUp.setTypeface(BaseActivity.typeface_roboto);
 		
 		resetPassword=(Button)findViewById(R.id.resetPassword);
-		resetPassword.setTypeface(BaseActivity.typeface_roboto);
+		//resetPassword.setTypeface(BaseActivity.typeface_roboto);
 		userId=(EditText)findViewById(R.id.userId);
 		userId.setTypeface(BaseActivity.typeface_roboto);
 		

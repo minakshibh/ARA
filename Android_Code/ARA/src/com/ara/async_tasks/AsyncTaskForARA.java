@@ -148,6 +148,7 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 	private void invalidToken()
 	{
 		AlertDialog.Builder alert = new AlertDialog.Builder(
+				
 				activity);
 	
 		alert.setMessage("Your session has expired. Please log in again");

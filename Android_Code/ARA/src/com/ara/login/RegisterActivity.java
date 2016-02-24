@@ -115,7 +115,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		txt_purchase.setTypeface(BaseActivity.typeface_roboto);
 		
 		btn_signUp = (Button) findViewById(R.id.btn_signUp);
-		btn_signUp.setTypeface(BaseActivity.typeface_roboto);
+		//btn_signUp.setTypeface(BaseActivity.typeface_roboto);
 		mea_spinner = (Spinner) findViewById(R.id.spinnermea);
 		//role_spinner = (Spinner) findViewById(R.id.role_spinner);
 		img_userId = (ImageView) findViewById(R.id.img_userId);

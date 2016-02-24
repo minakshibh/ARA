@@ -102,6 +102,7 @@
                         android:background="@color/transparent"
                         android:capitalize="words"
                         android:hint="First Name"
+                        android:inputType="textVisiblePassword" 
                         android:maxLength="25"
                         android:textSize="@dimen/default_text_size"
                         android:paddingLeft="@dimen/text_margin_left"
@@ -162,6 +163,7 @@
                         android:background="@color/transparent"
                         android:capitalize="words"
                         android:hint="Last Name"
+                        android:inputType="textVisiblePassword" 
                         android:maxLength="25"
                         android:textSize="@dimen/default_text_size"
                         android:paddingLeft="@dimen/text_margin_left"
@@ -221,6 +223,8 @@
                         android:layout_weight="9"
                         android:background="@color/transparent"
                         android:hint="User Id"
+                        android:capitalize="words"
+                        android:inputType="textVisiblePassword" 
                         android:textSize="@dimen/default_text_size"
                         android:paddingLeft="@dimen/text_margin_left"
                         android:singleLine="true" />
@@ -659,7 +663,7 @@
                     android:layout_weight="9"
                     android:background="@drawable/yellow_rounded_btn"
                     android:padding="10dp"
-                    android:text="Sign Up"
+                    android:text="SIGN UP"
                     android:textColor="@color/app_blue"
                     android:textSize="@dimen/default_text_size"
                     android:textStyle="bold" />

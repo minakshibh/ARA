@@ -6,11 +6,11 @@
     <string name="action_settings">Settings</string>
     <!-- local1 url=http://112.196.24.205:88/api -->
 <!--   local2  http://112.196.24.205:89/api -->
-   <!-- client1 url= http://10.10.10.219:801/api -->
+   <!-- client1 url= http://10.10.10.219:801/api 557158811114993 parv -->
   <!--  client2 new http://63.255.19.72:801/api -->
   
     <string name="baseUrl">http://63.255.19.72:801/api</string>
-  <!-- 557158811114993 parv   <string name="baseUrl">http://112.196.24.205:89/api</string>  -->
+  <!--   <string name="baseUrl">http://112.196.24.205:89/api</string>  -->
     <string name="facebook_appid">193241737704378</string>
     
     
