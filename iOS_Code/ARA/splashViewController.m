@@ -187,7 +187,7 @@
     LoginViewController *home;
     home = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     //this is iphone 5 xib
-        
+         NSLog(@"-----splash------");
     [self.navigationController pushViewController:home animated:YES];
     }@catch (NSException *exception) {
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Splash-5" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];

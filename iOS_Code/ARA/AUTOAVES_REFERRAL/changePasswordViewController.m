@@ -319,9 +319,15 @@
     
     return YES;
 }
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    scrollView.scrollEnabled = NO;
+    return YES;
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     svos = scrollView.contentOffset;
     scrollView.scrollEnabled = YES;
+    scrollView.contentSize = CGSizeMake(350, 700);
+    
     if(textField == txtConfirmnewpwd  || textField == txtNewpwd ) {
         
         CGPoint pt;

@@ -373,7 +373,10 @@
 //                                   selector:@selector(labelTransformation:)
 //                                   userInfo:nil
 //                                    repeats:YES];
-//    self.timerDashboard = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(dashboardWebservice) userInfo:nil repeats:YES];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//             self.timerDashboard = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(dashboardWebservice) userInfo:nil repeats:YES];
+//    });
+   
 
 }
 //-(void)labelTransformation:(NSTimer *)timer
@@ -396,6 +399,11 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"] != nil) {
+        NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
+        
+        imageViewMenuProfile.image = [UIImage imageWithData:im];
+    }
 //    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
 //        lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
 //        [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
@@ -428,7 +436,13 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagestr]];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-        [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:@"profile_picture"];
+        [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:@"profile_picture"]	;
+        
+        if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"] == nil) {
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
+        }
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             // Update the UI
             imageViewMenuProfile.image = [UIImage imageWithData:imageData];
@@ -555,10 +569,17 @@
 
 - (IBAction)btnlogout:(id)sender {
      //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"dashboardNotificationTimeStamp"];
-    [self.timerDashboard invalidate];
+    [self logoutFunction];
+    
+}
+-(void)logoutFunction{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.timerDashboard invalidate];
+    });
     
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"from_fb"] isEqualToString:@"yes"])
     {
+        
         if (FBSession.activeSession.state == FBSessionStateOpen
             || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
             
@@ -587,15 +608,13 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_image"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
-
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
+        NSLog(@"FFFFFFFFFFFFFFFFF%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"]);
         
         
         
-
     }
-    
 }
-
 - (IBAction)myBadges:(id)sender {
     myBadgesViewController *MBvc = [[myBadgesViewController alloc]initWithNibName:@"myBadgesViewController" bundle:nil];
     [self.navigationController pushViewController:MBvc animated:YES];
@@ -757,6 +776,22 @@ if([recieved_status isEqualToString:@"passed"])
         
     [kappDelegate HideIndicator];
         
+        NSString *upcomingStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UpcomingRewards"]];
+        NSString *earnedStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"EarnedRewards"]];
+        NSString* finalStr = [NSString stringWithFormat:@"$%@ Paid / $%@ Upcoming",earnedStr,upcomingStr];
+        
+        NSUInteger firstStringCount = earnedStr.length+1;
+        NSUInteger secondStringCountStart = 9+earnedStr.length;
+        NSUInteger secondStringCountEnd = upcomingStr.length+1;
+        
+        NSMutableAttributedString * string = [[NSMutableAttributedString alloc] initWithString:finalStr];
+        [string addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,firstStringCount)];
+        [string addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(secondStringCountStart,secondStringCountEnd)];
+        lblnewEarnedAwardePrice.attributedText = string;
+        
+        
+        
+        
         NSString * value ;
     for (int k=0; k<refType.count; k++) {
         
@@ -773,7 +808,7 @@ if([recieved_status isEqualToString:@"passed"])
         if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"sold"])
         {
             NSLog(@"%@",[NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]]);
-            lblnewEarnedAwardePrice.text = [NSString stringWithFormat:@"$%@",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
+//            lblnewEarnedAwardePrice.text = [NSString stringWithFormat:@"$%@",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
             lblSoldreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
             lblSoldreferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
             
@@ -826,10 +861,14 @@ if([recieved_status isEqualToString:@"passed"])
 //            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
 //            [alert show];
             [kappDelegate HideIndicator];
-            
-            LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-            [self.navigationController pushViewController:LIvc animated:YES];
-            
+            if (count_status==0) {
+                [[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"user_logout"];
+                LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                [self.navigationController pushViewController:LIvc animated:YES];
+                NSLog(@"-----webservice------");
+                count_status++;
+            }
+           
             return;
         }
     }else{
@@ -840,7 +879,9 @@ if([recieved_status isEqualToString:@"passed"])
             {
                 return;
             }
-           
+            if ([responseString rangeOfString:@" UserId is missing" options:NSCaseInsensitiveSearch].location != NSNotFound){
+                return;
+            }
         }
         [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
 
@@ -908,6 +949,7 @@ if([recieved_status isEqualToString:@"passed"])
     NSMutableURLRequest *request ;
     NSString*_postData ;
     NSURLConnection *connection;
+    count_status = 0;
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSLog(@"%@",[user valueForKey:@"l_userid"]);

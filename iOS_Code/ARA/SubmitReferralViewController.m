@@ -92,7 +92,7 @@
     [txtEmail setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
     [txtmea setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
     
-    
+  
 
     NSString *role_name = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleName"]];
     
@@ -105,7 +105,11 @@
         [btnMEA setTitle:@"" forState:UIControlStateNormal];
     }else{
         NSString *compare =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
+        if([compare isEqualToString:@"<null>"]){
+            txtmea.text = @"Any Member Experience Advisor (Sales)";
+        }else{
         txtmea.text =compare;
+        }
         [btnMEA setTitle:@"" forState:UIControlStateNormal];
     }
     
@@ -483,10 +487,12 @@
     
     txtPhoneno.text = [selectedContactDict valueForKey:@"phone_no"];
     txtEmail.text = [selectedContactDict valueForKey:@"email"];
-    
+    [self checkforavailability];
     txtFirstname.userInteractionEnabled = YES;
     txtLastname.userInteractionEnabled = YES;
     txtPhoneno.userInteractionEnabled = YES;
+    
+    [self checkforavailability];
 }
 -(void)aTime
 {
@@ -520,7 +526,7 @@
                 return;
             }
             txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
-            
+            [self checkforavailability];
         }else if([emailArray count] >1){
             [self showEmailPopup];
         }
@@ -683,6 +689,9 @@
         if ([code rangeOfString:@"null" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
             mea_id = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaId"]];
+            if ([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"]) {
+                mea_id = @"221";
+            }
         }else{
             mea_id = selected_text_id;
         }
@@ -965,7 +974,7 @@
                 }
                 
                 txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
-                
+                [self checkforavailability];
             }else if([emailArray count] >1){
                 [self showEmailPopup];
             }
@@ -1014,7 +1023,7 @@
                     return;
                 }
                 txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
-                
+                [self checkforavailability];
             }else if([emailArray count] >1){
                 [self showEmailPopup];
             }
@@ -1039,6 +1048,10 @@
     email_checked = @"no";
     imagecheckforemailView.image=nil;
     
+    
+    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
+    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    btnSubmitReferral.userInteractionEnabled = NO;
 }
 - (BOOL)validateEmailWithString:(NSString*)email
 {
@@ -1246,7 +1259,7 @@
     
     //txtPhoneno.text = str;
     txtEmail.text = [ar objectAtIndex:0];
-    
+    [self checkforavailability];
     
     ABPeoplePickerNavigationController *peoplePicker1 = (ABPeoplePickerNavigationController *)peoplePicker.navigationController;
     [peoplePicker1 dismissModalViewControllerAnimated:YES];
@@ -1416,7 +1429,11 @@
             
            // Check if user already selected the any menbor advisor other wise add the vale selected at the time of signup
             if (![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]] isEqualToString:[twoValueArray objectAtIndex:0]]){
+                if([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"]){
+                    
+                }else{
                  [twoValueArray addObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]]];
+                }
             }
            
             
@@ -1466,6 +1483,7 @@
             }
         }else if (webservice==5)
         {
+            
             email_checked = @"yes";
             if ([responseString rangeOfString:@"Email address not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1480,6 +1498,10 @@
                 lblemailerror.text=@"";
                 imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
                 [activityIndicatorObject1 stopAnimating];
+                
+                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
+                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+                btnSubmitReferral.userInteractionEnabled = YES;
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1533,6 +1555,11 @@
                 lblemailerror.text=@"";
                 imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
                 [activityIndicatorObject1 stopAnimating];
+                
+                
+                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
+                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+                btnSubmitReferral.userInteractionEnabled = YES;
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1861,6 +1888,8 @@
         }
         else if(buttonIndex == 1) //Annul button pressed.
         {
+           
+            
             txtFirstname.text = firstname;
             txtLastname.text = lastname;
             if ([phoneno isEqualToString:@"<null>"]) {
@@ -1871,6 +1900,9 @@
             found_client = @"yes";
             imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
         }
+        btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
+        [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+        btnSubmitReferral.userInteractionEnabled = YES;
     }
 }
 -(void)cancelNumberPad{
@@ -1925,6 +1957,9 @@
 
 -(void)checkforavailability
 {
+    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
+    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    btnSubmitReferral.userInteractionEnabled = NO;
     
     NSMutableURLRequest *request ;
     NSString*_postData ;

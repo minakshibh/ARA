@@ -12,6 +12,9 @@
 #import "ASIHTTPRequest.h"
 #import "paypalObj.h"
 #import "addpaypalemailViewController.h"
+#import "LoginViewController.h"
+#import "dashboardViewController.h"
+
 //#import "UIView+Toast.h"
 
 @interface PaypalAccountsViewController ()
@@ -505,8 +508,46 @@
             email_array = [userDetailDict valueForKey:@"PaypalEmail"];
             [tableView reloadData];
         }else{
+            if ([responseString rangeOfString:@"Invalid token provided" options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                UIAlertController *alert= [UIAlertController
+                                           alertControllerWithTitle:@"Error"
+                                           message:@"Your session has expired. Please log in again."
+                                           preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Log in" style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action){
+                                                               //Do Some action here
+                                                               
+            dashboardViewController *dashBoardVC = [[dashboardViewController alloc]init];
+                [dashBoardVC logoutFunction];
+                                                               
+        if([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"user_logout"]] isEqualToString:@"yes"]  ){
+                LoginViewController* loginVC = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }else{
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Not able to  logout. Try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                                                   [alert show];
+                                                                   
+                }
+}];
+                UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * action) {
+                                                                   
+                                                                   NSLog(@"cancel btn");
+                                                                   
+                                                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                   
+                                                               }];
+                
+                [alert addAction:ok];
+                [alert addAction:cancel];
+                
+                [self presentViewController:alert animated:YES completion:nil];
+            }else{
             [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
             }
+        }
 
     }else if (webservice==2)
     {

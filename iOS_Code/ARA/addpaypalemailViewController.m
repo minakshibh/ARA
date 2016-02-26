@@ -10,7 +10,9 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "PaypalAccountsViewController.h"
-
+#import "dashboardViewController.h"
+#import "LoginViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 @interface addpaypalemailViewController ()
 
 @end
@@ -19,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    count_status =0;
     [self getpaymentmedia];
     
     lblDropdown.layer.cornerRadius = 5.0;
@@ -426,6 +428,17 @@
     
     return YES;
 }
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    scrollView.scrollEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.contentSize = CGSizeMake(350, 700);
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    scrollView.scrollEnabled = NO;
+    return YES;
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     tableView.hidden = YES;
     svos = scrollView.contentOffset;
@@ -621,9 +634,64 @@
             }
           //  [tableView reloadData];
         }else{
+            
+            if ([responseString rangeOfString:@"Invalid token provided" options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                UIAlertController *alert= [UIAlertController
+                                           alertControllerWithTitle:@"Error"
+                                           message:@"Your session has expired. Please log in again."
+                                           preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Log in" style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action){
+                                                               //Do Some action here
+                                                               
+            dashboardViewController *dashBoardVC = [[dashboardViewController alloc]init];
+                                                               
+                    [dashBoardVC logoutFunction];
+            if([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"user_logout"]] isEqualToString:@"yes"]  ){
+                    LoginViewController* loginVC = [[LoginViewController alloc]init];
+                            [self.navigationController pushViewController:loginVC animated:YES];
+                    }else{
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Not able to  logout. Try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alert show];
+
+                                                               }
+                                                           }];
+                UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * action) {
+                                                                   
+                                                                   NSLog(@"cancel btn");
+                                                                   
+                                                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                                                   
+                                                               }];
+                
+                [alert addAction:ok];
+                [alert addAction:cancel];
+                
+                
+                [self presentViewController:alert animated:YES completion:nil];
+            }else if (webservice==7)
+            {
+                //[self.view makeToast:[NSString stringWithFormat:@"%@",responseString]];
+                //            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                //            [alert show];
+                [kappDelegate HideIndicator];
+                if (count_status==0) {
+                    [[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"user_logout"];
+                    LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                    [self.navigationController pushViewController:LIvc animated:YES];
+                    NSLog(@"-----webservice------");
+                    count_status++;
+                }
+                
+                return;
+            }else{
+            
             [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
 
-           
+            }
         }
     }
     [kappDelegate HideIndicator];
@@ -687,5 +755,98 @@
         status = true;
         btnCheckbox.userInteractionEnabled = NO;
     }
+}
+-(void)logoutFunction{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        dashboardViewController *dashVC = [[dashboardViewController alloc]init];
+        [dashVC.timerDashboard invalidate];
+    });
+    
+    if([[[NSUserDefaults standardUserDefaults]valueForKey:@"from_fb"] isEqualToString:@"yes"])
+    {
+        
+        if (FBSession.activeSession.state == FBSessionStateOpen
+            || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+            
+            // Close the session and remove the access token from the cache
+            // The session state handler (in the app delegate) will be called automatically
+            [FBSession.activeSession closeAndClearTokenInformation];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
+            // If the session state is not any of the two "open" states when the button is clicked
+            return;
+        }
+    }else{
+        [self logout];
+        
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_email"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_firstName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_lastName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_facebookUser"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaId"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_phoneNo"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userid"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleName"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleId"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_purchasedBefore"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_image"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
+        
+        
+        
+        
+    }
+}
+-(void)logout
+{
+    [kappDelegate ShowIndicator];
+    webservice=7;
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSURLConnection *connection;
+    count_status = 0;
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
+    //    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //    NSString *currSys = @"ios";
+    //    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"POST"];
+    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+    
+    
 }
 @end

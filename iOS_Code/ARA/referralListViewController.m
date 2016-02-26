@@ -347,22 +347,22 @@ UIButton *tag_btn,*tag_cancel_btn;
     NSString *name = [NSString stringWithFormat:@"%@ %@",obj.first_name,obj.last_name];
     
     
-    if([obj.ReferralStatus isEqualToString:@"sold"]){
+    if([[obj.ReferralStatus lowercaseString] isEqualToString:@"sold"]){
         [cell setLabelText:name :[NSString stringWithFormat:@"Sold Date: %@",obj.SoldDate] :obj.ReferralStatus :obj.ReferralType];
     }else{
         NSString *datee = [NSString stringWithFormat:@"%@",obj.createDate];
-        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
-        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
-        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
-        
-        NSArray *semidate = [date componentsSeparatedByString:@"-"];
-        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
-        
-        
+//        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
+//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+//        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
+//        
+//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
+//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
         
         
         
-        [cell setLabelText:name :[NSString stringWithFormat:@"Submit Date: %@ %@",finalDate,timeAMPM] :obj.ReferralStatus :obj.ReferralType];
+        
+        
+        [cell setLabelText:name :[NSString stringWithFormat:@"Submit Date: %@",datee] :obj.ReferralStatus :obj.ReferralType];
     }
     
 //    if([obj.ReferralType isEqualToString:@"Direct"])
@@ -1010,7 +1010,7 @@ UIButton *tag_btn,*tag_cancel_btn;
     
     // create the date formatter with the correct format
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+    [formatter setDateFormat:@"MM-dd-yyyy HH-mm-ss"];
     
     NSMutableArray *tempArray = [[NSMutableArray alloc]init];
     
@@ -1059,7 +1059,7 @@ UIButton *tag_btn,*tag_cancel_btn;
     for (int i=0; i<arr.count; i++) {
         obj = [arr objectAtIndex:i];
         
-        if([obj.ReferralStatus isEqualToString:@"sold"])
+        if([[obj.ReferralStatus lowercaseString] isEqualToString:@"sold"])
         {
             [referralListForSold addObject:obj];
         }
@@ -1071,7 +1071,7 @@ UIButton *tag_btn,*tag_cancel_btn;
     for (int i=0; i<arr.count; i++) {
         obj = [arr objectAtIndex:i];
         
-        if([obj.ReferralStatus isEqualToString:@"open"])
+        if([[obj.ReferralStatus lowercaseString] isEqualToString:@"open"])
         {
             [referralListForOpen addObject:obj];
         }

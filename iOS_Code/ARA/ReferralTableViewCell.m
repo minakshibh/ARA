@@ -29,12 +29,9 @@
     
     if([ReferralType isEqualToString:@"Direct"])
     {
-        
-        
         imageViewimage.image =[UIImage imageNamed:@"direct_ref.png"];
     }else //if ([ReferralType isEqualToString:@"Direct"])
     {
-        
         imageViewimage.image = [UIImage imageNamed:@"direct_ref.png"];
    //     imageViewimage.image = [UIImage imageNamed:@"chained_ref.png"];
     }
@@ -45,15 +42,10 @@
     lblPriceScoreboard.hidden = YES;
     lblName.text = Name;
     
-    
-    
     lblDate.text = date;
-    
-    
-    
-    
+
     lblDateReward.hidden = YES;
-    if([tag isEqualToString:@"open"])
+    if([[tag lowercaseString] isEqualToString:@"open"])
     {
         lbltag.textColor = [UIColor colorWithRed:95.0f/255.0f green:204.0f/255.0f blue:87.0f/255.0f alpha:1.0f];
      //   lbltag.textColor = [UIColor whiteColor];
@@ -63,7 +55,7 @@
         lbltag.frame = frame;
         lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:14];
 
-    }else if([tag isEqualToString:@"sold"]){
+    }else if([[tag lowercaseString] isEqualToString:@"sold"]){
         lbltag.textColor = [UIColor colorWithRed:105.0f/255.0f green:160.0f/255.0f blue:208.0f/255.0f alpha:1.0f];
       //  lbltag.textColor = [UIColor whiteColor];
         lbltag.text = @"SOLD";

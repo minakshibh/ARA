@@ -197,7 +197,18 @@
         [cell.contentView addSubview:Description];
         
         UILabel * DateDay = [[UILabel alloc]  initWithFrame: CGRectMake(Description.frame.origin.x, Description.frame.origin.y+Description.frame.size.height-5, 200, 40)];
-        DateDay.text= database.ScheduledAt;
+        
+        NSString *datee = [NSString stringWithFormat:@"%@",database.ScheduledAt];
+//        NSArray *dateArr = [datee componentsSeparatedByString:@"T"];
+//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+//        NSString *timeAMPM =[NSString stringWithFormat:@"%@",[dateArr objectAtIndex:1]];
+//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
+//        NSArray *semiTime = [timeAMPM componentsSeparatedByString:@":"];
+//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:1],[semidate objectAtIndex:2],[semidate objectAtIndex:0]];
+//        NSString *finalTime = [NSString stringWithFormat:@"%@:%@",[semiTime objectAtIndex:0],[semiTime objectAtIndex:1]];
+//        NSString *finalStr = [NSString stringWithFormat:@"%@ %@",finalDate,finalTime];
+        
+        DateDay.text= datee;
         DateDay.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:14] : [UIFont fontWithName:fontNameStr size:12];
         DateDay.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:18] : DateDay.font;
         DateDay.textColor = [UIColor lightGrayColor];
@@ -320,7 +331,19 @@
         
         
         UILabel * DateDay = [[UILabel alloc]  initWithFrame: CGRectMake(Description.frame.origin.x, Description.frame.origin.y+Description.frame.size.height-5, 200, 40)];
-        DateDay.text= database.ScheduledAt;
+        
+        
+        NSString *datee = [NSString stringWithFormat:@"%@",database.ScheduledAt];
+//       NSArray *dateArr = [datee componentsSeparatedByString:@"T"];
+//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+//        NSString *timeAMPM =[NSString stringWithFormat:@"%@",[dateArr objectAtIndex:1]];
+//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
+//        NSArray *semiTime = [timeAMPM componentsSeparatedByString:@":"];
+//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:1],[semidate objectAtIndex:2],[semidate objectAtIndex:0]];
+//        NSString *finalTime = [NSString stringWithFormat:@"%@:%@",[semiTime objectAtIndex:0],[semiTime objectAtIndex:1]];
+//        NSString *finalStr = [NSString stringWithFormat:@"%@ %@",finalDate,finalTime];
+        
+        DateDay.text= datee;
         DateDay.textColor = [UIColor lightGrayColor];
         DateDay.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:14] : [UIFont fontWithName:fontNameStr size:12];
         DateDay.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:18] : DateDay.font;
@@ -866,6 +889,7 @@
             [kappDelegate HideIndicator];
             
             LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+             NSLog(@"-----notification------");
             [self.navigationController pushViewController:LIvc animated:YES];
             
             return;
