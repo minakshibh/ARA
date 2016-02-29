@@ -270,7 +270,13 @@ public class ARAParser {
 				referral.setSoldDate(jsonObject.getString("SoldDate")
 						.toString());
 				if(referral.getSoldDate() == null || referral.getSoldDate().equalsIgnoreCase("null"))
+				{
 					referral.setSoldDate("");
+					referral.setBothdate(referral.getCreatedDate());
+					}
+				else{
+					referral.setBothdate(referral.getSoldDate());
+				}
 				
 				referral.setReferralNumber(jsonObject.getString("UniqueReferralNumber")
 						.toString());

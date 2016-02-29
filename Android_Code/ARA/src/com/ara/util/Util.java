@@ -446,23 +446,23 @@ static int statusCode;
 			
 			
 			DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
-			  HttpGet request = new HttpGet("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+			  HttpGet request = new HttpGet("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
 			+getemail+"&matchCriteria=NONE");
 	     
 	    	 request.setHeader("Accept", "application/json");
 	         request.setHeader("Content-type", "application/json");
 	        
 	     
-	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
-	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
-			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
+	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","amrikhappy-facilitator-1_api1.yahoo.in");//jb-us-seller_api1.paypal.com
+	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","35CE3X4AYH74CXG6");//WX4WTU3S8MY44S7F
+			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AOSVN5AShrvdZBIzkLtp8UWrFbxfAKSCGcIeMJjy4ijEEFsgred.cR2Q");
 			 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
 			 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
 			 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
 			 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
 				
 	
-			 
+			
 	         
 	         HttpResponse httpResponse = httpClient.execute(request);
 					
@@ -491,6 +491,7 @@ static int statusCode;
 						stringBuilder.append(bufferedStrChunk);
 					}
 					responseString=stringBuilder.toString();
+			 
 	        Log.e(functionName, responseString);
 		} catch (ParseException e) {
 			e.printStackTrace();

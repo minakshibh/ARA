@@ -206,6 +206,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 					{
 						emailId.setError(null);	
 						//addPaymentAccountAPI();
+						Util.hideKeyboard(AddPaymentAccountActivity.this);
 						paypalIDCheck();
 					}
 				}
