@@ -237,14 +237,14 @@ AsyncResponseForARA {
 			
 			amount.setText("$ "+reward.getRewardAmount());
 			amount.setTypeface(BaseActivity.typeface_roboto);
-			String date_after="";
+			/*String date_after="";
 			try{
 			 date_after = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", reward.getSoldDate());
 			}catch(Exception e)
 			{
 				e.printStackTrace();
-			}
-			date.setText("Sold Date : "+date_after);
+			}*/
+			date.setText("Sold Date : "+reward.getSoldDate());
 			date.setTypeface(BaseActivity.typeface_roboto);
 
 			return convertView;

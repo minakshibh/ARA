@@ -432,7 +432,7 @@
              
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/layout_comment"
+            android:id="@+id/outer_layout_comment"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="30dp"
@@ -457,7 +457,7 @@
                 android:background="@color/light_blue" />
 
              <LinearLayout
-            android:id="@+id/layout_comment"
+            android:id="@+id/inner_layout_comment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"

@@ -515,7 +515,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				}
 			
 			if (referral.getReferralStatus().equalsIgnoreCase(DashBoardActivity.STATUS_SOLD)) {
-				if(referral.getSoldDate()!=null)
+				/*if(referral.getSoldDate()!=null)
 				{
 					try{
 						//"CreatedDate": "12-27-2015 5:04:25 PM",
@@ -525,14 +525,14 @@ private View.OnClickListener listener = new View.OnClickListener() {
 							e.printStackTrace();
 						}
 					
-					}
-				date.setText("Sold date: " + newDate);
+					}*/
+				date.setText("Sold date: " + referral.getSoldDate());
 				date.setTypeface(BaseActivity.typeface_roboto);
 				status.setTextColor(getResources().getColor(R.color.app_blue));
 
 			} else {
 				String newDate1="";
-				if(referral.getCreatedDate()!=null)
+				/*if(referral.getCreatedDate()!=null)
 				{
 					try{
 						newDate1 = Util.formateDateFromstring("MM-dd-yyyy hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
@@ -542,8 +542,8 @@ private View.OnClickListener listener = new View.OnClickListener() {
 						{
 							e.printStackTrace();
 						}
-					}
-				date.setText("Submit Date: " + newDate1);
+					}*/
+				date.setText("Submit Date: " + referral.getCreatedDate());
 				if (referral.getReferralStatus().equalsIgnoreCase(
 						DashBoardActivity.STATUS_OPEN)) {
 					status.setTextColor(getResources().getColor(R.color.bright_green));

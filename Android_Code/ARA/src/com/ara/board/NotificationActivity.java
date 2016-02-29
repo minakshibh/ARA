@@ -335,14 +335,14 @@ public class NotificationActivity extends Activity implements
 			
 			Description.setText(notification.getNotificationText());
 			lblListHeader.setText(notification.getNotificationTitle() + "");
-			String date_after="";
+			/*String date_after="";
 			try{
 				 date_after = formateDateFromstring("yyyy-MM-dd'T'hh:mm:ss.SSS", "MM/dd/yyyy hh:mm a", notification.getCreatedDate());
 				}catch(Exception e)
 				{
 					e.printStackTrace();
-				}
-			date.setText(date_after);
+				}*/
+			date.setText(notification.getCreatedDate());
 			Description.setMaxLines(3);
 			Description.post(new Runnable() {
 			    @Override
