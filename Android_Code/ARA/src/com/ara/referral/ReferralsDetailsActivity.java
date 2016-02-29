@@ -144,7 +144,7 @@ public class ReferralsDetailsActivity extends Activity {
 					}
 				else
 				{
-					String newDate="";
+					/*String newDate="";
 					if(reward.getCreatedDate()!=null)
 					{
 					 	//newDate=parseDateToddMMyyyy(reward.getCreatedDate());//"yyyy-dd-MM HH:mm:ss";
@@ -154,8 +154,8 @@ public class ReferralsDetailsActivity extends Activity {
 							{
 								e.printStackTrace();
 							}
-						}
-					txtSubmittedDate.setText(newDate);
+						}*/
+					txtSubmittedDate.setText(reward.getCreatedDate());
 					
 					}
 				
@@ -170,7 +170,7 @@ public class ReferralsDetailsActivity extends Activity {
 					}
 				else
 				{
-					String newDate1="";
+					/*String newDate1="";
 					if(reward.getSoldDate()!=null)
 					{
 						try{
@@ -179,8 +179,8 @@ public class ReferralsDetailsActivity extends Activity {
 							{
 								e.printStackTrace();
 							}
-						}
-					txtSoldDate.setText(newDate1);
+						}*/
+					txtSoldDate.setText(reward.getSoldDate());
 					
 					}
 					
@@ -289,7 +289,7 @@ else
 						else
 						{
 							
-							String newDate1="";
+							/*String newDate1="";
 							if(referral.getCreatedDate()!=null)
 							{
 								try{
@@ -298,8 +298,8 @@ else
 									{
 										e.printStackTrace();
 									}
-								}
-							txtSubmittedDate.setText(newDate1);
+								}*/
+							txtSubmittedDate.setText(referral.getCreatedDate());
 							
 							
 							}
@@ -315,7 +315,7 @@ else
 							}
 						else
 						{
-							String newDate1="";
+							/*String newDate1="";
 							if(referral.getSoldDate()!=null)
 							{
 								try{
@@ -324,8 +324,8 @@ else
 									{
 										e.printStackTrace();
 									}
-								}
-							txtSoldDate.setText(newDate1);
+								}*/
+							txtSoldDate.setText(referral.getSoldDate());
 							
 							
 							

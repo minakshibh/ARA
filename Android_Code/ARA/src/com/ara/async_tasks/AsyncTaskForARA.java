@@ -3,6 +3,7 @@ package com.ara.async_tasks;
 
 import java.util.ArrayList;
 import org.apache.http.NameValuePair;
+import org.json.JSONException;
 
 import com.ara.board.DashBoardActivity;
 import com.ara.login.LoginActivity;
@@ -88,6 +89,7 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		else if(method_type.equalsIgnoreCase("paypal"))
 		{
 			result = Util.getResponsePostPayPal(token,methodName, nameValuePairs, email,activity);
+			
 			}
 		else
 		{

@@ -438,8 +438,16 @@ static int statusCode;
 			HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 			
 			//_getNewHttpClient();https://svcs.paypal.com
+			//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
+			
+		/*	Username:amrikhappy-facilitator_api1.yahoo.in
+			Password:LSRRHP7S926DBPZN
+			Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
+			
+			
 			DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
-			  HttpGet request = new HttpGet("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="+getemail+"&matchCriteria=NONE");
+			  HttpGet request = new HttpGet("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+			+getemail+"&matchCriteria=NONE");
 	     
 	    	 request.setHeader("Accept", "application/json");
 	         request.setHeader("Content-type", "application/json");
@@ -622,7 +630,72 @@ static int statusCode;
 	     }
 	 
 	
-	
+	 /*public static String getResponseFromUrlPost2(Boolean token,String functionName, List<NameValuePair> param, String email,Context context) throws JSONException{
+			String responseString = "";
+			SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
+			try {
+				
+				
+				
+				HttpParams httpParameters = new BasicHttpParams();
+				int timeoutConnection = 60000;
+				HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+				int timeoutSocket = 61000;
+				HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+				
+				
+				DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
+		         HttpPost request = new HttpPost(("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"));
+		         request.setHeader("Accept", "application/json");
+		         request.setHeader("Content-type", "application/json");
+		         
+		     
+		     
+		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","caller_1312486258_biz_api1.gmail.com");//jb-us-seller_api1.paypal.com
+		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","1312486294");//WX4WTU3S8MY44S7F
+				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AbtI7HV1xB428VygBUcIhARzxch4AL65.T18CTeylixNNxDZUu0iO87e");
+				 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
+				 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
+				 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
+		      
+		         
+		            
+		         JSONObject JSONObjectData = new JSONObject();
+
+		         JSONObjectData.put("emailAddress",email );
+		         JSONObjectData.put("matchCriteria", "NONE");
+		         for (NameValuePair nameValuePair : param) {
+		             try {
+		                 JSONObjectData.put(nameValuePair.getName(), nameValuePair.getValue());
+		             } catch (JSONException e) {
+
+		             }
+		         }
+		         
+		         String st = JSONObjectData.toString();
+		         Log.e("tag", st);
+		         StringEntity st_entity =  new StringEntity(st);
+		         request.setEntity(st_entity);
+		         HttpResponse response = httpClient.execute(request);
+		         
+		         statusCode = response.getStatusLine().getStatusCode();
+		         
+		         HttpEntity httpEntity = response.getEntity();
+		         responseString = EntityUtils.toString(httpEntity);
+				
+		        Log.e(functionName, responseString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.err.println("socket exception"+e);
+				//Util.alertMessage(context, "Please check your internet connection or try again later");
+			}
+			Log.e("responseString",statusCode+" "+ responseString);
+			return responseString;
+		
+		}*/
 	
 }
 

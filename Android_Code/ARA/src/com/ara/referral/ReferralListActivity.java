@@ -286,8 +286,8 @@ private View.OnClickListener listener = new View.OnClickListener() {
 					 	}
 					 else if(selectedSort.equalsIgnoreCase("date"))
 					 {
-						 //02-17-2016 3:04:25 PM",
-						 SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss a");
+						 //"02/23/2016 02:24:40 AM",
+						 SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 						// SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM hh:mm:ss a");
 						 Date datev2 = null,datev1=null;
 						 try {
