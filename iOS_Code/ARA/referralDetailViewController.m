@@ -139,17 +139,17 @@
     if(create_str.length>6){
         
         NSString *datee = [NSString stringWithFormat:@"%@",create_str];
-        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
-        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
-        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
-        
-        NSArray *semidate = [date componentsSeparatedByString:@"-"];
-        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
+//        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
+//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+//        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
+//        
+//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
+//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
         
 
         
         
-        lblCreateDate.text = [NSString stringWithFormat:@"%@ %@",finalDate,timeAMPM];
+        lblCreateDate.text = [NSString stringWithFormat:@"%@",datee];
     }else{
             lblCreateDate.text = @"";
         }
@@ -166,18 +166,18 @@
     }
     if(sold_str.length>6){
         NSString *datee = [NSString stringWithFormat:@"%@",sold_str];
-        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
-        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
-        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
-        
-        NSArray *semidate = [date componentsSeparatedByString:@"-"];
-        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
-        
-        
+//        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
+//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+//        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
+//        
+//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
+//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
         
         
         
-        lblSoldDate.text = [NSString stringWithFormat:@"%@ %@",finalDate,timeAMPM];
+        
+        
+        lblSoldDate.text = [NSString stringWithFormat:@"%@",datee];
     }
     else{
         lblSoldDate.text = @" ";
@@ -186,11 +186,11 @@
     
    
     
-        if([_obj.ReferralStatus isEqualToString:@"open"])
+        if([[_obj.ReferralStatus lowercaseString]isEqualToString:@"open"])
         {
             lblTagColor.backgroundColor = [UIColor colorWithRed:95.0f/255.0f green:204.0f/255.0f blue:87.0f/255.0f alpha:1.0f];
         
-        }else if([_obj.ReferralStatus isEqualToString:@"sold"])
+        }else if([[_obj.ReferralStatus lowercaseString] isEqualToString:@"sold"])
         {
             lblTagColor.backgroundColor = [UIColor colorWithRed:118.0f/255.0f green:178.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
         }else{

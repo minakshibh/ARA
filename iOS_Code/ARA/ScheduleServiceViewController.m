@@ -27,6 +27,9 @@
     selectTimeSlotIdArr = [[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",nil];
     
     pickerDate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    if (IS_IPHONE_5) {
+        pickerDate.frame = CGRectMake(pickerDate.frame.origin.x, pickerDate.frame.origin.y-25, pickerDate.frame.size.width,  pickerDate.frame.size.height);
+    }
     pickerDate.datePickerMode = UIDatePickerModeDate;
     [pickerDate addTarget:self action:@selector(dueDateChanged:) forControlEvents:UIControlEventValueChanged];
     [pickerDate setMinimumDate: [NSDate date]];
@@ -493,6 +496,11 @@
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField{
+    
+    scrollView.scrollEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.contentSize = CGSizeMake(350, 700);
+    
     tableViewSelectTimeSlot.hidden = YES;
     tableViewTypeOfService.hidden = YES;
     statusService  = false;
@@ -529,6 +537,7 @@
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    scrollView.scrollEnabled = NO;
     [textField resignFirstResponder];
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -645,6 +654,7 @@
 }
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
+    scrollView.scrollEnabled = NO;
         [txtComments resignFirstResponder];
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     return  YES;
@@ -661,6 +671,10 @@
      viewPickerbackground.hidden = YES;
     
     scrollView.scrollEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.contentSize = CGSizeMake(350, 800);
+    
+    
     svos = scrollView.contentOffset;
     if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5 || IS_IPHONE_6 ||IS_IPHONE_6P) {
         if(textView == txtComments) {

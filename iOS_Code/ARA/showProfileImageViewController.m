@@ -22,6 +22,12 @@
 
 - (void)viewDidLoad {
     
+    [NSTimer scheduledTimerWithTimeInterval:10
+                                     target:self
+                                   selector:@selector(targetMethod1:)
+                                   userInfo:nil
+                                    repeats:NO];
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -74,7 +80,14 @@
     }
     
 }
-
+-(void)targetMethod1:(NSTimer *)timer
+{
+    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
+    
+    imageViewProfile.image = [UIImage imageWithData:im];
+    imageViewProfile.contentMode=UIViewContentModeScaleAspectFit;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

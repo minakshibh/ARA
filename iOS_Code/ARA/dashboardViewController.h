@@ -68,7 +68,7 @@
     IBOutlet UIView *viewnewNotification;
     IBOutlet UIImageView *imagenotification;
     IBOutlet UIImageView *imagenotificationcount;
-    
+    int count_status;
 }
 - (IBAction)btnnewAppURL:(id)sender;
 - (IBAction)btnnewnotificationView:(id)sender;
@@ -93,5 +93,5 @@
 @property (nonatomic,strong) NSTimer *timerDashboard;
 -(void)getData;
 -(void)timerInvalidate;
-
+-(void)logoutFunction;
 @end

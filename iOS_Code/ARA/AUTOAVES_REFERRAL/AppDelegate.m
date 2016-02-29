@@ -202,8 +202,10 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_image"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
 
         LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+         NSLog(@"-----facebook------");
         [self.navigator pushViewController:LIvc animated:YES];
         // Show the user the logged-out UI
         // [self userLoggedOut];

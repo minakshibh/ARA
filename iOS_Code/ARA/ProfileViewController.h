@@ -11,7 +11,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController<UIPickerViewDelegate,UIImagePickerControllerDelegate>
+@interface ProfileViewController : UIViewController<UIPickerViewDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate>
 {
     CGPoint svos;
     IBOutlet UIImageView *headerImage;

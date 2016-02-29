@@ -330,6 +330,7 @@
         return;
     }
     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+     NSLog(@"-----signup------");
     [self.navigationController pushViewController:loginView animated:YES];
 }
 
@@ -573,6 +574,11 @@
     if(textField ==txtMEA)
     return NO;
     
+    
+    scrollView.scrollEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.contentSize = CGSizeMake(350, 850);
+    
     return  YES;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -581,6 +587,8 @@
     }
     tableViewPreviousCustomer.hidden = YES;
     tableViewMEA.hidden =YES;
+    
+    
     
     if(textField==txtUserId)
     {
@@ -611,6 +619,9 @@
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    scrollView.scrollEnabled = NO;
+
+    
     if(textField == txtUserId)
     {
      //   UIAlertView *alert;

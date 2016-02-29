@@ -156,7 +156,21 @@
     obj = [rewardListArray objectAtIndex:indexPath.row];
     
     NSString *name = [NSString stringWithFormat:@"%@ %@",obj.first_name,obj.last_name];
-        [cell setLabelTextforReward:name :obj.UniqueReferralNumber :obj.RewardAmount :obj.SoldDate];
+    
+    NSString *datee = [NSString stringWithFormat:@"%@",obj.SoldDate];
+//    NSArray *dateArr = [datee componentsSeparatedByString:@" "];
+//    NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+//    NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
+//    
+//    NSArray *semidate = [date componentsSeparatedByString:@"-"];
+//    NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@ %@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0],timeAMPM];
+    
+    
+    
+    
+    
+    
+        [cell setLabelTextforReward:name :obj.UniqueReferralNumber :obj.RewardAmount :datee];
     
         tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

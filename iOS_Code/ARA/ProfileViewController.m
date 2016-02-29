@@ -22,6 +22,14 @@
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
+    
+    [NSTimer scheduledTimerWithTimeInterval:10
+                                     target:self
+                                   selector:@selector(targetMethod1:)
+                                   userInfo:nil
+                                    repeats:NO];
+    
+    
     imageProfile.hidden = YES;
     [super viewDidLoad];
     activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -150,7 +158,12 @@
         }
     }
 }
-
+-(void)targetMethod1:(NSTimer *)timer
+{
+    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
+    imageProfile.image = [UIImage imageWithData:im];
+    
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
@@ -215,7 +228,12 @@
     }
     laststr =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
     lblRole.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_roleName"]];
-    lblMEAname.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]];
+    
+    if([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"]){
+        lblMEAname.text = @"";
+    }else{
+        lblMEAname.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]];
+    }
     NSString *role = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_purchasedBefore"]];
     if([role isEqualToString:@"1"]){
         lblPurchased.text = @"YES";
@@ -489,6 +507,19 @@
     [textField resignFirstResponder];
     scrollView.scrollEnabled = YES;
     
+    return YES;
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    scrollView.scrollEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.contentSize = CGSizeMake(350, 800);
+    
+    return YES;
+}
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+
+    scrollView.scrollEnabled = NO;
     return YES;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

@@ -244,6 +244,7 @@
     {
 //        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
         LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+         NSLog(@"-----forgot------");
         [self.navigationController pushViewController:loginView animated:YES];
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];

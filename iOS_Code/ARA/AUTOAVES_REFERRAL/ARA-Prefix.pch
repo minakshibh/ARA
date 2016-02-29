@@ -11,10 +11,10 @@
 #ifndef AUTOAVES_REFERRAL_ARA_Prefix_pch
 #define AUTOAVES_REFERRAL_ARA_Prefix_pch
 
-#define Kwebservices @"http://112.196.24.205:89/api"   //--staging
+//#define Kwebservices @"http://112.196.24.205:89/api"   //--staging
 //#define Kwebservices @"http://112.196.24.205:88/api"   //--production
 //#define Kwebservices @"http://10.10.10.219:801/api"    //--Live
-//#define Kwebservices @"http://63.255.19.72:801/api"   //--Client
+#define Kwebservices @"http://63.255.19.72:801/api"   //--Client
 
 
 

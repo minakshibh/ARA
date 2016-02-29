@@ -184,6 +184,17 @@
     [super didReceiveMemoryWarning];
 }
 #pragma mark UITextField Delegate Methods
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    scrollView.scrollEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.contentSize = CGSizeMake(350, 700);
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    scrollView.scrollEnabled = NO;
+    return YES;
+}
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField ==txtEmail){
@@ -525,6 +536,7 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
 
         LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+         NSLog(@"-----facebokk111------");
         [self.navigationController pushViewController:LIvc animated:YES];
         
         NSLog(@"----------------------------");
