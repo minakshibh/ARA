@@ -5,20 +5,29 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
+import java.security.KeyManagementException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.HttpEntity;
@@ -79,6 +88,7 @@ import android.widget.Toast;
 
 import com.ara.base.R;
 import com.ara.imageloader.Utils;
+
 
 public class Util {
 static 	Context context;
@@ -431,11 +441,50 @@ static int statusCode;
 		
 		
 		try{
+			
+			/* KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+		        trustStore.load(null, null);
+
+		        MySSLSocketFactory sf = new MySSLSocketFactory(trustStore);
+		        sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+//		        HttpParams params = new BasicHttpParams();
+//		        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+//		        HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+
+		        SchemeRegistry registry = new SchemeRegistry();
+		        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+		        registry.register(new Scheme("https", sf, 443));
+*/
+			 HttpsURLConnection urlConnection = (HttpsURLConnection) new URL("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+			+getemail+"&matchCriteria=NONE").openConnection();
+	            SSLContext sc = SSLContext.getInstance("TLS");
+	            sc.init(null, null, new java.security.SecureRandom());
+	            urlConnection.setSSLSocketFactory(sc.getSocketFactory());
+	            
 			HttpParams httpParameters = new BasicHttpParams();
 			int timeoutConnection = 60000;
 			HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
 			int timeoutSocket = 61000;
 			HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+		
+		   
+
+           
+		
+			//   ClientConnectionManager ccm = new ThreadSafeClientConnManager(httpParameters, registry);
+		        
+		        
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			//_getNewHttpClient();https://svcs.paypal.com
 			//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
@@ -445,7 +494,7 @@ static int statusCode;
 			Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
 			
 			
-			DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
+			DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
 			  HttpGet request = new HttpGet("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
 			+getemail+"&matchCriteria=NONE");
 	     
@@ -453,9 +502,9 @@ static int statusCode;
 	         request.setHeader("Content-type", "application/json");
 	        
 	     
-	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","amrikhappy-facilitator-1_api1.yahoo.in");//jb-us-seller_api1.paypal.com
-	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","35CE3X4AYH74CXG6");//WX4WTU3S8MY44S7F
-			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AOSVN5AShrvdZBIzkLtp8UWrFbxfAKSCGcIeMJjy4ijEEFsgred.cR2Q");
+	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
+	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
+			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
 			 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
 			 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
 			 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
@@ -463,7 +512,7 @@ static int statusCode;
 				
 	
 			
-	         
+			
 	         HttpResponse httpResponse = httpClient.execute(request);
 					
 					statusCode = httpResponse.getStatusLine().getStatusCode();
@@ -499,6 +548,13 @@ static int statusCode;
 			e.printStackTrace();
 			System.err.println("socket exception"+e);
 			//Util.alertMessage(context, "Please check your internet connection or try again later");
+		
+		} catch (KeyManagementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return responseString;
 			
@@ -558,8 +614,30 @@ static int statusCode;
 	    }
 	
 		
-	
-
+	private static void trustEveryone() { 
+	    try { 
+	            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){ 
+	                   	@Override
+						public boolean verify(String hostname,SSLSession session) {
+							// TODO Auto-generated method stub
+							return true;
+						}}); 
+	            SSLContext context = SSLContext.getInstance("TLS"); 
+	            context.init(null, new X509TrustManager[]{new X509TrustManager(){ 
+	                    public void checkClientTrusted(X509Certificate[] chain, 
+	                                    String authType) throws CertificateException {} 
+	                    public void checkServerTrusted(X509Certificate[] chain, 
+	                                    String authType) throws CertificateException {} 
+	                    public X509Certificate[] getAcceptedIssuers() { 
+	                            return new X509Certificate[0]; 
+	                    }}},
+	                    new SecureRandom()); 
+	            HttpsURLConnection.setDefaultSSLSocketFactory( 
+	                            context.getSocketFactory()); 
+	    } catch (Exception e) { // should never happen 
+	            e.printStackTrace(); 
+	    } 
+	} 
 	
 	public static String createImageFile() {
 		try{
@@ -629,7 +707,6 @@ static int statusCode;
 	         }
 			
 	     }
-	 
 	
 	 /*public static String getResponseFromUrlPost2(Boolean token,String functionName, List<NameValuePair> param, String email,Context context) throws JSONException{
 			String responseString = "";

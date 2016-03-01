@@ -1,8 +1,14 @@
 package com.ara.payment;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,6 +29,8 @@ import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,6 +56,8 @@ import com.ara.model.Payment;
 import com.ara.model.PaymentMode;
 import com.ara.util.ARAParser;
 import com.ara.util.Util;
+import com.facebook.Request;
+import com.facebook.Response;
 
 public class AddPaymentAccountActivity extends Activity implements AsyncResponseForARA {
 	private LinearLayout emailLayout;
@@ -340,6 +350,61 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			
 	}
 		
-		
-	
+/*	 private class OkHttpTaskWithTlsSocketFactory extends AsyncTask<String, Integer, String> {
+	        protected String doInBackground(String... urls) {
+	            String result = "";
+	            try {
+	                result += "result with TlsSocketFactory:";
+	                Response response = getOkhttpResponse(urls[0], true);
+	                result += response.body().string().trim();
+	            } catch (Exception e) {
+	                result += "FAIL: " + e.getLocalizedMessage().trim();
+	                Log.e("", result, e);
+	            }
+	            Log.i("", "background result:" + result);
+	            return result;
+	        }
+
+	        protected void onPostExecute(String result) {
+	            setResult(resultText1, result);
+	        }
+	    }		
+	 private Response getOkhttpResponse(String url, boolean useTlsSocketFactory) throws IOException, NoSuchAlgorithmException, KeyManagementException {
+	        Request request = new Request.Builder()
+	                .url(url)
+	                .build();
+
+	        // OK HTTP library is used by the SDK and is a more modern library.
+	        OkHttpClient client = new OkHttpClient().setConnectionSpecs(
+	                Arrays.asList(ConnectionSpec.MODERN_TLS));
+
+	        if (useTlsSocketFactory) {
+	            client.setSslSocketFactory(new TlsSocketFactory());
+	        }
+
+	        return client.newCall(request).execute();
+	    }
+
+	    private String getContentString(HttpsURLConnection urlConnection) throws IOException {
+	        InputStreamReader in = new InputStreamReader((InputStream) urlConnection.getContent());
+	        BufferedReader buff = new BufferedReader(in);
+	        String line;
+	        StringBuilder sb = new StringBuilder();
+	        do {
+	            line = buff.readLine();
+	            if (line != null) sb.append(line + "\n");
+	        } while (line != null);
+	        String result = sb.toString().trim();
+	        return result;
+	    }
+
+	    private void setResult(TextView resultTextView, String result) {
+	        if (null == result) {
+	            result = "FAIL: result was null";
+	        }
+
+	        Log.w("", "result:" + result);
+	        resultTextView.setText(result);
+	        resultTextView.setTextColor(result.contains("FAIL") ? Color.RED : Color.GREEN);
+	    }*/
 }

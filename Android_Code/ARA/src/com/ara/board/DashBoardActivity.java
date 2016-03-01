@@ -2,6 +2,7 @@ package com.ara.board;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -396,8 +397,15 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			//activeRewardAmount.setText("$ "+rewardAmount);
 			activeReferralAmount.setText(countOpen);
 			
-			txtPaidAmount.setText("$"+EarnedRewards);
-			txtPeningAmount.setText("$"+UpcomingRewards);
+			try{
+		
+     
+   		    txtPaidAmount.setText("$"+(int)Float.parseFloat(EarnedRewards));
+			txtPeningAmount.setText("$"+(int)Float.parseFloat(UpcomingRewards) );
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 			
 			/*if(referralTypeArray.get(0).getNotificationCount().equals("0"))
 			{
