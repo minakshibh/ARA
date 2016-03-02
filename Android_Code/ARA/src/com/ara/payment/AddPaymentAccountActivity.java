@@ -389,7 +389,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 	        InputStreamReader in = new InputStreamReader((InputStream) urlConnection.getContent());
 	        BufferedReader buff = new BufferedReader(in);
 	        String line;
-	        StringBuilder sb = new StringBuilder();
+	        StringBuilder sb = new StringBuilder();`
 	        do {
 	            line = buff.readLine();
 	            if (line != null) sb.append(line + "\n");

@@ -86,15 +86,16 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		setContentView(R.layout.activity_dashboard);
 
 		initUIComponents();
-		setValue();
-		
 		setClickListeners();
+		setValue();
 	}
 
 	
 
 	private void initUIComponents() {
 		// TODO Auto-generated method stub
+		
+		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		typeface_timeburner= Typeface.createFromAsset(getAssets(), "timeburner_regular.ttf");
 		typeface_roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
 		
@@ -195,8 +196,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	}
 	private void setValue() {
 		// TODO Auto-generated method stub
-		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		
+		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		imageurl=spref.getString("userimage", "");
 		//imageLoader = new ImageLoader(DashBoardActivity.this);
 		System.err.println("dashboard="+imageurl);
@@ -258,11 +259,11 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			}
 			else if(v == textViewEmail){
 				Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-	                    "mailto",  user_Model.getEmail(), null));
+	                    "mailto",  "robert.seeley@autoaves.com", null));
 	            startActivity(Intent.createChooser(emailIntent, "Send email..."));
 			}
 			else if(v == textViewPhone){
-				  String uri = "tel:" + user_Model.getPhoneNumber();
+				  String uri = "tel:" + "3037505000";
                   Intent intent = new Intent(Intent.ACTION_CALL);
                   intent.setData(Uri.parse(uri));
                   startActivity(intent);

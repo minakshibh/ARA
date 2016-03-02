@@ -1,7 +1,9 @@
 package com.ara.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +16,9 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,6 +92,7 @@ import android.widget.Toast;
 
 import com.ara.base.R;
 import com.ara.imageloader.Utils;
+import com.ara.payment.NoSSLv3Factory;
 
 
 public class Util {
@@ -456,11 +461,27 @@ static int statusCode;
 		        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 		        registry.register(new Scheme("https", sf, 443));
 */
-			 HttpsURLConnection urlConnection = (HttpsURLConnection) new URL("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
-			+getemail+"&matchCriteria=NONE").openConnection();
-	            SSLContext sc = SSLContext.getInstance("TLS");
-	            sc.init(null, null, new java.security.SecureRandom());
-	            urlConnection.setSSLSocketFactory(sc.getSocketFactory());
+			
+			/*HttpsURLConnection.setDefaultSSLSocketFactory(new NoSSLv3Factory());
+				
+			HostnameVerifier hostnameVerifier = new HostnameVerifier() {
+			    @Override
+			    public boolean verify(String hostname, SSLSession session) {
+			        HostnameVerifier hv =
+			            HttpsURLConnection.getDefaultHostnameVerifier();
+			        return hv.verify("https://svcs.sandbox.paypal.com", session);
+			    }
+			};
+
+			// Tell the URLConnection to use our HostnameVerifier
+			URL url = new URL("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+			+getemail+"&matchCriteria=NONE");
+			HttpsURLConnection urlConnection =
+			    (HttpsURLConnection)url.openConnection();
+			urlConnection.setHostnameVerifier(hostnameVerifier);
+			InputStream in = urlConnection.getInputStream();*/
+			//copyInputStreamToOutputStream(in, System.out);
+
 	            
 			HttpParams httpParameters = new BasicHttpParams();
 			int timeoutConnection = 60000;
@@ -475,23 +496,9 @@ static int statusCode;
 			//   ClientConnectionManager ccm = new ThreadSafeClientConnManager(httpParameters, registry);
 		        
 		        
+					
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			//_getNewHttpClient();https://svcs.paypal.com
-			//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
-			
-		/*	Username:amrikhappy-facilitator_api1.yahoo.in
-			Password:LSRRHP7S926DBPZN
-			Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
+		
 			
 			
 			DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
@@ -503,10 +510,10 @@ static int statusCode;
 	        
 	     
 	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
-	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
-			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
+	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX47F");//WX4WTU3S8MY44S7F
+			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","");
 			 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
-			 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
+			 request.setHeader("X-PAYPAL-APPLICATION-ID","");//APP-80W284485P519543T
 			 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
 			 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
 				
@@ -549,12 +556,7 @@ static int statusCode;
 			System.err.println("socket exception"+e);
 			//Util.alertMessage(context, "Please check your internet connection or try again later");
 		
-		} catch (KeyManagementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		}
 		return responseString;
 			
@@ -774,6 +776,13 @@ static int statusCode;
 			return responseString;
 		
 		}*/
-	
+		
+	 
+	 //_getNewHttpClient();https://svcs.paypal.com
+		//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
+		
+	/*	Username:amrikhappy-facilitator_api1.yahoo.in
+		Password:LSRRHP7S926DBPZN
+		Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
 }
 
