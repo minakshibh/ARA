@@ -146,6 +146,7 @@ static int statusCode;
 	        return android.util.Patterns.PHONE.matcher(target).matches();
 	    }
 	}
+	
 	 public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate){
 
 		    Date parsed = null;
@@ -419,228 +420,9 @@ static int statusCode;
 	
 	
 	}
-	public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
-		String responseString = "";
-		//SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
-		String getemail=email.trim();
-		
-		// ios code
-			 /*_postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
-			    
-			    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:
-			    @"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-			    //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
-			    //customer and upcoming
-			    NSLog(@"data post >>> %@",_postData);
-			    
-			    [request setHTTPMethod:@"POST"];
-			    [request addValue:@"jb-us-seller_api1.paypal.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
-			    [request addValue:@"WX4WTU3S8MY44S7F" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
-			    [request addValue:@"AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
-			    [request addValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
-			    [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
-			    [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
-			    
-			    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-			    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];*/
-		
-		
-		try{
-			
-			/* KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-		        trustStore.load(null, null);
-
-		        MySSLSocketFactory sf = new MySSLSocketFactory(trustStore);
-		        sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-//		        HttpParams params = new BasicHttpParams();
-//		        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-//		        HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
-
-		        SchemeRegistry registry = new SchemeRegistry();
-		        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-		        registry.register(new Scheme("https", sf, 443));
-*/
-			
-			/*HttpsURLConnection.setDefaultSSLSocketFactory(new NoSSLv3Factory());
-				
-			HostnameVerifier hostnameVerifier = new HostnameVerifier() {
-			    @Override
-			    public boolean verify(String hostname, SSLSession session) {
-			        HostnameVerifier hv =
-			            HttpsURLConnection.getDefaultHostnameVerifier();
-			        return hv.verify("https://svcs.sandbox.paypal.com", session);
-			    }
-			};
-
-			// Tell the URLConnection to use our HostnameVerifier
-			URL url = new URL("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
-			+getemail+"&matchCriteria=NONE");
-			HttpsURLConnection urlConnection =
-			    (HttpsURLConnection)url.openConnection();
-			urlConnection.setHostnameVerifier(hostnameVerifier);
-			InputStream in = urlConnection.getInputStream();*/
-			//copyInputStreamToOutputStream(in, System.out);
-
-	            
-			HttpParams httpParameters = new BasicHttpParams();
-			int timeoutConnection = 60000;
-			HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-			int timeoutSocket = 61000;
-			HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-		
-		   
-
-           
-		
-			//   ClientConnectionManager ccm = new ThreadSafeClientConnManager(httpParameters, registry);
-		        
-		        
-					
-			
-		
-			
-			
-			DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
-			  HttpGet request = new HttpGet("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
-			+getemail+"&matchCriteria=NONE");
-	     
-	    	 request.setHeader("Accept", "application/json");
-	         request.setHeader("Content-type", "application/json");
-	        
-	     
-	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
-	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX47F");//WX4WTU3S8MY44S7F
-			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","");
-			 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
-			 request.setHeader("X-PAYPAL-APPLICATION-ID","");//APP-80W284485P519543T
-			 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
-			 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
-				
 	
-			
-			
-	         HttpResponse httpResponse = httpClient.execute(request);
-					
-					statusCode = httpResponse.getStatusLine().getStatusCode();
-					
-					InputStream inputStream = httpResponse.getEntity().getContent();
-
-					// We have a byte stream. Next step is to convert it to a Character stream
-					InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-
-					// Then we have to wraps the existing reader (InputStreamReader) and buffer the input
-					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-					// InputStreamReader contains a buffer of bytes read from the source stream and converts these into characters as needed.
-					//The buffer size is 8K
-					//Therefore we need a mechanism to append the separately coming chunks in to one String element
-					// We have to use a class that can handle modifiable sequence of characters for use in creating String
-					StringBuilder stringBuilder = new StringBuilder();
-
-					String bufferedStrChunk = null;
-
-					// There may be so many buffered chunks. We have to go through each and every chunk of characters
-					//and assign a each chunk to bufferedStrChunk String variable
-					//and append that value one by one to the stringBuilder
-					while((bufferedStrChunk = bufferedReader.readLine()) != null){
-						stringBuilder.append(bufferedStrChunk);
-					}
-					responseString=stringBuilder.toString();
-			 
-	        Log.e(functionName, responseString);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("socket exception"+e);
-			//Util.alertMessage(context, "Please check your internet connection or try again later");
-		
-		
-		}
-		return responseString;
-			
-	/*		try {
-
-	            HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-
-	            DefaultHttpClient client = new DefaultHttpClient();
-
-	            SchemeRegistry registry = new SchemeRegistry();
-	            SSLSocketFactory socketFactory = SSLSocketFactory
-	                    .getSocketFactory();
-	            socketFactory
-	                    .setHostnameVerifier((X509HostnameVerifier) hostnameVerifier);
-	           // registry.register(new Scheme("http", socketFactory,80));
-	            registry.register(new Scheme("https", socketFactory, 443));
-	            SingleClientConnManager mgr = new SingleClientConnManager( client.getParams(), registry);
-	            DefaultHttpClient httpClient = new DefaultHttpClient(mgr,client.getParams());
-	            getHttpsClient(httpClient);
-	            HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
-	   
-	           
-	           
-	         
-	            HttpPost request = new HttpPost("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
-	            +email+"&matchCriteria=NONE");
-	            
-	           
-	            
-	            
-	            request.setHeader("Accept", "application/json");
-		        request.setHeader("Content-type", "application/json");
-		        
-		     
-		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
-		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
-				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
-				 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
-				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
-				 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
-				 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
-				// request.setHeader("payKey","AP-70M68096ML426802W");
-			   
-				 HttpResponse response = httpClient.execute(request);
-
-				 HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
-
-	            //String response = "";
-	         
-				 responseString=response.toString();
-	            Log.e("my response", response.toString());
-
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
-	        return responseString;*/
-	    }
 	
-		
-	private static void trustEveryone() { 
-	    try { 
-	            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){ 
-	                   	@Override
-						public boolean verify(String hostname,SSLSession session) {
-							// TODO Auto-generated method stub
-							return true;
-						}}); 
-	            SSLContext context = SSLContext.getInstance("TLS"); 
-	            context.init(null, new X509TrustManager[]{new X509TrustManager(){ 
-	                    public void checkClientTrusted(X509Certificate[] chain, 
-	                                    String authType) throws CertificateException {} 
-	                    public void checkServerTrusted(X509Certificate[] chain, 
-	                                    String authType) throws CertificateException {} 
-	                    public X509Certificate[] getAcceptedIssuers() { 
-	                            return new X509Certificate[0]; 
-	                    }}},
-	                    new SecureRandom()); 
-	            HttpsURLConnection.setDefaultSSLSocketFactory( 
-	                            context.getSocketFactory()); 
-	    } catch (Exception e) { // should never happen 
-	            e.printStackTrace(); 
-	    } 
-	} 
-	
+
 	public static String createImageFile() {
 		try{
 		    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -709,6 +491,160 @@ static int statusCode;
 	         }
 			
 	     }
+	public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
+		String responseString = "";
+		//SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
+		String getemail=email.trim();
+		
+		// ios code
+		/*	 _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
+			    
+			    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:
+			    @"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+			    //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
+			    //customer and upcoming
+			    NSLog(@"data post >>> %@",_postData);
+			    
+			    [request setHTTPMethod:@"POST"];
+			    [request addValue:@"jb-us-seller_api1.paypal.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
+			    [request addValue:@"WX4WTU3S8MY44S7F" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
+			    [request addValue:@"AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
+			    [request addValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
+			    [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
+			    [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
+			    
+			    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+			    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+				
+			//_getNewHttpClient();https://svcs.paypal.com
+				//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
+				
+				Username:amrikhappy-facilitator_api1.yahoo.in
+				Password:LSRRHP7S926DBPZN
+				Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
+		
+		try{
+			
+			HttpParams httpParameters = new BasicHttpParams();
+			int timeoutConnection = 60000;
+			HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+			int timeoutSocket = 61000;
+			HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+				
+			
+			DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
+			  HttpGet request = new HttpGet("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+			+getemail+"&matchCriteria=NONE");
+	     
+	    	 request.setHeader("Accept", "application/json");
+	         request.setHeader("Content-type", "application/json");
+	        
+	     
+	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
+	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX47F");//WX4WTU3S8MY44S7F
+			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","");
+			 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+			 request.setHeader("X-PAYPAL-APPLICATION-ID","");//APP-80W284485P519543T
+			 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
+			 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
+				
+	
+			
+			
+	         HttpResponse httpResponse = httpClient.execute(request);
+					
+					statusCode = httpResponse.getStatusLine().getStatusCode();
+					
+					InputStream inputStream = httpResponse.getEntity().getContent();
+
+					// We have a byte stream. Next step is to convert it to a Character stream
+					InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+					// Then we have to wraps the existing reader (InputStreamReader) and buffer the input
+					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+					// InputStreamReader contains a buffer of bytes read from the source stream and converts these into characters as needed.
+					//The buffer size is 8K
+					//Therefore we need a mechanism to append the separately coming chunks in to one String element
+					// We have to use a class that can handle modifiable sequence of characters for use in creating String
+					StringBuilder stringBuilder = new StringBuilder();
+
+					String bufferedStrChunk = null;
+
+					// There may be so many buffered chunks. We have to go through each and every chunk of characters
+					//and assign a each chunk to bufferedStrChunk String variable
+					//and append that value one by one to the stringBuilder
+					while((bufferedStrChunk = bufferedReader.readLine()) != null){
+						stringBuilder.append(bufferedStrChunk);
+					}
+					responseString=stringBuilder.toString();
+			 
+	        Log.e(functionName, responseString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("socket exception"+e);
+			//Util.alertMessage(context, "Please check your internet connection or try again later");
+		
+		
+		}
+		return responseString;
+		
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+	/*	public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
+			String responseString = "";
+			//SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
+			String getemail=email.trim();
+		
+			try {
+
+	              
+	            HttpPost request = new HttpPost("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+	            +email+"&matchCriteria=NONE");
+	            
+	           
+	            
+	            
+	            request.setHeader("Accept", "application/json");
+		        request.setHeader("Content-type", "application/json");
+		        
+		     
+		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
+		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
+				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
+				 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
+				 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
+				 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
+				// request.setHeader("payKey","AP-70M68096ML426802W");
+			   
+				// HttpResponse response = httpClient.execute(request);
+
+			//	 HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
+
+	            //String response = "";
+	         
+				 responseString=response.toString();
+	            Log.e("my response", response.toString());
+
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	        }
+	        return responseString;
+	    }
+	*/
+		
+
+	
 	
 	 /*public static String getResponseFromUrlPost2(Boolean token,String functionName, List<NameValuePair> param, String email,Context context) throws JSONException{
 			String responseString = "";
@@ -778,11 +714,6 @@ static int statusCode;
 		}*/
 		
 	 
-	 //_getNewHttpClient();https://svcs.paypal.com
-		//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
-		
-	/*	Username:amrikhappy-facilitator_api1.yahoo.in
-		Password:LSRRHP7S926DBPZN
-		Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
+	
 }
 

@@ -8,65 +8,57 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight=".9"
+        android:layout_weight=".8"
         android:background="@color/blue_header"
         android:orientation="horizontal" >
-<ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight=".1" />
-     
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight=".4"
-            android:gravity="center"
-            android:padding="12dp"
-            android:src="@drawable/header_icon" />
+        
            <RelativeLayout
-            android:id="@+id/RelNotification"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight=".1"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/notification_icon" />
-
-            <!-- <ImageView -->
-            <!--
-                    android:id="@+id/ImgViewNotiCount"
+               android:id="@+id/RelNotification"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentLeft="true"
-               android:layout_marginTop="-10dp"
-               android:layout_marginLeft="6dp"
-              
-               android:src="@drawable/notification_count" />
-            -->
+               android:layout_height="match_parent"
+               android:layout_gravity="center_vertical"
+               android:gravity="center_horizontal" >
+			<ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerHorizontal="true"
+                   android:layout_centerVertical="true"
+                   android:contentDescription="@null"
+                   android:src="@drawable/header_icon" />
+            
+   			<RelativeLayout
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+   			    android:layout_alignParentBottom="true"
+   			    android:layout_alignParentTop="true"
+   		        android:layout_gravity="center_vertical" >
 
-            <TextView
-                android:id="@+id/TxtNotiCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="-5dp"
-                android:background="@drawable/notification_count"
-                android:gravity="center"
-                android:paddingLeft="2dp"
-                android:text="1"
-                android:textColor="@color/white"
-                android:textSize="8dp"
-                 />
-        </RelativeLayout>
+               <ImageView
+                   android:id="@+id/imageViewNotitfication"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginRight="4dp"
+                   android:contentDescription="@null"
+                   android:src="@drawable/notification_icon" />
 
+               <TextView
+                   android:id="@+id/TxtNotiCount"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:layout_marginTop="5dp"
+                   android:layout_marginRight="2dp"
+                   android:background="@drawable/notification_redicon"
+                   android:gravity="center"
+                   android:textStyle="bold"
+                   android:text=""
+                   android:textColor="@color/white"
+                   android:textSize="10dp" />
+
+</RelativeLayout>
+           </RelativeLayout>
         
     </LinearLayout>
     <!--
@@ -140,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:layout_marginTop="-3dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:text="View Profile"
@@ -148,7 +141,7 @@
  <LinearLayout
         android:layout_width="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:padding="6dp"
         android:layout_gravity="center"

@@ -436,10 +436,12 @@ public class MyProfile extends Activity implements AsyncResponseForARA {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		Util.hideKeyboard(MyProfile.this);
 		setUI();
 		loginAPI();
 		setOnClickListener();
 		disableData();
+	
 		}
 	 public class LoadImage extends AsyncTask<String, String, Bitmap> {
 	     Bitmap bitmap;

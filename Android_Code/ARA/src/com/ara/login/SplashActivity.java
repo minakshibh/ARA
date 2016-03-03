@@ -5,9 +5,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 import org.apache.http.NameValuePair;
 import android.app.Activity;
+import android.app.DownloadManager;
+import android.app.DownloadManager.Request;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -191,8 +195,17 @@ public class SplashActivity extends Activity implements AsyncResponseForARA {
 	
 /*private void signUpAPI() {
 		
-		
-		if (Util.isNetworkAvailable(SplashActivity.this)) {
+	 String servicestring = Context.DOWNLOAD_SERVICE;
+	    DownloadManager downloadmanager;
+	    downloadmanager = (DownloadManager) getSystemService(servicestring);
+	    Uri uri = Uri
+	      .parse("https://sites.google.com/site/compiletimeerrorcom/android-programming/oct-2013/DownloadManagerAndroid1.zip");
+	    DownloadManager.Request request = new Request(uri);
+	    Long reference = downloadmanager.enqueue(request);
+	   
+};*/
+	 
+		/*if (Util.isNetworkAvailable(SplashActivity.this)) {
 
 		
 			
@@ -202,6 +215,6 @@ public class SplashActivity extends Activity implements AsyncResponseForARA {
 			mWebPageTask.execute();
 		} else {
 			Util.alertMessage(SplashActivity.this, Util.network_error);
-		}
-	}*/
+		}*/
+	
 }

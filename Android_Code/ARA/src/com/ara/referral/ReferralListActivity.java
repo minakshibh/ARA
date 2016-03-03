@@ -204,7 +204,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				.findViewById(R.id.imageView1);
 
 		TextView text2 = (TextView) dialog.findViewById(R.id.textView2);
-		text2.setText("By  Date");
+		text2.setText("By Date");
 		final ImageView image2 = (ImageView) dialog
 				.findViewById(R.id.imageView2);
 		

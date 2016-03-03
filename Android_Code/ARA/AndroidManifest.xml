@@ -129,13 +129,13 @@
            />    
              <activity
             android:name="com.ara.profile.MyProfile"
-            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
              <activity
             android:name="com.ara.login.ChangePasswordActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustResize|stateHidden"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
