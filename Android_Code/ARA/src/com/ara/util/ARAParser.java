@@ -297,7 +297,10 @@ public class ARAParser {
 		ArrayList<Reward> RewardArray = new ArrayList<Reward>();
 		
 		try {
-			JSONArray jsonArray = new JSONArray(output);
+			
+			JSONObject lstRewardEarnedData = new JSONObject(output);
+			JSONArray jsonArray = lstRewardEarnedData.getJSONArray("lstRewardEarnedData");
+			
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -386,6 +389,7 @@ public class ARAParser {
 				referral.setMeaID(jsonObject_Referral.getString("MeaId")
 						.toString());
 				referral.setMeaName(jsonObject_Referral.getString("MeaName")
+				
 						.toString());
 				referral.setPhoneNumber(jsonObject_Referral.getString("PhoneNumber")
 						.toString());

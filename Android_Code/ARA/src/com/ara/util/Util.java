@@ -497,7 +497,7 @@ static int statusCode;
 		String getemail=email.trim();
 		
 		// ios code
-		/*	 _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
+			/* _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
 			    
 			    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:
 			    @"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
@@ -514,12 +514,12 @@ static int statusCode;
 			    [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
 			    
 			    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-			    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+			    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];*/
 				
 			//_getNewHttpClient();https://svcs.paypal.com
 				//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
 				
-				Username:amrikhappy-facilitator_api1.yahoo.in
+				/*Username:amrikhappy-facilitator_api1.yahoo.in
 				Password:LSRRHP7S926DBPZN
 				Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
 		
@@ -541,10 +541,10 @@ static int statusCode;
 	        
 	     
 	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
-	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX47F");//WX4WTU3S8MY44S7F
-			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","");
+	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
+			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
 			 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
-			 request.setHeader("X-PAYPAL-APPLICATION-ID","");//APP-80W284485P519543T
+			 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
 			 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
 			 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
 				
@@ -600,48 +600,82 @@ static int statusCode;
 		
 		
 		
-	/*	public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
+		/*public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
 			String responseString = "";
 			//SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
 			String getemail=email.trim();
 		
-			try {
-
-	              
-	            HttpPost request = new HttpPost("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
-	            +email+"&matchCriteria=NONE");
-	            
-	           
-	            
-	            
-	            request.setHeader("Accept", "application/json");
-		        request.setHeader("Content-type", "application/json");
+			
+			try{
+				System.err.println("payral id="+"amrikhappy-facilitator_api1.yahoo.in");
+				HttpParams httpParameters = new BasicHttpParams();
+				int timeoutConnection = 60000;
+				HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+				int timeoutSocket = 61000;
+				HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+					
+				
+				DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
+				  HttpGet request = new HttpGet("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+				+getemail+"&matchCriteria=NONE");
+		     
+		    	 request.setHeader("Accept", "application/json");
+		         request.setHeader("Content-type", "application/json");
 		        
 		     
-		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
-		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
-				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
-				 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
-				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
+		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","amrikhappy-facilitator_api1.yahoo.in");
+		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","LSRRHP7S926DBPZN");
+				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA");
+				
+				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");
 				 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
 				 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
-				// request.setHeader("payKey","AP-70M68096ML426802W");
-			   
-				// HttpResponse response = httpClient.execute(request);
+					
+		
+				
+				
+		         HttpResponse httpResponse = httpClient.execute(request);
+						
+						statusCode = httpResponse.getStatusLine().getStatusCode();
+						
+						InputStream inputStream = httpResponse.getEntity().getContent();
 
-			//	 HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
+						// We have a byte stream. Next step is to convert it to a Character stream
+						InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
-	            //String response = "";
-	         
-				 responseString=response.toString();
-	            Log.e("my response", response.toString());
+						// Then we have to wraps the existing reader (InputStreamReader) and buffer the input
+						BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
-	        return responseString;
-	    }
-	*/
+						// InputStreamReader contains a buffer of bytes read from the source stream and converts these into characters as needed.
+						//The buffer size is 8K
+						//Therefore we need a mechanism to append the separately coming chunks in to one String element
+						// We have to use a class that can handle modifiable sequence of characters for use in creating String
+						StringBuilder stringBuilder = new StringBuilder();
+
+						String bufferedStrChunk = null;
+
+						// There may be so many buffered chunks. We have to go through each and every chunk of characters
+						//and assign a each chunk to bufferedStrChunk String variable
+						//and append that value one by one to the stringBuilder
+						while((bufferedStrChunk = bufferedReader.readLine()) != null){
+							stringBuilder.append(bufferedStrChunk);
+						}
+						responseString=stringBuilder.toString();
+				 
+		        Log.e(functionName, responseString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.err.println("socket exception"+e);
+				//Util.alertMessage(context, "Please check your internet connection or try again later");
+			
+			
+			}
+			return responseString;
+			
+	    }*/
+	
 		
 
 	
