@@ -94,7 +94,6 @@ public class LoginActivity extends Activity implements AsyncResponseForARA {
 		setUI();
 		setOnClickListener();
 		notificationGCM();
-		 
 	}
 
 	private void setUI() {

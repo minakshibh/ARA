@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ara.base"
     android:versionCode="1"
-    android:versionName="1.4.6" >
+    android:versionName="1.5.1" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -96,27 +96,27 @@
         </activity>
           <activity
             android:name="com.ara.login.LoginActivity"
-            android:windowSoftInputMode="adjustPan"  
+            android:windowSoftInputMode="adjustResize"  
              android:theme="@android:style/Theme.Holo.Light"
             android:screenOrientation="portrait"
              />  
               <activity
             android:name="com.ara.board.NotificationActivity"
-            android:windowSoftInputMode="adjustPan"  
+            android:windowSoftInputMode="adjustResize"  
              android:theme="@android:style/Theme.Holo.Light"
             android:screenOrientation="portrait"
              />   
             
          <activity
             android:name="com.ara.login.ForgotPasswordActivity"
-            android:windowSoftInputMode="adjustPan"  
+            android:windowSoftInputMode="adjustResize"  
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
              />      
          
             <activity
             android:name="com.ara.login.RegisterActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:screenOrientation="portrait"
              android:theme="@android:style/Theme.Holo.Light"
            />
@@ -124,53 +124,53 @@
             
              <activity
             android:name="com.ara.base.BaseActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:screenOrientation="portrait"
            />    
              <activity
             android:name="com.ara.profile.MyProfile"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
              <activity
             android:name="com.ara.login.ChangePasswordActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize|stateHidden"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
              <activity
             android:name="com.ara.referral.ReferralListActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />   
              <activity
             android:name="com.ara.referral.ReferralsDetailsActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
         <activity
             android:name="com.ara.referral.SubmitReferralActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />
         <activity
             android:name="com.ara.login.EmailValidatorActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
              <activity
             android:name="com.ara.board.DashBoardActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />    <activity
             android:name="com.ara.board.ScheduleActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
@@ -178,59 +178,59 @@
            
               <activity
             android:name="com.ara.profile.ImageUploadActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />   
            
              <activity
             android:name="com.ara.payment.PaymentListActivity"
-              android:windowSoftInputMode="adjustPan"
+              android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />   
            
              <activity 
                  android:name="com.ara.payment.AddPaymentAccountActivity" 
-                 android:windowSoftInputMode="adjustPan"
+                 android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
            <activity 
                  android:name="com.ara.rewards.RewardsListActivity" 
-                 android:windowSoftInputMode="adjustPan"
+                 android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
             <activity 
                  android:name="com.ara.rewards.RewardDetailsActivity" 
-                 android:windowSoftInputMode="adjustPan"
+                 android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
            
              <activity 
              android:name="com.ara.board.ScoreBoardActivity" 
-             android:windowSoftInputMode="adjustPan"
+             android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
             <activity 
              android:name="com.ara.board.ScoreBoardDetailActivity" 
-             android:windowSoftInputMode="adjustPan"
+             android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
            
              <activity 
              android:name="com.ara.badge.BadgeListActivity" 
-             android:windowSoftInputMode="adjustPan"
+             android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  
               <activity 
              android:name="com.ara.login.AboutActivity" 
-             android:windowSoftInputMode="adjustPan"
+             android:windowSoftInputMode="adjustResize"
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
            />  

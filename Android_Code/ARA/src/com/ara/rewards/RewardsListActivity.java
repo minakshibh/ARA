@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -131,9 +133,12 @@ AsyncResponseForARA {
 		if (Util.isNetworkAvailable(RewardsListActivity.this)) {
 
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
+		/*	nameValuePairs.add(new BasicNameValuePair("pageNumber", "0"));
+			nameValuePairs.add(new BasicNameValuePair("pageSize", "0"));		
+			nameValuePairs.add(new BasicNameValuePair("sorting", ""));*/
+			
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
-					RewardsListActivity.this, "get","/Rewards/"+userid+"/rewardType/"+rewardType, nameValuePairs,
+					RewardsListActivity.this, "get","/rewards/"+userid+"/rewardType/"+rewardType+"?pageNumber=0&pageSize=0&sorting=", nameValuePairs,
 					true, "Please wait...", true);
 			mWebPageTask.delegate = (AsyncResponseForARA) RewardsListActivity.this;
 			mWebPageTask.execute();
@@ -237,14 +242,14 @@ AsyncResponseForARA {
 			
 			amount.setText("$ "+reward.getRewardAmount());
 			amount.setTypeface(BaseActivity.typeface_roboto);
-			String date_after="";
+			/*String date_after="";
 			try{
 			 date_after = Util.formateDateFromstring("yyyy-dd-MM hh:mm:ss a", "MM/dd/yyyy hh:mm a", reward.getSoldDate());
 			}catch(Exception e)
 			{
 				e.printStackTrace();
-			}
-			date.setText("Sold Date : "+date_after);
+			}*/
+			date.setText("Sold Date : "+reward.getSoldDate());
 			date.setTypeface(BaseActivity.typeface_roboto);
 
 			return convertView;

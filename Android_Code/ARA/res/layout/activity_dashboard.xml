@@ -2,85 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@color/dark_blue"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight=".9"
+        android:layout_weight=".8"
         android:background="@color/blue_header"
         android:orientation="horizontal" >
-
-        <RelativeLayout
-            android:id="@+id/RelNotification"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:layout_weight=".2"
-            android:gravity="center_vertical" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/notification_icon" />
-
-            <!-- <ImageView -->
-            <!--
-                    android:id="@+id/ImgViewNotiCount"
+        
+           <RelativeLayout
+               android:id="@+id/RelNotification"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentLeft="true"
-               android:layout_marginTop="-10dp"
-               android:layout_marginLeft="6dp"
-              
-               android:src="@drawable/notification_count" />
-            -->
+               android:layout_height="match_parent"
+               android:layout_gravity="center_vertical"
+               android:gravity="center_horizontal" >
+			<ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerHorizontal="true"
+                   android:layout_centerVertical="true"
+                   android:contentDescription="@null"
+                   android:src="@drawable/header_icon" />
+            
+   			<RelativeLayout
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+   			    android:layout_alignParentBottom="true"
+   			    android:layout_alignParentTop="true"
+   		        android:layout_gravity="center_vertical" >
 
-            <TextView
-                android:id="@+id/TxtNotiCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="-10dp"
-                android:background="@drawable/notification_count"
-                android:gravity="center"
-                android:paddingLeft="2dp"
-                android:text="1"
-                android:textColor="@color/white"
-                android:textSize="8dp"
-                android:visibility="gone" />
-        </RelativeLayout>
+               <ImageView
+                   android:id="@+id/imageViewNotitfication"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginRight="4dp"
+                   android:contentDescription="@null"
+                   android:src="@drawable/notification_icon" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight=".1" />
+               <TextView
+                   android:id="@+id/TxtNotiCount"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:layout_marginTop="5dp"
+                   android:layout_marginRight="2dp"
+                   android:background="@drawable/notification_redicon"
+                   android:gravity="center"
+                   android:textStyle="bold"
+                   android:text=""
+                   android:textColor="@color/white"
+                   android:textSize="10dp" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight=".4"
-            android:gravity="center"
-            android:padding="12dp"
-            android:src="@drawable/header_icon" />
-
-        <TextView
-            android:id="@+id/txtSubmit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="5dp"
-            android:layout_weight=".3"
-            android:background="@drawable/yellow_rounded_btn"
-            android:gravity="center"
-            android:text="Submit Referral"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
+</RelativeLayout>
+           </RelativeLayout>
+        
     </LinearLayout>
     <!--
         <TextView
@@ -99,22 +78,24 @@
         android:id="@+id/LinearLayout_profilepic"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.8"
+        android:layout_weight="3.1"
         android:background="@color/white"
         android:orientation="vertical" >
 
         <RelativeLayout
             android:id="@+id/lay_rel_img"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="3dp" >
+            android:background="@drawable/map_background"
+             >
 
             <com.ara.util.CircularImageView
                 android:id="@+id/imageView_profilepic"
                 android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="78dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:src="@drawable/profile_image" />
             <!--
                  <ImageView
@@ -141,38 +122,67 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Name"
+            android:layout_marginTop="-3dp"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/txtProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/yellow_rounded_btn"
             android:gravity="center"
+            android:layout_marginTop="-3dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:text="Profile"
-            android:textColor="@color/black"
+            android:text="View Profile"
+            android:textColor="@color/blue_header"
             android:textSize="12sp" />
+ <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:layout_gravity="center"
+        android:background="@drawable/yellow_rounded_btn"
+        android:layout_height="wrap_content">
+               <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/refer_icon"
+                />
+        <TextView
+            android:id="@+id/txtSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text="Refer a Friend/Family"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:layout_marginRight="5dp"
+            android:textSize="14sp" />
+</LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/LinearLayout_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_weight="4.3"
+        android:layout_weight="3.7"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:background="@color/white"
         android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/LinearLayout_up"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4.5"
+            android:layout_height="wrap_content"
+          
             android:background="@color/white"
             android:orientation="horizontal" >
 
@@ -184,6 +194,7 @@
                 android:orientation="vertical" >
 
                 <ImageView
+                    
                     android:id="@+id/imageReferral"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,7 +210,7 @@
                     android:gravity="center"
                     android:text="Referrals"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -215,7 +226,7 @@
                         android:gravity="center_vertical"
                         android:text=""
                         android:textColor="@color/dark_blue"
-                        android:textSize="13sp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -224,7 +235,7 @@
                         android:gravity="center_vertical"
                         android:text=" Open /"
                         android:textColor="@color/gray"
-                        android:textSize="13sp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/SoldAmount"
@@ -233,7 +244,7 @@
                         android:gravity="center_vertical"
                         android:text=""
                         android:textColor="@color/dark_blue"
-                        android:textSize="13sp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -242,7 +253,7 @@
                         android:gravity="center_vertical"
                         android:text=" Sold"
                         android:textColor="@color/gray"
-                        android:textSize="13sp" />
+                        android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -258,6 +269,7 @@
                     android:id="@+id/imageReferralReward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                  
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
                     android:src="@drawable/rewards_icon" />
@@ -270,7 +282,7 @@
                     android:gravity="center"
                     android:text="Referral Rewards"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
   <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -285,7 +297,7 @@
                     android:text=""
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="11sp" />
                  <TextView
                     android:id="@+id/txtPaid"
                     android:layout_width="wrap_content"
@@ -294,7 +306,7 @@
                     android:text=" Paid /"
                     android:textColor="@color/gray"
                     android:singleLine="true"
-                    android:textSize="13sp" />
+                    android:textSize="11sp" />
                   
                 </LinearLayout>
                  <LinearLayout
@@ -311,7 +323,7 @@
                     android:text=""
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="11sp" />
                    <TextView
                     android:id="@+id/txtPending"
                     android:layout_width="wrap_content"
@@ -320,7 +332,7 @@
                     android:text=" Pending"
                     android:singleLine="true"
                     android:textColor="@color/gray"
-                    android:textSize="13sp" />
+                    android:textSize="11sp" />
                    </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -328,8 +340,7 @@
         <LinearLayout
             android:id="@+id/LinearLayout_down"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="horizontal" >
 
@@ -400,11 +411,11 @@
                     android:layout_gravity="center"
                     android:background="@drawable/gray_rounded_btn"
                     android:gravity="center"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:text="Coming Soon"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -413,7 +424,8 @@
         android:id="@+id/LinearLayout_fotter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.2"
+        android:layout_weight="1.8"
+        android:background="@color/white"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -434,11 +446,11 @@
                 android:id="@+id/textViewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="2dp"
                 android:gravity="center_horizontal"
-                android:text="Email: Robert.Seeley@autoaves.com"
+                android:text="Email: robert.seeley@autoaves.com"
                 android:textColor="@color/black"
-                android:textSize="13sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/textViewPhone"
@@ -447,7 +459,7 @@
                 android:gravity="center_horizontal"
                 android:text="Phone:(303) 750-5000"
                 android:textColor="@color/black"
-                android:textSize="13sp" />
+                android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -456,14 +468,14 @@
             android:layout_alignParentBottom="true"
             android:background="@color/dark_blue"
             android:orientation="horizontal"
-            android:padding="5dp" >
+            android:padding="4dp" >
 
             <TextView
                 android:id="@+id/txtAbout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="start"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
@@ -476,19 +488,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
+                android:gravity="center"
                 android:text="www.autoaves.com"
                 android:textColor="@color/gray"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txtLogout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="end"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"

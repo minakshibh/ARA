@@ -204,7 +204,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				.findViewById(R.id.imageView1);
 
 		TextView text2 = (TextView) dialog.findViewById(R.id.textView2);
-		text2.setText("By Submit Date");
+		text2.setText("By Date");
 		final ImageView image2 = (ImageView) dialog
 				.findViewById(R.id.imageView2);
 		
@@ -286,20 +286,37 @@ private View.OnClickListener listener = new View.OnClickListener() {
 					 	}
 					 else if(selectedSort.equalsIgnoreCase("date"))
 					 {
-						 //02-17-2016 3:04:25 PM",
-						 SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss a");
+						 //"02/23/2016 02:24:40 AM",
+						 SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 						// SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM hh:mm:ss a");
-						 Date datev2 = null,datev1=null;
+						 Date datev2 = null,datev1=null,dateS2 = null,dateS1=null;
 						 try {
-						      datev2 = format.parse(v2.getCreatedDate());
-				 		      datev1 = format.parse(v1.getCreatedDate());
-						    
+							/* if(v1.getReferralStatus().equalsIgnoreCase("open") | v2.getReferralStatus().equalsIgnoreCase("open"))
+							 {*/
+						      datev2 = format.parse(v2.getBothdate());
+				 		      datev1 = format.parse(v1.getBothdate());
+							// }
+							/* else if(v1.getReferralStatus().equalsIgnoreCase("sold") | v2.getReferralStatus().equalsIgnoreCase("sold"))
+								{
+									if(v2.getSoldDate()!=null | !v2.getSoldDate().equals("null")| !v2.getSoldDate().equals("")| 
+											v1.getSoldDate()!=null | !v1.getSoldDate().equals("null")| !v1.getSoldDate().equals(""))
+									{
+						 		      dateS2 = format.parse(v2.getSoldDate());
+						 		      dateS1 = format.parse(v1.getSoldDate());
+										}
+									}*/
 						 		} 
 						 catch (Exception e) {
 						     Log.e("log", e.getMessage(), e);
 						 	}
 
-						 return  datev2.compareTo(datev1);
+						 /*if(v1.getReferralStatus().equalsIgnoreCase("open") | v2.getReferralStatus().equalsIgnoreCase("open"))
+						 {*/
+							 return  datev2.compareTo(datev1);
+							/* }
+						 else{
+							 return  dateS2.compareTo(dateS1); 
+						 }*/
 						// return  v2.getCreatedDate().compareTo(v1.getCreatedDate());
 					 	}
 					 else
@@ -515,7 +532,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 				}
 			
 			if (referral.getReferralStatus().equalsIgnoreCase(DashBoardActivity.STATUS_SOLD)) {
-				if(referral.getSoldDate()!=null)
+				/*if(referral.getSoldDate()!=null)
 				{
 					try{
 						//"CreatedDate": "12-27-2015 5:04:25 PM",
@@ -525,14 +542,14 @@ private View.OnClickListener listener = new View.OnClickListener() {
 							e.printStackTrace();
 						}
 					
-					}
-				date.setText("Sold date: " + newDate);
+					}*/
+				date.setText("Sold date: " + referral.getSoldDate());
 				date.setTypeface(BaseActivity.typeface_roboto);
 				status.setTextColor(getResources().getColor(R.color.app_blue));
 
 			} else {
 				String newDate1="";
-				if(referral.getCreatedDate()!=null)
+				/*if(referral.getCreatedDate()!=null)
 				{
 					try{
 						newDate1 = Util.formateDateFromstring("MM-dd-yyyy hh:mm:ss a", "MM/dd/yyyy hh:mm a", referral.getCreatedDate());
@@ -542,8 +559,8 @@ private View.OnClickListener listener = new View.OnClickListener() {
 						{
 							e.printStackTrace();
 						}
-					}
-				date.setText("Submit Date: " + newDate1);
+					}*/
+				date.setText("Submit Date: " + referral.getCreatedDate());
 				if (referral.getReferralStatus().equalsIgnoreCase(
 						DashBoardActivity.STATUS_OPEN)) {
 					status.setTextColor(getResources().getColor(R.color.bright_green));

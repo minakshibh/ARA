@@ -8,7 +8,7 @@ public class Referral implements Parcelable {
 	private String comments, createdDate, email, firstName, lastName, MeaID,
 			MeaName, phoneNumber, referralId, referralStatus, referralType,
 			referrerEmail, referrarId, referrerName, referrerUserName,
-			soldDate, referralNumber, userDetailId;
+			soldDate, referralNumber, userDetailId,bothdate;
 
 	
 	 public Referral(Parcel source) {
@@ -31,10 +31,22 @@ public class Referral implements Parcelable {
 		soldDate= source.readString();
 		referralNumber= source.readString();
 		userDetailId= source.readString();
-		
+		bothdate=source.readString();
 		
 	    }
 	 
+	public String getBothdate() {
+		return bothdate;
+	}
+
+	public void setBothdate(String bothdate) {
+		this.bothdate = bothdate;
+	}
+
+	public static Parcelable.Creator<Referral> getCreator() {
+		return CREATOR;
+	}
+
 	public Referral() {
 		// TODO Auto-generated constructor stub
 	}
@@ -225,5 +237,6 @@ public class Referral implements Parcelable {
 		dest.writeString(soldDate);
 		dest.writeString(referralNumber);
 		dest.writeString(userDetailId);
+		dest.writeString(bothdate);
 	}
 }

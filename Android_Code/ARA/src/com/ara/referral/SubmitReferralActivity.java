@@ -794,10 +794,10 @@ public class SubmitReferralActivity extends Activity implements
 				alert.setPositiveButton("ok",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface arg0, int arg1) {
 
-								Intent intent = new Intent(
+								/*Intent intent = new Intent(
 										SubmitReferralActivity.this,
 										DashBoardActivity.class);
-								startActivity(intent);
+								startActivity(intent);*/
 								finish();
 							}
 						});

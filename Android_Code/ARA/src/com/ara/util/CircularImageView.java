@@ -47,10 +47,10 @@ public class CircularImageView extends ImageView
         paint = new Paint();
         paint.setAntiAlias(true);
         paintBorder = new Paint();
-        setBorderColor(Color.parseColor("#ffd11c"));
+        setBorderColor(Color.parseColor("#ffffff"));
         paintBorder.setAntiAlias(true);
         this.setLayerType(LAYER_TYPE_SOFTWARE, paintBorder);
-        paintBorder.setShadowLayer(0.0f, 0.0f, 0.0f, Color.parseColor("#ffd11c"));
+        paintBorder.setShadowLayer(0.0f, 0.0f, 0.0f, Color.parseColor("#ffffff"));
     }
 
     public void setBorderWidth(int borderWidth)

@@ -2,6 +2,7 @@ package com.ara.board;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,7 +72,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	private ImageLoader imageLoader;
 	private RelativeLayout RelNotification;
 	private String imageurl="";
-	private ImageView imageView_profilepic;
+	private ImageView imageView_profilepic,imageViewNotitfication;
 	public static Typeface typeface_roboto,typeface_timeburner;
 	public static String notiCount="0",EarnedRewards="0",UpcomingRewards="0";
 	private int activeCount=0;
@@ -85,15 +86,16 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		setContentView(R.layout.activity_dashboard);
 
 		initUIComponents();
-		setValue();
-		
 		setClickListeners();
+		setValue();
 	}
 
 	
 
 	private void initUIComponents() {
 		// TODO Auto-generated method stub
+		
+		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		typeface_timeburner= Typeface.createFromAsset(getAssets(), "timeburner_regular.ttf");
 		typeface_roboto = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
 		
@@ -110,14 +112,14 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		textViewPhone.setTypeface(typeface_roboto);
 		
 		TxtNotiCount=(TextView)findViewById(R.id.TxtNotiCount);
-		TxtNotiCount.setTypeface(typeface_roboto);
+		//TxtNotiCount.setTypeface(typeface_roboto);
 		TxtNotiCount.setVisibility(View.GONE);
 		progressBar=(ProgressBar)findViewById(R.id.progressBar);
 		progressBar.setVisibility(View.GONE);
 		
 		activeReferralAmount = (TextView)findViewById(R.id.activeReferralAmount);
 		activeReferralAmount.setTypeface(typeface_roboto);
-		
+		imageViewNotitfication=(ImageView)findViewById(R.id.imageViewNotitfication);
 		//activeRewardAmount= (TextView)findViewById(R.id.activeRewardAmount);
 		//activeRewardAmount.setTypeface(typeface_roboto);
 		//txtPaidAmount,txtPaid,txtPeningAmount,txtPending;
@@ -194,8 +196,8 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 	}
 	private void setValue() {
 		// TODO Auto-generated method stub
-		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		
+		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		imageurl=spref.getString("userimage", "");
 		//imageLoader = new ImageLoader(DashBoardActivity.this);
 		System.err.println("dashboard="+imageurl);
@@ -218,6 +220,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 		textViewPhone.setOnClickListener(listener);
 		txtWebLink.setOnClickListener(listener);
 		RelNotification.setOnClickListener(listener);
+		imageViewNotitfication.setOnClickListener(listener);
 	}
 	private View.OnClickListener listener = new View.OnClickListener() {
 		
@@ -257,11 +260,11 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			}
 			else if(v == textViewEmail){
 				Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-	                    "mailto",  user_Model.getEmail(), null));
+	                    "mailto",  "robert.seeley@autoaves.com", null));
 	            startActivity(Intent.createChooser(emailIntent, "Send email..."));
 			}
 			else if(v == textViewPhone){
-				  String uri = "tel:" + user_Model.getPhoneNumber();
+				  String uri = "tel:" + "3037505000";
                   Intent intent = new Intent(Intent.ACTION_CALL);
                   intent.setData(Uri.parse(uri));
                   startActivity(intent);
@@ -272,7 +275,7 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 					       Uri.parse("http://"+txtWebLink.getText().toString()));
 					startActivity(i);
 			}
-			else if(v==RelNotification)
+			else if(v==imageViewNotitfication)
 			{
 				Intent intent = new Intent(DashBoardActivity.this, NotificationActivity.class);
 				startActivity(intent);
@@ -358,14 +361,29 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			
 			try{
 				activeCount=Integer.parseInt(notiCount);
+				
 					}
 				catch (Exception e) {
 					// TODO: handle exception
 				}
+			//activeCount=99;
 			if(activeCount>0)
 			{
+				//if(activeCount.)
 				TxtNotiCount.setText(""+activeCount);
 				TxtNotiCount.setVisibility(View.VISIBLE);
+				String ss=""+activeCount;
+				if(ss.length()==1)
+				{
+					TxtNotiCount.setPadding(7, 2, 7, 2);
+					//TxtNotiCount.setPadding(left, top, right, bottom)
+					System.err.println("one");
+					}
+				else if(ss.length()==2)
+				{
+					TxtNotiCount.setPadding(3, 2, 3, 2);
+					System.err.println("two");
+					}
 				}
 			else
 			{
@@ -396,8 +414,15 @@ public class DashBoardActivity extends Activity implements AsyncResponseForARA{
 			//activeRewardAmount.setText("$ "+rewardAmount);
 			activeReferralAmount.setText(countOpen);
 			
-			txtPaidAmount.setText("$"+EarnedRewards);
-			txtPeningAmount.setText("$"+UpcomingRewards);
+			try{
+		
+     
+   		    txtPaidAmount.setText("$"+(int)Float.parseFloat(EarnedRewards));
+			txtPeningAmount.setText("$"+(int)Float.parseFloat(UpcomingRewards) );
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 			
 			/*if(referralTypeArray.get(0).getNotificationCount().equals("0"))
 			{
