@@ -26,18 +26,57 @@
 @interface dashboardViewController ()
 {
     referralListViewController *RLvc;
+    AFHTTPRequestOperation *requestOperation;
 }
 @end
 
 @implementation dashboardViewController
 
 - (void)viewDidLoad {
+    label45 = [[UILabel alloc]init];
+    requestOperation = [[AFHTTPRequestOperation alloc]init];
+    
     [super viewDidLoad];
     i=0;
-    lblComingSoon.layer.cornerRadius = 5.0;
+    lblComingSoon.layer.cornerRadius = 10.0;
     [lblComingSoon setClipsToBounds:YES];
     
     imagenotificationcount.hidden = YES;
+    
+    UIImageView *referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(14, btnSubmitReferral.frame.size.height/2-10, 26, 21)];
+    if (IS_IPHONE_6) {
+         referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x-4,referralImage.frame.origin.y-1 , referralImage.frame.size.width- 3, referralImage.frame.size.height-3)];
+    }else if (IS_IPHONE_5){
+        referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x-4,referralImage.frame.origin.y-4, referralImage.frame.size.width-5, referralImage.frame.size.height-3)];
+     }else if (IS_IPHONE_4_OR_LESS){
+          referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x-4,referralImage.frame.origin.y-6, referralImage.frame.size.width-7, referralImage.frame.size.height-4)];
+     }else if (IS_IPAD){
+           referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+12,btnSubmitReferral.frame.size.height/2-6 , referralImage.frame.size.width+13, referralImage.frame.size.height+10)];
+     }
+    referralImage.image = [UIImage imageNamed:@"refer-icon11"];
+    [btnSubmitReferral addSubview:referralImage];
+    [btnSubmitReferral bringSubviewToFront:referralImage];
+    
+    UILabel *referralLabel = [[UILabel alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+referralImage.frame.size.width+8, referralImage.frame.origin.y, btnSubmitReferral.frame.size.width-referralImage.frame.size.width-referralImage.frame.origin.x, referralImage.frame.size.height)];
+    if (IS_IPHONE_6) {
+        referralLabel = [[UILabel alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+referralImage.frame.size.width+8, referralImage.frame.origin.y, btnSubmitReferral.frame.size.width-referralImage.frame.size.width-referralImage.frame.origin.x, referralImage.frame.size.height)];
+       referralLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
+    }else if (IS_IPHONE_5){
+        referralLabel = [[UILabel alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+referralImage.frame.size.width+8, referralImage.frame.origin.y, btnSubmitReferral.frame.size.width-referralImage.frame.size.width-referralImage.frame.origin.x, referralImage.frame.size.height)];
+        referralLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:14];
+       }else if (IS_IPHONE_4_OR_LESS){
+           referralLabel = [[UILabel alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+referralImage.frame.size.width+6, referralImage.frame.origin.y, btnSubmitReferral.frame.size.width-referralImage.frame.size.width-referralImage.frame.origin.x, referralImage.frame.size.height)];
+           referralLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:14];
+       }else if (IS_IPAD){
+           referralLabel = [[UILabel alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+referralImage.frame.size.width+15, referralImage.frame.origin.y, btnSubmitReferral.frame.size.width-referralImage.frame.size.width-referralImage.frame.origin.x+140, referralImage.frame.size.height)];
+           referralLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:28  ];
+       }
+      referralLabel.text = @"Refer a Friend/Family";
+    referralLabel.textColor =  [UIColor blackColor];
+    [btnSubmitReferral addSubview:referralLabel];
+    
+    
+    [btnSubmitReferral setTitle:@"" forState:UIControlStateNormal];
     
     btnSubmitReferral.layer.cornerRadius = 4.0;
     btnmyprofile.layer.cornerRadius = 4.0;
@@ -146,8 +185,11 @@
         lblComingSoon.font = [lblComingSoon.font fontWithSize:12];
     }
     if ( IS_IPHONE_5) {
+        lblComingSoon.layer.cornerRadius = 5;
          imageViewMenuProfile.frame = CGRectMake(imageViewMenuProfile.frame.origin.x-6, imageViewMenuProfile.frame.origin.y-7, imageViewMenuProfile.frame.size.width, imageViewMenuProfile.frame.size.height);
-        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-15, btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width+15, btnSubmitReferral.frame.size.height);
+        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-12, btnSubmitReferral.frame.origin.y+2, btnSubmitReferral.frame.size.width+15, btnSubmitReferral.frame.size.height);
+        btnProfile.frame = CGRectMake(btnProfile.frame.origin.x, btnProfile.frame.origin.y+5, btnProfile.frame.size.width, btnProfile.frame.size.height);
+        
         btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:10];
         viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
          lblNameMenu.frame = CGRectMake(lblNameMenu.frame.origin.x, lblNameMenu.frame.origin.y+3, lblNameMenu.frame.size.width, lblNameMenu.frame.size.height);
@@ -168,7 +210,10 @@
          imageViewMenuProfile.frame = CGRectMake(imageViewMenuProfile.frame.origin.x, imageViewMenuProfile.frame.origin.y-7, imageViewMenuProfile.frame.size.width, imageViewMenuProfile.frame.size.height);
         lblNameMenu.frame = CGRectMake(lblNameMenu.frame.origin.x, lblNameMenu.frame.origin.y+2, lblNameMenu.frame.size.width, lblNameMenu.frame.size.height);
         btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:9];
-        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-4, btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width+4, btnSubmitReferral.frame.size.height);
+        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-4, btnSubmitReferral.frame.origin.y+3, btnSubmitReferral.frame.size.width+4, btnSubmitReferral.frame.size.height);
+        btnProfile.frame = CGRectMake(btnProfile.frame.origin.x, btnProfile.frame.origin.y+4, btnProfile.frame.size.width, btnProfile.frame.size.height);
+        lblComingSoon.layer.cornerRadius = 5;
+
          btnmyprofile.titleLabel.font = [btnmyprofile.titleLabel.font fontWithSize:12];
         lblnewReferrals.font = [lblnewReferrals.font fontWithSize:14];
         lblnewReferralsReward.font = [lblnewReferralsReward.font fontWithSize:14];
@@ -202,7 +247,10 @@
       //   btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
        btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:18];
         
-        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x+20, btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width-17, btnSubmitReferral.frame.size.height);
+        btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x+20-6, btnSubmitReferral.frame.origin.y+6, btnSubmitReferral.frame.size.width-17, btnSubmitReferral.frame.size.height);
+        
+        btnProfile.frame = CGRectMake(btnProfile.frame.origin.x, btnProfile.frame.origin.y+8, btnProfile.frame.size.width, btnProfile.frame.size.height);
+
         
        lblheader.font=[lblheader.font fontWithSize:24];
         lblActiveReferral.font=[lblActiveReferral.font fontWithSize:24];
@@ -232,7 +280,7 @@
         
 
 //        btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:24];
-        btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:24];
+        btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:20];
         btnreferral.titleLabel.font=[btnreferral.titleLabel.font fontWithSize:24];
         btnPaymentaccount.titleLabel.font=[btnPaymentaccount.titleLabel.font fontWithSize:24];
         btnmybadges.titleLabel.font=[btnmybadges.titleLabel.font fontWithSize:24];
@@ -269,6 +317,7 @@
          
          ipad 2   9.7
          */
+        viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x, viewnewNotification.frame.origin.y-6, viewnewNotification.frame.size.width, viewnewNotification.frame.size.height);
         if(IS_IPAD_PRO_1366 )
         {
             viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
@@ -368,6 +417,11 @@
                                    selector:@selector(targetMethod:)
                                    userInfo:nil
                                     repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:10
+                                     target:self
+                                   selector:@selector(imageReload:)
+                                   userInfo:nil
+                                    repeats:YES];
 //    [NSTimer scheduledTimerWithTimeInterval:4
 //                                     target:self
 //                                   selector:@selector(labelTransformation:)
@@ -378,6 +432,31 @@
 //    });
    
 
+}
+-(void)imageReload:(NSTimer *)timer
+{
+    
+    
+    
+    NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"] forKey:@"imageUserID"];
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagestr]];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
+        [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:@"profile_picture"]	;
+        if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"] == nil) {
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"imageUserID"] isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"]]) {
+                
+                imageViewMenuProfile.image = [UIImage imageWithData:imageData];
+            }
+            //  imageViewMenuProfile.contentMode=UIViewContentModeScaleAspectFit;
+        });
+    });
+    
 }
 //-(void)labelTransformation:(NSTimer *)timer
 //{
@@ -399,11 +478,11 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"] != nil) {
-        NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
-        
-        imageViewMenuProfile.image = [UIImage imageWithData:im];
-    }
+//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"] != nil) {
+//        NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
+//        
+//        imageViewMenuProfile.image = [UIImage imageWithData:im];
+//    }
 //    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
 //        lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
 //        [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
@@ -431,25 +510,11 @@
     lblNameMenu.text = namestr;
     
     
-    NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
-   
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagestr]];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-        [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:@"profile_picture"]	;
-        
-        if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"] == nil) {
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-        }
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
-            imageViewMenuProfile.image = [UIImage imageWithData:imageData];
-        //  imageViewMenuProfile.contentMode=UIViewContentModeScaleAspectFit;
 
-        });
-    });
+    
+        //dispatch_async(
+    
+  
 
 }
 - (void)didReceiveMemoryWarning {
@@ -569,6 +634,7 @@
 
 - (IBAction)btnlogout:(id)sender {
      //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"dashboardNotificationTimeStamp"];
+    self.stop = true;
     [self logoutFunction];
     
 }
@@ -609,6 +675,7 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"savedImageURL"];
         NSLog(@"FFFFFFFFFFFFFFFFF%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"]);
         
         
@@ -762,10 +829,20 @@ if([recieved_status isEqualToString:@"passed"])
         
         lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
         lblNotificationCount.text = notificationCountStr;
-         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:14] : [UIFont fontWithName:@"Roboto-Regular" size:10];
+//         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:14] : [UIFont fontWithName:@"Roboto-Regular" size:11];
         lblNotificationCount.textAlignment = NSTextAlignmentCenter;
         lblNotificationCount.textColor = [UIColor whiteColor];
-        [imagenotificationcount addSubview:lblNotificationCount];
+        lblNotificationCount.font = [UIFont boldSystemFontOfSize:lblNotificationCount.font.hash];
+        [btnSubmitReferral addSubview:lblNotificationCount];
+        [imagenotificationcount bringSubviewToFront:lblNotificationCount];
+        
+        [label45 removeFromSuperview];
+        label45 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
+        label45.textAlignment = NSTextAlignmentCenter;
+        label45.textColor = [UIColor whiteColor];
+        label45.text = notificationCountStr;
+        [imagenotificationcount addSubview:label45];
+        
         
         int noti = [notificationCountStr intValue];
         if (noti > 0) {
@@ -778,7 +855,7 @@ if([recieved_status isEqualToString:@"passed"])
         
         NSString *upcomingStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UpcomingRewards"]];
         NSString *earnedStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"EarnedRewards"]];
-        NSString* finalStr = [NSString stringWithFormat:@"$%@ Paid / $%@ Upcoming",earnedStr,upcomingStr];
+        NSString* finalStr = [NSString stringWithFormat:@"$%@ Paid / $%@ Pending",earnedStr,upcomingStr];
         
         NSUInteger firstStringCount = earnedStr.length+1;
         NSUInteger secondStringCountStart = 9+earnedStr.length;
@@ -1250,4 +1327,7 @@ if([recieved_status isEqualToString:@"passed"])
     
     [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",frmtStr] forState:UIControlStateNormal];
 }
+
+
+
 @end

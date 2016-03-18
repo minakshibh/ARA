@@ -14,7 +14,8 @@
 
     IBOutlet UITableView *tableView;
     ReferralObj *obj;
-    NSMutableArray* referralListArray,*referralListForSold,*referralListForOpen,*referralListSortName,*referralListSortDate,*sorted_array;
+    NSMutableArray* referralListArray,*referralListForSold,*referralListForOpen,*referralListSortName,*sorted_array;
+    NSArray *referralListSortDate;
     NSString *filter_status,*sold_open,*filter_height,*detail_view,*response_status,*pop_out,*restore_radiobtn,*optional;
     IBOutlet UIView *soryByView;
     IBOutlet UIView *filterView;

@@ -29,7 +29,7 @@
     
     [btnSold setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f]];
     [btnSold setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    lblheading.text = @"PAYMENT EARNED";
+    lblheading.text = @"PAID PAYMENT";
     
     [self getList:@"earned"];
     
@@ -93,7 +93,7 @@
     [btnSold setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f]];
     [btnSold setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    lblheading.text = @"PAYMENT EARNED";
+    lblheading.text = @"PAID PAYMENT";
     
     [self getList:@"earned"];
     [tableView reloadData];
@@ -111,7 +111,7 @@
     [btnSold setBackgroundColor:[UIColor blackColor]];
     
     
-    lblheading.text = @"PAYMENT UPCOMING";
+    lblheading.text = @"PENDING PAYMENT";
 
     [self getList:@"upcoming"];
     [tableView reloadData];
@@ -201,8 +201,8 @@
     _postData = [NSString stringWithFormat:@""];
     
     NSString *user_id = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
-    
-    NSString *urlStr = [NSString stringWithFormat:@"%@/rewards/%@/rewardType/%@",Kwebservices,user_id,status];
+    NSString *val;
+    NSString *urlStr = [NSString stringWithFormat:@"%@/rewards/%@/rewardType/%@?pageNumber=0&pageSize=0&sorting=%@",Kwebservices,user_id,status,val];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     
@@ -290,7 +290,7 @@
         [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
         return;
     }
-    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
+    [HelperAlert  alertWithOneBtn:@"ERROR" description:error okBtn:OkButtonTitle];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
 }
@@ -314,7 +314,7 @@
     {
         SBJsonParser *json = [[SBJsonParser alloc] init];
         NSMutableDictionary *data = [json objectWithString:responseString error:&error];
-        NSMutableDictionary *userDetailDict=[data valueForKey:@"Referral"];
+        NSMutableDictionary *userDetailDict=[data valueForKey:@"lstRewardEarnedData"];
         
         if([response_status isEqualToString:@"passed"])
         { rewardListArray = [[NSMutableArray alloc] init];
@@ -350,41 +350,44 @@
             for (int i=0; i<userDetailDict.count; i++)
             {
                 obj = [[ReferralObj alloc] init];
-                obj.first_name = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"FirstName"]objectAtIndex:i]];
-                obj.last_name = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"LastName"]objectAtIndex:i]];
-                obj.email = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"Email"]objectAtIndex:i]];
+                NSDictionary *dict = [[NSDictionary alloc]init];
+                dict = [[userDetailDict valueForKey:@"Referral"]objectAtIndex:i];
+                
+                obj.first_name = [NSString stringWithFormat:@"%@",[dict valueForKey:@"FirstName"]];
+                obj.last_name = [NSString stringWithFormat:@"%@",[dict valueForKey:@"LastName"]];
+                obj.email = [NSString stringWithFormat:@"%@",[dict valueForKey:@"Email"]];
 //                if([NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PhoneNumber"]objectAtIndex:i]].length==6)
 //                {
 //                    obj.phone_no = @" ";
 //                }else{
-                    obj.phone_no = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PhoneNumber"]objectAtIndex:i]];
+                    obj.phone_no = [NSString stringWithFormat:@"%@",[dict valueForKey:@"PhoneNumber"]];
 //                }
                
-                obj.MEAid = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"MeaId"]objectAtIndex:i]];
-                obj.comments=[NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"Comments"]objectAtIndex:i]];
+                obj.MEAid = [NSString stringWithFormat:@"%@",[dict valueForKey:@"MeaId"]];
+                obj.comments=[NSString stringWithFormat:@"%@",[dict valueForKey:@"Comments"]];
                 obj.createDate = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"CreatedDate"]objectAtIndex:i]];
-                obj.referralID = [NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralId"]objectAtIndex:i]]];
-                obj.ReferralStatus = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralStatus"]objectAtIndex:i]];
-                obj.ReferrerEmail = [NSString stringWithFormat:@"%@",[[userDetailDict   valueForKey:@"ReferrerEmail"]objectAtIndex:i]];
-                obj.ReferrerID = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferrerID"]objectAtIndex:i]];
+                obj.referralID = [NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferralId"]]];
+                obj.ReferralStatus = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferralStatus"]];
+                obj.ReferrerEmail = [NSString stringWithFormat:@"%@",[dict   valueForKey:@"ReferrerEmail"]];
+                obj.ReferrerID = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferrerID"]];
                 obj.ReferrerName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferrerName"]objectAtIndex:i]];
-                obj.ReferrerUserName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferrerUserName"]objectAtIndex:i]];
-                obj.SoldDate = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"SoldDate"]objectAtIndex:i]];
-                obj.UniqueReferralNumber = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"UniqueReferralNumber"]objectAtIndex:i]];
-                obj.UserDetailId = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"UserDetailId"]objectAtIndex:i]];
-                obj.MeaName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"MeaName"]objectAtIndex:i]];
-                obj.ReferralType = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralType"]objectAtIndex:i]];
+                obj.ReferrerUserName = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferrerUserName"]];
+                obj.SoldDate = [NSString stringWithFormat:@"%@",[dict valueForKey:@"SoldDate"]];
+                obj.UniqueReferralNumber = [NSString stringWithFormat:@"%@",[dict valueForKey:@"UniqueReferralNumber"]];
+                obj.UserDetailId = [NSString stringWithFormat:@"%@",[dict valueForKey:@"UserDetailId"]];
+                obj.MeaName = [NSString stringWithFormat:@"%@",[dict valueForKey:@"MeaName"]];
+                obj.ReferralType = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferralType"]];
                // obj.tag = [[userDetailDict valueForKey:@"FirstName"]objectAtIndex:i];
                 
                 
                 
-                obj.RewardAmount = [NSString stringWithFormat:@"%@",[[data valueForKey:@"RewardAmount"]objectAtIndex:i]];
-                obj.RewardDescription = [NSString stringWithFormat:@"%@",[[data valueForKey:@"RewardDescription"]objectAtIndex:i]];
-                obj.RewardName = [NSString stringWithFormat:@"%@",[[data valueForKey:@"RewardName"]objectAtIndex:i]];
-                obj.RewardType = [NSString stringWithFormat:@"%@",[[data valueForKey:@"RewardType"]objectAtIndex:i]];
-                obj.Rewardlevel = [NSString stringWithFormat:@"%@",[[data valueForKey:@"Rewardlevel"]objectAtIndex:i]];
-                obj.TransactionID = [NSString stringWithFormat:@"%@",[[data valueForKey:@"TransactionID"]objectAtIndex:i]];
-                 obj.IsReceived = [NSString stringWithFormat:@"%@",[[data valueForKey:@"IsReceived"]objectAtIndex:i]];
+                obj.RewardAmount = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"RewardAmount"]objectAtIndex:i]];
+                obj.RewardDescription = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"RewardDescription"]objectAtIndex:i]];
+                obj.RewardName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"RewardName"]objectAtIndex:i]];
+                obj.RewardType = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"RewardType"]objectAtIndex:i]];
+                obj.Rewardlevel = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"Rewardlevel"]objectAtIndex:i]];
+                obj.TransactionID = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"TransactionID"]objectAtIndex:i]];
+                 obj.IsReceived = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"IsReceived"]objectAtIndex:i]];
                 
                 [rewardListArray addObject:obj];
             }

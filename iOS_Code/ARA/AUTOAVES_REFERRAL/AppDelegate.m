@@ -203,7 +203,7 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"savedImageURL"];
         LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
          NSLog(@"-----facebook------");
         [self.navigator pushViewController:LIvc animated:YES];

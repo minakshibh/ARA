@@ -996,63 +996,33 @@ UIButton *tag_btn,*tag_cancel_btn;
     
      sorted_array=[[[sorted_array reverseObjectEnumerator] allObjects] mutableCopy];
 }
--(void)sortByDate:(NSMutableArray*)arr
+-(void)sortByDate:(NSMutableArray*)referralArray
 {
-    // create the string array
-    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
-    for (int l=0; l<arr.count; l++) {
-        obj = [arr objectAtIndex:l];
-        NSArray *str = [obj.createDate componentsSeparatedByString:@" "];
-        NSString *dateStr = [NSString stringWithFormat:@"%@ %@",[str objectAtIndex:0],[str objectAtIndex:1]];
-        [dateArray addObject:dateStr];
-    }
-    
-    
-    // create the date formatter with the correct format
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM-dd-yyyy HH-mm-ss"];
-    
-    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
-    
-    // fast enumeration of the array
-    for (int g=0;g<dateArray.count;g++) {
-     //   NSString* dateString = [NSString stringWithFormat:@"%@",[dateArray objectAtIndex:g]];
-        NSDate *date = [NSDate date];
-       date = [formatter dateFromString:[NSString stringWithFormat:@"%@",[dateArray objectAtIndex:g]]];
-        NSDateFormatter *fm = [[NSDateFormatter alloc]init];
-        [fm setDateFormat:@"MM-dd-yyyy hh-mm-ss"];
-        [tempArray addObject:[NSString stringWithFormat:@"%@",[fm stringFromDate:date]]];
-    }
-    
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"self"
-                                                               ascending:NO];
-    NSArray *descriptors = [NSArray arrayWithObject:descriptor];
-    NSArray *reverseOrder = [dateArray sortedArrayUsingDescriptors:descriptors];
-    
-    // sort the array of dates
-    // [tempArray sortUsingComparator:^NSComparisonResult(NSDate *date2, NSDate *date1) {
-    // return date2 compare date1 for descending. Or reverse the call for ascending.
-    //      return [date2 compare:date1];
-    //  }];
-    
-    NSLog(@"%@", reverseOrder);
-    referralListSortDate = [[NSMutableArray alloc]init];
-    for (int f=0; f<reverseOrder.count; f++) {
-        NSString *date_value = [NSString stringWithFormat:@"%@",[reverseOrder objectAtIndex:f]];
-        for (int h=0; h<referralListArray.count; h++) {
-            
-            obj = [referralListArray objectAtIndex:h];
-            
-            NSArray *array2 = [obj.createDate componentsSeparatedByString:@" "];
-            NSString *date_Value2 = [NSString stringWithFormat:@"%@ %@",[array2 objectAtIndex:0],[array2 objectAtIndex:1]];
-            
-            if ([date_value isEqualToString:date_Value2]) {
-                [referralListSortDate addObject:obj];
-                break;
-            }
-        }
-    }
+    referralListSortDate = [referralArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSDate *ref1ModifiedDate, *ref2ModifiedDate;
+        
+        ref1ModifiedDate = [self getModifiedDate:(ReferralObj*)a];
+        ref2ModifiedDate = [self getModifiedDate:(ReferralObj*)b];
+
+        return [ref2ModifiedDate compare:ref1ModifiedDate];
+    }];
 }
+
+-(NSDate*)getModifiedDate:(ReferralObj*)referralObj
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+    NSDate *modifiedDate;
+
+    if (![referralObj.SoldDate  isEqual: @"<null>"]) {
+        modifiedDate = [formatter dateFromString: referralObj.SoldDate];
+    }else{
+        modifiedDate = [formatter dateFromString: referralObj.createDate];
+    }
+    
+    return modifiedDate;
+}
+
 -(void)filterForSold:(NSMutableArray*)arr
 {
     referralListForSold = [[NSMutableArray alloc]init];

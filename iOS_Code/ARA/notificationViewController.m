@@ -24,12 +24,6 @@
     
     noOfLinesArr = [[NSMutableArray alloc]init];
 
-    
-    
-    
-    
-  //
-    
     refreshControl = [[UIRefreshControl alloc]init];
     [tableView addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
@@ -198,17 +192,26 @@
         
         UILabel * DateDay = [[UILabel alloc]  initWithFrame: CGRectMake(Description.frame.origin.x, Description.frame.origin.y+Description.frame.size.height-5, 200, 40)];
         
+//        NSString *datee = [NSString stringWithFormat:@"%@",database.ScheduledAt];
+        // "2016-03-01T23:16:18.123"
         NSString *datee = [NSString stringWithFormat:@"%@",database.ScheduledAt];
-//        NSArray *dateArr = [datee componentsSeparatedByString:@"T"];
-//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
-//        NSString *timeAMPM =[NSString stringWithFormat:@"%@",[dateArr objectAtIndex:1]];
-//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
-//        NSArray *semiTime = [timeAMPM componentsSeparatedByString:@":"];
-//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:1],[semidate objectAtIndex:2],[semidate objectAtIndex:0]];
-//        NSString *finalTime = [NSString stringWithFormat:@"%@:%@",[semiTime objectAtIndex:0],[semiTime objectAtIndex:1]];
-//        NSString *finalStr = [NSString stringWithFormat:@"%@ %@",finalDate,finalTime];
+        NSArray *dateArr = [datee componentsSeparatedByString:@"T"];
         
-        DateDay.text= datee;
+        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+        NSString *time =[NSString stringWithFormat:@"%@",[dateArr objectAtIndex:1]];
+        
+        NSArray *timeArr = [time componentsSeparatedByString:@"."];
+        time = [NSString stringWithFormat:@"%@",[timeArr objectAtIndex:0]];
+        NSString *finalStr = [NSString stringWithFormat:@"%@ %@",date,time];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+        NSDate *myDate = [dateFormatter dateFromString:finalStr];
+        // MM/dd/yyyy hh:mm a
+        [dateFormatter setDateFormat:@"MM/dd/yyyy hh:mm a"];
+        NSString *finalDate = [dateFormatter stringFromDate:myDate];
+        
+        DateDay.text= finalDate;
         DateDay.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:14] : [UIFont fontWithName:fontNameStr size:12];
         DateDay.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:18] : DateDay.font;
         DateDay.textColor = [UIColor lightGrayColor];
@@ -332,18 +335,26 @@
         
         UILabel * DateDay = [[UILabel alloc]  initWithFrame: CGRectMake(Description.frame.origin.x, Description.frame.origin.y+Description.frame.size.height-5, 200, 40)];
         
-        
+        //  2016-03-01T23:16:18.123
         NSString *datee = [NSString stringWithFormat:@"%@",database.ScheduledAt];
-//       NSArray *dateArr = [datee componentsSeparatedByString:@"T"];
-//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
-//        NSString *timeAMPM =[NSString stringWithFormat:@"%@",[dateArr objectAtIndex:1]];
-//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
-//        NSArray *semiTime = [timeAMPM componentsSeparatedByString:@":"];
-//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:1],[semidate objectAtIndex:2],[semidate objectAtIndex:0]];
-//        NSString *finalTime = [NSString stringWithFormat:@"%@:%@",[semiTime objectAtIndex:0],[semiTime objectAtIndex:1]];
-//        NSString *finalStr = [NSString stringWithFormat:@"%@ %@",finalDate,finalTime];
+        NSArray *dateArr = [datee componentsSeparatedByString:@"T"];
         
-        DateDay.text= datee;
+        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+        NSString *time =[NSString stringWithFormat:@"%@",[dateArr objectAtIndex:1]];
+        
+        NSArray *timeArr = [time componentsSeparatedByString:@"."];
+        time = [NSString stringWithFormat:@"%@",[timeArr objectAtIndex:0]];
+        NSString *finalStr = [NSString stringWithFormat:@"%@ %@",date,time];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+        NSDate *myDate = [dateFormatter dateFromString:finalStr];
+        // MM/dd/yyyy hh:mm a
+        [dateFormatter setDateFormat:@"MM/dd/yyyy hh:mm a"];
+        NSString *finalDate = [dateFormatter stringFromDate:myDate];
+        
+        
+        DateDay.text= finalDate;
         DateDay.textColor = [UIColor lightGrayColor];
         DateDay.font = (IS_IPAD) ? [UIFont fontWithName:fontNameStr size:14] : [UIFont fontWithName:fontNameStr size:12];
         DateDay.font = (IS_IPAD_PRO_1366) ? [UIFont fontWithName:fontNameStr size:18] : DateDay.font;

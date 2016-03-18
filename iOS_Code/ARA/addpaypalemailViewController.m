@@ -584,6 +584,13 @@
                 
                 return;
             }
+            if([acount_status isEqualToString:@"UNVERIFIED"])
+            {
+                [HelperAlert  alertWithOneBtn:AlertTitle description:@"This email is not a valid paypal email" okBtn:OkButtonTitle];
+                
+                
+                return;
+            }
             NSArray *data = [userDetailDict valueForKey:@"responseEnvelope"];
             NSString *response = [data valueForKey:@"ack"];
     

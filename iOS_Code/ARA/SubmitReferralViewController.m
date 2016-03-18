@@ -1049,9 +1049,9 @@
     imagecheckforemailView.image=nil;
     
     
-    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
-    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    btnSubmitReferral.userInteractionEnabled = NO;
+//    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
+//    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//    btnSubmitReferral.userInteractionEnabled = NO;
 }
 - (BOOL)validateEmailWithString:(NSString*)email
 {
@@ -1499,9 +1499,9 @@
                 imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
                 [activityIndicatorObject1 stopAnimating];
                 
-                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
-                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
-                btnSubmitReferral.userInteractionEnabled = YES;
+//                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
+//                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+//                btnSubmitReferral.userInteractionEnabled = YES;
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1557,9 +1557,9 @@
                 [activityIndicatorObject1 stopAnimating];
                 
                 
-                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
-                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
-                btnSubmitReferral.userInteractionEnabled = YES;
+//                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
+//                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+//                btnSubmitReferral.userInteractionEnabled = YES;
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1900,9 +1900,9 @@
             found_client = @"yes";
             imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
         }
-        btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
-        [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
-        btnSubmitReferral.userInteractionEnabled = YES;
+//        btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
+//        [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+//        btnSubmitReferral.userInteractionEnabled = YES;
     }
 }
 -(void)cancelNumberPad{
@@ -1957,9 +1957,9 @@
 
 -(void)checkforavailability
 {
-    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
-    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    btnSubmitReferral.userInteractionEnabled = NO;
+//    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
+//    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//    btnSubmitReferral.userInteractionEnabled = NO;
     
     NSMutableURLRequest *request ;
     NSString*_postData ;

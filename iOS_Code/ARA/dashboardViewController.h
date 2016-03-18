@@ -57,7 +57,7 @@
     IBOutlet UIButton *btnnewAppURL;
     
     UILabel *lblNotificationCount;
-    
+    UILabel *label45;
     IBOutlet UILabel *lblnewContactUs;
     
     IBOutlet UILabel *lblnewReferrals;
@@ -68,6 +68,8 @@
     IBOutlet UIView *viewnewNotification;
     IBOutlet UIImageView *imagenotification;
     IBOutlet UIImageView *imagenotificationcount;
+    IBOutlet UIButton *btnProfile;
+
     int count_status;
 }
 - (IBAction)btnnewAppURL:(id)sender;
@@ -91,6 +93,7 @@
 - (IBAction)btnScheduleServices:(id)sender;
 @property (nonatomic,strong) NSString *from_login;
 @property (nonatomic,strong) NSTimer *timerDashboard;
+@property (atomic) BOOL stop;
 -(void)getData;
 -(void)timerInvalidate;
 -(void)logoutFunction;
