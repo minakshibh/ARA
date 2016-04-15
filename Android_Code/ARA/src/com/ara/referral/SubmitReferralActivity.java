@@ -58,8 +58,7 @@ public class SubmitReferralActivity extends Activity implements
 			edittext_phonenumber, edittext_email, edittext_comment;
 	private User usermodel;
 	private Button button_submit;
-	private TextView textView_import, textView_SubmitReferral, textView_back
-			;
+	private TextView textView_import, textView_SubmitReferral, textView_back;
 	private SharedPreferences spref;
 	private ImageView img_email_check;
 	private ProgressBar progressBar_email;
@@ -243,7 +242,7 @@ public class SubmitReferralActivity extends Activity implements
 								.getText().toString())) {
 							message("Please enter valid Phone Number");
 							}
-						  else if(edittext_phonenumber.getText().toString().length()<14)
+						  else if(edittext_phonenumber.getText().toString().trim().length()<10)
 						  {
 								message("Please enter valid Phone Number"); 
 						  }

@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -491,13 +492,13 @@ static int statusCode;
 	         }
 			
 	     }
-	public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
+	/*public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
 		String responseString = "";
 		//SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
 		String getemail=email.trim();
 		
 		// ios code
-			/* _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
+			 _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
 			    
 			    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:
 			    @"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
@@ -514,14 +515,14 @@ static int statusCode;
 			    [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
 			    
 			    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-			    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];*/
+			    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 				
 			//_getNewHttpClient();https://svcs.paypal.com
 				//https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus
 				
-				/*Username:amrikhappy-facilitator_api1.yahoo.in
+				Username:amrikhappy-facilitator_api1.yahoo.in
 				Password:LSRRHP7S926DBPZN
-				Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA*/
+				Signature:AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA
 		
 		try{
 			
@@ -531,7 +532,7 @@ static int statusCode;
 			int timeoutSocket = 61000;
 			HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 				
-			
+			//  "https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]
 			DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
 			  HttpGet request = new HttpGet("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
 			+getemail+"&matchCriteria=NONE");
@@ -539,7 +540,16 @@ static int statusCode;
 	    	 request.setHeader("Accept", "application/json");
 	         request.setHeader("Content-type", "application/json");
 	        
+	         //client
+	         Robert.Seeley_api1.autoaves.com
+	         2VHLF2W76S5R9GXV
+	         AnWfP5X33cXzORYDXlcKLQpjJFuNAtiPGLTpiIpibiF7xaYk5k6irjfB
 	     
+	         //sand box
+	         jb-us-seller_api1.paypal.com
+	         WX4WTU3S8MY44S7F
+	         AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+	         
 	    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
 	    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
 			 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
@@ -591,7 +601,7 @@ static int statusCode;
 		}
 		return responseString;
 		
-	}
+	}*/
 		
 		
 		
@@ -600,12 +610,13 @@ static int statusCode;
 		
 		
 		
-		/*public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
+		public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context){
 			String responseString = "";
 			//SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
 			String getemail=email.trim();
 		
 			
+			//connect(email);
 			try{
 				System.err.println("payral id="+"amrikhappy-facilitator_api1.yahoo.in");
 				HttpParams httpParameters = new BasicHttpParams();
@@ -616,20 +627,21 @@ static int statusCode;
 					
 				
 				DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
-				  HttpGet request = new HttpGet("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+				  HttpPost request = new HttpPost("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
 				+getemail+"&matchCriteria=NONE");
 		     
 		    	 request.setHeader("Accept", "application/json");
 		         request.setHeader("Content-type", "application/json");
-		        
-		     
-		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","amrikhappy-facilitator_api1.yahoo.in");
-		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","LSRRHP7S926DBPZN");
-				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31ANGEcBHbQCx3AOfaxXv8jZ8z5QBA");
-				
+		       
+		       
+		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");
+		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");
+				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
 				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");
 				 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
 				 request.setHeader("X-PAYPAL-RESPONSE-DATA-FORMAT","JSON");
+				 
+				
 					
 		
 				
@@ -674,13 +686,13 @@ static int statusCode;
 			}
 			return responseString;
 			
-	    }*/
+	    }
 	
 		
 
 	
 	
-	 /*public static String getResponseFromUrlPost2(Boolean token,String functionName, List<NameValuePair> param, String email,Context context) throws JSONException{
+/*	 public static String getResponsePostPayPal(Boolean token,String functionName, List<NameValuePair> param, String email,Context context) throws JSONException{
 			String responseString = "";
 			SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
 			try {
@@ -701,9 +713,9 @@ static int statusCode;
 		         
 		     
 		     
-		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","caller_1312486258_biz_api1.gmail.com");//jb-us-seller_api1.paypal.com
-		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","1312486294");//WX4WTU3S8MY44S7F
-				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AbtI7HV1xB428VygBUcIhARzxch4AL65.T18CTeylixNNxDZUu0iO87e");
+		    	 request.setHeader("X-PAYPAL-SECURITY-USERID","jb-us-seller_api1.paypal.com");//jb-us-seller_api1.paypal.com
+		    	 request.setHeader("X-PAYPAL-SECURITY-PASSWORD","WX4WTU3S8MY44S7F");//WX4WTU3S8MY44S7F
+				 request.setHeader("X-PAYPAL-SECURITY-SIGNATURE","AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
 				 //AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
 				 request.setHeader("X-PAYPAL-APPLICATION-ID","APP-80W284485P519543T");//APP-80W284485P519543T
 				 request.setHeader("X-PAYPAL-REQUEST-DATA-FORMAT","NV" );
@@ -745,9 +757,13 @@ static int statusCode;
 			Log.e("responseString",statusCode+" "+ responseString);
 			return responseString;
 		
-		}*/
+		}
+		*/
 		
-	 
+
+		   
+
+		
 	
 }
 

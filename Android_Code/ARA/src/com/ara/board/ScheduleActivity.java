@@ -219,7 +219,34 @@ public class ScheduleActivity   extends Activity implements
 					Toast.makeText(ScheduleActivity.this, "Please enter Last Name", Toast.LENGTH_SHORT).show();
 					}
 				else{
-							if(!edittext_email.getText().toString().trim().equals(""))
+						
+					
+					if(!edittext_email.getText().toString().trim().equals("") && !edittext_phonenumber.getText().toString().trim().equals(""))
+					{
+						
+							String gettingEmail=edittext_email.getText().toString().trim();
+							 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(gettingEmail)
+										.matches() && !TextUtils.isEmpty(gettingEmail))
+							 {
+								Toast.makeText(ScheduleActivity.this, "Please enter a valid Email Address", Toast.LENGTH_SHORT).show();
+									
+							 	}
+							 else if (!Util.isValidPhoneNumber(edittext_phonenumber.getText().toString())) {
+									
+									Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+									}
+							  else if(edittext_phonenumber.getText().toString().trim().length()<10)
+							  {
+								Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+							  	}
+							 else{
+								 
+								 scheduleApi();
+						 	}
+						}
+					
+						
+					else if(!edittext_email.getText().toString().trim().equals(""))
 							{
 								
 								String gettingEmail=edittext_email.getText().toString().trim();
@@ -233,24 +260,23 @@ public class ScheduleActivity   extends Activity implements
 									scheduleApi();
 								 	}
 								}
-							else if(!edittext_phonenumber.getText().toString().trim().equals(""))
+					else if(!edittext_phonenumber.getText().toString().trim().equals(""))
 							{
-								if (!Util.isValidPhoneNumber(edittext_phonenumber.getText().toString())) {
-									
-									Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
-									}
-								  else if(edittext_phonenumber.getText().toString().length()<14)
-								  {
-									Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
-								  	}
-								 else{
-									 scheduleApi();
-								 	}
+									if (!Util.isValidPhoneNumber(edittext_phonenumber.getText().toString())) {
+										
+										Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+										}
+									  else if(edittext_phonenumber.getText().toString().trim().length()<10)
+									  {
+										Toast.makeText(ScheduleActivity.this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+									  	}
+									 else{
+										 scheduleApi();
+									 	}
 								
 								}
-							else{
-													
-								Toast.makeText(ScheduleActivity.this, "Please enter Phone Number or Email Address", Toast.LENGTH_SHORT).show();
+					else{
+							Toast.makeText(ScheduleActivity.this, "Please enter Phone Number or Email Address", Toast.LENGTH_SHORT).show();
 							}
 						}
 					

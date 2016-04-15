@@ -10,6 +10,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -73,7 +74,7 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponseFor
 				finish();
 
 			} else if (v == signUp) {
-				Intent intent = new Intent(ForgotPasswordActivity.this,RegisterActivity.class);
+				Intent intent = new Intent(ForgotPasswordActivity.this,EmailValidatorActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
@@ -111,6 +112,7 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponseFor
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
 		    		ForgotPasswordActivity.this, "other", "users/forgetpassword",
 		    		nameValuePairs, user, "", true, "Please wait...");
+			Log.e("users/forgetpassword", nameValuePairs.toString());
 			mWebPageTask.delegate = (AsyncResponseForARA) ForgotPasswordActivity.this;
 			mWebPageTask.execute();
 		} else {

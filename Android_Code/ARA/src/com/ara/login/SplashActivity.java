@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
@@ -46,9 +47,13 @@ public class SplashActivity extends Activity implements AsyncResponseForARA {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		 requestWindowFeature(Window.FEATURE_NO_TITLE);
+		   /* getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+		                            WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
+		
 		setContentView(R.layout.activity_splash);
 
+		
 		//startBackgroundTimer();
 		imageView = (ImageView) findViewById(R.id.imageView);
 		//signUpAPI();
