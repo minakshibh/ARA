@@ -91,6 +91,11 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 			result = Util.getResponsePostPayPal(token,methodName, nameValuePairs, email,activity);
 			
 			}
+		else if(method_type.equalsIgnoreCase("reset"))
+		{
+			result = Util.getResponseFromUrlGetHeaderReset(methodName, nameValuePairs,name,pass, activity);
+			
+			}
 		else
 		{
 			result = Util.getResponseFromUrlGetHeader(methodName, nameValuePairs,name,pass, activity);
