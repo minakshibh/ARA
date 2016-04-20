@@ -429,7 +429,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter valid Phone Number");
 					}
-					else if(phNumber.getText().toString().length()<14)
+					else if(phNumber.getText().toString().trim().length()<10)
 					{
 						Util.ToastMessage(RegisterActivity.this,
 								"Please enter valid Phone Number");
