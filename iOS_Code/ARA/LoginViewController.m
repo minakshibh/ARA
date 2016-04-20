@@ -60,7 +60,7 @@
     
 //    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
 
-    NSLog(@"---%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status"]]);
+    NSLog(@"remember_me_status---%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status"]]);
     
     if ([[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] != nil) {
         
@@ -675,8 +675,6 @@
     
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/accounts/login",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
     
     NSLog(@"data post >>> %@",_postData);
     

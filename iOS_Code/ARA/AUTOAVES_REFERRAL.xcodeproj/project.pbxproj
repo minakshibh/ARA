@@ -262,6 +262,8 @@
 		D95667381B8EC74500E01477 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D956672D1B8EC74500E01477 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D95667391B8EC74500E01477 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D95667301B8EC74500E01477 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D956674C1B8ECC8700E01477 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D94BEAFC1B78BA8E008BCF5F /* FacebookSDK.framework */; };
+		D959BCC91CC79FE200D3D6F2 /* RecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D959BCC71CC79FE200D3D6F2 /* RecoveryViewController.m */; };
+		D959BCCA1CC79FE200D3D6F2 /* RecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D959BCC81CC79FE200D3D6F2 /* RecoveryViewController.xib */; };
 		D959CE041BFDDC3300CE4BC4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D959CE031BFDDC3300CE4BC4 /* AdSupport.framework */; };
 		D959D18D1B7D9D670073C2D9 /* myBadgesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D959D18B1B7D9D670073C2D9 /* myBadgesViewController.m */; };
 		D959D18E1B7D9D670073C2D9 /* myBadgesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D959D18C1B7D9D670073C2D9 /* myBadgesViewController.xib */; };
@@ -317,6 +319,21 @@
 		D97FAB181BE9D49500540E38 /* header-image@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB141BE9D49500540E38 /* header-image@2x~ipad.png */; };
 		D98429671B943DB1008E5557 /* changePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D98429651B943DB1008E5557 /* changePasswordViewController.m */; };
 		D98429681B943DB1008E5557 /* changePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98429661B943DB1008E5557 /* changePasswordViewController.xib */; };
+		D988A5551CA107FF00AC1EE1 /* 29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5461CA107FF00AC1EE1 /* 29x29.png */; };
+		D988A5561CA107FF00AC1EE1 /* 40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5471CA107FF00AC1EE1 /* 40x40.png */; };
+		D988A5571CA107FF00AC1EE1 /* 48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5481CA107FF00AC1EE1 /* 48x48.png */; };
+		D988A5581CA107FF00AC1EE1 /* 58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5491CA107FF00AC1EE1 /* 58x58.png */; };
+		D988A5591CA107FF00AC1EE1 /* 60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A54A1CA107FF00AC1EE1 /* 60x60.png */; };
+		D988A55A1CA107FF00AC1EE1 /* 72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A54B1CA107FF00AC1EE1 /* 72x72.png */; };
+		D988A55B1CA107FF00AC1EE1 /* 80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A54C1CA107FF00AC1EE1 /* 80x80.png */; };
+		D988A55C1CA107FF00AC1EE1 /* 87x87.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A54D1CA107FF00AC1EE1 /* 87x87.png */; };
+		D988A55D1CA107FF00AC1EE1 /* 96x96.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A54E1CA107FF00AC1EE1 /* 96x96.png */; };
+		D988A55E1CA107FF00AC1EE1 /* 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A54F1CA107FF00AC1EE1 /* 120x120.png */; };
+		D988A55F1CA107FF00AC1EE1 /* 144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5501CA107FF00AC1EE1 /* 144x144.png */; };
+		D988A5601CA107FF00AC1EE1 /* 180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5511CA107FF00AC1EE1 /* 180x180.png */; };
+		D988A5611CA107FF00AC1EE1 /* 192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5521CA107FF00AC1EE1 /* 192x192.png */; };
+		D988A5621CA107FF00AC1EE1 /* 512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5531CA107FF00AC1EE1 /* 512x512.png */; };
+		D988A5631CA107FF00AC1EE1 /* 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5541CA107FF00AC1EE1 /* 1024x1024.png */; };
 		D99981CC1C895928005DCDDD /* map-background11.png in Resources */ = {isa = PBXBuildFile; fileRef = D99981C61C895928005DCDDD /* map-background11.png */; };
 		D99981CD1C895928005DCDDD /* map-background11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99981C71C895928005DCDDD /* map-background11@2x.png */; };
 		D99981CE1C895928005DCDDD /* notification-icon11.png in Resources */ = {isa = PBXBuildFile; fileRef = D99981C81C895928005DCDDD /* notification-icon11.png */; };
@@ -776,6 +793,9 @@
 		D956673E1B8ECC0F00E01477 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D95667401B8ECC1A00E01477 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D95667421B8ECC2F00E01477 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D959BCC61CC79FE200D3D6F2 /* RecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecoveryViewController.h; sourceTree = "<group>"; };
+		D959BCC71CC79FE200D3D6F2 /* RecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoveryViewController.m; sourceTree = "<group>"; };
+		D959BCC81CC79FE200D3D6F2 /* RecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecoveryViewController.xib; sourceTree = "<group>"; };
 		D959CE031BFDDC3300CE4BC4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D959D18A1B7D9D670073C2D9 /* myBadgesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myBadgesViewController.h; sourceTree = "<group>"; };
 		D959D18B1B7D9D670073C2D9 /* myBadgesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myBadgesViewController.m; sourceTree = "<group>"; };
@@ -842,6 +862,21 @@
 		D98429641B943DB1008E5557 /* changePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changePasswordViewController.h; sourceTree = "<group>"; };
 		D98429651B943DB1008E5557 /* changePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changePasswordViewController.m; sourceTree = "<group>"; };
 		D98429661B943DB1008E5557 /* changePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = changePasswordViewController.xib; sourceTree = "<group>"; };
+		D988A5461CA107FF00AC1EE1 /* 29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 29x29.png; sourceTree = "<group>"; };
+		D988A5471CA107FF00AC1EE1 /* 40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 40x40.png; sourceTree = "<group>"; };
+		D988A5481CA107FF00AC1EE1 /* 48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 48x48.png; sourceTree = "<group>"; };
+		D988A5491CA107FF00AC1EE1 /* 58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58x58.png; sourceTree = "<group>"; };
+		D988A54A1CA107FF00AC1EE1 /* 60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 60x60.png; sourceTree = "<group>"; };
+		D988A54B1CA107FF00AC1EE1 /* 72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 72x72.png; sourceTree = "<group>"; };
+		D988A54C1CA107FF00AC1EE1 /* 80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80x80.png; sourceTree = "<group>"; };
+		D988A54D1CA107FF00AC1EE1 /* 87x87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 87x87.png; sourceTree = "<group>"; };
+		D988A54E1CA107FF00AC1EE1 /* 96x96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 96x96.png; sourceTree = "<group>"; };
+		D988A54F1CA107FF00AC1EE1 /* 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120x120.png; sourceTree = "<group>"; };
+		D988A5501CA107FF00AC1EE1 /* 144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144x144.png; sourceTree = "<group>"; };
+		D988A5511CA107FF00AC1EE1 /* 180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 180x180.png; sourceTree = "<group>"; };
+		D988A5521CA107FF00AC1EE1 /* 192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 192x192.png; sourceTree = "<group>"; };
+		D988A5531CA107FF00AC1EE1 /* 512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512x512.png; sourceTree = "<group>"; };
+		D988A5541CA107FF00AC1EE1 /* 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024x1024.png; sourceTree = "<group>"; };
 		D99981C61C895928005DCDDD /* map-background11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-background11.png"; sourceTree = "<group>"; };
 		D99981C71C895928005DCDDD /* map-background11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-background11@2x.png"; sourceTree = "<group>"; };
 		D99981C81C895928005DCDDD /* notification-icon11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification-icon11.png"; sourceTree = "<group>"; };
@@ -1405,6 +1440,7 @@
 		D94BEAA41B7872EB008BCF5F = {
 			isa = PBXGroup;
 			children = (
+				D988A5451CA107EB00AC1EE1 /* new App Icons */,
 				D9B4A9D21C4E0318006364F0 /* libsqlite3.tbd */,
 				D96650A91C19505F00C1399C /* Controllers */,
 				D96650A81C19505100C1399C /* Modal */,
@@ -1469,6 +1505,7 @@
 		D94BEAD61B7873F9008BCF5F /* ARA */ = {
 			isa = PBXGroup;
 			children = (
+				D959BCC51CC79EEE00D3D6F2 /* Recovery Password */,
 				D9B162F41C509F70000A9DBB /* Schedule Service */,
 				D9408ADC1BABFA690078129A /* cross.png */,
 				D92EC4141B83006A00E8EB8D /* PayPal */,
@@ -1663,6 +1700,16 @@
 			path = AUTOAVES_REFERRAL;
 			sourceTree = "<group>";
 		};
+		D959BCC51CC79EEE00D3D6F2 /* Recovery Password */ = {
+			isa = PBXGroup;
+			children = (
+				D959BCC61CC79FE200D3D6F2 /* RecoveryViewController.h */,
+				D959BCC71CC79FE200D3D6F2 /* RecoveryViewController.m */,
+				D959BCC81CC79FE200D3D6F2 /* RecoveryViewController.xib */,
+			);
+			name = "Recovery Password";
+			sourceTree = "<group>";
+		};
 		D959D1891B7D9D480073C2D9 /* My Badges */ = {
 			isa = PBXGroup;
 			children = (
@@ -1830,6 +1877,28 @@
 			);
 			name = "Change Password";
 			path = AUTOAVES_REFERRAL;
+			sourceTree = "<group>";
+		};
+		D988A5451CA107EB00AC1EE1 /* new App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				D988A5461CA107FF00AC1EE1 /* 29x29.png */,
+				D988A5471CA107FF00AC1EE1 /* 40x40.png */,
+				D988A5481CA107FF00AC1EE1 /* 48x48.png */,
+				D988A5491CA107FF00AC1EE1 /* 58x58.png */,
+				D988A54A1CA107FF00AC1EE1 /* 60x60.png */,
+				D988A54B1CA107FF00AC1EE1 /* 72x72.png */,
+				D988A54C1CA107FF00AC1EE1 /* 80x80.png */,
+				D988A54D1CA107FF00AC1EE1 /* 87x87.png */,
+				D988A54E1CA107FF00AC1EE1 /* 96x96.png */,
+				D988A54F1CA107FF00AC1EE1 /* 120x120.png */,
+				D988A5501CA107FF00AC1EE1 /* 144x144.png */,
+				D988A5511CA107FF00AC1EE1 /* 180x180.png */,
+				D988A5521CA107FF00AC1EE1 /* 192x192.png */,
+				D988A5531CA107FF00AC1EE1 /* 512x512.png */,
+				D988A5541CA107FF00AC1EE1 /* 1024x1024.png */,
+			);
+			name = "new App Icons";
 			sourceTree = "<group>";
 		};
 		D9AF3CA61B8EE59600F98881 /* AFNETWORK */ = {
@@ -2123,6 +2192,7 @@
 				D968C25D1B9EF5AC0083198B /* addpaypalemailViewController.xib in Resources */,
 				D91B9E0E1B87415A008B0FEB /* import-from-contacts@2x.png in Resources */,
 				D94BEADF1B787759008BCF5F /* user-i.png in Resources */,
+				D988A5551CA107FF00AC1EE1 /* 29x29.png in Resources */,
 				D97AC4C71C8727D80073E32A /* refer-icon@3x.png in Resources */,
 				D90A924A1C450BA400A52A17 /* referrals_icon@2x.png in Resources */,
 				D969128C1BE381FD001D6E5E /* AutoAves Splash_240.jpg in Resources */,
@@ -2132,11 +2202,16 @@
 				D9DDB9B31B7CC788006F5A37 /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				D9527D4B1B9E9EE900630F9F /* 13.jpg in Resources */,
 				D9527D6B1B9E9F3500630F9F /* 3@2x.jpg in Resources */,
+				D988A55D1CA107FF00AC1EE1 /* 96x96.png in Resources */,
 				D9356A0E1B81E82000777DD3 /* my-profile@2x.png in Resources */,
 				D9BEB0C11C48CA2800FED0C5 /* 1profile_image@2x.png in Resources */,
+				D988A5631CA107FF00AC1EE1 /* 1024x1024.png in Resources */,
+				D988A55F1CA107FF00AC1EE1 /* 144x144.png in Resources */,
 				D9DDB9AF1B7CC788006F5A37 /* Roboto-Regular.ttf in Resources */,
 				D9A435571C352EBC00FC3406 /* step1@2x.png in Resources */,
 				D92D414A1B7B5D5E00AB588F /* Referral_List.jpg in Resources */,
+				D988A5561CA107FF00AC1EE1 /* 40x40.png in Resources */,
+				D988A55B1CA107FF00AC1EE1 /* 80x80.png in Resources */,
 				D93569DD1B81E74300777DD3 /* submit-referral.png in Resources */,
 				D94514D11C47CBBC00DA1573 /* 1title_bdr_btm@2x~ipad.png in Resources */,
 				D9B162F91C509FB7000A9DBB /* ScheduleServiceViewController.xib in Resources */,
@@ -2201,6 +2276,7 @@
 				D90A922B1C45091F00A52A17 /* profile_image@2x~ipad.png in Resources */,
 				D959D1A21B7E1CE40073C2D9 /* 1001fonts-timeburner-eula.txt in Resources */,
 				D9A435541C352EB100FC3406 /* step2.png in Resources */,
+				D988A5591CA107FF00AC1EE1 /* 60x60.png in Resources */,
 				D9A45DE61C438EC400D79C1A /* 22.png in Resources */,
 				D92D41481B7B579100AB588F /* ReferralTableViewCell.xib in Resources */,
 				D9DDB9AA1B7CC788006F5A37 /* Roboto-Italic.ttf in Resources */,
@@ -2261,6 +2337,8 @@
 				D97AC4C61C8727D80073E32A /* notification-icon@3x.png in Resources */,
 				D9527D4F1B9E9EE900630F9F /* 4.jpg in Resources */,
 				D9527D661B9E9F3500630F9F /* 12@2x.jpg in Resources */,
+				D988A5611CA107FF00AC1EE1 /* 192x192.png in Resources */,
+				D988A55E1CA107FF00AC1EE1 /* 120x120.png in Resources */,
 				D99981CC1C895928005DCDDD /* map-background11.png in Resources */,
 				D9CAFFC11C3292A00055FDE8 /* SignupEmailCheckViewController.xib in Resources */,
 				D94514C61C47CBBC00DA1573 /* 1collapse_icon@2x~ipad.png in Resources */,
@@ -2282,15 +2360,18 @@
 				D91B9E0F1B87415A008B0FEB /* login-with-facebook@2x.png in Resources */,
 				D9527D531B9E9EE900630F9F /* 8.jpg in Resources */,
 				D9B163101C510588000A9DBB /* time-icon@3x.png in Resources */,
+				D959BCCA1CC79FE200D3D6F2 /* RecoveryViewController.xib in Resources */,
 				D96F54861C08615C005C3265 /* AboutAppViewController.xib in Resources */,
 				D9154F091C33F33300FE0E6E /* step1_disabled.png in Resources */,
 				D969128F1BE381FD001D6E5E /* AutoAves Splash_600.jpg in Resources */,
 				D9B1630E1C510588000A9DBB /* calander-icon@3x.png in Resources */,
+				D988A5581CA107FF00AC1EE1 /* 58x58.png in Resources */,
 				D94514D01C47CBBC00DA1573 /* 1services_icon@2x~ipad.png in Resources */,
 				D9BEB0D71C48CA6E00FED0C5 /* 1bell_read@3x.png in Resources */,
 				D9BEB0B71C48CA2800FED0C5 /* 1back_btn@2x.png in Resources */,
 				D95D23C41C27F706000A9E7A /* inner-logo_iphone~ipad.png in Resources */,
 				D9527D671B9E9F3500630F9F /* 13.jpg in Resources */,
+				D988A5621CA107FF00AC1EE1 /* 512x512.png in Resources */,
 				D92D414F1B7B726100AB588F /* referralDetailViewController.xib in Resources */,
 				D9356A1D1B81E82000777DD3 /* user-icon@2x.png in Resources */,
 				D9356A131B81E82000777DD3 /* radio-checked@2x.png in Resources */,
@@ -2325,6 +2406,7 @@
 				D9BEB0DA1C48CA6E00FED0C5 /* 1del_icon@3x.png in Resources */,
 				D9BEB0E41C48CA6E00FED0C5 /* 1title_bdr_btm@3x.png in Resources */,
 				D96912911BE381FD001D6E5E /* AutoAves Splash_320~ipad.jpg in Resources */,
+				D988A5571CA107FF00AC1EE1 /* 48x48.png in Resources */,
 				D9BEB0C21C48CA2800FED0C5 /* 1referrals_icon@2x.png in Resources */,
 				D92EC4201B835ABD00E8EB8D /* refresh.png in Resources */,
 				D90A922E1C45091F00A52A17 /* services_icon@2x~ipad.png in Resources */,
@@ -2390,7 +2472,9 @@
 				D9527D701B9E9F3500630F9F /* 8@2x.jpg in Resources */,
 				D916BB0C1BBBAB1500AECF5D /* submit_ref.png in Resources */,
 				D96912991BE387EF001D6E5E /* inner-logo_240.png in Resources */,
+				D988A55C1CA107FF00AC1EE1 /* 87x87.png in Resources */,
 				D93569CC1B81E74300777DD3 /* inner-logo.png in Resources */,
+				D988A55A1CA107FF00AC1EE1 /* 72x72.png in Resources */,
 				D9BEB09E1C48C9E200FED0C5 /* 1news_icon.png in Resources */,
 				D99A74481C24034200880859 /* Icon-76.png in Resources */,
 				D9BEB0DE1C48CA6E00FED0C5 /* 1notification_count@3x.png in Resources */,
@@ -2401,6 +2485,7 @@
 				D97AC4C51C8727D80073E32A /* map-background@3x.png in Resources */,
 				D9356A0A1B81E82000777DD3 /* inner-logo@2x.png in Resources */,
 				D9DDB9A61B7CC788006F5A37 /* Roboto-Black.ttf in Resources */,
+				D988A5601CA107FF00AC1EE1 /* 180x180.png in Resources */,
 				D9BEB0DC1C48CA6E00FED0C5 /* 1news_icon@3x.png in Resources */,
 				D93569D01B81E74300777DD3 /* my-profile.png in Resources */,
 				D9BEB0E21C48CA6E00FED0C5 /* 1rewards_icon@3x.png in Resources */,
@@ -2515,6 +2600,7 @@
 				D94A837C1BBA8E7400F6529C /* badges.m in Sources */,
 				D92D412F1B7B1F9800AB588F /* SubmitReferralViewController.m in Sources */,
 				D93D08BE1BB5194800C9573E /* UIView+Toast.m in Sources */,
+				D959BCC91CC79FE200D3D6F2 /* RecoveryViewController.m in Sources */,
 				D9527D361B9E9DAC00630F9F /* splashViewController.m in Sources */,
 				D956670D1B8EC65B00E01477 /* SBJSONScanner.m in Sources */,
 				D9AF3CC01B8EE5BD00F98881 /* AFURLRequestSerialization.m in Sources */,
@@ -2680,7 +2766,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krishnais.autoaves2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac2c53e6-0cc8-4aea-8a70-8124b2a44431";
+				PROVISIONING_PROFILE = "59fd405b-56cb-4a69-8f71-2587406dcd4d";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2709,7 +2795,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krishnais.autoaves2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "53ba36ba-5776-4355-b697-bf53c843f896";
+				PROVISIONING_PROFILE = "b361fec9-02cd-4995-8cb2-0e3490142ee3";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
