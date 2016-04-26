@@ -8,15 +8,20 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>AppIcon_29.png</string>
-		<string>AppIcon_40.png</string>
-		<string>AppIcon_58.png</string>
-		<string>AppIcon_60.png</string>
-		<string>AppIcon_80.png</string>
-		<string>AppIcon_120.png</string>
-		<string>AppIcon_1024.png</string>
-		<string>Icon-76.png</string>
-		<string>Icon-76@2x.png</string>
+		<string>29x29.png</string>
+		<string>40x40.png</string>
+		<string>58x58.png</string>
+		<string>60x60.png</string>
+		<string>80x80.png</string>
+		<string>120x120.png</string>
+		<string>1024x1024.png</string>
+		<string>72x72.png</string>
+		<string>512x512.png</string>
+		<string>192x192.png</string>
+		<string>144x144.png</string>
+		<string>180x180.png</string>
+		<string>96x96.png</string>
+		<string>87x87.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict/>
@@ -27,18 +32,21 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ARA</string>
+	<string>AutoAves</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6.8</string>
+	<string>1.6.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.autoaves.ARAapp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>ARAapp</string>
 				<string>fb557158811114993</string>
 			</array>
 		</dict>

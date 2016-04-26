@@ -13,6 +13,7 @@
 #import "dashboardViewController.h"
 #import "referralListViewController.h"
 #import <Crittercism/Crittercism.h>
+#import "RecoveryViewController.h"
 
 @interface AppDelegate () <CrittercismDelegate>
 
@@ -162,11 +163,26 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
  //   NSLog(@"Error in registration. Error: %@", error);
 }
+
+#pragma mark- OPENURL
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    if ([[NSString stringWithFormat:@"%@",url] isEqualToString:@"araapp://"])
+    {
+    // NSString *customURL = @"iOSDevTips://?token=123abct&registered=1";
+    NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
+    NSLog(@"URL scheme:%@", [url scheme]);
+    NSLog(@"URL query: %@", [url query]);
+        
+        RecoveryViewController *recoveryVC = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+        [self.navigator pushViewController:recoveryVC animated:YES];
+        
+    return YES;
+    }
+    
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 }
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
@@ -336,5 +352,6 @@
     [DisableView removeFromSuperview];
     
 }
+
 
 @end

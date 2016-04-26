@@ -134,9 +134,9 @@
       <category android:name="android.intent.category.DEFAULT" />
        <category android:name="android.intent.category.LAUNCHER"/>
        
-       <data android:scheme="http"
-            android:host="AutoAvesReferralApp.com"
-           /> 
+       <data android:scheme="autoaves"/>
+       <data android:scheme="http"/>
+       <data android:host="referralapp.com"/> 
       
      
    

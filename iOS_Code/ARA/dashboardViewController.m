@@ -659,24 +659,7 @@
     }else{
         [self logout];
         
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_email"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_firstName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_lastName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_facebookUser"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaId"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_phoneNo"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userid"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleName"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleId"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_purchasedBefore"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_image"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"savedImageURL"];
-        NSLog(@"FFFFFFFFFFFFFFFFF%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"]);
+        
         
         
         
@@ -937,6 +920,25 @@ if([recieved_status isEqualToString:@"passed"])
             //[self.view makeToast:[NSString stringWithFormat:@"%@",responseString]];
 //            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
 //            [alert show];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_email"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_firstName"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_lastName"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_facebookUser"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaId"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_meaName"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_phoneNo"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userName"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_userid"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleName"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_roleId"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_purchasedBefore"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_image"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"savedImageURL"];
+            NSLog(@"FFFFFFFFFFFFFFFFF%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"]);
+            
             [kappDelegate HideIndicator];
             if (count_status==0) {
                 [[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"user_logout"];

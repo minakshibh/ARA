@@ -261,7 +261,7 @@
                 }else{
                     //activityIndicatorObject.center = CGPointMake(0, 0);
                     activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50, 0.50);
-                    activityIndicatorObject1.color=[UIColor whiteColor];
+                    activityIndicatorObject1.color=[UIColor grayColor ];
                     [viewEmailindicator addSubview:activityIndicatorObject1];
                     [activityIndicatorObject1 startAnimating];
                     
