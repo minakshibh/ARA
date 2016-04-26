@@ -35,8 +35,9 @@
     IBOutlet UITextField *txtPassword;
     NSMutableData *webData;
     NSString *status;
+    
 }
-//- (IBAction)btnCheckbox:(id)sender;
+
 //- (IBAction)btnForgotPassword:(id)sender;
 //- (IBAction)btnSignUp:(id)sender;
 //- (IBAction)btnFacebookLogin:(id)sender;
@@ -52,8 +53,8 @@
 
     NSLog(@"login view");
 
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [scrollView addGestureRecognizer:singleTap];
+//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+//    [self.view addGestureRecognizer:singleTap];
     
     //---initialize checkbox value first tiem with false
     checkbox_Value = false;
@@ -185,6 +186,16 @@
 }
 #pragma mark UITextField Delegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField == txtEmail)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+        
+    }
+    if (textField == txtPassword)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+        
+    }
     scrollView.scrollEnabled = YES;
     scrollView.delegate = self;
     scrollView.contentSize = CGSizeMake(350, 700);
@@ -192,7 +203,17 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (textField == txtEmail)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
+    }
+    
+    if (textField == txtPassword)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidShowNotification object:nil];
+    }
     scrollView.scrollEnabled = NO;
+     [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
     return YES;
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -204,22 +225,19 @@
     
     [self checkLogin];
 
-    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+   
     
     [textField resignFirstResponder];
-    scrollView.scrollEnabled = YES;
+//    scrollView.scrollEnabled = YES;
     
     return YES;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     svos = scrollView.contentOffset;
-    scrollView.scrollEnabled = YES;
+//    scrollView.scrollEnabled = YES;
     if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
     {
-     
-
     if( textField == txtPassword ) {
-        
         CGPoint pt;
         CGRect rc = [textField bounds];
         rc = [textField convertRect:rc toView:scrollView];
@@ -227,7 +245,7 @@
         pt.x = 0;
         pt.y -=150;
         [scrollView setContentOffset:pt animated:YES];
-    }
+        }
     }
 }
 #pragma mark Button Actions
@@ -705,5 +723,34 @@
         NSLog(@"connection is NULL");
     }
 }
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
+}
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    float newVerticalPosition = -keyboardSize.height + 100;
+    
+    [self moveFrameToVerticalPosition:newVerticalPosition forDuration:0.3f];
+}
 
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+//    CGFloat  kNavBarHeight =  self.navigationController.navigationBar.frame.size.height;
+    CGFloat  kNavBarHeight =  self.navigationController.navigationBar.frame.size.height;
+    [self moveFrameToVerticalPosition:kNavBarHeight forDuration:0.3f];
+}
+
+- (void)moveFrameToVerticalPosition:(float)position forDuration:(float)duration
+{
+    CGRect frame = self.view.frame;
+    frame.origin.y = position;
+    
+    [UIView animateWithDuration:duration animations:^{
+        self.view.frame = frame;
+    }];
+}
 @end

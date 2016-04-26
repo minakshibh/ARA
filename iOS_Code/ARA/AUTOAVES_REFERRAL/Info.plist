@@ -36,17 +36,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6.9</string>
+	<string>1.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.autoaves.ARAapp</string>
+			<string>com.referralapp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ARAapp</string>
+				<string>autoaves</string>
 				<string>fb557158811114993</string>
 			</array>
 		</dict>

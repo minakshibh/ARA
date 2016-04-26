@@ -170,15 +170,45 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    if ([[NSString stringWithFormat:@"%@",url] isEqualToString:@"araapp://"])
+//    NSArray *appName = [[NSString stringWithFormat:@"%@",url] componentsSeparatedByString:@":"];
+//    NSString *appNameStr = [NSString stringWithFormat:@"%@",[appName objectAtIndex:0]];
+    
+    if ([[url scheme] isEqualToString:@"autoaves"])
     {
     // NSString *customURL = @"iOSDevTips://?token=123abct&registered=1";
     NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
     NSLog(@"URL scheme:%@", [url scheme]);
     NSLog(@"URL query: %@", [url query]);
         
-        RecoveryViewController *recoveryVC = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
-        [self.navigator pushViewController:recoveryVC animated:YES];
+    NSArray *token = [[NSString stringWithFormat:@"%@",[url query]] componentsSeparatedByString:@"="];
+        NSString *tokenStr = [NSString stringWithFormat:@"%@",[token objectAtIndex:1]];
+        if (!(token.count>0) || (tokenStr.length < 4)) {
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Link is not correct." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            
+//            LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+//            [self.navigator pushViewController:loginVC animated:YES];
+            
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+            self.navigator = [[UINavigationController alloc] initWithRootViewController:loginVC];
+            self.window.rootViewController = self.navigator;
+            [self.window makeKeyAndVisible];
+            return YES;
+        }
+    
+        
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+         RecoveryViewController *recoveryVC = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+        recoveryVC.guid = tokenStr;
+        self.navigator = [[UINavigationController alloc] initWithRootViewController:recoveryVC];
+        self.navigator.navigationBarHidden = YES;
+        self.window.rootViewController = self.navigator;
+        [self.window makeKeyAndVisible];
+        
+//    RecoveryViewController *recoveryVC = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+//        recoveryVC.guid = tokenStr;
+//    [self.navigator pushViewController:recoveryVC animated:YES];
         
     return YES;
     }

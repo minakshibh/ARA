@@ -8,6 +8,7 @@
 
 #import "RecoveryViewController.h"
 #import "LoginViewController.h"
+#import "dashboardViewController.h"
 
 @interface RecoveryViewController ()
 
@@ -50,7 +51,7 @@
         return;
     }
     
-    [self resetPassword:confirmPasswordStr :@""];
+    [self resetPassword:confirmPasswordStr :self.guid];
     
    
     
@@ -62,14 +63,15 @@
     NSMutableURLRequest *request ;
     NSString*_postData ;
     
+//    _postData = [NSString stringWithFormat:@"userpassword=%@&useruniqueid=%@",pwd,userID];
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/resetpassword",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"GET"];
-//    [request addValue:email forHTTPHeaderField:@"username"];
-//    [request addValue:password forHTTPHeaderField:@"userpassword"];
+    [request addValue:pwd forHTTPHeaderField:@"userpassword"];
+    [request addValue:userID forHTTPHeaderField:@"useruniqueid"];
     
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -217,22 +219,34 @@
     if([status isEqualToString:@"failed"])
     {
         //        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:responseString  preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+                LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+
         return;
     }
-    SBJsonParser *json = [[SBJsonParser alloc] init];
-    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
+//    SBJsonParser *json = [[SBJsonParser alloc] init];
+//    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
     
     if([status isEqualToString:@"passed"])
     {
-        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:@"Password reset successfully"  preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:@"Your password has been changed"  preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
             LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
             [self.navigationController pushViewController:loginVC animated:YES];
             
             [self dismissViewControllerAnimated:YES completion:nil];
+            
+//            dashboardViewController *dashVC = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
+//            [dashVC logoutFunction];
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
        
