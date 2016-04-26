@@ -110,9 +110,9 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponseFor
 		
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
-		    		ForgotPasswordActivity.this, "other", "users/forgetpassword",
+		    		ForgotPasswordActivity.this, "other", "users/forgetpassword/app",
 		    		nameValuePairs, user, "", true, "Please wait...");
-			Log.e("users/forgetpassword", nameValuePairs.toString());
+			Log.e("users/forgetpassword/app", nameValuePairs.toString());
 			mWebPageTask.delegate = (AsyncResponseForARA) ForgotPasswordActivity.this;
 			mWebPageTask.execute();
 		} else {
@@ -122,7 +122,9 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponseFor
 	@Override
 	public void processFinish(String output, String methodName) {
 		// TODO Auto-generated method stub
-		if(methodName.equals("users/forgetpassword"))
+		// "Please check your email for further instructions."
+
+		if(methodName.equals("users/forgetpassword/app"))
 		{
 			if(output.contains("further instructions"))
 			{

@@ -422,7 +422,94 @@ static int statusCode;
 	
 	}
 	
+	public static String getResponseFromUrlGetHeaderReset(String functionName, List<NameValuePair> param,String user,String pass, Context context){
+		String responseString = "";
 	
+			
+			HttpParams httpParameters = new BasicHttpParams();
+			int timeoutConnection = 60000;
+			HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+			int timeoutSocket = 61000;
+			HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+			
+			
+			DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
+	         HttpGet request = new HttpGet(context.getResources().getString(R.string.baseUrl)+"/"+functionName);
+	      
+	      
+	        request.addHeader("userpassword",pass);
+	        request.addHeader("useruniqueid", user);
+		         
+	         
+	        
+	         request.setHeader("Accept", "application/json");
+	         request.setHeader("Content-type", "application/json");
+	         
+	            
+	         JSONObject JSONObjectData = new JSONObject();
+
+	         for (NameValuePair nameValuePair : param) {
+	             try {
+	                 JSONObjectData.put(nameValuePair.getName(), nameValuePair.getValue());
+	             } catch (JSONException e) {
+
+	             }
+	         }
+	     		try {
+					// execute(); executes a request using the default context.
+					// Then we assign the execution result to HttpResponse
+					HttpResponse httpResponse = httpClient.execute(request);
+				//	System.out.println("httpResponse					// getEntity() ; obtains the message entity of this response
+					// getContent() ; creates a new InputStream object of the entity.
+					// Now we need a readable source to read the byte stream that comes as the httpResponse
+					
+					statusCode = httpResponse.getStatusLine().getStatusCode();
+					
+					InputStream inputStream = httpResponse.getEntity().getContent();
+
+					// We have a byte stream. Next step is to convert it to a Character stream
+					InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+					// Then we have to wraps the existing reader (InputStreamReader) and buffer the input
+					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+					// InputStreamReader contains a buffer of bytes read from the source stream and converts these into characters as needed.
+					//The buffer size is 8K
+					//Therefore we need a mechanism to append the separately coming chunks in to one String element
+					// We have to use a class that can handle modifiable sequence of characters for use in creating String
+					StringBuilder stringBuilder = new StringBuilder();
+
+					String bufferedStrChunk = null;
+
+					// There may be so many buffered chunks. We have to go through each and every chunk of characters
+					//and assign a each chunk to bufferedStrChunk String variable
+					//and append that value one by one to the stringBuilder
+					while((bufferedStrChunk = bufferedReader.readLine()) != null){
+						stringBuilder.append(bufferedStrChunk);
+					}
+					responseString=stringBuilder.toString();
+					// Now we have the whole response as a String value.
+					//We return that value then the onPostExecute() can handle the content
+					System.out.println("Return of doInBackground :" +statusCode+" "+stringBuilder.toString());
+
+					// If the Username and Password match, it will return "working" as response
+					// If the Username or Password wrong, it will return "invalid" as response					
+					
+					return responseString;
+				
+
+				} catch (ClientProtocolException cpe) {
+					System.out.println("Exceptionrates caz of httpResponse :" + cpe);
+					cpe.printStackTrace();
+				} catch (IOException ioe) {
+					System.out.println("IOException httpResponse :" + ioe);
+					ioe.printStackTrace();
+				}
+
+				return null;
+	
+	
+	}
 
 	public static String createImageFile() {
 		try{
@@ -627,7 +714,7 @@ static int statusCode;
 					
 				
 				DefaultHttpClient httpClient = new DefaultHttpClient( httpParameters);
-				  HttpPost request = new HttpPost("https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+				  HttpPost request = new HttpPost("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
 				+getemail+"&matchCriteria=NONE");
 		     
 		    	 request.setHeader("Accept", "application/json");

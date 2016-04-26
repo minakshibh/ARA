@@ -63,12 +63,13 @@ public class ServerUtilities extends Activity {
 	     */
 	    public static boolean register(final Context context,String devicetype,final String regId,String udid) {
 	        Log.e(TAG, "registering device (regId = " + regId + ")");
+	        try{
 	        SharedPreferences spref = context.getSharedPreferences("ara_prefs", 1);
 	        tManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
 			udid = tManager.getDeviceId();
 			System.err.println("udid=" + udid);
 	        String serverUrl = Notification_Util.SERVER_URL;
-	     
+	      
 	        mContext = context;
 	       
 	        ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
@@ -81,7 +82,7 @@ public class ServerUtilities extends Activity {
 	      
 	        
 	        System.err.println(nameValuePair.toString());
-	        
+	      
 	        long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
 	        // Once GCM returns a registration id, we need to register it in the
 	        // demo server. As the server might be down, we will retry it a couple
@@ -129,7 +130,9 @@ public class ServerUtilities extends Activity {
 	        }
 	        String message = context.getString(R.string.server_register_error, MAX_ATTEMPTS);
 	        Notification_Util.displayMessage(context, message);
+	        }catch(Exception e){}
 	        return false;
+	       
 	    }
 
 	    /**

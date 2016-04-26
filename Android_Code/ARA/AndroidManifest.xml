@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ara.base"
     android:versionCode="1"
-    android:versionName="1.5.1" >
+    android:versionName="1.5.2" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -107,12 +107,51 @@
             android:screenOrientation="portrait"
              />   
             
-         <activity
+        <activity
             android:name="com.ara.login.ForgotPasswordActivity"
             android:windowSoftInputMode="adjustResize"  
              android:theme="@android:style/Theme.Holo.Light"
              android:screenOrientation="portrait"
-             />      
+             /> 
+             
+          <!-- http://example.com/someresource/ -->
+       <!--    <data  
+       http://AutoAvesReferralApp://?token="+*
+                android:host="example.com"
+                android:pathPrefix="/someresource/"
+                android:scheme="http" /> --> 
+   <activity android:name="com.ara.login.ResetPasswordActivity"
+       android:theme="@android:style/Theme.Holo.Light"
+       >
+    
+   <intent-filter>
+       
+     
+      <action android:name="android.intent.action.VIEW" />
+      <action android:name="android.intent.action.SEND" />
+    
+      <category android:name="android.intent.category.BROWSABLE" />
+      <category android:name="android.intent.category.DEFAULT" />
+       <category android:name="android.intent.category.LAUNCHER"/>
+       
+       <data android:scheme="autoaves"/>
+       <data android:scheme="http"/>
+       <data android:host="referralapp.com"/> 
+      
+     
+   
+         
+        
+       
+      
+    </intent-filter>
+    
+</activity>    
+
+   
+   
+   
+   
          
             <activity
             android:name="com.ara.login.RegisterActivity"
