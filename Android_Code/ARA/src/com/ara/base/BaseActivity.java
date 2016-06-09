@@ -89,8 +89,8 @@ public class BaseActivity extends Activity implements AsyncResponseForARA {
 		contentFrame = (RelativeLayout) findViewById(R.id.content_frame);
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerLayout.setScrimColor(getResources().getColor(
-				android.R.color.transparent));
+		mDrawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
+		
 		userImage=(ImageView)findViewById(R.id.userImage);
 		profile = (LinearLayout) findViewById(R.id.profile);
 		referrals = (LinearLayout) findViewById(R.id.referrals);

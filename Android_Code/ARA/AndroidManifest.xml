@@ -127,7 +127,7 @@
    <intent-filter>
        
      
-      <action android:name="android.intent.action.VIEW" />
+    <action android:name="android.intent.action.VIEW" />
       <action android:name="android.intent.action.SEND" />
     
       <category android:name="android.intent.category.BROWSABLE" />
@@ -140,7 +140,15 @@
       
      
    
-         
+     <!--  <action android:name="android.intent.action.VIEW" />
+      <action android:name="android.intent.action.SEND" />
+    
+      <category android:name="android.intent.category.BROWSABLE" />
+      <category android:name="android.intent.category.DEFAULT" />
+       <category android:name="android.intent.category.LAUNCHER"/>
+       
+       <data android:scheme="autoaves"/>
+            <data android:host="referralapp.com"/>  -->
         
        
       

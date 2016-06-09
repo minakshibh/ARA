@@ -30,7 +30,7 @@ import javax.net.ssl.SSLSocketFactory;
     public class NoSSLv3Factory extends SSLSocketFactory {
         private final SSLSocketFactory delegate;
 
-        public NoSSLv3Factory() {
+        public NoSSLv3Factory(SSLSocketFactory sslSocketFactory) {
             this.delegate = HttpsURLConnection.getDefaultSSLSocketFactory();
         }
 
