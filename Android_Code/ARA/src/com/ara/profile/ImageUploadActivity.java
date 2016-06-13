@@ -301,13 +301,19 @@ public class ImageUploadActivity extends Activity {
 		protected Void doInBackground(Void... arg0) {
 
 			try {
-
+				Log.e("", "url=" + ImageUploadActivity.this.getResources().getString(
+						R.string.baseUrl)
+						+ "/users/"
+						+ spref.getString("userid", "0")
+						+ "/profilepic");
+				
 				res = multipartRequest(
 						ImageUploadActivity.this.getResources().getString(
 								R.string.baseUrl)
 								+ "/users/"
 								+ spref.getString("userid", "0")
 								+ "/profilepic", imagePath);
+			
 				Log.e("", "url" + res);
 
 			} catch (Exception e) {

@@ -68,11 +68,13 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		super.onPreExecute();
 
 		if(displayProgress){
+			if(activity!=null){
 			pDialog = new ProgressDialog(activity);
 		//	pDialog.setTitle("");
 			pDialog.setMessage(message);
 			pDialog.setCancelable(false);
 			pDialog.show();
+			}
 		}
 	}
 
@@ -88,7 +90,12 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 			}
 		else if(method_type.equalsIgnoreCase("paypal"))
 		{
-			result = Util.getResponsePostPayPal(token,methodName, nameValuePairs, email,activity);
+			try {
+				result = Util.getResponsePostPayPal(token,methodName, null, email,activity);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			}
 		else if(method_type.equalsIgnoreCase("reset"))
@@ -111,8 +118,10 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		int resultcode=0;
 		try{
 		if(displayProgress)
-				
-		pDialog.dismiss();
+			
+			if(activity!=null){
+			pDialog.dismiss();
+			}
 		resultcode=Util.resultCode();
 		if(resultcode==200)
 		{
