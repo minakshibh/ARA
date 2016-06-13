@@ -19,6 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    if (IS_IPAD)
+    {
+        btnlogin.titleLabel.font = [btnlogin.titleLabel.font fontWithSize:20];
+        txtConfirmPassword.font = [txtConfirmPassword.font fontWithSize:20]
+        ;
+        txtNewPassword.font = [txtNewPassword.font fontWithSize:20]
+        ;
+        btnChangePassword.titleLabel.font = [btnChangePassword.titleLabel.font fontWithSize:24];
+        lblAlreadyhaveavalidpwd.font = [lblAlreadyhaveavalidpwd.font fontWithSize:20]
+        ;
+        btnlogin.titleLabel.font = [btnlogin.titleLabel.font fontWithSize:20];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,6 +40,11 @@
 }
 
 #pragma mark- Action Buttons
+- (IBAction)btnLogin:(id)sender{
+    LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
 - (IBAction)btnChangePassword:(id)sender {
 
     NSString* newPasswordStr = [txtNewPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -50,7 +68,7 @@
         [alert show];
         return;
     }
-    
+    [self.view endEditing:YES];
     [self resetPassword:confirmPasswordStr :self.guid];
     
    
@@ -222,8 +240,8 @@
         UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:responseString  preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-                LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                [self.navigationController pushViewController:loginVC animated:YES];
+//                LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+//                [self.navigationController pushViewController:loginVC animated:YES];
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }]];

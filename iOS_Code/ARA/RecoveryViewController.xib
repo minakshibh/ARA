@@ -11,14 +11,18 @@
         <mutableArray key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecoveryViewController">
             <connections>
                 <outlet property="btnChangePassword" destination="pov-NE-Ls6" id="Eic-eK-ojM"/>
+                <outlet property="btnlogin" destination="a1o-5w-uAP" id="s87-Tj-Ybw"/>
                 <outlet property="imageIconConfirmPassword" destination="xSK-ks-I2P" id="M0X-bf-Qrj"/>
                 <outlet property="imageIconNewPassword" destination="vgZ-r6-Fbh" id="Zqp-My-3Sc"/>
+                <outlet property="lblAlreadyhaveavalidpwd" destination="PD6-ov-26d" id="Lgl-T4-ShA"/>
                 <outlet property="lblBackgroundConfirmPassword" destination="4vc-no-Het" id="oqX-ej-RAX"/>
                 <outlet property="lblBackgroundNewPassword" destination="eEU-eI-Fnz" id="BSn-O7-Vt6"/>
                 <outlet property="lblPartitionConfirmPassword" destination="jAx-Rt-TXR" id="0Lc-03-r8F"/>
@@ -113,6 +117,25 @@
                             <rect key="frame" x="115" y="114" width="180" height="71"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="a1o-5w-uAP">
+                            <rect key="frame" x="267" y="422" width="77" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                            <state key="normal" title="Log In">
+                                <color key="titleColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnLogin:" destination="-1" eventType="touchUpInside" id="PHt-L2-hRh"/>
+                            </connections>
+                        </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have a valid password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PD6-ov-26d">
+                            <rect key="frame" x="66" y="421" width="196" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                 </scrollView>
             </subviews>

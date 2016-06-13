@@ -1109,7 +1109,7 @@ if ([response_status isEqualToString:@"passed"])
 //                   alert.tag =2;
                    [txtEmail resignFirstResponder];
                    [txtPassword resignFirstResponder];
-                     [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+                   [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
                    
                    firstname = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"FirstName"]];
                    lastname = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"LastName"]];
@@ -1133,8 +1133,6 @@ if ([response_status isEqualToString:@"passed"])
         if ([responseString rangeOfString:@"User Name not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
             imagecheckforuseridView.hidden =NO;
-            
-            
             CGRect frame = viewUserIdindicator.frame;
             frame.origin.x = txtUserId.frame.origin.x + txtUserId.frame.size.width+3;
             frame.origin.y = txtUserId.frame.origin.y +txtUserId.frame.size.height/4;

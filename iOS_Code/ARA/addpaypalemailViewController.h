@@ -19,6 +19,8 @@ int count_status;//
     IBOutlet UITextField *txtDropDown;
     IBOutlet UIView *emailview;
     IBOutlet UITextField *txtEmail;
+    IBOutlet UITextField *txtFirstName;
+    IBOutlet UITextField *txtLastName;
     IBOutlet UIScrollView *scrollView;
     CGPoint svos;
     int webservice;
@@ -33,6 +35,9 @@ int count_status;//
     NSArray *array_payment_id,*array_payment_name;
     IBOutlet UILabel *lblDropdown;
     IBOutlet UILabel *lblemailback;
+    IBOutlet UILabel *lblfirstnameback;
+     IBOutlet UILabel *lbllastnameback;
+    
     IBOutlet UIImageView *imageDropDownIcon;
 }
 - (IBAction)selectPaymentMode:(id)sender;
