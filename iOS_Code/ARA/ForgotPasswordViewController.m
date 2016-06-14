@@ -101,35 +101,35 @@
 }
 
 
-#pragma  mark TextField Delegate methods
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
-    
-    [textField resignFirstResponder];
-    scrollView.scrollEnabled = YES;
-    
-    return YES;
-}
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    svos = scrollView.contentOffset;
-    scrollView.scrollEnabled = YES;
-    if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
-    {
-        
-        
-        if( textField == txtEmail ) {
-            
-            CGPoint pt;
-            CGRect rc = [textField bounds];
-            rc = [textField convertRect:rc toView:scrollView];
-            pt = rc.origin;
-            pt.x = 0;
-            pt.y -=150;
-            [scrollView setContentOffset:pt animated:YES];
-        }
-    }
-}
+//#pragma  mark TextField Delegate methods
+//-(BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+//    
+//    [textField resignFirstResponder];
+//    scrollView.scrollEnabled = YES;
+//    
+//    return YES;
+//}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    svos = scrollView.contentOffset;
+//    scrollView.scrollEnabled = YES;
+//    if ([[ UIScreen mainScreen ] bounds ].size.width == 320 )
+//    {
+//        
+//        
+//        if( textField == txtEmail ) {
+//            
+//            CGPoint pt;
+//            CGRect rc = [textField bounds];
+//            rc = [textField convertRect:rc toView:scrollView];
+//            pt = rc.origin;
+//            pt.x = 0;
+//            pt.y -=150;
+//            [scrollView setContentOffset:pt animated:YES];
+//        }
+//    }
+//}
 
 #pragma mark - Connection Delegates
 
@@ -307,4 +307,56 @@
         NSLog(@"connection is NULL");
     }
 }
+#pragma  mark TextField Delegate methods
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+//    if (textField == txtEmail)
+//    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+        
+//    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (textField == txtEmail)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
+    }
+    return YES;
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    float newVerticalPosition = -keyboardSize.height + 100;
+    
+    [self moveFrameToVerticalPosition:newVerticalPosition forDuration:0.3f];
+}
+
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+//    CGFloat  kNavBarHeight =  self.navigationController.navigationBar.frame.size.height;
+    CGFloat  kNavBarHeight =  0;
+    [self moveFrameToVerticalPosition:kNavBarHeight forDuration:0.3f];
+}
+
+- (void)moveFrameToVerticalPosition:(float)position forDuration:(float)duration
+{
+    CGRect frame = self.view.frame;
+    frame.origin.y = position;
+    
+    [UIView animateWithDuration:duration animations:^{
+        self.view.frame = frame;
+    }];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
+}
+
 @end

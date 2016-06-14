@@ -37,8 +37,22 @@
     lblemailback.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
     [lblemailback setClipsToBounds:YES];
     
+    lblfirstnameback.layer.cornerRadius = 5.0;
+    lblfirstnameback.layer.borderWidth = 1.0;
+    lblfirstnameback.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
+    [lblfirstnameback setClipsToBounds:YES];
+
+    
+    lbllastnameback.layer.cornerRadius = 5.0;
+    lbllastnameback.layer.borderWidth = 1.0;
+    lbllastnameback.layer.borderColor = [UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f].CGColor;
+    [lbllastnameback setClipsToBounds:YES];
+
+    
     [txtEmail setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
     [txtDropDown setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtFirstName setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
+    [txtLastName setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
 //    int d = 0; // standard display
 //    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
 //        d = 1; // is retina display
@@ -139,6 +153,8 @@
 
 - (IBAction)btnSavechanges:(id)sender {
     NSString* emailstr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* firstNameStr = [txtFirstName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* lastNameStr = [txtLastName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if([_trigger isEqualToString:@"edit"])
     {
@@ -168,6 +184,18 @@
             }
         }
     }
+    if([txtFirstName isEmpty])
+    {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Please enter first name" okBtn:OkButtonTitle];
+        return;
+    }else if([txtLastName isEmpty])
+    {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Please enter last name" okBtn:OkButtonTitle];
+        return;
+    }
+    
+    
+    
     if([txtEmail isEmpty])
     {
         [HelperAlert alertWithOneBtn:AlertTitle description:@"Please enter an email address" okBtn:OkButtonTitle];
@@ -201,8 +229,7 @@
         value=@"false";
     }
     
-    [self verifyEmail:emailstr];
-    
+    [self verifyEmail:emailstr fName:firstNameStr lName:lastNameStr];
     
     
 }
@@ -318,28 +345,44 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:email];
 }
--(void)verifyEmail:email
+-(void)verifyEmail:email fName:(NSString*)fName lName:(NSString*)lName
 {
     [kappDelegate ShowIndicator];
     NSMutableURLRequest *request ;
     NSString*_postData ;
     webservice=1;
-
+/*
+ request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+ //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
+ //customer and upcoming
+ NSLog(@"data post >>> %@",_postData);
+ 
+ [request setHTTPMethod:@"POST"];
+ [request addValue:@"jb-us-seller_api1.paypal.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
+ [request addValue:@"WX4WTU3S8MY44S7F" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
+ [request addValue:@"AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
+ [request addValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
+ [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
+ [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
+ 
+ [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+ NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+ */ 
     //      NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]);
     //--sample email for testing @"parvbhaskar-facilitator@krishnais.com"
     
-    _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
-    
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+//    _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
+    _postData = [NSString stringWithFormat:@"emailAddress=%@&firstName=%@&lastName=%@&matchCriteria=%@",email,fName,lName,@"NAME"];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
     //customer and upcoming
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    [request addValue:@"jb-us-seller_api1.paypal.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
-    [request addValue:@"WX4WTU3S8MY44S7F" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
-    [request addValue:@"AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
-    [request addValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
+    [request addValue:@"Robert.Seeley_api1.autoaves.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
+    [request addValue:@"2VHLF2W76S5R9GXV" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
+    [request addValue:@"AnWfP5X33cXzORYDXlcKLQpjJFuNAtiPGLTpiIpibiF7xaYk5k6irjfB" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
+    [request addValue:@"APP-5MK05104KD7930901" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
     [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
     [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
     
@@ -547,6 +590,7 @@
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
     [kappDelegate HideIndicator];
     
     NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
@@ -689,7 +733,7 @@
                     [[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"user_logout"];
                     LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                     [self.navigationController pushViewController:LIvc animated:YES];
-                    NSLog(@"-----webservice------");
+//                    NSLog(@"-----webservice------");
                     count_status++;
                 }
                 

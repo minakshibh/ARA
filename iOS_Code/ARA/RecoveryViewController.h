@@ -18,10 +18,10 @@
     IBOutlet UITextField *txtConfirmPassword;
     IBOutlet UILabel *lblPartitionConfirmPassword;
     IBOutlet UIImageView *imageIconConfirmPassword;
-    
+    IBOutlet UIButton *btnlogin;
     IBOutlet UIButton *btnChangePassword;
     IBOutlet UIScrollView *scrollView;
-    
+    IBOutlet UILabel *lblAlreadyhaveavalidpwd;
     
     CGPoint svos;
     NSMutableData *webData;

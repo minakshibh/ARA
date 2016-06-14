@@ -368,12 +368,12 @@
 		D9B162F81C509FB7000A9DBB /* ScheduleServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B162F61C509FB7000A9DBB /* ScheduleServiceViewController.m */; };
 		D9B162F91C509FB7000A9DBB /* ScheduleServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B162F71C509FB7000A9DBB /* ScheduleServiceViewController.xib */; };
 		D9B163081C50FBB5000A9DBB /* Schedule_Service (1).jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */; };
-		D9B1630E1C510588000A9DBB /* calander-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630B1C510588000A9DBB /* calander-icon@3x.png */; };
-		D9B1630F1C510588000A9DBB /* setting-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630C1C510588000A9DBB /* setting-icon@3x.png */; };
-		D9B163101C510588000A9DBB /* time-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630D1C510588000A9DBB /* time-icon@3x.png */; };
-		D9B163141C510594000A9DBB /* calander-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163111C510594000A9DBB /* calander-icon@2x.png */; };
-		D9B163151C510594000A9DBB /* setting-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163121C510594000A9DBB /* setting-icon@2x.png */; };
-		D9B163161C510594000A9DBB /* time-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163131C510594000A9DBB /* time-icon@2x.png */; };
+		D9B1630E1C510588000A9DBB /* calander-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630B1C510588000A9DBB /* calander-icon@2x.png */; };
+		D9B1630F1C510588000A9DBB /* setting-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630C1C510588000A9DBB /* setting-icon@2x.png */; };
+		D9B163101C510588000A9DBB /* time-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630D1C510588000A9DBB /* time-icon@2x.png */; };
+		D9B163141C510594000A9DBB /* calander-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163111C510594000A9DBB /* calander-icon.png */; };
+		D9B163151C510594000A9DBB /* setting-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163121C510594000A9DBB /* setting-icon.png */; };
+		D9B163161C510594000A9DBB /* time-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B163131C510594000A9DBB /* time-icon.png */; };
 		D9B4A9D31C4E0318006364F0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B4A9D21C4E0318006364F0 /* libsqlite3.tbd */; };
 		D9B4A9DB1C4E24CD006364F0 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4A9DA1C4E24CD006364F0 /* DBManager.m */; };
 		D9BEB0981C48C9E200FED0C5 /* 1back_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = D9BEB0891C48C9E200FED0C5 /* 1back_btn.png */; };
@@ -918,12 +918,12 @@
 		D9B162F61C509FB7000A9DBB /* ScheduleServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleServiceViewController.m; sourceTree = "<group>"; };
 		D9B162F71C509FB7000A9DBB /* ScheduleServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleServiceViewController.xib; sourceTree = "<group>"; };
 		D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Schedule_Service (1).jpg"; sourceTree = "<group>"; };
-		D9B1630B1C510588000A9DBB /* calander-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calander-icon@3x.png"; sourceTree = "<group>"; };
-		D9B1630C1C510588000A9DBB /* setting-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-icon@3x.png"; sourceTree = "<group>"; };
-		D9B1630D1C510588000A9DBB /* time-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-icon@3x.png"; sourceTree = "<group>"; };
-		D9B163111C510594000A9DBB /* calander-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calander-icon@2x.png"; sourceTree = "<group>"; };
-		D9B163121C510594000A9DBB /* setting-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-icon@2x.png"; sourceTree = "<group>"; };
-		D9B163131C510594000A9DBB /* time-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-icon@2x.png"; sourceTree = "<group>"; };
+		D9B1630B1C510588000A9DBB /* calander-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calander-icon@2x.png"; sourceTree = "<group>"; };
+		D9B1630C1C510588000A9DBB /* setting-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-icon@2x.png"; sourceTree = "<group>"; };
+		D9B1630D1C510588000A9DBB /* time-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-icon@2x.png"; sourceTree = "<group>"; };
+		D9B163111C510594000A9DBB /* calander-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calander-icon.png"; sourceTree = "<group>"; };
+		D9B163121C510594000A9DBB /* setting-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-icon.png"; sourceTree = "<group>"; };
+		D9B163131C510594000A9DBB /* time-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-icon.png"; sourceTree = "<group>"; };
 		D9B4A9D21C4E0318006364F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D9B4A9D91C4E24CD006364F0 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		D9B4A9DA1C4E24CD006364F0 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
@@ -1943,9 +1943,9 @@
 		D9B163091C510563000A9DBB /* 320x568 */ = {
 			isa = PBXGroup;
 			children = (
-				D9B163111C510594000A9DBB /* calander-icon@2x.png */,
-				D9B163121C510594000A9DBB /* setting-icon@2x.png */,
-				D9B163131C510594000A9DBB /* time-icon@2x.png */,
+				D9B163111C510594000A9DBB /* calander-icon.png */,
+				D9B163121C510594000A9DBB /* setting-icon.png */,
+				D9B163131C510594000A9DBB /* time-icon.png */,
 			);
 			name = 320x568;
 			sourceTree = "<group>";
@@ -1953,9 +1953,9 @@
 		D9B1630A1C51056F000A9DBB /* 640x1136 */ = {
 			isa = PBXGroup;
 			children = (
-				D9B1630B1C510588000A9DBB /* calander-icon@3x.png */,
-				D9B1630C1C510588000A9DBB /* setting-icon@3x.png */,
-				D9B1630D1C510588000A9DBB /* time-icon@3x.png */,
+				D9B1630B1C510588000A9DBB /* calander-icon@2x.png */,
+				D9B1630C1C510588000A9DBB /* setting-icon@2x.png */,
+				D9B1630D1C510588000A9DBB /* time-icon@2x.png */,
 			);
 			name = 640x1136;
 			sourceTree = "<group>";
@@ -2172,7 +2172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D94D54B51B99BA9B00C03639 /* 123.jpg in Resources */,
-				D9B1630F1C510588000A9DBB /* setting-icon@3x.png in Resources */,
+				D9B1630F1C510588000A9DBB /* setting-icon@2x.png in Resources */,
 				D93569D81B81E74300777DD3 /* right-arrow.png in Resources */,
 				D96912901BE381FD001D6E5E /* AutoAves Splash_320@2x.jpg in Resources */,
 				D90A92551C450BB700A52A17 /* news_icon@3x.png in Resources */,
@@ -2282,7 +2282,7 @@
 				D9DDB9AA1B7CC788006F5A37 /* Roboto-Italic.ttf in Resources */,
 				D99981D11C895928005DCDDD /* refer-icon11@2x.png in Resources */,
 				D93D09B41B79BF710011E46B /* dashboardViewController.xib in Resources */,
-				D9B163141C510594000A9DBB /* calander-icon@2x.png in Resources */,
+				D9B163141C510594000A9DBB /* calander-icon.png in Resources */,
 				D94514C31C47CBBC00DA1573 /* 1back_btn@2x~ipad.png in Resources */,
 				D9527D4C1B9E9EE900630F9F /* 14.jpg in Resources */,
 				D90A925A1C450BB700A52A17 /* rewards_icon@3x.png in Resources */,
@@ -2354,17 +2354,17 @@
 				D9BEB0DB1C48CA6E00FED0C5 /* 1expand_icon@3x.png in Resources */,
 				D9356A141B81E82000777DD3 /* radio-unchecked@2x.png in Resources */,
 				D94514C51C47CBBC00DA1573 /* 1bell_unread@2x~ipad.png in Resources */,
-				D9B163151C510594000A9DBB /* setting-icon@2x.png in Resources */,
+				D9B163151C510594000A9DBB /* setting-icon.png in Resources */,
 				D96912831BE37280001D6E5E /* AppIcon_1024.png in Resources */,
 				D94D54AE1B995CAF00C03639 /* tick2@2x.png in Resources */,
 				D91B9E0F1B87415A008B0FEB /* login-with-facebook@2x.png in Resources */,
 				D9527D531B9E9EE900630F9F /* 8.jpg in Resources */,
-				D9B163101C510588000A9DBB /* time-icon@3x.png in Resources */,
+				D9B163101C510588000A9DBB /* time-icon@2x.png in Resources */,
 				D959BCCA1CC79FE200D3D6F2 /* RecoveryViewController.xib in Resources */,
 				D96F54861C08615C005C3265 /* AboutAppViewController.xib in Resources */,
 				D9154F091C33F33300FE0E6E /* step1_disabled.png in Resources */,
 				D969128F1BE381FD001D6E5E /* AutoAves Splash_600.jpg in Resources */,
-				D9B1630E1C510588000A9DBB /* calander-icon@3x.png in Resources */,
+				D9B1630E1C510588000A9DBB /* calander-icon@2x.png in Resources */,
 				D988A5581CA107FF00AC1EE1 /* 58x58.png in Resources */,
 				D94514D01C47CBBC00DA1573 /* 1services_icon@2x~ipad.png in Resources */,
 				D9BEB0D71C48CA6E00FED0C5 /* 1bell_read@3x.png in Resources */,
@@ -2443,7 +2443,7 @@
 				D93569CF1B81E74300777DD3 /* menu-icon.png in Resources */,
 				D93569D31B81E74300777DD3 /* phone-icon.png in Resources */,
 				D9BEB0BC1C48CA2800FED0C5 /* 1expand_icon@2x.png in Resources */,
-				D9B163161C510594000A9DBB /* time-icon@2x.png in Resources */,
+				D9B163161C510594000A9DBB /* time-icon.png in Resources */,
 				D94D54AC1B995CA100C03639 /* tick2.png in Resources */,
 				D93569CE1B81E74300777DD3 /* logout.png in Resources */,
 				D9356A161B81E82000777DD3 /* right-arrow@2x.png in Resources */,
@@ -2766,7 +2766,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krishnais.autoaves2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "59fd405b-56cb-4a69-8f71-2587406dcd4d";
+				PROVISIONING_PROFILE = "dfa69db1-6911-40d2-825f-607ceed1da44";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2795,7 +2795,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krishnais.autoaves2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b361fec9-02cd-4995-8cb2-0e3490142ee3";
+				PROVISIONING_PROFILE = "f43c42d9-f472-4111-af8c-11a5819327fd";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

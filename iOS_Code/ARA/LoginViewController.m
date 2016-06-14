@@ -80,6 +80,7 @@
     scrollView.scrollEnabled = YES;
     scrollView.delegate = self;
     scrollView.contentSize = CGSizeMake(200, 450);
+    
     scrollView.backgroundColor=[UIColor clearColor];
     
     
@@ -740,7 +741,7 @@
 - (void)keyboardWillHide:(NSNotification *)notification
 {
 //    CGFloat  kNavBarHeight =  self.navigationController.navigationBar.frame.size.height;
-    CGFloat  kNavBarHeight =  self.navigationController.navigationBar.frame.size.height;
+    CGFloat  kNavBarHeight =  0;
     [self moveFrameToVerticalPosition:kNavBarHeight forDuration:0.3f];
 }
 
