@@ -122,6 +122,108 @@
             </RelativeLayout>
         </LinearLayout>
 
+        
+
+        
+        
+        
+        
+        
+        <LinearLayout
+            android:id="@+id/firstNameLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/blue_rounded_btn"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="5dp"
+                    android:src="@drawable/user_icon" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/light_blue" />
+
+            <EditText
+                android:id="@+id/userFirstName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:background="@color/transparent"
+                android:hint="Enter First Name"
+                android:capitalize="words"
+                android:inputType="textVisiblePassword" 
+                android:paddingLeft="@dimen/text_margin_left"
+                android:singleLine="true"
+              	android:textColorHint="@color/light_blue"
+                android:textColor="@color/blue_header"
+                android:textSize="@dimen/default_text_size" >
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/lastNameLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/blue_rounded_btn"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="5dp"
+                    android:src="@drawable/user_icon" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/light_blue" />
+
+            <EditText
+                android:id="@+id/userLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:background="@color/transparent"
+                android:hint="Enter Last Name"
+              
+                android:capitalize="words"
+                 android:inputType="textVisiblePassword" 
+                android:paddingLeft="@dimen/text_margin_left"
+                android:singleLine="true"
+              	android:textColorHint="@color/light_blue"
+                android:textColor="@color/blue_header"
+                android:textSize="@dimen/default_text_size" >
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+        
         <LinearLayout
             android:id="@+id/emailLayout"
             android:layout_width="fill_parent"
@@ -167,7 +269,11 @@
                 <requestFocus />
             </EditText>
         </LinearLayout>
-
+        
+        
+        
+        
+        
         <LinearLayout
             android:id="@+id/lay_isDefault"
             android:layout_width="fill_parent"

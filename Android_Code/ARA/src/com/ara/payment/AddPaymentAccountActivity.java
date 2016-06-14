@@ -63,8 +63,8 @@ import com.facebook.Request;
 import com.facebook.Response;
 
 public class AddPaymentAccountActivity extends Activity implements AsyncResponseForARA {
-	private LinearLayout emailLayout;
-	private EditText emailId;
+	private LinearLayout emailLayout,firstNameLayout,lastNameLayout;
+	private EditText emailId,userFirstName,userLastName;
 	private Spinner paymentModeSpinner;
 	private ArrayList<PaymentMode> paymentModeList=new ArrayList<PaymentMode>();
 	private String paymentModeId = "-1", trigger;
@@ -94,6 +94,10 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 		 paymentMode =new PaymentMode();
 		spref = getSharedPreferences("ara_prefs", MODE_PRIVATE);
 		emailLayout = (LinearLayout) findViewById(R.id.emailLayout);
+		firstNameLayout=(LinearLayout)findViewById(R.id.firstNameLayout);
+		lastNameLayout=(LinearLayout)findViewById(R.id.lastNameLayout);
+		userFirstName=(EditText)findViewById(R.id.userFirstName);
+		userLastName=(EditText)findViewById(R.id.userLastName);
 		emailId =(EditText) findViewById(R.id.emailId);
 		paymentModeSpinner = (Spinner) findViewById(R.id.account_spinner);
 		save = (Button)findViewById(R.id.save);
@@ -121,6 +125,8 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 		if(trigger!=null){
 			paymentAccount = (Payment) getIntent().getParcelableExtra("PaymentAccount");
 			emailId.setText(paymentAccount.getPaypalEmail());
+			userFirstName.setText(paymentAccount.getUserFirstName());
+			userLastName.setText(paymentAccount.getUserLastName());
 			save.setText("Update Payment Account");
 		}else{
 			trigger = "";
@@ -206,7 +212,14 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 				{
 				if(trigger.equals("") && accountAlreadyExists()){
 					emailId.setError("Payment account already exists.");
-				}else if(emailId.getText().toString().equals("")){
+				}
+				else if(userFirstName.getText().toString().equals("")){
+					userFirstName.setError("Please specify First name");
+				}
+				else if(userLastName.getText().toString().equals("")){
+					userLastName.setError("Please specify Last name");
+				}
+				else if(emailId.getText().toString().equals("")){
 					emailId.setError("Please specify Paypal email");
 				}
 				else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(
@@ -218,6 +231,8 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 				}else
 					{
 						emailId.setError(null);	
+						userFirstName.setError(null);	
+						userLastName.setError(null);	
 						//addPaymentAccountAPI();
 						Util.hideKeyboard(AddPaymentAccountActivity.this);
 						paypalIDCheck();
@@ -269,9 +284,10 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			nameValuePairs.add(new BasicNameValuePair("IsDefault", setDefault.toString()));
 			nameValuePairs.add(new BasicNameValuePair("PaymentModeID", paymentModeId));
 			nameValuePairs.add(new BasicNameValuePair("PaypalEmail", emailId.getText().toString().trim()));
-			
+			nameValuePairs.add(new BasicNameValuePair("FirstName", userFirstName.getText().toString().trim()));
+			nameValuePairs.add(new BasicNameValuePair("LastName", userLastName.getText().toString().trim()));
 
-			Log.e("payment", nameValuePairs.toString());
+			Log.e("paymentaccountinfo", nameValuePairs.toString());
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
 					AddPaymentAccountActivity.this, "post", "paymentaccountinfo", nameValuePairs,
 					true, "Please wait...",true);
@@ -287,9 +303,9 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 		
 		if (Util.isNetworkAvailable(AddPaymentAccountActivity.this)) {
 			
-						
+			//"emailAddress=%@&firstName=%@&lastName=%@&matchCriteria=%@",email,@"Robert",@"Seeley",@"NAME"];			
 			AsyncTaskForARA mWebPageTask = new AsyncTaskForARA(
-			AddPaymentAccountActivity.this, "paypal", "GetVerifiedStatus", emailId.getText().toString().trim(),true, "Please wait...");
+			AddPaymentAccountActivity.this, "paypal", "GetVerifiedStatus", userFirstName.getText().toString().trim(),userLastName.getText().toString().trim(),emailId.getText().toString().trim(),true, "Please wait...");
 			mWebPageTask.delegate = (AsyncResponseForARA) AddPaymentAccountActivity.this;
 			mWebPageTask.execute();
 		} else {

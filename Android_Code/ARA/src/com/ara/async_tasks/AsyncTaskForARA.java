@@ -27,7 +27,7 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 	public AsyncResponseForARA delegate = null;
 	private String result = "";	
 	private  ProgressDialog pDialog;
-	private String methodName, message,method_type,email;
+	private String methodName, message,method_type,email,firstName,lastName;
 	private ArrayList<NameValuePair> nameValuePairs;
 	private boolean displayProgress,token;
 	
@@ -53,10 +53,13 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		this.name = name;
 		this.pass=pass;
 	}
-	public AsyncTaskForARA(Activity activity, String method_type, String methodName, String email, boolean displayDialog, String message) {
+	public AsyncTaskForARA(Activity activity, String method_type, String methodName, String firstName, String lastName, 
+			String email, boolean displayDialog, String message) {
 		this.activity = activity;
 		this.method_type=method_type;
 		this.methodName = methodName;
+		this.firstName=firstName;
+		this.lastName=lastName;
 		this.email=email;
 		this.displayProgress = displayDialog;
 		this.message = message;
@@ -91,7 +94,7 @@ public class AsyncTaskForARA extends AsyncTask<String, Void, String> {
 		else if(method_type.equalsIgnoreCase("paypal"))
 		{
 			try {
-				result = Util.getResponsePostPayPal(token,methodName, null, email,activity);
+				result = Util.getResponsePostPayPal(firstName,lastName,methodName, null, email,activity);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
