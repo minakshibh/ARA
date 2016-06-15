@@ -12,9 +12,10 @@
 {
     IBOutlet UIImageView *imageViewPaypalIcon;
     
+    IBOutlet UILabel *lblName;
     IBOutlet UILabel *lblEmail;
     IBOutlet UIImageView *iamgeViewTick;
 }
--(void)setLabelText:(NSString*)image1 :(NSString*)email : (NSString*)image2;
+-(void)setLabelText:(NSString*)image1 :(NSString*)email : (NSString*)image2 : (NSString*)name;
 
 @end

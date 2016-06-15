@@ -17,13 +17,21 @@ int i=0;
     [super setSelected:selected animated:animated];
 }
 
--(void)setLabelText:(NSString*)image1 :(NSString*)email : (NSString*)image2
+-(void)setLabelText:(NSString*)image1 :(NSString*)email : (NSString*)image2 : (NSString*)name
 {
+    if ([name  isEqual: @" "] ) {
+         lblName.text  = email;
+    }else{
+        lblName.text  = name;
+        lblEmail.text = email;
+    }
+    
+    
     if([image1 isEqualToString:@"Paypal"])
     {
     imageViewPaypalIcon.image = [UIImage imageNamed:@"paypal-icon.png"];
     }
-    lblEmail.text = email;
+    
     
     if([image2 isEqualToString:@"1"])
     {
@@ -31,7 +39,7 @@ int i=0;
         i++;
     }
     imageViewPaypalIcon.contentMode=UIViewContentModeScaleAspectFit;
-
+    
     iamgeViewTick.contentMode=UIViewContentModeScaleAspectFit;
 
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )

@@ -134,6 +134,17 @@
         {
             btnCheckbox.userInteractionEnabled = NO;
         }
+        
+        NSString *fnameStr = [NSString stringWithFormat:@"%@",_obj.FirstName];
+        NSString *lnameStr = [NSString stringWithFormat:@"%@",_obj.LastName];
+        
+        if (![fnameStr   isEqual: @"(null)"]) {
+            txtFirstName.text = fnameStr;
+        }
+        if (![lnameStr  isEqual: @"(null)"]) {
+            txtLastName.text = lnameStr;
+        }
+        
         txtEmail.text = _obj.PaypalEmail;
         emailview.hidden = NO;
         [selectPaymentMode setTitle:@"" forState:UIControlStateNormal];
@@ -411,6 +422,12 @@
 }
 -(void)editwebservice
 {
+    NSString* emailstr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* firstNameStr = [txtFirstName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* lastNameStr = [txtLastName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    
+    
     [kappDelegate ShowIndicator];
     webservice=2;
     NSMutableURLRequest *request ;
@@ -418,11 +435,11 @@
     NSString * userid =  [[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"];
     if([_trigger isEqualToString:@"edit"])
     {
-    _postData = [NSString stringWithFormat:@"PaymentAccountInfoId=%@&UserId=%@&IsDefault=%@&PaymentModeID=%@&PaypalEmail=%@",_obj.PaymentAccountInfoId,userid,value,_obj.PaymentModeID,txtEmail.text];
+    _postData = [NSString stringWithFormat:@"PaymentAccountInfoId=%@&UserId=%@&IsDefault=%@&PaymentModeID=%@&PaypalEmail=%@&FirstName=%@&LastName=%@",_obj.PaymentAccountInfoId,userid,value,_obj.PaymentModeID,emailstr,firstNameStr,lastNameStr];
     }
     if([_trigger isEqualToString:@"add"])
     {
-         _postData = [NSString stringWithFormat:@"UserId=%@&IsDefault=%@&PaymentModeID=%@&PaypalEmail=%@",userid,value,selected_id,txtEmail.text];
+         _postData = [NSString stringWithFormat:@"UserId=%@&IsDefault=%@&PaymentModeID=%@&PaypalEmail=%@&FirstName=%@&LastName=%@",userid,value,selected_id,emailstr,firstNameStr,lastNameStr];
     }
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/paymentaccountinfo",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     

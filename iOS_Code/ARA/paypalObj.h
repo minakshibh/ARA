@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface paypalObj : NSObject
-@property (strong, nonatomic) NSString *CreatedDate,*IsDefault,*PaymentAccountInfoId,*PaymentModeID,*PaymentModeName,*PaypalEmail,*UserId;
+@property (strong, nonatomic) NSString *CreatedDate,*IsDefault,*PaymentAccountInfoId,*PaymentModeID,*PaymentModeName,*PaypalEmail,*UserId,*FirstName,*LastName;
 @end

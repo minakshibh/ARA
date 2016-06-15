@@ -91,7 +91,7 @@
     {
         return 70;
     }
-    return 50;
+    return 60;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -177,10 +177,25 @@
         cell = [nib objectAtIndex:0];
     }
    
+    
     obj = [[paypalObj alloc]init];
     obj = [paypalListArray objectAtIndex:indexPath.row];
+    NSLog(@"%@",obj.FirstName);
+    NSLog(@"%@",obj.LastName);
     
-    [cell setLabelText:obj.PaymentModeName :obj.PaypalEmail :obj.IsDefault];
+    NSString *fnameStr = [NSString stringWithFormat:@"%@",obj.FirstName];
+    NSString *lnameStr = [NSString stringWithFormat:@"%@",obj.LastName];
+    
+    if ([fnameStr  isEqual: @"(null)"]) {
+        fnameStr = @"";
+    }
+    if ([lnameStr  isEqual: @"(null)"]) {
+        lnameStr = @"";
+    }
+    
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@",fnameStr,lnameStr];
+    
+    [cell setLabelText:obj.PaymentModeName :obj.PaypalEmail :obj.IsDefault :fullName];
 
     
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -492,6 +507,10 @@
                 obj.CreatedDate = CreatedDate;
                 NSString *IsDefault = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"IsDefault"] objectAtIndex:i]];
                 obj.IsDefault = IsDefault;
+                NSString *FirstName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"FirstName"] objectAtIndex:i]];
+                obj.FirstName = FirstName;
+                NSString *LastName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"LastName"] objectAtIndex:i]];
+                obj.LastName = LastName;
                 NSString *PaymentAccountInfoId = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PaymentAccountInfoId"] objectAtIndex:i]];
                 obj.PaymentAccountInfoId = PaymentAccountInfoId;
                 NSString *PaymentModeID = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PaymentModeID"] objectAtIndex:i]];
