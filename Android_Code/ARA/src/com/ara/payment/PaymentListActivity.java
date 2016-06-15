@@ -142,7 +142,7 @@ private View.OnClickListener listener = new View.OnClickListener() {
 
 	public class PaymentListAdapter extends BaseSwipeAdapter {
 		private Context context;
-		private TextView paypalEmail, editAccount, deleteAccount;
+		private TextView paypalEmail, editAccount, deleteAccount,name;
 		private ImageView isDefault;
 
 		public PaymentListAdapter(Context ctx) {
@@ -192,12 +192,14 @@ private View.OnClickListener listener = new View.OnClickListener() {
 		@Override
 		public void fillValues(final int position, View convertView) {
 			// TODO Auto-generated method stub
+			name= (TextView) convertView.findViewById(R.id.name);
 			paypalEmail = (TextView) convertView.findViewById(R.id.paypalEmail);
 			isDefault = (ImageView) convertView.findViewById(R.id.defaultIcon);
 			
 			editAccount = (TextView) convertView.findViewById(R.id.editAccount);
 			deleteAccount = (TextView) convertView.findViewById(R.id.deleteAccount);
 			
+			name.setText(paymentList.get(position).getUserFirstName()+ " "+paymentList.get(position).getUserLastName());
 			paypalEmail.setText(paymentList.get(position).getPaypalEmail());
 			if(paymentList.get(position).getIsDefault().equalsIgnoreCase("true"))
 				isDefault.setImageResource(R.drawable.tick);

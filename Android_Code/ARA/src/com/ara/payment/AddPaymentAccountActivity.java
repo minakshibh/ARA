@@ -360,7 +360,7 @@ public class AddPaymentAccountActivity extends Activity implements AsyncResponse
 			}
 			else
 			{
-				Toast.makeText(AddPaymentAccountActivity.this, "This email is not a verified Paypal email.", Toast.LENGTH_LONG).show();
+				Toast.makeText(AddPaymentAccountActivity.this, "Enter specific data is not match with Paypal verified email.", Toast.LENGTH_LONG).show();
 				}
 			
 		}
