@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Payment implements Parcelable {
 	
-	private String paymentAccountInfoId, userID, paymentModeId, paypalEmail, isDefault, paymentMode;
+	private String paymentAccountInfoId, userID, paymentModeId, paypalEmail, isDefault, paymentMode,userFirstName,userLastName;
 
 	 public Payment(Parcel source) {
 		 paymentAccountInfoId = source.readString();
@@ -14,6 +14,8 @@ public class Payment implements Parcelable {
 		 paypalEmail = source.readString();
 		 isDefault = source.readString();
 		 paymentMode = source.readString();
+		 userFirstName=source.readString();
+		 userLastName=source.readString();
 	}
 	 
 	public Payment() {
@@ -72,6 +74,14 @@ public class Payment implements Parcelable {
 	
 	
 	
+	public static Parcelable.Creator<Payment> getCreator() {
+		return CREATOR;
+	}
+
+
+
+
+
 	public static final Parcelable.Creator<Payment> CREATOR
 	  = new Parcelable.Creator<Payment>() 
 	{
@@ -100,6 +110,24 @@ public class Payment implements Parcelable {
 		dest.writeString(paypalEmail);
 		dest.writeString(isDefault);
 		dest.writeString(paymentMode);
+		dest.writeString(userFirstName);
+		dest.writeString(userLastName);
+	}
+
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+
+	public String getUserLastName() {
+		return userLastName;
+	}
+
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
 	}
 	
 }

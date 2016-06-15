@@ -665,12 +665,13 @@ static int statusCode=0;
     //  2VHLF2W76S5R9GXV
     // AnWfP5X33cXzORYDXlcKLQpjJFuNAtiPGLTpiIpibiF7xaYk5k6irjfB
 	//APP-5MK05104KD7930901	
-	/* public static String getResponsePostPayPal(Boolean token,String functionName, HashMap<String, String> param, String email,Context context) throws JSONException{
+	 public static String getResponsePostPayPal(String firstName,String lastname,String functionName, HashMap<String, String> param, String email,Context context) throws JSONException{
 		 System.setProperty ("jsse.enableSNIExtension", "false");
 
-	 String requestString = "https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
-	 +email+"&matchCriteria=NONE";
-
+		// "emailAddress=%@&firstName=%@&lastName=%@&matchCriteria=%@",email,@"Robert",@"Seeley",@"NAME"];
+		 String requestString = "https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
+		 +email+"&firstName="+firstName+"&lastName="+lastname+"&matchCriteria=NAME";
+		
         requestString += getGetDataString(null);
         Log.e("url", requestString);
         String response = "";
@@ -715,10 +716,10 @@ static int statusCode=0;
 		        }
 
 		        return response;
-		    }*/
+		    }
 		
 		
-		// sand box with get ssl class method
+		
 	
 	  private static String getGetDataString(HashMap<String, String> params) {
 
@@ -744,7 +745,9 @@ static int statusCode=0;
 	        }
 	        return result.toString();
 	    }
-	 public static String getResponsePostPayPal(Boolean token,String functionName, HashMap<String, String> param, String email,Context context) throws JSONException{
+	  
+	// sand box with get ssl class method
+	/* public static String getResponsePostPayPal(Boolean token,String functionName, HashMap<String, String> param, String email,Context context) throws JSONException{
 		 System.setProperty ("jsse.enableSNIExtension", "false");
 
 	 String requestString = "https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
@@ -793,7 +796,7 @@ static int statusCode=0;
 		        }
 
 		        return response;
-		    }
+		    }*/
 		
 }
 		

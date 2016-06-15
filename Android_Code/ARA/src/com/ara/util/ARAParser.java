@@ -106,6 +106,8 @@ public class ARAParser {
 				paymentObject.setPaypalEmail(jsonObject.getString("PaypalEmail").toString());
 				paymentObject.setIsDefault(jsonObject.getString("IsDefault").toString());
 				paymentObject.setPaymentMode(jsonObject.getString("PaymentModeName").toString());
+				paymentObject.setUserFirstName(jsonObject.getString("FirstName").toString());
+				paymentObject.setUserLastName(jsonObject.getString("LastName").toString());
 				
 				paymentList.add(paymentObject);
 			}
