@@ -751,13 +751,13 @@ public class SubmitReferralActivity extends Activity implements
 					}
 				}
 				mea_spinner.setSelection(gettingStatePosition);
-				/*MEA mea_Model = new MEA("Any Member Experience Advisor (Sales)","221","testkrishna@gmail.com");
-				onlyTwo_Mea.add(mea_Model);*/
-				String saleId="221";
+//				{"Email":"robertseeley@autoaves.com","ID":12,"Name":"Any Member Experience Advisor (Sales)"}
+				//	onlyTwo_Mea.add(mea_Model);
+				String saleName="Any Member Experience Advisor (Sales)";
 				int i = 0;
 				for (MEA mea : arrayList_Mea) {
-				String id = mea.getId();
-				 if(saleId.equals(id))
+				String name = mea.getName();
+				 if(saleName.equalsIgnoreCase(name))
 				 {
 					onlyTwo_Mea.add(arrayList_Mea.get(i));
 					}
