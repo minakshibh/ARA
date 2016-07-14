@@ -630,7 +630,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_toRightOf="@+id/purchase_chkBox"
-                    android:text="Purchased Vehicle from AAI before?"
+                    android:text="Purchased Vehicle from AutoAves before?"
                     android:textColor="@color/white" />
             </RelativeLayout>
 			<ImageView

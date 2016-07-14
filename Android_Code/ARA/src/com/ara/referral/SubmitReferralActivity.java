@@ -34,14 +34,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.RelativeLayout.LayoutParams;
-
 import com.ara.async_tasks.AsyncResponseForARA;
 import com.ara.async_tasks.AsyncTaskForARA;
 import com.ara.model.MEA;
 import com.ara.model.User;
 import com.ara.util.ARAParser;
 import com.ara.util.Util;
-import com.ara.base.BaseActivity;
 import com.ara.base.R;
 import com.ara.board.DashBoardActivity;
 
@@ -789,7 +787,7 @@ public class SubmitReferralActivity extends Activity implements
 			//{
 				AlertDialog.Builder alert = new AlertDialog.Builder(
 						SubmitReferralActivity.this);
-				alert.setMessage("Your referral has been submitted.");// You can track the same by referral id "/+ output);
+				alert.setMessage("Your referral has been submitted successfully.");// You can track the same by referral id "/+ output);
 				alert.setPositiveButton("ok",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface arg0, int arg1) {
 
