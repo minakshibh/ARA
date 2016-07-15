@@ -842,7 +842,7 @@ alert.setPositiveButton("Yes i am",new DialogInterface.OnClickListener() {
 			if (output.contains("UserId")) {
 
 				AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
-				alert.setMessage("You are sucessfully registered with us.");
+				alert.setMessage("You are successfully registered with us.");
 				alert.setPositiveButton("ok",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface arg0, int arg1) {
