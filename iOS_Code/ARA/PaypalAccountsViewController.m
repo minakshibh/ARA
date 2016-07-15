@@ -619,6 +619,10 @@
                 obj.PaymentModeID=PaymentModeID;
                 NSString *PaymentModeName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PaymentModeName"] objectAtIndex:i]];
                 obj.PaymentModeName=PaymentModeName;
+                NSString *FirstName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"FirstName"] objectAtIndex:i]];
+                obj.FirstName = FirstName;
+                NSString *LastName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"LastName"] objectAtIndex:i]];
+                obj.LastName = LastName;
                 NSString *PaypalEmail = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PaypalEmail"] objectAtIndex:i]];
                 obj.PaypalEmail=PaypalEmail;
                 NSString *UserId = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"UserId"] objectAtIndex:i]];
