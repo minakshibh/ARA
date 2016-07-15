@@ -418,7 +418,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:gravity="start|center_vertical"
-                        android:text="Purchase vehicle from\nAAI Before?"
+                        android:text="Purchase vehicle from\nAutoAves Before?"
                         android:textSize="@dimen/textview_myprofile" />
 
                     <ImageView
@@ -477,7 +477,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                   <TextView
-                    android:id="@+id/textView_emptyline6"
+                    android:id="@+id/textView_emptyline63"
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:background="@color/light_gray" />
