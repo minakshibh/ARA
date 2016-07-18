@@ -90,7 +90,10 @@
     [numberToolbar sizeToFit];
     txtPhoneNo.inputAccessoryView = numberToolbar;
     
-    
+    if (IS_IPHONE_5){
+        
+     btnCheckBox.titleLabel.font = [btnCheckBox.titleLabel.font fontWithSize:10];
+    }
     if (IS_IPAD)
     {
         lblEnteremailaddress.font = [lblEnteremailaddress.font fontWithSize:14];
@@ -711,10 +714,10 @@
                     }
                 }
                 if (check_for_meaEmail !=true) {
-                    [HelperAlert  alertWithOneBtn:AlertTitle description:@"This email is not registered with AAI - MEA account." okBtn:OkButtonTitle];
+                    [HelperAlert  alertWithOneBtn:AlertTitle description:@"This email is not registered with AutoAves - MEA account." okBtn:OkButtonTitle];
 
                     
-                    lblemailerror.text = @"Email not register with AAI - MEA account";
+                    lblemailerror.text = @"Email not register with AutoAves - MEA account";
                     imagecheckforemailView.image=nil;
                     return;
                     
@@ -1277,12 +1280,12 @@ if(tableView == tableViewPreviousCustomer)
              }
             if (check_for_meaEmail !=true) {
                 
-                [HelperAlert alertWithOneBtn:AlertTitle description:@"This email is not registered with AAI - MEA account." okBtn:OkButtonTitle];
+                [HelperAlert alertWithOneBtn:AlertTitle description:@"This email is not registered with AutoAves - MEA account." okBtn:OkButtonTitle];
                 
                
                 
                 
-                lblemailerror.text = @"Email not register with AAI - MEA account";
+                lblemailerror.text = @"Email not register with AutoAves - MEA account";
                 imagecheckforemailView.image=nil;
 
                 
