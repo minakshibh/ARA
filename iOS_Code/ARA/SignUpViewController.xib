@@ -290,7 +290,7 @@
                                     <rect key="frame" x="0.0" y="60" width="332" height="29"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <state key="normal" title="  Purchased Vehicle from  AutoAves before?" image="checkbox-unchecked.png">
+                                    <state key="normal" title="  Purchased Vehicle from AutoAves before?" image="checkbox-unchecked.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
