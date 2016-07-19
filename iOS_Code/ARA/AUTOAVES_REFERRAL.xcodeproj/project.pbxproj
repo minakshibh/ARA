@@ -82,7 +82,6 @@
 		D92D413D1B7B41EC00AB588F /* referralListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92D413B1B7B41EC00AB588F /* referralListViewController.xib */; };
 		D92D41471B7B579100AB588F /* ReferralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D41451B7B579100AB588F /* ReferralTableViewCell.m */; };
 		D92D41481B7B579100AB588F /* ReferralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92D41461B7B579100AB588F /* ReferralTableViewCell.xib */; };
-		D92D414A1B7B5D5E00AB588F /* Referral_List.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D92D41491B7B5D5E00AB588F /* Referral_List.jpg */; };
 		D92D414E1B7B726100AB588F /* referralDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D414C1B7B726100AB588F /* referralDetailViewController.m */; };
 		D92D414F1B7B726100AB588F /* referralDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92D414D1B7B726100AB588F /* referralDetailViewController.xib */; };
 		D92EC4181B83009800E8EB8D /* PaypalAccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92EC4161B83009800E8EB8D /* PaypalAccountsViewController.m */; };
@@ -367,7 +366,6 @@
 		D9AF3CC21B8EE5BD00F98881 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF3CB91B8EE5BD00F98881 /* AFURLSessionManager.m */; };
 		D9B162F81C509FB7000A9DBB /* ScheduleServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B162F61C509FB7000A9DBB /* ScheduleServiceViewController.m */; };
 		D9B162F91C509FB7000A9DBB /* ScheduleServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B162F71C509FB7000A9DBB /* ScheduleServiceViewController.xib */; };
-		D9B163081C50FBB5000A9DBB /* Schedule_Service (1).jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */; };
 		D9B1630E1C510588000A9DBB /* calander-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630B1C510588000A9DBB /* calander-icon@2x.png */; };
 		D9B1630F1C510588000A9DBB /* setting-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630C1C510588000A9DBB /* setting-icon@2x.png */; };
 		D9B163101C510588000A9DBB /* time-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B1630D1C510588000A9DBB /* time-icon@2x.png */; };
@@ -558,7 +556,6 @@
 		D92D41441B7B579100AB588F /* ReferralTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralTableViewCell.h; sourceTree = "<group>"; };
 		D92D41451B7B579100AB588F /* ReferralTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralTableViewCell.m; sourceTree = "<group>"; };
 		D92D41461B7B579100AB588F /* ReferralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReferralTableViewCell.xib; sourceTree = "<group>"; };
-		D92D41491B7B5D5E00AB588F /* Referral_List.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Referral_List.jpg; sourceTree = "<group>"; };
 		D92D414B1B7B726100AB588F /* referralDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = referralDetailViewController.h; sourceTree = "<group>"; };
 		D92D414C1B7B726100AB588F /* referralDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = referralDetailViewController.m; sourceTree = "<group>"; };
 		D92D414D1B7B726100AB588F /* referralDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = referralDetailViewController.xib; sourceTree = "<group>"; };
@@ -917,7 +914,6 @@
 		D9B162F51C509FB7000A9DBB /* ScheduleServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleServiceViewController.h; sourceTree = "<group>"; };
 		D9B162F61C509FB7000A9DBB /* ScheduleServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleServiceViewController.m; sourceTree = "<group>"; };
 		D9B162F71C509FB7000A9DBB /* ScheduleServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleServiceViewController.xib; sourceTree = "<group>"; };
-		D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Schedule_Service (1).jpg"; sourceTree = "<group>"; };
 		D9B1630B1C510588000A9DBB /* calander-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calander-icon@2x.png"; sourceTree = "<group>"; };
 		D9B1630C1C510588000A9DBB /* setting-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-icon@2x.png"; sourceTree = "<group>"; };
 		D9B1630D1C510588000A9DBB /* time-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-icon@2x.png"; sourceTree = "<group>"; };
@@ -1154,11 +1150,9 @@
 		D92D412B1B7B1F6200AB588F /* Referrals Process */ = {
 			isa = PBXGroup;
 			children = (
-				D9B163071C50FBB5000A9DBB /* Schedule_Service (1).jpg */,
 				D9F3B02D1C1E79C800828219 /* PopupTableViewCell.h */,
 				D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */,
 				D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */,
-				D92D41491B7B5D5E00AB588F /* Referral_List.jpg */,
 				D92D41361B7B34F200AB588F /* ReferralObj.h */,
 				D92D41371B7B34F200AB588F /* ReferralObj.m */,
 				D92D412C1B7B1F9800AB588F /* SubmitReferralViewController.h */,
@@ -2209,7 +2203,6 @@
 				D988A55F1CA107FF00AC1EE1 /* 144x144.png in Resources */,
 				D9DDB9AF1B7CC788006F5A37 /* Roboto-Regular.ttf in Resources */,
 				D9A435571C352EBC00FC3406 /* step1@2x.png in Resources */,
-				D92D414A1B7B5D5E00AB588F /* Referral_List.jpg in Resources */,
 				D988A5561CA107FF00AC1EE1 /* 40x40.png in Resources */,
 				D988A55B1CA107FF00AC1EE1 /* 80x80.png in Resources */,
 				D93569DD1B81E74300777DD3 /* submit-referral.png in Resources */,
@@ -2266,7 +2259,6 @@
 				D94514C41C47CBBC00DA1573 /* 1bell_read@2x~ipad.png in Resources */,
 				D9A435531C352EB100FC3406 /* step1.png in Resources */,
 				D959D18E1B7D9D670073C2D9 /* myBadgesViewController.xib in Resources */,
-				D9B163081C50FBB5000A9DBB /* Schedule_Service (1).jpg in Resources */,
 				D90A923B1C450B9100A52A17 /* referrals_icon.png in Resources */,
 				D9356A031B81E82000777DD3 /* comments-icon@2x.png in Resources */,
 				D9DDB9B21B7CC788006F5A37 /* RobotoCondensed-Bold.ttf in Resources */,
@@ -2757,7 +2749,7 @@
 				);
 				GCC_PREFIX_HEADER = "AUTOAVES_REFERRAL/ARA-Prefix.pch";
 				INFOPLIST_FILE = AUTOAVES_REFERRAL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2786,7 +2778,7 @@
 				);
 				GCC_PREFIX_HEADER = "AUTOAVES_REFERRAL/ARA-Prefix.pch";
 				INFOPLIST_FILE = AUTOAVES_REFERRAL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

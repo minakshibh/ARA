@@ -585,6 +585,10 @@
                 obj.IsDefault = IsDefault;
                 NSString *PaymentAccountInfoId = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PaymentAccountInfoId"] objectAtIndex:i]];
                 obj.PaymentAccountInfoId = PaymentAccountInfoId;
+                NSString *FirstName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"FirstName"] objectAtIndex:i]];
+                obj.FirstName = FirstName;
+                NSString *LastName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"LastName"] objectAtIndex:i]];
+                obj.LastName = LastName;
                 NSString *PaymentModeID = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PaymentModeID"] objectAtIndex:i]];
                 obj.PaymentModeID=PaymentModeID;
                 NSString *PaymentModeName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PaymentModeName"] objectAtIndex:i]];

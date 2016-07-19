@@ -114,7 +114,8 @@
     }
     
     [self getMEA];
-    
+ 
+    if (!IS_IPAD){
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
     numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
@@ -122,7 +123,7 @@
                             [[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
     [numberToolbar sizeToFit];
     txtPhoneno.inputAccessoryView = numberToolbar;
-    
+    }
     
 //    int d = 0; // standard display
 //    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
@@ -1474,7 +1475,7 @@
                // NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted. You can track the same by referral id %@",responseString];
                   NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted successfully."];
                 
-                [HelperAlert alertWithOneBtn:@"Thanks!!" description:msg okBtn:OkButtonTitle withTag:3 forController:self];
+                [HelperAlert alertWithOneBtn:@"Thanks!" description:msg okBtn:OkButtonTitle withTag:3 forController:self];
 //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thanks!!"  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 //                
 //                alert.tag=3;
