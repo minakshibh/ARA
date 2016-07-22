@@ -363,45 +363,45 @@
     NSString*_postData ;
     webservice=1;
 // /*
-    //--sample email for testing @"parvbhaskar-facilitator@krishnais.com"
-     _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
-
- request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
- //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
- //customer and upcoming
- NSLog(@"data post >>> %@",_postData);
- 
- [request setHTTPMethod:@"POST"];
- [request addValue:@"jb-us-seller_api1.paypal.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
- [request addValue:@"WX4WTU3S8MY44S7F" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
- [request addValue:@"AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
- [request addValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
- [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
- [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
- 
- [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
- NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-//   */
-//    //      NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]);
+//    //--sample email for testing @"parvbhaskar-facilitator@krishnais.com"
+//     _postData = [NSString stringWithFormat:@"emailAddress=%@&matchCriteria=%@",email,@"NONE"];
 //
-//    
-//    _postData = [NSString stringWithFormat:@"emailAddress=%@&firstName=%@&lastName=%@&matchCriteria=%@",email,fName,lName,@"NAME"];
-//    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-//    //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
-//    //customer and upcoming
-//    NSLog(@"data post >>> %@",_postData);
-//    
-//    [request setHTTPMethod:@"POST"];
-//    [request addValue:@"Robert.Seeley_api1.autoaves.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
-//    [request addValue:@"2VHLF2W76S5R9GXV" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
-//    [request addValue:@"AnWfP5X33cXzORYDXlcKLQpjJFuNAtiPGLTpiIpibiF7xaYk5k6irjfB" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
-//    [request addValue:@"APP-5MK05104KD7930901" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
-//    [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
-//    [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
-//    
-//    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
-//    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-//    
+// request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+// //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
+// //customer and upcoming
+// NSLog(@"data post >>> %@",_postData);
+// 
+// [request setHTTPMethod:@"POST"];
+// [request addValue:@"jb-us-seller_api1.paypal.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
+// [request addValue:@"WX4WTU3S8MY44S7F" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
+// [request addValue:@"AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
+// [request addValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
+// [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
+// [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
+// 
+// [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+// NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+//   */
+    //      NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"userid"]);
+
+    
+    _postData = [NSString stringWithFormat:@"emailAddress=%@&firstName=%@&lastName=%@&matchCriteria=%@",email,fName,lName,@"NAME"];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
+    //customer and upcoming
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"Robert.Seeley_api1.autoaves.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
+    [request addValue:@"2VHLF2W76S5R9GXV" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
+    [request addValue:@"AnWfP5X33cXzORYDXlcKLQpjJFuNAtiPGLTpiIpibiF7xaYk5k6irjfB" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
+    [request addValue:@"APP-5MK05104KD7930901" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
+    [request addValue:@"NV" forHTTPHeaderField:@"X-PAYPAL-REQUEST-DATA-FORMAT"];
+    [request addValue:@"JSON" forHTTPHeaderField:@"X-PAYPAL-RESPONSE-DATA-FORMAT"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
     if(connection)
     {
         if(webData==nil)
