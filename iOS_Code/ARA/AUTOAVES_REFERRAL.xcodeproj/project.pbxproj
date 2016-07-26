@@ -2127,7 +2127,7 @@
 				TargetAttributes = {
 					D94BEAAC1B7872EB008BCF5F = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = T5DY39F2BR;
+						DevelopmentTeam = TKF3QPSC95;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2739,8 +2739,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2756,9 +2756,9 @@
 					"$(PROJECT_DIR)/AUTOAVES_REFERRAL",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Krishnais.autoaves2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.autoaves.ARA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dfa69db1-6911-40d2-825f-607ceed1da44";
+				PROVISIONING_PROFILE = "ec9d9d29-ace3-4b6c-899b-ff65ab51ec78";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2768,8 +2768,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2785,9 +2785,9 @@
 					"$(PROJECT_DIR)/AUTOAVES_REFERRAL",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Krishnais.autoaves2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.autoaves.ARA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f43c42d9-f472-4111-af8c-11a5819327fd";
+				PROVISIONING_PROFILE = "ec9d9d29-ace3-4b6c-899b-ff65ab51ec78";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
