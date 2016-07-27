@@ -69,8 +69,6 @@
 		<string>timeburner_regular.ttf</string>
 		<string>Roboto-Light.ttf</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>splashScreenViewController</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

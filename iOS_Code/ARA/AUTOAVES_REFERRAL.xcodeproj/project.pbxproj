@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97CB234D1D487452008D963B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CB234C1D487452008D963B /* Default-568h@2x.png */; };
 		D90A92281C45091F00A52A17 /* news_icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D90A92211C45091F00A52A17 /* news_icon@2x~ipad.png */; };
 		D90A92291C45091F00A52A17 /* notification_count@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D90A92221C45091F00A52A17 /* notification_count@2x~ipad.png */; };
 		D90A922A1C45091F00A52A17 /* notification_icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D90A92231C45091F00A52A17 /* notification_icon@2x~ipad.png */; };
@@ -460,6 +461,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		97CB234C1D487452008D963B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D90A92211C45091F00A52A17 /* news_icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_icon@2x~ipad.png"; sourceTree = "<group>"; };
 		D90A92221C45091F00A52A17 /* notification_count@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification_count@2x~ipad.png"; sourceTree = "<group>"; };
 		D90A92231C45091F00A52A17 /* notification_icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification_icon@2x~ipad.png"; sourceTree = "<group>"; };
@@ -1081,6 +1083,7 @@
 		D90A924D1C450BA900A52A17 /* Iphone6+ */ = {
 			isa = PBXGroup;
 			children = (
+				97CB234C1D487452008D963B /* Default-568h@2x.png */,
 				D97AC4C21C8727D80073E32A /* map-background@3x.png */,
 				D97AC4C31C8727D80073E32A /* notification-icon@3x.png */,
 				D97AC4C41C8727D80073E32A /* refer-icon@3x.png */,
@@ -2483,6 +2486,7 @@
 				D9BEB0E21C48CA6E00FED0C5 /* 1rewards_icon@3x.png in Resources */,
 				D9BEB0E31C48CA6E00FED0C5 /* 1services_icon@3x.png in Resources */,
 				D9527D4E1B9E9EE900630F9F /* 3.jpg in Resources */,
+				97CB234D1D487452008D963B /* Default-568h@2x.png in Resources */,
 				D97AC4BF1C8727CF0073E32A /* map-background@2x.png in Resources */,
 				D9BEB0E01C48CA6E00FED0C5 /* 1profile_image@3x.png in Resources */,
 				D94EE3351C0F0A58000FE550 /* chained_ref@2x.png in Resources */,
@@ -2739,8 +2743,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Seeley (6XQR47KC24)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert Seeley (6XQR47KC24)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2758,7 +2762,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.autoaves.ARA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ec9d9d29-ace3-4b6c-899b-ff65ab51ec78";
+				PROVISIONING_PROFILE = "3a590757-b9d9-4767-b504-7e554b0c1ccf";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
