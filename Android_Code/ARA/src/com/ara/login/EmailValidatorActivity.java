@@ -163,6 +163,7 @@ public class EmailValidatorActivity  extends Activity implements AsyncResponseFo
 			intent.putExtra("firstname",getIntent().getStringExtra("firstname"));
 			intent.putExtra("lastname",getIntent().getStringExtra("lastname"));
 			intent.putExtra("username",getIntent().getStringExtra("username"));
+			intent.putExtra("email",email.getText().toString());
 		}
 		else{
 			intent.putExtra("newEmail",email.getText().toString());

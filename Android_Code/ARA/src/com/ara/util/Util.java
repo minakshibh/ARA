@@ -660,11 +660,15 @@ static int statusCode=0;
 		
 		
 	// live client get ssl class method
-	//client
+	
+	 //client
     // Robert.Seeley_api1.autoaves.com
     //  2VHLF2W76S5R9GXV
     // AnWfP5X33cXzORYDXlcKLQpjJFuNAtiPGLTpiIpibiF7xaYk5k6irjfB
 	//APP-5MK05104KD7930901	
+	
+	 
+	 
 	 public static String getResponsePostPayPal(String firstName,String lastname,String functionName, HashMap<String, String> param, String email,Context context) throws JSONException{
 		 System.setProperty ("jsse.enableSNIExtension", "false");
 
@@ -717,7 +721,7 @@ static int statusCode=0;
 
 		        return response;
 		    }
-		
+	
 		
 		
 	
@@ -747,8 +751,8 @@ static int statusCode=0;
 	    }
 	  
 	// sand box with get ssl class method
-	/* public static String getResponsePostPayPal(Boolean token,String functionName, HashMap<String, String> param, String email,Context context) throws JSONException{
-		 System.setProperty ("jsse.enableSNIExtension", "false");
+	/*  public static String getResponsePostPayPal(String firstName,String lastname,String functionName, HashMap<String, String> param, String email,Context context) throws JSONException{
+			 System.setProperty ("jsse.enableSNIExtension", "false");
 
 	 String requestString = "https://svcs.sandbox.paypal.com/AdaptiveAccounts/GetVerifiedStatus?emailAddress="
 	 +email+"&matchCriteria=NONE";

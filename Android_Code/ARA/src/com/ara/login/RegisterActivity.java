@@ -599,6 +599,7 @@ public class RegisterActivity extends Activity implements AsyncResponseForARA {
 		}
 	}
 	
+@SuppressWarnings("deprecation")
 private void signUP2()
 {
 	if (Util.isNetworkAvailable(RegisterActivity.this)) {
