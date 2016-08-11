@@ -23,7 +23,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
     
 //    for(NSString *fontfamilyname in [UIFont familyNames])
 //    {
