@@ -81,7 +81,7 @@
     NSMutableURLRequest *request ;
     NSString*_postData ;
     
-//    _postData = [NSString stringWithFormat:@"userpassword=%@&useruniqueid=%@",pwd,userID];
+
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/resetpassword",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
@@ -236,12 +236,11 @@
     NSError *error;
     if([status isEqualToString:@"failed"])
     {
-        //        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+       
         UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:responseString  preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-//                LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-//                [self.navigationController pushViewController:loginVC animated:YES];
+
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }]];
@@ -250,8 +249,7 @@
 
         return;
     }
-//    SBJsonParser *json = [[SBJsonParser alloc] init];
-//    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
+
     
     if([status isEqualToString:@"passed"])
     {
@@ -263,8 +261,7 @@
             
             [self dismissViewControllerAnimated:YES completion:nil];
             
-//            dashboardViewController *dashVC = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
-//            [dashVC logoutFunction];
+
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
        

@@ -17,7 +17,11 @@
 //#define Kwebservices @"http://63.255.19.72:801/api"   //--Client
 //#define Kwebservices @"http://69.164.149.164:814/api"  //--Client Production
 //#define Kwebservices @"http://69.164.149.164:801/api" //--Client Staging
-#define Kwebservices @"http://ara-web.autoaves.com:814/api" //new api latest 23 jun 16
+//#define Kwebservices @"http://ara-web.autoaves.com:814/api" //new api latest 23 jun 16
+//#define Kwebservices @"http://69.164.149.164:801/api"
+#define Kwebservices @"http://69.164.149.164:801/api"
+
+
 
 #ifdef __OBJC__
 #import "UITextfieldValidations.h"

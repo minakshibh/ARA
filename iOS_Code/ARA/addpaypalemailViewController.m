@@ -53,50 +53,7 @@
     [txtDropDown setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
     [txtFirstName setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
     [txtLastName setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
-//    int d = 0; // standard display
-//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-//        d = 1; // is retina display
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        d += 2;
-//    }
-//    
-//    if (d==0) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
-//    }
-//    if (d==1) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
-//    }
-//    if (d==2) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
-//    }
-//    if (d==3) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
-//    }
-/*
-    int c = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        c = 1; // is retina display
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        c += 2;
-    }
-    
-    if (c==0) {
-        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-    }
-    if (c==1) {
-        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-    }
-    if (c==2) {
-        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-    }
-    if (c==3) {
-        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-    }
-    */
+
     
     if (IS_IPAD)
     {
@@ -274,7 +231,7 @@
     webservice=3;
     NSMutableURLRequest *request ;
     NSString*_postData ;
-   // NSString * userid =  [[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"];
+  
     
         _postData = [NSString stringWithFormat:@""];
     
@@ -285,8 +242,6 @@
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"GET"];
-    //    [request addValue:email forHTTPHeaderField:@"username"];
-    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
     
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -387,8 +342,7 @@
     
     _postData = [NSString stringWithFormat:@"emailAddress=%@&firstName=%@&lastName=%@&matchCriteria=%@",email,fName,lName,@"NAME"];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus"]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    //NSString *responce= GetVerifiedStatus:@"dfdfdfdf" :@"":@"":@"";
-    //customer and upcoming
+   
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
@@ -450,9 +404,6 @@
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //    [request addValue:email forHTTPHeaderField:@"username"];
-    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
-    
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -620,12 +571,7 @@
     NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
     NSLog(@"responseString:%@",responseString);
     NSError *error;
-//    if([status isEqualToString:@"failed"])
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
+
     SBJsonParser *json = [[SBJsonParser alloc] init];
     NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
     
@@ -785,16 +731,6 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    [txtEmail resignFirstResponder];
-//    [txtFirstName resignFirstResponder];
-//    [txtLastName resignFirstResponder];
-//    //[txtMEA resignFirstResponder];
-//    [txtPassword resignFirstResponder];
-//    [txtPhoneNo resignFirstResponder];
-//    [txtPreviousCoustomer resignFirstResponder];
-//    [txtUserId resignFirstResponder];
-//    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
-//    scrollView.scrollEnabled = YES;
     
     return 35;
     
@@ -882,9 +818,7 @@
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSLog(@"%@",[user valueForKey:@"l_userid"]);
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
-    //    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    //    NSString *currSys = @"ios";
-    //    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
+   
     
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
@@ -892,8 +826,7 @@
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
-    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];

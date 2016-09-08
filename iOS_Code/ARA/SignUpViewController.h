@@ -11,6 +11,8 @@
 
 @interface SignUpViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
+     NSString *getValue;
+    IBOutlet UIImageView *mainImage;
     IBOutlet UIImageView *imagelogo;
     IBOutlet UILabel *lblEmail;
     IBOutlet UILabel *lblUserId;
@@ -84,4 +86,5 @@
 @property (strong,nonatomic) NSString *fromEmailView;
 @property (strong,nonatomic) NSArray *valuesArray;
 @property (strong,nonatomic) NSString *from_fb_button,*isClient;
+@property(strong,nonatomic)NSString *userReference;
 @end

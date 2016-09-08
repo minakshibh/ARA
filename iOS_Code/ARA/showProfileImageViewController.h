@@ -14,7 +14,7 @@
     IBOutlet UIImageView *imageViewProfile;
     IBOutlet UIButton *btnProfile;
     IBOutlet UILabel *lblheading;
-    NSData *imagedata;
+    NSData *imagedata;UIImage *img ;
     IBOutlet UIButton *btnCancel;
 }
 - (IBAction)btnCancel:(id)sender;

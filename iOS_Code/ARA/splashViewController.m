@@ -32,20 +32,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//
-//    NSDate *date1 = [NSDate date];
-//    NSDateFormatter* formatter1 = [[NSDateFormatter alloc] init] ;
-//    [formatter1 setDateFormat:@"yyyy-MM-dd"];
-//    NSString*todaysDate = [formatter1 stringFromDate:date1];
-//    NSUserDefaults * value = [NSUserDefaults standardUserDefaults];
-//    
-//    autoArchieve=[value valueForKey:@"autoArchieve"];
-//    keepHistry=[value valueForKey:@"keepArchieveHisty"];
-//    autoArchieveDate =[value valueForKey: @"autoArchivDate" ];
-//    emailid=[value valueForKey:@"Emailid"];
-//
-//
-//
     @try {
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         appDelegate.navigator.navigationBarHidden = YES;

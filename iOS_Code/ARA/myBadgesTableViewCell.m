@@ -18,7 +18,7 @@
 }
 - (IBAction)btnClick:(id)sender {
     
-//   [self.delegate cellWithButtonDidPressed:self];    
+    
   
     NSString* msg = [NSString stringWithFormat:@"You haven't earned this badge yet."];
     [HelperAlert alertWithOneBtn:AlertTitle description:msg okBtn:OkButtonTitle];
@@ -44,37 +44,14 @@
     }else{
     badagesDate.text = [NSString stringWithFormat:@"Earned on : %@",date];
     }
-//   badagesImage.image = [UIImage imageWithData:@""];
-   
-//    [badagesImage sd_setImageWithURL:[NSURL URLWithString:image] placeholderImage:                                [UIImage imageNamed:@"user-i.png"]];
+
     [badagesImage sd_setImageWithURL:[NSURL URLWithString:image]
                       placeholderImage:[UIImage imageNamed:@"user-i.png"]];
-    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        
-//        
-//                //imageProfile.contentMode=UIViewContentModeScaleAspectFit;
-//        
-//                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:image]];
-//        
-//        [badagesImage sd_setImageWithURL:[NSURL URLWithString:image]
-//                         placeholderImage:nil];
-//        
-//        
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    // Update the UI
-//                    badagesImage.image = [UIImage imageWithData:imageData];
-//        //
-//                   
-//                });
-//            });
     
     
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-//        lblheadingView.font=[lblheadingView.font fontWithSize:24];
-//        btnSort.titleLabel.font = [btnSort.titleLabel.font fontWithSize:24];
-//        imagedirectregerral.frame = CGRectMake(imagedirectregerral.frame.origin.x+20, imagedirectregerral.frame.origin.y, imagedirectregerral.frame.size.width, imagedirectregerral.frame.size.height);
+
         
          badagesName.font=[badagesName.font fontWithSize:24];
          badagesDate.font=[badagesDate.font fontWithSize:20];
@@ -87,9 +64,7 @@
         badagesDate.frame = CGRectMake(badagesDate.frame.origin.x-20, badagesDate.frame.origin.y, badagesDate.frame.size.width, badagesDate.frame.size.height);
         badagesNo.frame = CGRectMake(badagesNo.frame.origin.x-20, badagesNo.frame.origin.y, badagesNo.frame.size.width, badagesNo.frame.size.height);
         
-        //badagesImage.frame = CGRectMake(badagesImage.frame.origin.x, badagesImage.frame.origin.y, badagesImage.frame.size.width, badagesImage.frame.size.height+5);
-        
-        
+               
         if(IS_IPAD_PRO_1366)
         {
             badagesName.font=[badagesName.font fontWithSize:30];

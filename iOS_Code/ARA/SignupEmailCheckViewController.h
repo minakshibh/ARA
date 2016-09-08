@@ -14,5 +14,6 @@
     IBOutlet UILabel *lblEnteremailaddress;
     CGPoint svos;
     IBOutlet UIImageView *imageViewDisablestep2;
+    IBOutlet UIImageView * icon;
 }
 @end

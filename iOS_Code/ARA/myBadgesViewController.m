@@ -26,36 +26,8 @@
     [super viewDidLoad];
     [self getData:@"local"];
     
-//    btnallBadges.hidden = YES;
-//    [self getData:@"all"];
-//   // status = @"yes";
-    
-    
-    
     
     mybadges = @"no";
-    
-//    int d = 0; // standard display
-//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-//        d = 1; // is retina display
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        d += 2;
-//    }
-//    
-//    if (d==0) {
-//        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-//    }
-//    if (d==1) {
-//        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-//    }
-//    if (d==2) {
-//        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-//    }
-//    if (d==3) {
-//        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-//    }
     
     if (IS_IPAD)
     {
@@ -123,12 +95,7 @@
         
     }
     
-//    if (indexPath.row==0) {
-//        random = @"1";
-//    }else{
-//        random= @"2";
-//    }
-    
+
     
     if ([mybadges isEqualToString:@"no"]) {
         [cell setLabelText:[NSString stringWithFormat:@"%@",obj.BadgeName] :joinedStr :@"" :badgeUrl_str :random];
@@ -146,9 +113,6 @@
     
         obj = [badgesArray objectAtIndex:indexPath.row];
         NSString *random = [NSString stringWithFormat:@"%@",obj.IsBadgeEarned];
-    
-    
- //     NSString *badgeName = [NSString stringWithFormat:@"%@",obj.BadgeName];
         
         NSString *msg;
         if ([random isEqualToString:@"1"]) {
@@ -324,7 +288,7 @@
                     [tableView reloadData];
                     return;
                 }
-              //lblheading.text =[NSString stringWithFormat:@"ALL BADGES (%lu)",(unsigned long)userDetailDict.count];
+            
                lblheading.text =[NSString stringWithFormat:@"ALL BADGES"];
                 for (int i=0; i<userDetailDict.count; i++) {
                     badges *obj = [[badges alloc]init];
@@ -345,12 +309,10 @@
                     [badgesArray addObject:obj];
                     
                 }
-                                [tableView reloadData];
-//                [self getData:@"local"];
+                        [tableView reloadData];
             }else if(webservices==2)
             {
                 mybadges = @"yes";
-          //     lblheading.text =[NSString stringWithFormat:@"BADGES (%lu)",(unsigned long)userDetailDict.count];
                 lblheading.text =[NSString stringWithFormat:@"BADGES"];
                 
                 if(userDetailDict.count<1)
@@ -410,24 +372,6 @@
                     }
                 }
                 
-//                NSMutableArray *array1,*array2;
-//                array1 = [[NSMutableArray alloc]init];
-//                array2 = [[NSMutableArray alloc]init];
-//                for (int j=0; j<finalarray.count; j++) {
-//                    badges *obj = [[badges alloc]init];
-//
-//                    obj = [finalarray objectAtIndex:j];
-//                    if ([obj.IsBadgeEarned isEqualToString:@"1"]) {
-//                        array1 = [finalarray objectAtIndex:j];
-//                    }else {
-//                        array2 = [finalarray objectAtIndex:j];
-//                    }
-//                    
-//                }
-//                [finalarray removeAllObjects];
-//                [finalarray addObject:array1];
-//                 [finalarray addObject:array2];
-//                
 
                 NSArray *sortedArray = [finalarray sortedArrayUsingComparator:^NSComparisonResult(badges* p1, badges* p2){
                     

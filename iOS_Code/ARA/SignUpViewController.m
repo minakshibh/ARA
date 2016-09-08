@@ -19,11 +19,27 @@
 @end
 
 @implementation SignUpViewController
-
+@synthesize userReference;
 - (void)viewDidLoad {
     txtMEA.text = @" ";
     [super viewDidLoad];
     
+    mainImage.image=[UIImage imageNamed:@"step2.png"];
+    
+    lblEnteremailaddress.text=@"Enter email address";
+    
+    
+    
+    getValue   = [[NSUserDefaults standardUserDefaults]stringForKey:@"data"];
+    if ([getValue isEqualToString:@"1"])
+    {
+        //mainImage.image=[UIImage imageNamed:@"step_b_icon"];
+      
+        //lblEnteremailaddress.text=@"Enter Reference Data";
+       // txtEmail.placeholder=@"Enter Reference Data";
+        
+    }
+
     imagecheckforemailView.hidden = YES;
     imagecheckforuseridView.hidden = YES;
     
@@ -162,6 +178,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
+    
+    if ([userReference isEqualToString:@"True"]) {
+        
+        mainImage.image=[UIImage imageNamed:@"step_b_icon"];
+        
+        lblEnteremailaddress.text=@"Enter Reference Data";
+
+        [txtFirstName setEnabled:false];
+        [txtLastName setEnabled:false];
+        
+    }
     txtPreviousCoustomer.text = @"Customer";
     selected_previousid = [NSString stringWithFormat:@"2"];
     

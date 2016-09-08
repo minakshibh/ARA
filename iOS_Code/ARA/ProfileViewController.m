@@ -12,6 +12,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "ASIHTTPRequest.h"
 #import "showProfileImageViewController.h"
+#import "UIImageView+Webcache.h"
 //#import "UIImageView+WebCache.h"
 
 
@@ -22,14 +23,7 @@
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
-    
-    [NSTimer scheduledTimerWithTimeInterval:10
-                                     target:self
-                                   selector:@selector(targetMethod1:)
-                                   userInfo:nil
-                                    repeats:NO];
-    
-    
+   
     imageProfile.hidden = YES;
     [super viewDidLoad];
     activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -51,27 +45,6 @@
     [numberToolbar sizeToFit];
     txtPhoneNo.inputAccessoryView = numberToolbar;
     
-//    int d = 0; // standard display
-//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-//        d = 1; // is retina display
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        d += 2;
-//    }
-//    
-//    if (d==0) {
-//        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-//    }
-//    if (d==1) {
-//        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-//    }
-//    if (d==2) {
-//        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-//    }
-//    if (d==3) {
-//        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-//    }
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Change Password"];
     // making text property to underline text-
@@ -158,63 +131,42 @@
         }
     }
 }
--(void)targetMethod1:(NSTimer *)timer
-{
-    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
-    imageProfile.image = [UIImage imageWithData:im];
-    
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
+    UIImage *img = [[SDImageCache sharedImageCache]imageFromMemoryCacheForKey:@"l_image"];
+    if (img != nil){
+        imageProfile.image = img;
+    }else{
+    
     NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
-    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
-    imageProfile.image = [UIImage imageWithData:im];
+//    [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]placeholderImage:[UIImage imageNamed:@"user-i.png"]options:SDWebImageRefreshCached];
+    [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]placeholderImage:[UIImage imageNamed:@"user-i.png"]options:SDWebImageRefreshCached];
+    }
+
     
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        
-//
-//        //imageProfile.contentMode=UIViewContentModeScaleAspectFit;
-//
-//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagestr]];
-//                 [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]
-//    placeholderImage:[UIImage imageNamed:@"user-i.png"]];
-//        
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            // Update the UI
-//            imageProfile.image = [UIImage imageWithData:imageData];
-////
-//           
-//        });
-//    });
-//
-//    [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]
-//                    placeholderImage:[UIImage imageNamed:@"user-i.png"]];
-    
-    //---make profile image round
-   
     
     lblRole.hidden = NO;
     
     [self.view bringSubviewToFront:lblRole];
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    
     //--assigning image and label values
     lblEmail.text = [NSString stringWithFormat:@"%@",[user valueForKey:@"l_email"]];
-    //NSData *image_data= [[NSUserDefaults standardUserDefaults]valueForKey:@"user_image"];
+    
+   
     lblUserID.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_userName"]];
-    // imageProfile.image = [UIImage imageWithData:image_data];
+   
     NSString *first = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"]];
     lblName.text = first;
     NSString *last = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
     lblLastname.text = last;
-//    NSString* namestr =[NSString stringWithFormat:@"%@ %@",first,last];
-//    lblName.text = namestr;
     
     
     lblPhoneno.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
     NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-   // lblPhoneno.text=@"5454564564564564564";
+   
     NSMutableString *mutstr = [[NSMutableString alloc]init];
     for (int i = 0; i<phone.length; i++)
     {
@@ -286,12 +238,12 @@
     lastnamelbl.textColor = [UIColor blackColor];
     
     
-    // txtEmail.text = lblEmail.text;
+    
     txtLastname.hidden = NO;
     txtPhoneNo.text = lblPhoneno.text;
     txtName.text = lblName.text;
     txtLastname.text = lblLastname.text;
-   // txtRole.text = lblRole.text;
+  
     
     txtName.textColor = [UIColor blackColor];
     txtPhoneNo.textColor = [UIColor blackColor];
@@ -338,25 +290,6 @@
     NSString* lastname = [txtLastname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     UIAlertView *alert;
     NSString *msg;
-//    
-//    NSMutableString *fir_name,*Secon_nam;
-//    Secon_nam = [[NSMutableString alloc]init];
-//    NSArray *name = [namestr componentsSeparatedByString:@" "];
-//    
-//    if (name.count<2) {
-//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please enter your last name." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//        return;
-//    }else {
-//        fir_name = [NSMutableString stringWithFormat:@"%@",[name objectAtIndex:0]];
-//        for(int n = 1; n<name.count; n++){
-//            Secon_nam = [NSMutableString stringWithFormat:@"%@%@ ",Secon_nam,[name objectAtIndex:n]];
-//            NSLog(@"%@",Secon_nam);
-//    
-//        }
-//    }
-//    
     
     if([txtName isEmpty])
     {
@@ -483,7 +416,7 @@
         purchasedBefore = @"false";
 
     }
-    //NSString *purchasedBefore = [NSString stringWithFormat:@"%d",checkbox_Value];
+    
     SignUpViewController *obj = [[SignUpViewController alloc]init];
     
     
@@ -558,10 +491,7 @@
 {
     if(textField==txtPhoneNo)
     {
-//        if(string.length == 0)
-//        {
-//            return NO;
-//        }
+
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         if(newString.length==0)
         {   txtPhoneNo.text=@"";
@@ -630,7 +560,7 @@
 -(void)cancelNumberPad{
     [txtPhoneNo resignFirstResponder];
     NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-    // lblPhoneno.text=@"5454564564564564564";
+   
     NSMutableString *random = [[NSMutableString alloc]init];
     for (int i = 0; i<phone.length; i++)
     {
@@ -677,15 +607,7 @@
     avatarView.frame = frame;
     
     
-    
-    
-    //
-    //    CGRect frame = avatarView.frame;
-    //    frame.size.width = newSize;
-    //    frame.size.height = newSize;
-    //     frame.origin.x = frame.origin.x+45;
-    //    avatarView.frame = frame;
-    
+ 
 }
 -(void)targetMethod:(NSTimer *)timer
 {

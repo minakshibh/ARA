@@ -24,13 +24,45 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
+    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+            if (granted) {
+                //                picker.peoplePickerDelegate = self;
+                //
+                //                [self presentModalViewController:picker animated:YES];
+                //                [picker setPeoplePickerDelegate:self];
+                //                [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
+            } else {
+                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
+            }
+        });
+    }else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        // If the user user has earlier provided the access, then add the contact
+        //        picker.peoplePickerDelegate = self;
+        //
+        //        [self presentModalViewController:picker animated:YES];
+        //        [picker setPeoplePickerDelegate:self];
+        //        [picker setDisplayedProperties:[NSArray arrayWithObject:[NSNumber numberWithInt:kABPersonPhoneProperty]]];
+    }
+    else {
+        // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
+        NSString *msgStr = @"You've disabled access to contacts. To re-enable, please go to Settings and enable Contacts for ARA.";
+        //        [HelperAlert alertWithOneBtn:AlertTitle description:msgStr okBtn:OkButtonTitle];
+    }
 //    for(NSString *fontfamilyname in [UIFont familyNames])
 //    {
 //        NSLog(@"Family:'%@'",fontfamilyname);
 //    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TITLE"];
     
-
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"NETWORK_TITLE"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"APP_TITLE"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"REFERRAL_TITLE"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"myInvitationBtn"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"networkInvitationBtn"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"appInstallationBtn"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"networkReferralBtn"];
     @try {
    [Crittercism enableWithAppID:@"56723ec36c33dc0f00f11469"];
     
@@ -96,6 +128,8 @@
     }@finally {
         
     }
+    
+
 }
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     @try {

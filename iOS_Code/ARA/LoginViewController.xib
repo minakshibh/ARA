@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Bold.ttf">
             <string>Roboto-Bold</string>
         </mutableArray>
         <mutableArray key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
@@ -25,10 +29,16 @@
                 <outlet property="btnForgotPassword" destination="Ad8-6T-ZiX" id="cpy-Oc-dmR"/>
                 <outlet property="btnLogin" destination="FeD-jf-d5F" id="VNN-Zj-BWK"/>
                 <outlet property="btnSignUp" destination="Bpn-e4-A7P" id="bhi-to-0Ls"/>
+                <outlet property="btnsignUpWithReference" destination="Gnc-ij-Y1V" id="vnM-9g-KpQ"/>
+                <outlet property="iBtnSignup" destination="pIe-lY-JzI" id="ZE7-2B-5Kt"/>
                 <outlet property="imagelogo" destination="38G-lJ-iEy" id="gtV-x7-75n"/>
+                <outlet property="ipadbtnsignUpWithReference" destination="5dc-G2-bJo" id="keM-sy-dey"/>
+                <outlet property="ipadlblAlreadyHaveAnAccount" destination="LRV-BN-0Uj" id="ZEi-Fu-3nE"/>
+                <outlet property="ipadlblor" destination="Lve-8m-Szs" id="9bt-Zw-nJ8"/>
                 <outlet property="lblAlreadyHaveAnAccount" destination="hCv-VX-Je6" id="Gyy-Pr-xe4"/>
                 <outlet property="lblEmail" destination="iNZ-iS-XQj" id="2G9-aP-mGE"/>
                 <outlet property="lblPass" destination="5Bd-7k-tKn" id="Io5-Qf-Qm5"/>
+                <outlet property="lblor" destination="BeA-zW-46c" id="Ad8-TI-4Xq"/>
                 <outlet property="txtEmail" destination="Ulw-Vd-4Gs" id="6ks-EC-8A0"/>
                 <outlet property="txtPassword" destination="nGz-cW-re5" id="gXy-FE-Afh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -40,11 +50,12 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Nah-BJ-ZTn">
-                    <rect key="frame" x="39" y="502" width="336" height="45"/>
+                    <rect key="frame" x="39" y="510" width="336" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="  Log in with Facebook" image="DE4B527D-C508-4461-A6E2-D26259521A6E">
+                    <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="  Log in with Facebook" image="login-with-facebook.png">
                         <color key="titleColor" red="0.062745098040000002" green="0.42352941179999998" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -87,16 +98,35 @@
                     <rect key="frame" x="50" y="310" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bpn-e4-A7P">
-                    <rect key="frame" x="267" y="447" width="77" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BeA-zW-46c">
+                    <rect key="frame" x="156" y="481" width="28" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pIe-lY-JzI">
+                    <rect key="frame" x="41" y="481" width="108" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
-                    <state key="normal" title="Sign up">
+                    <state key="normal" title="  Sign up">
                         <color key="titleColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="btnSignUp:" destination="-1" eventType="touchUpInside" id="3VE-CH-f7c"/>
+                        <action selector="btnSignUp:" destination="-1" eventType="touchUpInside" id="B6v-Ab-uj0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gnc-ij-Y1V">
+                    <rect key="frame" x="177" y="481" width="198" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <state key="normal" title="Sign up with Reference">
+                        <color key="titleColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnSignUpwithReference:" destination="-1" eventType="touchUpInside" id="79e-eB-JGB"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YbZ-fY-JV6">
@@ -110,8 +140,8 @@
                     <rect key="frame" x="115" y="137" width="180" height="71"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hCv-VX-Je6">
-                    <rect key="frame" x="66" y="446" width="196" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hCv-VX-Je6">
+                    <rect key="frame" x="39" y="450" width="337" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -176,6 +206,44 @@
                         <action selector="btnLogin:" destination="-1" eventType="touchUpInside" id="DRH-yQ-BA5"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bpn-e4-A7P">
+                    <rect key="frame" x="188" y="450" width="65" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <state key="normal">
+                        <color key="titleColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnSignUp:" destination="-1" eventType="touchUpInside" id="3VE-CH-f7c"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lve-8m-Szs">
+                    <rect key="frame" x="231" y="450" width="45" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LRV-BN-0Uj">
+                    <rect key="frame" x="66" y="450" width="144" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5dc-G2-bJo">
+                    <rect key="frame" x="246" y="450" width="173" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <state key="normal">
+                        <color key="titleColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnSignUpwithReference:" destination="-1" eventType="touchUpInside" id="Hsp-Da-JcZ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.062745098039215685" green="0.42352941176470588" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -183,151 +251,10 @@
         </view>
     </objects>
     <resources>
-        <image name="DE4B527D-C508-4461-A6E2-D26259521A6E" width="37" height="37">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
-GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
-c1dOU0NvbG9ygAKADRIgwAAAgAOAC1h7MzcsIDM3fdIVChYYWk5TLm9iamVjdHOhF4AEgArSFQoaHaIb
-HIAFgAaACRAA0iAKISJfEBROU1RJRkZSZXByZXNlbnRhdGlvboAHgAhPER3STU0AKgAAFWz7+/v/////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-///////R1+f/rrnW/7G61v+xutb/sbrW/7G61v+xutb/sbrW/7G61v+xutb/sbrW/7G61v+xutb/sbrW
-/7G61v+xutb/sbrW/7G61v+xutb/sbrW/7G61v+xutb/sbrW/7G61v+xutb/rrnW/8/T5///////////
-///////////////////////////////////////Q1uf/N0yS/yc7h/8oPYj/KD2I/yg9iP8oPYj/KD2I
-/yg9iP8oPYj/KD2I/yg9iP8oPYj/KD2I/yg9iP8oPYj/KD2I/yg9iP8oPYj/KD2I/yg9iP8oPYj/KD2I
-/yg9iP8oPYj/KD2I/yc7h/81SJH/ydHj////////////////////////////////////////////rLbV
-/yU7hv8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/JjuG/6221f//////////
-/////////////////////////////////7G61/8oPYj/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y5Ci/8rP4n/KDyI/yg8iP8oPYj/Kj+J
-/y1Ci/8tQov/LUKL/yg8iP+vutb///////////////////////////////////////////+xutf/KD2I
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LkOL
-/yc9h/8jOIX/M0iO/z1Rlv89UZb/O06U/zVKkf8tQov/LUKL/y1Ci/8oPIj/r7rW////////////////
-////////////////////////////sbrX/yg9iP8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LkOM/yQ5hf9DV5n/q7XU/+nr9P/3+fv/9/n7//X2+v/l6vL/OE2S
-/yk+iP8tQov/KDyI/6+61v///////////////////////////////////////////7G61/8oPYj/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LkOM/yU5hf9TZaL/8PL3
-////////////////////////////9/n7/zpPk/8pPYj/LUKL/yg8iP+vutb/////////////////////
-//////////////////////+xutf/KD2I/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/yxAiv8uQov/2+Dt//////////////////////////////////v8/v86T5P/KT2I
-/y1Ci/8oPIj/r7rW////////////////////////////////////////////sbrX/yg9iP8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y5Di/8kOYX/YnOs////////////////
-///////x8vn/vcbd/7rE3P+1v9n/NkuR/yo/if8tQov/KDyI/6+61v//////////////////////////
-/////////////////7G61/8oPYj/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8uQ4z/IDWD/32Mu//////////////////w8vf/R1uc/yE2g/8lOob/JTuG/yxBi/8tQov/LUKL
-/yg8iP+vutb///////////////////////////////////////////+xutf/KD2I/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LkOM/yA1g/+Dkr7/////////////////yM7j
-/yA1g/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8oPIj/r7rW////////////////////////////////
-////////////sbrX/yg9iP8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LkOL
-/y9EjP8hNoP/g5K+/////////////////8fO4v8lOoX/LkOL/y5Di/8uQov/LUKL/y1Ci/8tQov/KDyI
-/6+61v///////////////////////////////////////////7G61/8oPYj/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8uQov/LECK/yI3hP8iOIX/Fip6/3yKuv/////////////////Dy+D/GS59
-/yE3hP8hN4T/JDmF/y1Ci/8tQov/LUKL/yg8iP+vutb/////////////////////////////////////
-//////+xutf/KD2I/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/Kj+J/zpOlP+OnMT/j53F
-/4eVv//ByN//////////////////5Ofx/4mXwv+PncT/j57F/4CPvf8sQov/LEGL/y1Ci/8oPIj/r7rW
-////////////////////////////////////////////sbrX/yg9iP8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/yc7iP9GW5z/////////////////////////////////////////////////////
-///////HzuL/JTqG/y1Ci/8tQov/KDyI/6+61v//////////////////////////////////////////
-/7G61/8oPYj/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8oPIj/RVmb//n6+///////////
-////////////////////////////////////////////prHR/yA1hP8uQ4v/LUKL/yg8iP+vutb/////
-//////////////////////////////////////+xutf/KD2I/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/KDyI/0ZanP//////////////////////////////////////////////////////////
-/5ikyv8gNYP/LkOL/y1Ci/8oPIj/r7rW////////////////////////////////////////////sbrX
-/yg9iP8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/yo+if89UpX/q7TS/6y21f+lsdD/0Nfn
-/////////////////+vt9f+nstH/q7XU/6+51v9db6n/JzuH/y1Ci/8tQov/KDyI/6+61v//////////
-/////////////////////////////////7G61/8oPYj/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8uQov/LECK/yM4hf8kOYX/Fyt6/3uLuv/////////////////Dy+D/Gi59/yM3hP8iN4T/KD2I
-/y5Di/8tQov/LUKL/yg8iP+vutb///////////////////////////////////////////+xutf/KD2I
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LkOM/yA1g/+Dkr7/////
-////////////x87i/yU6hf8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8oPIj/r7rW////////////////
-////////////////////////////sbrX/yg9iP8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/y5DjP8gNYP/g5K+/////////////////8fO4v8lOoX/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/KDyI/6+61v///////////////////////////////////////////7G61/8oPYj/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8uQ4z/IDWD/4OSvv//////////
-///////HzuL/JTqF/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/yg8iP+vutb/////////////////////
-//////////////////////+xutf/KD2I/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LkOM/yA1g/+Dkr7/////////////////x87i/yU6hf8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8oPIj/r7rW////////////////////////////////////////////sbrX/yg9iP8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y5DjP8gNYP/g5K+////////////////
-/8fO4v8lOoX/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/KDyI/6+61v//////////////////////////
-/////////////////7G61/8oPYj/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y1Ci/8uQ4z/IDWD/4OSvv/////////////////HzuL/JTqF/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/yg8iP+vutb///////////////////////////////////////////+xutf/KD2I/y1Ci/8tQov/LUKL
-/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LkOM/yA1g/+Dkr7/////////////////x87i
-/yU6hf8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8oPIj/r7rW////////////////////////////////
-////////////rbjV/yY8hv8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/LUKL
-/y5DjP8gNYP/g5K+/////////////////8fO4v8lOoX/LUKL/y1Ci/8tQov/LUKL/y1Ci/8tQov/JjuG
-/6y21f///////////////////////////////////////////8vS5f80So7/JzuH/yg8iP8oPIj/KDyI
-/yg8iP8oPIj/KDyI/yg8iP8oPIj/KDyI/yg8iP8pPYn/GzB+/3+OvP/////////////////EzeH/HzSA
-/yg8iP8oPIj/KDyI/yg8iP8oPIj/JzuH/zFFjf/GzeH/////////////////////////////////////
-////////////y9Lm/6641f+xutb/sbrW/7G61v+xutb/sbrW/7G61v+xutb/sbrW/7G61v+xutb/sbrX
-/6q00v/T2Oj/////////////////7O71/6y21P+xutb/sbrW/7G61v+xutb/sbrW/6641f/JzuX/////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////AA4BAAADAAAAAQAlAAABAQADAAAAAQAlAAABAgADAAAABAAAFhoBAwADAAAAAQABAAAB
-BgADAAAAAQACAAABEQAEAAAAAQAAAAgBEgADAAAAAQABAAABFQADAAAAAQAEAAABFgADAAAAAQAlAAAB
-FwAEAAAAAQAAFWQBHAADAAAAAQABAAABUgADAAAAAQABAAABUwADAAAABAAAFiKHcwAHAAAHqAAAFioA
-AAAAAAgACAAIAAgAAQABAAEAAQAAB6hhcHBsAiAAAG1udHJSR0IgWFlaIAfZAAIAGQALABoAC2Fjc3BB
-UFBMAAAAAGFwcGwAAAAAAAAAAAAAAAAAAAAAAAD21gABAAAAANMtYXBwbAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC2Rlc2MAAAEIAAAAb2RzY20AAAF4AAAFbGNwcnQA
-AAbkAAAAOHd0cHQAAAccAAAAFHJYWVoAAAcwAAAAFGdYWVoAAAdEAAAAFGJYWVoAAAdYAAAAFHJUUkMA
-AAdsAAAADmNoYWQAAAd8AAAALGJUUkMAAAdsAAAADmdUUkMAAAdsAAAADmRlc2MAAAAAAAAAFEdlbmVy
-aWMgUkdCIFByb2ZpbGUAAAAAAAAAAAAAABRHZW5lcmljIFJHQiBQcm9maWxlAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtbHVjAAAAAAAAAB4AAAAMc2tTSwAAACgA
-AAF4aHJIUgAAACgAAAGgY2FFUwAAACQAAAHIcHRCUgAAACYAAAHsdWtVQQAAACoAAAISZnJGVQAAACgA
-AAI8emhUVwAAABYAAAJkaXRJVAAAACgAAAJ6bmJOTwAAACYAAAKia29LUgAAABYAAALIY3NDWgAAACIA
-AALeaGVJTAAAAB4AAAMAZGVERQAAACwAAAMeaHVIVQAAACgAAANKc3ZTRQAAACYAAAKiemhDTgAAABYA
-AANyamFKUAAAABoAAAOIcm9STwAAACQAAAOiZWxHUgAAACIAAAPGcHRQTwAAACYAAAPobmxOTAAAACgA
-AAQOZXNFUwAAACYAAAPodGhUSAAAACQAAAQ2dHJUUgAAACIAAARaZmlGSQAAACgAAAR8cGxQTAAAACwA
-AASkcnVSVQAAACIAAATQYXJFRwAAACYAAATyZW5VUwAAACYAAAUYZGFESwAAAC4AAAU+AFYBYQBlAG8A
-YgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAaQENAGsAaQAgAFIARwBCACAA
-cAByAG8AZgBpAGwAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBuAOgAcgBpAGMAUABlAHIAZgBpAGwA
-IABSAEcAQgAgAEcAZQBuAOkAcgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsA
-IABSAEcAQgBQAHIAbwBmAGkAbAAgAGcA6QBuAOkAcgBpAHEAdQBlACAAUgBWAEKQGnUoACAAUgBHAEIA
-IIJyX2ljz4/wAFAAcgBvAGYAaQBsAG8AIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAbwBHAGUAbgBlAHIA
-aQBzAGsAIABSAEcAQgAtAHAAcgBvAGYAaQBsx3y8GAAgAFIARwBCACDVBLhc0wzHfABPAGIAZQBjAG4A
-/QAgAFIARwBCACAAcAByAG8AZgBpAGwF5AXoBdUF5AXZBdwAIABSAEcAQgAgBdsF3AXcBdkAQQBsAGwA
-ZwBlAG0AZQBpAG4AZQBzACAAUgBHAEIALQBQAHIAbwBmAGkAbADBAGwAdABhAGwA4QBuAG8AcwAgAFIA
-RwBCACAAcAByAG8AZgBpAGxmbpAaACAAUgBHAEIAIGPPj/Blh072TgCCLAAgAFIARwBCACAw1zDtMNUw
-oTCkMOsAUAByAG8AZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMDkwO1A70DuQO6A8wAIAPAA8ED
-vwPGA68DuwAgAFIARwBCAFAAZQByAGYAaQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBsAGcA
-ZQBtAGUAZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAgDhcO
-MQ5IDicORA4bAEcAZQBuAGUAbAAgAFIARwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBuACAA
-UgBHAEIALQBwAHIAbwBmAGkAaQBsAGkAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8AZgBpAGwA
-IABSAEcAQgQeBDEESQQ4BDkAIAQ/BEAEPgREBDgEOwRMACAAUgBHAEIGRQZEBkEAIAYqBjkGMQZKBkEA
-IABSAEcAQgAgBicGRAY5BicGRQBHAGUAbgBlAHIAaQBjACAAUgBHAEIAIABQAHIAbwBmAGkAbABlAEcA
-ZQBuAGUAcgBlAGwAIABSAEcAQgAtAGIAZQBzAGsAcgBpAHYAZQBsAHMAZXRleHQAAAAAQ29weXJpZ2h0
-IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9Y
-WVogAAAAAAAAdE0AAD3uAAAD0FhZWiAAAAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZj
-dXJ2AAAAAAAAAAEBzQAAc2YzMgAAAAAAAQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGzS
-JSYnKFokY2xhc3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMpKitfEBBOU0JpdG1hcElt
-YWdlUmVwWk5TSW1hZ2VSZXBYTlNPYmplY3TSJSYtLldOU0FycmF5oi0r0iUmMDFeTlNNdXRhYmxlQXJy
-YXmjMC0r0zM0CjU2N1dOU1doaXRlXE5TQ29sb3JTcGFjZUQwIDAAEAOADNIlJjk6V05TQ29sb3KiOSvS
-JSY8PVdOU0ltYWdlojwrXxAPTlNLZXllZEFyY2hpdmVy0UBBVHJvb3SAAQAIABEAGgAjAC0AMgA3AEYA
-TABXAF4AZQByAHkAgQCDAIUAigCMAI4AlwCcAKcAqQCrAK0AsgC1ALcAuQC7AL0AwgDZANsA3R6zHrge
-wx7MHt8e4x72HwEfCh8PHxcfGh8fHy4fMh85H0EfTh9TH1UfVx9cH2QfZx9sH3Qfdx+JH4wfkQAAAAAA
-AAIBAAAAAAAAAEIAAAAAAAAAAAAAAAAAAB+TA
-</mutableData>
-        </image>
         <image name="checkbox-unchecked.png" width="17" height="17"/>
         <image name="email-icon.png" width="12" height="12"/>
         <image name="inner-logo_iphone.png" width="140" height="51"/>
+        <image name="login-with-facebook.png" width="37" height="37"/>
         <image name="password-icon.png" width="12" height="12"/>
     </resources>
 </document>

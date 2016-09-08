@@ -65,12 +65,7 @@
         lblCommentPlaceholder.font = [lblCommentPlaceholder.font fontWithSize:20];
         
         
-//        btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
-//        btnImportContacts.titleLabel.font = [btnImportContacts.titleLabel.font fontWithSize:24];
-//        btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
-//        txtFirstname.font = [txtFirstname.font fontWithSize:20];
-//        txtLastname.font = [txtLastname.font fontWithSize:20];
-//        txtPhoneno.font = [txtPhoneno.font fontWithSize:20];
+
         viewPickerbackground.frame = CGRectMake(viewPickerbackground.frame.origin.x, viewPickerbackground.frame.origin.y+55, viewPickerbackground.frame.size.width, viewPickerbackground.frame.size.height);
     }
      [self getDataTypeOfService];
@@ -185,7 +180,7 @@
     
     
     NSString* str = [userDefault valueForKey:@"l_phoneNo"];
-//    NSArray *ar = [email componentsSeparatedByString:@"\n"];
+
     NSMutableString *mutStr = [[NSMutableString alloc]init];
     for (int i = 0; i<str.length; i++)
     {
@@ -246,22 +241,11 @@
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
-    //self.myLabel.text = [dateFormatter stringFromDate:[dueDatePickerView date]];
+   
     
     NSLog(@"Picked the date %@", [dateFormatter stringFromDate:[sender date]]);
     pickerSelectedDate = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[sender date]]];
     
-//    NSString *today1 =[dateFormatter stringFromDate:[NSDate date]];
-//    NSDate *today = (NSDate*)today1;
-//    
-//    //NSDate *today = [NSDate date]; // it will give you current date
-//    NSDate *dateChoosed = (NSDate*)pickerSelectedDate; // your date
-//    
-//    NSComparisonResult result;
-//    //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
-//    
-//    result = [today compare:dateChoosed]; // comparing two dates
-//    
     NSDateFormatter* dateFormatter1 = [[NSDateFormatter alloc] init];
     dateFormatter1.dateFormat = @"yyyy-MM-dd";
     NSDate *date1 = (NSDate*)[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[sender date]]];
@@ -277,17 +261,6 @@
     }
 
     
-//if(result==NSOrderedAscending){
-//        NSLog(@"today is less");
-//    pickerDateStatus = true;
-//        
-//    }else if(result==NSOrderedDescending){
-//        NSLog(@"newDate is less");
-//        pickerDateStatus = false;
-//    }else{
-//        NSLog(@"Both dates are same");
-//        pickerDateStatus = true;
-//    }
     
 }
 - (IBAction)btnDonePicker:(id)sender {
@@ -404,58 +377,7 @@
         }
     }
     
-//    if (![txtPhoneNo isEmpty]) {
-//        
-//        
-//        if (phoneStr.length<10 ) {
-//            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
-//            
-//            
-//            return;
-//        }
-//    }
-//    if (phoneStr.length>10 ) {
-//        if([[NSString stringWithFormat:@"%C",[phoneStr characterAtIndex:0]] isEqual:@"1"])
-//        {
-//            
-//        }else{
-//            
-//            msgstr = @"Please enter phone no. of atmost 10 digits";
-//            [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-//            
-//            return;
-//        }
-//    }
-//    if (![txtemailAddress emailValidation]==YES) {
-//        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
-//        
-//        
-//        [txtemailAddress becomeFirstResponder];
-//        return;
-//    }
 
-//    if([txtTypeOfService isEmpty])
-//    {
-//        msgstr = @"Please select a Service Type.";
-//        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-//        return;
-//    }else if([txtPrefferedDate isEmpty])
-//    {
-//        msgstr = @"Please select a Preferred Date.";
-//        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-//        return;
-//    }else if([txtSelectTimeSlot isEmpty])
-//    {
-//        msgstr = @"Please select a Time Slot.";
-//        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-//        return;
-//    }else if(commentsStr.length<=0)
-//    {
-//        msgstr = @"Please select a Time Slot.";
-//        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-//        return;
-//    }
-//    -(void)submitFormData:(NSString*)firstName :(NSString*)lastName :(NSString*)phoneNumber :(NSString*)email :(NSString*)scheduleServiceTyperId :(NSString*)preferredDate :(NSString*)timeSlot :(NSString*)comments{
     
     if([txtTypeOfService isEmpty]){
         ServiceTypeSelectedId=nil;
@@ -716,11 +638,7 @@
     NSUInteger length = decimalString.length;
     BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
     
-//    if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 10)) {
-//        [txtPhoneno becomeFirstResponder];
-//        
-//        return number;
-//    }
+
     
     NSUInteger index = 0;
     NSMutableString *formattedString = [NSMutableString string];
@@ -745,8 +663,7 @@
     NSString *remainder = [decimalString substringFromIndex:index];
     [formattedString appendString:remainder];
     
-    // NSString *abc = formattedString;
-    return  formattedString;
+      return  formattedString;
     
 }
 

@@ -22,10 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //---makeing button round
-//    btnSold.layer.cornerRadius = 2.0;  [btnSold setClipsToBounds:YES];
-//    btnUpcoming.layer.cornerRadius = 2.0; [btnUpcoming setClipsToBounds:YES];
-    
     
     [btnSold setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f]];
     [btnSold setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -33,30 +29,7 @@
     
     [self getList:@"earned"];
     
-   /*
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        d += 2;
-    }
-    
-    if (d==0) {
-        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-    }
-    if (d==1) {
-        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-    }
-    if (d==2) {
-        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-    }
-    if (d==3) {
-        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-    }*/
-    
-    if (IS_IPAD)
+      if (IS_IPAD)
     {
         lblheading.font=[lblheading.font fontWithSize:24];
         btnSold.titleLabel.font=[lblheading.font fontWithSize:24];
@@ -152,21 +125,12 @@
         
     }
     obj = [[ReferralObj alloc]init];
-   // rewardListArray = [[NSMutableArray alloc] init];
+  
     obj = [rewardListArray objectAtIndex:indexPath.row];
     
     NSString *name = [NSString stringWithFormat:@"%@ %@",obj.first_name,obj.last_name];
     
     NSString *datee = [NSString stringWithFormat:@"%@",obj.SoldDate];
-//    NSArray *dateArr = [datee componentsSeparatedByString:@" "];
-//    NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
-//    NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
-//    
-//    NSArray *semidate = [date componentsSeparatedByString:@"-"];
-//    NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@ %@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0],timeAMPM];
-    
-    
-    
     
     
     
@@ -189,7 +153,7 @@
     
     obj = [rewardListArray objectAtIndex:indexPath.row];
     RDvc.obj =obj;
-   // RDvc.from_RewardList = @"yes";
+  
     [self.navigationController pushViewController:RDvc animated:YES];
 }
 -(void)getList:(NSString*)status
@@ -258,7 +222,7 @@
     }
     else if ((long)[httpResponse statusCode] == 405)
     {
-        //response_status = @"failed";
+      
         [HelperAlert  alertWithOneBtn:AlertTitle description:@"Method name has been changed at backed" okBtn:OkButtonTitle];
 
     }
@@ -324,25 +288,14 @@
                 
                 NSString *status = [NSString stringWithFormat:@"%@",lblheading.text];
                 
-//                if([status isEqualToString:@"PAYMENT EARNED"])
-//                {
-//                    [btnSold setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//                    btnSold.userInteractionEnabled = NO;
+
                 [HelperAlert  alertWithOneBtn:AlertTitle description:@"There is no data to display" okBtn:OkButtonTitle];
 
                 
                     [tableView reloadData];
-//                    return;
-//                    
-//                }else if([status isEqualToString:@"PAYMENT UPCOMING"])
-//                {
-//                    [btnUpcoming setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//                    btnUpcoming.userInteractionEnabled = NO;
-//                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"There is no data to display" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//                    [alert show];
-//                    [tableView reloadData];
+
                     return;
-//                }
+                
             }
             
             
@@ -356,12 +309,10 @@
                 obj.first_name = [NSString stringWithFormat:@"%@",[dict valueForKey:@"FirstName"]];
                 obj.last_name = [NSString stringWithFormat:@"%@",[dict valueForKey:@"LastName"]];
                 obj.email = [NSString stringWithFormat:@"%@",[dict valueForKey:@"Email"]];
-//                if([NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"PhoneNumber"]objectAtIndex:i]].length==6)
-//                {
-//                    obj.phone_no = @" ";
-//                }else{
+                
+
                     obj.phone_no = [NSString stringWithFormat:@"%@",[dict valueForKey:@"PhoneNumber"]];
-//                }
+
                
                 obj.MEAid = [NSString stringWithFormat:@"%@",[dict valueForKey:@"MeaId"]];
                 obj.comments=[NSString stringWithFormat:@"%@",[dict valueForKey:@"Comments"]];
@@ -377,9 +328,7 @@
                 obj.UserDetailId = [NSString stringWithFormat:@"%@",[dict valueForKey:@"UserDetailId"]];
                 obj.MeaName = [NSString stringWithFormat:@"%@",[dict valueForKey:@"MeaName"]];
                 obj.ReferralType = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferralType"]];
-               // obj.tag = [[userDetailDict valueForKey:@"FirstName"]objectAtIndex:i];
-                
-                
+               
                 
                 obj.RewardAmount = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"RewardAmount"]objectAtIndex:i]];
                 obj.RewardDescription = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"RewardDescription"]objectAtIndex:i]];

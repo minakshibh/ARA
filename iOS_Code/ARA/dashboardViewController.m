@@ -1,4 +1,4 @@
-//
+ //
 //  dashboardViewController.m
 //  AUTOAVES_REFERRAL
 //
@@ -21,6 +21,9 @@
 #import "AFHTTPRequestOperation.h"
 #import "notificationViewController.h"
 #import "ScheduleServiceViewController.h"
+#import "SMContactsSelector.h"
+#import "UIImageView+Webcache.h"
+#import "DistributerDetailViewController.h"
 // #import "UIView+Toast.h"
 
 @interface dashboardViewController ()
@@ -33,6 +36,22 @@
 @implementation dashboardViewController
 
 - (void)viewDidLoad {
+    
+    
+    
+    //.frame = CGRectMake(imagenotificationcount.frame.origin.x, imagenotificationcount.frame.origin.y, imagenotificationcount.frame.size.width-2, imagenotificationcount.frame.size.height-2)
+    
+    
+    [btnSubmitReferral setHidden:NO];
+    [sideMenuBtn setHidden:YES];
+     [menuBtnImage setHidden:YES];
+    [newReferralBtn setHidden:YES];
+    [sendInvitationBtn setHidden:YES];
+    
+    [self centerButtonAndImageWithSpacing:6];
+    [self newcenterButtonAndImageWithSpacing:8];
+    
+    
     label45 = [[UILabel alloc]init];
     requestOperation = [[AFHTTPRequestOperation alloc]init];
     
@@ -48,11 +67,14 @@
          referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x-4,referralImage.frame.origin.y-1 , referralImage.frame.size.width- 3, referralImage.frame.size.height-3)];
     }else if (IS_IPHONE_5){
         referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x-4,referralImage.frame.origin.y-4, referralImage.frame.size.width-5, referralImage.frame.size.height-3)];
+     //   btnSubmitReferral.frame = CGRectMake(50,266 ,181, 50);
+        
      }else if (IS_IPHONE_4_OR_LESS){
           referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x-4,referralImage.frame.origin.y-6, referralImage.frame.size.width-7, referralImage.frame.size.height-4)];
      }else if (IS_IPAD){
            referralImage = [[UIImageView alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+12,btnSubmitReferral.frame.size.height/2-6 , referralImage.frame.size.width+13, referralImage.frame.size.height+10)];
      }
+   
     referralImage.image = [UIImage imageNamed:@"refer-icon11"];
     [btnSubmitReferral addSubview:referralImage];
     [btnSubmitReferral bringSubviewToFront:referralImage];
@@ -63,6 +85,7 @@
        referralLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
     }else if (IS_IPHONE_5){
         referralLabel = [[UILabel alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+referralImage.frame.size.width+8, referralImage.frame.origin.y, btnSubmitReferral.frame.size.width-referralImage.frame.size.width-referralImage.frame.origin.x, referralImage.frame.size.height)];
+     //   referralLabel.frame = CGRectMake(21,266 ,181, 40);
         referralLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:14];
        }else if (IS_IPHONE_4_OR_LESS){
            referralLabel = [[UILabel alloc]initWithFrame:CGRectMake(referralImage.frame.origin.x+referralImage.frame.size.width+6, referralImage.frame.origin.y, btnSubmitReferral.frame.size.width-referralImage.frame.size.width-referralImage.frame.origin.x, referralImage.frame.size.height)];
@@ -84,7 +107,7 @@
     
     [self.view addSubview:viewNew];
     [self.view bringSubviewToFront:viewNew];
-//    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
+
 
     //--hide navigation bar
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
@@ -100,86 +123,21 @@
     
     
     lblEmailSideMenu.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]];
-//    [btnnewEmail setTitle:[NSString stringWithFormat:@"Email: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]] forState:UIControlStateNormal];
-//    
-//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
-//         lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//       [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
-//        // set masking on number befroe displaying
-//        
-//        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//        // lblPhoneno.text=@"5454564564564564564";
-//        NSMutableString *mutstr = [[NSMutableString alloc]init];
-//        for (int h = 0; h<phone.length; h++)
-//        {
-//            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
-//            if(h==0){
-//                mutstr =[NSMutableString stringWithFormat:@"%@",character];
-//            }else{
-//                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
-//            }
-//            [self showmaskonnumber:mutstr];
-//        }
-//
-//    }else{
-//        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
-//    }
-   
-    
+
     
     NSLog(@"%@",lblEmailSideMenu.text);
-    
-    
-//    if([_from_login isEqualToString:@"yes"])
-//    {
-//        NSString *first = [[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"];
-//        NSString *last = [[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"];
-//
-//        NSString* namestr =[NSString stringWithFormat:@"%@ %@",first,last];
-//        lblNameMenu.text = namestr;
-//        lblEmailSideMenu.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"];
-//    }
-//    
-//    //--setting image and label values on the side menu
-//    lblEmailSideMenu.text = [[NSUserDefaults standardUserDefaults ]valueForKey:@"user_email"];
-//    NSData *image_data= [[NSUserDefaults standardUserDefaults]valueForKey:@"user_image"];
-//    imageViewMenuProfile.image = [UIImage imageWithData:image_data];
-//    lblNameMenu.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"user_name"];
-    
-    
-//    
-//    int d = 0; // standard display
-//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-//        d = 1; // is retina display
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        d += 2;
-//    }
-//    
-//    if (d==0) {
-//        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-//    }
-//    if (d==1) {
-//        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-//    }
-//    if (d==2) {
-//        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-//    }
-//    if (d==3) {
-//        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-//    }
-    
-    
-   
-    
+ 
     if (IS_IPHONE_6P) {
+         menuBtnImage.frame = CGRectMake(15,34, 33, 35);
         viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
         lblnewContactUs.font = [lblnewContactUs.font fontWithSize:15];
         lblnewContactUs.frame = CGRectMake(lblnewContactUs.frame.origin.x, lblnewContactUs.frame.origin.y+7, lblnewContactUs.frame.size.width, lblnewContactUs.frame.size.height);
          lblComingSoon.font = [lblComingSoon.font fontWithSize:lblComingSoon.font.pointSize-1];
     }
     if (IS_IPHONE_6) {
+        
+        
+         menuBtnImage.frame = CGRectMake(15,34, 33, 35);
          btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-8, btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width+8, btnSubmitReferral.frame.size.height);
         viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
         lblComingSoon.font = [lblComingSoon.font fontWithSize:12];
@@ -204,8 +162,16 @@
         
         lblnewPhoneNo.frame = CGRectMake(lblnewPhoneNo.frame.origin.x, lblnewPhoneNo.frame.origin.y+3, lblnewPhoneNo.frame.size.width, lblnewPhoneNo.frame.size.height);
         lblComingSoon.font = [lblComingSoon.font fontWithSize:11];
+          menuBtnImage.frame = CGRectMake(15,36, 32, 35);
+        
+        
     }
     if (IS_IPHONE_4_OR_LESS) {
+        
+        
+        
+        menuBtnImage.frame = CGRectMake(15,38, 28, 33);
+
         lblComingSoon.font = [lblComingSoon.font fontWithSize:11];
          imageViewMenuProfile.frame = CGRectMake(imageViewMenuProfile.frame.origin.x, imageViewMenuProfile.frame.origin.y-7, imageViewMenuProfile.frame.size.width, imageViewMenuProfile.frame.size.height);
         lblNameMenu.frame = CGRectMake(lblNameMenu.frame.origin.x, lblNameMenu.frame.origin.y+2, lblNameMenu.frame.size.width, lblNameMenu.frame.size.height);
@@ -239,10 +205,14 @@
     
     if ( IS_IPAD )
     {
+        //menuBtnImage
+        
+       // menuBtnImage.frame = CGRectMake(15,34 , 23, 31);
+         menuBtnImage.frame = CGRectMake(15,34 , 27, 35);
+        
+        
          lblComingSoon.font = [lblComingSoon.font fontWithSize:lblComingSoon.font.pointSize+2];
          lblComingSoon.frame = CGRectMake(lblComingSoon.frame.origin.x+13, lblComingSoon.frame.origin.y, lblComingSoon.frame.size.width-25, lblComingSoon.frame.size.height);
-        
-        
         
       //   btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:24];
        btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:18];
@@ -320,6 +290,7 @@
         viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x, viewnewNotification.frame.origin.y-6, viewnewNotification.frame.size.width, viewnewNotification.frame.size.height);
         if(IS_IPAD_PRO_1366 )
         {
+             menuBtnImage.frame = CGRectMake(15,35,18,34);
             viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
              btnSubmitReferral.frame = CGRectMake(btnSubmitReferral.frame.origin.x-7   , btnSubmitReferral.frame.origin.y, btnSubmitReferral.frame.size.width+7, btnSubmitReferral.frame.size.height);
             btnSubmitReferral.titleLabel.font = [btnSubmitReferral.titleLabel.font fontWithSize:26];
@@ -366,7 +337,7 @@
             lblEmailSideMenu.font=[lblEmailSideMenu.font fontWithSize:24];
             
             
-//            btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:30];
+//
             btnmyprofile.titleLabel.font=[btnmyprofile.titleLabel.font fontWithSize:30];
 
             btnreferral.titleLabel.font=[btnreferral.titleLabel.font fontWithSize:30];
@@ -382,146 +353,226 @@
         
     }
     
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-//    // get documents path
-//    NSString *documentsPath = [paths objectAtIndex:0];
-//    // get the path to our Data/plist file
-//   // NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"Data.plist"];
-//    NSString *plistPath = [ NSString stringWithFormat:@"%@/Data.plist",documentsPath];
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-//    {
-//        plistPath = [[NSBundle mainBundle] pathForResource:@"Data" ofType:@"plist"];
-//        
-//        
-//    }
-//    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-//    NSString *errorDesc = nil;
-//    NSPropertyListFormat format;
-//    NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
-//    if (!temp)
-//    {
-//        NSLog(@"Error reading plist: %@, format: %lu", errorDesc, (unsigned long)format);
-//    }
-//    
-//    // assign values
-//    NSLog(@"%@",[temp objectForKey:@"name"] );
-//    NSMutableArray *phoneNumbers = [NSMutableArray arrayWithArray:[temp objectForKey:@"phones"]];
-//    // display values
-//    
-//   NSLog(@"%@",[phoneNumbers objectAtIndex:0]);
-//   NSLog(@"%@",[phoneNumbers objectAtIndex:1]);
-//   NSLog(@"%@",[phoneNumbers objectAtIndex:2]);
 
     [NSTimer scheduledTimerWithTimeInterval:0.1
                                      target:self
                                    selector:@selector(targetMethod:)
                                    userInfo:nil
                                     repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval:10
-                                     target:self
-                                   selector:@selector(imageReload:)
-                                   userInfo:nil
-                                    repeats:YES];
-//    [NSTimer scheduledTimerWithTimeInterval:4
+//    [NSTimer scheduledTimerWithTimeInterval:0.1
 //                                     target:self
-//                                   selector:@selector(labelTransformation:)
+//                                   selector:@selector(imageReload:)
 //                                   userInfo:nil
 //                                    repeats:YES];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//             self.timerDashboard = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(dashboardWebservice) userInfo:nil repeats:YES];
-//    });
-   
+//
 
 }
--(void)imageReload:(NSTimer *)timer
+-(void)imageReload
 {
-    
+    UIImage *img = [[SDImageCache sharedImageCache]imageFromMemoryCacheForKey:@"l_image"];
+    if (img != nil){
+        imageViewMenuProfile.image = img;
+    }else{
     
     
     NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"] forKey:@"imageUserID"];
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagestr]];
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-        [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:@"profile_picture"]	;
-        if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"] == nil) {
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
-            if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"imageUserID"] isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"l_userid"]]) {
-                
-                imageViewMenuProfile.image = [UIImage imageWithData:imageData];
-            }
-            //  imageViewMenuProfile.contentMode=UIViewContentModeScaleAspectFit;
-        });
-    });
+    
+     [imageViewMenuProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]placeholderImage:[UIImage imageNamed:@"user-i.png"]options:SDWebImageRefreshCached];
+    }
     
 }
-//-(void)labelTransformation:(NSTimer *)timer
-//{
-//    if (lblComingSoon.font.pointSize == 16) {
-//    lblComingSoon.font = [UIFont boldSystemFontOfSize:14];
-//    }else{
-//        lblComingSoon.font = [UIFont boldSystemFontOfSize:16];
-//    }
-//    
-//    lblComingSoon.transform = CGAffineTransformScale(lblComingSoon.transform, 0.25, 0.25);
-//    [self.view addSubview:lblComingSoon];
-//    [UIView animateWithDuration:2.0 animations:^{
-//        lblComingSoon.transform = CGAffineTransformScale(lblComingSoon.transform, 4, 4);
-//    }];
-//}
 -(void)dashboardWebservice
 {
     [self getData];
 }
+-(void) centerButtonAndImageWithSpacing:(CGFloat)spacing {
+    
+    [newReferralBtn setImage:[UIImage imageNamed:@"refer-icon11.png"] forState:UIControlStateNormal];
+    
+    [newReferralBtn setTitle:@"Refer a Friend/Family" forState:UIControlStateNormal];
+    [newReferralBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if(IS_IPAD_PRO_1366 )
+    {
+    newReferralBtn.titleLabel.font = [UIFont systemFontOfSize:24.0];
+    }
+    if(IS_IPAD)
+    {
+        newReferralBtn.titleLabel.font = [UIFont systemFontOfSize:24.0];
+    }
+    
+    if (IS_IPHONE_6) {
+     
+        newReferralBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+
+
+        
+    }
+    if (IS_IPHONE_6P)
+    {
+      
+        newReferralBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    }
+    
+    if (IS_IPHONE_5){
+   
+     newReferralBtn.titleLabel.font = [UIFont systemFontOfSize:10.0];
+        
+    }
+    
+    if (IS_IPHONE_4_OR_LESS)
+    {
+         newReferralBtn.titleLabel.font = [UIFont systemFontOfSize:10.0];
+    }
+    newReferralBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
+    newReferralBtn.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+}
+-(void) newcenterButtonAndImageWithSpacing:(CGFloat)spacing {
+    
+    [sendInvitationBtn setImage:[UIImage imageNamed:@"send_invitation1"] forState:UIControlStateNormal];
+    
+    [sendInvitationBtn setTitle:@" Send Invitation " forState:UIControlStateNormal];
+    [sendInvitationBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if(IS_IPAD_PRO_1366 )
+    {
+    sendInvitationBtn.titleLabel.font = [UIFont systemFontOfSize:24.0];
+    }
+    if(IS_IPAD)
+    {
+        sendInvitationBtn.titleLabel.font = [UIFont systemFontOfSize:24.0];
+    }
+     if (IS_IPHONE_6) {
+         //   sendInvitationBtn.frame = CGRectMake(195.0,245.0, 170.0, 32.0);
+           sendInvitationBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+         
+     }
+    if (IS_IPHONE_6P)
+    {
+       
+        sendInvitationBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    }
+    if (IS_IPHONE_5){
+      // sendInvitationBtn.frame = CGRectMake(172.0,206.0, 137.0, 30.0);
+        sendInvitationBtn.titleLabel.font = [UIFont systemFontOfSize:10.0];
+    }
+    if (IS_IPHONE_4_OR_LESS)
+    {
+        sendInvitationBtn.titleLabel.font = [UIFont systemFontOfSize:10.0];
+    }
+    sendInvitationBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
+    sendInvitationBtn.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+}
+-(void) sideMenuCenterButton:(CGFloat)spacing {
+    
+
+    sideMenuBtn.contentMode = UIViewContentModeScaleToFill;
+    
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
-//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"] != nil) {
-//        NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
-//        
-//        imageViewMenuProfile.image = [UIImage imageWithData:im];
-//    }
-//    if ([[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"] != nil) {
-//        lblnewPhoneNo.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//        [btnnewPhoneNo setTitle:[NSString stringWithFormat:@"Phone: %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]] forState:UIControlStateNormal];
-//        
-//        NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-//        // lblPhoneno.text=@"5454564564564564564";
-//        NSMutableString *mutstr = [[NSMutableString alloc]init];
-//        for (int h = 0; h<phone.length; h++)
-//        {
-//            NSString *character = [NSString stringWithFormat:@"%C",[phone characterAtIndex:h]];
-//            if(h==0){
-//                mutstr =[NSMutableString stringWithFormat:@"%@",character];
-//            }else{
-//                mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
-//            }
-//            [self showmaskonnumber:mutstr];
-//        }
-//
-//    }else{
-//        [btnnewPhoneNo setTitle:@"" forState:UIControlStateNormal];
-//    }
+    [self imageReload];
+    
+    sideMenuBtn.layer.cornerRadius=4.0;
+    NSString *getValue = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:@"Value"];
+    
+    if ([getValue isEqualToString:@"1"])
+    {
+        [btnSubmitReferral setHidden:YES];
+        [menuBtnImage setHidden:NO];
+        [sideMenuBtn setHidden:NO];
+        [self sideMenuCenterButton:2];
+        
+        
+        [newReferralBtn setHidden:NO];
+        [self centerButtonAndImageWithSpacing:6];
+        
+      
+        [sendInvitationBtn setHidden:NO];
+        [self newcenterButtonAndImageWithSpacing:8];
+        
+        [newReferralBtn setTitle:@"Refer a Friend/Family" forState:UIControlStateNormal];
+        newReferralBtn.layer.cornerRadius = 4.0;
+          sendInvitationBtn.layer.cornerRadius = 4.0;
+    }
+    
+  
     [self getData];
    
     NSString* namestr = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"],[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
     lblNameMenu.text = namestr;
     
-    
-
-    
-        //dispatch_async(
-    
-  
-
 }
+- (void)showContacts
+{
+    SMContactsSelector *controller = [[SMContactsSelector alloc] initWithNibName:@"SMContactsSelector" bundle:nil];
+  controller.showModal = YES;
+    controller.requestData = DATA_CONTACT_EMAIL;
+    controller.showCheckButton = YES;
+    
+    [self.navigationController pushViewController:controller animated:YES];
+    
+   
+}
+- (void)sideMenu
+{
+   DistributerDetailViewController  *detail = [[DistributerDetailViewController alloc] initWithNibName:@"DistributerDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:detail animated:YES];
+    
+    
+}
+
+
+#pragma SMContactsSelectorDelegate Methods
+- (void)numberOfRowsSelected:(NSInteger)numberRows withData:(NSArray *)data andDataType:(DATA_CONTACT)type
+{
+    if (type == DATA_CONTACT_TELEPHONE)
+    {
+        for ( i = 0; i < [data count]; i++)
+        {
+            NSString *str = [data objectAtIndex:i];
+            
+            str = [str reformatTelephone];
+            
+            NSLog(@"Telephone: %@", str);
+        }
+    }
+    else if (type == DATA_CONTACT_EMAIL)
+    {
+        for ( i = 0; i < [data count]; i++)
+        {
+            NSString *str = [data objectAtIndex:i];
+            
+            NSLog(@"Emails: %@", str);
+        }
+    }
+    else
+    {
+        for ( i = 0; i < [data count]; i++)
+        {
+            NSString *str = [data objectAtIndex:i];
+            
+            NSLog(@"IDs: %@", str);
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 #pragma  mark - Buttons
+- (IBAction)sendInvitation:(id)sender
+{
+   [self showContacts];
+}
+
+- (IBAction)btnSideMenu:(id)sender
+{
+    [self sideMenu];
+}
+
 - (IBAction)btnScheduleServices:(id)sender{
     ScheduleServiceViewController *scheduleServicesVC = [[ScheduleServiceViewController alloc]initWithNibName:@"ScheduleServiceViewController" bundle:nil];
     [self.navigationController pushViewController:scheduleServicesVC animated:YES];
@@ -629,11 +680,10 @@
 {
     ProfileViewController *Pvc = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     [self.navigationController pushViewController:Pvc animated:YES];
- //   [self  menuSlideBack];
-}
+ }
 
 - (IBAction)btnlogout:(id)sender {
-     //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"dashboardNotificationTimeStamp"];
+    
     self.stop = true;
     [self logoutFunction];
     
@@ -649,11 +699,10 @@
         if (FBSession.activeSession.state == FBSessionStateOpen
             || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
             
-            // Close the session and remove the access token from the cache
-            // The session state handler (in the app delegate) will be called automatically
+           
             [FBSession.activeSession closeAndClearTokenInformation];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
-            // If the session state is not any of the two "open" states when the button is clicked
+            
             return;
         }
     }else{
@@ -664,6 +713,7 @@
         
         
     }
+    [[SDImageCache sharedImageCache]removeImageForKey:@"l_image"];
 }
 - (IBAction)myBadges:(id)sender {
     myBadgesViewController *MBvc = [[myBadgesViewController alloc]initWithNibName:@"myBadgesViewController" bundle:nil];
@@ -776,6 +826,7 @@
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
 {
     [webData appendData:data1];
+    NSLog(@"data Received %@",webData);
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
@@ -789,13 +840,7 @@
     NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
     NSLog(@"responseString:%@",responseString);
     NSError *error;
-    //    if ([responseString rangeOfString:@"#Ref" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    //    {
-    //        NSString *msg = [NSString stringWithFormat:@"Thank you for submitting referral. You can track this referal using this referral id %@.",responseString];
-    //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    //        [alert show];
-    //        return;
-    //    }
+   
     SBJsonParser *json = [[SBJsonParser alloc] init];
     NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
     
@@ -803,16 +848,14 @@ if([recieved_status isEqualToString:@"passed"])
 {
     if(webservice==1)
     {
-//    NSArray *amount = [userDetailDict valueForKey:@"Amount"];
-//    NSArray *refCount = [userDetailDict valueForKey:@"ReferralCount"];
+
     NSArray *refType = [userDetailDict valueForKey:@"DashboardResult"];
     NSString *notificationCountStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"NotificationsCount"]];
-      //  int notificationCount = (int)notificationCountStr;
         [lblNotificationCount removeFromSuperview];
         
         lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
         lblNotificationCount.text = notificationCountStr;
-//         lblNotificationCount.font = (IS_IPAD) ? [UIFont fontWithName:@"Roboto-Regular" size:14] : [UIFont fontWithName:@"Roboto-Regular" size:11];
+
         lblNotificationCount.textAlignment = NSTextAlignmentCenter;
         lblNotificationCount.textColor = [UIColor whiteColor];
         lblNotificationCount.font = [UIFont boldSystemFontOfSize:lblNotificationCount.font.hash];
@@ -868,15 +911,15 @@ if([recieved_status isEqualToString:@"passed"])
         if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"sold"])
         {
             NSLog(@"%@",[NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]]);
-//            lblnewEarnedAwardePrice.text = [NSString stringWithFormat:@"$%@",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
+
+            
             lblSoldreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
             lblSoldreferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
             
             NSString *finalStr= [NSString stringWithFormat:@"%@%@ Sold",lblnewActiveSoldCount.text,[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
-         //   finalStr = @"19 Open / 13 Sold";
-         //   value = @"13";
+        
             NSString *val1 =[NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
-         //   val1 = @"23";
+
             NSLog(@"%lu",(unsigned long)val1.length);
            
             
@@ -886,8 +929,7 @@ if([recieved_status isEqualToString:@"passed"])
             NSUInteger length2 = val1.length ;
             
             
-            //3 Open / 4 Sold
-           
+            
             NSMutableAttributedString * string = [[NSMutableAttributedString alloc] initWithString:finalStr];
             [string addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,value.length)];
             [string addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(length1,length2)];
@@ -899,13 +941,13 @@ if([recieved_status isEqualToString:@"passed"])
         }
         if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"inactive"])
         {
-            //  lblInactivereferralAmount.text = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"] objectAtIndex:i]];
+            
             lblInactivereferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
             }
         if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"Total"])
             {
            
-                //lbltotalreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[userDetailDict valueForKey:@"Amount"]objectAtIndex:i]];
+              
                 lbltotalreferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
                 }
             }
@@ -917,9 +959,7 @@ if([recieved_status isEqualToString:@"passed"])
             
         }else if (webservice==3)
         {
-            //[self.view makeToast:[NSString stringWithFormat:@"%@",responseString]];
-//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [alert show];
+           
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_email"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_firstName"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_lastName"];
@@ -981,20 +1021,16 @@ if([recieved_status isEqualToString:@"passed"])
     NSURLConnection *connection;
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
-    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
-    //    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    //    NSString *currSys = @"ios";
-    //    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
-    
+    NSLog(@"%@",[user valueForKey:@"profile_picture"]);
+    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"profile_picture"]];
+   
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
-    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
+    
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -1033,9 +1069,7 @@ if([recieved_status isEqualToString:@"passed"])
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSLog(@"%@",[user valueForKey:@"l_userid"]);
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
-    //    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    //    NSString *currSys = @"ios";
-    //    NSString *devToken = [[NSUserDefaults standardUserDefaults] valueForKey: @"deviceToken"];
+  
     
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
@@ -1043,8 +1077,6 @@ if([recieved_status isEqualToString:@"passed"])
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
-    //[request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -1078,7 +1110,6 @@ if([recieved_status isEqualToString:@"passed"])
                         options: UIViewAnimationCurveEaseIn
                      animations:^
      {
-         //   sideView.hidden=YES;
          
          CGRect frame = sideView.frame;
          frame.origin.y = sideView.frame.origin.y;
@@ -1180,8 +1211,7 @@ if([recieved_status isEqualToString:@"passed"])
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     
     
-//    NSString *dashboardTimeStamp = [[NSUserDefaults standardUserDefaults]valueForKey:@"dashboardNotificationTimeStamp"];
-//    NSLog(@"%@",dashboardTimeStamp);
+
    
     NSData *data2222 = [[NSUserDefaults standardUserDefaults] objectForKey:@"dashboardNotificationTimeStamp"];
     NSMutableDictionary *dict3333 = [NSKeyedUnarchiver unarchiveObjectWithData:data2222];
@@ -1194,7 +1224,7 @@ if([recieved_status isEqualToString:@"passed"])
     
     _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,loginDateStr];
     
-    //_postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"loginDateSaved"]];
+    
     if(latestCreatedDateStr!=nil)
     {
         _postData = [NSString stringWithFormat:@"userId=%@&Timestamp=%@",userid,latestCreatedDateStr];
@@ -1206,7 +1236,7 @@ if([recieved_status isEqualToString:@"passed"])
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+   
     NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]);
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
     
@@ -1254,7 +1284,7 @@ if([recieved_status isEqualToString:@"passed"])
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+   
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1297,7 +1327,6 @@ if([recieved_status isEqualToString:@"passed"])
     BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
     
     if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 11)) {
-//        [txtPhoneNo becomeFirstResponder];
         
         return;
     }

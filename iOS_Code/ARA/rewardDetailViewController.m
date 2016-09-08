@@ -36,32 +36,8 @@
 
     }
     lblReferralID.text = _obj.UniqueReferralNumber;
-    // Do any additional setup after loading the view from its nib.
- /*
-    int d = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        d = 1; // is retina display
-    }
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        d += 2;
-    }
-    
-    if (d==0) {
-        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-    }
-    if (d==1) {
-        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-    }
-    if (d==2) {
-        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-    }
-    if (d==3) {
-        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-    }
-    */
-    
-    if (IS_IPAD)
+     if (IS_IPAD)
     {
         lblHeading.font=[lblHeading.font fontWithSize:24];
         
@@ -122,15 +98,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 #pragma mark - Buttons
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated: YES];

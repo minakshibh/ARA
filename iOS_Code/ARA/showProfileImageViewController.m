@@ -13,6 +13,7 @@
 #import "ASIHTTPRequest.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIImageView+WebCache.h"
+#import "SDImageCache.h"
 //#import "UIView+Toast.h"
 @interface showProfileImageViewController ()
 
@@ -22,11 +23,11 @@
 
 - (void)viewDidLoad {
     
-    [NSTimer scheduledTimerWithTimeInterval:10
-                                     target:self
-                                   selector:@selector(targetMethod1:)
-                                   userInfo:nil
-                                    repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:10
+//                                     target:self
+//                                   selector:@selector(targetMethod1:)
+//                                   userInfo:nil
+//                                    repeats:NO];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -34,20 +35,24 @@
     //imageViewProfile.image = [UIImage imageNamed:@"dummy-user-img.png"];
     
     [super viewDidLoad];
-   // NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
-
-    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
     
-    imageViewProfile.image = [UIImage imageWithData:im];
+    NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];//profile_picture           //l_image
+    
+    
+    NSLog(@"image url %@",imagestr);
+    [imageViewProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]];
+    
+    
     imageViewProfile.contentMode=UIViewContentModeScaleAspectFit;
     
         [self.view endEditing:YES];
         UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                       initWithTitle:nil
                                       delegate:self
-                                      cancelButtonTitle:@"Cancel"
-                                      destructiveButtonTitle:@"Photo Library"
-                                      otherButtonTitles:@"Camera",nil];
+    cancelButtonTitle:@"Cancel"
+    destructiveButtonTitle:@"Photo Library"
+    otherButtonTitles:@"Camera",nil];
+    
         actionSheet.actionSheetStyle = UIBarStyleBlackTranslucent;
         [actionSheet showInView:self.view];
     
@@ -82,10 +87,10 @@
 }
 -(void)targetMethod1:(NSTimer *)timer
 {
-    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];
-    
-    imageViewProfile.image = [UIImage imageWithData:im];
-    imageViewProfile.contentMode=UIViewContentModeScaleAspectFit;
+//    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];//l_image    //profile_picture
+//    
+//    imageViewProfile.image = [UIImage imageWithData:im];
+//    imageViewProfile.contentMode=UIViewContentModeScaleAspectFit;
     
 }
 - (void)didReceiveMemoryWarning {
@@ -141,7 +146,8 @@
             [popover presentPopoverFromRect:btnProfile.bounds inView:imageViewProfile permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
            // self.popoverImageViewController = popover;
         } else {
-            [self presentModalViewController:picker animated:YES];
+            
+            [self presentViewController:picker animated:YES completion:nil];
         }
     }
 
@@ -210,7 +216,8 @@
     CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
     UIGraphicsBeginImageContext(rect.size);
     [chosenImage drawInRect:rect];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    img = UIGraphicsGetImageFromCurrentImageContext();
+    
     imagedata = UIImageJPEGRepresentation(img, compressionQuality);
     UIGraphicsEndImageContext();
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -248,8 +255,10 @@
     NSString *fileName = [NSString stringWithFormat:@"profilePic%ld%c%c.png", (long)[[NSDate date] timeIntervalSince1970], arc4random_uniform(26) + 'a', arc4random_uniform(26) + 'a'];
     
     
+   // AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://server.url"]];
-    //NSData *imageData = UIImageJPEGRepresentation(self.avatarView.image, 0.5);
+    
     NSDictionary *parameters = @{@"":@""};
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     [manager setResponseSerializer:responseSerializer];
@@ -258,7 +267,11 @@
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
     
     AFHTTPRequestOperation *op = [manager POST:imagePostUrl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //do not put image inside parameters dictionary as I did, but append it!
+        //do not put image inside parameters dictionary as I did, but append it!//imagedata
+        
+        //[imageViewProfile setImage:img];
+    
+        NSLog(@"append image data %@",imagedata);
         [formData appendPartWithFileData:imagedata name:fileName fileName:@"photo.jpg" mimeType:@"image/jpeg"];
     //     [self.view makeToast:@"The image is being uploading...."];
         
@@ -282,14 +295,31 @@
             NSString *ch = [imagestr substringWithRange:NSMakeRange(i, 1)];
             imagestr1 = [NSString stringWithFormat:@"%@%@",imagestr1,ch];
         }
-        NSURL *imageURL = [NSURL URLWithString:imagestr1];
-        imageViewProfile.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//        NSURL *imageURL = [NSURL URLWithString:imagestr1];
+//        imageViewProfile.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+//        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+       
+     //  [[NSUserDefaults standardUserDefaults]setObject:imagestr1 forKey:@"profile_picture"];
+    
+    //  [imageViewProfile sd_setImageWithURL:[NSURL URLWithString:imagestr1]];
+        
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-       [[NSUserDefaults standardUserDefaults]setObject:imageData forKey:@"profile_picture"];
-
+        [[SDImageCache sharedImageCache]clearMemory];
+        [[SDImageCache sharedImageCache]clearDisk];
+        
+        [[SDImageCache sharedImageCache]storeImage:img forKey:@"l_image" toDisk:YES];
+         [[SDImageCache sharedImageCache]storeImage:img forKey:@"profile_picture" toDisk:YES];
+    
+        
+        [[NSUserDefaults standardUserDefaults]setObject:imagedata forKey:@"profile_picture"];
+ NSLog(@"new image url %@",imagestr1);
         [[NSUserDefaults standardUserDefaults]setObject:imagestr1 forKey:@"l_image"];
+       [[SDImageCache sharedImageCache]storeImage:img forKey:@"profile_picture"];
+       [[SDImageCache sharedImageCache]storeImage:img forKey:@"l_image"];
+
         [kappDelegate HideIndicator];
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@ ***** %@", operation.responseString, error);

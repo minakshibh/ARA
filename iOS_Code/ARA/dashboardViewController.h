@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SMContactsSelector.h"
 
-
-@interface dashboardViewController : UIViewController
+@interface dashboardViewController : UIViewController<SMContactsSelectorDelegate>
 {
     
     IBOutlet UIView *viewNew;
@@ -34,6 +34,9 @@
     
     int webservice,i;
     NSString *recieved_status;
+     IBOutlet UIButton *sideMenuBtn;
+    IBOutlet UIButton *sendInvitationBtn;
+    IBOutlet UIButton *newReferralBtn;
     IBOutlet UIButton *btnSubmitReferral;
     IBOutlet UILabel *lblheader;
     IBOutlet UILabel *lblComingSoon;
@@ -55,6 +58,7 @@
     IBOutlet UIButton *btnnewEmail;
     IBOutlet UIButton *btnnewPhoneNo;
     IBOutlet UIButton *btnnewAppURL;
+    IBOutlet UIButton *btnProfile;
     
     UILabel *lblNotificationCount;
     UILabel *label45;
@@ -68,10 +72,12 @@
     IBOutlet UIView *viewnewNotification;
     IBOutlet UIImageView *imagenotification;
     IBOutlet UIImageView *imagenotificationcount;
-    IBOutlet UIButton *btnProfile;
+    IBOutlet UIImageView *menuBtnImage;
 
     int count_status;
 }
+- (IBAction)btnSideMenu:(id)sender;
+- (IBAction)sendInvitation:(id)sender;
 - (IBAction)btnnewAppURL:(id)sender;
 - (IBAction)btnnewnotificationView:(id)sender;
 - (IBAction)btnnewPhoneNo:(id)sender;
@@ -95,6 +101,6 @@
 @property (nonatomic,strong) NSTimer *timerDashboard;
 @property (atomic) BOOL stop;
 -(void)getData;
--(void)timerInvalidate;
+//-(void)timerInvalidate;
 -(void)logoutFunction;
 @end

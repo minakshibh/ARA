@@ -38,6 +38,8 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
         <mutableArray key="timeburner_regular.ttf">
             <string>TimeBurner</string>
@@ -86,6 +88,10 @@
                 <outlet property="lblnewReferralsReward" destination="obi-9F-Vbc" id="dHv-lX-j5e"/>
                 <outlet property="lblnewScheduleService" destination="wus-B6-GRz" id="bfc-3V-iiz"/>
                 <outlet property="lbltotalreferralcount" destination="BR0-A0-SBm" id="mUF-wP-Irb"/>
+                <outlet property="menuBtnImage" destination="uSs-hV-ZG8" id="lcB-Zl-HcU"/>
+                <outlet property="newReferralBtn" destination="xoz-lz-xrb" id="ljQ-Ih-GPj"/>
+                <outlet property="sendInvitationBtn" destination="JvH-MT-8aO" id="FZx-oD-MIY"/>
+                <outlet property="sideMenuBtn" destination="KI2-2X-FGe" id="6fS-Q4-qzL"/>
                 <outlet property="sideView" destination="mDn-bm-PKl" id="aBy-Fy-cwR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewNew" destination="c0r-EQ-T7c" id="9jx-En-wRs"/>
@@ -108,7 +114,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dYg-cY-2FU">
                     <rect key="frame" x="0.0" y="76" width="414" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="0.81960784313725488" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -269,6 +275,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="erb-3N-SAv">
                     <rect key="frame" x="33" y="142" width="160" height="152"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -532,7 +539,7 @@
             </subviews>
             <color key="backgroundColor" red="0.95686274509803926" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-            <point key="canvasLocation" x="723" y="241"/>
+            <point key="canvasLocation" x="1106" y="180"/>
         </view>
         <view contentMode="scaleToFill" id="c0r-EQ-T7c">
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -617,13 +624,13 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.098039215686274508" green="0.10588235294117647" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.096938098975280051" green="0.10427653781182443" blue="0.19215686274509791" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="XJ8-uc-awC">
                     <rect key="frame" x="375" y="32" width="55" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification-icon11.png" id="mUZ-IN-agl">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashboardBell" id="mUZ-IN-agl">
                             <rect key="frame" x="-6" y="6" width="36" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -736,10 +743,6 @@
                         <action selector="btnScheduleServices:" destination="-1" eventType="touchUpInside" id="qGq-77-IWF"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JvH-MT-8aO">
-                    <rect key="frame" x="296" y="258" width="110" height="48"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="twr-hT-FBP">
                     <rect key="frame" x="256" y="582" width="95" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -755,8 +758,15 @@
                         <action selector="btnMyRewards:" destination="-1" eventType="touchUpInside" id="W83-UC-JEV"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8it-1b-L5k">
+                    <rect key="frame" x="346" y="20" width="62" height="51"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="btnnewnotificationView:" destination="-1" eventType="touchUpInside" id="oqP-qy-y23"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DM3-az-p78">
-                    <rect key="frame" x="90" y="258" width="226" height="49"/>
+                    <rect key="frame" x="94" y="257" width="226" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
@@ -767,11 +777,44 @@
                         <action selector="btnSubmitReferral:" destination="-1" eventType="touchUpInside" id="R1a-zw-MIE"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8it-1b-L5k">
-                    <rect key="frame" x="346" y="21" width="62" height="51"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon1" id="uSs-hV-ZG8">
+                    <rect key="frame" x="15" y="41" width="35" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KI2-2X-FGe">
+                    <rect key="frame" x="4" y="34" width="57" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <action selector="btnnewnotificationView:" destination="-1" eventType="touchUpInside" id="oqP-qy-y23"/>
+                        <action selector="btnSideMenu:" destination="-1" eventType="touchUpInside" id="G9z-mW-9pH"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JvH-MT-8aO">
+                    <rect key="frame" x="212" y="266" width="181" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                    <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                    <state key="normal" title="Send Invitation" image="send_invitation1">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="sendInvitation:" destination="-1" eventType="touchUpInside" id="6em-z0-aS9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xoz-lz-xrb">
+                    <rect key="frame" x="21" y="266" width="183" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Refer a Friend/Family" image="refer-icon11.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="btnSubmitReferral:" destination="-1" eventType="touchUpInside" id="BjY-eR-5oO"/>
                     </connections>
                 </button>
             </subviews>
@@ -784,19 +827,22 @@
         <image name="1notification_count.png" width="25" height="25"/>
         <image name="about_320.png" width="16" height="16"/>
         <image name="badges.png" width="16" height="16"/>
+        <image name="dashboardBell" width="32" height="37"/>
         <image name="header-image.png" width="98" height="22"/>
         <image name="logout.png" width="16" height="16"/>
         <image name="map-background11.png" width="320" height="67"/>
         <image name="menu-icon.png" width="33" height="33"/>
+        <image name="menu_icon1" width="41" height="43"/>
         <image name="my-profile.png" width="16" height="16"/>
         <image name="news_icon.png" width="116" height="116"/>
-        <image name="notification-icon11.png" width="30" height="30"/>
         <image name="paypal.png" width="16" height="16"/>
+        <image name="refer-icon11.png" width="19" height="17"/>
         <image name="referrals-icon.png" width="16" height="16"/>
         <image name="referrals_icon.png" width="116" height="116"/>
         <image name="rewards.png" width="16" height="16"/>
         <image name="rewards_icon.png" width="116" height="116"/>
         <image name="scoreboard.png" width="16" height="16"/>
+        <image name="send_invitation1" width="20" height="17"/>
         <image name="services_icon.png" width="116" height="116"/>
         <image name="user-i.png" width="15" height="15"/>
     </resources>

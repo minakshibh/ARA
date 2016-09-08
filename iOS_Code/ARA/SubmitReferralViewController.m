@@ -41,8 +41,7 @@
        picker = [[ABPeoplePickerNavigationController alloc] init];
     
     
-    //--hide navigation bar
-    //--hide navigation bar
+       //--hide navigation bar
    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     lblComments.layer.cornerRadius = 5.0;
@@ -125,28 +124,6 @@
     txtPhoneno.inputAccessoryView = numberToolbar;
     }
     
-//    int d = 0; // standard display
-//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-//        d = 1; // is retina display
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        d += 2;
-//    }
-//    
-//    if (d==0) {
-//        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-//    }
-//    if (d==1) {
-//        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-//    }
-//    if (d==2) {
-//        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-//    }
-//    if (d==3) {
-//        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-//    }
-    
     
     [self iPadDesignInitialization];
     
@@ -168,7 +145,7 @@
         txtmea.font = [txtmea.font fontWithSize:20];
         txtComment.font = [txtComment.font fontWithSize:20];
         lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:20];
-        //btnImportContacts.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 90);
+       
         
         if(IS_IPAD_PRO_1366)
         {
@@ -209,13 +186,6 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-//    txtComment.text =@"";
-//    txtEmail.text =@"";
-//    txtFirstname.text =@"";
-//    txtLastname.text =@"";
-//    txtPhoneno.text =@"";
-//    txtEmail.text =@"";
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -260,7 +230,7 @@
                 if (![txtEmail emailValidation]==YES) {
                     lblemailerror.text = @"Enter a valid email";
                 }else{
-                    //activityIndicatorObject.center = CGPointMake(0, 0);
+                   
                     activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50, 0.50);
                     activityIndicatorObject1.color=[UIColor grayColor ];
                     [viewEmailindicator addSubview:activityIndicatorObject1];
@@ -332,11 +302,7 @@
     
     svos = scrollView.contentOffset;
     tableView.hidden = YES;
-    //    if(textField == txtFirstname ||textField == txtLastname)
-    //    {
-    //        [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    //        return;
-    //    }
+   
     if(textField == txtEmail)
     {
         lblemailerror.text = @"";
@@ -452,14 +418,14 @@
 }
 - (IBAction)btnShowEmailPopup:(id)sender {
     if ([selectedContactDict objectForKey:@"phone_no"]){
-        //KGModal *obj = [KGModal sharedInstance];
+       
         [[KGModal sharedInstance] hideAnimated:YES];
         
         txtFirstname.text = selectedPersonFName;
         txtLastname.text = selectedPersonLName;
     aTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(aTime) userInfo:nil repeats:NO];
 
-      //  [self.view bringSubviewToFront:self.view];
+     
     
     }else{
         [self.view makeToast:@"Kindly select a phone number first..."];
@@ -577,13 +543,7 @@
        
         return;
     }
-    //    else if (phoneStr.length==0 ) {
-    //        msgstr = @"Please enter phone no.";
-    //        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    //        [alert show];
-    //        return;
-    //    }
-    if (![txtPhoneno isEmpty]) {
+        if (![txtPhoneno isEmpty]) {
         
     
         if (phoneStr.length<10 ) {
@@ -617,7 +577,7 @@
         [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please wait a moment while we check your email." okBtn:OkButtonTitle];
         
         
-    //    [self.view makeToast:@"Just wait a movement we are verifying your email address."];
+    
     if (webservice!=5) {
             
         
@@ -626,7 +586,7 @@
                 if (![txtEmail emailValidation]==YES) {
                     lblemailerror.text = @"Enter a valid email";
                 }else{
-                    //activityIndicatorObject.center = CGPointMake(0, 0);
+                    
                     activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50,   0.50);
                     activityIndicatorObject1.color=[UIColor whiteColor];
                     [viewEmailindicator addSubview:activityIndicatorObject1];
@@ -648,19 +608,7 @@
         return;
     }
 
-    //    dispatch_sync( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-    //
-    //        [self checkforavailability];
-    //    });
-    
-//    if(commentsStr.length == 0)
-//    {
-//        msgstr = @"Please enter some comments";
-//        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:msgstr delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
-    if([txtmea isEmpty])
+       if([txtmea isEmpty])
     {
         msgstr = @"Please select mea";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
@@ -669,7 +617,7 @@
     }
     if([lblemailerror.text isEqualToString:@"Email already exist"])
     {
-       // msgstr = @"Email already exist";
+      
        msgstr =  @"Unable to add user--email address already exists.";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
         return;
@@ -685,7 +633,7 @@
     }
     }else{
         NSLog(@"%lu",[NSString stringWithFormat:@"%@",selected_text_id ].length);
-        //if([NSString stringWithFormat:@"%@",selected_text_id ].length==6)
+       
         NSString *code =[NSString stringWithFormat:@"%@",selected_text_id ];
         if ([code rangeOfString:@"null" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
@@ -698,7 +646,7 @@
         }
     }
     
-   // btnSubmitReferral.userInteractionEnabled = NO;
+  
     [self submitReferral:firstNameStr lastname:lastNameStr phoneno:phoneStr email:emailStr mea:mea_id comment:commentsStr];
     
 }
@@ -829,18 +777,6 @@
     [contactDict setObject:phonelbl forKey:@"contact_lbl"];
     [contactDict setObject:emaillbl forKey:@"contact_emaillbl"];
     
-    //    NSString *name,*phone,*email;
-    //    phone = [[NSString alloc]init];
-    //    email = [[NSString alloc]init];
-    //    name = [[NSString alloc]init];
-    //
-    //
-    //    if (fnameProperty != nil) {
-    //        name = [NSString stringWithFormat:@"%@", fnameProperty];
-    //    }
-    //    if (lnameProperty != nil) {
-    //        name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
-    //    }
     
     [self dismissViewControllerAnimated:YES completion:nil];
     if (fnameProperty != nil) {
@@ -869,7 +805,7 @@
             
             txtFirstname.text = selectedPersonFName;
             txtLastname.text = selectedPersonLName;
-            //  txtPhoneno.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_phone"]objectAtIndex:0]];
+          
             popupActive = false;
             
             /// --- put mask on number
@@ -915,7 +851,7 @@
                         [selectedContactDict setObject:txtPhoneno.text forKey:select];
                     }else{
                         
-                        // msgstr = @"Please enter phone no. of atmost 10 digits";
+                     
                         NSString* msgstr = @"Selected contact does't have a valid phone number.";
                         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
                         txtPhoneno.text=@"";
@@ -1050,9 +986,6 @@
     imagecheckforemailView.image=nil;
     
     
-//    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
-//    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-//    btnSubmitReferral.userInteractionEnabled = NO;
 }
 - (BOOL)validateEmailWithString:(NSString*)email
 {
@@ -1100,8 +1033,7 @@
     }
     
     [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUP andAnimated:YES];
-   // [self.view addSubview:viewHeaderPOPUP];
-    [tableViewPopup reloadData];
+      [tableViewPopup reloadData];
 
 }
 -(void)showEmailPopup
@@ -1147,7 +1079,7 @@
     
     [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUPemail andAnimated:YES];
 
-//    [self.view addSubview:viewHeaderPOPUP];
+
     [tableViewPopupEmail reloadData];
 }
 -(void)popupTableViewreloadHeight
@@ -1177,13 +1109,6 @@
     NSLog(@"phone %@", (__bridge NSString *)phone1);
     CFRelease(phone1);
     
-    //    if ([[NSString stringWithFormat:@"%@",phone1] rangeOfString:@"null" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    //    {
-    //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"Kindly select phone no only" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    //        [alert show];
-    //        [self peoplePickerNavigationController:peoplePicker didSelectPerson:person property:property identifier:identifier];
-    //        return  YES;
-    //    }
     
     
     ABMultiValueRef fnameProperty = ABRecordCopyValue(person, kABPersonFirstNameProperty);
@@ -1258,7 +1183,7 @@
         txtPhoneno.text = returnedStr;
     }
     
-    //txtPhoneno.text = str;
+    
     txtEmail.text = [ar objectAtIndex:0];
     [self checkforavailability];
     
@@ -1311,8 +1236,7 @@
     NSString *remainder = [decimalString substringFromIndex:index];
     [formattedString appendString:remainder];
     
-   // NSString *abc = formattedString;
-    return  formattedString;
+       return  formattedString;
     
 }
 
@@ -1455,24 +1379,13 @@
             
             //---------29th dec modification end
             
-            
-            
-            
-            
-            
-//            NSString *compare =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
-            
-            
-//            if ([responseString rangeOfString:@"Validation failed for one or more entities" options:NSCaseInsensitiveSearch].location != NSNotFound)
-//            {
-//                
-//            }
+        
         }else if(webservice==2)
         {
             
             if ([responseString rangeOfString:@"Ref" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
-               // NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted. You can track the same by referral id %@",responseString];
+              
                   NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted successfully."];
                 
                 [HelperAlert alertWithOneBtn:@"Thanks!" description:msg okBtn:OkButtonTitle withTag:3 forController:self];
@@ -1500,9 +1413,7 @@
                 imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
                 [activityIndicatorObject1 stopAnimating];
                 
-//                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
-//                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
-//                btnSubmitReferral.userInteractionEnabled = YES;
+
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1534,7 +1445,7 @@
                 
                 return;
             }
-            // NSString *usertype = [userDetailDict valueForKey:@"UserType"];
+           
             lblemailerror.text =@"Email already exist";
             [activityIndicatorObject1 stopAnimating];
             
@@ -1558,9 +1469,7 @@
                 [activityIndicatorObject1 stopAnimating];
                 
                 
-//                btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
-//                [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
-//                btnSubmitReferral.userInteractionEnabled = YES;
+
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1591,7 +1500,7 @@
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     
     
-//    [self.view endEditing:YES];
+
     
     if (tableView == tableViewPopup || tableView==tableViewPopupEmail) {
         NSArray *value;
@@ -1784,11 +1693,9 @@
         if (isPhoneNo) {
         [tableViewPopup reloadData];
         }else{
-//        [[KGModal sharedInstance] hideAnimated:YES];
+
         [tableViewPopupEmail reloadData];
             
-//            txtPhoneno.text = [selectedContactDict valueForKey:@"phone_no"];
-//            txtEmail.text = [selectedContactDict valueForKey:@"email"];
         }
         return;
     }
@@ -1843,7 +1750,7 @@
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //[request addValue:mea forHTTPHeaderField:@"MEAId"];
+    
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1868,7 +1775,6 @@
         NSLog(@"connection is NULL");
     }
     NSString *objStr = @"self";
-//    [[NSUserDefaults standardUserDefaults]setObject:objStr forKey:@"self"];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -1901,9 +1807,7 @@
             found_client = @"yes";
             imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
         }
-//        btnSubmitReferral.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:209.0f/255.0f blue:28.0f/255.0f alpha:1.0f];
-//        [btnSubmitReferral setTitleColor:[UIColor colorWithRed:33.0f/255.0f green:101.0f/255.0f blue:183.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
-//        btnSubmitReferral.userInteractionEnabled = YES;
+
     }
 }
 -(void)cancelNumberPad{

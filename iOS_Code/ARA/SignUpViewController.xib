@@ -59,6 +59,7 @@
                 <outlet property="lbluseriderror" destination="oa6-Y1-IL8" id="L4g-uK-Se5"/>
                 <outlet property="leftview" destination="8tY-Em-G2J" id="VgO-dZ-6i7"/>
                 <outlet property="loweView" destination="R7b-iv-prS" id="Yz4-H8-97i"/>
+                <outlet property="mainImage" destination="xpb-z8-Ern" id="GcJ-u7-Dxi"/>
                 <outlet property="passwordView" destination="lnF-xO-7aw" id="ZBG-tv-bLJ"/>
                 <outlet property="scrollView" destination="RgY-lG-3B0" id="sFH-c5-PkF"/>
                 <outlet property="tableViewMEA" destination="h14-cD-2sy" id="hWX-Le-mG3"/>
@@ -215,15 +216,6 @@
                             <rect key="frame" x="57" y="385" width="14" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" id="hyf-qZ-o0V">
-                            <rect key="frame" x="96" y="209" width="280" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="wEw-bI-pli"/>
-                            </connections>
-                        </textField>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vzx-mN-0Fa">
                             <rect key="frame" x="85" y="161" width="1" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -502,6 +494,15 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="2FX-Ip-ZAw"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" id="hyf-qZ-o0V">
+                            <rect key="frame" x="96" y="209" width="280" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="wEw-bI-pli"/>
                             </connections>
                         </textField>
                     </subviews>

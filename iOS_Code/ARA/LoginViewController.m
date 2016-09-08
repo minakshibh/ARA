@@ -21,11 +21,18 @@
     CGPoint svos;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UILabel *lblPass;
+    IBOutlet UILabel *lblor;
+    IBOutlet UILabel *ipadlblor;
     IBOutlet UILabel *lblAlreadyHaveAnAccount;
+    IBOutlet UILabel *ipadlblAlreadyHaveAnAccount;
     IBOutlet UILabel *lblEmail;
     IBOutlet UIButton *btnForgotPassword;
     IBOutlet UIButton *btnSignUp;
-    IBOutlet UIButton *btnFacebookLogin;
+    IBOutlet UIButton *ipadbtnsignUpWithReference;
+
+    IBOutlet UIButton *iBtnSignup;
+     IBOutlet UIButton *btnsignUpWithReference;
+      IBOutlet UIButton *btnFacebookLogin;
     SignUpViewController *SUvc;
     IBOutlet UIButton *btnLogin;
     IBOutlet UIButton *btnCheckbox;
@@ -51,15 +58,48 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
+    [ipadlblor setHidden:YES];
+    [btnSignUp setHidden:YES];
+    [ipadbtnsignUpWithReference setHidden:YES];
+    [ipadlblAlreadyHaveAnAccount setHidden:YES];
+    
+   // [iBtnSignup setTitle:@"Sign Up" forState:UIControlStateNormal];
+   // [btnsignUpWithReference setTitle:@"Sign Up with Reference" forState:UIControlStateNormal];
+      iBtnSignup.titleLabel.font = [btnSignUp.titleLabel.font fontWithSize:12];
+     btnsignUpWithReference.titleLabel.font = [btnSignUp.titleLabel.font fontWithSize:12];
+   
+    if (IS_IPAD) {
+        [lblAlreadyHaveAnAccount setHidden:YES];
+        [lblor setHidden:YES];
+        [iBtnSignup setHidden:YES];
+        [btnsignUpWithReference setHidden:YES];
+        
+    [ipadlblAlreadyHaveAnAccount setHidden:NO];
+       ipadlblAlreadyHaveAnAccount.text=@"Don't have an account?";
+[ipadlblAlreadyHaveAnAccount setFont:[UIFont fontWithName:@"Roboto-Regular" size:20]];
+        
+        [ipadlblor setHidden:NO];
+         ipadlblor.text=@"or";
+    [ipadlblor setFont:[UIFont fontWithName:@"Roboto-Regular" size:20]];
+        
+        [btnSignUp setHidden:NO];
+        [ipadbtnsignUpWithReference setHidden:NO];
+        
+        
+        [btnSignUp setTitle:@"Sign Up" forState:UIControlStateNormal];
+         btnSignUp.titleLabel.font = [btnSignUp.titleLabel.font fontWithSize:20];
+        
+        
+        
+        ipadbtnsignUpWithReference.titleLabel.font = [btnSignUp.titleLabel.font fontWithSize:20];
+        [ipadbtnsignUpWithReference setTitle:@"Sign Up with Reference" forState:UIControlStateNormal];
+    }
+    
     NSLog(@"login view");
 
-//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-//    [self.view addGestureRecognizer:singleTap];
-    
-    //---initialize checkbox value first tiem with false
     checkbox_Value = false;
     
-//    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"self"];
+
 
     NSLog(@"remember_me_status---%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status"]]);
     
@@ -276,11 +316,30 @@
 }
 
 - (IBAction)btnSignUp:(id)sender {
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
+//    NSString *variable=@"2";
+//    NSUserDefaults *storeData=[NSUserDefaults standardUserDefaults];
+//    [storeData setObject:variable forKey:@"subValue"];
+//    [storeData synchronize];
     SignupEmailCheckViewController *signupEmail = [[SignupEmailCheckViewController alloc]initWithNibName:@"SignupEmailCheckViewController" bundle:nil];
     [self.view endEditing:YES];
     [self.navigationController pushViewController:signupEmail animated:YES];
    // [self.navigationController pushViewController:SUvc animated:YES];
 }
+- (IBAction)btnSignUpwithReference:(id)sender {
+     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
+    NSString *variable=@"1";
+    NSUserDefaults *storeData=[NSUserDefaults standardUserDefaults];
+    [storeData setObject:variable forKey:@"subValue"];
+    [storeData synchronize];
+
+    
+    SignupEmailCheckViewController *signupEmail = [[SignupEmailCheckViewController alloc]initWithNibName:@"SignupEmailCheckViewController" bundle:nil];
+    [self.view endEditing:YES];
+    [self.navigationController pushViewController:signupEmail animated:YES];
+    // [self.navigationController pushViewController:SUvc animated:YES];
+}
+
 
 - (IBAction)btnFacebookLogin:(id)sender {
   
@@ -288,6 +347,9 @@
 }
 
 - (IBAction)btnLogin:(id)sender {
+    
+    
+    
     
     [self checkLogin];
 }
@@ -358,6 +420,7 @@
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
 {
     [webData appendData:data1];
+    NSLog(@"The append data is %@",data1);
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
@@ -369,6 +432,8 @@
         return;
     
     NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
+
+    
     NSLog(@"responseString:%@",responseString);
     NSError *error;
     if([status isEqualToString:@"failed"])
@@ -383,6 +448,7 @@
     
     if([status isEqualToString:@"passed"])
     {
+        
     NSString *email = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"Email"]];
     NSString *first_name = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"FirstName"]];
     NSString *last_name = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"LastName"]];
@@ -397,10 +463,16 @@
     NSString *role_id = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"RoleID"]];
     NSString *purchased_before = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PurchasedBefore"]];
     NSString *profile_picture = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"ProfilePicName"]];
-        
+   NSString *AppDistributor = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"IsAppDistributor"]];
+  
+       // NSString *parameter=@"1";
+        NSUserDefaults *storeData=[NSUserDefaults standardUserDefaults];
+        [storeData setObject:AppDistributor forKey:@"Value"];
+        [storeData synchronize];
+    
         NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
 
-        
+    
     [user setObject:email forKey:@""];
     [user setObject:email forKey:@"l_email"];
     [user setObject:first_name forKey:@"l_firstName"];
@@ -427,6 +499,8 @@
         if ([user valueForKey:@"loginDateSaved"]!=nil) {
             NSData *data = [user objectForKey:@"loginDateSaved"];
             NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            
+            NSLog(@"THe Data in Dictionary is %@",dict);
             
             saveDateDict  = dict;
             if ([saveDateDict valueForKey:[user valueForKey:@"l_userid"]]) {
@@ -653,32 +727,19 @@
         message = @"Please enter email address";
                 alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alert show];
-//        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
         return;
     }else if (passwordNameStr.length==0) {
         message = @"Please enter password";
         
         alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
-//        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+
 
         return;
     }
     
-    //    if ([emailStr rangeOfString:@"@" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    //    {
-    //        if (![txtEmail emailValidation]) {
-    //
-    //            message = @"Please enter email address";
-    //            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    //            [alert show];
-    //            [txtEmail becomeFirstResponder];
-    //            return;
-    //        }
-    //
-    //    }
     
-//    [self.view endEditing:YES];
     
         [txtPassword resignFirstResponder];
         [txtEmail resignFirstResponder];
@@ -695,7 +756,7 @@
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/accounts/login",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
-    NSLog(@"data post >>> %@",_postData);
+    NSLog(@"data Get >>> %@",_postData);
     
     [request setHTTPMethod:@"GET"];
     [request addValue:email forHTTPHeaderField:@"username"];

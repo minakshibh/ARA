@@ -33,29 +33,6 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-/*
-    int c = 0; // standard display
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-        c = 1; // is retina display
-    }
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        c += 2;
-    }
-    
-    if (c==0) {
-        headerImage.image = [UIImage imageNamed:@"320X480.png"];
-    }
-    if (c==1) {
-        headerImage.image = [UIImage imageNamed:@"320X568.png"];
-    }
-    if (c==2) {
-        headerImage.image = [UIImage imageNamed:@"480X800.png"];
-    }
-    if (c==3) {
-        headerImage.image = [UIImage imageNamed:@"640X1136.png"];
-    }
- */   
     if (IS_IPAD)
     {
         btnheading.font=[btnheading.font fontWithSize:24];
@@ -273,8 +250,7 @@
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //    [request addValue:email forHTTPHeaderField:@"username"];
-    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
+   
     
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -303,7 +279,7 @@
 }
 -(void)getlist
 {
-    // [self.view makeToast:@"Fetching data..."];
+   
     if (count==0) {
         [kappDelegate ShowIndicator];
         count++;
@@ -323,8 +299,7 @@
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"GET"];
-    //    [request addValue:email forHTTPHeaderField:@"username"];
-    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
+  
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -365,8 +340,7 @@
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
-    //    [request addValue:email forHTTPHeaderField:@"username"];
-    //    [request addValue:password forHTTPHeaderField:@"userpassword"];
+  
     
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -535,8 +509,8 @@
                                            preferredStyle:UIAlertControllerStyleAlert];
                 
                 UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Log in" style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * action){
-                                                               //Do Some action here
+                handler:^(UIAlertAction * action){
+                                                               
                                                                
             dashboardViewController *dashBoardVC = [[dashboardViewController alloc]init];
                 [dashBoardVC logoutFunction];
