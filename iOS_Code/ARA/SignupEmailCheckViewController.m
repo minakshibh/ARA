@@ -398,6 +398,7 @@
                 
                 
                   NSString *invitationStatus = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"Invitaionstatus"]];
+                
                 if ([invitationStatus.lowercaseString isEqualToString:@"installed"]){
                     
                     UIAlertView *ARAalert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"The referrence code is either expired or already used." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -414,6 +415,7 @@
                 lastname = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"LastName"]];
                 phoneno = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PhoneNo"]];
                 UserDetailId = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"userDetails"]];
+                NSString *InvitationId = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"InvitationId"]];
                 NSString* emailStr =  [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"Email"]];
                 
                 NSArray *values = [[NSArray alloc]initWithObjects:firstname,lastname,phoneno,UserDetailId,emailStr, nil];
@@ -424,6 +426,7 @@
                 signUpView.fromEmailView = @"yes";
                 signUpView.valuesArray = values;
                 signUpView.userReference=@"True";
+                signUpView.InvitationId = InvitationId;
                 
                 if([usertype isEqualToString:@"Client"])
                 {

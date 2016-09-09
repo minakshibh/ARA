@@ -1474,11 +1474,11 @@ if(tableView == tableViewPreviousCustomer)
     
     
     webservice=4;
-    _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid];
+    _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@&InvitationId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid,_InvitationId];
     
     if([found_client isEqualToString:@"yes"])
     {
-        _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@&UserDetailId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid,UserDetailId];
+        _postData = [NSString stringWithFormat:@"UserName=%@&Password=%@&RoleID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&IsFacebookUser=%@&PurchasedBefore=%@&MEAID=%@&ProfilePicName=%@&userId=%@&UserDetailId=%@&InvitationId=%@",userName,password,roleId,firstName,lastName,phoneNo,emailid,isFacebookUser,purchasedBefore,meaID,@"",userid,UserDetailId,_InvitationId];
         
     }
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];

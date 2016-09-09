@@ -86,5 +86,5 @@
 @property (strong,nonatomic) NSString *fromEmailView;
 @property (strong,nonatomic) NSArray *valuesArray;
 @property (strong,nonatomic) NSString *from_fb_button,*isClient;
-@property(strong,nonatomic)NSString *userReference;
+@property(strong,nonatomic)NSString *userReference,*InvitationId;
 @end
