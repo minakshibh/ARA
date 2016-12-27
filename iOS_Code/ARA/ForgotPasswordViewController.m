@@ -85,13 +85,13 @@
     if([txtEmail isEmpty])
     {
 //        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter an email address" okBtn:OkButtonTitle];
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Kindly enter an email address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:@"Kindly enter an email address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         return;
     }
     if (![txtEmail emailValidation]==YES) {
 //        [HelperAlert alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:@"Please check your email address" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         [txtEmail becomeFirstResponder];
         return;
@@ -206,7 +206,7 @@
         return;
     }
     
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
@@ -235,7 +235,7 @@
      if ([responseString rangeOfString:@"Email address not found" options:NSCaseInsensitiveSearch].location != NSNotFound)
      {
 //         [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
-         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
          [alert show];
 
          return;
@@ -246,7 +246,7 @@
         LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
          NSLog(@"-----forgot------");
         [self.navigationController pushViewController:loginView animated:YES];
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
 
         return;
@@ -256,12 +256,12 @@
 //        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
         
         
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Something went wrong. Please try after some time." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:@"Something went wrong. Please try after some time." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         return;
     }
 //    [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     [alert show];
     return;
 }

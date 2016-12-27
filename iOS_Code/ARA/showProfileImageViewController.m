@@ -14,6 +14,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImageView+WebCache.h"
 #import "SDImageCache.h"
+
+#import "JTSImageViewController.h"
+#import "JTSImageInfo.h"
+
+#define TRY_AN_ANIMATED_GIF 0
 //#import "UIView+Toast.h"
 @interface showProfileImageViewController ()
 
@@ -36,7 +41,7 @@
     
     [super viewDidLoad];
     
-    NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];//profile_picture           //l_image
+    imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];//profile_picture           //l_image
     
     
     NSLog(@"image url %@",imagestr);
@@ -83,8 +88,52 @@
             btnProfile.titleLabel.font = [btnProfile.titleLabel.font fontWithSize:30];
         }
     }
-    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
+    [tapRecognizer addTarget:self action:@selector(bigButtonTapped:)];
+    [imageViewProfile addGestureRecognizer:tapRecognizer];
+   
 }
+- (void)bigButtonTapped:(id)sender {
+    
+    // Create image info
+    
+    NSString *empty = @"<null>";
+    
+    if (imagestr != nil ) {
+        
+        if (![imagestr isEqual:empty]){
+
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+#if TRY_AN_ANIMATED_GIF == 1
+    imageInfo.imageURL = [NSURL URLWithString:@"http://media.giphy.com/media/O3QpFiN97YjJu/giphy.gif"];
+#else
+    imageInfo.image = imageViewProfile.image;
+#endif
+    imageInfo.referenceRect = imageViewProfile.frame;
+    imageInfo.referenceView = imageViewProfile.superview;
+    imageInfo.referenceContentMode = imageViewProfile.contentMode;
+    imageInfo.referenceCornerRadius = imageViewProfile.layer.cornerRadius;
+    
+    // Setup view controller
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
+                                           initWithImageInfo:imageInfo
+                                           mode:JTSImageViewControllerMode_Image
+                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+    
+    // Present the view controller.
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+        }
+    }
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return imageViewProfile;
+}
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+}
+
 -(void)targetMethod1:(NSTimer *)timer
 {
 //    NSData * im = [[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"];//l_image    //profile_picture
@@ -96,7 +145,9 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
-    // Dispose of any resources that can be recreated.
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    [imageCache clearMemory];
+    [imageCache clearDisk];
 }
 
 #pragma  mark - buttons
@@ -166,7 +217,7 @@
     {
         UIImagePickerController * picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 //        [self presentViewController:picker animated:YES completion:nil];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:picker];
@@ -270,9 +321,16 @@
         //do not put image inside parameters dictionary as I did, but append it!//imagedata
         
         //[imageViewProfile setImage:img];
+//        
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+//        formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
+//        NSLog(@"%@", [formatter stringFromDate:[NSDate date]]);
+        
+        
+        NSString *date=[NSString stringWithFormat:@"%@",[self randomStringWithLength:6]];
     
         NSLog(@"append image data %@",imagedata);
-        [formData appendPartWithFileData:imagedata name:fileName fileName:@"photo.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imagedata name:fileName fileName:[NSString stringWithFormat:@"%@.jpg",date] mimeType:@"image/jpeg"];
     //     [self.view makeToast:@"The image is being uploading...."];
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -304,19 +362,13 @@
     //  [imageViewProfile sd_setImageWithURL:[NSURL URLWithString:imagestr1]];
         
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
-        [[SDImageCache sharedImageCache]clearMemory];
-        [[SDImageCache sharedImageCache]clearDisk];
-        
-        [[SDImageCache sharedImageCache]storeImage:img forKey:@"l_image" toDisk:YES];
-         [[SDImageCache sharedImageCache]storeImage:img forKey:@"profile_picture" toDisk:YES];
-    
+
+        [imageViewProfile sd_setImageWithURL:[NSURL URLWithString:imagestr1]];
         
         [[NSUserDefaults standardUserDefaults]setObject:imagedata forKey:@"profile_picture"];
  NSLog(@"new image url %@",imagestr1);
         [[NSUserDefaults standardUserDefaults]setObject:imagestr1 forKey:@"l_image"];
-       [[SDImageCache sharedImageCache]storeImage:img forKey:@"profile_picture"];
-       [[SDImageCache sharedImageCache]storeImage:img forKey:@"l_image"];
-
+ 
         [kappDelegate HideIndicator];
         
         
@@ -332,4 +384,19 @@
     }];
     [op start];
 }
+
+
+
+-(NSString *) randomStringWithLength: (int) len {
+    
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+    }
+    
+    return randomString;
+}
+
 @end

@@ -593,6 +593,7 @@
     self.filteredListContent = [NSMutableArray arrayWithCapacity:[data count]];
     [self.searchDisplayController.searchBar setShowsCancelButton:NO];
     [info release];
+  
     [self.table reloadData];
 }
 
@@ -702,7 +703,7 @@
     
     
     if (collectedData.count == 0){
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Select a contact to send invitation" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:@"Select a contact to send invitation" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         return;
     }
@@ -783,12 +784,6 @@
         NSLog(@"connection is NULL");
     }
     
-    
-    
-
-    
-    
-    
 }
 
 - (void)dismiss
@@ -828,6 +823,8 @@
                 
                 UITableViewCell *cell = [selectedItem objectForKey:@"cell"];
               //   NSLog(@"Value for checked %@",selectedItem);
+                
+               
                 
                 UIButton *button = (UIButton *)cell.accessoryView;
                 
@@ -885,6 +882,7 @@
 
         cell.textLabel.text = [objectsArray objectAtIndex:indexPath.row];
         
+        
         NSInteger rowSelected = [[selectedItem valueForKey:@"rowSelected"] integerValue];
         
         if ((rowSelected != -1) && (indexPath.row == rowSelected))
@@ -902,7 +900,7 @@
         
         if (cell == nil)
         {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCustomCellID] autorelease];
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCustomCellID] autorelease];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         }
@@ -948,7 +946,8 @@
   [[item allKeys] sortedArrayUsingSelector:@selector(compare:)];
 	cell.textLabel.text = [item objectForKey:@"name"];
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
-    
+     cell.detailTextLabel.text=[item objectForKey:@"email"];
+    cell.detailTextLabel.font= [UIFont systemFontOfSize:14];
 	[item setObject:cell forKey:@"cell"];
 	
 	BOOL checked = [[item objectForKey:@"checked"] boolValue];
@@ -977,7 +976,10 @@
 	
 	return cell;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     return self.table.rowHeight = 70.f;
+}
 - (void)checkButtonTapped:(id)sender event:(id)event
 {
 	NSSet *touches = [event allTouches];
@@ -1221,12 +1223,12 @@
     if ([responseString isEqualToString:@"true"])
     {
        
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Invitation Send Successfully." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"Invitation Send Successfully." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
     }
   else if ([responseString isEqualToString:@"false"])
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Invitation Sending failed Please Try After Some Time." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"Invitation Sending failed Please Try After Some Time." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
     }
     else
@@ -1259,14 +1261,14 @@
             }
             
             NSLog(@" my email %@",email);
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"User with these email(s) already exist in System" message:email delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Invitation has been already sent to the highlighted email address(es)." message:email delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
 
         }
         
        else
        {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Invitation Sent successfully" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"Invitation Sent successfully" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
        }
     }

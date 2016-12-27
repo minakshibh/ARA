@@ -46,7 +46,7 @@
 }
 
 - (IBAction)btnChangePassword:(id)sender {
-
+ [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
     NSString* newPasswordStr = [txtNewPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* confirmPasswordStr = [txtConfirmPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
@@ -54,17 +54,17 @@
     NSString *message;
     if (newPasswordStr.length==0) {
         message = @"Please enter new password.";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
         return;
     }else if(confirmPasswordStr.length==0){
         message = @"Please enter confirm password.";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
         return;
     }else if(![confirmPasswordStr isEqualToString:newPasswordStr]){
         message = @"Password didnt match. Kindly enter same password.";
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
         return;
     }
@@ -211,7 +211,7 @@
         [alert show];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
@@ -237,10 +237,11 @@
     if([status isEqualToString:@"failed"])
     {
        
-        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:responseString  preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:AlertTitle  message:responseString  preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-
+            [self.navigationController popViewControllerAnimated:true];
+            [self.navigationController dismissViewControllerAnimated:true completion:nil];
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }]];
@@ -253,7 +254,7 @@
     
     if([status isEqualToString:@"passed"])
     {
-        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:@"Your password has been changed"  preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:AlertTitle  message:@"Your password has been changed"  preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
             LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];

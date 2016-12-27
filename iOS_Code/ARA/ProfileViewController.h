@@ -15,7 +15,7 @@
 {
     CGPoint svos;
     IBOutlet UIImageView *headerImage;
-
+    
     UIActivityIndicatorView *activityIndicatorObject;
     IBOutlet UIImageView *imageProfile;
     IBOutlet UIScrollView *scrollView;
@@ -62,6 +62,10 @@
     IBOutlet UILabel *lblmea1;
     IBOutlet UILabel *lblpurchased1;
     IBOutlet UILabel *lblphoneno1;
+    
+    NSString *status;
+    NSString *email;
+    NSString *password;
 }
 - (IBAction)btnEditImage:(id)sender;
 - (IBAction)btnUploadImage:(id)sender;

@@ -44,7 +44,7 @@
     
     [btnSubmitReferral setHidden:NO];
     [sideMenuBtn setHidden:YES];
-     [menuBtnImage setHidden:YES];
+    [menuBtnImage setHidden:YES];
     [newReferralBtn setHidden:YES];
     [sendInvitationBtn setHidden:YES];
     
@@ -809,7 +809,7 @@
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Internet connection lost. Could not connect to the server" okBtn:OkButtonTitle];
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Server connection lost. Could not connect to the server" okBtn:OkButtonTitle];
         return;
     }
     
@@ -1281,8 +1281,8 @@ if([recieved_status isEqualToString:@"passed"])
     _postData = [NSString stringWithFormat:@"UserID=%@&DeviceUDID=%@&DeviceOS=%@&TokenID=%@",userid,udid,currSys,devToken];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/userdevice",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
+    NSLog(@"%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] );
     NSLog(@"data post >>> %@",_postData);
-    
     [request setHTTPMethod:@"POST"];
    
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];

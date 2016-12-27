@@ -13,6 +13,10 @@
 #import "ASIHTTPRequest.h"
 #import "showProfileImageViewController.h"
 #import "UIImageView+Webcache.h"
+#import "DBManager.h"
+#import "dashboardViewController.h"
+
+
 //#import "UIImageView+WebCache.h"
 
 
@@ -23,14 +27,20 @@
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
-   
+    
     imageProfile.hidden = YES;
     [super viewDidLoad];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    email = [NSString stringWithFormat:@"%@",[user valueForKey:@"l_email"]];
+    password = [NSString stringWithFormat:@"%@",[user valueForKey:@"l_password"]];
+    
+    lblUserID.textColor = [UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
     activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-
+    
     btnCheckBox.hidden = YES;
     checkbox_Value = false;
-
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -92,10 +102,10 @@
         
         btnedit.titleLabel.font = [btnedit.titleLabel.font fontWithSize:24];
         btnSave.titleLabel.font = [btnSave.titleLabel.font fontWithSize:24];
-         btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
+        btnback.titleLabel.font = [btnback.titleLabel.font fontWithSize:24];
         btnEditImage.titleLabel.font = [btnback.titleLabel.font fontWithSize:20];
         lblUserID.font=[lblUserID.font fontWithSize:24];
-
+        
         if(IS_IPAD_PRO_1366)
         {
             namelbl.font=[namelbl.font fontWithSize:30];
@@ -130,6 +140,9 @@
             lblUserID.font=[lblUserID.font fontWithSize:30];
         }
     }
+    
+    
+    [self getloginDetails];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -138,12 +151,12 @@
     if (img != nil){
         imageProfile.image = img;
     }else{
-    
-    NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
-//    [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]placeholderImage:[UIImage imageNamed:@"user-i.png"]options:SDWebImageRefreshCached];
-    [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]placeholderImage:[UIImage imageNamed:@"user-i.png"]options:SDWebImageRefreshCached];
+        
+        NSString *imagestr = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_image"]];
+        //    [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]placeholderImage:[UIImage imageNamed:@"user-i.png"]options:SDWebImageRefreshCached];
+        [imageProfile sd_setImageWithURL:[NSURL URLWithString:imagestr]placeholderImage:[UIImage imageNamed:@"user-i.png"]options:SDWebImageRefreshCached];
     }
-
+    
     
     
     lblRole.hidden = NO;
@@ -155,9 +168,9 @@
     //--assigning image and label values
     lblEmail.text = [NSString stringWithFormat:@"%@",[user valueForKey:@"l_email"]];
     
-   
+    
     lblUserID.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_userName"]];
-   
+    
     NSString *first = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"]];
     lblName.text = first;
     NSString *last = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
@@ -166,7 +179,7 @@
     
     lblPhoneno.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
     NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-   
+    
     NSMutableString *mutstr = [[NSMutableString alloc]init];
     for (int i = 0; i<phone.length; i++)
     {
@@ -174,7 +187,7 @@
         if(i==0){
             mutstr =[NSMutableString stringWithFormat:@"%@",character];
         }else{
-        mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
+            mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
         }
         [self showmaskonnumber:mutstr];
     }
@@ -225,7 +238,7 @@
     [btnCheckBox setImage:btnImage forState:UIControlStateNormal];
 }
 
-- (IBAction)btnback:(id)sender {    
+- (IBAction)btnback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -243,7 +256,7 @@
     txtPhoneNo.text = lblPhoneno.text;
     txtName.text = lblName.text;
     txtLastname.text = lblLastname.text;
-  
+    
     
     txtName.textColor = [UIColor blackColor];
     txtPhoneNo.textColor = [UIColor blackColor];
@@ -254,7 +267,7 @@
     btnCheckBox.hidden = NO;
     btnSave.hidden = NO;
     lblEmail.hidden = NO;
-
+    
     lblPhoneno.hidden = YES;
     lblRole.hidden = NO;
     lblPurchased.hidden = YES;
@@ -282,8 +295,8 @@
 
 
 - (IBAction)btnSave:(id)sender {
-     NSString* namestr = [txtName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-     NSString* phoneno = [txtPhoneNo.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* namestr = [txtName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString* phoneno = [txtPhoneNo.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
     phoneno = [[phoneno componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
@@ -295,13 +308,13 @@
     {
         msg = @"please enter name";
         lblerrorName.hidden = NO;
-
+        
         lblerrorName.text = msg;
-       [txtName becomeFirstResponder];
+        [txtName becomeFirstResponder];
         return;
     }else if(namestr.length > 25)
     {
-          msg = @"Entered name is too long.";
+        msg = @"Entered name is too long.";
         lblerrorName.hidden = NO;
         
         lblerrorName.text = msg;
@@ -328,12 +341,12 @@
         
         msg = @"please enter phone no";
         lblerrorPhoneno.hidden = NO;
-
+        
         lblerrorPhoneno.text =msg;
         [txtPhoneNo becomeFirstResponder];
         
         return;
-    }else if(phoneno.length < 5)
+    }else if(phoneno.length < 10)
     {
         msg = @"Kindly enter a valid phone number.";
         lblerrorPhoneno.hidden = NO;
@@ -348,13 +361,14 @@
         {
             
         }else{
-        msg = @"Phone no should be atmost of 10 digits";
-        lblerrorPhoneno.hidden = NO;
-        lblerrorPhoneno.text =msg;
-        [txtPhoneNo becomeFirstResponder];
-        return;
+            msg = @"Phone no should be atmost of 10 digits";
+            lblerrorPhoneno.hidden = NO;
+            lblerrorPhoneno.text =msg;
+            [txtPhoneNo becomeFirstResponder];
+            return;
         }
     }
+    lblerrorPhoneno.hidden =YES;
     namelbl.textColor = [UIColor darkGrayColor];
     phonelbl.textColor = [UIColor darkGrayColor];
     purchasedlbl.textColor = [UIColor darkGrayColor];
@@ -364,7 +378,7 @@
     [txtName resignFirstResponder];
     [txtLastname resignFirstResponder];
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-
+    
     lblName.hidden=NO;
     btnSave.hidden = YES;
     btnEdit.hidden = NO;
@@ -378,7 +392,7 @@
     btnCheckBox.hidden = YES;
     
     lblEmail.hidden = NO;
-
+    
     lblPhoneno.hidden = NO;
     lblPurchased.hidden = NO;
     lblRole.hidden = NO;
@@ -398,7 +412,7 @@
     lblLastname.text = lastname;
     txtName.hidden=YES;
     txtLastname.hidden = YES;
-   
+    
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *roldID = [NSString stringWithFormat:@"%@",[user valueForKey:@"l_roleId"]];
@@ -408,20 +422,20 @@
     NSString *meaid = [NSString stringWithFormat:@"%@",[user valueForKey:@"l_meaId"]];
     NSString *username= [NSString stringWithFormat:@"%@",[user valueForKey:@"l_userName"]];
     NSString *userid= [NSString stringWithFormat:@"%@",[user valueForKey:@"l_userid"]];
-
+    
     NSString *purchasedBefore;
     if(checkbox_Value == YES){
-         purchasedBefore = @"true";
+        purchasedBefore = @"true";
     }else{
         purchasedBefore = @"false";
-
+        
     }
     
     SignUpViewController *obj = [[SignUpViewController alloc]init];
     
     
     [obj userRegestration:namestr LastName:lastname RoleID:roldID PhoneNumber:phoneno Emailid:email Password:password PurchasedBefore:purchasedBefore IsFacebookUser:isfacebook MEAID:meaid UserName:username userid:userid];
- 
+    
 }
 #pragma mark - text delegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -451,7 +465,7 @@
     return YES;
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-
+    
     scrollView.scrollEnabled = NO;
     return YES;
 }
@@ -468,30 +482,30 @@
         lblerrorName.hidden = YES;
         
     }
-
+    
     
     svos = scrollView.contentOffset;
     scrollView.scrollEnabled = YES;
     
+    
+    
+    if(  textField==txtPhoneNo) {
         
-        
-        if(  textField==txtPhoneNo) {
-            
-            CGPoint pt;
-            CGRect rc = [textField bounds];
-            rc = [textField convertRect:rc toView:scrollView];
-            pt = rc.origin;
-            pt.x = 0;
-            pt.y -=100;
-            [scrollView setContentOffset:pt animated:YES];
-        }
+        CGPoint pt;
+        CGRect rc = [textField bounds];
+        rc = [textField convertRect:rc toView:scrollView];
+        pt = rc.origin;
+        pt.x = 0;
+        pt.y -=100;
+        [scrollView setContentOffset:pt animated:YES];
+    }
     
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if(textField==txtPhoneNo)
     {
-
+        
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         if(newString.length==0)
         {   txtPhoneNo.text=@"";
@@ -503,19 +517,19 @@
         NSUInteger length = decimalString.length;
         BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
         
-    if (laststr.length<decimalString.length)
-    {
-            
-        
-        if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 11))
+        if (laststr.length<decimalString.length)
         {
-            [txtPhoneNo becomeFirstResponder];
             
-            return NO;
+            
+            if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 11))
+            {
+                [txtPhoneNo becomeFirstResponder];
+                
+                return NO;
+            }
         }
-    }
         laststr = [NSString stringWithFormat:@"%@",decimalString];
-
+        
         NSUInteger index = 0;
         NSMutableString *formattedString = [NSMutableString string];
         
@@ -560,7 +574,7 @@
 -(void)cancelNumberPad{
     [txtPhoneNo resignFirstResponder];
     NSString *phone =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_phoneNo"]];
-   
+    
     NSMutableString *random = [[NSMutableString alloc]init];
     for (int i = 0; i<phone.length; i++)
     {
@@ -607,7 +621,7 @@
     avatarView.frame = frame;
     
     
- 
+    
 }
 -(void)targetMethod:(NSTimer *)timer
 {
@@ -696,5 +710,248 @@
     lblPhoneno.text = frmtStr;
     txtPhoneNo.text = frmtStr;
 }
+-(void)getloginDetails
+{
+    // [kappDelegate ShowIndicator];
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/accounts/login",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"data Get >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    [request addValue:email forHTTPHeaderField:@"username"];
+    [request addValue:password forHTTPHeaderField:@"userpassword"];
+    
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
 
+
+#pragma mark - Connection Delegates
+
+-(NSInteger)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+    
+    if((long)[httpResponse statusCode] == ResultOk)
+    {
+        NSLog(@"Received Response");
+        [webData setLength: 0];
+        status = @"passed";
+        
+    }else if ((long)[httpResponse statusCode] == ResultFailed)
+    {
+        status = @"failed";
+        return [httpResponse statusCode];
+        
+    }
+    return  YES;
+}
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    //  [kappDelegate HideIndicator];
+    
+    
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The Internet connection appears to be offline." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The network connection was lost" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"Internet connection lost. Could not connect to the server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ERROR" message:@"The request timed out. Not able to connect to server" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    NSLog(@"ERROR with the Connection ");
+    webData =nil;
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
+{
+    [webData appendData:data1];
+    NSLog(@"The append data is %@",data1);
+}
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    //  [kappDelegate HideIndicator];
+    
+    NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
+    
+    if ([webData length]==0)
+        return;
+    
+    NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
+    
+    
+    NSLog(@"responseString:%@",responseString);
+    NSError *error;
+    if([status isEqualToString:@"failed"])
+    {
+        //        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    SBJsonParser *json = [[SBJsonParser alloc] init];
+    NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
+    
+    if([status isEqualToString:@"passed"])
+    {
+        
+        NSString *email = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"Email"]];
+        NSString *first_name = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"FirstName"]];
+        NSString *last_name = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"LastName"]];
+        NSString *facebook_user = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"IsFacebookUser"]];
+        NSString *mea_id = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAID"]];
+        NSString *mea_name = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAName"]];
+        NSString *phone_no = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PhoneNumber"]];
+        NSString *user_name = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserName"]];
+        NSString *user_id = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserId"]];
+        NSString *password = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"Password"]];
+        NSString *role_name = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"RoleName"]];
+        NSString *role_id = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"RoleID"]];
+        NSString *purchased_before = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PurchasedBefore"]];
+        NSString *profile_picture = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"ProfilePicName"]];
+        NSString *AppDistributor = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"IsAppDistributor"]];
+        
+        // NSString *parameter=@"1";
+        NSUserDefaults *storeData=[NSUserDefaults standardUserDefaults];
+        [storeData setObject:AppDistributor forKey:@"Value"];
+        [storeData synchronize];
+        
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        
+        
+        [user setObject:email forKey:@""];
+        [user setObject:email forKey:@"l_email"];
+        [user setObject:first_name forKey:@"l_firstName"];
+        [user setObject:last_name forKey:@"l_lastName"];
+        [user setObject:facebook_user forKey:@"l_facebookUser"];
+        [user setObject:mea_id forKey:@"l_meaId"];
+        [user setObject:mea_name forKey:@"l_meaName"];
+        [user setObject:phone_no forKey:@"l_phoneNo"];
+        [user setObject:user_name forKey:@"l_userName"];
+        [user setObject:user_id forKey:@"l_userid"];
+        [user setObject:role_name forKey:@"l_roleName"];
+        [user setObject:role_id forKey:@"l_roleId"];
+        [user setObject:purchased_before forKey:@"l_purchasedBefore"];
+        [user setObject:password forKey:@"l_password"];
+        [user setObject:@"yes" forKey:@"l_loggedin"];
+        [user setObject:profile_picture forKey:@"l_image"];
+        
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        NSString* dateStr = [dateFormatter stringFromDate:[NSDate date]];
+        
+        NSMutableDictionary *saveDateDict = [[NSMutableDictionary alloc]init];
+        
+        if ([user valueForKey:@"loginDateSaved"]!=nil) {
+            NSData *data = [user objectForKey:@"loginDateSaved"];
+            NSMutableDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            
+            NSLog(@"THe Data in Dictionary is %@",dict);
+            
+            saveDateDict  = dict;
+            if ([saveDateDict valueForKey:[user valueForKey:@"l_userid"]]) {
+                
+            }else{
+                [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:user_id];
+            }
+        }else{
+            [saveDateDict setObject:[NSString stringWithFormat:@"%@",dateStr] forKey:[user valueForKey:@"l_userid"]];
+        }
+        
+        NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:saveDateDict];
+        [user setObject:data1 forKey:@"loginDateSaved"];
+        
+        
+        [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]] forKey:@"UserToken"];
+        NSLog(@"%@",[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserToken"]]);
+        
+        if(checkbox_Value == true)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"remember_me_status"];
+            
+            
+            
+            if ([txtEmail.text isEqualToString:user_name]) {
+                
+                [[NSUserDefaults standardUserDefaults] setObject:user_name forKey:@"remember_me_status_email"];
+                
+            }
+            else
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:email forKey:@"remember_me_status_email"];
+                
+            }
+            
+            
+            [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"remember_me_status_pass"];
+        }else{
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status_email"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status_pass"];
+        }
+        
+        DBManager *db = [[DBManager alloc]init];
+        bool createDB = [db createDB];
+        
+        
+        //  [kappDelegate HideIndicator];
+        //  dashboardViewController *obj = [[dashboardViewController alloc]initWithNibName:@"dashboardViewController" bundle:nil];
+        //  obj.from_login = @"yes";
+        
+        //   [self.navigationController pushViewController:obj animated:YES];
+        
+        
+        
+    }else{
+        //        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    //   [kappDelegate HideIndicator];
+    
+}
 @end

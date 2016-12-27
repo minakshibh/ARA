@@ -107,6 +107,7 @@
         
         if([[[NSUserDefaults standardUserDefaults]valueForKey:@"remember_me_status"] isEqualToString:@"yes"])
         {
+            
             txtEmail.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status_email"];
             txtPassword.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"remember_me_status_pass"];
             [btnCheckbox setImage:[UIImage imageNamed:@"checkbox-checked.png"] forState:UIControlStateNormal];
@@ -411,7 +412,7 @@
         [alert show];
         return;
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"Intenet connection failed.. Try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     NSLog(@"ERROR with the Connection ");
     webData =nil;
@@ -439,7 +440,7 @@
     if([status isEqualToString:@"failed"])
     {
 //        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
         return;
     }
@@ -522,7 +523,21 @@
     if(checkbox_Value == true)
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"remember_me_status"];
-        [[NSUserDefaults standardUserDefaults] setObject:email forKey:@"remember_me_status_email"];
+      
+        
+        
+        if ([txtEmail.text isEqualToString:user_name]) {
+            
+        [[NSUserDefaults standardUserDefaults] setObject:user_name forKey:@"remember_me_status_email"];
+            
+        }
+        else
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:email forKey:@"remember_me_status_email"];
+            
+        }
+        
+        
         [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"remember_me_status_pass"];
     }else{
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"remember_me_status"];
@@ -544,7 +559,7 @@
         
     }else{
 //        [HelperAlert alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
     [kappDelegate HideIndicator];
@@ -725,14 +740,14 @@
     NSString *message;
     if (emailStr.length==0) {
         message = @"Please enter email address";
-                alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alert show];
 
         return;
     }else if (passwordNameStr.length==0) {
         message = @"Please enter password";
         
-        alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
 
 

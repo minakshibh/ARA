@@ -133,10 +133,10 @@
                 continue;
             }
             if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
-                [HelperAlert alertWithOneBtn:AlertTitle description:@"Email already exists in the list" okBtn:OkButtonTitle];
+                [HelperAlert alertWithOneBtn:AlertTitle description:@"The email you entered is already exist in Autoaves system Please Try with another email address" okBtn:OkButtonTitle];
               
                 return;
-            }
+            }//Email already exists in the list
         }
         
     }else{
@@ -145,7 +145,7 @@
         {
             for (int l=0; l<_email_array.count; l++) {
                 if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
-                     [HelperAlert alertWithOneBtn:AlertTitle description:@"Email already exists in the list" okBtn:OkButtonTitle];
+                     [HelperAlert alertWithOneBtn:AlertTitle description:@"The email you entered is already exist in Autoaves system Please Try with another email address" okBtn:OkButtonTitle];
                    
                     return;
                 }
@@ -669,7 +669,7 @@
                     LoginViewController* loginVC = [[LoginViewController alloc]init];
                             [self.navigationController pushViewController:loginVC animated:YES];
                     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Not able to  logout. Try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"AutoAves" message:@"Not able to  logout. Try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [alert show];
 
                                                                }
@@ -691,7 +691,7 @@
             }else if (webservice==7)
             {
                 //[self.view makeToast:[NSString stringWithFormat:@"%@",responseString]];
-                //            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                //            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"AutoAves" message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 //            [alert show];
                 [kappDelegate HideIndicator];
                 if (count_status==0) {

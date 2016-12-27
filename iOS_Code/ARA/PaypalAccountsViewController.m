@@ -70,6 +70,29 @@
     }
     return 60;
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)table
+{
+    NSInteger numOfSections = 0;
+    if (paypalListArray.count>0)
+    {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections                = 1;
+        tableView.backgroundView = nil;
+    }
+    else
+    {
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+        noDataLabel.text             = @"No record found";
+        noDataLabel.textColor        = [UIColor blackColor];
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        tableView.backgroundView = noDataLabel;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
      tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -162,6 +185,7 @@
     
     NSString *fnameStr = [NSString stringWithFormat:@"%@",obj.FirstName];
     NSString *lnameStr = [NSString stringWithFormat:@"%@",obj.LastName];
+    NSString *emailStr = [NSString stringWithFormat:@"%@",obj.PaypalEmail];
     
     if ([fnameStr  isEqual: @"(null)"]) {
         fnameStr = @"";
@@ -172,8 +196,20 @@
     
     NSString *fullName = [NSString stringWithFormat:@"%@ %@",fnameStr,lnameStr];
     
-    [cell setLabelText:obj.PaymentModeName :obj.PaypalEmail :obj.IsDefault :fullName];
-
+    NSMutableArray *emailArray= [[NSMutableArray alloc]init];
+    
+    
+    if ([emailArray containsObject:obj.PaypalEmail]) {
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"The email you entered is already exist in Autoaves system Please Try with another email address" okBtn:OkButtonTitle];
+        
+        return cell;
+    }
+    else
+    {
+        [emailArray addObject:emailStr];
+        [cell setLabelText:obj.PaymentModeName :obj.PaypalEmail :obj.IsDefault :fullName];
+        
+    }
     
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -519,7 +555,7 @@
                 LoginViewController* loginVC = [[LoginViewController alloc]init];
             [self.navigationController pushViewController:loginVC animated:YES];
         }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Not able to  logout. Try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:@"Not able to  logout. Try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                                                    [alert show];
                                                                    
                 }

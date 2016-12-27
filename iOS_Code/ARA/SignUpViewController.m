@@ -27,7 +27,8 @@
     mainImage.image=[UIImage imageNamed:@"step2.png"];
     
     lblEnteremailaddress.text=@"Enter email address";
-    
+    [txtFirstName enterOnlyLetters];
+    [txtLastName enterOnlyLetters];
     
     
     getValue   = [[NSUserDefaults standardUserDefaults]stringForKey:@"data"];
@@ -66,10 +67,10 @@
     lblEmail.layer.cornerRadius = 2.0;  [lblEmail setClipsToBounds:YES];
     btnCheckBox.layer.cornerRadius = 2.0;  [btnCheckBox setClipsToBounds:YES];
     btnSignup.layer.cornerRadius = 2.0;  [btnSignup setClipsToBounds:YES];
-
+    getdataFromFB   = [[NSUserDefaults standardUserDefaults]stringForKey:@"from_fb"];
     
     //checking if coming to this view throudh facebook
-    if([_from_fb_button isEqualToString:@"yes"])
+    if([getdataFromFB isEqualToString:@"yes"])
     {
         NSUserDefaults *user_details = [NSUserDefaults standardUserDefaults];
         NSArray *name = [[user_details valueForKey:@"user_name"] componentsSeparatedByString:@" "];
@@ -207,7 +208,7 @@
     [imageViewDisablestep1 addGestureRecognizer:singleFingerTap];
 
     //--assigning values to label
-    if([_from_fb_button isEqualToString:@"yes"])
+    if([getdataFromFB isEqualToString:@"yes"])
     {
         CGRect pwd_lbl_height = lblPassword.frame;
         float lbl_height = pwd_lbl_height.size.height;
@@ -244,6 +245,12 @@
     //---get tableview data
     [self getPreviousCustomer];
     
+     if([getdataFromFB isEqualToString:@"yes"])
+     {
+         return;
+     }
+    else
+    {
     if ([_fromEmailView isEqualToString:@"yes"]) {
         if (_valuesArray.count>0) {
             if ([_isClient isEqualToString:@"yes"]) {
@@ -260,6 +267,7 @@
             UserDetailId = [NSString stringWithFormat:@"%@",[_valuesArray objectAtIndex:3]];
             txtEmail.text = [_valuesArray objectAtIndex:4];
             webserviceStatus = @"checked" ;
+            }
         }
     }
 }
@@ -354,7 +362,7 @@
 }
 
 - (IBAction)btnLogIn:(id)sender {
-    if([_from_fb_button isEqualToString:@"yes"])
+    if([getdataFromFB isEqualToString:@"yes"])
     {
         LoginViewController *obj = [[LoginViewController alloc]init];
         [obj facebookLogin];
@@ -402,8 +410,16 @@
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }else if ([txtPhoneNo isEmpty] ) {
+        
+
         message = @"Please Enter a valid phone no";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    if (phoneNostr.length<10 ) {
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+        
+        
         return;
     }
     if (phoneNostr.length>10 ) {
@@ -428,7 +444,7 @@
         return;
     }else if ([txtPassword isEmpty] ) {
         int i=0;
-        if([_from_fb_button isEqualToString:@"yes"])
+        if([getdataFromFB isEqualToString:@"yes"])
         {
             i++;
         }
@@ -496,7 +512,7 @@
     
     NSString *fb_status,*value;
     //--check if user came from facebook
-    if ([_from_fb_button isEqualToString: @"yes"]) {
+    if ([getdataFromFB isEqualToString: @"yes"]) {
         fb_status = @"true";
     }else{
         fb_status = @"false";
@@ -651,14 +667,26 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     scrollView.scrollEnabled = NO;
-
+    CGPoint pt;
+    CGRect rc = [textField bounds];
+    rc = [textField convertRect:rc toView:scrollView];
+    pt = rc.origin;
+    pt.x = 0;
+    pt.y -=200;
+    [scrollView setContentOffset:pt animated:YES];
+    
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+//    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+//    scrollView.contentInset = contentInsets;
+//    scrollView.scrollIndicatorInsets = contentInsets;
+    
     
     if(textField == txtUserId)
     {
      //   UIAlertView *alert;
         if(txtUserId.text.length==0)
         {
-//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Please enter userId" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:@"Please enter userId" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
 //            [alert show];
             
             return;
@@ -1021,7 +1049,8 @@ if ([response_status isEqualToString:@"passed"])
             [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PurchasedBefore"]] forKey:@"l_purchasedBefore"];
             [user setObject:@"yes" forKey:@"l_loggedin"];
             [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"Password"]] forKey:@"l_password"];
-                
+                [user setObject:[NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"IsAppDistributor"]] forKey:@"Value"];
+             
                 if(internal1==11){
                   
                 }else{
@@ -1135,7 +1164,7 @@ if ([response_status isEqualToString:@"passed"])
                    [HelperAlert alertWithTwoBtns:AlertTitle description:@"Are you a previous client of Automotive Avenues?" okBtn:@"No" cancelBtn:@"Yes" withTag:2 forController:self];
 
                    
-//                   UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:@"We already have your details. Are you a previous client of ARA ?" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Yes i am",nil];
+//                   UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:@"We already have your details. Are you a previous client of ARA ?" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Yes i am",nil];
 //                   [alert show];
 //                   alert.tag =2;
                    [txtEmail resignFirstResponder];
@@ -1150,7 +1179,7 @@ if ([response_status isEqualToString:@"passed"])
 
                    return;
                }
-               lblemailerror.text =@"Email already exist";
+               lblemailerror.text =@"The email you entered is already exist in Autoaves system Please Try with another email address";
             
             [activityIndicatorObject1 stopAnimating];
             
@@ -1626,4 +1655,29 @@ if(tableView == tableViewPreviousCustomer)
     scrollView.scrollEnabled = YES;
     
 }
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+}
+
 @end

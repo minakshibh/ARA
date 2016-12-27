@@ -11,6 +11,8 @@
 
 @interface SignUpViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
+    NSString * getdataFromFB;
+
      NSString *getValue;
     IBOutlet UIImageView *mainImage;
     IBOutlet UIImageView *imagelogo;

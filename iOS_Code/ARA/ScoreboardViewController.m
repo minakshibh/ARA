@@ -292,7 +292,7 @@
     NSError *error;
     //    if([status isEqualToString:@"failed"])
     //    {
-    //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"ARA" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     //        [alert show];
     //        return;
     //    }

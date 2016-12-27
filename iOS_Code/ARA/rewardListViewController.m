@@ -100,6 +100,29 @@
     }
     return 60;
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)table
+{
+    NSInteger numOfSections = 0;
+    if (rewardListArray.count>0)
+    {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections                = 1;
+        tableView.backgroundView = nil;
+    }
+    else
+    {
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+        noDataLabel.text             = @"No record found";
+        noDataLabel.textColor        = [UIColor blackColor];
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        tableView.backgroundView = noDataLabel;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
      tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -289,7 +312,7 @@
                 NSString *status = [NSString stringWithFormat:@"%@",lblheading.text];
                 
 
-                [HelperAlert  alertWithOneBtn:AlertTitle description:@"There is no data to display" okBtn:OkButtonTitle];
+               // [HelperAlert  alertWithOneBtn:AlertTitle description:@"There is no data to display" okBtn:OkButtonTitle];
 
                 
                     [tableView reloadData];

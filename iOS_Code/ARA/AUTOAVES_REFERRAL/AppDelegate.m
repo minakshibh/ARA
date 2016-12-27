@@ -12,10 +12,11 @@
 #import "LoginViewController.h"
 #import "dashboardViewController.h"
 #import "referralListViewController.h"
-#import <Crittercism/Crittercism.h>
+//#import <Crittercism/Crittercism.h>
 #import "RecoveryViewController.h"
 
-@interface AppDelegate () <CrittercismDelegate>
+//@interface AppDelegate () <CrittercismDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -47,7 +48,7 @@
     }
     else {
         // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
-        NSString *msgStr = @"You've disabled access to contacts. To re-enable, please go to Settings and enable Contacts for ARA.";
+//        NSString *msgStr = @"You've disabled access to contacts. To re-enable, please go to Settings and enable Contacts for AutoAves.";
         //        [HelperAlert alertWithOneBtn:AlertTitle description:msgStr okBtn:OkButtonTitle];
     }
 //    for(NSString *fontfamilyname in [UIFont familyNames])
@@ -64,7 +65,7 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"appInstallationBtn"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"networkReferralBtn"];
     @try {
-   [Crittercism enableWithAppID:@"56723ec36c33dc0f00f11469"];
+//   [Crittercism enableWithAppID:@"56723ec36c33dc0f00f11469"];
     
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
         
@@ -217,7 +218,7 @@
     NSArray *token = [[NSString stringWithFormat:@"%@",[url query]] componentsSeparatedByString:@"="];
         NSString *tokenStr = [NSString stringWithFormat:@"%@",[token objectAtIndex:1]];
         if (!(token.count>0) || (tokenStr.length < 4)) {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"Link is not correct." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"AutoAves" message:@"Link is not correct." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             
 //            LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -228,17 +229,24 @@
             self.navigator = [[UINavigationController alloc] initWithRootViewController:loginVC];
             self.window.rootViewController = self.navigator;
             [self.window makeKeyAndVisible];
+            
+            
             return YES;
         }
     
+        RecoveryViewController *obj = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+        obj.guid = tokenStr;
+        [self.navigator pushViewController:obj animated:YES];
         
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-         RecoveryViewController *recoveryVC = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
-        recoveryVC.guid = tokenStr;
-        self.navigator = [[UINavigationController alloc] initWithRootViewController:recoveryVC];
-        self.navigator.navigationBarHidden = YES;
-        self.window.rootViewController = self.navigator;
-        [self.window makeKeyAndVisible];
+        
+        
+//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//         RecoveryViewController *recoveryVC = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+//        recoveryVC.guid = tokenStr;
+//        self.navigator = [[UINavigationController alloc] initWithRootViewController:recoveryVC];
+//        self.navigator.navigationBarHidden = YES;
+//        self.window.rootViewController = self.navigator;
+//        [self.window makeKeyAndVisible];
         
 //    RecoveryViewController *recoveryVC = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
 //        recoveryVC.guid = tokenStr;

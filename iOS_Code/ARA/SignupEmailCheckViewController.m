@@ -241,7 +241,7 @@
     NSString*_postData ;
     webservice =7;
     _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/forgetpassword",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/forgetpassword/app",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     
     
@@ -390,7 +390,7 @@
                 if ([responseString rangeOfString:@"No record" options:NSCaseInsensitiveSearch].location != NSNotFound){
                    
                 
-                    UIAlertView *ARAalert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"The referrence code do not exist." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    UIAlertView *ARAalert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"The referrence code do not exist." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                     
                     [ARAalert show];
                     return;
@@ -401,7 +401,7 @@
                 
                 if ([invitationStatus.lowercaseString isEqualToString:@"installed"]){
                     
-                    UIAlertView *ARAalert=[[UIAlertView alloc]initWithTitle:@"ARA" message:@"The referrence code is either expired or already used." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    UIAlertView *ARAalert=[[UIAlertView alloc]initWithTitle:AlertTitle message:@"The referrence code is either expired or already used." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                     
                     [ARAalert show];
                     return;

@@ -213,18 +213,14 @@ value = false;
     
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-          [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
+         // [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
         
-        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:@"No data to display"  preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-           [self.navigationController popViewControllerAnimated:YES];
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
-        
-        
-        
-               return;
+//        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"ARA"  message:@"No data to display"  preferredStyle:UIAlertControllerStyleAlert];
+//        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//           [self.navigationController popViewControllerAnimated:YES];
+//        }]];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//               return;
     }
     if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
@@ -266,6 +262,18 @@ value = false;
     
     NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
     NSLog(@"responseString:%@",responseString);
+    
+    if ([responseString rangeOfString:@"Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound){
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ARA" message:@"There is no data to display." preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }];
+//        [alert addAction:okAction];
+//        [self presentViewController:alert animated:YES completion:nil];
+//        return;
+    }
+    
+    
     NSError *error;
     SBJsonParser *json = [[SBJsonParser alloc] init];
     NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
@@ -386,12 +394,29 @@ value = false;
         return 50 - 10*IS_IPHONE_6P ;
     }
     return 63;
-   
 }
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    NSInteger numOfSections = 0;
+    if (allData.count>0)
+    {
+        _table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections                = 1;
+        _table.backgroundView = nil;
+    }
+    else
+    {
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _table.bounds.size.width, _table.bounds.size.height)];
+        noDataLabel.text             = @"No record found";
+        noDataLabel.textColor        = [UIColor blackColor];
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        _table.backgroundView = noDataLabel;
+        _table.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
@@ -499,6 +524,15 @@ value = false;
             
             
         }
+        
+        if([referralstatus isEqualToString:@"Call Intiated"])
+        {
+            TableCell.lblinvitationStatus.textColor= [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f]; //Red color
+        }
+        if([referralstatus isEqualToString:@"Inactive"])
+        {
+            TableCell.lblinvitationStatus.textColor= [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f]; //Red color
+        }
 
         return TableCell;
     }
@@ -568,7 +602,7 @@ value = false;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ARA" message:@"Please visit our site for more information" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"AutoAves" message:@"Please visit our site for more information" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }];

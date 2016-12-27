@@ -20,6 +20,10 @@
   
     statusService = false;
     statusTime = false;
+    [txtPrefferedDate setPlaceholder:@"Preferred Date"];
+    [txtFirstname enterOnlyLetters];
+    [txtLastName enterOnlyLetters];
+    
     
     pickerDateStatus = false;
     
@@ -377,6 +381,20 @@
         }
     }
     
+    
+    if (phoneStr.length<11 ) {
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+        [txtPhoneNo becomeFirstResponder];
+        
+        return;
+    }
+    //}
+    
+    if (![txtemailAddress emailValidation]==YES) {
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Entered email is not valid" okBtn:OkButtonTitle];
+        [txtemailAddress becomeFirstResponder];
+        return;
+    }
 
     
     if([txtTypeOfService isEmpty]){
@@ -857,7 +875,7 @@
             if ([responseString rangeOfString:@"Service Data Updated Successfully" options:NSCaseInsensitiveSearch].location != NSNotFound){
                 
                 UIAlertController * alert=   [UIAlertController
-                                              alertControllerWithTitle:@"ARA"
+                                              alertControllerWithTitle:AlertTitle
                                               message:@"Your Service Request has been sent. You will be contacted to confirm an appointment. Thank you!"
                                               preferredStyle:UIAlertControllerStyleAlert];
                 
@@ -873,14 +891,14 @@
                 [kappDelegate HideIndicator];
                 return;
             }else{
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
 
             }
             
         }
     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:responseString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
 
     }

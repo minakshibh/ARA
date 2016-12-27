@@ -30,6 +30,7 @@
     IBOutlet UIButton *btnImportContacts;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UILabel *lblheading;
+    NSString *phoneStr1;
     
     IBOutlet UIButton *btnback;
     NSString *firstname,*lastname,*phoneno,*UserDetailId,*found_client;
