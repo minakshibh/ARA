@@ -9,7 +9,6 @@
 #import "splashViewController.h"
 #import "LoginViewController.h"
 #import "dashboardViewController.h"
-#import <Crittercism/Crittercism.h>
 
 @interface splashViewController ()
 

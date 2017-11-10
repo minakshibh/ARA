@@ -12,9 +12,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "dashboardViewController.h"
 #import "ASIHTTPRequest.h"
-#import <Crittercism/Crittercism.h>
 #import "SignupEmailCheckViewController.h"
 #import "DBManager.h"
+#import "loginProto.h"
 
 @interface LoginViewController (){
     IBOutlet UIImageView *imagelogo;
@@ -445,6 +445,10 @@
         return;
     }
     SBJsonParser *json = [[SBJsonParser alloc] init];
+//    id<loginProto> response = [json objectWithString:responseString error:&error];
+//    NSMutableDictionary<baseInfoProto> *user = response ;
+//    NSLog(@"%@",[user valueForKey:NSStringFromSelector(@selector(UserName))]);
+
     NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
     
     if([status isEqualToString:@"passed"])

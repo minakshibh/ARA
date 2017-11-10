@@ -586,14 +586,17 @@
         
     }
     
-    lblCommentsCount.text = [NSString stringWithFormat:@"%ld",(long)remainingCount];
+    lblCommentsCount.text = [NSString stringWithFormat:@"%ld characters remaining",(long)remainingCount];
     
     if([[textView text] length] > restrictedLength){
         textView.text=[temp substringToIndex:[temp length]-1];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Limit of 250 characters exceed" okBtn:OkButtonTitle];
     }
 }
+
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
+    lblCommentsCount.hidden = YES;
     scrollView.scrollEnabled = NO;
         [txtComments resignFirstResponder];
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -624,7 +627,7 @@
             rc = [textView convertRect:rc toView:scrollView];
             pt = rc.origin;
             pt.x = 0;
-            pt.y -=200;
+            pt.y -= 170;
             [scrollView setContentOffset:pt animated:YES];
             lblCommentPlaceholder.hidden = YES;
         }

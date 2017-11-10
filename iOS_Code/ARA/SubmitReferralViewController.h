@@ -68,6 +68,7 @@
     IBOutlet UIButton *btnDonePOPUPemail;
      IBOutlet UILabel *lblheaderbackgroungPopup;
     IBOutlet UILabel *lblheaderbackgroungPopupEmail;
+    IBOutlet UILabel *lblCommentsCount;
     BOOL popupActive,noShowOnPopUp;
 }
 - (IBAction)btnShowEmailPopup:(id)sender;

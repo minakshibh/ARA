@@ -302,7 +302,8 @@
     [self.view bringSubviewToFront:btnCancel];
     
     NSString *imagePostUrl = [NSString stringWithFormat:@"%@/users/%@/profilepic",Kwebservices,[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
-    //
+    //http://69.164.149.164:801/api/users/151/profilepic
+
     NSString *fileName = [NSString stringWithFormat:@"profilePic%ld%c%c.png", (long)[[NSDate date] timeIntervalSince1970], arc4random_uniform(26) + 'a', arc4random_uniform(26) + 'a'];
     
     

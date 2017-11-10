@@ -32,19 +32,19 @@
     noShowOnPopUp = false;
     popupActive = false;
     
-    
     [txtFirstname enterOnlyLetters];
     [txtLastname enterOnlyLetters];
+    
     selectedContactDict = [[NSMutableDictionary alloc]init];
     email_checked = @"no";
     
     activityIndicatorObject1 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
-       picker = [[ABPeoplePickerNavigationController alloc] init];
+    picker = [[ABPeoplePickerNavigationController alloc] init];
     
     
-       //--hide navigation bar
-   [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    //--hide navigation bar
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     lblComments.layer.cornerRadius = 5.0;
     [lblComments setClipsToBounds:YES];
@@ -93,8 +93,8 @@
     [txtEmail setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
     [txtmea setValue:[UIColor colorWithRed:144.0f/255.0f green:184.0f/255.0f blue:218.0f/255.0f alpha:1.0f] forKeyPath:@"_placeholderLabel.textColor"];
     
-  
-
+    
+    
     NSString *role_name = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleName"]];
     
     if([role_name isEqualToString:@"AAI - MEA"])
@@ -109,21 +109,21 @@
         if([compare isEqualToString:@"<null>"]){
             txtmea.text = @"Any Member Experience Advisor (Sales)";
         }else{
-        txtmea.text =compare;
+            txtmea.text =compare;
         }
         [btnMEA setTitle:@"" forState:UIControlStateNormal];
     }
     
     [self getMEA];
- 
+    
     if (!IS_IPAD){
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                            [[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
-    [numberToolbar sizeToFit];
-    txtPhoneno.inputAccessoryView = numberToolbar;
+        UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+        numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+        numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                                [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                [[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
+        [numberToolbar sizeToFit];
+        txtPhoneno.inputAccessoryView = numberToolbar;
     }
     
     
@@ -147,7 +147,7 @@
         txtmea.font = [txtmea.font fontWithSize:20];
         txtComment.font = [txtComment.font fontWithSize:20];
         lblCommentsPlaceholder.font = [lblCommentsPlaceholder.font fontWithSize:20];
-       
+        
         
         if(IS_IPAD_PRO_1366)
         {
@@ -169,7 +169,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-   
+    lblCommentsCount.hidden = YES;
+
     
     
     [self iPadDesignInitialization];
@@ -232,7 +233,7 @@
                 if (![txtEmail emailValidation]==YES) {
                     lblemailerror.text = @"Enter a valid email";
                 }else{
-                   
+                    
                     activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50, 0.50);
                     activityIndicatorObject1.color=[UIColor grayColor ];
                     [viewEmailindicator addSubview:activityIndicatorObject1];
@@ -258,10 +259,10 @@
         
         if (phoneStr1.length>0) {
             
-           
+            
             NSLog(@"%@----%@",phoneStr1,[phoneStrArr objectAtIndex:0]);
             
-           
+            
             if ([[NSString stringWithFormat:@"%@",[phoneStrArr objectAtIndex:0]]isEqualToString:@"1"]) {
                 
                 if (phoneStr1.length<16 || phoneStr1.length>16){
@@ -274,10 +275,10 @@
                 if (phoneStr1.length<14 || phoneStr1.length>14){
                     lblphonenoerror.text = @"Enter a valid phone no.";
                 }else{
-                     lblphonenoerror.text=@"";
+                    lblphonenoerror.text=@"";
                 }
             }
-    
+            
         }
     }
     
@@ -292,12 +293,12 @@
         return;
     }
     
-   if(textField==txtPhoneno)
-   {
-       
-    //[txtPhoneno setText:@""];
-       lblphonenoerror.text = @"";
-   }
+    if(textField==txtPhoneno)
+    {
+        
+        //[txtPhoneno setText:@""];
+        lblphonenoerror.text = @"";
+    }
     scrollView.scrollEnabled = YES;
     scrollView.delegate = self;
     scrollView.contentSize = CGSizeMake(350, 700);
@@ -306,7 +307,7 @@
     
     svos = scrollView.contentOffset;
     tableView.hidden = YES;
-   
+    
     if(textField == txtEmail)
     {
         lblemailerror.text = @"";
@@ -331,22 +332,19 @@
         [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         return NO;
     }
-   
-
+    
+    
     
     return YES;
 }
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView
 {   [textView resignFirstResponder];
-    
-    
-    
-       return  YES;
+    return  YES;
 }
 -(void)textViewDidEndEditing:(UITextField *)textField
 {
     scrollView.scrollEnabled = NO;
-    
+    lblCommentsCount.hidden = YES;
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
@@ -384,7 +382,7 @@
 
 //-(BOOL)canPerformAction:(SEL)action withSender:(id)sender
 //{
-//    
+//
 //    return NO;
 //    return [super canPerformAction:action withSender:sender];
 //}
@@ -392,7 +390,7 @@
 {
     if(textField==txtPhoneno)
     {
-  
+        
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         if(newString.length==0)
         {   txtPhoneno.text=@"";
@@ -406,9 +404,9 @@
         
         if (length == 0  || (length > 10 && !hasLeadingOne) || (length ==12)) {
             if (length == 0  || (length > 10 && !hasLeadingOne) || (length ==12)) {
-            [txtPhoneno becomeFirstResponder];
-            
-            return NO;
+                [txtPhoneno becomeFirstResponder];
+                
+                return NO;
             }
         }
         
@@ -449,21 +447,50 @@
     }
     return YES;
 }
+
+- (void)textViewDidChange:(UITextView *)textView{
+    
+    lblCommentsCount.hidden = NO;
+    NSInteger restrictedLength=249;
+    
+    NSString *temp=textView.text;
+    if (temp.length==0) {
+        lblCommentsCount.hidden = YES;
+    }
+    NSInteger remainingCount = 250 - temp.length;
+    NSLog(@"%lu",(unsigned long)temp.length);
+    NSString *tempStr;
+    
+    if (temp.length > 250) {
+        tempStr =  [temp substringToIndex:249];
+        NSLog(@"%lu",(unsigned long)tempStr.length);
+        remainingCount = 0;
+        textView.text = tempStr;
+    }
+    
+    lblCommentsCount.text = [NSString stringWithFormat:@"%ld characters remaining",(long)remainingCount];
+    
+    if([[textView text] length] > restrictedLength){
+        textView.text=[temp substringToIndex:[temp length]-1];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Limit of 250 characters reached" okBtn:OkButtonTitle];
+    }
+}
+
 #pragma mark Buttons
 - (IBAction)btnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)btnShowEmailPopup:(id)sender {
     if ([selectedContactDict objectForKey:@"phone_no"]){
-       
+        
         [[KGModal sharedInstance] hideAnimated:YES];
         
         txtFirstname.text = selectedPersonFName;
         txtLastname.text = selectedPersonLName;
-    aTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(aTime) userInfo:nil repeats:NO];
-
-     
-    
+        aTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(aTime) userInfo:nil repeats:NO];
+        
+        
+        
     }else{
         [self.view makeToast:@"Kindly select a phone number first..."];
     }
@@ -474,10 +501,10 @@
     
     NSString *str =    [selectedContactDict valueForKey:@"email"];
     if (str == nil) {
-          [self.view makeToast:@"Kindly select an email first..."];
+        [self.view makeToast:@"Kindly select an email first..."];
         return;
     }
-
+    
     [[KGModal sharedInstance] hideAnimated:YES];
     
     NSArray *name = [lblNamePOPUPEmail.text componentsSeparatedByString:@" "];
@@ -546,14 +573,14 @@
     phoneStr1 = [txtPhoneno.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
-  NSString* phoneStr = [[phoneStr1 componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
+    NSString* phoneStr = [[phoneStr1 componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
     NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* commentsStr = [txtComment.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* meaStr = [txtmea.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     
     
-       
+    
     
     
     NSString *msgstr;
@@ -569,25 +596,25 @@
     {
         msgstr = @"Please enter first name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-
+        
         
         return;
     }else if([txtLastname isEmpty])
     {
         msgstr = @"Please enter last name";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-
-       
+        
+        
         return;
     }
-        if (![txtPhoneno isEmpty]) {
+    if (![txtPhoneno isEmpty]) {
         
-    
+        
         if (phoneStr.length<10 ) {
             [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
-
             
-        return;
+            
+            return;
         }
     }
     if (phoneStr.length>10 ) {
@@ -598,14 +625,14 @@
             
             msgstr = @"Please enter phone no. of atmost 10 digits";
             [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-
+            
             return;
         }
     }
     if (![txtEmail emailValidation]==YES) {
         [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
-
-       
+        
+        
         [txtEmail becomeFirstResponder];
         return;
     }
@@ -614,10 +641,10 @@
         [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please wait a moment while we check your email." okBtn:OkButtonTitle];
         
         
-    
-    if (webservice!=5) {
-            
         
+        if (webservice!=5) {
+            
+            
             imagecheckforemailView.hidden = YES;
             if(txtEmail.text.length>0){
                 if (![txtEmail emailValidation]==YES) {
@@ -628,7 +655,7 @@
                     activityIndicatorObject1.color=[UIColor whiteColor];
                     [viewEmailindicator addSubview:activityIndicatorObject1];
                     [activityIndicatorObject1 startAnimating];
-                
+                    
                     CGRect frame = viewEmailindicator.frame;
                     frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width;
                     frame.origin.y = txtEmail.frame.origin.y +1;
@@ -636,7 +663,7 @@
                     [self checkforavailability];
                 }
             }
-        
+            
         }
         
         
@@ -644,18 +671,18 @@
         [txtEmail resignFirstResponder];
         return;
     }
-
-       if([txtmea isEmpty])
+    
+    if([txtmea isEmpty])
     {
         msgstr = @"Please select mea";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-
+        
         return;
     }
     if([lblemailerror.text isEqualToString:@"Email already exist"])
     {
-      
-       msgstr =  @"Unable to add user--email address already exists.";
+        
+        msgstr =  @"Unable to add user--email address already exists.";
         [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
         return;
     }
@@ -670,7 +697,7 @@
     }
     }else{
         NSLog(@"%lu",[NSString stringWithFormat:@"%@",selected_text_id ].length);
-       
+        
         NSString *code =[NSString stringWithFormat:@"%@",selected_text_id ];
         if ([code rangeOfString:@"null" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
@@ -683,9 +710,8 @@
         }
     }
     
-  
-    [self submitReferral:firstNameStr lastname:lastNameStr phoneno:phoneStr email:emailStr mea:mea_id comment:commentsStr];
     
+    [self submitReferral:firstNameStr lastname:lastNameStr phoneno:phoneStr email:emailStr mea:mea_id comment:commentsStr];
 }
 
 - (IBAction)btnMEA:(id)sender {
@@ -739,7 +765,7 @@
         // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
         NSString *msgStr = @"You've disabled access to contacts. To re-enable, please go to Settings and enable Contacts for ARA.";
         [HelperAlert alertWithOneBtn:AlertTitle description:msgStr okBtn:OkButtonTitle];
-        }
+    }
 }
 
 #pragma mark - AddressBook Delegate Methods
@@ -842,7 +868,7 @@
             
             txtFirstname.text = selectedPersonFName;
             txtLastname.text = selectedPersonLName;
-          
+            
             popupActive = false;
             
             /// --- put mask on number
@@ -866,7 +892,7 @@
                     if([[NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:0]] isEqual:@"1"]  && phoneNoStr.length==10)
                     {
                         
-                      
+                        
                         
                         noShowOnPopUp = false;
                         if(phoneNoStr.length >10){
@@ -888,31 +914,31 @@
                         [selectedContactDict setObject:txtPhoneno.text forKey:select];
                     }else{
                         
-                     if([[NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:0]] isEqual:@"1"]  && phoneNoStr.length==11)
-                     {
-                         noShowOnPopUp = false;
-                         if(phoneNoStr.length >10){
-                             noShowOnPopUp = true;
-                         }
-                         NSMutableString *mutStr = [[NSMutableString alloc]init];
-                         NSString *returnedStr;
-                         for (int i = 0; i<phoneNoStr.length; i++)
-                         {
-                             NSString *abc = [NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:i]];
-                             if(i==0){
-                                 mutStr =[NSMutableString stringWithFormat:@"%@",abc];
-                             }else{
-                                 mutStr = [NSMutableString stringWithFormat:@"%@%@",mutStr,abc];
-                             }
-                             txtPhoneno.text =   [self showmaskonnumber:mutStr];
-                             
-                         }
-                         [selectedContactDict setObject:txtPhoneno.text forKey:select];
-                     }else{
-                        NSString* msgstr = @"Selected contact does't have a valid phone number.";
-                        [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
-                        txtPhoneno.text=@"";
-                     }
+                        if([[NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:0]] isEqual:@"1"]  && phoneNoStr.length==11)
+                        {
+                            noShowOnPopUp = false;
+                            if(phoneNoStr.length >10){
+                                noShowOnPopUp = true;
+                            }
+                            NSMutableString *mutStr = [[NSMutableString alloc]init];
+                            NSString *returnedStr;
+                            for (int i = 0; i<phoneNoStr.length; i++)
+                            {
+                                NSString *abc = [NSString stringWithFormat:@"%C",[phoneNoStr characterAtIndex:i]];
+                                if(i==0){
+                                    mutStr =[NSMutableString stringWithFormat:@"%@",abc];
+                                }else{
+                                    mutStr = [NSMutableString stringWithFormat:@"%@%@",mutStr,abc];
+                                }
+                                txtPhoneno.text =   [self showmaskonnumber:mutStr];
+                                
+                            }
+                            [selectedContactDict setObject:txtPhoneno.text forKey:select];
+                        }else{
+                            NSString* msgstr = @"Selected contact does't have a valid phone number.";
+                            [HelperAlert  alertWithOneBtn:AlertTitle description:msgstr okBtn:OkButtonTitle];
+                            txtPhoneno.text=@"";
+                        }
                     }
                 }else{
                     
@@ -1059,7 +1085,7 @@
     NSArray *value = [contactDict valueForKey:@"contact_phone"];
     
     [self popupTableViewreloadHeight];
-
+    
     lblTypeheaderpopup.text = @"Select Phone Number";
     
     if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
@@ -1090,8 +1116,8 @@
     }
     
     [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUP andAnimated:YES];
-      [tableViewPopup reloadData];
-
+    [tableViewPopup reloadData];
+    
 }
 -(void)showEmailPopup
 {
@@ -1131,12 +1157,12 @@
         
         [viewHeaderPOPUPemail setFrame:CGRectMake(self.view.frame.size.width/2-viewHeaderPOPUPemail.frame.size.width/2, self.view.frame.size.height/2-viewHeaderPOPUPemail.frame.size.height/2-tableViewPopupEmail.frame.size.height/2, viewHeaderPOPUPemail.frame.size.width, viewHeaderPOPUPemail.frame.size.height + tableViewPopupEmail.frame.size.height)];
         tableViewPopupEmail.scrollEnabled = YES;
-
+        
     }
     
     [[KGModal sharedInstance] showWithContentView:viewHeaderPOPUPemail andAnimated:YES];
-
-
+    
+    
     [tableViewPopupEmail reloadData];
 }
 -(void)popupTableViewreloadHeight
@@ -1157,7 +1183,7 @@
     if([[NSString stringWithFormat:@"%d",property] isEqualToString:@"14"])
     {
         [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly select phone number" okBtn:OkButtonTitle];
-
+        
         
         return YES;
     }
@@ -1229,14 +1255,14 @@
     
     NSMutableString *mutStr = [[NSMutableString alloc]init];
     for (int i = 0; i<str.length; i++)
-    {   
+    {
         NSString *abc = [NSString stringWithFormat:@"%C",[str characterAtIndex:i]];
         if(i==0){
             mutStr =[NSMutableString stringWithFormat:@"%@",abc];
         }else{
             mutStr = [NSMutableString stringWithFormat:@"%@%@",mutStr,abc];
         }
-     NSString *returnedStr =   [self showmaskonnumber:mutStr];
+        NSString *returnedStr =   [self showmaskonnumber:mutStr];
         txtPhoneno.text = returnedStr;
     }
     
@@ -1263,11 +1289,11 @@
     if (noShowOnPopUp) {
         
     }else{
-    if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 10)) {
-        [txtPhoneno becomeFirstResponder];
-        
-        return number;
-    }
+        if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 10)) {
+            [txtPhoneno becomeFirstResponder];
+            
+            return number;
+        }
     }
     
     NSUInteger index = 0;
@@ -1293,7 +1319,7 @@
     NSString *remainder = [decimalString substringFromIndex:index];
     [formattedString appendString:remainder];
     
-       return  formattedString;
+    return  formattedString;
     
 }
 
@@ -1395,7 +1421,7 @@
             
             
             //---------29th dec modification Start
-
+            
             //showing only previously selected mea and any membor advisor
             twoValueArray = [[NSMutableArray alloc]init];
             twoValueArrayID = [[NSMutableArray alloc]init];
@@ -1409,47 +1435,56 @@
                 
             }
             
-           // Check if user already selected the any menbor advisor other wise add the vale selected at the time of signup
+            // Check if user already selected the any member advisor other wise add the value selected at the time of signup
             if (![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]] isEqualToString:[twoValueArray objectAtIndex:0]]){
                 if([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"]){
                     
                 }else{
-                 [twoValueArray addObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]]];
+                    [twoValueArray addObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]]];
                 }
             }
-           
+            
             
             //getting objects id
             for (int j=0; j<twoValueArray.count; j++) {
-                NSInteger indexValue1 = [name_mea_array indexOfObject:[twoValueArray objectAtIndex:j]];
+                NSInteger indexValue1;
+                if ([name_mea_array containsObject:[twoValueArray objectAtIndex:j]]) {
+                    indexValue1 = [name_mea_array indexOfObject:[twoValueArray objectAtIndex:j]];
+                }else {
+                    [twoValueArray removeObjectAtIndex:j];
+                    continue;
+                }
+                
                 [twoValueArrayID addObject:[NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexValue1]]];
             }
             
             id_mea_array = [[NSArray alloc]init];
             name_mea_array = [[NSArray alloc]init];
             
-                id_mea_array = twoValueArrayID;
-                name_mea_array = twoValueArray;
+            id_mea_array = twoValueArrayID;
+            name_mea_array = twoValueArray;
             
+            NSString *meaDefaultStr =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
             
-            NSLog(@"asdasdasd");
+            if (![name_mea_array containsObject:meaDefaultStr]){
+                txtmea.text = @"";
+                [btnMEA setTitle:@"Select MEA" forState:UIControlStateNormal];
+            }
             
             //---------29th dec modification end
-            
-        
         }else if(webservice==2)
         {
             
             if ([responseString rangeOfString:@"Ref" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
-              
-                  NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted successfully."];
+                
+                NSString *msg = [NSString stringWithFormat:@"Your referral has been submitted successfully."];
                 
                 [HelperAlert alertWithOneBtn:@"Thanks!" description:msg okBtn:OkButtonTitle withTag:3 forController:self];
-//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thanks!!"  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//                
-//                alert.tag=3;
-//                [alert show];
+                //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Thanks!!"  message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                //
+                //                alert.tag=3;
+                //                [alert show];
                 return;
             }
         }else if (webservice==5)
@@ -1470,7 +1505,7 @@
                 imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
                 [activityIndicatorObject1 stopAnimating];
                 
-
+                
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1479,12 +1514,12 @@
             NSString *usertype = [userDetailDict valueForKey:@"UserType"];
             if([usertype isEqualToString:@"Client"])
             {
-               
+                
                 [HelperAlert alertWithTwoBtns:AlertTitle description:@"One of our client already referred this person. Do you want to refer this person again." okBtn:@"No" cancelBtn:@"Yes" withTag:8 forController:self];
                 
-//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:@"One of our client already referred this person. Do you want to refer this person again." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
-//                [alert show];
-//                alert.tag =8;
+                //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:@"One of our client already referred this person. Do you want to refer this person again." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
+                //                [alert show];
+                //                alert.tag =8;
                 
                 [txtEmail resignFirstResponder];
                 [txtComment resignFirstResponder];
@@ -1498,7 +1533,7 @@
                 lastname = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"LastName"]];
                 phoneno = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PhoneNumber"]];
                 
-//                 txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
+                //                 txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
                 
                 
                 UserDetailId = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserDetailId"]];
@@ -1507,7 +1542,7 @@
                 
                 return;
             }
-           
+            
             lblemailerror.text =@"The email you entered is already exist in Autoaves system Please Try with another email address";
             [activityIndicatorObject1 stopAnimating];
             
@@ -1531,7 +1566,7 @@
                 [activityIndicatorObject1 stopAnimating];
                 
                 
-
+                
                 return;
             }else if ([responseString rangeOfString:@"User Not Found" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
@@ -1562,7 +1597,7 @@
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     
     
-
+    
     
     if (tableView == tableViewPopup || tableView==tableViewPopupEmail) {
         NSArray *value;
@@ -1574,7 +1609,7 @@
         }
         return [value count];
     }
-   
+    
     return id_mea_array.count;
     
 }
@@ -1618,7 +1653,7 @@
         
         if (isPhoneNo) {
             valueToSet = [contactDict valueForKey:@"contact_phone"];
-           valueLbl = [contactDict valueForKey:@"contact_lbl"];
+            valueLbl = [contactDict valueForKey:@"contact_lbl"];
             
             NSMutableArray *savedStrArray = [[NSMutableArray alloc]init];
             for (int i=0; i<valueToSet.count; i++) {
@@ -1644,7 +1679,7 @@
                     }else{
                         mutStr = [NSMutableString stringWithFormat:@"%@%@",mutStr,abc];
                     }
-                   returnedStr =   [self showmaskonnumber:mutStr];
+                    returnedStr =   [self showmaskonnumber:mutStr];
                     
                 }
                 [savedStrArray addObject:returnedStr];
@@ -1666,7 +1701,7 @@
         if (selectedIndex ==indexPath.row) {
             imageName = @"radio-checked.png";
         }else{
-         imageName = @"radio-unchecked.png";
+            imageName = @"radio-unchecked.png";
         }
         
         if (indexPath.row==selectedIndex) {
@@ -1708,7 +1743,7 @@
         NSArray *selectedValue;
         NSString *select;
         if (isPhoneNo) {
-        selectedValue = [contactDict valueForKey:@"contact_phone"];
+            selectedValue = [contactDict valueForKey:@"contact_phone"];
             select = @"phone_no";
             
             NSString *phoneStr = [NSString stringWithFormat:@"%@",[selectedValue objectAtIndex:indexPath.row]];
@@ -1741,7 +1776,7 @@
                 }
             }
             
-
+            
         }else{
             selectedValue = [contactDict valueForKey:@"contact_email"];
             select = @"email";
@@ -1753,10 +1788,10 @@
         [selectedContactDict setObject:[selectedValue objectAtIndex:indexPath.row] forKey:select];
         selectedIndex = indexPath.row;
         if (isPhoneNo) {
-        [tableViewPopup reloadData];
+            [tableViewPopup reloadData];
         }else{
-
-        [tableViewPopupEmail reloadData];
+            
+            [tableViewPopupEmail reloadData];
             
         }
         return;
@@ -1850,7 +1885,7 @@
         
         if(buttonIndex == 0) //OK button pressed
         {
-           // lblemailerror.text = @"Email already registered.";
+            // lblemailerror.text = @"Email already registered.";
             txtFirstname.text = @"";
             txtLastname.text = @"";
             txtPhoneno.text = @"";
@@ -1859,7 +1894,7 @@
         }
         else if(buttonIndex == 1) //Annul button pressed.
         {
-           
+            
             
             txtFirstname.text = firstname;
             txtLastname.text = lastname;
@@ -1871,7 +1906,7 @@
             found_client = @"yes";
             imagecheckforemailView.image = [UIImage imageNamed:@"tick2.png"];
         }
-
+        
     }
 }
 -(void)cancelNumberPad{
@@ -1926,9 +1961,9 @@
 
 -(void)checkforavailability
 {
-//    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
-//    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-//    btnSubmitReferral.userInteractionEnabled = NO;
+    //    btnSubmitReferral.backgroundColor = [UIColor darkGrayColor];
+    //    [btnSubmitReferral setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    //    btnSubmitReferral.userInteractionEnabled = NO;
     
     NSMutableURLRequest *request ;
     NSString*_postData ;

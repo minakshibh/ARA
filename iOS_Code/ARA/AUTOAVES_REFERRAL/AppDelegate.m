@@ -14,6 +14,8 @@
 #import "referralListViewController.h"
 //#import <Crittercism/Crittercism.h>
 #import "RecoveryViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 //@interface AppDelegate () <CrittercismDelegate>
 @interface AppDelegate ()
@@ -24,7 +26,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [Fabric with:@[[Crashlytics class]]];
+
     ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
         ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
@@ -215,28 +218,28 @@
     NSLog(@"URL scheme:%@", [url scheme]);
     NSLog(@"URL query: %@", [url query]);
         
-    NSArray *token = [[NSString stringWithFormat:@"%@",[url query]] componentsSeparatedByString:@"="];
-        NSString *tokenStr = [NSString stringWithFormat:@"%@",[token objectAtIndex:1]];
-        if (!(token.count>0) || (tokenStr.length < 4)) {
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"AutoAves" message:@"Link is not correct." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            
+//    NSArray *token = [[NSString stringWithFormat:@"%@",[url query]] componentsSeparatedByString:@"="];
+//        NSString *tokenStr = [NSString stringWithFormat:@"%@",[token objectAtIndex:1]];
+//        if (!(token.count>0) || (tokenStr.length < 4)) {
+//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"AutoAves" message:@"Link is not correct." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            [alert show];
+//            
+////            LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+////            [self.navigator pushViewController:loginVC animated:YES];
+//            
+//            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //            LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-//            [self.navigator pushViewController:loginVC animated:YES];
-            
-            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-            LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-            self.navigator = [[UINavigationController alloc] initWithRootViewController:loginVC];
-            self.window.rootViewController = self.navigator;
-            [self.window makeKeyAndVisible];
-            
-            
-            return YES;
-        }
-    
-        RecoveryViewController *obj = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
-        obj.guid = tokenStr;
-        [self.navigator pushViewController:obj animated:YES];
+//            self.navigator = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//            self.window.rootViewController = self.navigator;
+//            [self.window makeKeyAndVisible];
+//            
+//            
+//            return YES;
+//        }
+//    
+//        RecoveryViewController *obj = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+//        obj.guid = tokenStr;
+//        [self.navigator pushViewController:obj animated:YES];
         
         
         

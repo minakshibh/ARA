@@ -480,6 +480,10 @@
 		D9F3B0301C1E79C800828219 /* PopupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */; };
 		D9F3B0311C1E79C800828219 /* PopupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */; };
 		D9F3B0351C1EC42900828219 /* KGModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B0341C1EC42900828219 /* KGModal.m */; };
+		D9F6D2A11E55A42900E6A14A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F6D29F1E55A42900E6A14A /* Fabric.framework */; };
+		D9F6D2A21E55A42A00E6A14A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F6D2A01E55A42900E6A14A /* Crashlytics.framework */; };
+		D9F6D2A51E55A45F00E6A14A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F6D2A31E55A45F00E6A14A /* Fabric.framework */; };
+		D9F6D2A61E55A45F00E6A14A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F6D2A41E55A45F00E6A14A /* Crashlytics.framework */; };
 		D9F8F07C1C1AD77D007745FA /* cornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F8F07B1C1AD77D007745FA /* cornerRadius.m */; };
 /* End PBXBuildFile section */
 
@@ -563,6 +567,8 @@
 		04D290D01D630F7E0053CC9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04EDF8FA1DCC657F00D10241 /* SMContactsSelector.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SMContactsSelector.strings; sourceTree = "<group>"; };
 		97CB234C1D487452008D963B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D9025CD41E2613290048F822 /* loginProto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginProto.h; sourceTree = "<group>"; };
+		D9025CD51E2614BC0048F822 /* baseInfoProto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseInfoProto.h; sourceTree = "<group>"; };
 		D90A92211C45091F00A52A17 /* news_icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_icon@2x~ipad.png"; sourceTree = "<group>"; };
 		D90A92221C45091F00A52A17 /* notification_count@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification_count@2x~ipad.png"; sourceTree = "<group>"; };
 		D90A92231C45091F00A52A17 /* notification_icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification_icon@2x~ipad.png"; sourceTree = "<group>"; };
@@ -1112,11 +1118,16 @@
 		D9DDB9A21B7CC788006F5A37 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		D9DDB9A31B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
 		D9DDB9A41B7CC788006F5A37 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		D9F0509A1E405B7A00B997ED /* AUTOAVES_REFERRAL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AUTOAVES_REFERRAL.entitlements; sourceTree = "<group>"; };
 		D9F3B02D1C1E79C800828219 /* PopupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupTableViewCell.h; sourceTree = "<group>"; };
 		D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupTableViewCell.m; sourceTree = "<group>"; };
 		D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupTableViewCell.xib; sourceTree = "<group>"; };
 		D9F3B0331C1EC42800828219 /* KGModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGModal.h; sourceTree = "<group>"; };
 		D9F3B0341C1EC42900828219 /* KGModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGModal.m; sourceTree = "<group>"; };
+		D9F6D29F1E55A42900E6A14A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D9F6D2A01E55A42900E6A14A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D9F6D2A31E55A45F00E6A14A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D9F6D2A41E55A45F00E6A14A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D9F8F07A1C1AD77D007745FA /* cornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cornerRadius.h; sourceTree = "<group>"; };
 		D9F8F07B1C1AD77D007745FA /* cornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cornerRadius.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1128,11 +1139,15 @@
 			files = (
 				04D290D11D630F7E0053CC9C /* Foundation.framework in Frameworks */,
 				04D290CF1D630F690053CC9C /* UIKit.framework in Frameworks */,
+				D9F6D2A61E55A45F00E6A14A /* Crashlytics.framework in Frameworks */,
 				04D290CD1D630F5B0053CC9C /* AddressBook.framework in Frameworks */,
+				D9F6D2A11E55A42900E6A14A /* Fabric.framework in Frameworks */,
 				04D290CB1D630F450053CC9C /* AddressBookUI.framework in Frameworks */,
+				D9F6D2A51E55A45F00E6A14A /* Fabric.framework in Frameworks */,
 				04D290C91D630F330053CC9C /* QuartzCore.framework in Frameworks */,
 				D9B4A9D31C4E0318006364F0 /* libsqlite3.tbd in Frameworks */,
 				D94FFFC81BFF2426006A37AA /* CoreData.framework in Frameworks */,
+				D9F6D2A21E55A42A00E6A14A /* Crashlytics.framework in Frameworks */,
 				D959CE041BFDDC3300CE4BC4 /* AdSupport.framework in Frameworks */,
 				D9AF3CA41B8ECE4D00F98881 /* libz.dylib in Frameworks */,
 				D9AF3CA31B8ECE4300F98881 /* CoreGraphics.framework in Frameworks */,
@@ -1669,6 +1684,12 @@
 		D94BEAA41B7872EB008BCF5F = {
 			isa = PBXGroup;
 			children = (
+				D9F6D2A31E55A45F00E6A14A /* Fabric.framework */,
+				D9F6D2A41E55A45F00E6A14A /* Crashlytics.framework */,
+				D9F6D29F1E55A42900E6A14A /* Fabric.framework */,
+				D9F6D2A01E55A42900E6A14A /* Crashlytics.framework */,
+				D9025CD51E2614BC0048F822 /* baseInfoProto.h */,
+				D9025CD41E2613290048F822 /* loginProto.h */,
 				046E57561DEFF8C30059E4DE /* UITextField+HelperTextField.h */,
 				046E57571DEFF8C30059E4DE /* UITextField+HelperTextField.m */,
 				044714701D6C1011006D8F74 /* Images.xcassets */,
@@ -1707,6 +1728,7 @@
 		D94BEAAF1B7872EB008BCF5F /* AUTOAVES_REFERRAL */ = {
 			isa = PBXGroup;
 			children = (
+				D9F0509A1E405B7A00B997ED /* AUTOAVES_REFERRAL.entitlements */,
 				D96DA36A1BFB0E1400930AC4 /* test */,
 				D94BEAEF1B78A43B008BCF5F /* Frameworks */,
 				D94BEAB01B7872EB008BCF5F /* Supporting Files */,
@@ -2355,6 +2377,7 @@
 				D94BEAA91B7872EB008BCF5F /* Sources */,
 				D94BEAAA1B7872EB008BCF5F /* Frameworks */,
 				D94BEAAB1B7872EB008BCF5F /* Resources */,
+				D9F6D29E1E55A07A00E6A14A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2394,11 +2417,14 @@
 				TargetAttributes = {
 					D94BEAAC1B7872EB008BCF5F = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = TKF3QPSC95;
+						DevelopmentTeam = D6S9NQGVAX;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
@@ -2797,6 +2823,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D9F6D29E1E55A07A00E6A14A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 4a7005b093a99faf9432462b39532d88f8aa2bc1 98f0b5406e3a16ceb9849c583fa1876716462e8b2480f7fd9073f70306efe4c7";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D94BEAA91B7872EB008BCF5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -3037,8 +3079,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = AUTOAVES_REFERRAL/AUTOAVES_REFERRAL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TKF3QPSC95;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3048,7 +3091,7 @@
 				);
 				GCC_PREFIX_HEADER = "AUTOAVES_REFERRAL/ARA-Prefix.pch";
 				INFOPLIST_FILE = AUTOAVES_REFERRAL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3057,8 +3100,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.autoaves.ARA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7e13c106-d379-41b2-840f-fac40dfd46b4";
-				PROVISIONING_PROFILE_SPECIFIER = "Autoaves Distribution 2 dec2016";
+				PROVISIONING_PROFILE = "70cb6adf-0719-4e1a-986e-db6dee3d2c72";
+				PROVISIONING_PROFILE_SPECIFIER = "AUTOAVES DEVELOPMENT 16th feb 2";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3068,6 +3111,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = AUTOAVES_REFERRAL/AUTOAVES_REFERRAL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = TKF3QPSC95;
@@ -3079,7 +3123,7 @@
 				);
 				GCC_PREFIX_HEADER = "AUTOAVES_REFERRAL/ARA-Prefix.pch";
 				INFOPLIST_FILE = AUTOAVES_REFERRAL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3088,8 +3132,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.autoaves.ARA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7e13c106-d379-41b2-840f-fac40dfd46b4";
-				PROVISIONING_PROFILE_SPECIFIER = "Autoaves Distribution 2 dec2016";
+				PROVISIONING_PROFILE = "20049485-da77-4ad1-8159-7d4d89dd6773";
+				PROVISIONING_PROFILE_SPECIFIER = "AutoAves_Appstore 12April";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
