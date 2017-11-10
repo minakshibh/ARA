@@ -39,7 +39,7 @@ static sqlite3_stmt *statement = nil;
         if (sqlite3_open(dbpath, &database) == SQLITE_OK)
         {
             char *errMsg;
-            const char *sql_stmt = "create table if not exists notificationDetails (userId text, isRead BOOLEAN, notificationtitle text, notificationDetail text, notificationDate text, NotificationId text, Id INTEGER PRIMARY KEY AUTOINCREMENT, CreatedDate text)";
+            const char *sql_stmt = "create table if not exists notificationDetails (userId text, isRead text, notificationtitle text, notificationDetail text, notificationDate text, NotificationId text, Id INTEGER PRIMARY KEY AUTOINCREMENT, CreatedDate text, uniqueReferenceId text)";
             if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg)
                 != SQLITE_OK)
             {
@@ -57,7 +57,7 @@ static sqlite3_stmt *statement = nil;
     return isSuccess;
 }
 - (BOOL) saveData:(NSString*)userId isRead:(NSString*)isRead
-notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)notificationDetail notificationDate:(NSString*)notificationDate NotificationId:(NSString*)NotificationId CreatedDate:(NSString*)CreatedDate
+notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)notificationDetail notificationDate:(NSString*)notificationDate NotificationId:(NSString*)NotificationId CreatedDate:(NSString*)CreatedDate uniqueReferenceId:(NSString*)uniqueReferenceId
 {
     NSString *docsDir;
     NSArray *dirPaths;
@@ -74,7 +74,7 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into notificationDetails (userId, isRead, notificationtitle, notificationDetail, notificationDate, NotificationId, CreatedDate) values(\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")",userId,isRead,notificationtitle,notificationDetail,notificationDate,NotificationId,CreatedDate];
+        NSString *insertSQL = [NSString stringWithFormat:@"insert into notificationDetails (userId, isRead, notificationtitle, notificationDetail, notificationDate, NotificationId, CreatedDate, uniqueReferenceId) values(\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")",userId,isRead,notificationtitle,notificationDetail,notificationDate,NotificationId,CreatedDate,uniqueReferenceId];
         
 //        sqlite3_bind_text(statement,1,[userId UTF8String],-1,SQLITE_TRANSIENT);
 //        sqlite3_bind_text(statement,2,[isRead UTF8String],-1,SQLITE_TRANSIENT);
@@ -110,11 +110,11 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     NSString *userid = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
     NSMutableArray *data = [[NSMutableArray alloc]init];
     const char *dbpath = [databasePath UTF8String];
-    
+    NSLog(@"##%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"lastnotificationId"]);
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
         
-        NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where userId = \"%@\" and NotificationId < \"%@\" ORDER BY NotificationId DESC LIMIT 10",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"lastnotificationId"]];
+        NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where NotificationId < \"%@\" ORDER BY NotificationId DESC LIMIT 10",[[NSUserDefaults standardUserDefaults]valueForKey:@"lastnotificationId"]];
 
        
 //         NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where userId = \"%@\" ORDER BY notificationDate DESC and NotificationId > \"%@\" LIMIT 10",userid,[[NSUserDefaults standardUserDefaults]valueForKey:@"lastnotificationId"]];
@@ -124,7 +124,7 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
         
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
-            int i=0,k=0;
+            int i=0;
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 i++;
@@ -149,7 +149,9 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
                                             (const char *) sqlite3_column_text(statement, 5)];
                 database.NotificationId = NotificationId;
                 
-                
+                NSString *uniqueReferenceId = [[NSString alloc]initWithUTF8String:
+                                            (const char *) sqlite3_column_text(statement, 8)];
+                database.uniqueReferenceId = uniqueReferenceId;
 
                 lastnotificationId = [[NSString alloc]initWithUTF8String:
                                       (const char *) sqlite3_column_text(statement,5)];
@@ -189,7 +191,6 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
                     [docsDir stringByAppendingPathComponent: @"notification.db"]];
     
     NSString *userid = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
-    NSMutableArray *data = [[NSMutableArray alloc]init];
     const char *dbpath = [databasePath UTF8String];
     
     int count = 0;
@@ -244,7 +245,7 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
         
-        NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails where userId = \"%@\" ORDER BY notificationDate DESC LIMIT 10",userid];
+        NSString *querySQL = [NSString stringWithFormat: @"select * from notificationDetails"];
        
         
         
@@ -253,7 +254,6 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             
-            int i=0;
             while (sqlite3_step(statement) == SQLITE_ROW)
             { 
                 DBManager *database = [[DBManager alloc]init];
@@ -277,7 +277,9 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
                                     (const char *) sqlite3_column_text(statement, 5)];
                 database.NotificationId = NotificationId;
                 
-                
+                NSString *uniqueReferenceId = [[NSString alloc]initWithUTF8String:
+                                               (const char *) sqlite3_column_text(statement, 8)];
+                database.uniqueReferenceId = uniqueReferenceId;
                 
                     
                 
@@ -315,7 +317,7 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"notification.db"]];
     
-    NSString *updatingValue = @"true";
+    NSString *updatingValue = @"1";
     
     
     const char *dbpath = [databasePath UTF8String];
@@ -383,7 +385,7 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"notification.db"]];
     
-    NSString *userid = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
+//    NSString *userid = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
     NSMutableArray *data = [[NSMutableArray alloc]init];
     const char *dbpath = [databasePath UTF8String];
     
@@ -454,12 +456,15 @@ notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)not
     
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
-        NSString *querySQL = [NSString stringWithFormat: @"DELETE * FROM notificationDetails"];
+        NSString *querySQL = [NSString stringWithFormat: @"DELETE FROM notificationDetails"];
         
         const char *query_stmt = [querySQL UTF8String];
         
         if(sqlite3_prepare_v2(database,query_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            while (sqlite3_step(statement) == SQLITE_DONE){
+                NSLog(@"%@", @"deleted");
+            }
             sqlite3_step(statement);
             return YES;
         }

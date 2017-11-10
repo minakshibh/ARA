@@ -30,6 +30,7 @@
 {
     referralListViewController *RLvc;
     AFHTTPRequestOperation *requestOperation;
+    NSTimer *refreshApiNotificationCountTimer;
 }
 @end
 
@@ -117,7 +118,7 @@
 
     [self.view bringSubviewToFront:sideView];
     
-    NSLog(@"%f",self.view.frame.size.height);
+//    NSLog(@"%f",self.view.frame.size.height);
     
     imageViewMenuProfile.clipsToBounds = YES;
     
@@ -125,7 +126,8 @@
     lblEmailSideMenu.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_email"]];
 
     
-    NSLog(@"%@",lblEmailSideMenu.text);
+    [self registerDevice];
+//    NSLog(@"%@",lblEmailSideMenu.text);
  
     if (IS_IPHONE_6P) {
          menuBtnImage.frame = CGRectMake(15,34, 33, 35);
@@ -200,7 +202,7 @@
          btnnewAppURL.titleLabel.font = [btnnewAppURL.titleLabel.font fontWithSize:11];
         
         viewnewNotification.frame = CGRectMake(viewnewNotification.frame.origin.x-7, viewnewNotification.frame.origin.y-12, viewnewNotification.frame.size.width+10, viewnewNotification.frame.size.height+10);
-        NSLog(@"test");
+//        NSLog(@"test");
     }
     
     if ( IS_IPAD )
@@ -366,7 +368,9 @@
 //                                    repeats:YES];
 //
 
+
 }
+
 -(void)imageReload
 {
     UIImage *img = [[SDImageCache sharedImageCache]imageFromMemoryCacheForKey:@"l_image"];
@@ -381,10 +385,7 @@
     }
     
 }
--(void)dashboardWebservice
-{
-    [self getData];
-}
+
 -(void) centerButtonAndImageWithSpacing:(CGFloat)spacing {
     
     [newReferralBtn setImage:[UIImage imageNamed:@"refer-icon11.png"] forState:UIControlStateNormal];
@@ -471,6 +472,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+//    [HelperAlert alertWithOneBtn:@"" description:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"badgeCountValue"]] okBtn:@"Okay"];
+    
     [self imageReload];
     
     sideMenuBtn.layer.cornerRadius=4.0;
@@ -496,14 +499,27 @@
         newReferralBtn.layer.cornerRadius = 4.0;
           sendInvitationBtn.layer.cornerRadius = 4.0;
     }
-    
-  
-    [self getData];
    
     NSString* namestr = [NSString stringWithFormat:@"%@ %@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"],[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
     lblNameMenu.text = namestr;
     
+    refreshApiNotificationCountTimer = [NSTimer scheduledTimerWithTimeInterval: 10.0 target:self selector:@selector(refreshApiNotificationCount:) userInfo:nil repeats: YES];
+    
+    [self getData];
+    
+    [self resetBadgeCount];
 }
+
+-(void)refreshApiNotificationCount:(NSTimer *)timer
+{
+    [self getData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [refreshApiNotificationCountTimer invalidate];
+}
+
 - (void)showContacts
 {
     SMContactsSelector *controller = [[SMContactsSelector alloc] initWithNibName:@"SMContactsSelector" bundle:nil];
@@ -535,7 +551,7 @@
             
             str = [str reformatTelephone];
             
-            NSLog(@"Telephone: %@", str);
+//            NSLog(@"Telephone: %@", str);
         }
     }
     else if (type == DATA_CONTACT_EMAIL)
@@ -544,7 +560,7 @@
         {
             NSString *str = [data objectAtIndex:i];
             
-            NSLog(@"Emails: %@", str);
+//            NSLog(@"Emails: %@", str);
         }
     }
     else
@@ -553,7 +569,7 @@
         {
             NSString *str = [data objectAtIndex:i];
             
-            NSLog(@"IDs: %@", str);
+//            NSLog(@"IDs: %@", str);
         }
     }
 }
@@ -668,7 +684,7 @@
          }
                          completion:^(BOOL finished)
                 {
-             NSLog(@"Completed");
+//             NSLog(@"Completed");
               btnSubmitReferral.hidden = YES;
          }];
         
@@ -773,14 +789,14 @@
 -(NSInteger)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-    NSLog(@"response status code: %ld %@", (long)[httpResponse statusCode],httpResponse.debugDescription);
+//    NSLog(@"response status code: %ld %@", (long)[httpResponse statusCode],httpResponse.debugDescription);
     
-    NSLog(@"Received Response");
+//    NSLog(@"Received Response");
     [webData setLength: 0];
     
     if((long)[httpResponse statusCode] == ResultOk)
     {
-        NSLog(@"Received Response");
+//        NSLog(@"Received Response");
         [webData setLength: 0];
         recieved_status = @"passed";
         
@@ -796,77 +812,91 @@
 {
     [kappDelegate HideIndicator];
     
-    
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
+    if(webservice!=1)
     {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
-        return;
+        if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The Internet connection appears to be offline." options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+            [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The Internet connection appears to be offline." okBtn:OkButtonTitle];
+            return;
+        }
+        if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+            [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
+            return;
+        }
+        if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+            [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Server connection lost. Could not connect to the server" okBtn:OkButtonTitle];
+            return;
+        }
+        
+        if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+            [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
+            return;
+        }
+        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
+        //    NSLog(@"ERROR with the Connection ");
+
     }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The network connection was lost" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The network connection was lost" okBtn:OkButtonTitle];
-        return;
-    }
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"Could not connect to the server" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Server connection lost. Could not connect to the server" okBtn:OkButtonTitle];
-        return;
-    }
-    
-    if ([[NSString stringWithFormat:@"%@",error] rangeOfString:@"The request timed out" options:NSCaseInsensitiveSearch].location != NSNotFound)
-    {
-        [HelperAlert  alertWithOneBtn:@"ERROR" description:@"The request timed out. Not able to connect to server" okBtn:OkButtonTitle];
-        return;
-    }
-    [HelperAlert  alertWithOneBtn:@"ERROR" description:@"Intenet connection failed.. Try again later." okBtn:OkButtonTitle];
-    NSLog(@"ERROR with the Connection ");
+
     webData =nil;
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data1
 {
     [webData appendData:data1];
-    NSLog(@"data Received %@",webData);
+//    NSLog(@"data Received %@",webData);
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [kappDelegate HideIndicator];
     
-    NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
+//    NSLog(@"DONE. Received Bytes: %lu", (unsigned long)[webData length]);
     
     if ([webData length]==0)
         return;
     
     NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
-    NSLog(@"responseString:%@",responseString);
+//    NSLog(@"responseString:%@",responseString);
     NSError *error;
    
     SBJsonParser *json = [[SBJsonParser alloc] init];
     NSMutableDictionary *userDetailDict=[json objectWithString:responseString error:&error];
     
-if([recieved_status isEqualToString:@"passed"])
+if([recieved_status isEqualToString:@"passed"] )
 {
-    if(webservice==1)
+    if(webservice==1 && userDetailDict != nil)
     {
-
+        webservice=0;
     NSArray *refType = [userDetailDict valueForKey:@"DashboardResult"];
     NSString *notificationCountStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"NotificationsCount"]];
         [lblNotificationCount removeFromSuperview];
         
         lblNotificationCount = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
         lblNotificationCount.text = notificationCountStr;
+        
+ //       int val = [notificationCountStr intValue];
 
         lblNotificationCount.textAlignment = NSTextAlignmentCenter;
         lblNotificationCount.textColor = [UIColor whiteColor];
+        
         lblNotificationCount.font = [UIFont boldSystemFontOfSize:lblNotificationCount.font.hash];
         [btnSubmitReferral addSubview:lblNotificationCount];
         [imagenotificationcount bringSubviewToFront:lblNotificationCount];
         
         [label45 removeFromSuperview];
         label45 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, imagenotificationcount.frame.size.width, imagenotificationcount.frame.size.height)];
+        label45.adjustsFontSizeToFitWidth=YES;
+        label45.minimumScaleFactor=0.5;
         label45.textAlignment = NSTextAlignmentCenter;
         label45.textColor = [UIColor whiteColor];
         label45.text = notificationCountStr;
+//        if(val > 99)
+//        {
+//            label45.text = @"99+";
+////            label45.frame = CGRectMake(label45.frame.origin.x, label45.frame.origin.y, label45.frame.size.width+4, label45.frame.size.height);
+//        }
         [imagenotificationcount addSubview:label45];
         
         
@@ -877,7 +907,7 @@ if([recieved_status isEqualToString:@"passed"])
             imagenotificationcount.hidden = YES;
         }
         
-    [kappDelegate HideIndicator];
+        [kappDelegate HideIndicator];
         
         NSString *upcomingStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UpcomingRewards"]];
         NSString *earnedStr= [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"EarnedRewards"]];
@@ -910,7 +940,7 @@ if([recieved_status isEqualToString:@"passed"])
         }
         if([[[refType valueForKey:@"ReferralType" ] objectAtIndex:k] isEqualToString:@"sold"])
         {
-            NSLog(@"%@",[NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]]);
+//            NSLog(@"%@",[NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]]);
 
             
             lblSoldreferralAmount.text = [NSString stringWithFormat:@"($%@)",[[refType valueForKey:@"Amount"] objectAtIndex:k]];
@@ -920,10 +950,10 @@ if([recieved_status isEqualToString:@"passed"])
         
             NSString *val1 =[NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
 
-            NSLog(@"%lu",(unsigned long)val1.length);
+//            NSLog(@"%lu",(unsigned long)val1.length);
            
             
-            NSLog(@"%@",lblnewActiveSoldCount.text);
+//            NSLog(@"%@",lblnewActiveSoldCount.text);
             
             NSUInteger length1 = lblnewActiveSoldCount.text.length;
             NSUInteger length2 = val1.length ;
@@ -951,15 +981,15 @@ if([recieved_status isEqualToString:@"passed"])
                 lbltotalreferralcount.text = [NSString stringWithFormat:@"%@",[[refType valueForKey:@"ReferralCount"]objectAtIndex:k]];
                 }
             }
-            [self registerDevice];
         }else if(webservice==2)
         {
-            NSLog(@"%@",responseString);
-           
+//            NSLog(@"%@",responseString);
+           webservice=0;
+            
             
         }else if (webservice==3)
         {
-           
+           webservice=0;
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_email"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_firstName"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_lastName"];
@@ -977,18 +1007,23 @@ if([recieved_status isEqualToString:@"passed"])
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"profile_picture"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"savedImageURL"];
-            NSLog(@"FFFFFFFFFFFFFFFFF%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"]);
+//            NSLog(@"FFFFFFFFFFFFFFFFF%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"profile_picture"]);
             
             [kappDelegate HideIndicator];
             if (count_status==0) {
                 [[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"user_logout"];
                 LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                 [self.navigationController pushViewController:LIvc animated:YES];
-                NSLog(@"-----webservice------");
+//                NSLog(@"-----webservice------");
                 count_status++;
             }
            
             return;
+        }
+        else if (webservice==13)
+        {
+            webservice=0;
+//            NSLog(@"%@",responseString);
         }
     }else{
         
@@ -1021,13 +1056,13 @@ if([recieved_status isEqualToString:@"passed"])
     NSURLConnection *connection;
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"profile_picture"]);
+//    NSLog(@"%@",[user valueForKey:@"profile_picture"]);
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"profile_picture"]];
    
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
-    NSLog(@"data post >>> %@",_postData);
+//    NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
     
@@ -1040,14 +1075,14 @@ if([recieved_status isEqualToString:@"passed"])
         if(webData==nil)
         {
             webData = [NSMutableData data] ;
-            NSLog(@"data");
+//            NSLog(@"data");
         }
         else
         {
             webData=nil;
             webData = [NSMutableData data] ;
         }
-        NSLog(@"server connection made");
+//        NSLog(@"server connection made");
     }
     else
     {
@@ -1055,6 +1090,47 @@ if([recieved_status isEqualToString:@"passed"])
     }
     
 
+}
+
+-(void)resetBadgeCount
+{
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    NSURLConnection *connection;
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    //    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+    NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
+    
+    
+    _postData = [NSString stringWithFormat:@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/userdevice/SetDefaultBadge/%@",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    //    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            //            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        //        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
 }
 
 -(void)logout
@@ -1067,14 +1143,14 @@ if([recieved_status isEqualToString:@"passed"])
     count_status = 0;
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+//    NSLog(@"%@",[user valueForKey:@"l_userid"]);
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
   
     
     _postData = [NSString stringWithFormat:@""];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/logout",Kwebservices,userid]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
-    NSLog(@"data post >>> %@",_postData);
+//    NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
     
@@ -1086,14 +1162,14 @@ if([recieved_status isEqualToString:@"passed"])
         if(webData==nil)
         {
             webData = [NSMutableData data] ;
-            NSLog(@"data");
+//            NSLog(@"data");
         }
         else
         {
             webData=nil;
             webData = [NSMutableData data] ;
         }
-        NSLog(@"server connection made");
+//        NSLog(@"server connection made");
     }
     else
     {
@@ -1122,7 +1198,7 @@ if([recieved_status isEqualToString:@"passed"])
      }
                      completion:^(BOOL finished)
      {
-         NSLog(@"Completed");
+//         NSLog(@"Completed");
          
      }];
     
@@ -1207,7 +1283,7 @@ if([recieved_status isEqualToString:@"passed"])
     NSURLConnection *connection;
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+//    NSLog(@"%@",[user valueForKey:@"l_userid"]);
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     
     
@@ -1233,11 +1309,11 @@ if([recieved_status isEqualToString:@"passed"])
     
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
-    NSLog(@"data post >>> %@",_postData);
+//    NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"POST"];
    
-    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]);
+//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]);
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1248,14 +1324,14 @@ if([recieved_status isEqualToString:@"passed"])
         if(webData==nil)
         {
             webData = [NSMutableData data] ;
-            NSLog(@"data");
+//            NSLog(@"data");
         }
         else
         {
             webData=nil;
             webData = [NSMutableData data] ;
         }
-        NSLog(@"server connection made");
+//        NSLog(@"server connection made");
     }
     else
     {
@@ -1265,13 +1341,13 @@ if([recieved_status isEqualToString:@"passed"])
 
 -(void)registerDevice
 {
-    webservice=2;
+    
     NSMutableURLRequest *request ;
     NSString*_postData ;
     NSURLConnection *connection;
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSLog(@"%@",[user valueForKey:@"l_userid"]);
+//    NSLog(@"%@",[user valueForKey:@"l_userid"]);
     NSString *userid = [NSString stringWithFormat: @"%@",[user valueForKey:@"l_userid"]];
     NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     NSString *currSys = @"ios";
@@ -1281,8 +1357,8 @@ if([recieved_status isEqualToString:@"passed"])
     _postData = [NSString stringWithFormat:@"UserID=%@&DeviceUDID=%@&DeviceOS=%@&TokenID=%@",userid,udid,currSys,devToken];
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/userdevice",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
-    NSLog(@"%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] );
-    NSLog(@"data post >>> %@",_postData);
+//    NSLog(@"%@",[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] );
+//    NSLog(@"data post >>> %@",_postData);
     [request setHTTPMethod:@"POST"];
    
     [request addValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]] forHTTPHeaderField:@"token"];
@@ -1295,14 +1371,14 @@ if([recieved_status isEqualToString:@"passed"])
         if(webData==nil)
         {
             webData = [NSMutableData data] ;
-            NSLog(@"data");
+//            NSLog(@"data");
         }
         else
         {
             webData=nil;
             webData = [NSMutableData data] ;
         }
-        NSLog(@"server connection made");
+//        NSLog(@"server connection made");
     }
     else
     {

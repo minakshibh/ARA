@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.m
 //  AUTOAVES_REFERRAL
@@ -12,20 +13,18 @@
 #import "LoginViewController.h"
 #import "dashboardViewController.h"
 #import "referralListViewController.h"
-//#import <Crittercism/Crittercism.h>
 #import "RecoveryViewController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-//@interface AppDelegate () <CrittercismDelegate>
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     [Fabric with:@[[Crashlytics class]]];
 
     ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
@@ -136,6 +135,7 @@
 
 }
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+
     @try {
    
 //    if (notificationSettings.types != UIUserNotificationTypeNone) {
@@ -145,7 +145,7 @@
         
     }@catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"App Delegate 2" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         
     }@finally {
@@ -167,7 +167,7 @@
     [[NSUserDefaults standardUserDefaults]setValue:deviceToken forKey:@"deviceToken"];
     }@catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"App Delegate 3" message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:[NSString stringWithFormat:@"%@",exception.reason] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         
     }@finally {
@@ -176,30 +176,19 @@
     
     
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    [kappDelegate HideIndicator];
-//    NSString *noti = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"self"]];
-//    if([noti isEqualToString:@"self"])
-//    {
-//    
-//    }else{
-        NSArray *array = [userInfo valueForKey:@"aps"];
-        NSString *noti_msg = [array valueForKey:@"alert"];
-        
-        [HelperAlert alertWithOneBtn:AlertTitle description:noti_msg okBtn:OkButtonTitle];
-        
-//        dashboardViewController *Dvc = [[dashboardViewController alloc]init];
-//        [Dvc getData];
-//        referralListViewController *RLvc = [[referralListViewController alloc]init];
-        
-//        NSString *trigger =[[NSUserDefaults standardUserDefaults]valueForKey:@"webservice_trigger"];
-//        [RLvc getList:trigger];
-//    }
 
+-(void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void
+                                                                                                                               (^)(UIBackgroundFetchResult))completionHandler
+{
+    NSArray *array = [userInfo valueForKey:@"aps"];
+    NSString *noti_msg = [array valueForKey:@"alert"];
+
+    [HelperAlert alertWithOneBtn:AlertTitle description:noti_msg okBtn:OkButtonTitle];
 }
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
- //   NSLog(@"Error in registration. Error: %@", error);
+
+    NSLog(@"Error in registration. Error: %@", error);
 }
 
 #pragma mark- OPENURL
@@ -368,6 +357,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     application.applicationIconBadgeNumber = 0;
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -378,7 +368,6 @@
 
 -(void)ShowIndicator
 {
-    
     activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
     if (IS_IPHONE_5 )
@@ -427,6 +416,5 @@
     [DisableView removeFromSuperview];
     
 }
-
 
 @end

@@ -26,7 +26,8 @@
 
 @implementation showProfileImageViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     
 //    [NSTimer scheduledTimerWithTimeInterval:10
 //                                     target:self
@@ -49,18 +50,6 @@
     
     
     imageViewProfile.contentMode=UIViewContentModeScaleAspectFit;
-    
-        [self.view endEditing:YES];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                      initWithTitle:nil
-                                      delegate:self
-    cancelButtonTitle:@"Cancel"
-    destructiveButtonTitle:@"Photo Library"
-    otherButtonTitles:@"Camera",nil];
-    
-        actionSheet.actionSheetStyle = UIBarStyleBlackTranslucent;
-        [actionSheet showInView:self.view];
-    
     
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 //        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagestr]];
@@ -93,6 +82,22 @@
     [imageViewProfile addGestureRecognizer:tapRecognizer];
    
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.view endEditing:YES];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:nil
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  destructiveButtonTitle:@"Photo Library"
+                                  otherButtonTitles:@"Camera",nil];
+    
+    actionSheet.actionSheetStyle = UIBarStyleBlackTranslucent;
+    [actionSheet showInView:self.view];
+
+}
+
 - (void)bigButtonTapped:(id)sender {
     
     // Create image info
@@ -330,7 +335,7 @@
         
         NSString *date=[NSString stringWithFormat:@"%@",[self randomStringWithLength:6]];
     
-        NSLog(@"append image data %@",imagedata);
+//        NSLog(@"append image data %@",imagedata);
         [formData appendPartWithFileData:imagedata name:fileName fileName:[NSString stringWithFormat:@"%@.jpg",date] mimeType:@"image/jpeg"];
     //     [self.view makeToast:@"The image is being uploading...."];
         
@@ -367,7 +372,9 @@
         [imageViewProfile sd_setImageWithURL:[NSURL URLWithString:imagestr1]];
         
         [[NSUserDefaults standardUserDefaults]setObject:imagedata forKey:@"profile_picture"];
- NSLog(@"new image url %@",imagestr1);
+        
+        NSLog(@"new image url %@",imagestr1);
+        
         [[NSUserDefaults standardUserDefaults]setObject:imagestr1 forKey:@"l_image"];
  
         [kappDelegate HideIndicator];

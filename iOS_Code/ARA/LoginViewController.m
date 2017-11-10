@@ -31,8 +31,8 @@
     IBOutlet UIButton *ipadbtnsignUpWithReference;
 
     IBOutlet UIButton *iBtnSignup;
-     IBOutlet UIButton *btnsignUpWithReference;
-      IBOutlet UIButton *btnFacebookLogin;
+    IBOutlet UIButton *btnsignUpWithReference;
+    IBOutlet UIButton *btnFacebookLogin;
     SignUpViewController *SUvc;
     IBOutlet UIButton *btnLogin;
     IBOutlet UIButton *btnCheckbox;
@@ -92,7 +92,7 @@
         
         
         ipadbtnsignUpWithReference.titleLabel.font = [btnSignUp.titleLabel.font fontWithSize:20];
-        [ipadbtnsignUpWithReference setTitle:@"Sign Up with Reference" forState:UIControlStateNormal];
+        [ipadbtnsignUpWithReference setTitle:@"Sign Up with Invitation" forState:UIControlStateNormal];
     }
     
     NSLog(@"login view");
@@ -550,7 +550,7 @@
     }
     
         DBManager *db = [[DBManager alloc]init];
-        bool createDB = [db createDB];
+        [db createDB];
         
         
     [kappDelegate HideIndicator];
@@ -647,11 +647,27 @@
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"l_loggedin"];
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"from_fb"];
 
-        LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-         NSLog(@"-----facebokk111------");
-        [self.navigationController pushViewController:LIvc animated:YES];
         
         NSLog(@"----------------------------");
+
+        
+        if ([[NSUserDefaults standardUserDefaults] valueForKey:@"OTPFacebookLogout"] != nil)
+        {
+            NSString *oTPFacebookLogout = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"OTPFacebookLogout"]];
+            
+            if([oTPFacebookLogout isEqualToString:@"yes"])
+            {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"OTPFacebookLogout"];
+            }
+            
+        }
+        else
+        {
+            LoginViewController *LIvc = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+            NSLog(@"-----facebokk111------");
+            [self.navigationController pushViewController:LIvc animated:YES];
+
+        }
 
         // [self userLoggedOut];
     }

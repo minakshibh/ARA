@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ReferralObj : NSObject
-@property (strong, nonatomic) NSString *first_name,*last_name,*phone_no,*email,*MEAid,*comments,*tag,*date,*referralID,*price,*createDate,*ReferralStatus,*ReferrerEmail,*ReferrerID,*ReferrerName,*ReferrerUserName,*SoldDate,*UniqueReferralNumber,*UserDetailId,*MeaName,*ReferralType,*RewardAmount,*RewardDescription,*RewardName,*RewardType,*Rewardlevel,*TransactionID,*IsReceived;
+@property (strong, nonatomic) NSString *first_name,*last_name,*phone_no,*email,*MEAid,*comments,*tag,*date,*referralID,*price,*createDate,*ReferralStatus,*ReferrerEmail,*ReferrerID,*ReferrerName,*ReferrerUserName,*SoldDate,*UniqueReferralNumber,*UserDetailId,*MeaName,*ReferralType,*RewardAmount,*RewardDescription,*RewardName,*RewardType,*Rewardlevel,*TransactionID,*IsReceived,*IsAutoFlowLeadExists;
+@property (strong, nonatomic) NSArray *AFLeadNote;
+@property (nonatomic) BOOL IsReferralSoldOut;
 
 @end

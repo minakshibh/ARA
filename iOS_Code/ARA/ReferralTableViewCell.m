@@ -45,48 +45,66 @@
     lblDate.text = date;
 
     lblDateReward.hidden = YES;
-    if([[tag lowercaseString] isEqualToString:@"open"])
+    if([[tag lowercaseString] isEqualToString:@"lost sale"] || [[tag lowercaseString] isEqualToString:@"deleted from crm"] || [[tag lowercaseString] isEqualToString:@"reversed"])
     {
-        lbltag.textColor = [UIColor colorWithRed:95.0f/255.0f green:204.0f/255.0f blue:87.0f/255.0f alpha:1.0f];
-     //   lbltag.textColor = [UIColor whiteColor];
-        lbltag.text = @"OPEN";
-        CGRect frame = lbltag.frame;
-        frame.origin.x = frame.origin.x-10;
-        lbltag.frame = frame;
-        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:14];
+        txtTag.textColor = [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
+        txtTag.text = tag.uppercaseString;
+        
+        CGRect frame = txtTag.frame;
+        frame.origin.x = frame.origin.x;
+        txtTag.frame = frame;
+        txtTag.font = [UIFont fontWithName:@"Roboto-Bold" size:12];
+
+        // open
+//        lbltag.textColor = [UIColor colorWithRed:95.0f/255.0f green:204.0f/255.0f blue:87.0f/255.0f alpha:1.0f];
+//     //   lbltag.textColor = [UIColor whiteColor];
+//        lbltag.text = @"OPEN";
+//        CGRect frame = lbltag.frame;
+//        frame.origin.x = frame.origin.x-10;
+//        lbltag.frame = frame;
+//        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:12];
 
     }else if([[tag lowercaseString] isEqualToString:@"sold"]){
-        lbltag.textColor = [UIColor colorWithRed:105.0f/255.0f green:160.0f/255.0f blue:208.0f/255.0f alpha:1.0f];
+        txtTag.textColor = [UIColor colorWithRed:105.0f/255.0f green:160.0f/255.0f blue:208.0f/255.0f alpha:1.0f];
       //  lbltag.textColor = [UIColor whiteColor];
-        lbltag.text = @"SOLD";
+        txtTag.text = @"SOLD";
         
-        CGRect frame = lbltag.frame;
-        frame.origin.x = frame.origin.x-10;
-        lbltag.frame = frame;
-        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:14];
+        CGRect frame = txtTag.frame;
+        frame.origin.x = frame.origin.x;
+        txtTag.frame = frame;
+        txtTag.font = [UIFont fontWithName:@"Roboto-Bold" size:12];
 
     }else{
-        lbltag.textColor = [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
-       // lbltag.textColor = [UIColor whiteColor];
-        lbltag.text = [tag uppercaseString];
         
-        CGRect frame = lbltag.frame;
-        frame.size.width = frame.size.width +20;
-        frame.origin.x = frame.origin.x-24;
-        lbltag.frame = frame;
-        
-        if([lbltag.text isEqualToString:@"CALL INTIATED"])
-        {
-             lbltag.text = @"CALL INITIATED";
-             lbltag.frame = CGRectMake(lbltag.frame.origin.x-25, lbltag.frame.origin.y, lbltag.frame.size.width+20, lbltag.frame.size.height);
-        }
-        
-        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:12];
-        }
+        txtTag.textColor = [UIColor colorWithRed:95.0f/255.0f green:204.0f/255.0f blue:87.0f/255.0f alpha:1.0f];
+        //   lbltag.textColor = [UIColor whiteColor];
+        txtTag.text = [tag uppercaseString];;
+        CGRect frame = txtTag.frame;
+        frame.origin.x = frame.origin.x;
+        txtTag.frame = frame;
+        txtTag.font = [UIFont fontWithName:@"Roboto-Bold" size:12];
+
+//        lbltag.textColor = [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
+//       // lbltag.textColor = [UIColor whiteColor];
+//        lbltag.text = [tag uppercaseString];
+//        
+//        CGRect frame = lbltag.frame;
+//        frame.size.width = frame.size.width +20;
+//        frame.origin.x = frame.origin.x-24;
+//        lbltag.frame = frame;
+//        
+//        if([lbltag.text isEqualToString:@"CALL INTIATED"])
+//        {
+//             lbltag.text = @"CALL INITIATED";
+//             lbltag.frame = CGRectMake(lbltag.frame.origin.x-25, lbltag.frame.origin.y, lbltag.frame.size.width+20, lbltag.frame.size.height);
+//        }
+//        
+//        lbltag.font = [UIFont fontWithName:@"Roboto-Bold" size:12];
+    }
     
     
-    lbltag.layer.cornerRadius = 3.0;
-    [lbltag setClipsToBounds:YES];
+    txtTag.layer.cornerRadius = 3.0;
+    [txtTag setClipsToBounds:YES];
     
     
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
@@ -95,14 +113,14 @@
         
         lblName.font = [lblName.font fontWithSize:24];
         lblDate.font = [lblDate.font fontWithSize:18];
-        lbltag.font = [lbltag.font fontWithSize:24];
+        txtTag.font = [txtTag.font fontWithSize:18];
         
         lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y, lblDate.frame.size.width, lblDate.frame.size.height);
         if(IS_IPAD_PRO_1366)
         {
             lblName.font = [lblName.font fontWithSize:30];
             lblDate.font = [lblDate.font fontWithSize:24];
-            lbltag.font = [lbltag.font fontWithSize:30];
+            txtTag.font = [txtTag.font fontWithSize:24];
             
             lblDate.frame = CGRectMake(lblDate.frame.origin.x, lblDate.frame.origin.y+3, lblDate.frame.size.width, lblDate.frame.size.height);
         }

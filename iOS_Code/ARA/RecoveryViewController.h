@@ -27,6 +27,6 @@
     NSMutableData *webData;
     NSString *status;
 }
-@property (atomic,strong) NSString* guid;
+@property (atomic,strong) NSString* email;
 - (IBAction)btnChangePassword:(id)sender;
 @end

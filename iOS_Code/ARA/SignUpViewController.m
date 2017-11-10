@@ -1,3 +1,5 @@
+
+
 //
 //  SignUpViewController.m
 //  AUTOAVES_REFERRAL
@@ -19,9 +21,15 @@
 @end
 
 @implementation SignUpViewController
+{
+    BOOL statusUserId;
+}
 @synthesize userReference;
+
+
 - (void)viewDidLoad {
     txtMEA.text = @" ";
+    statusUserId = false;
     [super viewDidLoad];
     
     mainImage.image=[UIImage imageNamed:@"step2.png"];
@@ -133,6 +141,7 @@
         txtLastName.font = [txtLastName.font fontWithSize:20];
         txtUserId.font = [txtUserId.font fontWithSize:20];
         txtPhoneNo.font = [txtPhoneNo.font fontWithSize:20];
+        txtOTP.font = [txtOTP.font fontWithSize:20];
         txtEmail.font = [txtEmail.font fontWithSize:20];
         txtPassword.font = [txtPassword.font fontWithSize:20];
         txtPreviousCoustomer.font = [txtPreviousCoustomer.font fontWithSize:20];
@@ -160,12 +169,11 @@
             txtLastName.font = [txtLastName.font fontWithSize:30];
             txtUserId.font = [txtUserId.font fontWithSize:30];
             txtPhoneNo.font = [txtPhoneNo.font fontWithSize:30];
+            txtOTP.font = [txtOTP.font fontWithSize:30];
             txtEmail.font = [txtEmail.font fontWithSize:30];
             txtPassword.font = [txtPassword.font fontWithSize:30];
             txtPreviousCoustomer.font = [txtPreviousCoustomer.font fontWithSize:30];
             txtMEA.font = [txtMEA.font fontWithSize:30];
-
-            
         }
     }
     
@@ -178,13 +186,11 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-    
     if ([userReference isEqualToString:@"True"]) {
         
         mainImage.image=[UIImage imageNamed:@"step_b_icon"];
         
-        lblEnteremailaddress.text=@"Enter Reference Data";
+        lblEnteremailaddress.text=@"Enter your invitation code";
 
         [txtFirstName setEnabled:false];
         [txtLastName setEnabled:false];
@@ -238,6 +244,7 @@
     //[txtMEA resignFirstResponder];
     [txtPassword resignFirstResponder];
     [txtPhoneNo resignFirstResponder];
+    [txtOTP resignFirstResponder];
     [txtPreviousCoustomer resignFirstResponder];
     [txtUserId resignFirstResponder];
     
@@ -261,12 +268,37 @@
             if ([[_valuesArray objectAtIndex:2] rangeOfString:@"<null>" options:NSCaseInsensitiveSearch].location != NSNotFound){
                 txtPhoneNo.text = @"";
             }else{
-                txtPhoneNo.text = [_valuesArray objectAtIndex:2];
-
+                NSString *phoneStr  = [_valuesArray objectAtIndex:2];
+                
+                NSMutableString *mutstr = [[NSMutableString alloc]init];
+                for (int i = 0; i<phoneStr.length; i++)
+                {
+                    NSString *character = [NSString stringWithFormat:@"%C",[phoneStr characterAtIndex:i]];
+                    if(i==0){
+                        mutstr =[NSMutableString stringWithFormat:@"%@",character];
+                    }else{
+                        mutstr = [NSMutableString stringWithFormat:@"%@%@",mutstr,character];
+                    }
+                   txtPhoneNo.text = [self showmaskonnumber:mutstr];
+                }
             }
             UserDetailId = [NSString stringWithFormat:@"%@",[_valuesArray objectAtIndex:3]];
             txtEmail.text = [_valuesArray objectAtIndex:4];
             webserviceStatus = @"checked" ;
+            
+            
+                 txtMEA.text = [_valuesArray objectAtIndex:5];
+                 selected_meaid= [_valuesArray objectAtIndex:6];
+            
+            if(![txtMEA.text isEqual: @""])
+            {
+               [btnMEA setTitle:@" " forState:UIControlStateNormal];
+            }
+            
+            
+            
+            
+            
             }
         }
     }
@@ -287,6 +319,7 @@
     txtPreviousCoustomer.text =@" ";
     txtPassword.text =@"";
     txtPhoneNo.text =@"";
+    txtOTP.text =@"";
     txtUserId.text =@"";
      checkbox_Value = false;
      btnImage = [UIImage imageNamed:@"checkbox-unchecked.png"];
@@ -375,6 +408,7 @@
 
 - (IBAction)btnSignup:(id)sender {
     
+    NSCharacterSet *validChars = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
     NSString* firstNameStr = [txtFirstName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* lastNameStr = [txtLastName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* userIdstr = [txtUserId.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -409,31 +443,84 @@
         message = @"Please Enter User ID";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
-    }else if ([txtPhoneNo isEmpty] ) {
+    }
+    else if(!statusUserId)
+    {
+        message = @"Please wait userId is getting verified";
         
-
-        message = @"Please Enter a valid phone no";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
-        return;
-    }
-    if (phoneNostr.length<10 ) {
-        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
         
+        [self veriphyUserId];
         
         return;
     }
-    if (phoneNostr.length>10 ) {
-        if([[NSString stringWithFormat:@"%C",[phoneNostr characterAtIndex:0]] isEqual:@"1"])
-        {
-            
-        }else{
+    else if([lbluseriderror.text isEqualToString:@"This userId already exists"])
+    {
+        message = @"Please select a different userid";
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        
+        return;
+    }
+
+    else  if([txtPhoneNo isEmpty])
+    {
         message = @"Please Enter a phone no with atmost 10 digits";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        [txtPhoneNo becomeFirstResponder];
+        return;
+     }else if(phoneNostr.length == 10)
+    {
+        if([[NSString stringWithFormat:@"%C",[phoneNostr characterAtIndex:0]] isEqual:@"1"])
+        {
+            message = @"Kindly enter a valid phone number.";
+            [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+            [txtPhoneNo becomeFirstResponder];
+            return;
+        }
         
+    }else if(phoneNostr.length < 10)
+    {
+        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+        [txtPhoneNo becomeFirstResponder];
+        return;
+    }
+    if(phoneNostr.length >10)
+    {
+        if([[NSString stringWithFormat:@"%C",[phoneNostr characterAtIndex:0]] isEqual:@"1"])
+        {
+        }else{
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please Enter a phone no with atmost 10 digits" okBtn:OkButtonTitle];
+            [txtPhoneNo becomeFirstResponder];
             return;
         }
     }
+    else if ([txtOTP isEmpty]) {
+        message = @"Please Enter OTP.";
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+
     
+//    if (phoneNostr.length<10 ) {
+//        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+//        
+//        
+//        return;
+//    }
+//    if (phoneNostr.length>10 ) {
+//        if([[NSString stringWithFormat:@"%C",[phoneNostr characterAtIndex:0]] isEqual:@"1"])
+//        {
+//            
+//        }else{
+//        message = @"Please Enter a phone no with atmost 10 digits";
+//        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+//        
+//            return;
+//        }
+//    }
+//
+    
+ 
     
     
     if (![txtEmail emailValidation]) {
@@ -453,7 +540,33 @@
             [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
         }
-    }else if([txtPreviousCoustomer.text isEqualToString:@"Select Role"])
+    }
+    
+    if(txtPassword.text.length < 6){
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    } else if(txtPassword.text.length >= 6 && [txtPassword.text rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location == NSNotFound ){
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    else if (txtPassword.text.length >= 6 && [txtPassword.text rangeOfCharacterFromSet:validChars].location == NSNotFound ){
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+//    
+//    NSRange  range = [txtPassword.text rangeOfCharacterFromSet:validChars];
+//    if (NSNotFound == range.location) {
+//        message = @"Please enter at least one alphabet letter in password.";
+//        
+//        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+//        return;
+//    }
+    else if([txtPreviousCoustomer.text isEqualToString:@"Select Role"])
     {
         message = @"Please Select Any Role";
         [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
@@ -500,15 +613,15 @@
         return;
     }
     
-    if (![webserviceStatus isEqualToString:@"checked"])
-    {
-        [self.view makeToast:@"Please wait a moment while we check your email."];
-        internal=2;
-        [txtEmail resignFirstResponder];
-        [self checkforAvailability];
-        [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-        return;
-    }
+//    if (![webserviceStatus isEqualToString:@"checked"])
+//    {
+//        [self.view makeToast:@"Please wait a moment while we check your email."];
+//        internal=2;
+//        [txtEmail resignFirstResponder];
+//        [self checkforAvailability];
+//        [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+//        return;
+//    }
     
     NSString *fb_status,*value;
     //--check if user came from facebook
@@ -584,6 +697,14 @@
     [btnCheckBox setImage:btnImage forState:UIControlStateNormal];
 }
 
+- (BOOL)string:(NSString *)text matches:(NSString *)pattern
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+    
+    NSArray *matches = [regex matchesInString:text options:0 range:NSMakeRange(0, text.length)];
+    
+    return matches.count > 0;
+}
 #pragma mark - Textfield Delegates
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -641,6 +762,7 @@
     {
         lbluseriderror.text =@"";
         imagecheckforuseridView.image=nil;
+        statusUserId = false;
     }
     if(textField==txtEmail){
         lblemailerror.text = @"";
@@ -651,8 +773,9 @@
     tableViewPreviousCustomer.hidden = YES;
     svos = scrollView.contentOffset;
     scrollView.scrollEnabled = YES;
-     if(textField == txtEmail|| textField == txtPassword || textField == txtPhoneNo || textField == txtUserId  || textField==txtUserId) {
-            
+    
+     if(textField == txtEmail|| textField == txtPassword || textField == txtPhoneNo || textField == txtUserId  || textField==txtUserId || textField == txtOTP)
+     {
             CGPoint pt;
             CGRect rc = [textField bounds];
             rc = [textField convertRect:rc toView:scrollView];
@@ -661,9 +784,8 @@
             pt.y -=200;
             [scrollView setContentOffset:pt animated:YES];
      }
-   // NSString *path = [NSString stringWithFormat:@"%@/users/%@/profilepic",Kwebservices,[[NSUserDefaults standardUserDefaults] valueForKey:@"l_userid"]];
-
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     scrollView.scrollEnabled = NO;
@@ -691,22 +813,8 @@
             
             return;
         }
-        //activityIndicatorObject.center = CGPointMake(0, 0);
-        activityIndicatorObject.transform = CGAffineTransformMakeScale(0.50, 0.50);
-        activityIndicatorObject.color=[UIColor whiteColor];
-        [viewUserIdindicator addSubview:activityIndicatorObject];
-        [activityIndicatorObject startAnimating];
-        
-        CGRect frame = viewUserIdindicator.frame;
-        frame.origin.x = txtUserId.frame.origin.x + txtUserId.frame.size.width;
-        frame.origin.y = txtUserId.frame.origin.y +1;
-        viewUserIdindicator.frame = frame;
-      
-       
-        internal=1;
-        
-        [self checkforAvailability];
-        
+
+        [self veriphyUserId];
     }
     
     if(textField == txtEmail)
@@ -746,8 +854,8 @@
         if(flag ==false)
         {
             
-            [self checkforAvailability];
-            [activityIndicatorObject1 startAnimating];
+//            [self checkforAvailability];
+//            [activityIndicatorObject1 startAnimating];
         }
         
         NSString *client_email = [NSString stringWithFormat:@"%@",txtEmail.text];
@@ -856,6 +964,22 @@
         textField.text = formattedString;
         return NO;
     }
+    
+    if(textField == txtUserId)
+    {
+        statusUserId = false;
+        lbluseriderror.text =@"";
+        imagecheckforuseridView.hidden = YES;
+    }
+    
+    if(textField == txtPassword)
+    {
+        if([string isEqualToString:@" "]){
+            // Returning no here to restrict whitespace
+            return NO;
+        }
+    }
+    
     return YES;
 }
 
@@ -1117,6 +1241,9 @@ if ([response_status isEqualToString:@"passed"])
             }
         }else if(webservice==5)
         {   webservice=0;
+            
+            statusUserId = true;
+            
             [activityIndicatorObject stopAnimating];
            
             NSString *firstname6 = [userDetailDict valueForKey:@"FirstName"];
@@ -1133,6 +1260,7 @@ if ([response_status isEqualToString:@"passed"])
                 viewUserIdindicator.frame = frame;
 
                 imagecheckforuseridView.image = [UIImage imageNamed:@"tick2.png"];
+                
                 return;
             }
             if (firstname6.length >0 || lastname6.length >0 || phoneno6.length >0) {
@@ -1192,6 +1320,7 @@ if ([response_status isEqualToString:@"passed"])
        
         if ([responseString rangeOfString:@"User Name not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
+            statusUserId = true;
             imagecheckforuseridView.hidden =NO;
             CGRect frame = viewUserIdindicator.frame;
             frame.origin.x = txtUserId.frame.origin.x + txtUserId.frame.size.width+3;
@@ -1417,6 +1546,28 @@ if(tableView == tableViewPreviousCustomer)
 }
 
 #pragma mark - Other Methods
+
+-(void)veriphyUserId
+{
+    //activityIndicatorObject.center = CGPointMake(0, 0);
+    activityIndicatorObject.transform = CGAffineTransformMakeScale(0.50, 0.50);
+    activityIndicatorObject.color=[UIColor whiteColor];
+    [viewUserIdindicator addSubview:activityIndicatorObject];
+    [activityIndicatorObject startAnimating];
+    
+    CGRect frame = viewUserIdindicator.frame;
+    frame.origin.x = txtUserId.frame.origin.x + txtUserId.frame.size.width;
+    frame.origin.y = txtUserId.frame.origin.y +1;
+    viewUserIdindicator.frame = frame;
+    
+    
+    internal=1;
+    
+    statusUserId = false;
+    
+    [self checkforAvailability];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex              {
     if(alertView.tag==2){
         
@@ -1648,6 +1799,7 @@ if(tableView == tableViewPreviousCustomer)
     //[txtMEA resignFirstResponder];
     [txtPassword resignFirstResponder];
     [txtPhoneNo resignFirstResponder];
+    [txtOTP resignFirstResponder];
     [txtPreviousCoustomer resignFirstResponder];
     [txtUserId resignFirstResponder];
     
@@ -1679,5 +1831,45 @@ if(tableView == tableViewPreviousCustomer)
     scrollView.contentInset = contentInsets;
     scrollView.scrollIndicatorInsets = contentInsets;
 }
-
+-(NSString *)showmaskonnumber:(NSString*)number
+{
+    
+    NSString *newString = number;
+    if(newString.length==0)
+    {
+        return @"";;
+    }
+    NSArray *components = [newString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
+    NSString *decimalString = [components componentsJoinedByString:@""];
+    
+    NSUInteger length = decimalString.length;
+    BOOL hasLeadingOne = length > 1 && [decimalString characterAtIndex:0] == '1';
+        
+    NSUInteger index = 0;
+    NSMutableString *formattedString = [NSMutableString string];
+    
+    if (hasLeadingOne) {
+        [formattedString appendString:@"1 "];
+        index += 1;
+    }
+    
+    if (length - index > 3) {
+        NSString *areaCode = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"(%@) ",areaCode];
+        index += 3;
+    }
+    
+    if (length - index > 3) {
+        NSString *prefix = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"%@-",prefix];
+        index += 3;
+    }
+    
+    NSString *remainder = [decimalString substringFromIndex:index];
+    [formattedString appendString:remainder];
+    
+    NSString *frmtStr = formattedString;
+    
+    return frmtStr;
+}
 @end

@@ -309,7 +309,7 @@
             
             if (userDetailDict.count<1) {
                 
-                NSString *status = [NSString stringWithFormat:@"%@",lblheading.text];
+//                NSString *status = [NSString stringWithFormat:@"%@",lblheading.text];
                 
 
                // [HelperAlert  alertWithOneBtn:AlertTitle description:@"There is no data to display" okBtn:OkButtonTitle];
@@ -344,7 +344,7 @@
                 obj.ReferralStatus = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferralStatus"]];
                 obj.ReferrerEmail = [NSString stringWithFormat:@"%@",[dict   valueForKey:@"ReferrerEmail"]];
                 obj.ReferrerID = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferrerID"]];
-                obj.ReferrerName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferrerName"]objectAtIndex:i]];
+                obj.ReferrerName = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferrerName"]];;
                 obj.ReferrerUserName = [NSString stringWithFormat:@"%@",[dict valueForKey:@"ReferrerUserName"]];
                 obj.SoldDate = [NSString stringWithFormat:@"%@",[dict valueForKey:@"SoldDate"]];
                 obj.UniqueReferralNumber = [NSString stringWithFormat:@"%@",[dict valueForKey:@"UniqueReferralNumber"]];

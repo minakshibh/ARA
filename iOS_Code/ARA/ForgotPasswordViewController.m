@@ -10,6 +10,8 @@
 #import "SignupEmailCheckViewController.h"
 #import "ASIHTTPRequest.h"
 #import "LoginViewController.h"
+#import "OTPViewController.h"
+#import "RecoveryViewController.h"
 
 @interface ForgotPasswordViewController ()
 
@@ -18,31 +20,10 @@
 @implementation ForgotPasswordViewController
 
 - (void)viewDidLoad {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fromOTPView"];
+
     txtEmail.text = _email;
     [super viewDidLoad];
-    
-    
-//    int d = 0; // standard display
-//    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0) {
-//        d = 1; // is retina display
-//    }
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        d += 2;
-//    }
-//    
-//    if (d==0) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_320.png"];
-//    }
-//    if (d==1) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_480.png"];
-//    }
-//    if (d==2) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_600.png"];
-//    }
-//    if (d==3) {
-//        imagelogo.image = [UIImage imageNamed:@"inner-logo_640.png"];
-//    }
     
     if ( IS_IPAD)
     {
@@ -65,6 +46,42 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fromOTPView"] != nil)
+    {
+        NSString *fromOTPView = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"fromOTPView"]];
+        
+        if([fromOTPView isEqualToString:@"yes"])
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fromOTPView"];
+            
+            RecoveryViewController *recoveryView = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+            recoveryView.email = txtEmail.text;
+//            signUpView.fromEmailView = [dataValuesDict valueForKey:@"fromEmailView"];;
+//            signUpView.isClient = [dataValuesDict valueForKey:@"isClient"];;
+//            signUpView.valuesArray = [dataValuesDict valueForKey:@"valuesArray"];
+            
+            [self.navigationController pushViewController:recoveryView animated:YES];
+            
+        }
+        
+        if([fromOTPView isEqualToString:@"backtologin"])
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fromOTPView"];
+            for(UIViewController *viewController in self.navigationController.viewControllers)
+            {
+                if([viewController isKindOfClass:[LoginViewController class]])
+                {
+                    [self.navigationController popToViewController:viewController animated:YES];
+                }
+            }
+
+        }
+    }
+ 
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -79,8 +96,8 @@
     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     [self.navigationController pushViewController:loginView animated:YES];
 }
-- (IBAction)btnResetPassword:(id)sender {
-    
+- (IBAction)btnResetPassword:(id)sender
+{
     NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if([txtEmail isEmpty])
     {
@@ -242,13 +259,17 @@
      }
     if ([responseString rangeOfString:@"Please check your email for further instructions." options:NSCaseInsensitiveSearch].location != NSNotFound)
     {
-//        [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
-        LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-         NSLog(@"-----forgot------");
-        [self.navigationController pushViewController:loginView animated:YES];
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
 
+        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:AlertTitle  message:@"A security code was sent to your email. Please check to complete process."  preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            OTPViewController *OTPView = [[OTPViewController alloc]initWithNibName:@"OTPViewController" bundle:nil];
+            OTPView.userEmail = txtEmail.text;
+            [self presentViewController:OTPView animated:true completion:nil];
+            
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
         return;
     }
     if ([responseString rangeOfString:@"Failure sending mail" options:NSCaseInsensitiveSearch].location != NSNotFound)
@@ -261,9 +282,26 @@
         return;
     }
 //    [HelperAlert  alertWithOneBtn:@"ERROR" description:responseString okBtn:OkButtonTitle];
+ 
+    if ([responseString rangeOfString:@"true" options:NSCaseInsensitiveSearch].location != NSNotFound)
+    {
+        UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:AlertTitle  message:@"A security code was sent to your email. Please check to complete process."  preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            OTPViewController *OTPView = [[OTPViewController alloc]initWithNibName:@"OTPViewController" bundle:nil];
+            OTPView.userEmail = txtEmail.text;
+            [self presentViewController:OTPView animated:true completion:nil];
+            
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+
+        return;
+    }
+    
     UIAlertView *alert=[[UIAlertView alloc] initWithTitle:AlertTitle message:responseString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     [alert show];
-    return;
+
+
 }
 
 #pragma  mark Other Methods
@@ -273,17 +311,12 @@
     NSMutableURLRequest *request ;
     NSString*_postData ;
     
-    _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/forgetpassword/app",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-    
-    
+    _postData = [NSString stringWithFormat:@"Email=%@&PhoneNumber=%@",email,@""];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/account/SendOTP",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     NSLog(@"data post >>> %@",_postData);
     
-    [request setHTTPMethod:@"GET"];
-    [request addValue:email forHTTPHeaderField:@"useremail"];
-    //[request addValue:password forHTTPHeaderField:@"userpassword"];
-    
+    [request setHTTPMethod:@"POST"];    
     
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -307,7 +340,16 @@
         NSLog(@"connection is NULL");
     }
 }
+
 #pragma  mark TextField Delegate methods
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
 //    if (textField == txtEmail)
@@ -332,7 +374,7 @@
 {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    float newVerticalPosition = -keyboardSize.height + 100;
+    float newVerticalPosition = -keyboardSize.height + 100 + 50*IS_IPHONE_6 + 50*IS_IPHONE_6P;
     
     [self moveFrameToVerticalPosition:newVerticalPosition forDuration:0.3f];
 }

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SMContactsSelector.h"
 
-@interface dashboardViewController : UIViewController<SMContactsSelectorDelegate>
+@interface dashboardViewController : UIViewController<SMContactsSelectorDelegate,UIActionSheetDelegate,UIGestureRecognizerDelegate>
 {
     
     IBOutlet UIView *viewNew;

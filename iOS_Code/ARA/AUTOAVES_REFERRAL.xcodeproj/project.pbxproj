@@ -47,6 +47,7 @@
 		04D290CF1D630F690053CC9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D290CE1D630F690053CC9C /* UIKit.framework */; };
 		04D290D11D630F7E0053CC9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D290D01D630F7E0053CC9C /* Foundation.framework */; };
 		04EDF8FB1DCC657F00D10241 /* SMContactsSelector.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04EDF8FA1DCC657F00D10241 /* SMContactsSelector.strings */; };
+		131A6CF984033BDBBB711F60 /* Pods_AUTOAVES_REFERRAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57D9F7F1852F337B3F71960 /* Pods_AUTOAVES_REFERRAL.framework */; };
 		97CB234D1D487452008D963B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CB234C1D487452008D963B /* Default-568h@2x.png */; };
 		D90A92281C45091F00A52A17 /* news_icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D90A92211C45091F00A52A17 /* news_icon@2x~ipad.png */; };
 		D90A92291C45091F00A52A17 /* notification_count@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D90A92221C45091F00A52A17 /* notification_count@2x~ipad.png */; };
@@ -345,6 +346,8 @@
 		D97FAB181BE9D49500540E38 /* header-image@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D97FAB141BE9D49500540E38 /* header-image@2x~ipad.png */; };
 		D98429671B943DB1008E5557 /* changePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D98429651B943DB1008E5557 /* changePasswordViewController.m */; };
 		D98429681B943DB1008E5557 /* changePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98429661B943DB1008E5557 /* changePasswordViewController.xib */; };
+		D98624201F1F23A500323345 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D986241F1F1F23A500323345 /* GameKit.framework */; };
+		D98624221F1F23A900323345 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98624211F1F23A900323345 /* StoreKit.framework */; };
 		D988A5551CA107FF00AC1EE1 /* 29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5461CA107FF00AC1EE1 /* 29x29.png */; };
 		D988A5561CA107FF00AC1EE1 /* 40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5471CA107FF00AC1EE1 /* 40x40.png */; };
 		D988A5571CA107FF00AC1EE1 /* 48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5481CA107FF00AC1EE1 /* 48x48.png */; };
@@ -361,6 +364,7 @@
 		D988A5621CA107FF00AC1EE1 /* 512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5531CA107FF00AC1EE1 /* 512x512.png */; };
 		D988A5631CA107FF00AC1EE1 /* 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = D988A5541CA107FF00AC1EE1 /* 1024x1024.png */; };
 		D997B46F1D9954B6001424B4 /* menu@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D997B46E1D9954B6001424B4 /* menu@2x~ipad.png */; };
+		D999595C1EB0B1EA00773442 /* podFile in Resources */ = {isa = PBXBuildFile; fileRef = D999595B1EB0B1EA00773442 /* podFile */; };
 		D99981CC1C895928005DCDDD /* map-background11.png in Resources */ = {isa = PBXBuildFile; fileRef = D99981C61C895928005DCDDD /* map-background11.png */; };
 		D99981CD1C895928005DCDDD /* map-background11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99981C71C895928005DCDDD /* map-background11@2x.png */; };
 		D99981CE1C895928005DCDDD /* notification-icon11.png in Resources */ = {isa = PBXBuildFile; fileRef = D99981C81C895928005DCDDD /* notification-icon11.png */; };
@@ -455,6 +459,7 @@
 		D9BEB0E41C48CA6E00FED0C5 /* 1title_bdr_btm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9BEB0D51C48CA6E00FED0C5 /* 1title_bdr_btm@3x.png */; };
 		D9BEB0E71C48E9EB00FED0C5 /* CommonHelperClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D9BEB0E61C48E9EB00FED0C5 /* CommonHelperClass.m */; };
 		D9BEB0EA1C48F16E00FED0C5 /* UILabel+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D9BEB0E91C48F16E00FED0C5 /* UILabel+helper.m */; };
+		D9C914771EEA82370056A69C /* NonCopyPasteField.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C914761EEA82370056A69C /* NonCopyPasteField.m */; };
 		D9CAFFC01C3292A00055FDE8 /* SignupEmailCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CAFFBE1C3292A00055FDE8 /* SignupEmailCheckViewController.m */; };
 		D9CAFFC11C3292A00055FDE8 /* SignupEmailCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CAFFBF1C3292A00055FDE8 /* SignupEmailCheckViewController.xib */; };
 		D9DA1B631B7CA7A600554220 /* TLTagsControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DA1B621B7CA7A600554220 /* TLTagsControl.m */; };
@@ -477,6 +482,8 @@
 		D9DDB9B51B7CC788006F5A37 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A21B7CC788006F5A37 /* RobotoCondensed-Light.ttf */; };
 		D9DDB9B61B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A31B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf */; };
 		D9DDB9B71B7CC788006F5A37 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9DDB9A41B7CC788006F5A37 /* RobotoCondensed-Regular.ttf */; };
+		D9EFCB551EF919F7003F4DB3 /* OTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EFCB531EF919F7003F4DB3 /* OTPViewController.m */; };
+		D9EFCB561EF919F7003F4DB3 /* OTPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9EFCB541EF919F7003F4DB3 /* OTPViewController.xib */; };
 		D9F3B0301C1E79C800828219 /* PopupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */; };
 		D9F3B0311C1E79C800828219 /* PopupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F3B02F1C1E79C800828219 /* PopupTableViewCell.xib */; };
 		D9F3B0351C1EC42900828219 /* KGModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B0341C1EC42900828219 /* KGModal.m */; };
@@ -566,7 +573,10 @@
 		04D290CE1D630F690053CC9C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		04D290D01D630F7E0053CC9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04EDF8FA1DCC657F00D10241 /* SMContactsSelector.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SMContactsSelector.strings; sourceTree = "<group>"; };
+		0C2B19A9F1A6407D2309704D /* Pods-AUTOAVES_REFERRAL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AUTOAVES_REFERRAL.release.xcconfig"; path = "Pods/Target Support Files/Pods-AUTOAVES_REFERRAL/Pods-AUTOAVES_REFERRAL.release.xcconfig"; sourceTree = "<group>"; };
 		97CB234C1D487452008D963B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A57D9F7F1852F337B3F71960 /* Pods_AUTOAVES_REFERRAL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AUTOAVES_REFERRAL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D36D4F360638E55DFDB8177D /* Pods-AUTOAVES_REFERRAL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AUTOAVES_REFERRAL.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AUTOAVES_REFERRAL/Pods-AUTOAVES_REFERRAL.debug.xcconfig"; sourceTree = "<group>"; };
 		D9025CD41E2613290048F822 /* loginProto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginProto.h; sourceTree = "<group>"; };
 		D9025CD51E2614BC0048F822 /* baseInfoProto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseInfoProto.h; sourceTree = "<group>"; };
 		D90A92211C45091F00A52A17 /* news_icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_icon@2x~ipad.png"; sourceTree = "<group>"; };
@@ -968,6 +978,8 @@
 		D98429641B943DB1008E5557 /* changePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changePasswordViewController.h; sourceTree = "<group>"; };
 		D98429651B943DB1008E5557 /* changePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changePasswordViewController.m; sourceTree = "<group>"; };
 		D98429661B943DB1008E5557 /* changePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = changePasswordViewController.xib; sourceTree = "<group>"; };
+		D986241F1F1F23A500323345 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		D98624211F1F23A900323345 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D988A5461CA107FF00AC1EE1 /* 29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 29x29.png; sourceTree = "<group>"; };
 		D988A5471CA107FF00AC1EE1 /* 40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 40x40.png; sourceTree = "<group>"; };
 		D988A5481CA107FF00AC1EE1 /* 48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 48x48.png; sourceTree = "<group>"; };
@@ -984,6 +996,7 @@
 		D988A5531CA107FF00AC1EE1 /* 512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512x512.png; sourceTree = "<group>"; };
 		D988A5541CA107FF00AC1EE1 /* 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024x1024.png; sourceTree = "<group>"; };
 		D997B46E1D9954B6001424B4 /* menu@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu@2x~ipad.png"; path = "Images.xcassets/dashboardMenu.imageset/menu@2x~ipad.png"; sourceTree = "<group>"; };
+		D999595B1EB0B1EA00773442 /* podFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = podFile; sourceTree = "<group>"; };
 		D99981C61C895928005DCDDD /* map-background11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-background11.png"; sourceTree = "<group>"; };
 		D99981C71C895928005DCDDD /* map-background11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-background11@2x.png"; sourceTree = "<group>"; };
 		D99981C81C895928005DCDDD /* notification-icon11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification-icon11.png"; sourceTree = "<group>"; };
@@ -1094,6 +1107,8 @@
 		D9BEB0E61C48E9EB00FED0C5 /* CommonHelperClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommonHelperClass.m; path = "Helper Classes/CommonHelperClass.m"; sourceTree = "<group>"; };
 		D9BEB0E81C48F16E00FED0C5 /* UILabel+helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+helper.h"; path = "Helper Classes/UILabel+helper.h"; sourceTree = "<group>"; };
 		D9BEB0E91C48F16E00FED0C5 /* UILabel+helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+helper.m"; path = "Helper Classes/UILabel+helper.m"; sourceTree = "<group>"; };
+		D9C914751EEA82370056A69C /* NonCopyPasteField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonCopyPasteField.h; sourceTree = SOURCE_ROOT; };
+		D9C914761EEA82370056A69C /* NonCopyPasteField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonCopyPasteField.m; sourceTree = SOURCE_ROOT; };
 		D9CAFFBD1C3292A00055FDE8 /* SignupEmailCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupEmailCheckViewController.h; sourceTree = "<group>"; };
 		D9CAFFBE1C3292A00055FDE8 /* SignupEmailCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupEmailCheckViewController.m; sourceTree = "<group>"; };
 		D9CAFFBF1C3292A00055FDE8 /* SignupEmailCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupEmailCheckViewController.xib; sourceTree = "<group>"; };
@@ -1118,6 +1133,9 @@
 		D9DDB9A21B7CC788006F5A37 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		D9DDB9A31B7CC788006F5A37 /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
 		D9DDB9A41B7CC788006F5A37 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		D9EFCB521EF919F7003F4DB3 /* OTPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPViewController.h; sourceTree = "<group>"; };
+		D9EFCB531EF919F7003F4DB3 /* OTPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPViewController.m; sourceTree = "<group>"; };
+		D9EFCB541EF919F7003F4DB3 /* OTPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPViewController.xib; sourceTree = "<group>"; };
 		D9F0509A1E405B7A00B997ED /* AUTOAVES_REFERRAL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AUTOAVES_REFERRAL.entitlements; sourceTree = "<group>"; };
 		D9F3B02D1C1E79C800828219 /* PopupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupTableViewCell.h; sourceTree = "<group>"; };
 		D9F3B02E1C1E79C800828219 /* PopupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupTableViewCell.m; sourceTree = "<group>"; };
@@ -1146,6 +1164,7 @@
 				D9F6D2A51E55A45F00E6A14A /* Fabric.framework in Frameworks */,
 				04D290C91D630F330053CC9C /* QuartzCore.framework in Frameworks */,
 				D9B4A9D31C4E0318006364F0 /* libsqlite3.tbd in Frameworks */,
+				D98624201F1F23A500323345 /* GameKit.framework in Frameworks */,
 				D94FFFC81BFF2426006A37AA /* CoreData.framework in Frameworks */,
 				D9F6D2A21E55A42A00E6A14A /* Crashlytics.framework in Frameworks */,
 				D959CE041BFDDC3300CE4BC4 /* AdSupport.framework in Frameworks */,
@@ -1156,6 +1175,8 @@
 				D9AF3CA01B8ECE2200F98881 /* CFNetwork.framework in Frameworks */,
 				D913AFD01C227846007D3D6E /* Crittercism.framework in Frameworks */,
 				D956674C1B8ECC8700E01477 /* FacebookSDK.framework in Frameworks */,
+				131A6CF984033BDBBB711F60 /* Pods_AUTOAVES_REFERRAL.framework in Frameworks */,
+				D98624221F1F23A900323345 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1296,25 @@
 				04D290BF1D62DAB60053CC9C /* UIAlertView+UITableView.m */,
 			);
 			name = UIAlertViewController;
+			sourceTree = "<group>";
+		};
+		9857DEC8CB1283BC546E2088 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D98624211F1F23A900323345 /* StoreKit.framework */,
+				D986241F1F1F23A500323345 /* GameKit.framework */,
+				A57D9F7F1852F337B3F71960 /* Pods_AUTOAVES_REFERRAL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C4C1937083575CC8D514645B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D36D4F360638E55DFDB8177D /* Pods-AUTOAVES_REFERRAL.debug.xcconfig */,
+				0C2B19A9F1A6407D2309704D /* Pods-AUTOAVES_REFERRAL.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D90A92201C45087A00A52A17 /* IpadPro */ = {
@@ -1684,6 +1724,7 @@
 		D94BEAA41B7872EB008BCF5F = {
 			isa = PBXGroup;
 			children = (
+				D999595B1EB0B1EA00773442 /* podFile */,
 				D9F6D2A31E55A45F00E6A14A /* Fabric.framework */,
 				D9F6D2A41E55A45F00E6A14A /* Crashlytics.framework */,
 				D9F6D29F1E55A42900E6A14A /* Fabric.framework */,
@@ -1713,6 +1754,8 @@
 				D94BEAAF1B7872EB008BCF5F /* AUTOAVES_REFERRAL */,
 				D94BEAC91B7872EB008BCF5F /* AUTOAVES_REFERRALTests */,
 				D94BEAAE1B7872EB008BCF5F /* Products */,
+				C4C1937083575CC8D514645B /* Pods */,
+				9857DEC8CB1283BC546E2088 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1768,6 +1811,7 @@
 		D94BEAD61B7873F9008BCF5F /* ARA */ = {
 			isa = PBXGroup;
 			children = (
+				D9EFCB511EF919B2003F4DB3 /* OTP */,
 				D959BCC51CC79EEE00D3D6F2 /* Recovery Password */,
 				D9B162F41C509F70000A9DBB /* Schedule Service */,
 				D9408ADC1BABFA690078129A /* cross.png */,
@@ -1787,6 +1831,7 @@
 				D94BEAE81B788213008BCF5F /* Login */,
 				D9527D2C1B9E9A0F00630F9F /* Splash */,
 				D94BEAEE1B788635008BCF5F /* ForgotPassword */,
+				D9C914781EEA89380056A69C /* Textfield class */,
 			);
 			name = ARA;
 			sourceTree = "<group>";
@@ -2304,6 +2349,16 @@
 			name = "iphone 6 +";
 			sourceTree = "<group>";
 		};
+		D9C914781EEA89380056A69C /* Textfield class */ = {
+			isa = PBXGroup;
+			children = (
+				D9C914751EEA82370056A69C /* NonCopyPasteField.h */,
+				D9C914761EEA82370056A69C /* NonCopyPasteField.m */,
+			);
+			name = "Textfield class";
+			path = AUTOAVES_REFERRAL;
+			sourceTree = "<group>";
+		};
 		D9DA1B5D1B7CA59800554220 /* TagControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2358,6 +2413,16 @@
 			name = Timeburner;
 			sourceTree = "<group>";
 		};
+		D9EFCB511EF919B2003F4DB3 /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				D9EFCB521EF919F7003F4DB3 /* OTPViewController.h */,
+				D9EFCB531EF919F7003F4DB3 /* OTPViewController.m */,
+				D9EFCB541EF919F7003F4DB3 /* OTPViewController.xib */,
+			);
+			name = OTP;
+			sourceTree = "<group>";
+		};
 		D9F3B0321C1EC41900828219 /* KGModal */ = {
 			isa = PBXGroup;
 			children = (
@@ -2374,10 +2439,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D94BEAD01B7872EB008BCF5F /* Build configuration list for PBXNativeTarget "AUTOAVES_REFERRAL" */;
 			buildPhases = (
+				D874357D765CCA5F115084FF /* [CP] Check Pods Manifest.lock */,
 				D94BEAA91B7872EB008BCF5F /* Sources */,
 				D94BEAAA1B7872EB008BCF5F /* Frameworks */,
 				D94BEAAB1B7872EB008BCF5F /* Resources */,
 				D9F6D29E1E55A07A00E6A14A /* ShellScript */,
+				669A6996D41757F06F306CE2 /* [CP] Embed Pods Frameworks */,
+				8CA1422CF08BEF238E24342C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2417,13 +2485,22 @@
 				TargetAttributes = {
 					D94BEAAC1B7872EB008BCF5F = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = D6S9NQGVAX;
+						DevelopmentTeam = TKF3QPSC95;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
+							};
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
 								enabled = 1;
 							};
 						};
@@ -2613,6 +2690,7 @@
 				D9527D6E1B9E9F3500630F9F /* 6@2x.jpg in Resources */,
 				D9527D6D1B9E9F3500630F9F /* 5@2x.jpg in Resources */,
 				D9527D651B9E9F3500630F9F /* 11@2x.jpg in Resources */,
+				D999595C1EB0B1EA00773442 /* podFile in Resources */,
 				D97AC4C01C8727CF0073E32A /* notification-icon@2x.png in Resources */,
 				D9BEB0C31C48CA2800FED0C5 /* 1rewards_icon@2x.png in Resources */,
 				D9356A041B81E82000777DD3 /* dropdown-arrow@2x.png in Resources */,
@@ -2675,6 +2753,7 @@
 				D9A45DE71C438EC400D79C1A /* 33.png in Resources */,
 				D90A92491C450BA400A52A17 /* profile_image@2x.png in Resources */,
 				D9BEB0A41C48C9E200FED0C5 /* 1rewards_icon.png in Resources */,
+				D9EFCB561EF919F7003F4DB3 /* OTPViewController.xib in Resources */,
 				D9BEB0D61C48CA6E00FED0C5 /* 1back_btn@3x.png in Resources */,
 				D99981D01C895928005DCDDD /* refer-icon11.png in Resources */,
 				D93569CA1B81E74300777DD3 /* gold-badge.png in Resources */,
@@ -2824,6 +2903,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		669A6996D41757F06F306CE2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AUTOAVES_REFERRAL/Pods-AUTOAVES_REFERRAL-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CA1422CF08BEF238E24342C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AUTOAVES_REFERRAL/Pods-AUTOAVES_REFERRAL-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D874357D765CCA5F115084FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		D9F6D29E1E55A07A00E6A14A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2925,6 +3049,7 @@
 				046123071D6588C10047164E /* NSData+ImageContentType.m in Sources */,
 				D9B162F81C509FB7000A9DBB /* ScheduleServiceViewController.m in Sources */,
 				D92D41471B7B579100AB588F /* ReferralTableViewCell.m in Sources */,
+				D9C914771EEA82370056A69C /* NonCopyPasteField.m in Sources */,
 				D95667131B8EC65B00E01477 /* SBJsonStreamParserState.m in Sources */,
 				D9BBA2871DCB654B00811B22 /* JTSAnimatedGIFUtility.m in Sources */,
 				D94BEAB31B7872EB008BCF5F /* main.m in Sources */,
@@ -2944,6 +3069,7 @@
 				D935699B1B81B15800777DD3 /* ScoreboardViewController.m in Sources */,
 				D95086941BA987B500A35FC4 /* rewardDetailViewController.m in Sources */,
 				D95667101B8EC65B00E01477 /* SBJsonStreamParser.m in Sources */,
+				D9EFCB551EF919F7003F4DB3 /* OTPViewController.m in Sources */,
 				D956670E1B8EC65B00E01477 /* NSObject+SBJson.m in Sources */,
 				D9AF3CBE1B8EE5BD00F98881 /* AFSecurityPolicy.m in Sources */,
 				D95667161B8EC65B00E01477 /* SBJsonStreamWriterState.m in Sources */,
@@ -3076,12 +3202,13 @@
 		};
 		D94BEAD11B7872EB008BCF5F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D36D4F360638E55DFDB8177D /* Pods-AUTOAVES_REFERRAL.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AUTOAVES_REFERRAL/AUTOAVES_REFERRAL.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rocky Uppal (3R7VB3H8QT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Seeley (6XQR47KC24)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert Seeley (6XQR47KC24)";
 				DEVELOPMENT_TEAM = TKF3QPSC95;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3100,20 +3227,21 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.autoaves.ARA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "70cb6adf-0719-4e1a-986e-db6dee3d2c72";
-				PROVISIONING_PROFILE_SPECIFIER = "AUTOAVES DEVELOPMENT 16th feb 2";
+				PROVISIONING_PROFILE = "2a238229-047b-4de7-a180-e5acce8155dc";
+				PROVISIONING_PROFILE_SPECIFIER = "AUTOAVES DEVELOPMENT 21st aug";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		D94BEAD21B7872EB008BCF5F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C2B19A9F1A6407D2309704D /* Pods-AUTOAVES_REFERRAL.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AUTOAVES_REFERRAL/AUTOAVES_REFERRAL.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rocky Uppal (T5DY39F2BR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automotive Avenues, Inc. (TKF3QPSC95)";
 				DEVELOPMENT_TEAM = TKF3QPSC95;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3132,8 +3260,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.autoaves.ARA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "20049485-da77-4ad1-8159-7d4d89dd6773";
-				PROVISIONING_PROFILE_SPECIFIER = "AutoAves_Appstore 12April";
+				PROVISIONING_PROFILE = "921442a2-37fe-4c71-829d-513a44d704a1";
+				PROVISIONING_PROFILE_SPECIFIER = "Autoaves Distribution 21st aug";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

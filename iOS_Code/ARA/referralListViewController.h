@@ -48,6 +48,10 @@
     IBOutlet UIView *bottomView;
     IBOutlet UIImageView *imageindirectreferral;
     IBOutlet UIImageView *imagedirectregerral;
+    
+    IBOutlet UITableView *tableViewFilter;
+    int webservice;
+    NSTimer *timer;
 }
 - (IBAction)btnFilternone:(id)sender;
 - (IBAction)btnSortnone:(id)sender;

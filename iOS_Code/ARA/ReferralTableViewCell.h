@@ -22,6 +22,7 @@
     IBOutlet UIImageView *imageView;
     IBOutlet UIImageView *imageViewimage;
     IBOutlet UILabel *lblAmontEarnedScoreboard;
+    IBOutlet UITextView *txtTag;
 }
 -(void)setLabelText:(NSString*)Name :(NSString*)date : (NSString*)tag :(NSString*)ReferralType;
 -(void)setLabelTextforReward:(NSString*)Name :(NSString*)referralId : (NSString*)price :(NSString*)date;

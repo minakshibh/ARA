@@ -1,0 +1,350 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1CE6D1127AC334AEBCC8DB158E490B41 /* Pods-AUTOAVES_REFERRAL-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F177941D89045088A62F084C73F44C24 /* Pods-AUTOAVES_REFERRAL-dummy.m */; };
+		2C6D083D34877225ED77B22F3824A1B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		40F2145E39C33B629FE3D36BF82C0C58 /* Pods-AUTOAVES_REFERRAL-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B793C1C0D64E2ABB809AA2C8C218B6 /* Pods-AUTOAVES_REFERRAL-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2C1511276B8FF9120E99A7B1675ECFFE /* Pods-AUTOAVES_REFERRAL-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AUTOAVES_REFERRAL-frameworks.sh"; sourceTree = "<group>"; };
+		583398CD8F59A408E6C81383D7C6723D /* Pods-AUTOAVES_REFERRAL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AUTOAVES_REFERRAL.release.xcconfig"; sourceTree = "<group>"; };
+		6427A78D31AAA357E9D2C633CD2E0A96 /* Pods-AUTOAVES_REFERRAL-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AUTOAVES_REFERRAL-resources.sh"; sourceTree = "<group>"; };
+		6E131D58E843F8BE2E6E49264665D67D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BE0A75B2037434ABAB60F2D111DDB15F /* Pods-AUTOAVES_REFERRAL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AUTOAVES_REFERRAL.debug.xcconfig"; sourceTree = "<group>"; };
+		CB30A58AED68C146BCCA0CD4671919A4 /* Pods-AUTOAVES_REFERRAL.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AUTOAVES_REFERRAL.modulemap"; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D36DEEA0E9FFFA5EC5935AF6D7EF9D46 /* Pods_AUTOAVES_REFERRAL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AUTOAVES_REFERRAL.framework; path = "Pods-AUTOAVES_REFERRAL.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3B793C1C0D64E2ABB809AA2C8C218B6 /* Pods-AUTOAVES_REFERRAL-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AUTOAVES_REFERRAL-umbrella.h"; sourceTree = "<group>"; };
+		F177941D89045088A62F084C73F44C24 /* Pods-AUTOAVES_REFERRAL-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AUTOAVES_REFERRAL-dummy.m"; sourceTree = "<group>"; };
+		F5EE3C60E0E627DA690DE779F5426BB7 /* Pods-AUTOAVES_REFERRAL-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AUTOAVES_REFERRAL-acknowledgements.plist"; sourceTree = "<group>"; };
+		FDE6C5908E35055C892ED10558CBBC9C /* Pods-AUTOAVES_REFERRAL-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AUTOAVES_REFERRAL-acknowledgements.markdown"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC8B544DD9B438B712E698BAFFA12734 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C6D083D34877225ED77B22F3824A1B7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		25EA9C9BABB3B68686FD0901D5D6A65E /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C5038C2EADE32AC740ABAE07F92C598C /* Pods-AUTOAVES_REFERRAL */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				C7968ADE82A0F5E26DDF80FFEE2EACE6 /* Products */,
+				25EA9C9BABB3B68686FD0901D5D6A65E /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C5038C2EADE32AC740ABAE07F92C598C /* Pods-AUTOAVES_REFERRAL */ = {
+			isa = PBXGroup;
+			children = (
+				6E131D58E843F8BE2E6E49264665D67D /* Info.plist */,
+				CB30A58AED68C146BCCA0CD4671919A4 /* Pods-AUTOAVES_REFERRAL.modulemap */,
+				FDE6C5908E35055C892ED10558CBBC9C /* Pods-AUTOAVES_REFERRAL-acknowledgements.markdown */,
+				F5EE3C60E0E627DA690DE779F5426BB7 /* Pods-AUTOAVES_REFERRAL-acknowledgements.plist */,
+				F177941D89045088A62F084C73F44C24 /* Pods-AUTOAVES_REFERRAL-dummy.m */,
+				2C1511276B8FF9120E99A7B1675ECFFE /* Pods-AUTOAVES_REFERRAL-frameworks.sh */,
+				6427A78D31AAA357E9D2C633CD2E0A96 /* Pods-AUTOAVES_REFERRAL-resources.sh */,
+				E3B793C1C0D64E2ABB809AA2C8C218B6 /* Pods-AUTOAVES_REFERRAL-umbrella.h */,
+				BE0A75B2037434ABAB60F2D111DDB15F /* Pods-AUTOAVES_REFERRAL.debug.xcconfig */,
+				583398CD8F59A408E6C81383D7C6723D /* Pods-AUTOAVES_REFERRAL.release.xcconfig */,
+			);
+			name = "Pods-AUTOAVES_REFERRAL";
+			path = "Target Support Files/Pods-AUTOAVES_REFERRAL";
+			sourceTree = "<group>";
+		};
+		C7968ADE82A0F5E26DDF80FFEE2EACE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D36DEEA0E9FFFA5EC5935AF6D7EF9D46 /* Pods_AUTOAVES_REFERRAL.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8396113448A7E5AA4F9D04D8C36748ED /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40F2145E39C33B629FE3D36BF82C0C58 /* Pods-AUTOAVES_REFERRAL-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		905EFFF0D72CF87332844610BA7DE568 /* Pods-AUTOAVES_REFERRAL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CA15CAC16FA953DBAFDEABC4A8F7016 /* Build configuration list for PBXNativeTarget "Pods-AUTOAVES_REFERRAL" */;
+			buildPhases = (
+				14743E7A4DCBDED557EA7F1050F0171F /* Sources */,
+				AC8B544DD9B438B712E698BAFFA12734 /* Frameworks */,
+				8396113448A7E5AA4F9D04D8C36748ED /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-AUTOAVES_REFERRAL";
+			productName = "Pods-AUTOAVES_REFERRAL";
+			productReference = D36DEEA0E9FFFA5EC5935AF6D7EF9D46 /* Pods_AUTOAVES_REFERRAL.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = C7968ADE82A0F5E26DDF80FFEE2EACE6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				905EFFF0D72CF87332844610BA7DE568 /* Pods-AUTOAVES_REFERRAL */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14743E7A4DCBDED557EA7F1050F0171F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CE6D1127AC334AEBCC8DB158E490B41 /* Pods-AUTOAVES_REFERRAL-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		41E03F8322E03FAF81EC19544E1DD585 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE0A75B2037434ABAB60F2D111DDB15F /* Pods-AUTOAVES_REFERRAL.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-AUTOAVES_REFERRAL/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AUTOAVES_REFERRAL/Pods-AUTOAVES_REFERRAL.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_AUTOAVES_REFERRAL;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		755829C9D6C1454EEFD75C9634DD013F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 583398CD8F59A408E6C81383D7C6723D /* Pods-AUTOAVES_REFERRAL.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-AUTOAVES_REFERRAL/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AUTOAVES_REFERRAL/Pods-AUTOAVES_REFERRAL.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_AUTOAVES_REFERRAL;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
+				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CA15CAC16FA953DBAFDEABC4A8F7016 /* Build configuration list for PBXNativeTarget "Pods-AUTOAVES_REFERRAL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41E03F8322E03FAF81EC19544E1DD585 /* Debug */,
+				755829C9D6C1454EEFD75C9634DD013F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

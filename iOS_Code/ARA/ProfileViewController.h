@@ -68,7 +68,6 @@
     NSString *password;
 }
 - (IBAction)btnEditImage:(id)sender;
-- (IBAction)btnUploadImage:(id)sender;
 - (IBAction)btnSave:(id)sender;
 - (IBAction)btnCheckBox:(id)sender;
 - (IBAction)btnback:(id)sender;

@@ -41,7 +41,6 @@
         
     }
     
-    
     //--scrolview initialization
     scrollView.scrollEnabled = YES;
     scrollView.delegate = self;
@@ -382,11 +381,18 @@
     }
     
     
-    if (phoneStr.length<11 ) {
-        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
-        [txtPhoneNo becomeFirstResponder];
+    if (![txtPhoneNo isEmpty]) {
         
-        return;
+        if (phoneStr.length<10 ) {
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+            return;
+        }else if (phoneStr.length==10 ) {
+            if([[NSString stringWithFormat:@"%C",[phoneStr characterAtIndex:0]] isEqual:@"1"])
+            {
+                [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+                return;
+            }
+        }
     }
     //}
     

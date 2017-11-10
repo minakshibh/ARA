@@ -138,11 +138,12 @@
 
 - (IBAction)btnChangePWD:(id)sender {
     
+     NSCharacterSet *validChars = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
     NSString* oldPWDstr = [txtOldpwd.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* newPWDstr = [txtNewpwd.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* confirmNewPWDstr = [txtConfirmnewpwd.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    UIAlertView *alert;
+//    UIAlertView *alert;
     NSString *message;
     
     
@@ -174,27 +175,42 @@
         [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         
         return;
-    }else if([txtConfirmnewpwd isEmpty])
-    {
-        message = @"Please confirm your new password";
-        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
-        return;
-    }else if([oldPWDstr isEqualToString:newPWDstr])
+    }
+    else if([oldPWDstr isEqualToString:newPWDstr])
     {
         message = @"Old and new password cannot be same.";
-       [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
-    }else if(![newPWDstr isEqualToString:confirmNewPWDstr])
+    }
+
+    if(txtNewpwd.text.length < 6){
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    else if(txtNewpwd.text.length >= 6 && [txtNewpwd.text rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location == NSNotFound ){
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    else if (txtNewpwd.text.length >= 6 && [txtNewpwd.text rangeOfCharacterFromSet:validChars].location == NSNotFound ){
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    else if(![newPWDstr isEqualToString:confirmNewPWDstr])
     {
         
         NSLog(@"%@ %@",txtConfirmnewpwd.text, txtNewpwd.text);
         message = @"New password and confirm password should be same.";
-       [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
         return;
     }
-    
-    
-        [self ConfirmPWD:oldPWDstr newPwd:newPWDstr confirmPwd:confirmNewPWDstr];
+ 
+
+    [self ConfirmPWD:oldPWDstr newPwd:newPWDstr confirmPwd:confirmNewPWDstr];
 
     
 }
@@ -301,6 +317,23 @@
 
 }
 #pragma mark - textfield Delegates
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(textField == txtNewpwd)
+    {
+        if([string isEqualToString:@" "]){
+            // Returning no here to restrict whitespace
+            return NO;
+        }
+    }else if(textField == txtConfirmnewpwd)
+    {
+        if([string isEqualToString:@" "]){
+            // Returning no here to restrict whitespace
+            return NO;
+        }
+    }
+    return YES;
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -328,7 +361,7 @@
     scrollView.scrollEnabled = YES;
     scrollView.contentSize = CGSizeMake(350, 700);
     
-    if(textField == txtConfirmnewpwd  || textField == txtNewpwd ) {
+    if(textField == txtConfirmnewpwd) {
         
         CGPoint pt;
         CGRect rc = [textField bounds];

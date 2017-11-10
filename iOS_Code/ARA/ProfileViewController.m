@@ -301,7 +301,7 @@
     NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
     phoneno = [[phoneno componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
     NSString* lastname = [txtLastname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    UIAlertView *alert;
+    
     NSString *msg;
     
     if([txtName isEmpty])
@@ -346,6 +346,18 @@
         [txtPhoneNo becomeFirstResponder];
         
         return;
+    }else if(phoneno.length == 10)
+    {
+        if([[NSString stringWithFormat:@"%C",[phoneno characterAtIndex:0]] isEqual:@"1"])
+        {
+           msg = @"Kindly enter a valid phone number.";
+            lblerrorPhoneno.hidden = NO;
+            
+            lblerrorPhoneno.text = msg;
+            [txtPhoneNo becomeFirstResponder];
+            return;
+        }
+        
     }else if(phoneno.length < 10)
     {
         msg = @"Kindly enter a valid phone number.";
@@ -935,7 +947,7 @@
         }
         
         DBManager *db = [[DBManager alloc]init];
-        bool createDB = [db createDB];
+        [db createDB];
         
         
         //  [kappDelegate HideIndicator];

@@ -15,5 +15,7 @@
     CGPoint svos;
     IBOutlet UIImageView *imageViewDisablestep2;
     IBOutlet UIImageView * icon;
+    
+    int webservice;
 }
 @end

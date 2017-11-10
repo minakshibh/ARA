@@ -35,8 +35,6 @@
     
      [self goToNextView];
     
-    
-
 }
 -(IBAction)networkInvitation:(id)sender
 {
@@ -50,7 +48,6 @@
 
      [self goToNextView];
 
-   
 }
 
 -(IBAction)appInstallation:(id)sender
@@ -106,7 +103,6 @@
 
 -(void)logoutFunction{
    
-
 
     if([[[NSUserDefaults standardUserDefaults]valueForKey:@"from_fb"] isEqualToString:@"yes"])
     {
@@ -395,31 +391,31 @@
       
         
         
-        lblmyInvitation.frame = CGRectMake(34, 345, 120, 30);
-        lblTotalNetwork.frame = CGRectMake(210, 345, 200, 30);
-       // lblApp.frame = CGRectMake(34, 340, 200, 30);
-        lblNetwork.frame = CGRectMake(210,625, 200, 30);
-        
-        
-        
-        lblmyInvitationCount.frame = CGRectMake(32, 272, 120, 80);
-
-        lblNetworkInvitationCount.frame = CGRectMake(250, 272, 140, 80);
-        
-        
-        lblAppInstallsCount.frame = CGRectMake(52,550, 80, 80);
-        lblNetworkReferralCount.frame = CGRectMake(278, 550, 80, 80);
-
-        
-        
-        //set button image
-        
-    myinvitationBtnImage.frame = CGRectMake(35, 146, 120, 120);
-   appInstallBtnImage.frame = CGRectMake(35, 430, 120, 120);
-        
-    networkInvitationBtnImage.frame = CGRectMake(255, 146, 120, 120);
-   
-    networkReferralBtnImage.frame = CGRectMake(255, 430, 120, 120);
+//        lblmyInvitation.frame = CGRectMake(34, 345, 120, 30);
+//        lblTotalNetwork.frame = CGRectMake(210, 345, 200, 30);
+//       // lblApp.frame = CGRectMake(34, 340, 200, 30);
+//        lblNetwork.frame = CGRectMake(210,625, 200, 30);
+//        
+//        
+//        
+//        lblmyInvitationCount.frame = CGRectMake(32, 272, 120, 80);
+//
+//        lblNetworkInvitationCount.frame = CGRectMake(250, 272, 140, 80);
+//        
+//        
+//        lblAppInstallsCount.frame = CGRectMake(52,500, 80, 80);
+//        lblNetworkReferralCount.frame = CGRectMake(278, 550, 80, 80);
+//
+//        
+//        
+//        //set button image
+//        
+//    myinvitationBtnImage.frame = CGRectMake(35, 146, 120, 120);
+//   appInstallBtnImage.frame = CGRectMake(35, 400, 120, 120);
+//        
+//    networkInvitationBtnImage.frame = CGRectMake(255, 146, 120, 120);
+//   
+//    networkReferralBtnImage.frame = CGRectMake(255, 430, 120, 120);
         
             }
     if (IS_IPHONE_6) {
@@ -430,34 +426,34 @@
         lblNetwork.font=[lblNetwork.font fontWithSize:14];
         
         
-        //set button image
-        
-        myinvitationBtnImage.frame = CGRectMake(35, 146, 135, 135);
-        appInstallBtnImage.frame = CGRectMake(35, 421, 135, 135);
-        
-        networkInvitationBtnImage.frame = CGRectMake(250, 146, 135, 135);
-        
-        networkReferralBtnImage.frame = CGRectMake(250, 421, 135, 135);
-        
-        //count label
-        lblmyInvitationCount.frame = CGRectMake(45, 285, 110, 70);
-         lblNetworkInvitationCount.frame = CGRectMake(260, 285, 110, 70);
-        lblNetworkReferralCount.frame = CGRectMake(260, 563, 110, 70);
-        
-        
-        //set name
-        lblmyInvitation.frame = CGRectMake(15, 345, 170, 30);
-
-        lblTotalNetwork.frame = CGRectMake(225, 345, 175, 30);
-        lblNetwork.frame = CGRectMake(230, 626, 170, 30);
+//        //set button image
+//
+//        myinvitationBtnImage.frame = CGRectMake(35, 146, 135, 135);
+//        appInstallBtnImage.frame = CGRectMake(35, 421, 135, 135);
+//
+//        networkInvitationBtnImage.frame = CGRectMake(250, 146, 135, 135);
+//
+//        networkReferralBtnImage.frame = CGRectMake(250, 421, 135, 135);
+//
+//        //count label
+//        lblmyInvitationCount.frame = CGRectMake(45, 285, 110, 70);
+//         lblNetworkInvitationCount.frame = CGRectMake(260, 285, 110, 70);
+//        lblNetworkReferralCount.frame = CGRectMake(260, 563, 110, 70);
+//
+//
+//        //set name
+//        lblmyInvitation.frame = CGRectMake(15, 345, 170, 30);
+//
+//        lblTotalNetwork.frame = CGRectMake(225, 345, 175, 30);
+//        lblNetwork.frame = CGRectMake(230, 626, 170, 30);
         
     }
      if (IS_IPHONE_6P) {
         
-        //count label
-        lblNetworkInvitationCount.frame = CGRectMake(255, 285, 120, 70);
-        lblNetworkReferralCount.frame = CGRectMake(265, 563, 100, 70);
-        lblmyInvitationCount.frame = CGRectMake(50, 285, 100, 70);
+//        //count label
+//        lblNetworkInvitationCount.frame = CGRectMake(255, 285, 120, 70);
+//        lblNetworkReferralCount.frame = CGRectMake(265, 563, 100, 70);
+//        lblmyInvitationCount.frame = CGRectMake(50, 285, 100, 70);
         
         //naming label
         lblmyInvitation.font=[lblmyInvitation.font fontWithSize:16];
@@ -466,13 +462,13 @@
         lblNetwork.font=[lblNetwork.font fontWithSize:16];
         
         
-        //set button image
-        
-        myinvitationBtnImage.frame = CGRectMake(37, 146, 135, 135);
-        appInstallBtnImage.frame = CGRectMake(37, 428, 135, 135);
-        networkInvitationBtnImage.frame = CGRectMake(250, 150, 135, 135);
-        
-        networkReferralBtnImage.frame = CGRectMake(250, 428, 135, 135);
+//        //set button image
+//        
+//        myinvitationBtnImage.frame = CGRectMake(37, 146, 135, 135);
+//        appInstallBtnImage.frame = CGRectMake(37, 428, 135, 135);
+//        networkInvitationBtnImage.frame = CGRectMake(250, 150, 135, 135);
+//        
+//        networkReferralBtnImage.frame = CGRectMake(250, 428, 135, 135);
         
     }
 

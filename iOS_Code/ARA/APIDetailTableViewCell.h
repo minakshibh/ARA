@@ -13,8 +13,9 @@
 
 
 }
-@property(strong,nonatomic)IBOutlet UILabel*lblinvitationStatus;
+//@property(strong,nonatomic)IBOutlet UILabel*lblinvitationStatus;
 @property(strong,nonatomic)IBOutlet UILabel*lblEmailId;
 @property(strong,nonatomic)IBOutlet UILabel*lblFullName;
+@property (strong, nonatomic) IBOutlet UITextView *lblinvitationStatus;
 -(void)setvalue:(NSString *)name Email:(NSString *)emailID InvitationStatus:(NSString *)Status;
 @end

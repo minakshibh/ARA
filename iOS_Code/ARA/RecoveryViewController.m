@@ -27,7 +27,9 @@
         ;
         txtNewPassword.font = [txtNewPassword.font fontWithSize:20]
         ;
+        ;
         btnChangePassword.titleLabel.font = [btnChangePassword.titleLabel.font fontWithSize:24];
+
         lblAlreadyhaveavalidpwd.font = [lblAlreadyhaveavalidpwd.font fontWithSize:20]
         ;
         btnlogin.titleLabel.font = [btnlogin.titleLabel.font fontWithSize:20];
@@ -45,53 +47,73 @@
     [self.navigationController pushViewController:loginVC animated:YES];
 }
 
-- (IBAction)btnChangePassword:(id)sender {
- [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+- (IBAction)btnChangePassword:(id)sender
+{
+    [scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
+    
+    NSCharacterSet *validChars = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+
     NSString* newPasswordStr = [txtNewPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* confirmPasswordStr = [txtConfirmPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     UIAlertView *alert;
     NSString *message;
-    if (newPasswordStr.length==0) {
-        message = @"Please enter new password.";
-        alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        return;
-    }else if(confirmPasswordStr.length==0){
-        message = @"Please enter confirm password.";
-        alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        return;
-    }else if(![confirmPasswordStr isEqualToString:newPasswordStr]){
-        message = @"Password didnt match. Kindly enter same password.";
-        alert = [[UIAlertView alloc]initWithTitle:AlertTitle message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+
+    if([txtNewPassword isEmpty])
+    {
+        message = @"Please enter your new password";
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        
         return;
     }
+    
+    if(txtNewPassword.text.length < 6)
+    {
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    else if(txtNewPassword.text.length >= 6 && [txtNewPassword.text rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location == NSNotFound)
+    {
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    else if (txtNewPassword.text.length >= 6 && [txtNewPassword.text rangeOfCharacterFromSet:validChars].location == NSNotFound )
+    {
+        message = @"Password should have atleast 6 characters and a number without whitespaces.";
+        
+        [HelperAlert  alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+    else if(![txtNewPassword.text isEqualToString:txtConfirmPassword.text])
+    {
+        message = @"New password and confirm password should be same.";
+        [HelperAlert alertWithOneBtn:AlertTitle description:message okBtn:OkButtonTitle];
+        return;
+    }
+
+    
     [self.view endEditing:YES];
-    [self resetPassword:confirmPasswordStr :self.guid];
-    
-   
-    
+    [self resetPassword:confirmPasswordStr :self.email];
 }
--(void)resetPassword:(NSString*)pwd :(NSString*)userID{
-    
-    
+
+-(void)resetPassword:(NSString*)pwd :(NSString*)email
+{
     [kappDelegate ShowIndicator];
+    
     NSMutableURLRequest *request ;
     NSString*_postData ;
     
-
     _postData = [NSString stringWithFormat:@""];
-    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/resetpassword",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/user/updatePassword",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
     
     NSLog(@"data post >>> %@",_postData);
     
     [request setHTTPMethod:@"GET"];
+    [request addValue:email forHTTPHeaderField:@"username"];
     [request addValue:pwd forHTTPHeaderField:@"userpassword"];
-    [request addValue:userID forHTTPHeaderField:@"useruniqueid"];
-    
-    
     [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
@@ -236,7 +258,6 @@
     NSError *error;
     if([status isEqualToString:@"failed"])
     {
-       
         UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:AlertTitle  message:responseString  preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
@@ -247,7 +268,6 @@
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
         
-
         return;
     }
 

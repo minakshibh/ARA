@@ -14,10 +14,17 @@
 #import "ASIHTTPRequest.h"
 #import "dashboardViewController.h"
 
-@interface referralListViewController ()
+@interface referralListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) IBOutlet TLTagsControl *defaultEditingTagControl;
 @property (nonatomic, strong) UIColor *tagsBackgroungColor;
 @property (nonatomic, strong) IBOutlet TLTagsControl *tagControl;
+
+@property (nonatomic, strong) NSMutableArray *filterListArr;
+@property (nonatomic, strong) NSMutableArray *referralListArrNew;
+@property (nonatomic, strong) NSMutableArray *tableDataArr;
+@property (nonatomic, strong) NSString *selectedStatus;
+
+@property (nonatomic, strong) NSString *selectedSort;
 
 @end
 
@@ -25,7 +32,11 @@
 UIButton *tag_btn,*tag_cancel_btn;
 
 - (void)viewDidLoad {
-    
+    self.selectedStatus = @"None";
+    self.selectedSort = @"none";
+    self.filterListArr = [[NSMutableArray alloc]init];
+    self.referralListArrNew = [[NSMutableArray alloc]init];
+
     count=0;
     create_tag_btn=1;
     
@@ -130,7 +141,6 @@ UIButton *tag_btn,*tag_cancel_btn;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     AppDelegate*appdelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     sort_back_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, appdelegate.window.frame.size.width, appdelegate.window.frame.size.height)];
@@ -139,13 +149,18 @@ UIButton *tag_btn,*tag_cancel_btn;
     [self.view addSubview:sort_back_view];
     sort_back_view.hidden = YES;
 
-      lblheadingView.text = [NSString stringWithFormat:@"%@ (0)",_headerstr];
+//      lblheadingView.text = [NSString stringWithFormat:@"%@ (0)",_headerstr];
     
     UITapGestureRecognizer *messagesTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delTag:)];
     [_defaultEditingTagControl addGestureRecognizer:messagesTap];
     
-      lblheadingView.text = [NSString stringWithFormat:@"%@ (0)",_headerstr];
-    [self getList:_webservice_trigger];
+//      lblheadingView.text = [NSString stringWithFormat:@"%@ (0)",_headerstr];
+    
+    if(![detail_view isEqualToString: @"yes"])
+    {
+        [self getList:_webservice_trigger];
+    }
+    
     [[NSUserDefaults standardUserDefaults]setObject:_webservice_trigger forKey:@"webservice_trigger"];
     
     if([_headerstr isEqualToString:@"SOLD REFERRALS"] || [_headerstr isEqualToString:@"INACTIVE REFERRALS"] || [_headerstr isEqualToString:@"ACTIVE REFERRALS"])
@@ -159,35 +174,82 @@ UIButton *tag_btn,*tag_cancel_btn;
         
          [btnSort.titleLabel setTextAlignment:NSTextAlignmentCenter];
     }
+    
+    if(![self.selectedStatus isEqualToString: @"None"])
+    {
+        
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"notesAdded"] != nil)
+    {
+        NSString *val = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"notesAdded"]];
+        if([val isEqualToString:@"yes"])
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"notesAdded"];
+                self.tableDataArr = referralListArray;
+            
+            if(![self.selectedStatus isEqualToString: @"None"])
+            {
+                CGFloat tableViewOldY = sortFilterView.frame.origin.y + sortFilterView.frame.size.height;
+                CGFloat tableViewNewY = tableView.frame.origin.y;
+                
+                if(!(tableViewNewY < tableViewOldY))
+                {
+                    CGRect frame = tableView.frame;
+                    frame.origin.y = frame.origin.y - lbltagbackground.frame.size.height;
+                    frame.size.height = frame.size.height+lbltagbackground.frame.size.height;
+                    tableView.frame = frame;
+                    _defaultEditingTagControl.hidden = YES;
+                }
+                self.selectedStatus = @"None";
+                
+            }
+            [self getList:_webservice_trigger];
+        }
+    }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(indicator:) userInfo:nil repeats:YES];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [timer invalidate];
+}
+
+-(void)indicator:(BOOL)animated{
+    [tableViewFilter flashScrollIndicators];
+//    NSLog(@"asda");
+}
 -(void)viewWillDisappear:(BOOL)animated
 {
     if([detail_view isEqualToString: @"yes"])
     {
-        detail_view =@"no";
+//        detail_view =@"no";
     }else{
     
     if (referralListArray.count>0)
-    {
-    //--for sort option
-    //(1)
-        [self sortByName:referralListArray];
-    //(2)
-    // create the string array
-        [self sortByDate:referralListArray];
-    //--
-    
-    
-    //---for filter options
-        [self filterForSold:referralListArray];
-    
-        [self filterForOpen:referralListArray];
-
-     pop_out = @"yes";
-        [tableView reloadData];
-    
-    }
+//    {
+//    //--for sort option
+//    //(1)
+//        [self sortByName:referralListArray];
+//    //(2)
+//    // create the string array
+//        [self sortByDate:referralListArray];
+//    //--
+//    
+//    
+//    //---for filter options
+//        [self filterForSold:referralListArray];
+//    
+//        [self filterForOpen:referralListArray];
+//
+//     pop_out = @"yes";
+//        [tableView reloadData];
+//    
+//    }
     
     btnFilter.hidden = NO;
     lblpartition.hidden = NO;
@@ -281,13 +343,32 @@ UIButton *tag_btn,*tag_cancel_btn;
 {
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
+        if(tableView == tableViewFilter)
+        {
+            return 60;
+        }
+
         return 80;
     }
+    
+    if(tableView == tableViewFilter)
+    {
+        return 48;
+    }
+
     
     
     return 60;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    lblheadingView.text = [NSString stringWithFormat:@"%@ (%lu)",_headerstr,self.tableDataArr.count];
+
+    if(tableView == tableViewFilter)
+    {
+        return [self.filterListArr count];
+    }
+
+    
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if([pop_out isEqualToString:@"yes"])
     {
@@ -297,119 +378,224 @@ UIButton *tag_btn,*tag_cancel_btn;
     }
     
     
-    if([filter_status isEqualToString:@"sortByDate"])
-    {
-        return [referralListSortDate count];
-    }else if([filter_status isEqualToString:@"sortByName"])
-    {
-        return [sorted_array count];
-        
-    }else if([filter_status isEqualToString:@"sold_filter"])
-    {
-        return [referralListForSold count];
-        
-    }else if ([filter_status isEqualToString:@"open_filter"])
-    {
-        return [referralListForOpen count];
-        
-    }else{
-        return [referralListArray count];
-    }
+//    if([filter_status isEqualToString:@"sortByDate"])
+//    {
+//        return [referralListSortDate count];
+//    }else if([filter_status isEqualToString:@"sortByName"])
+//    {
+//        return [sorted_array count];
+//        
+//    }else if([filter_status isEqualToString:@"sold_filter"])
+//    {
+//        return [referralListForSold count];
+//        
+//    }else if ([filter_status isEqualToString:@"open_filter"])
+//    {
+//        return [referralListForOpen count];
+//        
+//    }else{
+        return [self.tableDataArr count];
+//    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"ArticleCellID";
-    
-    ReferralTableViewCell *cell = (ReferralTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-   
-    
-    if (cell == nil)
+    if(tableView == tableViewFilter)
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ReferralTableViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
+        static NSString *cellIdentifier = @"HistoryCell";
         
+        // Similar to UITableViewCell, but
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        NSDictionary *dataDict = self.filterListArr[indexPath.row];
+        
+        NSString *filterName = [dataDict valueForKey:@"Name"];
+        
+        cell.textLabel.text = filterName;
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        cell.textLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if([filterName isEqualToString: self.selectedStatus])
+        {
+            cell.imageView.image = [UIImage imageNamed:@"radio-checked.png"];
+        }
+        else
+        {
+            cell.imageView.image = [UIImage imageNamed:@"radio-unchecked.png"];
+        }
+        
+        return cell;
     }
-    if([filter_status isEqualToString:@"sortByDate"])
+    else
     {
-        obj = [referralListSortDate objectAtIndex:indexPath.row];
-    }else if([filter_status isEqualToString:@"sortByName"])
-    {
-        obj = [sorted_array objectAtIndex:indexPath.row];
-    }else if([filter_status isEqualToString:@"sold_filter"])
-    {
-        obj = [referralListForSold objectAtIndex:indexPath.row];
-    }else if ([filter_status isEqualToString:@"open_filter"])
-    {
-        obj = [referralListForOpen objectAtIndex:indexPath.row];
-    }else
-    {
-        obj = [referralListArray objectAtIndex:indexPath.row];
+        static NSString *simpleTableIdentifier = @"ArticleCellID";
+        
+        ReferralTableViewCell *cell = (ReferralTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+        
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ReferralTableViewCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+            
+        }
+//        if([filter_status isEqualToString:@"sortByDate"])
+//        {
+//            obj = [referralListSortDate objectAtIndex:indexPath.row];
+//        }else if([filter_status isEqualToString:@"sortByName"])
+//        {
+//            obj = [sorted_array objectAtIndex:indexPath.row];
+//        }else if([filter_status isEqualToString:@"sold_filter"])
+//        {
+//            obj = [referralListForSold objectAtIndex:indexPath.row];
+//        }else if ([filter_status isEqualToString:@"open_filter"])
+//        {
+//            obj = [referralListForOpen objectAtIndex:indexPath.row];
+//        }else
+//        {
+//            obj = [referralListArray objectAtIndex:indexPath.row];
+//        }
+        
+        
+        obj = [self.tableDataArr objectAtIndex:indexPath.row];
+        
+        NSString *name = [NSString stringWithFormat:@"%@ %@",obj.first_name,obj.last_name];
+        
+        if([[obj.ReferralStatus lowercaseString] isEqualToString:@"sold"]){
+            [cell setLabelText:name :[NSString stringWithFormat:@"Date: %@",obj.SoldDate] :obj.ReferralStatus :obj.ReferralType];
+        }else{
+            NSString *datee = [NSString stringWithFormat:@"%@",obj.createDate];
+            //        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
+            //        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
+            //        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
+            //
+            //        NSArray *semidate = [date componentsSeparatedByString:@"-"];
+            //        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
+            
+            
+            
+            
+            
+            [cell setLabelText:name :[NSString stringWithFormat:@"Date: %@",datee] :obj.ReferralStatus :obj.ReferralType];
+        }
+        
+        //    if([obj.ReferralType isEqualToString:@"Direct"])
+        //    {
+        //        cell.imageView.image = [UIImage imageNamed:@"direct_ref.png"];
+        //
+        //
+        //    }else //if ([ReferralType isEqualToString:@"Direct"])
+        //    {
+        //        cell.imageView.image = [UIImage imageNamed:@"chained_ref.png"];
+        //    }
+        //cell.imageView.contentMode=UIViewContentModeScaleAspectFit;
+        
+        tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        //cell.imageView.image = [UIImage imageNamed:@"chained_ref.png"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        return cell;
     }
-    NSString *name = [NSString stringWithFormat:@"%@ %@",obj.first_name,obj.last_name];
-    
-    
-    if([[obj.ReferralStatus lowercaseString] isEqualToString:@"sold"]){
-        [cell setLabelText:name :[NSString stringWithFormat:@"Sold Date: %@",obj.SoldDate] :obj.ReferralStatus :obj.ReferralType];
-    }else{
-        NSString *datee = [NSString stringWithFormat:@"%@",obj.createDate];
-//        NSArray *dateArr = [datee componentsSeparatedByString:@" "];
-//        NSString *date = [NSString stringWithFormat:@"%@",[dateArr objectAtIndex:0]];
-//        NSString *timeAMPM =[NSString stringWithFormat:@"%@ %@",[dateArr objectAtIndex:1],[dateArr objectAtIndex:2]];
-//        
-//        NSArray *semidate = [date componentsSeparatedByString:@"-"];
-//        NSString *finalDate = [NSString stringWithFormat:@"%@-%@-%@",[semidate objectAtIndex:2],[semidate objectAtIndex:1],[semidate objectAtIndex:0]];
-        
-        
-        
-        
-        
-        [cell setLabelText:name :[NSString stringWithFormat:@"Submit Date: %@",datee] :obj.ReferralStatus :obj.ReferralType];
-    }
-    
-//    if([obj.ReferralType isEqualToString:@"Direct"])
-//    {
-//        cell.imageView.image = [UIImage imageNamed:@"direct_ref.png"];
-//        
-//        
-//    }else //if ([ReferralType isEqualToString:@"Direct"])
-//    {
-//        cell.imageView.image = [UIImage imageNamed:@"chained_ref.png"];
-//    }
-    //cell.imageView.contentMode=UIViewContentModeScaleAspectFit;
-
-    tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    //cell.imageView.image = [UIImage imageNamed:@"chained_ref.png"];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if([filter_status isEqualToString:@"sortByDate"])
+- (void)tableView:(UITableView *)tableViewA didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if(tableViewA == tableViewFilter)
     {
-        obj = [referralListSortDate objectAtIndex:indexPath.row];
-    }else if([filter_status isEqualToString:@"sortByName"])
+        NSDictionary *dictData = self.filterListArr[indexPath.row];
+        NSString *filterValue = [dictData valueForKey:@"Name"];
+        
+        if([filterValue isEqualToString: @"None"])
+        {
+            self.tableDataArr = referralListArray;
+            
+            if(![self.selectedStatus isEqualToString: @""])
+            {
+
+                CGFloat tableViewOldY = sortFilterView.frame.origin.y + sortFilterView.frame.size.height;
+                CGFloat tableViewNewY = tableView.frame.origin.y;
+
+                if(!(tableViewNewY < tableViewOldY))
+                {
+                    CGRect frame = tableView.frame;
+                    frame.origin.y = frame.origin.y - lbltagbackground.frame.size.height;
+                    frame.size.height = frame.size.height+lbltagbackground.frame.size.height;
+                    tableView.frame = frame;
+                    _defaultEditingTagControl.hidden = YES;
+                }
+                
+                NSLog(@"%f ,, %f",tableViewOldY,tableViewNewY);
+                lblheadingView.text = [NSString stringWithFormat:@"%@ (%lu)",_headerstr,self.tableDataArr.count];
+            }
+        }
+        else
+        {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ReferralStatus CONTAINS[cd] %@", filterValue];
+            
+            self.tableDataArr = [[referralListArray filteredArrayUsingPredicate:predicate] mutableCopy];
+            
+            CGFloat tableViewOldY = sortFilterView.frame.origin.y + sortFilterView.frame.size.height;
+            CGFloat tableViewNewY = tableView.frame.origin.y;
+
+            if(!(tableViewNewY > tableViewOldY + 10))
+            {
+                CGRect frame = tableView.frame;
+                frame.origin.y = frame.origin.y+lbltagbackground.frame.size.height;
+                frame.size.height = frame.size.height-lbltagbackground.frame.size.height;
+                tableView.frame = frame;
+            }
+            
+            NSArray *array = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@ X",filterValue], nil];
+            _defaultEditingTagControl.tags = [array mutableCopy];
+            _defaultEditingTagControl.hidden = NO;
+            [_defaultEditingTagControl reloadTagSubviews];
+        }
+        
+        self.selectedStatus = filterValue;
+        
+        sort_back_view.hidden = YES;
+        soryByView.hidden = YES;
+        filterView.hidden = YES;
+        
+        [tableViewFilter reloadData];
+        [tableView reloadData];
+    }
+    else
     {
-        obj = [sorted_array objectAtIndex:indexPath.row];
-    }else if([filter_status isEqualToString:@"sold_filter"])
-    {
-        obj = [referralListForSold objectAtIndex:indexPath.row];
-    }else if ([filter_status isEqualToString:@"open_filter"])
-    {
-        obj = [referralListForOpen objectAtIndex:indexPath.row];
-    }else
-    {
-        obj = [referralListArray objectAtIndex:indexPath.row];
+//        if([filter_status isEqualToString:@"sortByDate"])
+//        {
+//            obj = [referralListSortDate objectAtIndex:indexPath.row];
+//        }else if([filter_status isEqualToString:@"sortByName"])
+//        {
+//            obj = [sorted_array objectAtIndex:indexPath.row];
+//        }else if([filter_status isEqualToString:@"sold_filter"])
+//        {
+//            obj = [referralListForSold objectAtIndex:indexPath.row];
+//        }else if ([filter_status isEqualToString:@"open_filter"])
+//        {
+//            obj = [referralListForOpen objectAtIndex:indexPath.row];
+//        }else
+//        {
+//            obj = [referralListArray objectAtIndex:indexPath.row];
+//        }
+        
+        obj = [self.tableDataArr objectAtIndex:indexPath.row];
+        
+        referralDetailViewController *RDvc = [[referralDetailViewController alloc]initWithNibName:@"referralDetailViewController" bundle:nil];
+        RDvc.obj = obj;
+        detail_view = @"yes";
+        [self.navigationController pushViewController:RDvc animated:YES];
     }
     
-    
-    referralDetailViewController *RDvc = [[referralDetailViewController alloc]initWithNibName:@"referralDetailViewController" bundle:nil];
-    RDvc.obj = obj;
-    detail_view = @"yes";
-    [self.navigationController pushViewController:RDvc animated:YES];
 }
+
 #pragma  mark - Buttons
 - (IBAction)btnFilternone:(id)sender {
     
@@ -524,79 +710,90 @@ UIButton *tag_btn,*tag_cancel_btn;
     
 }
 
-- (IBAction)btnSortnone:(id)sender {
-    
-    
-    if([filter_status isEqualToString:@"sortByName"])
-    {
-        
-        if([sold_open isEqualToString:@"sold_filter"])
-        {
-            [self filterForSold:referralListArray];
-            filter_status = @"sold_filter";
-            [tableView reloadData];
-        }else if([sold_open isEqualToString:@"open_filter"])
-        {
-            [self filterForOpen:referralListArray];
-            filter_status = @"open_filter";
-            [tableView reloadData];
-        }else if([sold_open isEqualToString:@"sortByDate"])
-        {
-            filter_status = @" ";
-            [tableView reloadData];
-        }else
-            {
-                filter_status = @" ";
-                [tableView reloadData];
-            }
-        btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-        [btnSortByname setImage:btnImage1 forState:UIControlStateNormal];
-        [btnSortnone setImage:[UIImage imageNamed:@"radio-checked.png"] forState:UIControlStateNormal];
-
-    }
-    if([filter_status isEqualToString:@"sortByDate"])
-    {
-        if([sold_open isEqualToString:@"sold_filter"])
-        {
-            [self filterForSold:referralListArray];
-            filter_status = @"sold_filter";
-            [tableView reloadData];
-        }else if([sold_open isEqualToString:@"open_filter"])
-        {
-            [self filterForOpen:referralListArray];
-            filter_status = @"open_filter";
-            [tableView reloadData];
-        }else if([sold_open isEqualToString:@"sortByName"])
-        {
-            filter_status = @" ";
-            [tableView reloadData];
-        }else {
-            filter_status = @" ";
-            [tableView reloadData];
-        }
-        
-        btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-        [btnSortBydate setImage:btnImage1 forState:UIControlStateNormal];
-        [btnSortnone setImage:[UIImage imageNamed:@"radio-checked.png"] forState:UIControlStateNormal];
-    }
-    if([filter_status isEqualToString:@"sold_filter"])
-    {
-        [self filterForSold:referralListArray];
-        filter_status = @"sold_filter";
-        [tableView reloadData];
-    }
-    if([filter_status isEqualToString:@"open_filter"])
-    {
-        [self filterForOpen:referralListArray];
-        filter_status = @"open_filter";
-        [tableView reloadData];
-    }
+- (IBAction)btnSortnone:(id)sender
+{
+    UIImage *btnImage = [UIImage imageNamed:@"radio-checked.png"];
+    [btnSortnone setImage:btnImage forState:UIControlStateNormal];
+    [tableView reloadData];
+    //--change icon of sort by name
+    btnImage4 = [UIImage imageNamed:@"radio-unchecked.png"];
+    [btnSortByname setImage:btnImage4 forState:UIControlStateNormal];
+    [btnSortBydate setImage:[UIImage imageNamed:@"radio-unchecked.png"] forState:UIControlStateNormal];
     
     sort_back_view.hidden = YES;
     soryByView.hidden = YES;
     filterView.hidden = YES;
     optional= @"yes";
+    
+    [self ByName];
 }
+
+    
+//    if([filter_status isEqualToString:@"sortByName"])
+//    {
+//        
+//        if([sold_open isEqualToString:@"sold_filter"])
+//        {
+//            [self filterForSold:referralListArray];
+//            filter_status = @"sold_filter";
+//            [tableView reloadData];
+//        }else if([sold_open isEqualToString:@"open_filter"])
+//        {
+//            [self filterForOpen:referralListArray];
+//            filter_status = @"open_filter";
+//            [tableView reloadData];
+//        }else if([sold_open isEqualToString:@"sortByDate"])
+//        {
+//            filter_status = @" ";
+//            [tableView reloadData];
+//        }else
+//            {
+//                filter_status = @" ";
+//                [tableView reloadData];
+//            }
+//        btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//        [btnSortByname setImage:btnImage1 forState:UIControlStateNormal];
+//        [btnSortnone setImage:[UIImage imageNamed:@"radio-checked.png"] forState:UIControlStateNormal];
+//
+//    }
+//    if([filter_status isEqualToString:@"sortByDate"])
+//    {
+//        if([sold_open isEqualToString:@"sold_filter"])
+//        {
+//            [self filterForSold:referralListArray];
+//            filter_status = @"sold_filter";
+//            [tableView reloadData];
+//        }else if([sold_open isEqualToString:@"open_filter"])
+//        {
+//            [self filterForOpen:referralListArray];
+//            filter_status = @"open_filter";
+//            [tableView reloadData];
+//        }else if([sold_open isEqualToString:@"sortByName"])
+//        {
+//            filter_status = @" ";
+//            [tableView reloadData];
+//        }else {
+//            filter_status = @" ";
+//            [tableView reloadData];
+//        }
+//        
+//        btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//        [btnSortBydate setImage:btnImage1 forState:UIControlStateNormal];
+//        [btnSortnone setImage:[UIImage imageNamed:@"radio-checked.png"] forState:UIControlStateNormal];
+//    }
+//    if([filter_status isEqualToString:@"sold_filter"])
+//    {
+//        [self filterForSold:referralListArray];
+//        filter_status = @"sold_filter";
+//        [tableView reloadData];
+//    }
+//    if([filter_status isEqualToString:@"open_filter"])
+//    {
+//        [self filterForOpen:referralListArray];
+//        filter_status = @"open_filter";
+//        [tableView reloadData];
+//    }
+    
 
 - (IBAction)btncancelSort:(id)sender {
     sort_back_view.hidden = YES;
@@ -656,50 +853,110 @@ UIButton *tag_btn,*tag_cancel_btn;
     filterView.hidden = NO;
     }
 
-- (IBAction)btnSortBydate:(id)sender {
-    optional = @"no";
-   if([filter_status isEqualToString:@"sold_filter"])
-   {
-       date_arr = referralListForSold;
-       [self sortByDate:date_arr];
-       sold_open =@"sold_filter";
+//- (IBAction)btnSortBydate:(id)sender {
+//    optional = @"no";
+//   if([filter_status isEqualToString:@"sold_filter"])
+//   {
+//       date_arr = referralListForSold;
+//       [self sortByDate:date_arr];
+//       sold_open =@"sold_filter";
+//
+//   }else if([filter_status isEqualToString:@"open_filter"])
+//   {
+//       date_arr = referralListForOpen;
+//       [self sortByDate:date_arr];
+//       sold_open=@"open_filter";
+//   }else if([filter_status isEqualToString:@"sortByName"])
+//   {
+//       if([sold_open isEqualToString:@"sold_filter"])
+//       {
+//           date_arr = referralListForSold;
+//           [self sortByDate:date_arr];
+//           sold_open =@"sold_filter";
+//       }else if([sold_open isEqualToString:@"open_filter"]){
+//           date_arr = referralListForOpen;
+//           [self sortByDate:date_arr];
+//           sold_open =@"open_filter";
+//       }else{
+//           date_arr =sorted_array;
+//           [self sortByDate:date_arr];
+//           sold_open =@"sortByName";
+//       }
+//       
+//   }else{
+//       if([sold_open isEqualToString:@"sold_filter"])
+//       {
+//           sold_open = sold_open;
+//       }else if([sold_open isEqualToString:@"open_filter"]){
+//       sold_open = sold_open;
+//       }else{
+//       sold_open =@" ";
+//       date_arr = referralListArray;
+//           [self sortByDate:date_arr];
+//       }
+//   }
+//    
+//    filter_status = @"sortByDate";
+//    UIImage *btnImage = [UIImage imageNamed:@"radio-checked.png"];
+//    [btnSortBydate setImage:btnImage forState:UIControlStateNormal];
+//    [tableView reloadData];
+//    //--change icon of sort by name
+//    btnImage4 = [UIImage imageNamed:@"radio-unchecked.png"];
+//    [btnSortByname setImage:btnImage4 forState:UIControlStateNormal];
+//    [btnSortnone setImage:[UIImage imageNamed:@"radio-unchecked.png"] forState:UIControlStateNormal];
+//
+//    
+//    //--remove view
+//    sort_back_view.hidden = YES;
+//    soryByView.hidden = YES;
+//    }
 
-   }else if([filter_status isEqualToString:@"open_filter"])
-   {
-       date_arr = referralListForOpen;
-       [self sortByDate:date_arr];
-       sold_open=@"open_filter";
-   }else if([filter_status isEqualToString:@"sortByName"])
-   {
-       if([sold_open isEqualToString:@"sold_filter"])
-       {
-           date_arr = referralListForSold;
-           [self sortByDate:date_arr];
-           sold_open =@"sold_filter";
-       }else if([sold_open isEqualToString:@"open_filter"]){
-           date_arr = referralListForOpen;
-           [self sortByDate:date_arr];
-           sold_open =@"open_filter";
-       }else{
-           date_arr =sorted_array;
-           [self sortByDate:date_arr];
-           sold_open =@"sortByName";
-       }
-       
-   }else{
-       if([sold_open isEqualToString:@"sold_filter"])
-       {
-           sold_open = sold_open;
-       }else if([sold_open isEqualToString:@"open_filter"]){
-       sold_open = sold_open;
-       }else{
-       sold_open =@" ";
-       date_arr = referralListArray;
-           [self sortByDate:date_arr];
-       }
-   }
+- (IBAction)btnSortByname:(id)sender
+{
+    [self ByName];
     
-    filter_status = @"sortByDate";
+    self.selectedSort = @"SortByName";
+    UIImage *btnImage = [UIImage imageNamed:@"radio-checked.png"];
+    [btnSortByname setImage:btnImage forState:UIControlStateNormal];
+    [tableView reloadData];
+    //--change icon of sort by name
+    btnImage4 = [UIImage imageNamed:@"radio-unchecked.png"];
+    [btnSortBydate setImage:btnImage4 forState:UIControlStateNormal];
+    [btnSortnone setImage:[UIImage imageNamed:@"radio-unchecked.png"] forState:UIControlStateNormal];
+    
+    sort_back_view.hidden = YES;
+    soryByView.hidden = YES;
+    filterView.hidden = YES;
+}
+
+-(void)ByName
+{
+    if([self.selectedStatus isEqualToString: @"None"] || [self.selectedStatus isEqualToString: @""])
+    {
+        self.tableDataArr = [self sortByName:referralListArray];
+    }
+    else
+    {
+        self.tableDataArr = [self sortByName:self.tableDataArr];
+    }
+    
+    [tableView reloadData];
+}
+
+- (IBAction)btnSortBydate:(id)sender
+{
+    if([self.selectedStatus isEqualToString: @"None"] || [self.selectedStatus isEqualToString: @""])
+    {
+        self.tableDataArr = [self sortByDate:referralListArray];
+    }
+    else
+    {
+        self.tableDataArr = [self sortByDate:self.tableDataArr];
+    }
+    
+    [tableView reloadData];
+    
+    self.selectedSort = @"SortByDate";
     UIImage *btnImage = [UIImage imageNamed:@"radio-checked.png"];
     [btnSortBydate setImage:btnImage forState:UIControlStateNormal];
     [tableView reloadData];
@@ -707,60 +964,61 @@ UIButton *tag_btn,*tag_cancel_btn;
     btnImage4 = [UIImage imageNamed:@"radio-unchecked.png"];
     [btnSortByname setImage:btnImage4 forState:UIControlStateNormal];
     [btnSortnone setImage:[UIImage imageNamed:@"radio-unchecked.png"] forState:UIControlStateNormal];
-
     
-    //--remove view
+
     sort_back_view.hidden = YES;
     soryByView.hidden = YES;
-    }
+    filterView.hidden = YES;
+}
 
-- (IBAction)btnSortByname:(id)sender {
-    optional=@"no";
-    if([filter_status isEqualToString:@"sold_filter"])
-    {
-        name_arr = referralListForSold;
-        [self sortByName:name_arr];
-        sold_open=@"sold_filter";
-    }else if([filter_status isEqualToString:@"open_filter"])
-    {
-        name_arr = referralListForOpen;
-        [self sortByName:name_arr];
-        sold_open=@"open_filter";
-    }else if([filter_status isEqualToString:@"sortByDate"])
-    {
-        if([sold_open isEqualToString:@"sold_filter"])
-        {
-            name_arr = referralListForSold;
-            [self sortByName:name_arr];
-            sold_open =@"sold_filter";
-        }else if([sold_open isEqualToString:@"open_filter"]){
-            name_arr = referralListForOpen;
-            [self sortByName:name_arr];
-            sold_open =@"open_filter";
 
-        }else{
-            name_arr = referralListSortDate;
-            [self sortByName:name_arr];
-            sold_open=@"sortByDate";
-        }
-        
-    }else{
-        name_arr = referralListArray;
-        [self sortByName:referralListArray];
-    }
-    filter_status = @"sortByName";
-    UIImage *btnImage = [UIImage imageNamed:@"radio-checked.png"];
-    [btnSortByname setImage:btnImage forState:UIControlStateNormal];
-    [tableView reloadData];
-    //--change icon of sort by date
-    btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-    [btnSortBydate setImage:btnImage1 forState:UIControlStateNormal];
-    [btnSortnone setImage:[UIImage imageNamed:@"radio-unchecked.png"] forState:UIControlStateNormal];
-    
-    //--remove view
-    sort_back_view.hidden = YES;
-    soryByView.hidden = YES;
-    }
+//{
+//    optional=@"no";
+//    if([filter_status isEqualToString:@"sold_filter"])
+//    {
+//        name_arr = referralListForSold;
+//        [self sortByName:name_arr];
+//        sold_open=@"sold_filter";
+//    }else if([filter_status isEqualToString:@"open_filter"])
+//    {
+//        name_arr = referralListForOpen;
+//        [self sortByName:name_arr];
+//        sold_open=@"open_filter";
+//    }else if([filter_status isEqualToString:@"sortByDate"])
+//    {
+//        if([sold_open isEqualToString:@"sold_filter"])
+//        {
+//            name_arr = referralListForSold;
+//            [self sortByName:name_arr];
+//            sold_open =@"sold_filter";
+//        }else if([sold_open isEqualToString:@"open_filter"]){
+//            name_arr = referralListForOpen;
+//            [self sortByName:name_arr];
+//            sold_open =@"open_filter";
+//
+//        }else{
+//            name_arr = referralListSortDate;
+//            [self sortByName:name_arr];
+//            sold_open=@"sortByDate";
+//        }
+//        
+//    }else{
+//        name_arr = referralListArray;
+//        [self sortByName:referralListArray];
+//    }
+//    filter_status = @"sortByName";
+//    UIImage *btnImage = [UIImage imageNamed:@"radio-checked.png"];
+//    [btnSortByname setImage:btnImage forState:UIControlStateNormal];
+//    [tableView reloadData];
+//    //--change icon of sort by date
+//    btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//    [btnSortBydate setImage:btnImage1 forState:UIControlStateNormal];
+//    [btnSortnone setImage:[UIImage imageNamed:@"radio-unchecked.png"] forState:UIControlStateNormal];
+//    
+//    //--remove view
+//    sort_back_view.hidden = YES;
+//    soryByView.hidden = YES;
+//    }
 
 - (IBAction)btnSoldOnly:(id)sender {
    optional=@"no";
@@ -849,7 +1107,7 @@ UIButton *tag_btn,*tag_cancel_btn;
     {
     CGRect frame = tableView.frame;
     frame.origin.y = frame.origin.y+lbltagbackground.frame.size.height;
-        frame.size.height = frame.size.height-lbltagbackground.frame.size.height;
+    frame.size.height = frame.size.height-lbltagbackground.frame.size.height;
     tableView.frame = frame;
     filter_height = @"yes";
     }
@@ -970,7 +1228,7 @@ UIButton *tag_btn,*tag_cancel_btn;
         }
     }
 }
--(void)sortByName:(NSMutableArray*)arr
+-(NSMutableArray *)sortByName:(NSMutableArray*)arr
 {
     referralListSortName = [[NSMutableArray alloc]init];
     for (int k=0; k<arr.count; k++) {
@@ -996,27 +1254,41 @@ UIButton *tag_btn,*tag_cancel_btn;
         }
     }
     
-     sorted_array=[[[sorted_array reverseObjectEnumerator] allObjects] mutableCopy];
+//     sorted_array=[[[sorted_array reverseObjectEnumerator] allObjects] mutableCopy];
+    return [[[sorted_array reverseObjectEnumerator] allObjects] mutableCopy];
 }
--(void)sortByDate:(NSMutableArray*)referralArray
+
+-(NSMutableArray *)sortByDate:(NSMutableArray*)referralArray
 {
-    referralListSortDate = [referralArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+//    referralListSortDate = [referralArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+//        NSDate *ref1ModifiedDate, *ref2ModifiedDate;
+//        
+//        ref1ModifiedDate = [self getModifiedDate:(ReferralObj*)a];
+//        ref2ModifiedDate = [self getModifiedDate:(ReferralObj*)b];
+//
+//        return [ref2ModifiedDate compare:ref1ModifiedDate];
+//    }];
+    return [[referralArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSDate *ref1ModifiedDate, *ref2ModifiedDate;
         
         ref1ModifiedDate = [self getModifiedDate:(ReferralObj*)a];
         ref2ModifiedDate = [self getModifiedDate:(ReferralObj*)b];
-
+        
         return [ref2ModifiedDate compare:ref1ModifiedDate];
-    }];
+    }] mutableCopy];
 }
 
 -(NSDate*)getModifiedDate:(ReferralObj*)referralObj
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+    
+    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+    [formatter1 setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+
     NSDate *modifiedDate;
 
-    if (![referralObj.SoldDate  isEqual: @"<null>"]) {
+    if ([[obj.ReferralStatus lowercaseString] isEqualToString:@"sold"]) {
         modifiedDate = [formatter dateFromString: referralObj.SoldDate];
     }else{
         modifiedDate = [formatter dateFromString: referralObj.createDate];
@@ -1050,185 +1322,199 @@ UIButton *tag_btn,*tag_cancel_btn;
     }
 
 }
+
 -(void)delTag:(id)sender
 {
-//    tag_btn.hidden = YES;
-//    [tableView bringSubviewToFront:tag_btn];
-    if([optional isEqualToString:@"yes"])
-    {
-        if([filter_height isEqualToString:@"yes"])
-        {
-            CGRect frame = tableView.frame;
-            frame.origin.y = frame.origin.y - lbltagbackground.frame.size.height;
-            frame.size.height = frame.size.height+lbltagbackground.frame.size.height;
-            tableView.frame = frame;
-            filter_height =@"no";
-            _defaultEditingTagControl.hidden = YES;
-        }
-        filter_status = @" ";
-        sold_open = @" ";
-        [tableView reloadData];
-        return;
-    }
-    if ([sold_open isEqualToString:@"sortByName"])
-    {
-        
-        if([filter_status isEqualToString:@"open_filter"])
-        {
-            btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
-            [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
-            filter_status = sold_open;
-            [self sortByName:referralListArray];
-            [tableView reloadData];
-        }else if([filter_status isEqualToString:@"sold_filter"]){
-            
-            
-            btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-            [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
-            filter_status = sold_open;
-            [self sortByName:referralListArray];
-            [tableView reloadData];
-        }else if([filter_status isEqualToString:@"sortByDate"]){
-            [self sortByDate:referralListArray];
-            filter_status=@"sortByDate";
-            sold_open = @" ";
-            [tableView reloadData];
-        }
-        
-        
-    }else if ([sold_open isEqualToString:@"sortByDate"])
-    {
-       
-        if([filter_status isEqualToString:@"open_filter"])
-        {
-            btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
-            [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
-            filter_status = sold_open;
-            [self sortByDate:referralListArray];
-            [tableView reloadData];
-        }else if([filter_status isEqualToString:@"sold_filter"])
-        {
-
-            btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-            [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
-            filter_status = sold_open;
-            [self sortByDate:referralListArray];
-            [tableView reloadData];
-        }else if([filter_status isEqualToString:@"sortByName"]){
-            [self sortByName:referralListArray];
-            filter_status=@"sortByName";
-            sold_open = @" ";
-            [tableView reloadData];
-        }
-       
-
-    }else if ([sold_open isEqualToString:@"sold_filter"])
-        {
-        
-        if([filter_status isEqualToString:@"open_filter"])
-        {
-            btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
-            [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
-             [btnSortBydate setImage:btnImage2 forState:UIControlStateNormal];
-              [btnSortByname setImage:btnImage2 forState:UIControlStateNormal];
-            
-            filter_status =  @" ";
-            
-            [tableView reloadData];
-            
-        }else if([filter_status isEqualToString:@"sold_filter"])
-        {
-            btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-            [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
-            filter_status = sold_open;
-            
-            [tableView reloadData];
-        }else if([filter_status isEqualToString:@"sortByName"])
-        {
-            [self sortByName:referralListArray];
-            
-            filter_status =@"sortByName";
-            [tableView reloadData];
-
-        }else if([filter_status isEqualToString:@"sortByDate"])
-        {
-            [self sortByDate:referralListArray];
-
-            filter_status =@"sortByDate";
-            [tableView reloadData];
-        }
-           
-        }else if ([sold_open isEqualToString:@"open_filter"])
-        {
-            
-            
-            
-            if([filter_status isEqualToString:@"open_filter"])
-            {
-                btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
-                [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
-                filter_status = sold_open;
-                [tableView reloadData];
-            }else if([filter_status isEqualToString:@"sold_filter"]){
-                
-                
-                btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-                [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
-                [btnSortBydate setImage:btnImage1 forState:UIControlStateNormal];
-                [btnSortByname setImage:btnImage1 forState:UIControlStateNormal];
-
-                filter_status = @" ";
-                [tableView reloadData];
-            }else if([filter_status isEqualToString:@"sortByName"]){
-                [self sortByName:referralListArray];
-                
-                filter_status =@"sortByName";
-                [tableView reloadData];
-            }else if([filter_status isEqualToString:@"sortByDate"]){
-                [self sortByDate:referralListArray];
-                
-                filter_status =@"sortByDate";
-                [tableView reloadData];
-            }
-            
-        }else{
-            
-            if([filter_status isEqualToString:@"open_filter"])
-            {
-                btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
-                [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
-                
-            }else if([filter_status isEqualToString:@"sold_filter"])
-            {
-                btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-                [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
-                
-            }
-            else
-            {
-                
-                
-                btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-                [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
-            }
-            filter_status = sold_open;
-            [tableView reloadData];
-        }
+    CGRect frame = tableView.frame;
+    frame.origin.y = frame.origin.y - lbltagbackground.frame.size.height;
+    frame.size.height = frame.size.height+lbltagbackground.frame.size.height;
+    tableView.frame = frame;
+    _defaultEditingTagControl.hidden = YES;
     
-    if([filter_height isEqualToString:@"yes"])
-    {
-        CGRect frame = tableView.frame;
-        frame.origin.y = frame.origin.y - lbltagbackground.frame.size.height;
-        frame.size.height = frame.size.height+lbltagbackground.frame.size.height;
-        tableView.frame = frame;
-        filter_height =@"no";
-        _defaultEditingTagControl.hidden = YES;
-    }else{
-           }
-    btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
-    [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
-    [btnOpenOnly setImage:btnImage1 forState:UIControlStateNormal];
+    self.selectedStatus = @"";
+    self.tableDataArr = referralListArray;
+    [tableViewFilter reloadData];
+    [tableView reloadData];
 }
+
+//{
+////    tag_btn.hidden = YES;
+////    [tableView bringSubviewToFront:tag_btn];
+//    if([optional isEqualToString:@"yes"])
+//    {
+//        if([filter_height isEqualToString:@"yes"])
+//        {
+//            CGRect frame = tableView.frame;
+//            frame.origin.y = frame.origin.y - lbltagbackground.frame.size.height;
+//            frame.size.height = frame.size.height+lbltagbackground.frame.size.height;
+//            tableView.frame = frame;
+//            filter_height =@"no";
+//            _defaultEditingTagControl.hidden = YES;
+//        }
+//        filter_status = @" ";
+//        sold_open = @" ";
+//        [tableView reloadData];
+//        return;
+//    }
+//    if ([sold_open isEqualToString:@"sortByName"])
+//    {
+//        
+//        if([filter_status isEqualToString:@"open_filter"])
+//        {
+//            btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
+//            [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
+//            filter_status = sold_open;
+//            [self sortByName:referralListArray];
+//            [tableView reloadData];
+//        }else if([filter_status isEqualToString:@"sold_filter"]){
+//            
+//            
+//            btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//            [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
+//            filter_status = sold_open;
+//            [self sortByName:referralListArray];
+//            [tableView reloadData];
+//        }else if([filter_status isEqualToString:@"sortByDate"]){
+//            [self sortByDate:referralListArray];
+//            filter_status=@"sortByDate";
+//            sold_open = @" ";
+//            [tableView reloadData];
+//        }
+//        
+//        
+//    }else if ([sold_open isEqualToString:@"sortByDate"])
+//    {
+//       
+//        if([filter_status isEqualToString:@"open_filter"])
+//        {
+//            btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
+//            [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
+//            filter_status = sold_open;
+//            [self sortByDate:referralListArray];
+//            [tableView reloadData];
+//        }else if([filter_status isEqualToString:@"sold_filter"])
+//        {
+//
+//            btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//            [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
+//            filter_status = sold_open;
+//            [self sortByDate:referralListArray];
+//            [tableView reloadData];
+//        }else if([filter_status isEqualToString:@"sortByName"]){
+//            [self sortByName:referralListArray];
+//            filter_status=@"sortByName";
+//            sold_open = @" ";
+//            [tableView reloadData];
+//        }
+//       
+//
+//    }else if ([sold_open isEqualToString:@"sold_filter"])
+//        {
+//        
+//        if([filter_status isEqualToString:@"open_filter"])
+//        {
+//            btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
+//            [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
+//             [btnSortBydate setImage:btnImage2 forState:UIControlStateNormal];
+//              [btnSortByname setImage:btnImage2 forState:UIControlStateNormal];
+//            
+//            filter_status =  @" ";
+//            
+//            [tableView reloadData];
+//            
+//        }else if([filter_status isEqualToString:@"sold_filter"])
+//        {
+//            btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//            [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
+//            filter_status = sold_open;
+//            
+//            [tableView reloadData];
+//        }else if([filter_status isEqualToString:@"sortByName"])
+//        {
+//            [self sortByName:referralListArray];
+//            
+//            filter_status =@"sortByName";
+//            [tableView reloadData];
+//
+//        }else if([filter_status isEqualToString:@"sortByDate"])
+//        {
+//            [self sortByDate:referralListArray];
+//
+//            filter_status =@"sortByDate";
+//            [tableView reloadData];
+//        }
+//           
+//        }else if ([sold_open isEqualToString:@"open_filter"])
+//        {
+//            
+//            
+//            
+//            if([filter_status isEqualToString:@"open_filter"])
+//            {
+//                btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
+//                [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
+//                filter_status = sold_open;
+//                [tableView reloadData];
+//            }else if([filter_status isEqualToString:@"sold_filter"]){
+//                
+//                
+//                btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//                [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
+//                [btnSortBydate setImage:btnImage1 forState:UIControlStateNormal];
+//                [btnSortByname setImage:btnImage1 forState:UIControlStateNormal];
+//
+//                filter_status = @" ";
+//                [tableView reloadData];
+//            }else if([filter_status isEqualToString:@"sortByName"]){
+//                [self sortByName:referralListArray];
+//                
+//                filter_status =@"sortByName";
+//                [tableView reloadData];
+//            }else if([filter_status isEqualToString:@"sortByDate"]){
+//                [self sortByDate:referralListArray];
+//                
+//                filter_status =@"sortByDate";
+//                [tableView reloadData];
+//            }
+//            
+//        }else{
+//            
+//            if([filter_status isEqualToString:@"open_filter"])
+//            {
+//                btnImage2 = [UIImage imageNamed:@"radio-unchecked.png"];
+//                [btnOpenOnly setImage:btnImage2 forState:UIControlStateNormal];
+//                
+//            }else if([filter_status isEqualToString:@"sold_filter"])
+//            {
+//                btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//                [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
+//                
+//            }
+//            else
+//            {
+//                
+//                
+//                btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//                [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
+//            }
+//            filter_status = sold_open;
+//            [tableView reloadData];
+//        }
+//    
+//    if([filter_height isEqualToString:@"yes"])
+//    {
+//        CGRect frame = tableView.frame;
+//        frame.origin.y = frame.origin.y - lbltagbackground.frame.size.height;
+//        frame.size.height = frame.size.height+lbltagbackground.frame.size.height;
+//        tableView.frame = frame;
+//        filter_height =@"no";
+//        _defaultEditingTagControl.hidden = YES;
+//    }else{
+//           }
+//    btnImage1 = [UIImage imageNamed:@"radio-unchecked.png"];
+//    [btnSoldOnly setImage:btnImage1 forState:UIControlStateNormal];
+//    [btnOpenOnly setImage:btnImage1 forState:UIControlStateNormal];
+//}
 -(void)getList:(NSString*)status
 {
     if(count==0)
@@ -1277,6 +1563,46 @@ UIButton *tag_btn,*tag_cancel_btn;
     }
     
 }
+
+-(void)getFilterList
+{
+    NSMutableURLRequest *request ;
+    NSString*_postData ;
+    
+    webservice = 2;
+    
+    _postData = [NSString stringWithFormat:@""];
+    
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/dashboard/referralstatus",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    
+    NSLog(@"%@",request);
+    
+    NSLog(@"data post >>> %@",_postData);
+    
+    [request setHTTPMethod:@"GET"];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
+
 #pragma mark - Connection Delegates
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -1378,17 +1704,26 @@ if([response_status isEqualToString:@"passed"])
         
         if (userDetailDict.count<1) {
              [HelperAlert alertWithOneBtn:AlertTitle description:@"No referrals to display yet. Start submitting some referrals."  okBtn:OkButtonTitle withTag:2 forController:self];
-
-//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:AlertTitle  message:@"No referrals to display yet. Start submitting some referrals." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//            
-//            alert.tag=2;
-//            [alert show];
-            
-            
              [kappDelegate HideIndicator];
             return;
         }
         
+        if(webservice == 2)
+        {
+            webservice = 0;
+            
+            self.filterListArr = [userDetailDict mutableCopy];
+            
+            NSMutableDictionary *dictX = [NSMutableDictionary new];
+            [dictX setObject:@"None" forKey:@"ID"];
+            [dictX setObject:@"None" forKey:@"Name"];
+            
+            [self.filterListArr addObject:dictX];
+            
+            [tableViewFilter reloadData];
+            
+            return;
+        }
         
         lblheadingView.text = [NSString stringWithFormat:@"%@ (%lu)",_headerstr,(unsigned long)userDetailDict.count];
         if(userDetailDict.count==0)
@@ -1399,6 +1734,9 @@ if([response_status isEqualToString:@"passed"])
             btnFilter.userInteractionEnabled=YES;
             btnSort.userInteractionEnabled = YES;
         }
+        
+        self.referralListArrNew = [userDetailDict mutableCopy];
+        
         referralListArray = [[NSMutableArray alloc] init];
         for (int i=0; i<userDetailDict.count; i++)
         {
@@ -1426,7 +1764,13 @@ if([response_status isEqualToString:@"passed"])
             obj.UniqueReferralNumber = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"UniqueReferralNumber"]objectAtIndex:i]];
             obj.UserDetailId = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"UserDetailId"]objectAtIndex:i]];
             obj.MeaName = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"MeaName"]objectAtIndex:i]];
-        obj.ReferralType = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralType"]objectAtIndex:i]];
+            obj.ReferralType = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"ReferralType"]objectAtIndex:i]];
+            obj.IsAutoFlowLeadExists = [NSString stringWithFormat:@"%@",[[userDetailDict valueForKey:@"IsAutoFlowLeadExists"]objectAtIndex:i]];
+            
+            if ([[userDetailDict valueForKey:@"AFLeadNote"]objectAtIndex:i] != nil && [[userDetailDict valueForKey:@"AFLeadNote"]objectAtIndex:i] != (id)[NSNull null])
+            {
+                obj.AFLeadNote = [[userDetailDict valueForKey:@"AFLeadNote"]objectAtIndex:i];
+            }
             obj.tag = [[userDetailDict valueForKey:@"FirstName"]objectAtIndex:i];
         
             [referralListArray addObject:obj];
@@ -1450,8 +1794,14 @@ if([response_status isEqualToString:@"passed"])
             [self filterForOpen:referralListArray];
     //--
         }
+        
+        self.tableDataArr = referralListArray;
+        
         [tableView reloadData];
-         [kappDelegate HideIndicator];
+        
+        [self getFilterList];
+        
+        [kappDelegate HideIndicator];
     }
 }else{
     NSString *msg = @"No referrals to display yet. Start submitting some referrals.";

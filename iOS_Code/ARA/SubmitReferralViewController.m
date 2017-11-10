@@ -95,24 +95,27 @@
     
     
     
+    //    if(NSNotFound == anIndex) {
+    //        NSLog(@"not found");
+    //    }
     NSString *role_name = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleName"]];
     
-    if([role_name isEqualToString:@"AAI - MEA"])
-    {
-        NSString *first = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"]];
-        NSString *last = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
-        
-        txtmea.text =[NSString stringWithFormat:@"%@ %@",first,last];
-        [btnMEA setTitle:@"" forState:UIControlStateNormal];
-    }else{
-        NSString *compare =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
-        if([compare isEqualToString:@"<null>"]){
-            txtmea.text = @"Any Member Experience Advisor (Sales)";
-        }else{
-            txtmea.text =compare;
-        }
-        [btnMEA setTitle:@"" forState:UIControlStateNormal];
-    }
+    //    if([role_name isEqualToString:@"AAI - MEA"])
+    //    {
+    //        NSString *first = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_firstName"]];
+    //        NSString *last = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_lastName"]];
+    //
+    //        txtmea.text =[NSString stringWithFormat:@"%@ %@",first,last];
+    //        [btnMEA setTitle:@"" forState:UIControlStateNormal];
+    //    }else{
+    //        NSString *compare =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
+    //        if([compare isEqualToString:@"<null>"]){
+    //            txtmea.text = @"Any Member Experience Advisor (Sales)";
+    //        }else{
+    //            txtmea.text =compare;
+    //        }
+    //        [btnMEA setTitle:@"" forState:UIControlStateNormal];
+    //    }
     
     [self getMEA];
     
@@ -170,7 +173,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     lblCommentsCount.hidden = YES;
-
+    
     
     
     [self iPadDesignInitialization];
@@ -232,19 +235,20 @@
             if(txtEmail.text.length>0){
                 if (![txtEmail emailValidation]==YES) {
                     lblemailerror.text = @"Enter a valid email";
-                }else{
-                    
-                    activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50, 0.50);
-                    activityIndicatorObject1.color=[UIColor grayColor ];
-                    [viewEmailindicator addSubview:activityIndicatorObject1];
-                    [activityIndicatorObject1 startAnimating];
-                    
-                    CGRect frame = viewEmailindicator.frame;
-                    frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width;
-                    frame.origin.y = txtEmail.frame.origin.y +1;
-                    viewEmailindicator.frame = frame;
-                    [self checkforavailability];
                 }
+                //                else{
+                //
+                //                    activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50, 0.50);
+                //                    activityIndicatorObject1.color=[UIColor grayColor ];
+                //                    [viewEmailindicator addSubview:activityIndicatorObject1];
+                //                    [activityIndicatorObject1 startAnimating];
+                //
+                //                    CGRect frame = viewEmailindicator.frame;
+                //                    frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width;
+                //                    frame.origin.y = txtEmail.frame.origin.y +1;
+                //                    viewEmailindicator.frame = frame;
+                //                    [self checkforavailability];
+                //                }
             }
         }
     }
@@ -311,8 +315,8 @@
     if(textField == txtEmail)
     {
         lblemailerror.text = @"";
-        email_checked = @"no";
-        imagecheckforemailView.image=nil;
+        //        email_checked = @"no";
+        //        imagecheckforemailView.image=nil;
     }
     if(textField == txtEmail || textField == txtPhoneno ) {
         
@@ -518,12 +522,12 @@
     
     txtPhoneno.text = [selectedContactDict valueForKey:@"phone_no"];
     txtEmail.text = [selectedContactDict valueForKey:@"email"];
-    [self checkforavailability];
+    //   [self checkforavailability];
     txtFirstname.userInteractionEnabled = YES;
     txtLastname.userInteractionEnabled = YES;
     txtPhoneno.userInteractionEnabled = YES;
     
-    [self checkforavailability];
+    //  [self checkforavailability];
 }
 -(void)aTime
 {
@@ -557,7 +561,7 @@
                 return;
             }
             txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
-            [self checkforavailability];
+            //   [self checkforavailability];
         }else if([emailArray count] >1){
             [self showEmailPopup];
         }
@@ -572,8 +576,13 @@
     NSString* lastNameStr = [txtLastname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     phoneStr1 = [txtPhoneno.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
-    NSString* phoneStr = [[phoneStr1 componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
+    NSString* phoneStr = @"";
+    if(![phoneStr1 isEqualToString: @""])
+    {
+        NSCharacterSet *unwantedStr = [NSCharacterSet characterSetWithCharactersInString:@"+() -"];
+        phoneStr = [[phoneStr1 componentsSeparatedByCharactersInSet: unwantedStr] componentsJoinedByString: @""];
+    }
+    
     NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* commentsStr = [txtComment.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* meaStr = [txtmea.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -607,14 +616,30 @@
         
         return;
     }
+    if ([txtPhoneno isEmpty])
+    {
+        if([txtEmail isEmpty])
+        {
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter either phone number or email." okBtn:OkButtonTitle];
+            return;
+        }
+    }
+    
     if (![txtPhoneno isEmpty]) {
-        
         
         if (phoneStr.length<10 ) {
             [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
             
             
             return;
+        }else if (phoneStr.length==10 ) {
+            if([[NSString stringWithFormat:@"%C",[phoneStr characterAtIndex:0]] isEqual:@"1"])
+            {
+                [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter a valid phone number." okBtn:OkButtonTitle];
+                
+                
+                return;
+            }
         }
     }
     if (phoneStr.length>10 ) {
@@ -629,48 +654,66 @@
             return;
         }
     }
-    if (![txtEmail emailValidation]==YES) {
-        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
-        
-        
-        [txtEmail becomeFirstResponder];
-        return;
-    }
-    if([email_checked isEqualToString:@"no"])
-    {
-        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please wait a moment while we check your email." okBtn:OkButtonTitle];
-        
-        
-        
-        if (webservice!=5) {
+    if (txtEmail.text.length > 0) {
+        if (![txtEmail emailValidation]==YES) {
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please check your email address" okBtn:OkButtonTitle];
             
             
-            imagecheckforemailView.hidden = YES;
-            if(txtEmail.text.length>0){
-                if (![txtEmail emailValidation]==YES) {
-                    lblemailerror.text = @"Enter a valid email";
-                }else{
-                    
-                    activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50,   0.50);
-                    activityIndicatorObject1.color=[UIColor whiteColor];
-                    [viewEmailindicator addSubview:activityIndicatorObject1];
-                    [activityIndicatorObject1 startAnimating];
-                    
-                    CGRect frame = viewEmailindicator.frame;
-                    frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width;
-                    frame.origin.y = txtEmail.frame.origin.y +1;
-                    viewEmailindicator.frame = frame;
-                    [self checkforavailability];
-                }
-            }
-            
+            [txtEmail becomeFirstResponder];
+            return;
         }
-        
-        
-        
-        [txtEmail resignFirstResponder];
-        return;
     }
+    
+    if(txtEmail.text.length>0){
+        if (![txtEmail emailValidation]==YES) {
+            lblemailerror.text = @"Enter a valid email";
+        }
+    }
+    
+    if ([txtEmail isEmpty])
+    {
+        if ([txtPhoneno isEmpty])
+        {
+            [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please enter either phone number or email." okBtn:OkButtonTitle];
+            return;
+        }
+    }
+    //    if([email_checked isEqualToString:@"no"])
+    //    {
+    //        [HelperAlert  alertWithOneBtn:AlertTitle description:@"Please wait a moment while we check your email." okBtn:OkButtonTitle];
+    
+    
+    
+    //        if (webservice!=5) {
+    
+    
+    //            imagecheckforemailView.hidden = YES;
+    //            if(txtEmail.text.length>0){
+    //                if (![txtEmail emailValidation]==YES) {
+    //                    lblemailerror.text = @"Enter a valid email";
+    //                }
+    //                else{
+    //
+    //                    activityIndicatorObject1.transform = CGAffineTransformMakeScale(0.50,   0.50);
+    //                    activityIndicatorObject1.color=[UIColor whiteColor];
+    //                    [viewEmailindicator addSubview:activityIndicatorObject1];
+    //                    [activityIndicatorObject1 startAnimating];
+    //
+    //                    CGRect frame = viewEmailindicator.frame;
+    //                    frame.origin.x = txtEmail.frame.origin.x + txtEmail.frame.size.width;
+    //                    frame.origin.y = txtEmail.frame.origin.y +1;
+    //                    viewEmailindicator.frame = frame;
+    //                    [self checkforavailability];
+    //                }
+    //            }
+    
+    //        }
+    
+    
+    
+    //        [txtEmail resignFirstResponder];
+    //        return;
+    //    }
     
     if([txtmea isEmpty])
     {
@@ -689,12 +732,13 @@
     NSString *mea_id;
     NSString *role_name = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleName"]];
     if([role_name isEqualToString:@"AAI - MEA"])
-    {   if([[[NSUserDefaults standardUserDefaults]valueForKey:@"MEAName"] isEqualToString:txtmea.text])
     {
-        mea_id = [[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleId"];
-    }else{
-        mea_id = selected_text_id;
-    }
+        if([[[NSUserDefaults standardUserDefaults]valueForKey:@"MEAName"] isEqualToString:txtmea.text])
+        {
+            mea_id = [[NSUserDefaults standardUserDefaults] valueForKey:@"l_roleId"]    ;
+        }else{
+            mea_id = selected_text_id;
+        }
     }else{
         NSLog(@"%lu",[NSString stringWithFormat:@"%@",selected_text_id ].length);
         
@@ -702,14 +746,22 @@
         if ([code rangeOfString:@"null" options:NSCaseInsensitiveSearch].location != NSNotFound)
         {
             mea_id = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaId"]];
-            if ([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"]) {
+            if ([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"])
+            {
                 mea_id = @"221";
             }
-        }else{
+        }
+        else
+        {
             mea_id = selected_text_id;
         }
     }
     
+    NSLog(@"%lu",(unsigned long)phoneStr.length);
+    NSLog(@"%@",phoneStr);
+    if (phoneStr == @""){
+        NSLog(@"~~~~%@~~~~~",phoneStr);
+    }
     
     [self submitReferral:firstNameStr lastname:lastNameStr phoneno:phoneStr email:emailStr mea:mea_id comment:commentsStr];
 }
@@ -994,7 +1046,7 @@
                 }
                 
                 txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
-                [self checkforavailability];
+                //   [self checkforavailability];
             }else if([emailArray count] >1){
                 [self showEmailPopup];
             }
@@ -1043,7 +1095,7 @@
                     return;
                 }
                 txtEmail.text = [NSString stringWithFormat:@"%@",[[contactDict valueForKey:@"contact_email"]objectAtIndex:0]];
-                [self checkforavailability];
+                //   [self checkforavailability];
             }else if([emailArray count] >1){
                 [self showEmailPopup];
             }
@@ -1268,7 +1320,7 @@
     
     
     txtEmail.text = [ar objectAtIndex:0];
-    [self checkforavailability];
+    //   [self checkforavailability];
     
     ABPeoplePickerNavigationController *peoplePicker1 = (ABPeoplePickerNavigationController *)peoplePicker.navigationController;
     [peoplePicker1 dismissModalViewControllerAnimated:YES];
@@ -1419,59 +1471,81 @@
             id_mea_array = [userDetailDict valueForKey:@"ID"];
             name_mea_array= [userDetailDict valueForKey:@"Name"];
             
-            
-            //---------29th dec modification Start
-            
-            //showing only previously selected mea and any membor advisor
-            twoValueArray = [[NSMutableArray alloc]init];
-            twoValueArrayID = [[NSMutableArray alloc]init];
-            
-            //to add any membor advisior as first option in dropdown
-            for (int i=0; i<name_mea_array.count; i++) {
-                
-                if ([[NSString stringWithFormat:@"%@",[name_mea_array objectAtIndex:i]] rangeOfString:@"Any Member" options:NSCaseInsensitiveSearch].location != NSNotFound){
-                    [twoValueArray addObject:[NSString stringWithFormat:@"%@",[name_mea_array objectAtIndex:i]]];
+            NSString *meaid = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaId"]];
+            if ([meaid isEqualToString:@"<null>"]) {
+                if ([name_mea_array containsObject:@"Any Member Experience Advisor (Sales)"]) {
+                    NSInteger anIndex=[name_mea_array indexOfObject:@"Any Member Experience Advisor (Sales)"];
+                    int indexOfArray = (int)anIndex;
+                    txtmea.text = [name_mea_array objectAtIndex:indexOfArray];
+                    selected_text_id = [NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexOfArray]];
+                    [btnMEA setTitle:@"" forState:UIControlStateNormal];
                 }
+            } else {
+                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                f.numberStyle = NSNumberFormatterDecimalStyle;
+                NSNumber *meaIdVal = [f numberFromString:meaid];
                 
-            }
-            
-            // Check if user already selected the any member advisor other wise add the value selected at the time of signup
-            if (![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]] isEqualToString:[twoValueArray objectAtIndex:0]]){
-                if([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"]){
-                    
-                }else{
-                    [twoValueArray addObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]]];
+                if ([id_mea_array containsObject:meaIdVal]) {
+                    NSInteger anIndex=[id_mea_array indexOfObject:meaIdVal];
+                    int indexOfArray = (int)anIndex;
+                    txtmea.text = [name_mea_array objectAtIndex:indexOfArray];
+                    selected_text_id = [NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:anIndex]];
+                    [btnMEA setTitle:@"" forState:UIControlStateNormal];
                 }
             }
-            
-            
-            //getting objects id
-            for (int j=0; j<twoValueArray.count; j++) {
-                NSInteger indexValue1;
-                if ([name_mea_array containsObject:[twoValueArray objectAtIndex:j]]) {
-                    indexValue1 = [name_mea_array indexOfObject:[twoValueArray objectAtIndex:j]];
-                }else {
-                    [twoValueArray removeObjectAtIndex:j];
-                    continue;
-                }
-                
-                [twoValueArrayID addObject:[NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexValue1]]];
-            }
-            
-            id_mea_array = [[NSArray alloc]init];
-            name_mea_array = [[NSArray alloc]init];
-            
-            id_mea_array = twoValueArrayID;
-            name_mea_array = twoValueArray;
-            
-            NSString *meaDefaultStr =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
-            
-            if (![name_mea_array containsObject:meaDefaultStr]){
-                txtmea.text = @"";
-                [btnMEA setTitle:@"Select MEA" forState:UIControlStateNormal];
-            }
-            
-            //---------29th dec modification end
+            //
+            //            //---------29th dec modification Start
+            //
+            //            //showing only previously selected mea and any membor advisor
+            //            twoValueArray = [[NSMutableArray alloc]init];
+            //            twoValueArrayID = [[NSMutableArray alloc]init];
+            //
+            //            //to add any membor advisior as first option in dropdown
+            //            for (int i=0; i<name_mea_array.count; i++) {
+            //
+            //                if ([[NSString stringWithFormat:@"%@",[name_mea_array objectAtIndex:i]] rangeOfString:@"Any Member" options:NSCaseInsensitiveSearch].location != NSNotFound){
+            //                    [twoValueArray addObject:[NSString stringWithFormat:@"%@",[name_mea_array objectAtIndex:i]]];
+            //                }
+            //
+            //            }
+            //
+            //            // Check if user already selected the any member advisor other wise add the value selected at the time of signup
+            //            if (![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]] isEqualToString:[twoValueArray objectAtIndex:0]]){
+            //                if([[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"l_meaName"]] isEqualToString:@"<null>"]){
+            //
+            //                }else{
+            //                    [twoValueArray addObject:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]]];
+            //                }
+            //            }
+            //
+            //
+            //            //getting objects id
+            //            for (int j=0; j<twoValueArray.count; j++) {
+            //                NSInteger indexValue1;
+            //                if ([name_mea_array containsObject:[twoValueArray objectAtIndex:j]]) {
+            //                    indexValue1 = [name_mea_array indexOfObject:[twoValueArray objectAtIndex:j]];
+            //                }else {
+            //                    [twoValueArray removeObjectAtIndex:j];
+            //                    continue;
+            //                }
+            //
+            //                [twoValueArrayID addObject:[NSString stringWithFormat:@"%@",[id_mea_array objectAtIndex:indexValue1]]];
+            //            }
+            //
+            //            id_mea_array = [[NSArray alloc]init];
+            //            name_mea_array = [[NSArray alloc]init];
+            //
+            //            id_mea_array = twoValueArrayID;
+            //            name_mea_array = twoValueArray;
+            //
+            //            NSString *meaDefaultStr =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"l_meaName"]];
+            //
+            //            if (![name_mea_array containsObject:meaDefaultStr]){
+            //                txtmea.text = @"";
+            //                [btnMEA setTitle:@"Select MEA" forState:UIControlStateNormal];
+            //            }
+            //
+            //            //---------29th dec modification end
         }else if(webservice==2)
         {
             
@@ -1836,7 +1910,7 @@
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSLog(@"%@",[user valueForKey:@"l_userid"]);
     
-    _postData = [NSString stringWithFormat:@"ReferrerID=%@&FirstName=%@&LastName=%@&PhoneNumber=%@&Email=%@&Comments=%@&MeaId=%@",[NSString stringWithFormat:@"%@",[user valueForKey:@"l_userid"]],firstname1,lastname1,phoneno1,email,comment,mea];
+    _postData = [NSString stringWithFormat:@"ReferrerID=%@&FirstName=%@&LastName=%@&PhoneNumber=""%@&Email=%@&Comments=%@&MeaId=%@",[NSString stringWithFormat:@"%@",[user valueForKey:@"l_userid"]],firstname1,lastname1,phoneno1,email,comment,mea];
     
     if([found_client isEqualToString:@"yes"])
     {   found_client = @"no";

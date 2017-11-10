@@ -126,17 +126,27 @@
     
     if([_trigger isEqualToString:@"edit"])
     {
-        for (int l=0; l<_email_array.count; l++) {
-            
-            if([_obj.PaypalEmail isEqualToString:[_email_array objectAtIndex:l]])
-            {
-                continue;
-            }
-            if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
+        if (_email_array.count == 1)
+        {
+            //Email already exists in the list
+            if ([emailstr isEqualToString:[_email_array objectAtIndex:0]]) {
                 [HelperAlert alertWithOneBtn:AlertTitle description:@"The email you entered is already exist in Autoaves system Please Try with another email address" okBtn:OkButtonTitle];
-              
+                
                 return;
-            }//Email already exists in the list
+            }
+        }else{
+            for (int l=0; l<_email_array.count; l++) {
+                //Email already exists in the list
+                if ([emailstr isEqualToString:[_email_array objectAtIndex:l]]) {
+                    [HelperAlert alertWithOneBtn:AlertTitle description:@"The email you entered is already exist in Autoaves system Please Try with another email address" okBtn:OkButtonTitle];
+                    
+                    return;
+                }
+                if([_obj.PaypalEmail isEqualToString:[_email_array objectAtIndex:l]])
+                {
+                    continue;
+                }
+            }
         }
         
     }else{
@@ -603,25 +613,28 @@
             NSArray *data = [userDetailDict valueForKey:@"responseEnvelope"];
             NSString *response = [data valueForKey:@"ack"];
     
-            if ([response isEqualToString:@"Failure"]) {
+            if ([response isEqualToString:@"Failure"])
+            {
                 [HelperAlert  alertWithOneBtn:AlertTitle description:@"This email is not a valid paypal email" okBtn:OkButtonTitle];
-
-               
-            return;
-            }
-        }else{
-            [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
-
             
-
+                return;
+            }
         }
-    }else if(webservice==2)
+        else
+        {
+            [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
+        }
+    }
+    else if(webservice==2)
     {
         if([response_status isEqualToString:@"passed"])
         {
             [self.navigationController popViewControllerAnimated:YES];
+            
             return;
-        }else{
+        }
+        else
+        {
             [HelperAlert  alertWithOneBtn:AlertTitle description:responseString okBtn:OkButtonTitle];
 
             return;

@@ -106,6 +106,7 @@
             tempViewFrame.origin.x = 0;
         }
         tempViewFrame.origin.y = frame.origin.y;
+        tempViewFrame.size.width = self.width + 15;
         view.frame = tempViewFrame;
         
         if (_mode == TLTagsControlModeList) {
@@ -136,7 +137,7 @@
         if (self.frame.size.width - tagInputField_.frame.origin.x > 100) {
             frame.size.width = self.frame.size.width - frame.origin.x - 12;
         } else {
-            frame.size.width = 100;
+            frame.size.width = self.width + 15;
         }
         tagInputField_.frame = frame;
     } else {
@@ -209,7 +210,7 @@
                                         options:NSStringDrawingUsesLineFragmentOrigin
                                      attributes:@{NSFontAttributeName:tagInputField_.font}
                                         context:nil].size.width;
-        
+        self.width = width;
         UIView *tagView = [[UIView alloc] initWithFrame:tagInputField_.frame];
         CGRect tagFrame = tagView.frame;
         tagView.layer.cornerRadius = 5;
@@ -228,7 +229,7 @@
         tagLabel.layer.cornerRadius = 5;
         
         if (_mode == TLTagsControlModeEdit) {
-            UIButton *deleteTagButton = [[UIButton alloc] initWithFrame:tagInputField_.frame];
+//            UIButton *deleteTagButton = [[UIButton alloc] initWithFrame:tagInputField_.frame];
             
 //            CGRect buttonFrame = deleteTagButton.frame;
 //            [deleteTagButton.titleLabel setFont:tagInputField_.font];

@@ -77,6 +77,8 @@
     IBOutlet UIView *loweView;
     int error;
     IBOutlet UIImageView *imageViewDisablestep1;
+    
+    IBOutlet UITextField *txtOTP;
 }
 - (IBAction)btnMEA:(id)sender;
 - (IBAction)btnPreviewCustomer:(id)sender;
@@ -85,8 +87,8 @@
 - (IBAction)btnCheckBox:(id)sender;
 -(void)userRegestration:(NSString*)firstName LastName:(NSString*)lastName RoleID:(NSString *)roleId PhoneNumber:(NSString*)phoneNo Emailid:(NSString*)emailid Password:(NSString *)password PurchasedBefore:(NSString*)purchasedBefore  IsFacebookUser:(NSString*)isFacebookUser  MEAID:(NSString*)meaID UserName:(NSString*)userName userid:(NSString*)userid;
 -(void)gestureHandlerMethod2:(UITapGestureRecognizer*)sender;
-@property (strong,nonatomic) NSString *fromEmailView;
+@property (strong,nonatomic) NSString *fromEmailView,*isClient;
 @property (strong,nonatomic) NSArray *valuesArray;
-@property (strong,nonatomic) NSString *from_fb_button,*isClient;
+@property (strong,nonatomic) NSString *from_fb_button;
 @property(strong,nonatomic)NSString *userReference,*InvitationId;
 @end

@@ -33,6 +33,9 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    lblbelowHeader.hidden = true;
+    
     if (IS_IPAD)
     {
         btnheading.font=[btnheading.font fontWithSize:24];
@@ -504,11 +507,17 @@
         {
             if(userDetailDict.count==0)
             {
+                lblbelowHeader.hidden = true;
                // [self.view makeToast:@"No email is added yet. Kindly add an email."];
 //                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"ARA" message:@"" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
 //                [alert show];
                 return;
             }
+            else
+            {
+                lblbelowHeader.hidden = false;
+            }
+            
             paypalListArray = [[NSMutableArray alloc] init];
             for (int i=0; i<userDetailDict.count; i++)
             {

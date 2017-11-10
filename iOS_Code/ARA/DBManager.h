@@ -16,8 +16,8 @@
 +(DBManager*)getSharedInstance;
 -(BOOL)createDB;
 - (BOOL) saveData:(NSString*)userId isRead:(NSString*)isRead
-notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)notificationDetail notificationDate:(NSString*)notificationDate NotificationId:(NSString*)NotificationId CreatedDate:(NSString*)CreatedDate;
-@property (strong,nonatomic) NSString *ScheduledAt,*NotificationText,*serviceName,*isRead,*NotificationId,*CreatedDate;
+notificationtitle:(NSString*)notificationtitle notificationDetail:(NSString*)notificationDetail notificationDate:(NSString*)notificationDate NotificationId:(NSString*)NotificationId CreatedDate:(NSString*)CreatedDate uniqueReferenceId:(NSString*)uniqueReferenceId;
+@property (strong,nonatomic) NSString *ScheduledAt,*NotificationText,*serviceName,*isRead,*NotificationId,*CreatedDate,*uniqueReferenceId;
 - (NSMutableArray*)showData;
 - (BOOL)updateTableNotification:(NSString*)NotificationId;
 - (BOOL)deleteTableNotification:(NSString*)NotificationId;

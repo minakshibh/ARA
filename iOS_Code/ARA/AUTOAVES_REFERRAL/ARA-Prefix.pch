@@ -8,10 +8,10 @@
 #import <Availability.h>
 #import "AppDelegate.h"
 
-#ifndef AUTOAVES_RE FERRAL_ARA_Prefix_pch
+#ifndef AUTOAVES_REFERRAL_ARA_Prefix_pch
 #define AUTOAVES_REFERRAL_ARA_Prefix_pch
 
-//#define l @"http://112.196.24.205:89/api"   //--staging
+//#define Kwebservices @"http://112.196.24.205:89/api"   //--staging
 //#define Kwebservices @"http://112.196.24.205:88/api"   //--production
 //#define Kwebservices @"http://10.10.10.219:801/api"    //--Live
 //#define Kwebservices @"http://63.255.19.72:801/api"   //--Client
@@ -21,8 +21,6 @@
 //#define Kwebservices @"http://69.164.149.164:801/api"
 //#define Kwebservices @"http://69.164.149.164:814/api"
 #define Kwebservices @"https://ara-web.autoaves.com:814/api"
-
-//https://i.diawi.com/E1o18q
 
 #ifdef __OBJC__
 #import "UITextfieldValidations.h"

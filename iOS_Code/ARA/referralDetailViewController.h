@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ReferralObj.h"
-@interface referralDetailViewController : UIViewController
+
+@interface referralDetailViewController : UIViewController <UITextViewDelegate>
 {
     IBOutlet UIImageView *headerImage;
 
@@ -44,6 +45,17 @@
     IBOutlet UILabel *lblcreateddate1;
     IBOutlet UILabel *lblmea1;
     IBOutlet UILabel *lblphoneno1;
+    IBOutlet UIButton *btnAddNotes;
+    IBOutlet UILabel *lblNotes;
+    IBOutlet UITextView *txtNotesDetail;
+    IBOutlet UILabel *lblNotesBottomLine;
+    
+    IBOutlet UITableView *tableView;
+
+    NSMutableData *webData;
+    NSString *response_status;
+    UITextView *textViewNew;
+    NSTimer *timer;
 }
 - (IBAction)btnBack:(id)sender;
 @property (strong,nonatomic) ReferralObj *obj;

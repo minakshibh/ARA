@@ -10,25 +10,32 @@
 #import "SignUpViewController.h"
 #import "LoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "OTPViewController.h"
+#import "RecoveryViewController.h"
 
 @interface SignupEmailCheckViewController ()
 {
     IBOutlet UITextField *txtEmail;
     NSMutableData *webData;
-    int webservice;
     NSString *getValue;
-    NSString *response_status,*firstname,*lastname,*phoneno,*UserDetailId;
+    NSString *response_status,*firstname,*lastname,*phoneno,*UserDetailId,*mEAName,*mEAID;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UIButton *btnVerifyEmail;
     IBOutlet UIButton *btnLogin;
     IBOutlet UIButton *lblAlreadyhaveanaccount;
     IBOutlet UIImageView *topImage;
+    
+    NSMutableDictionary *dataValuesDict;
+    
+    NSString *status;
 }
 @end
 
 @implementation SignupEmailCheckViewController
 
 - (void)viewDidLoad {
+    dataValuesDict = [[NSMutableDictionary alloc] init];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fromOTPView"];
    // [txtEmail resignFirstResponder];
     [txtEmail becomeFirstResponder];
      txtEmail.delegate=self;
@@ -37,17 +44,11 @@
     if ([getValue isEqualToString:@"1"])
     {
         topImage.image=[UIImage imageNamed:@"step_a_icon"];
-        lblEnteremailaddress.text=@"Enter Reference Data";
-        txtEmail.placeholder=@"Enter Reference Data";
+        lblEnteremailaddress.text=@"Enter your invitation code";
+        txtEmail.placeholder=@"Enter your invitation code";
         icon.image=[UIImage imageNamed:@"referrenceCode"];
         icon.alpha = 0.2;
     }else{
-//        getValue   = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]stringForKey:@"subValue"]];
-//        if ([getValue isEqualToString:@"2"])
-//        {
-//
-//        }else{
-//            
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             NSString *valCheck = [NSString stringWithFormat:@"%@",[user valueForKey:@"from_fb"]];
             
@@ -56,7 +57,6 @@
                 txtEmail.text = [NSString stringWithFormat:@"%@",[user valueForKey:@"user_email"]];
                 [self checkEmail];
             }
-//        }
     }
 
    
@@ -104,6 +104,52 @@
         lblComposeyourprofile.frame = CGRectMake(lblComposeyourprofile.frame.origin.x-15, lblComposeyourprofile.frame.origin.y, lblComposeyourprofile.frame.size.width, lblComposeyourprofile.frame.size.height);
         
     }
+    
+[[NSUserDefaults standardUserDefaults]setObject:@"yes" forKey:@"OTPFacebookLogout"];    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fromOTPView"] != nil)
+    {
+        NSString *fromOTPView = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"fromOTPView"]];
+
+        if([fromOTPView isEqualToString:@"yes"])
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fromOTPView"];
+            
+            if([status isEqualToString:@"resetPwd"])
+            {
+                status = @"";
+                
+                RecoveryViewController *recoveryView = [[RecoveryViewController alloc]initWithNibName:@"RecoveryViewController" bundle:nil];
+                recoveryView.email = txtEmail.text;
+                
+                [self.navigationController pushViewController:recoveryView animated:YES];
+            }
+            else
+            {
+                SignUpViewController *signUpView = [[SignUpViewController alloc]initWithNibName:@"SignUpViewController" bundle:nil];
+                signUpView.fromEmailView = [dataValuesDict valueForKey:@"fromEmailView"];;
+                signUpView.isClient = [dataValuesDict valueForKey:@"isClient"];;
+                signUpView.valuesArray = [dataValuesDict valueForKey:@"valuesArray"];
+                
+                [self.navigationController pushViewController:signUpView animated:YES];
+  
+            }
+        }
+        
+        if([fromOTPView isEqualToString:@"backtologin"])
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"fromOTPView"];
+            for(UIViewController *viewController in self.navigationController.viewControllers)
+            {
+                if([viewController isKindOfClass:[LoginViewController class]])
+                {
+                    [self.navigationController popToViewController:viewController animated:YES];
+                }
+            }
+            
+        }
+
+    }
+
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -164,7 +210,7 @@
     NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     txtEmail.text = emailStr;
     if(emailStr.length==0) {
-        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter Referrence code" okBtn:OkButtonTitle];
+        [HelperAlert alertWithOneBtn:AlertTitle description:@"Kindly enter your invitation code." okBtn:OkButtonTitle];
         return;
     }    [self.view endEditing:YES];
     
@@ -175,7 +221,8 @@
     _getData = [NSString stringWithFormat:@""];
     
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/invitation/referrence/%@",Kwebservices,txtEmail.text]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
-   // http://10.10.10.12:801/api/invitation/referrence/4457bb49
+    // http://69.164.149.164:801/api/invitation/referrence/4457bb49
+
     NSLog(@"data post >>> %@",_getData);
     [request setHTTPMethod:@"GET"];
     [request setHTTPBody: [_getData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -234,6 +281,44 @@
         NSLog(@"connection is NULL");
     }
 }
+
+-(void)sendOTP:(NSString*)email
+{
+    NSMutableURLRequest *request;
+    NSString*_postData ;
+    
+    [kappDelegate ShowIndicator];
+    
+    webservice=22;
+    
+    _postData = [NSString stringWithFormat:@"Email=%@&PhoneNumber=%@", email, @""];
+    
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/account/SendOTP",Kwebservices]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60.0];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: [_postData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(connection)
+    {
+        if(webData==nil)
+        {
+            webData = [NSMutableData data] ;
+            NSLog(@"data");
+        }
+        else
+        {
+            webData=nil;
+            webData = [NSMutableData data] ;
+        }
+        NSLog(@"server connection made");
+    }
+    else
+    {
+        NSLog(@"connection is NULL");
+    }
+}
+
 -(void)forgotPassword:(NSString*)email
 {
     [kappDelegate ShowIndicator];
@@ -347,7 +432,7 @@
         [alert show];
         }
     }
-    
+    [kappDelegate HideIndicator];
     if ([response_status isEqualToString:@"passed"])
     {
         if ([responseString rangeOfString:@"Please check your" options:NSCaseInsensitiveSearch].location != NSNotFound)
@@ -373,8 +458,6 @@
 
             return;
         }
-        
-       
         
         NSError *error;
         SBJsonParser *json = [[SBJsonParser alloc] init];
@@ -414,11 +497,26 @@
                 firstname = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"FirstName"]];
                 lastname = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"LastName"]];
                 phoneno = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PhoneNo"]];
-                UserDetailId = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"userDetails"]];
+                UserDetailId = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserDetailID"]];
+                
+                if(![[[userDetailDict valueForKey:@"MEAID"] stringValue] isEqualToString:@"0"])
+                {
+                    mEAName = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAName"]];
+                    mEAID = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAID"]];
+                }
+                else
+                {
+                    mEAName = @"";
+                    mEAID = @"0";
+                }
+                
                 NSString *InvitationId = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"InvitationId"]];
                 NSString* emailStr =  [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"Email"]];
                 
-                NSArray *values = [[NSArray alloc]initWithObjects:firstname,lastname,phoneno,UserDetailId,emailStr, nil];
+//                mEAName = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAName"]];
+//                mEAID = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAID"]];
+                
+                NSArray *values = [[NSArray alloc]initWithObjects:firstname,lastname,phoneno,UserDetailId,emailStr,mEAName,mEAID,nil];
                   NSLog(@"get data %@",values);
                 NSString *usertype = [userDetailDict valueForKey:@"UserType"];
                 
@@ -467,17 +565,21 @@
                     lastname = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"LastName"]];
                     phoneno = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"PhoneNumber"]];
                     UserDetailId = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"UserDetailId"]];
+                    mEAName = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAName"]];
+                    mEAID = [NSString stringWithFormat:@"%@",[userDetailDict valueForKey:@"MEAID"]];
                     NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
-                    NSArray *values = [[NSArray alloc]initWithObjects:firstname,lastname,phoneno,UserDetailId,emailStr, nil];
+                    NSArray *values = [[NSArray alloc]initWithObjects: firstname, lastname, phoneno, UserDetailId, emailStr, mEAName, mEAID, nil];
                     
                     
-                    SignUpViewController *signUpView = [[SignUpViewController alloc]initWithNibName:@"SignUpViewController" bundle:nil];
-                    signUpView.fromEmailView = @"yes";
-                    signUpView.valuesArray = values;
-                    signUpView.isClient = @"yes";
-                    [self.navigationController pushViewController:signUpView animated:YES];
-                    
+//                    SignUpViewController *signUpView = [[SignUpViewController alloc]initWithNibName:@"SignUpViewController" bundle:nil];
+//                    OTPViewController *otpView = [[OTPViewController alloc]initWithNibName:@"OTPViewController" bundle:nil];
+                    [dataValuesDict setObject:@"yes" forKey:@"fromEmailView"];
+                    [dataValuesDict setObject:@"yes" forKey:@"isClient"];
+                    [dataValuesDict setObject:values forKey:@"valuesArray"];
+//                    [self presentViewController:otpView animated:true completion:nil];
+//                    [self.navigationController pushViewController:signUpView animated:YES];
+                    [self sendOTP:txtEmail.text];
                     return;
                 }else{
                     UIAlertController * alert=   [UIAlertController
@@ -506,7 +608,9 @@
 //                                                        
 //        // If the session state is not any of the two "open" states when the button is clicked
 //        }
-                                                    [self forgotPassword:emailStr];
+                                                    status = @"resetPwd";
+                                                    [self sendOTP:emailStr];
+//                                                    [self forgotPassword:emailStr];
                                                 }];
                     UIAlertAction* noButton = [UIAlertAction
                                                actionWithTitle:@"No"
@@ -530,32 +634,75 @@
                     
                     [self presentViewController:alert animated:YES completion:nil];
                 }
+            }
+            
+            if(webservice==22)
+            {
+                NSLog(@"%@",responseString);
                 
-                
-        }
+                if ([responseString rangeOfString:@"true" options:NSCaseInsensitiveSearch].location != NSNotFound)
+                {
+                    UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:AlertTitle  message:@"A security code was sent to your email. Please check to complete process."  preferredStyle:UIAlertControllerStyleAlert];
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        
+                        OTPViewController *OTPView = [[OTPViewController alloc]initWithNibName:@"OTPViewController" bundle:nil];
+                        OTPView.userEmail = txtEmail.text;
+                        [self presentViewController:OTPView animated:true completion:nil];
+                        
+                    }]];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            }
 
             
-            
-    
-            
-}
-        
-        
-        
-        
+        }
     }else{
         
         if (webservice==6) {
             if ([responseString rangeOfString:@"Email address not exist" options:NSCaseInsensitiveSearch].location != NSNotFound)
             {
                 NSString* emailStr = [txtEmail.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                mEAName = [NSString stringWithFormat:@""];
+                mEAID = [NSString stringWithFormat:@""];
+                
+                
+//                SignUpViewController *signupView = [[SignUpViewController   alloc]initWithNibName:@"SignUpViewController" bundle:nil];
+//                OTPViewController *otpView = [[OTPViewController alloc]initWithNibName:@"OTPViewController" bundle:nil];
+                /// facebook check
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                NSString *valCheck = [NSString stringWithFormat:@"%@",[user valueForKey:@"from_fb"]];
+                
+                NSArray *value = [[NSArray alloc]initWithObjects:@"",@"",@"",@"",emailStr,mEAName,mEAID, nil];
+                
+                if ([valCheck isEqualToString:@"yes"])
+                {
+                   NSString *name = [NSString stringWithFormat:@"%@",[user valueForKey:@"user_name"]];
+                    NSArray *nam = [name componentsSeparatedByString:@" "];
+                    
+                    if(nam.count > 1)
+                    {
+                       value = [[NSArray alloc]initWithObjects:[nam objectAtIndex:0],[nam objectAtIndex:1],@"",@"",emailStr,mEAName,mEAID, nil];
+                    }
+                    else
+                    {
+                        value = [[NSArray alloc]initWithObjects:[nam objectAtIndex:0],@"",@"",@"",emailStr,mEAName,mEAID, nil];
+                    }
+                    
+                }
+                
+                
+                
+                
+                
+                
+                [dataValuesDict setObject:@"yes" forKey:@"fromEmailView"];
+                [dataValuesDict setObject:@"" forKey:@"isClient"];
+                [dataValuesDict setObject:value forKey:@"valuesArray"];
+//                [self.navigationController pushViewController:signupView animated:YES];
+//                [self presentViewController:otpView animated:true completion:nil];
 
-                SignUpViewController *signupView = [[SignUpViewController   alloc]initWithNibName:@"SignUpViewController" bundle:nil];
-                NSArray *value = [[NSArray alloc]initWithObjects:@"",@"",@"",@"",emailStr, nil];
-                signupView.fromEmailView = @"yes";
-                signupView.valuesArray = value;
-                [self.navigationController pushViewController:signupView animated:YES];
-           
+                [self sendOTP:txtEmail.text];
+                
                 return;
             }
         }else if(webservice==7)
@@ -581,7 +728,7 @@
                      [self presentViewController:alert animated:YES completion:nil];
                 }
                
-            }
+        }
     
     }
     [kappDelegate HideIndicator];

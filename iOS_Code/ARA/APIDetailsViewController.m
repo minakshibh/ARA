@@ -420,7 +420,7 @@ value = false;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
-     NSString *count=[[NSUserDefaults standardUserDefaults]stringForKey:@"Total_Count"];
+//     NSString *count=[[NSUserDefaults standardUserDefaults]stringForKey:@"Total_Count"];
     
     if (allData.count == 0) {
         return 0;
@@ -514,21 +514,28 @@ value = false;
         
         
          [TableCell setvalue:fullname Email:uniqueReferralNo InvitationStatus:referralstatus];
-        if ([referralstatus isEqualToString:@"Sold"])
+        
+        
+        if ([referralstatus isEqualToString:@"Open"]){
+            TableCell.lblinvitationStatus.textColor=[UIColor colorWithRed:98/255.0 green:180/255.0 blue:95/255.0 alpha:1.0];//green
+        }
+
+        
+        if([[referralstatus lowercaseString] isEqualToString:@"sold"])
         {
              TableCell.lblinvitationStatus.textColor=[UIColor colorWithRed:105.0f/255.0f green:160.0f/255.0f blue:208.0f/255.0f alpha:1.0f];
            
-        }   if ([referralstatus isEqualToString:@"Open"]){
-               TableCell.lblinvitationStatus.textColor=[UIColor colorWithRed:98/255.0 green:180/255.0 blue:95/255.0 alpha:1.0];//green
-                
-            
-            
-        }
-        
-        if([referralstatus isEqualToString:@"Call Intiated"])
+        } else if([[referralstatus lowercaseString] isEqualToString:@"lost sale"] || [[referralstatus lowercaseString] isEqualToString:@"deleted from crm"] || [[referralstatus lowercaseString] isEqualToString:@"reversed"])
+//        if([referralstatus isEqualToString:@"Call Intiated"])
         {
             TableCell.lblinvitationStatus.textColor= [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f]; //Red color
         }
+        else
+        {
+          TableCell.lblinvitationStatus.textColor=[UIColor colorWithRed:95.0f/255.0f green:204.0f/255.0f blue:87.0f/255.0f alpha:1.0f];//green  
+        }
+        TableCell.lblinvitationStatus.font = [UIFont fontWithName:@"Roboto-Bold" size:12];
+        
         if([referralstatus isEqualToString:@"Inactive"])
         {
             TableCell.lblinvitationStatus.textColor= [UIColor colorWithRed:224.0f/255.0f green:120.0f/255.0f blue:85.0f/255.0f alpha:1.0f]; //Red color
